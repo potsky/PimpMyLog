@@ -1,6 +1,4 @@
 PHPApacheLogViewer
 ==================
 
-An Apache log viewer written in PHP.
-
-Documentation soon available !
+More information at http://www.potsky.com/code/phpapachelogviewer/
