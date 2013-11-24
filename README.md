@@ -1,4 +1,4 @@
 PHPApacheLogViewer
 ==================
 
-More information at http://www.potsky.com/code/phpapachelogviewer/
+More information at https://www.potsky.com/code/php-apache-log-viewer/
