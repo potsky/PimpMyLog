@@ -1,408 +1,121 @@
 <?php
-/**
- * PHPApacheLogViewer
- *
- * Copyright © 2009-2012 Raphael Barbate (potsky) <potsky@me.com> [http://www.potsky.com]
- *
- * This file is part of PHPApacheLogViewer.
- *
- * PHPApacheLogViewer is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License.
- *
- * PHPApacheLogViewer is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with PHPApacheLogViewer.  If not, see <http://www.gnu.org/licenses/>.
- */
+include_once 'inc/global.inc.php';
 
-if (!file_exists('config.inc.php')) {
-	die('Not configured !');
+// Check if configured
+if ( ! file_exists( 'config.inc.php' ) ) {
+	include_once 'inc/not_configured.php';
+	die();
+}
+include_once 'config.inc.php';
+
+// Check if v2 compliant
+if ( isset( $_GET[ 'v1'] ) ) {
+	include_once 'inc/index-v1.php';
+	die();
+}
+else if ( ! defined( 'TITLE' ) ) {
+	include_once 'inc/not_configured_v2.php';
+	die();
 }
 
-$files	 = array(
-	'Access'	=> 'access.log',
-	'Error'		=> 'error.log',
-);
-
-include_once('config.inc.php');
-
-$logtype = @$_GET['l'];
-$logtype = ($logtype=='') ? 'Error' : $logtype;
-
-$howmany = (int)@$_GET['n'];
-$howmany = ($howmany>0) ? $howmany : 10;
-$howmany = min($howmany,$howmax);
-
-$Gi      = @$_GET['Gi'];	// ip
-$Gc      = @$_GET['Gc'];	// code
-$Gu      = @$_GET['Gu'];	// user
-$Gm      = @$_GET['Gm'];	// cmd
-$Gs      = @$_GET['Gs'];  // url
-$Ga      = @$_GET['Ga'];	// ua
-
-$ipselector   = array();
-$codeselector = array();
-$userselector = array();
-$cmdselector  = array();
-$urlselector  = array();
-$uaselector   = array();
-
-
+include_once 'config.inc.php';
 ?>
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-<title>Apache logs</title>
-<style>
-body {
-	font-family: Lucida Grande;
-	font-size: 10px;
-	background-color: #333;
-	color: #aaa;
-}
-table {
-	border-collapse: collapse;
-	border: 1px solid #666;
-	margin-top: 5px;
-}
-tr {
-	background-color: #333;
-}
-tr:hover {
-	background-color: #222;
-}
-th {
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-top: 1px;
-	padding-bottom: 1px solid #333;
-	color: #333;
-	background-color: #f08;
-	font-family: Lucida Grande;
-	font-size: 10px;
-	border-left: 1px solid #666;
-	border-bottom: 1px solid #666;
-}
-td {
-	vertical-align: top;
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-top: 1px;
-	padding-bottom: 1px;
-	font-family: Lucida Grande;
-	font-size: 10px;
-	border-left: 1px solid #666;
-}
-select, input {
-	background-color: #333;
-	border: 0;
-	color: #aaa;
-	padding: 0;
-	text-align: right;
-	font-size: 10px;
-}
-a {
-	text-decoration: none;
-	color: #f08;
-}
-a:hover {
-	color: #fff;
-}
-.ua {
-	color: #aaa;
-}
-.c1 {
-	color: #f60;
-}
-.c2 {
-	color: #0f0;
-}
-.c3 {
-	color: #08f;
-}
-.c4 {
-	color: #f00;
-}
-.c5 {
-	color: #f00;
-}
-</style>
-</head>
-<body><center><form method="GET" name="form">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
 
-<?php
-
-die('coucou');
-
-echo '<input type="hidden" name="l" value="'.$logtype.'"/>';
-foreach ($files as $name=>$logfile) {
-	if ($name==$logtype) {
-		echo '['.$name.']';
-	}
-	else {
-		echo '<a href="?n='.$howmany.'&l='.$name.'">['.$name.']</a>';
-	}
-	echo '&nbsp;';
-}
-echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<input size="3" maxlength="3" type="text" name="n" value="'.$howmany.'"/> lines displayed';
-echo '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.location.href=\'?n='.$howmany.'&l='.$logtype.'\';">[Reset filters]</a>';
-
-function selector($array,$currentvalue) {
-	$return = '<option value=""></option>';
-	ksort($array);
-	foreach ($array as $value) {
-		if ($value==$currentvalue) {
-			$s = ' selected="selected"';
-		} else {
-			$s = '';
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<style>
+		body {
+			padding-top: 50px;
+			padding-bottom: 20px;
 		}
-		$value = htmlentities($value);
-		$value2 = $value;
-		if (strlen($value2)>50) $value2=substr($value2,0,80).'...';
-		$return .= '<option value="'.$value.'"'.$s.'>'.$value2.'</option>';
-	}
-	return $return;
-}
-function strposa($haystack, $needles=array(), $offset=0) {
-        $chr = array();
-        foreach($needles as $needle) {
-                $res = strpos($haystack, $needle, $offset);
-                if ($res !== false) $chr[$needle] = $res;
-        }
-        if(empty($chr)) return false;
-        return min($chr);
-}
+	</style>
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+<body>
+	<!--[if lt IE 7]>
+	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+	<![endif]-->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><?php echo TITLE;?></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Nav header</li>
+							<li><a href="#">Separated link</a></li>
+							<li><a href="#">One more separated link</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="nav navbar-right">
+					Coucou !
+				</div>
+			</div><!--/.navbar-collapse -->
+		</div>
+	</div>
 
-function preg_matcha($needles,$haystack) {
-    foreach($needles as $needle) {
-      if (preg_match($needle, $haystack)) {
-    		return true;
-    	}
-    }
-    return false;
-}
+	<div class="container">
+		<!-- Example row of columns -->
+		<div class="row">
+			<div class="col-lg-4">
+				<h2>Heading</h2>
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+				<p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+			</div>
+			<div class="col-lg-4">
+				<h2>Heading</h2>
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+				<p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+			</div>
+			<div class="col-lg-4">
+				<h2>Heading</h2>
+				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+				<p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+			</div>
+		</div>
 
+		<hr>
 
-//===================================================================================================================================================
-// APACHE ACCESS
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-if ($logtype=='Access') {
-	$result	 = '';
-	//	$dumb		= exec('cat '.$files[$logtype].'|grep -v "::1"|grep -v "/wwwlogs/"|grep -v "/favicon.ico"|grep -v "/robots.txt"',$output);
-	//	$lengtd		= count($output)-1;
-	$lastip  = '';
-	$lastday = '';
-	$lndisp	 = 0;
+		<footer>
+			<p><?php echo FOOTER;?></p>
+		</footer>
 
-	$fl = fopen($files[$logtype], "r");
-	for($x_pos = 0, $ln = 0, $line=''; fseek($fl, $x_pos, SEEK_END) !== -1; $x_pos--) {
-	    $char = fgetc($fl);
-	    if ($char === "\n") {
+	</div> <!-- /container -->
 
-			if (preg_matcha($exclude,$line)) {
-	        	$deal = '';
-			}
-	        else {
-		        $deal = $line;
-	        }
-	        $line = '';
-
-	    	if ($deal!='') {
-
-				$parser = parser_access($deal);
-				if (!is_array($parser)) continue;
-				list($day,$mon,$yea,$ddate,$ip,$login,$command,$url,$protocol,$code,$bytes,$ua) = $parser;
-
-				// Filtering
-				//
-				$ipselector[$ip]   		= $ip;
-				$codeselector[$code] 	= $code;
-				$userselector[$login] 	= $login;
-				$cmdselector[$command]  = $command;
-				$urlselector[$url]  	= $url;
-				$uaselector[$ua]   		= $ua;
-
-		        $ln++;
-				if ($ln>$howmax) break;
-//				if ($lndisp>=$howmany) continue;
-				if ($lndisp>=$howmany) break;
-
-				if (($Gi!='')&&($Gi!=$ip)) continue;
-				if (($Gc!='')&&($Gc!=$code)) continue;
-				if (($Gu!='')&&($Gu!=$login)) continue;
-				if (($Gm!='')&&($Gm!=$command)) continue;
-				if (($Gs!='')&&($Gs!=$url)) continue;
-				if (($Ga!='')&&($Ga!=$ua)) continue;
-
-
-				// Display
-				//
-				$codetype	= substr($code,0,1);
-				$hcode		= '<a href="http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP" target="httpcode"><span class="c'.$codetype.'">'.$code.'</span></a>';
-
-				if ($lastday!=$day) {
-					$result.= '<tr><td style="border-left:1px solid #666; border-right:1px solid #666; border-top:1px solid #333;background-color:#666;color:#fff;" colspan="7">'.$day.'/'.$mon.'/'.$yea.'</td></tr>';
-				}
-				$lastday	= $day;
-
-				if ($lastip!=$ip) {
-					$result.= '<tr><td style="padding-top:3px;"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
-				}
-				$lastip		= $ip;
-				$hip		= '<a href="http://www.geoiptool.com/en/?IP='.$ip.'" target="geoip">'.$ip.'</a>';
-				$hurl		= '<a href="'.$url.'" target="url">'.$url.'</a>';
-				$hua		= '<a href="http://user-agent-string.info/?Fuas='.urlencode($ua).'&test=spamno&action=analyze" target="ua" class="ua">'.$ua.'</a>';
-
-				$result	.= '<tr>
-					<td>'.$ddate.'</td>
-					<td>'.$hip.'</td>
-					<td>'.$hcode.'</td>
-					<td>'.$login.'</td>
-					<td>'.$command.'</td>
-					<td>'.$hurl.'</td>
-					<td>'.$hua.'</td>
-				</tr>';
-				$lndisp++;
-			}
-			continue;
-        }
-        $line = $char.$line;
-    }
-	fclose($fl);
-
-	echo '<table>';
-	echo '<tr>
-			<th>Date</td>
-			<th>IP</td>
-			<th>Code</td>
-			<th>User</td>
-			<th>CMD</td>
-			<th>URL</td>
-			<th>UA</td>
-	</tr>';
-
-	echo '<tr>
-			<td></td>
-			<td><select name="Gi" onChange="javascrip:this.form.submit();">'.selector($ipselector,$Gi).'</select></td>
-			<td><select name="Gc" onChange="javascrip:this.form.submit();">'.selector($codeselector,$Gc).'</select></td>
-			<td><select name="Gu" onChange="javascrip:this.form.submit();">'.selector($userselector,$Gu).'</select></td>
-			<td><select name="Gm" onChange="javascrip:this.form.submit();">'.selector($cmdselector,$Gm).'</select></td>
-			<td><select name="Gs" onChange="javascrip:this.form.submit();">'.selector($urlselector,$Gs).'</select></td>
-			<td><select name="Ga" onChange="javascrip:this.form.submit();">'.selector($uaselector,$Ga).'</select></td>
-	</tr>';
-	echo $result;
-    echo '</table><br/>'.$lndisp.' logs displayed';
-    echo ($display_file_path==true) ? ' from file <a href="'.$files[$logtype].'" target="'.$files[$logtype].'">'.$files[$logtype].'</a>' : '';
-}
-
-//===================================================================================================================================================
-// APACHE ERROR
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-else if ($logtype=='Error') {
-
-	$result	 = '';
-	//	$dumb		= exec('cat '.$files[$logtype].'|grep -v "::1"|grep -v "/wwwlogs/"|grep -v "/favicon.ico"|grep -v "/robots.txt"',$output);
-	//	$lengtd		= count($output)-1;
-	$lastip  = '';
-	$lastday = '';
-	$lndisp	 = 0;
-
-	$fl = fopen($files[$logtype], "r");
-	for($x_pos = 0, $ln = 0, $line=''; fseek($fl, $x_pos, SEEK_END) !== -1; $x_pos--) {
-	    $char = fgetc($fl);
-	    if ($char === "\n") {
-
-			if (preg_matcha($exclude,$line)) {
-	        	$deal = '';
-	        }
-	        else {
-		        $deal = $line;
-	        }
-	        $line = '';
-
-	    	if ($deal!='') {
-
-				$parser = parser_error($deal);
-				if (!is_array($parser)) continue;
-				list($day,$mon,$yea,$ddate,$ip,$error) = $parser;
-
-//				// Filtering
-//				//
-				$ipselector[$ip]   		= $ip;
-		        $ln++;
-				if ($ln>$howmax) break;
-//				if ($lndisp>=$howmany) continue;
-				if ($lndisp>=$howmany) break;
-
-				if (($Gi!='')&&($Gi!=$ip)) continue;
-
-				// Display
-				//
-				if ($lastday!=$day) {
-					$result.= '<tr><td style="border-left:1px solid #666; border-right:1px solid #666; border-top:1px solid #333;background-color:#666;color:#fff;" colspan="3">'.$day.'/'.$mon.'/'.$yea.'</td></tr>';
-				}
-				$lastday	= $day;
-
-				if ($lastip!=$ip) {
-					$result.= '<tr><td style="padding-top:3px;" colspan="3"></td></tr>';
-				}
-				$lastip		= $ip;
-
-				// c1 orange
-				// c4 touge
-				// c3 bleu
-				$error 		= htmlentities($error);
-				$error		= str_replace('\n', '<br/>', $error);
-				$error		= str_replace('Password Mismatch', '<span class="c4">Password Mismatch</span>', $error);
-				$error		= str_replace('not found or unable to stat', '<span class="c4">not found or unable to stat</span>', $error);
-				$error		= str_replace('File does not exist:', '<span class="c4">File does not exist:</span>', $error);
-				$error		= str_replace('PHP Fatal error:', '<span class="c4">PHP Fatal error:</span>', $error);
-				$error		= str_replace('PHP Parse error:', '<span class="c4">PHP Parse error:</span>', $error);
-				$error		= str_replace('PHP Notice:', '<span class="c3">PHP Notice:</span>', $error);
-				$error		= str_replace('PHP Warning:', '<span class="c1">PHP Warning:</span>', $error);
-				$error		= str_replace('ErrorException', '<span class="c4">ErrorException</span>', $error);
-
-				if (strpos($error,', referer: ')!==false) {
-					$error 		= substr($error,0,strpos($error,', referer: '));
-				}
-				$error      = preg_replace('/^(.*) in (.*) on line (.*)$/', '${1} in <span class="c3">${2}</span> on line <span class="c3">${3}</span>', $error);
-
-				$hip		= '<a href="http://www.geoiptool.com/en/?IP='.$ip.'" target="geoip">'.$ip.'</a>';
-
-				$result	.= '<tr>
-					<td>'.$ddate.'</td>
-					<td>'.$hip.'</td>
-					<td>'.$error.'</td>
-				</tr>';
-				$lndisp++;
-			}
-			continue;
-        }
-        $line = $char.$line;
-    }
-	fclose($fl);
-
-	echo '<table>';
-	echo '<tr>
-			<th>Date</td>
-			<th>IP</td>
-			<th>Log</td>
-	</tr>';
-
-	echo '<tr>
-			<td></td>
-			<td><select name="Gi" onChange="javascrip:this.form.submit();">'.selector($ipselector,$Gi).'</select></td>
-			<td></td>
-	</tr>';
-	echo $result;
-	echo '</table><br/>'.$lndisp.' logs displayed';
-    echo ($display_file_path==true) ? ' from file <a href="'.$files[$logtype].'" target="'.$files[$logtype].'">'.$files[$logtype].'</a>' : '';
-
-}
-?>
-
-</form></center></body>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src='//www.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
+</body>
 </html>
