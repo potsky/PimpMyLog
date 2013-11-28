@@ -43,16 +43,17 @@ include_once 'inc/global.inc.php';
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1><?php _e( 'Oups!' );?></h1>
-			<p><?php _e( 'This site is not configured. Please create a <code>config.inc.php</code> file at root directory.' );?></p>
-			<p><a class="btn btn-primary btn-lg" href="<?php echo HELP_URL;?>"><?php _e('Learn more');?> &raquo;</a></p>
+			<h1><?php echo $title;?></h1>
+			<p><?php echo $message;?></p>
+<?php if ( '' != @$link_url ) { ?>
+			<p><a class="btn btn-primary btn-lg" href="<?php echo $link_url;?>"><?php echo $link_msg;?> &raquo;</a></p>
+<?php } ?>
 		</div>
 	</div>
 
 	<div class="container">
-		<hr>
 		<footer>
-			<p>&copy; Potsky <?php echo YEAR;?></p>
+			<p>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> <?php echo date('Y'); ?> - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">PHP Apache Log Viewer</a></p>
 		</footer>
 	</div>
 

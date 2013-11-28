@@ -1,4 +1,8 @@
 <?php
+/////////////////////////////////////////
+// DO NOT USE ON NEW INSTALLATION      //
+// USE config.v2.example.php INSTEAD ! //
+/////////////////////////////////////////
 
 $exclude           = array('/\/wwwlogs\//','/favicon.ico/','/PHP Stack trace:/','/PHP *[0-9]*\. /');
 $howmax            = 100;

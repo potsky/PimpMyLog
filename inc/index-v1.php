@@ -286,12 +286,12 @@ if ($logtype=='Access') {
 
 	echo '<tr>
 			<td></td>
-			<td><select name="Gi" onChange="javascrip:this.form.submit();">'.selector($ipselector,$Gi).'</select></td>
-			<td><select name="Gc" onChange="javascrip:this.form.submit();">'.selector($codeselector,$Gc).'</select></td>
-			<td><select name="Gu" onChange="javascrip:this.form.submit();">'.selector($userselector,$Gu).'</select></td>
-			<td><select name="Gm" onChange="javascrip:this.form.submit();">'.selector($cmdselector,$Gm).'</select></td>
-			<td><select name="Gs" onChange="javascrip:this.form.submit();">'.selector($urlselector,$Gs).'</select></td>
-			<td><select name="Ga" onChange="javascrip:this.form.submit();">'.selector($uaselector,$Ga).'</select></td>
+			<td><select name="Gi" onChange="javascript:this.form.submit();">'.selector($ipselector,$Gi).'</select></td>
+			<td><select name="Gc" onChange="javascript:this.form.submit();">'.selector($codeselector,$Gc).'</select></td>
+			<td><select name="Gu" onChange="javascript:this.form.submit();">'.selector($userselector,$Gu).'</select></td>
+			<td><select name="Gm" onChange="javascript:this.form.submit();">'.selector($cmdselector,$Gm).'</select></td>
+			<td><select name="Gs" onChange="javascript:this.form.submit();">'.selector($urlselector,$Gs).'</select></td>
+			<td><select name="Ga" onChange="javascript:this.form.submit();">'.selector($uaselector,$Ga).'</select></td>
 	</tr>';
 	echo $result;
     echo '</table><br/>'.$lndisp.' logs displayed';
@@ -394,7 +394,7 @@ else if ($logtype=='Error') {
 
 	echo '<tr>
 			<td></td>
-			<td><select name="Gi" onChange="javascrip:this.form.submit();">'.selector($ipselector,$Gi).'</select></td>
+			<td><select name="Gi" onChange="javascript:this.form.submit();">'.selector($ipselector,$Gi).'</select></td>
 			<td></td>
 	</tr>';
 	echo $result;

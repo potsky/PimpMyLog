@@ -3,7 +3,11 @@ include_once 'inc/global.inc.php';
 
 // Check if configured
 if ( ! file_exists( 'config.inc.php' ) ) {
-	include_once 'inc/not_configured.php';
+	$title    = __( 'Oups!' );
+	$message  = __( 'This site is not configured. Please create a <code>config.inc.php</code> file at root directory.' );
+	$link_url = HELP_URL;
+	$link_msg = __('Learn more');
+	include_once 'inc/error.php';
 	die();
 }
 include_once 'config.inc.php';
@@ -14,13 +18,32 @@ if ( isset( $_GET[ 'v1'] ) ) {
 	die();
 }
 else if ( ! defined( 'TITLE' ) ) {
-	include_once 'inc/not_configured_v2.php';
+	$title    = __( 'Oups!' );
+	$message  = __( 'You was using <em>PHP Apache Log Viewer</em> v1.' ) . '<br/>' . __('You need to update the <code>config.inc.php</code> configuration file at root to upgrade <em>PHP Apache Log Viewer</em> v2.' );
+	$link_url = '?v1=1';
+	$link_msg = __('Use v1 anyway');
+	include_once 'inc/error.php';
 	die();
 }
 
 include_once 'config.inc.php';
-?>
-<!DOCTYPE html>
+
+$errors = check_config();
+if ( is_array( $errors ) ) {
+	$title    = __( 'Oups!' );
+	$message  = __( '<code>config.inc.php</code> configuration file is buggy :' ) . '<ul>';
+	foreach ( $errors as $error ) {
+		$message .= '<li>' . $error . '</li>';
+	}
+	$message .= '</ul>';
+	$link_url = '#';
+	$link_msg = __('Retry');
+	include_once 'inc/error.php';
+	die();
+}
+
+
+?><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -31,7 +54,6 @@ include_once 'config.inc.php';
 	<title></title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
-
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<style>
 		body {
@@ -41,7 +63,22 @@ include_once 'config.inc.php';
 	</style>
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/main.css">
+<?php if ( file_exists( 'config.inc.css' ) ) { ?>
+	<link rel="stylesheet" href="config.inc.css">
+<?php } else { ?>
+	<link rel="stylesheet" href="css/config.inc.css">
+<?php } ?>
+	<link rel="stylesheet" href="js/vendor/Hook.js/hook.css">
 	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<script>
+		var logs_refresh_default = <?php echo (int)LOGS_REFRESH;?>,
+			logs_max_default = <?php echo (int)LOGS_MAX;?>,
+			files = <?php echo json_encode($files);?>,
+			notification_title = "<?php echo NOTIFICATION_TITLE;?>",
+			severities = <?php echo json_encode($severities);?>,
+			pull_to_refresh = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
+			notification_default = <?php echo ( NOTIFICATION===true ) ? 'true' : 'false';?>;
+	</script>
 </head>
 <body>
 	<!--[if lt IE 7]>
@@ -59,63 +96,88 @@ include_once 'config.inc.php';
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+					<li class="dropdown" title="<?php _e( 'Select a log file to display' );?>">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li class="dropdown-header">Nav header</li>
-							<li><a href="#">Separated link</a></li>
-							<li><a href="#">One more separated link</a></li>
+<?php
+foreach ( $files as $file_id=>$file ) {
+	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
+}
+?>
 						</ul>
 					</li>
+					<li class="loader" style="display:none;"><img src="img/loading.gif" class="loading" /></li>
+					<li class="loader"><a href="#" title="<?php _e( 'Click to refresh' );?>"><span id="refresh" class="glyphicon glyphicon-refresh"></span></a></li>
 				</ul>
-				<div class="nav navbar-right">
-					Coucou !
-				</div>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>">
+							<option value="0"><?php _e( 'No auto refresh' );?></option>
+<?php
+foreach ( get_refresh_options() as $r ) {
+	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh every %ss' ) , $r ) . '</option>';
+}
+?>
+						</select>
+					</div>
+					<div class="form-group">
+						<select id="max" class="form-control input-sm" title="<?php _e( 'Max count of logs to display' );?>">
+<?php
+foreach ( get_max_options() as $r ) {
+	echo '<option value="' . $r . '">' . sprintf( ( (int)$r>1 ) ? __( '%s logs' ) : __( '%s log' ) , $r ) . '</option>';
+}
+?>
+						</select>
+					</div>
+					<button style="display:none;" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>">
+					  <span class="glyphicon glyphicon-bell"></span>
+					</button>
+				</form>
 			</div><!--/.navbar-collapse -->
 		</div>
 	</div>
 
-	<div class="container">
-		<!-- Example row of columns -->
-		<div class="row">
-			<div class="col-lg-4">
-				<h2>Heading</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-				<p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-			</div>
-			<div class="col-lg-4">
-				<h2>Heading</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-				<p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-			</div>
-			<div class="col-lg-4">
-				<h2>Heading</h2>
-				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-				<p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-			</div>
+<?php if ( PULL_TO_REFRESH === true ) { ?>
+	<div id="hook" class="hook">
+		<div id="loader">
+			<div class="spinner"></div>
 		</div>
+		<span id="hook-text"><?php _e('Reloading...');?></span>
+	</div>
+<?php } ?>
 
+	<div class="container">
+		<div id="error" style="display:none;"><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
+		<div id="result">
+			<br/>
+			<div class="table-responsive">
+				<table id="logs" class="table table-striped table-bordered table-hover table-condensed logs">
+					<thead id="logshead"></thead>
+					<tbody id="logsbody"></tbody>
+				</table>
+			</div>
+			<small id="compute"></small>
+		</div>
 		<hr>
-
 		<footer>
 			<p><?php echo FOOTER;?></p>
 		</footer>
-
-	</div> <!-- /container -->
+	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/vendor/ua-parser.min.js"></script>
+    <script src="js/vendor/Hook.js/mousewheel.js"></script>
+    <script src="js/vendor/Hook.js/hook.min.js"></script>
 	<script src="js/main.js"></script>
+<?php if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
 	<script>
-		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+		var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];
 		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 			g.src='//www.google-analytics.com/ga.js';
 			s.parentNode.insertBefore(g,s)}(document,'script'));
 	</script>
+<?php } ?>
 </body>
 </html>
