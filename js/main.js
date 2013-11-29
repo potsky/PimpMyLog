@@ -1,6 +1,6 @@
 var file           = '';
 var loading        = false;
-var file_last_time = 0;
+var fingerprint    = '';
 var notification;
 var auto_refresh_timer;
 
@@ -65,15 +65,27 @@ var get_logs = function( load_default_values ) {
 	loading = true;
 
 	$.ajax( {
-		url     : 'inc/get_logs.php' ,
+		url     : 'inc/getlogzzz.php' ,
 		data    : {
 			'ldv'  : load_default_values,
-			'flt'  : file_last_time,
 			'file' : file,
 			'max'  : $('#max').val()
 		} ,
 		dataType: 'json'
 	} )
+	.fail( function ( logs ) {
+		// Layout
+		$('.loader').toggle();
+		loading = false;
+
+		// Error
+		if ( logs.error ) {
+			$("#result").hide();
+			$("#error").show();
+			$('#errortxt').html( logs.responseText );
+			return;
+		}
+	})
 	.done( function ( logs ) {
 
 		// Layout
@@ -88,14 +100,18 @@ var get_logs = function( load_default_values ) {
 			return;
 		}
 
-		// Compute
+		// PHP Internal notices
+		if ( logs.warning )
+			$('<div class="alert alert-warning alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + logs.warning + '</div>').appendTo("#notice");
+		if ( logs.notice )
+			$('<div class="alert alert-notice alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + logs.notice + '</div>').appendTo("#notice");
+
+		// Render
 		$("#error").hide();
 		$("#result").show();
 		$("#compute").text( logs.duration );
-
-		// Render
-		console.log(logs);
-
+		$("#lastmodified").html( '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;' + logs.lastmodified );
+		$("#bytes").html( '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;' + bytes_parsed.replace('%s',numeral(logs.bytes).format('0b') ) );
 		$( "#logshead" ).text( '' );
 		$( "#logsbody" ).text( '' );
 
@@ -104,38 +120,70 @@ var get_logs = function( load_default_values ) {
 			$( "<th>" + logs.headers[ h ] + "</th>" ).addClass( h ).appendTo( '#logshead' );
 		}
 
+		var uaparser = new UAParser();
+
 		for ( var log in logs.logs ) {
 
 			var tr = $('<tr>');
 
 			for ( var c in logs.logs[log] ) {
 
-				var val   = logs.logs[log][ c ];
-				var title = val;
-
+				var val           = logs.logs[log][ c ];
+				var title         = val;
+				var severityclass = '';
+				if ( val == '-' ) {
+					val = '';
+				}
 				if ( 'Severity' == c ) {
-					var s = severities[ logs.logs[log][ c ] ];
-					if ( s !== '' ) {
-						tr.addClass( s );
+					severityclass = severities[ logs.logs[log][ c ] ];
+					if (severity_color_on_all_cols) {
+						if ( severityclass !== '') {
+							tr.addClass( severityclass );
+						}
+						severityclass = '';
+					} else {
+						if ( severityclass === '') {
+							severityclass = 'default';
+						}
+						val = '<span class="label label-' + severityclass + '">' + val + '</span>';
+					}
+				}
+				else if ( 'Code' == c ) {
+					httpcodeclass = httpcodes[ logs.logs[log][ c ].substring(0,1) ];
+					if ( ( httpcodeclass !== undefined ) && ( httpcodeclass !== '') ) {
+						val = '<span class="label label-' + httpcodeclass + '">' + val + '</span>';
+					}
+				}
+				else if ( 'UA' == c ) {
+					var ua = uaparser.setUA(val).getResult();
+					val = ua.os.name + ' ' + ua.os.version + ' | ' + ua.browser.name + ' ' + ua.browser.version;
+				}
+				else if ( 'Size' == c ) {
+					if ( val != '-' ) {
+						val = numeral(val).format('0b');
 					}
 				}
 				else if ( 'Date' == c ) {
 					var tmp = val.split(' ');
 					val = '<span class="day">' + tmp[0] + '</span> <span class="time">' + tmp[1] + '</span>';
 				}
-
-				$( "<td title=" + title + ">" + val + "</td>" ).addClass( c ).appendTo( tr );
+				else if ( 'IP' == c ) {
+					val = '<a href="' + geoip_url.replace( "%p" , val ) + '" target="geoip">' + val + '</a>';
+				}
+				else if ( 'Referer' == c ) {
+					val = '<a href="' + val + '" target="referer">' + val + '</a>';
+				}
+				$( '<td title="' + title + '">' + val + '</td>' ).addClass( severityclass + c ).appendTo( tr );
 			}
 
 			tr.appendTo('#logsbody');
 		}
 
-		// File has changed
-		var file_has_changed = (file_last_time == logs.file_last_time);
-		file_last_time = logs.file_last_time;
-
 		// Notification
-		notify( notification_title.replace( /%f/g , files[file].display ) , 'New log !' );
+		if ( logs.fingerprint != fingerprint ) {
+			notify( notification_title.replace( /%f/g , files[file].display ) , 'New logs !' );
+			fingerprint = logs.fingerprint;
+		}
 
 		// Auto refresh
 		if ( auto_refresh_timer !== null ) {
@@ -150,7 +198,6 @@ var get_logs = function( load_default_values ) {
 
 	} )
 	.always( function () {
-
 	});
 };
 

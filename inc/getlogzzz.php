@@ -2,11 +2,57 @@
 include_once 'global.inc.php';
 include_once '../config.inc.php';
 
+$logs = array();
+
+////////////////////
+// Error handling //
+////////////////////
+function myErrorHandler( $errno, $errstr, $errfile, $errline ) {
+	global $logs;
+	if ( !( error_reporting() & $errno ) ) {
+		return;
+	}
+	switch ( $errno ) {
+	case E_USER_ERROR:
+		echo json_encode( array( 'error' => $errstr ) );
+		exit( 1 );
+		break;
+
+	case E_USER_WARNING:
+		$logs['warning'] = sprintf( __('<strong>PHP Warning</strong> [%s] %s') , $errno , $errstr );
+		break;
+
+	case E_USER_NOTICE:
+		$logs['notice'] = sprintf( __('<strong>PHP Notice</strong> [%s] %s') , $errno , $errstr );
+		break;
+
+	default:
+		$logs['warning'] = sprintf( __('<strong>PHP Unknown error</strong> [%s] %s') , $errno , $errstr );
+		break;
+	}
+	return true;
+}
+
+$old_error_handler = set_error_handler( "myErrorHandler" );
+
+register_shutdown_function( 'shutdown' );
+
+function shutdown() {
+	$error = error_get_last();
+	if ( $error['type'] === E_ERROR ) {
+		echo json_encode(
+			array(
+				'error' => sprintf( __('<strong>PHP Error</strong> line %s : %s') , $error['line'] , $error['message'] )
+			)
+		);
+	}
+}
+
+
 /////////////
 // Prepare //
 /////////////
 $start               = microtime( true );
-$logs                = array();
 $file_id             = $_GET['file'];
 $user_max            = $_GET['max'];
 $load_default_values = $_GET['ldv'];
@@ -50,38 +96,45 @@ if ( $fl === false ) {
 }
 
 $found = false;
+$bytes = 0;
 for ( $x_pos = 0, $ln = 0, $line=''; fseek( $fl, $x_pos, SEEK_END ) !== -1; $x_pos-- ) {
 
 	$char = fgetc( $fl );
 
 	if ( $char === "\n" ) {
-
-		/*
-		if ( preg_matcha( $exclude, $line ) ) {
-			$deal = '';
-		}
-		else {
-			$deal = $line;
-		}
-		$line = '';
-		*/
 		$deal = $line;
 		$line = '';
-
 		if ( $deal != '' ) {
-			$found = true;
-			$log = parser( $regex , $match , $deal , 'Y/m/d h:i:s' , ' :: ' );
+			$log        = parser( $regex , $match , $deal , 'Y/m/d H:i:s' , ' :: ' );
 			if ( is_array( $log ) ) {
-				$logs[ 'logs' ][] = $log;
+				$return_log = true;
+				foreach ( $log as $key => $value ) {
+					if ( ( isset( $exclude[$key] ) ) && ( is_array( $exclude[$key] ) ) ) {
+						foreach ( $exclude[$key] as $ekey => $reg ) {
+							try {
+								if ( preg_match( $reg , $value ) ) {
+									$return_log = false;
+									break 2;
+								}
+							} catch ( Exception $e ) {
+							}
+						}
+					}
+				}
+				if ( $return_log === true ) {
+					$found = true;
+					$logs[ 'logs' ][] = $log;
+					$ln++;
+				}
 			}
-			$ln++;
-			if ( $ln >= $max ) break;
+			else {
+			}
 		}
-
+		if ( $ln >= $max ) break;
 		continue;
 	}
-
 	$line = $char . $line;
+	$bytes++;
 }
 fclose( $fl );
 
@@ -94,15 +147,18 @@ if ( $found ) {
 		$logs['headers'][ $k ] = __( $k );
 	}
 }
-$logs['found']          = $found;
-$logs['file_last_time'] = filemtime( $file_path );
+
+$logs['found']        = $found;
+$logs['lastmodified'] = sprintf( __( 'File <code>%s</code> was last modified on <code>%s</code>' ) , $file_path , date( 'Y/m/d H:i:s' , filemtime( $file_path ) ) );
+$logs['fingerprint']  = md5( serialize( $logs['logs'] ) );
+$logs['bytes']        = $bytes;
 
 
 ////////////////
 // End Tuning //
 ////////////////
-$now                    = microtime( true );
-$duration               = (int) ( ( $now - $start ) * 1000 );
-$logs['duration']       = sprintf( __( 'Computed in %sms' ) , $duration );
+$now              = microtime( true );
+$duration         = (int) ( ( $now - $start ) * 1000 );
+$logs['duration'] = sprintf( __( 'Computed in %sms' ) , $duration );
 
 echo json_encode( $logs );

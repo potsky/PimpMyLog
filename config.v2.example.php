@@ -1,7 +1,7 @@
 <?php
 
-define( 'TITLE'              , 'PHP Apache Log Viewer' );
-define( 'FOOTER'             , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">PHP Apache Log Viewer</a>');
+define( 'TITLE'              , 'Pimp My Logs' );
+define( 'FOOTER'             , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp My Logs</a>');
 define( 'LOGS_MAX'           , 10 );
 define( 'LOGS_REFRESH'       , 7 );
 define( 'NOTIFICATION'       , true );

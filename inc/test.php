@@ -1,5 +1,5 @@
 <?php
-include_once 'functions.inc.php';
+include_once 'functionzzz.inc.php';
 
 function test( $type , $regex , $match , $log , $dateformat='Y/m/d h:i:s' , $separator=' :: ') {
 	echo '<br/><h3>' . $type . '</h3>';
@@ -53,7 +53,7 @@ function test( $type , $regex , $match , $log , $dateformat='Y/m/d h:i:s' , $sep
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">PHP Apache Log Viewer Regex Test</a>
+				<a class="navbar-brand" href="#">Pimp My Logs Regex Test</a>
 			</div>
 		</div>
 	</div>
@@ -156,7 +156,7 @@ test( $type , $regex , $match , $log );
 ?>
 		<hr>
 		<footer>
-			<p>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> <?php echo date('Y'); ?> - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">PHP Apache Log Viewer</a></p>
+			<p>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> <?php echo date('Y'); ?> - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp My Logs</a></p>
 		</footer>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>

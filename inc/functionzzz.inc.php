@@ -36,7 +36,7 @@ function _e( $text ) {
  *
  * @return  mixed             An array where keys are internal tokens and values the corresponding values extracted from the log file. Or false if line is not matchable.
  */
-function parser( $regex , $match , $log , $dateformat='Y/m/d h:i:s' , $separator=' :: ' ) {
+function parser( $regex , $match , $log , $dateformat='Y/m/d H:i:s' , $separator=' :: ' ) {
 	$result = array();
 	preg_match_all( $regex , $log , $out, PREG_PATTERN_ORDER );
 	if ( @count( $out[0] )==0 ) {

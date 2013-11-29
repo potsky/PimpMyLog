@@ -1,5 +1,5 @@
 <?php
-include_once 'functions.inc.php';
+include_once 'functionzzz.inc.php';
 
 
 //////////////////////////
@@ -12,6 +12,7 @@ define( 'HELP_URL' , 'https://github.com/potsky/PHPApacheLogViewer' );
 ///////////////////////////////////
 // Define locale and translation //
 ///////////////////////////////////
+$lang = '';
 if ( function_exists( 'bindtextdomain' ) ) {
 	$locale = '';
 	if ( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
@@ -23,17 +24,15 @@ if ( function_exists( 'bindtextdomain' ) ) {
 	if ( isset( $_GET['l'] ) ) {
 		$locale = $_GET['l'];
 	}
-
 	$locale         = str_replace( '-', '_', $locale );
-	@list( $a, $b ) = explode( '_', $locale );
-	$locale         = strtolower( $a ).'_'.strtoupper( $b );
-
+	@list( $lang, $b ) = explode( '_', $locale );
+	$locale         = strtolower( $lang ).'_'.strtoupper( $b );
 	putenv( 'LC_ALL=' . $locale );
 	putenv( 'LANGUAGE=' . $locale );
-	if ( $a == 'fr' ) {
+	if ( $lang == 'fr' ) {
 		setlocale( LC_ALL , $locale , $locale . '.utf8' , 'fra' );
 	}
-	else if ( $a == 'de' ) {
+	else if ( $lang == 'de' ) {
 		setlocale( LC_ALL , $locale , $locale . '.utf8' , 'deu_deu' , 'de' , 'ge' );
 	}
 	else {
@@ -61,14 +60,16 @@ function check_config() {
 	global $files;
 	$errors = array();
 
-	if ( ! defined( 'TITLE'              ) ) define( 'TITLE'              , 'PHP Apache Log Viewer' );
-	if ( ! defined( 'FOOTER'             ) ) define( 'FOOTER'             , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">PHP Apache Log Viewer</a>');
-	if ( ! defined( 'LOGS_MAX'           ) ) define( 'LOGS_MAX'           , 50 );
-	if ( ! defined( 'LOGS_REFRESH'       ) ) define( 'LOGS_REFRESH'       , 0 );
-	if ( ! defined( 'NOTIFICATION'       ) ) define( 'NOTIFICATION'       , false );
-	if ( ! defined( 'PULL_TO_REFRESH'    ) ) define( 'PULL_TO_REFRESH'    , false );
-	if ( ! defined( 'NOTIFICATION_TITLE' ) ) define( 'NOTIFICATION_TITLE' , 'Logs [%f]' );
-	if ( ! defined( 'GOOGLE_ANALYTICS'   ) ) define( 'GOOGLE_ANALYTICS'   , 'UA-XXXXX-X' );
+	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp My Logs' );
+	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp My Logs</a>');
+	if ( ! defined( 'LOGS_MAX'                   ) ) define( 'LOGS_MAX'                   , 50 );
+	if ( ! defined( 'LOGS_REFRESH'               ) ) define( 'LOGS_REFRESH'               , 0 );
+	if ( ! defined( 'NOTIFICATION'               ) ) define( 'NOTIFICATION'               , false );
+	if ( ! defined( 'PULL_TO_REFRESH'            ) ) define( 'PULL_TO_REFRESH'            , true );
+	if ( ! defined( 'NOTIFICATION_TITLE'         ) ) define( 'NOTIFICATION_TITLE'         , 'Logs [%f]' );
+	if ( ! defined( 'GOOGLE_ANALYTICS'           ) ) define( 'GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
+	if ( ! defined( 'SEVERITY_COLOR_ON_ALL_COLS' ) ) define( 'SEVERITY_COLOR_ON_ALL_COLS' , true );
+	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
 
 	if ( ! isset( $files ) ) {
 		$errors[] = __('array <code>$files</code> is not defined');

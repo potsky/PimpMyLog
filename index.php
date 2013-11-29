@@ -19,7 +19,7 @@ if ( isset( $_GET[ 'v1'] ) ) {
 }
 else if ( ! defined( 'TITLE' ) ) {
 	$title    = __( 'Oups!' );
-	$message  = __( 'You was using <em>PHP Apache Log Viewer</em> v1.' ) . '<br/>' . __('You need to update the <code>config.inc.php</code> configuration file at root to upgrade <em>PHP Apache Log Viewer</em> v2.' );
+	$message  = __( 'You was using <em>Pimp My Logs</em> v1.' ) . '<br/>' . __('You need to update the <code>config.inc.php</code> configuration file at root to upgrade <em>Pimp My Logs</em> v2.' );
 	$link_url = '?v1=1';
 	$link_msg = __('Use v1 anyway');
 	include_once 'inc/error.php';
@@ -71,13 +71,17 @@ if ( is_array( $errors ) ) {
 	<link rel="stylesheet" href="js/vendor/Hook.js/hook.css">
 	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script>
-		var logs_refresh_default = <?php echo (int)LOGS_REFRESH;?>,
-			logs_max_default = <?php echo (int)LOGS_MAX;?>,
-			files = <?php echo json_encode($files);?>,
-			notification_title = "<?php echo NOTIFICATION_TITLE;?>",
-			severities = <?php echo json_encode($severities);?>,
-			pull_to_refresh = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
-			notification_default = <?php echo ( NOTIFICATION===true ) ? 'true' : 'false';?>;
+		var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
+			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
+			files                      = <?php echo json_encode($files);?>,
+			notification_title         = "<?php echo NOTIFICATION_TITLE;?>",
+			severities                 = <?php echo json_encode($severities);?>,
+			httpcodes                  = <?php echo json_encode($httpcodes);?>,
+			geoip_url                  = "<?php echo GEOIP_URL;?>",
+			bytes_parsed               = "<?php echo __( '%s of logs parsed' );?>",
+			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
+			severity_color_on_all_cols = <?php echo ( SEVERITY_COLOR_ON_ALL_COLS===true ) ? 'true' : 'false';?>,
+			notification_default       = <?php echo ( NOTIFICATION===true ) ? 'true' : 'false';?>;
 	</script>
 </head>
 <body>
@@ -139,24 +143,25 @@ foreach ( get_max_options() as $r ) {
 
 <?php if ( PULL_TO_REFRESH === true ) { ?>
 	<div id="hook" class="hook">
-		<div id="loader">
-			<div class="spinner"></div>
+		<div id="loader" class="hook-loader">
+			<div class="hook-spinner"></div>
 		</div>
-		<span id="hook-text"><?php _e('Reloading...');?></span>
+		<span id="hook-text"></span>
 	</div>
 <?php } ?>
 
 	<div class="container">
-		<div id="error" style="display:none;"><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
+		<div id="error" style="display:none;"><br/><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
 		<div id="result">
 			<br/>
+			<div id="notice"></div>
 			<div class="table-responsive">
 				<table id="logs" class="table table-striped table-bordered table-hover table-condensed logs">
 					<thead id="logshead"></thead>
 					<tbody id="logsbody"></tbody>
 				</table>
 			</div>
-			<small id="compute"></small>
+			<small id="compute"></small><small id="bytes"></small><small id="lastmodified"></small>
 		</div>
 		<hr>
 		<footer>
@@ -170,6 +175,13 @@ foreach ( get_max_options() as $r ) {
 	<script src="js/vendor/ua-parser.min.js"></script>
     <script src="js/vendor/Hook.js/mousewheel.js"></script>
     <script src="js/vendor/Hook.js/hook.min.js"></script>
+    <script src="js/vendor/Numeral.js/min/numeral.min.js"></script>
+<?php if ( file_exists( "js/vendor/Numeral.js/min/languages/$lang.min.js" ) ) { ?>
+    <script src="js/vendor/Numeral.js/min/languages/<?php echo $lang;?>.min.js"></script>
+	<script>
+	numeral.language('<?php echo $lang;?>');
+	</script>
+<?php } ?>
 	<script src="js/main.js"></script>
 <?php if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
 	<script>
