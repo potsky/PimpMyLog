@@ -1,0 +1,57 @@
+
+.logs th {
+	text-align: center;
+}
+
+.logs td.Date {
+  font-size: 0.8em;
+}
+
+.logs td.Date .day {
+  display:none;
+}
+
+.logs td.Date .time {
+}
+
+.logs td.IP {
+  font-size: 0.8em;
+}
+
+.logs td.Log {
+  font-family: monospace, serif;
+  font-size: 0.8em;
+  white-space: pre-wrap;
+}
+
+.logs td.Severity {
+  font-size: 0.8em;
+}
+
+.logs td.Referer {
+  font-size: 0.8em;
+}
+
+.logs td.CMD {
+  font-size: 0.8em;
+}
+
+.logs td.Code {
+  font-size: 0.9em;
+}
+
+.logs td.Size {
+  font-size: 0.8em;
+}
+
+.logs td.UA {
+  font-size: 0.8em;
+}
+
+.logs td.URL {
+  font-size: 0.8em;
+}
+
+.logs td.User {
+  font-size: 0.8em;
+}
