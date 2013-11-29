@@ -156,7 +156,19 @@ var get_logs = function( load_default_values ) {
 				}
 				else if ( 'UA' == c ) {
 					var ua = uaparser.setUA(val).getResult();
-					val = ua.os.name + ' ' + ua.os.version + ' | ' + ua.browser.name + ' ' + ua.browser.version;
+					if (ua.os.name !== undefined) {
+							val = ua.os.name;
+							if (ua.os.version !== undefined ) {
+									val += ' ' + ua.os.version;
+							}
+							val+= ' | ';
+					}
+					if (ua.browser.name !== undefined) {
+							val = ua.browser.name;
+							if (ua.browser.version !== undefined ) {
+									val += ' ' + ua.browser.version;
+							}
+					}
 				}
 				else if ( 'Size' == c ) {
 					if ( val != '-' ) {

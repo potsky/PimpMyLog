@@ -123,7 +123,7 @@ test( $type , $regex , $match , $log );
 
 $type  = 'Access Apache 2.2 with referer and user agent';
 $log   = '127.0.0.1 - - [27/Nov/2013:10:20:40 +0100] "GET /~potsky/PHPApacheLogViewer/inc/get_logs.php?ldv=false&file=access&max=27 HTTP/1.1" 200 33 "http://localhost/~potsky/PHPApacheLogViewer/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71"';
-$regex = '|^(.*) (.*) (.*) \[(.*)\] "(.*) (.*) (.*)" ([0-9]*) (.*) "(.*)" "(.*)"$|U';
+$regex = '|^(.*) (.*) (.*) \[(.*)\] "(.*) (.*) (.*)" ([0-9]*) (.*) "(.*)" "(.*)"( [0-9]*/[0-9]*)*$|U';
 $match = array(
 	'CMD'     => 5,
 	'Code'    => 8,
@@ -137,20 +137,12 @@ $match = array(
 );
 test( $type , $regex , $match , $log );
 
+$type  = 'Access Apache 2.2 with tuning options';
+$log   = '62.129.4.154 - - [29/Nov/2013:18:13:22 +0100] "GET /PimpMyLogs/inc/getlogzzz.php?ldv=true&file=access&max=20 HTTP/1.1" 500 96 "http://www.potsky.com/PimpMyLogs/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71" 10/10003980';
+test( $type , $regex , $match , $log );
+
 $type  = 'Access Apache 2.2 dummy SSL connection';
 $log   = '::1 - - [27/Nov/2013:12:02:08 +0100] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.2.25 (Unix) mod_ssl/2.2.26 OpenSSL/1.0.1e DAV/2 PHP/5.3.27 (internal dummy connection)"';
-$regex = '|^(.*) (.*) (.*) \[(.*)\] "(.*) (.*) (.*)" ([0-9]*) (.*) "(.*)" "(.*)"$|U';
-$match = array(
-	'CMD'     => 5,
-	'Code'    => 8,
-	'Date'    => 4,
-	'IP'      => 1,
-	'Referer' => 10,
-	'Size'    => 9,
-	'UA'      => 11,
-	'URL'     => 6,
-	'User'    => 3,
-);
 test( $type , $regex , $match , $log );
 
 ?>
