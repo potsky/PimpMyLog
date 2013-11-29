@@ -164,7 +164,7 @@ var get_logs = function( load_default_values ) {
 							val+= ' | ';
 					}
 					if (ua.browser.name !== undefined) {
-							val = ua.browser.name;
+							val+= ua.browser.name;
 							if (ua.browser.version !== undefined ) {
 									val += ' ' + ua.browser.version;
 							}
