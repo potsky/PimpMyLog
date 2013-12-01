@@ -53,7 +53,7 @@ function test( $type , $regex , $match , $log , $dateformat='Y/m/d h:i:s' , $sep
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Pimp My Logs Regex Test</a>
+				<a class="navbar-brand" href="#">Pimp my Log Regex Test</a>
 			</div>
 		</div>
 	</div>
@@ -147,9 +147,7 @@ test( $type , $regex , $match , $log );
 
 ?>
 		<hr>
-		<footer>
-			<p>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> <?php echo date('Y'); ?> - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp My Logs</a></p>
-		</footer>
+		<footer><small>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> <?php echo date('Y'); ?> - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp my Log</a></small></footer>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.1.min.js"><\/script>')</script>

@@ -3,8 +3,8 @@
 // Remove this if you have PHP Warning: ini_set() has been disabled for security reasons
 ini_set( 'max_execution_time' , 10 );
 
-define( 'TITLE'                      , 'Pimp My Logs' );
-define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp My Logs</a>');
+define( 'TITLE'                      , 'Pimp my Log' );
+define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp my Log</a>');
 define( 'LOGS_MAX'                   , 10 );
 define( 'LOGS_REFRESH'               , 7 );
 define( 'NOTIFICATION'               , true );

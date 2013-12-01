@@ -19,7 +19,7 @@ if ( isset( $_GET[ 'v1'] ) ) {
 }
 else if ( ! defined( 'TITLE' ) ) {
 	$title    = __( 'Oups!' );
-	$message  = __( 'You was using <em>Pimp My Logs</em> v1.' ) . '<br/>' . __('You need to update the <code>config.inc.php</code> configuration file at root to upgrade <em>Pimp My Logs</em> v2.' );
+	$message  = __( 'You was using <em>Pimp my Log</em> v1.' ) . '<br/>' . __('You need to update the <code>config.inc.php</code> configuration file at root to upgrade <em>Pimp my Log</em> v2.' );
 	$link_url = '?v1=1';
 	$link_msg = __('Use v1 anyway');
 	include_once 'inc/error.php';
@@ -164,9 +164,7 @@ foreach ( get_max_options() as $r ) {
 			<small id="compute"></small><small id="bytes"></small><small id="lastmodified"></small>
 		</div>
 		<hr>
-		<footer>
-			<p><?php echo FOOTER;?></p>
-		</footer>
+		<footer><small><?php echo FOOTER;?></small></footer>
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>

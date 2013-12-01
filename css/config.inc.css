@@ -21,7 +21,14 @@
 .logs td.Log {
   font-family: monospace, serif;
   font-size: 0.8em;
-  white-space: pre-wrap;
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
 }
 
 .logs td.Severity {
@@ -30,6 +37,14 @@
 
 .logs td.Referer {
   font-size: 0.8em;
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
 }
 
 .logs td.CMD {
@@ -50,6 +65,14 @@
 
 .logs td.URL {
   font-size: 0.8em;
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
 }
 
 .logs td.User {

@@ -60,8 +60,8 @@ function check_config() {
 	global $files;
 	$errors = array();
 
-	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp My Logs' );
-	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp My Logs</a>');
+	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp my Log' );
+	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp my Log</a>');
 	if ( ! defined( 'LOGS_MAX'                   ) ) define( 'LOGS_MAX'                   , 50 );
 	if ( ! defined( 'LOGS_REFRESH'               ) ) define( 'LOGS_REFRESH'               , 0 );
 	if ( ! defined( 'NOTIFICATION'               ) ) define( 'NOTIFICATION'               , false );

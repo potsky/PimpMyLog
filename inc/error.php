@@ -36,7 +36,7 @@ include_once 'inc/global.inc.php';
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Pimp My Logs</a>
+				<a class="navbar-brand" href="#">Pimp my Log</a>
 			</div>
 		</div>
 	</div>
@@ -52,9 +52,7 @@ include_once 'inc/global.inc.php';
 	</div>
 
 	<div class="container">
-		<footer>
-			<p>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> <?php echo date('Y'); ?> - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp My Logs</a></p>
-		</footer>
+		<footer><small>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> <?php echo date('Y'); ?> - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp my Log</a></small></footer>
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
