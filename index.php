@@ -43,6 +43,11 @@ if ( is_array( $errors ) ) {
 }
 
 
+$lemma = array(
+	'notification_deny' => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
+	'no_log'            => __( 'No log has been found.' ),
+);
+
 ?><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -75,8 +80,10 @@ if ( is_array( $errors ) ) {
 			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
 			files                      = <?php echo json_encode($files);?>,
 			notification_title         = "<?php echo NOTIFICATION_TITLE;?>",
+			site_title                 = "<?php echo TITLE;?>",
 			severities                 = <?php echo json_encode($severities);?>,
 			httpcodes                  = <?php echo json_encode($httpcodes);?>,
+			lemma                      = <?php echo json_encode($lemma);?>,
 			geoip_url                  = "<?php echo GEOIP_URL;?>",
 			bytes_parsed               = "<?php echo __( '%s of logs parsed' );?>",
 			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
@@ -89,6 +96,7 @@ if ( is_array( $errors ) ) {
 	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
 	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="logo"></div>
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -96,7 +104,11 @@ if ( is_array( $errors ) ) {
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><?php echo TITLE;?></a>
+				<div class="navbar-brand">
+					<span class="loader glyphicon glyphicon-download" style="display:none;" /></span>
+					<span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh' );?>" id="refresh"/></span>
+					<a href="?"><?php echo NAV_TITLE;?></a>
+				</div>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -110,10 +122,11 @@ foreach ( $files as $file_id=>$file ) {
 ?>
 						</ul>
 					</li>
-					<li class="loader" style="display:none;"><img src="img/loading.gif" class="loading" /></li>
-					<li class="loader"><a href="#" title="<?php _e( 'Click to refresh' );?>"><span id="refresh" class="glyphicon glyphicon-refresh"></span></a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<input type="text" class="form-control input-sm" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>">
+					</div>
 					<div class="form-group">
 						<select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>">
 							<option value="0"><?php _e( 'No auto refresh' );?></option>
@@ -155,13 +168,14 @@ foreach ( get_max_options() as $r ) {
 		<div id="result">
 			<br/>
 			<div id="notice"></div>
+			<div id="nolog" style="display:none"><div class="alert alert-info fade in"><?php echo __('No log found');?></div></div>
 			<div class="table-responsive">
 				<table id="logs" class="table table-striped table-bordered table-hover table-condensed logs">
 					<thead id="logshead"></thead>
 					<tbody id="logsbody"></tbody>
 				</table>
 			</div>
-			<small id="compute"></small><small id="bytes"></small><small id="lastmodified"></small>
+			<small id="footer"></small>
 		</div>
 		<hr>
 		<footer><small><?php echo FOOTER;?></small></footer>

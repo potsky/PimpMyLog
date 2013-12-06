@@ -135,8 +135,6 @@ a:hover {
 
 <?php
 
-die('coucou');
-
 echo '<input type="hidden" name="l" value="'.$logtype.'"/>';
 foreach ($files as $name=>$logfile) {
 	if ($name==$logtype) {

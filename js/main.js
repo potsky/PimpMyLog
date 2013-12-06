@@ -6,42 +6,83 @@ var auto_refresh_timer;
 
 
 /**
- * Safari notifications
  * Just display a notification on the desktop
- *
  * @return  {void}
  */
+var notification_displayed = false;
 var notify = function ( title , message ) {
-	if (!'Notification' in window) {
-		return;
+	if ( 'webkitNotifications' in window ) {
+		var havePermission = window.webkitNotifications.checkPermission();
+		if (havePermission === 0) {
+			notification_class = 'success';
+			set_notification();
+			if ( ( notification === true ) && ( title !== undefined ) && ( notification_displayed === false ) ) {
+				notification_displayed = true;
+				var noti = window.webkitNotifications.createNotification(
+					'img/icon_072.png', title , message
+				);
+				noti.onclick = function () {
+					window.focus();
+					noti.close();
+				};
+				noti.onclose = function() {
+					notification_displayed = false;
+				};
+				noti.show();
+				setTimeout(	function(){try {noti.close();}catch(e){}} , 5000 );
+			}
+		}
+		else if (havePermission === 2) {
+			notification_class = 'danger';
+			set_notification();
+		}
+		else {
+			notification_class = 'warning';
+			set_notification();
+
+			window.webkitNotifications.requestPermission(function (a) {
+				notify( title , message );
+			});
+		}
 	}
-	if (notification === false) {
-		return;
-	}
-	if (Notification.permission === 'default') {
-		Notification.requestPermission(function () {
-			notify();
-		});
-	}
-	else if (Notification.permission === 'granted') {
-		var n = new Notification( title , { 'body': message , 'tag' : 'phpapachelogviewer' } );
-		n.onclick = function () {
-			this.close();
-		};
-		n.onclose = function () {
-		};
-	}
-	else if (Notification.permission === 'denied') {
-		return;
+	else if ('Notification' in window) {
+		if (Notification.permission === 'default') {
+			notification_class = 'warning';
+			set_notification();
+
+			Notification.requestPermission(function () {
+				notify( title , message );
+			});
+		}
+		else if (Notification.permission === 'granted') {
+			notification_class = 'success';
+			set_notification();
+			if ( ( notification === true ) && ( title !== undefined ) && ( notification_displayed === false ) ) {
+				notification_displayed = true;
+				var n = new Notification( title , { 'body': message , 'tag' : 'Pimp My Log' } );
+				n.onclick = function () {
+					this.close();
+				};
+				n.onclose = function () {
+					notification_displayed = false;
+				};
+			}
+		}
+		else if (Notification.permission === 'denied') {
+			notification_class = 'danger';
+			set_notification();
+			return;
+		}
 	}
 };
 
 
-/**
- *
- *
- * @return  {void}
- */
+
+var pml_alert = function( message , severity) {
+	$('<div class="alert alert-' + severity + ' alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + message + '</div>').appendTo("#notice");
+};
+
+
 
 /**
  * Ajax call to get logs
@@ -50,6 +91,7 @@ var notify = function ( title , message ) {
  *
  * @return  {void}
  */
+var first_launch = true;
 var get_logs = function( load_default_values ) {
 
 	if ( load_default_values === true ) {
@@ -67,9 +109,10 @@ var get_logs = function( load_default_values ) {
 	$.ajax( {
 		url     : 'inc/getlogzzz.php' ,
 		data    : {
-			'ldv'  : load_default_values,
-			'file' : file,
-			'max'  : $('#max').val()
+			'ldv'    : load_default_values,
+			'file'   : file,
+			'max'    : $('#max').val(),
+			'search' : $('#search').val(),
 		} ,
 		dataType: 'json'
 	} )
@@ -102,22 +145,30 @@ var get_logs = function( load_default_values ) {
 
 		// PHP Internal notices
 		if ( logs.warning )
-			$('<div class="alert alert-warning alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + logs.warning + '</div>').appendTo("#notice");
+			pml_alert( logs.warning , 'warning' );
 		if ( logs.notice )
-			$('<div class="alert alert-notice alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + logs.notice + '</div>').appendTo("#notice");
+			pml_alert( logs.notice , 'notice' );
 
 		// Render
 		$("#error").hide();
 		$("#result").show();
-		$("#compute").text( logs.duration );
-		$("#lastmodified").html( '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;' + logs.lastmodified );
-		$("#bytes").html( '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;' + bytes_parsed.replace('%s',numeral(logs.bytes).format('0b') ) );
+		$("#footer").html( logs.footer );
 		$( "#logshead" ).text( '' );
 		$( "#logsbody" ).text( '' );
 
+		// No log
+		if ( logs.found === false ) {
+			$('#nolog').show();
+		} else {
+			$('#nolog').hide();
+		}
+
 		// header
+		var sort   = 'Date';
+		var sortsc = 'down';
 		for ( var h in logs.headers ) {
-			$( "<th>" + logs.headers[ h ] + "</th>" ).addClass( h ).appendTo( '#logshead' );
+			var s = ( sort == h ) ? '<span class="glyphicon glyphicon-chevron-' + sortsc + '"/></span>' : '';
+			$( "<th>" + logs.headers[ h ] + s + "</th>" ).addClass( h ).appendTo( '#logshead' );
 		}
 
 		var uaparser = new UAParser();
@@ -192,10 +243,13 @@ var get_logs = function( load_default_values ) {
 		}
 
 		// Notification
-		if ( logs.fingerprint != fingerprint ) {
-			notify( notification_title.replace( /%f/g , files[file].display ) , 'New logs !' );
-			fingerprint = logs.fingerprint;
+		if ( first_launch === false ) {
+			if ( logs.fingerprint != fingerprint ) {
+				notify( notification_title.replace( /%f/g , files[file].display ) , 'New logs !' );
+				fingerprint = logs.fingerprint;
+			}
 		}
+		first_launch = false;
 
 		// Auto refresh
 		if ( auto_refresh_timer !== null ) {
@@ -240,12 +294,16 @@ var set_max = function( a ) {
  *
  * @param  {string}  a  the value of the wanted selected option
  */
-var set_notification = function( a ) {
+var notification_class = 'warning';
+var set_notification   = function( a ) {
+	if ( a === undefined ) {
+		a = notification;
+	}
 	if ( a === true ) {
-		$('#notification').addClass('active btn-info');
+		$('#notification').removeClass('btn-warning btn-success btn-danger').addClass('active btn-' + notification_class );
 		notification = true;
 	} else {
-		$('#notification').removeClass('active btn-info');
+		$('#notification').removeClass('btn-warning btn-success btn-danger active');
 		notification = false;
 	}
 };
@@ -282,8 +340,19 @@ $(function() {
 		get_logs( true );
 	});
 
+	// Logo click
+	$('.logo').click(function() {
+		location.reload();
+	});
+
 	// Refresh button
 	$('#refresh').click( function() {
+		notify();
+		get_logs();
+	});
+
+	// Autorefresh menu
+	$('#search').change( function() {
 		get_logs();
 	});
 
@@ -300,13 +369,23 @@ $(function() {
 	});
 
 	// Notification > init
-	if ( 'Notification' in window ) {
+	if ( ( 'Notification' in window ) || ( 'webkitNotifications' in window ) ) {
 		$('#notification').show();
 		set_notification( notification_default );
 	}
 	$('#notification').click( function() {
-		set_notification( ! is_notification() );
+		if ( $(this).hasClass('btn-warning') ) {
+			notify();
+		}
+		else if ( $(this).hasClass('btn-danger') ) {
+			pml_alert( lemma.notification_deny , 'danger' );
+		}
+		else {
+			set_notification( ! is_notification() );
+		}
 	});
+	notify();
+
 
 	// Pull to refresh
 	if ( pull_to_refresh === true ) {
@@ -314,6 +393,7 @@ $(function() {
 			dynamic: false,
 			reloadPage: false,
 			reloadEl: function(){
+				notify();
 				get_logs();
 			}
 		});
@@ -323,4 +403,3 @@ $(function() {
 	get_logs( true );
 
 });
-

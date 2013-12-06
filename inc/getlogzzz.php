@@ -7,6 +7,7 @@ $logs = array();
 ////////////////////
 // Error handling //
 ////////////////////
+/*
 function myErrorHandler( $errno, $errstr, $errfile, $errline ) {
 	global $logs;
 	if ( !( error_reporting() & $errno ) ) {
@@ -47,7 +48,7 @@ function shutdown() {
 		);
 	}
 }
-
+*/
 
 /////////////
 // Prepare //
@@ -56,6 +57,7 @@ $start               = microtime( true );
 $file_id             = $_GET['file'];
 $user_max            = $_GET['max'];
 $load_default_values = $_GET['ldv'];
+$search              = @$_GET['search'];
 
 if ( ! isset( $files[$file_id] ) ) {
 	$logs['error'] = sprintf( __( 'File ID <code>%s</code> does not exist, please review your configuration file and stop playing!' ) , $file_id );
@@ -84,6 +86,14 @@ $match    = $files[ $file_id ][ 'format' ][ 'match' ];
 $exclude  = $files[ $file_id ][ 'format' ][ 'exclude' ];
 
 
+
+// Chek the search regexp
+if ($search!='') {
+	$test      = @preg_match( $search , 'this is just a test !' );
+	$regsearch = ( $test === false ) ? false : true;
+}
+
+
 //////////////
 // Let's Go //
 //////////////
@@ -97,6 +107,8 @@ if ( $fl === false ) {
 
 $found = false;
 $bytes = 0;
+$skip  = 0;
+$error = 0;
 for ( $x_pos = 0, $ln = 0, $line=''; fseek( $fl, $x_pos, SEEK_END ) !== -1; $x_pos-- ) {
 
 	$char = fgetc( $fl );
@@ -105,7 +117,7 @@ for ( $x_pos = 0, $ln = 0, $line=''; fseek( $fl, $x_pos, SEEK_END ) !== -1; $x_p
 		$deal = $line;
 		$line = '';
 		if ( $deal != '' ) {
-			$log        = parser( $regex , $match , $deal , 'Y/m/d H:i:s' , ' :: ' );
+			$log = parser( $regex , $match , $deal , 'Y/m/d H:i:s' , ' :: ' );
 			if ( is_array( $log ) ) {
 				$return_log = true;
 				foreach ( $log as $key => $value ) {
@@ -121,13 +133,29 @@ for ( $x_pos = 0, $ln = 0, $line=''; fseek( $fl, $x_pos, SEEK_END ) !== -1; $x_p
 						}
 					}
 				}
-				if ( $return_log === true ) {
-					$found = true;
-					$logs[ 'logs' ][] = $log;
-					$ln++;
+				if ( $return_log === false ) {
+					$skip++;
 				}
+				else {
+					if ( $search != '' ) { // Search
+						if ( $regsearch ) { // Regex
+							$return_log = preg_match( $search , $deal );
+						} else { // simple string
+							$return_log = strpos( $deal , $search );
+						}
+					}
+					if ( $return_log === true ) {
+						$found = true;
+						$logs[ 'logs' ][] = $log;
+						$ln++;
+					} else {
+						$skip++;
+					}
+				}
+
 			}
 			else {
+				$error++;
 			}
 		}
 		if ( $ln >= $max ) break;
@@ -148,10 +176,10 @@ if ( $found ) {
 	}
 }
 
+
+
 $logs['found']        = $found;
-$logs['lastmodified'] = sprintf( __( 'File <code>%s</code> was last modified on <code>%s</code>' ) , $file_path , date( 'Y/m/d H:i:s' , filemtime( $file_path ) ) );
-$logs['fingerprint']  = md5( serialize( $logs['logs'] ) );
-$logs['bytes']        = $bytes;
+$logs['fingerprint']  = md5( serialize( @$logs['logs'] ) );
 
 
 ////////////////
@@ -159,6 +187,17 @@ $logs['bytes']        = $bytes;
 ////////////////
 $now              = microtime( true );
 $duration         = (int) ( ( $now - $start ) * 1000 );
-$logs['duration'] = sprintf( __( 'Computed in %sms' ) , $duration );
+//$logs['duration'] = sprintf( __( 'Computed in %sms' ) , $duration );
+
+$logs['footer']   = sprintf( __( 'Computed in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</code> was last modified on <code>%s</code>, size is <code>%s</code>' )
+	, $duration
+	, human_filesize($bytes)
+	, $skip
+	, $error
+	, $file_path
+	, date( 'Y/m/d H:i:s' , filemtime( $file_path ) )
+	, human_filesize(filesize( $file_path ))
+);
+
 
 echo json_encode( $logs );

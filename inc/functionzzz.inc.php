@@ -73,3 +73,12 @@ function parser( $regex , $match , $log , $dateformat='Y/m/d H:i:s' , $separator
 	}
 	return $result;
 }
+
+
+
+
+function human_filesize( $bytes, $decimals = 0 ) {
+	$sz = __( 'B KBMBGBTBPB' );
+	$factor = floor( ( strlen( $bytes ) - 1 ) / 3 );
+	return sprintf( "%.{$decimals}f", $bytes / pow( 1024, $factor ) ) . @$sz[$factor*2];
+}
