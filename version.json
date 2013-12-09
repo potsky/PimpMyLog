@@ -3,8 +3,22 @@
 	"changelog" : {
 		"0.3" : {
 			"notice"   : "Hey upgrade now !!!",
-			"severity" : "danger",
 			"released" : "2013-12-08",
+			"new" : [
+				"This is a new #1 and in #23",
+				"This is a new #2"
+			],
+			"changed" : [
+				"This is a change #1",
+				"This is a change #2",
+				"This is a change #3"
+			],
+			"fixed" : [
+				"This is a fix #1"
+			]
+		},
+		"0.2.5" : {
+			"released" : "2013-11-08",
 			"new" : [
 				"This is a new #1",
 				"This is a new #2"
@@ -18,9 +32,7 @@
 				"This is a fix #1"
 			]
 		},
-		"0.2.5" : {
-			"notice"   : "Hey this update is really cool",
-			"released" : "2013-11-08",
+		"0.2.3" : {
 			"new" : [
 				"This is a new #1",
 				"This is a new #2"
