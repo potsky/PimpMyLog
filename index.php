@@ -169,6 +169,7 @@ foreach ( get_max_options() as $r ) {
 		<div id="error" style="display:none;"><br/><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
 		<div id="result">
 			<br/>
+<?php check_version(); ?>
 			<div id="notice"></div>
 			<div id="nolog" style="display:none"><div class="alert alert-info fade in"><?php echo __('No log found');?></div></div>
 			<div class="table-responsive">
