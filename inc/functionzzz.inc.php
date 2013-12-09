@@ -101,6 +101,7 @@ function check_config() {
 	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
 	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
 	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.json' );
+	if ( ! defined( 'PIMPMYLOG_GITHUB_ISSUE'     ) ) define( 'PIMPMYLOG_GITHUB_ISSUE'     , 'https://github.com/potsky/PimpMyLog/issues/%ID%' );
 
 	if ( ! isset( $files ) ) {
 		$errors[] = __('array <code>$files</code> is not defined');
@@ -250,19 +251,59 @@ function check_upgrade() {
 			throw new Exception("Error Processing Request", 1);
 		}
 		$remote_version = $JSr_version[ 'version' ];
-		var_dump($JSr_version);
-
-$local_version = '';
 
 		if ( version_compare( $local_version , $remote_version ) < 0 ) {
-			echo '';
-			while () {
-
+			$notices = array();
+			$upgrade = '<ul>';
+			foreach ( $JSr_version[ 'changelog' ] as $version => $version_details ) {
+				if ( version_compare( $local_version , $version ) >= 0 ) {
+					break;
+				}
+				if ( isset( $version_details['notice'] ) ) {
+					$notices[ $version ] = $version_details['notice'];
+				}
+				$upgrade .= '<li>';
+				$upgrade .= ( isset( $version_details['released'] ) ) ?	sprintf( __('Version %s released on %s') , '<em>' . $version . '</em>' , '<em>' . $version_details['released'] . '</em>' ) : sprintf( __('Version %s') , '<em>' . $version . '</em>' ) ;
+				$upgrade .= '<ul>';
+				foreach ( array( 'new' => 'New' , 'changed' => 'Changed' , 'fixed' => 'Fixed' ) as $type => $type_display ) {
+					if ( isset( $version_details[$type] ) ) {
+						$upgrade .= '<li>' . $type_display;
+						$upgrade .= '<ul>';
+						foreach ( $version_details[$type] as $issue ) {
+							$upgrade .= '<li>' . preg_replace( '/#([0-9])/i' , '<a href="' . PIMPMYLOG_GITHUB_ISSUE . '$1">#$1</a>' , $issue) . '</li>';
+						}
+						$upgrade .= '</ul>';
+						$upgrade .= '</li>';
+					}
+				}
+				$upgrade .= '</ul>';
+				$upgrade .= '</li>';
 			}
-			echo '';
-		}
+			$upgrade .= '</ul>';
 
-		return sprintf ( __('Your version %s is up to date') , $local_version );
+			$severity = ( count( $notices ) > 0 ) ? 'danger' : 'warning';
+			echo '<div class="alert alert-' . $severity . ' alert-dismissable">';
+			echo '  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+			echo '<strong>' . __( 'An upgrade is available !') . '</strong> ';
+			echo sprintf( __('You have version %s and version %s is available.' ) , '<em>' . $local_version . '</em>' , '<em>' . $remote_version . '</em>');
+			if ( count( $notices ) > 0 ) {
+				echo '<hr/>';
+				echo '<strong>' . __( 'You should upgrade right now :') . '</strong><ul>';
+				foreach ( $notices as $version => $notice ) {
+					echo '<li><em>' . $version . '</em> : ' . $notice . '</li>';
+				}
+				echo '</ul>';
+			}
+			echo '<hr/>';
+			echo '<a href="#" data-toggle="collapse" data-target="#changelog">' . __('Changelog') . '</a>';
+			echo '<div id="changelog" class="panel-collapse collapse"><div class="panel-body">' . $upgrade . '</div></div>';
+
+			echo '</div>';
+			return '<span class="text-warning">' . sprintf ( __('Your version %s is out of date') , $local_version ) . '</span>';
+		}
+		else {
+			return sprintf ( __('Your version %s is up to date') , $local_version );
+		}
 	}
 	catch ( Exception $e ) {
 		return $default . ' - <a href="'. PIMPMYLOG_VERSION_URL . '" target="check"><span class="text-danger" title="' . sprintf( __('Unable to fetch URL %s from the server hosting this Pimp my Log instance.') , PIMPMYLOG_VERSION_URL ) . '">' . __('Unable to check remote version!') . '</span></a>';
