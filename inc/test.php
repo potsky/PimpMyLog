@@ -1,5 +1,5 @@
 <?php
-include_once 'functionzzz.inc.php';
+include_once 'functions.inc.php';
 
 function test( $type , $regex , $match , $log , $dateformat='Y/m/d h:i:s' , $separator=' :: ') {
 	echo '<br/><h3>' . $type . '</h3>';
@@ -138,7 +138,7 @@ $match = array(
 test( $type , $regex , $match , $log );
 
 $type  = 'Access Apache 2.2 with tuning options';
-$log   = '62.129.4.154 - - [29/Nov/2013:18:13:22 +0100] "GET /PimpMyLogs/inc/getlogzzz.php?ldv=true&file=access&max=20 HTTP/1.1" 500 96 "http://www.potsky.com/PimpMyLogs/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71" 10/10003980';
+$log   = '62.129.4.154 - - [29/Nov/2013:18:13:22 +0100] "GET /PimpMyLogs/inc/getlog.pml.php?ldv=true&file=access&max=20 HTTP/1.1" 500 96 "http://www.potsky.com/PimpMyLogs/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71" 10/10003980';
 test( $type , $regex , $match , $log );
 
 $type  = 'Access Apache 2.2 dummy SSL connection';

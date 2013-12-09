@@ -37,7 +37,7 @@ $files = array(
 				'User'    => 3,
 			),
 			'exclude' => array(
-				'URL' => array( '/favicon.ico/' , '/inc\/getlogzzz.php/' ),
+				'URL' => array( '/favicon.ico/' , '/\.pml\.php/' ),
 				'CMD' => array( '/OPTIONS/' )
 			),
 		),
@@ -59,7 +59,7 @@ $files = array(
 				'Referer'  => 7,
 			),
 			'exclude' => array(
-				'Log' => array( '/inc\/functionzzz.inc.php/' , '/inc\/getlogzzz.php/' , '/PHP Stack trace:/' , '/PHP *[0-9]*\. /' )
+				'Log' => array( '/PHP Stack trace:/' , '/PHP *[0-9]*\. /' )
 			),
 		),
 	),

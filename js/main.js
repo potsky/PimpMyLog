@@ -107,7 +107,7 @@ var get_logs = function( load_default_values ) {
 	loading = true;
 
 	$.ajax( {
-		url     : 'inc/getlogzzz.php' ,
+		url     : 'inc/getlog.pml.php' ,
 		data    : {
 			'ldv'    : load_default_values,
 			'file'   : file,
@@ -370,20 +370,21 @@ $(function() {
 	});
 
 	// Upgrade
-	$( '#upgradestop' ).click( function() {
-		$.cookie( 'upgrade' + $(this).data('version') , 'hide' );
-		$("#upgradealert").alert('close');
-	});
-	var version = $('#upgradestop').data('version');
-	if ( version !== null ) {
-		var hide = $.cookie( 'upgrade' + version );
-		if ( hide === undefined ) {
-			if ( hide !== 'hide' ) {
-				$('#upgrademessage').show();
-			}
+	$.ajax( {
+		url     : 'inc/upgrade.pml.php' ,
+		dataType: 'json'
+	} )
+	.done( function ( upgrade ) {
+		$( '#upgradefooter' ).html( ' - ' + upgrade.footer);
+		var hide = $.cookie( 'upgrade' + upgrade.to );
+		if ( hide !== 'hide' ) {
+			$( '#upgrademessage' ).html( upgrade.alert );
+			$( '#upgradestop' ).click( function() {
+				$.cookie( 'upgrade' + $(this).data('version') , 'hide' );
+				$("#upgradealert").alert('close');
+			});
 		}
-	}
-
+	} );
 
 
 	// Notification > init

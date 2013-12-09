@@ -75,19 +75,10 @@ function parser( $regex , $match , $log , $dateformat = 'Y/m/d H:i:s' , $separat
 }
 
 
-
-
 /**
- * Check the $files array and fix it with default values
- * If there is a problem, return an array of errors
- * If everything is ok, return true;
- *
- * @return  mixed  true if ok, otherwise an array of errors
+ * Set unset constants
  */
-function check_config() {
-	global $files;
-	$errors = array();
-
+function set_default_constants() {
 	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp my Log' );
 	if ( ! defined( 'NAV_TITLE'                  ) ) define( 'NAV_TITLE'                  , '' );
 	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
@@ -102,6 +93,21 @@ function check_config() {
 	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
 	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.json' );
 	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
+}
+
+
+/**
+ * Check the $files array and fix it with default values
+ * If there is a problem, return an array of errors
+ * If everything is ok, return true;
+ *
+ * @return  mixed  true if ok, otherwise an array of errors
+ */
+function check_config() {
+	global $files;
+	$errors = array();
+
+	set_default_constants();
 
 	if ( ! isset( $files ) ) {
 		$errors[] = __('array <code>$files</code> is not defined');
@@ -221,101 +227,5 @@ function human_filesize( $bytes, $decimals = 0 ) {
 	$factor = floor( ( strlen( $bytes ) - 1 ) / 3 );
 	return sprintf( "%.{$decimals}f", $bytes / pow( 1024, $factor ) ) . @$sz[$factor*2];
 }
-
-
-/**
- * Check if an upgrade is available and echo html code to upgrade
- * Return html code to tell up to date !
- *
- * @return  string  Up to date html string
- */
-function check_upgrade() {
-
-	if ( file_exists( 'version.json' ) ) {
-		$JSl_version   = json_decode( @file_get_contents( 'version.json' ) , true );
-		$local_version = $JSl_version[ 'version' ];
-		$default       = sprintf ( __('Current version %s') , $local_version );
-	}
-	else {
-		return __('Unable to check your current version!');
-	}
-
-	if ( false === CHECK_UPGRADE ) {
-		return $default;
-	}
-
-	try {
-		$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 3 ) ) );
-		$JSr_version = json_decode( @file_get_contents( PIMPMYLOG_VERSION_URL , false , $ctx ) , true );
-		if ( is_null( $JSr_version ) ) {
-			throw new Exception("Error Processing Request", 1);
-		}
-		$remote_version = $JSr_version[ 'version' ];
-
-		if ( version_compare( $local_version , $remote_version ) < 0 ) {
-			$notices = array();
-			$upgrade = '<ul>';
-			foreach ( $JSr_version[ 'changelog' ] as $version => $version_details ) {
-				if ( version_compare( $local_version , $version ) >= 0 ) {
-					break;
-				}
-				if ( isset( $version_details['notice'] ) ) {
-					$notices[ $version ] = $version_details['notice'];
-				}
-				$upgrade .= '<li>';
-				$upgrade .= ( isset( $version_details['released'] ) ) ?	sprintf( __('Version %s released on %s') , '<em>' . $version . '</em>' , '<em>' . $version_details['released'] . '</em>' ) : sprintf( __('Version %s') , '<em>' . $version . '</em>' ) ;
-				$upgrade .= '<ul>';
-				foreach ( array( 'new' => 'New' , 'changed' => 'Changed' , 'fixed' => 'Fixed' ) as $type => $type_display ) {
-					if ( isset( $version_details[$type] ) ) {
-						$upgrade .= '<li>' . $type_display;
-						$upgrade .= '<ul>';
-						foreach ( $version_details[$type] as $issue ) {
-							$upgrade .= '<li>' . preg_replace( '/#([0-9]*)/i' , '<a href="' . PIMPMYLOG_ISSUE_LINK . '$1">#$1</a>' , $issue) . '</li>';
-						}
-						$upgrade .= '</ul>';
-						$upgrade .= '</li>';
-					}
-				}
-				$upgrade .= '</ul>';
-				$upgrade .= '</li>';
-			}
-			$upgrade .= '</ul>';
-
-			$severity = ( count( $notices ) > 0 ) ? 'danger' : 'warning';
-			echo '<div id="upgradealert" class="alert alert-' . $severity . ' alert-dismissable">';
-			echo '  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-			echo '<strong>' . __( 'An upgrade is available !') . '</strong> ';
-			echo sprintf( __('You have version %s and version %s is available' ) , '<em>' . $local_version . '</em>' , '<em>' . $remote_version . '</em>');
-			echo ' (<a href="#" class="alert-link" data-toggle="collapse" data-target="#changelog">' . __('release notes') . '</a>)';
-			echo '<br/>';
-			echo '<a href="#" id="upgradestop" data-version="' . $remote_version . '" class="alert-link">' . __("Don't bother me again with this upgrade!") . '</a>';
-
-			echo '<div id="changelog" class="panel-collapse collapse"><div class="panel-body panel panel-default">' . $upgrade . '</div></div>';
-
-			if ( count( $notices ) > 0 ) {
-				echo '<hr/>';
-				echo '<strong>' . __( 'You should upgrade right now :') . '</strong><ul>';
-				foreach ( $notices as $version => $notice ) {
-					echo '<li><em>' . $version . '</em> : ' . $notice . '</li>';
-				}
-				echo '</ul>';
-			}
-
-			echo '</div>';
-			return '<span class="text-warning">' . sprintf ( __('Your version %s is out of date') , $local_version ) . '</span>';
-		}
-		else {
-			return sprintf ( __('Your version %s is up to date') , $local_version );
-		}
-	}
-	catch ( Exception $e ) {
-		return $default . ' - <a href="'. PIMPMYLOG_VERSION_URL . '" target="check"><span class="text-danger" title="' . sprintf( __('Unable to fetch URL %s from the server hosting this Pimp my Log instance.') , PIMPMYLOG_VERSION_URL ) . '">' . __('Unable to check remote version!') . '</span></a>';
-	}
-}
-
-
-
-
-
 
 
