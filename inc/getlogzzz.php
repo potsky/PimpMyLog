@@ -1,13 +1,18 @@
 <?php
-if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
-	header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found');
-	die();
-}
-
 include_once 'global.inc.php';
 include_once '../config.inc.php';
 
-$logs = array();
+
+/////////////
+//  Check  //
+/////////////
+if (( ! isset( $_POST['file'] ) ) ||
+	( ! isset( $_POST['max'] ) ) ||
+	( ! isset( $_POST['ldv'] ) )
+) {
+	die();
+}
+
 
 ////////////////////
 // Error handling //
@@ -55,17 +60,21 @@ function shutdown() {
 }
 */
 
+
 /////////////
 // Prepare //
 /////////////
 $start               = microtime( true );
-$file_id             = $_GET['file'];
-$user_max            = $_GET['max'];
-$load_default_values = $_GET['ldv'];
-$search              = @$_GET['search'];
+$logs                = array();
+$file_id             = $_POST['file'];
+$load_default_values = $_POST['ldv'];
+$user_max            = @(int)$_POST['max'];
+$search              = @$_POST['search'];
+
+header('Content-type: application/json');
 
 if ( ! isset( $files[$file_id] ) ) {
-	$logs['error'] = sprintf( __( 'File ID <code>%s</code> does not exist, please review your configuration file and stop playing!' ) , $file_id );
+	$logs['error'] = sprintf( __( 'File IeD <code>%s</code> does not exist, please review your configuration file and stop playing!' ) , $file_id );
 	echo json_encode( $logs );
 	die();
 }

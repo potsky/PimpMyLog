@@ -114,6 +114,7 @@ var get_logs = function( load_default_values ) {
 			'max'    : $('#max').val(),
 			'search' : $('#search').val(),
 		} ,
+		type: 'POST',
 		dataType: 'json'
 	} )
 	.fail( function ( logs ) {
