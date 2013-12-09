@@ -32,9 +32,8 @@ if ( false === CHECK_UPGRADE ) {
 
 try {
 
-	$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 3 ) ) );
-	$JSr_version = json_decode( @file_get_contents( PIMPMYLOG_VERSION_URL , false , $ctx ) , true );
-
+	$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 5 ) ) );
+	$JSr_version = json_decode( @file_get_contents( PIMPMYLOG_VERSION_URL . '?' . date("U") , false , $ctx ) , true );
 	if ( is_null( $JSr_version ) ) {
 		throw new Exception( 'Unable to fetch remote version' , 1);
 	}
