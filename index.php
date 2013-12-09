@@ -169,7 +169,7 @@ foreach ( get_max_options() as $r ) {
 		<div id="error" style="display:none;"><br/><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
 		<div id="result">
 			<br/>
-<?php check_version(); ?>
+<?php $no_upgrade = check_upgrade(); ?>
 			<div id="notice"></div>
 			<div id="nolog" style="display:none"><div class="alert alert-info fade in"><?php echo __('No log found');?></div></div>
 			<div class="table-responsive">
@@ -181,7 +181,7 @@ foreach ( get_max_options() as $r ) {
 			<small id="footer"></small>
 		</div>
 		<hr>
-		<footer><small><?php echo FOOTER;?></small></footer>
+		<footer class="text-muted"><small><?php echo FOOTER;?> - <?php echo $no_upgrade;?></small></footer>
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>

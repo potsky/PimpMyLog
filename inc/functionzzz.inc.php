@@ -90,15 +90,17 @@ function check_config() {
 
 	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp my Log' );
 	if ( ! defined( 'NAV_TITLE'                  ) ) define( 'NAV_TITLE'                  , '' );
-	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp my Log</a>');
+	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
 	if ( ! defined( 'LOGS_MAX'                   ) ) define( 'LOGS_MAX'                   , 50 );
 	if ( ! defined( 'LOGS_REFRESH'               ) ) define( 'LOGS_REFRESH'               , 0 );
 	if ( ! defined( 'NOTIFICATION'               ) ) define( 'NOTIFICATION'               , false );
 	if ( ! defined( 'PULL_TO_REFRESH'            ) ) define( 'PULL_TO_REFRESH'            , true );
-	if ( ! defined( 'NOTIFICATION_TITLE'         ) ) define( 'NOTIFICATION_TITLE'         , 'Logs [%f]' );
+	if ( ! defined( 'NOTIFICATION_TITLE'         ) ) define( 'NOTIFICATION_TITLE'         , 'New logs [%f]' );
 	if ( ! defined( 'GOOGLE_ANALYTICS'           ) ) define( 'GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
 	if ( ! defined( 'SEVERITY_COLOR_ON_ALL_COLS' ) ) define( 'SEVERITY_COLOR_ON_ALL_COLS' , true );
 	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
+	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
+	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.json' );
 
 	if ( ! isset( $files ) ) {
 		$errors[] = __('array <code>$files</code> is not defined');
@@ -218,5 +220,58 @@ function human_filesize( $bytes, $decimals = 0 ) {
 	$factor = floor( ( strlen( $bytes ) - 1 ) / 3 );
 	return sprintf( "%.{$decimals}f", $bytes / pow( 1024, $factor ) ) . @$sz[$factor*2];
 }
+
+
+/**
+ * Check if an upgrade is available and echo html code to upgrade
+ * Return html code to tell up to date !
+ *
+ * @return  string  Up to date html string
+ */
+function check_upgrade() {
+
+	if ( file_exists( 'version.json' ) ) {
+		$JSl_version   = json_decode( @file_get_contents( 'version.json' ) , true );
+		$local_version = $JSl_version[ 'version' ];
+		$default       = sprintf ( __('Current version %s') , $local_version );
+	}
+	else {
+		return __('Unable to check your current version!');
+	}
+
+	if ( false === CHECK_UPGRADE ) {
+		return $default;
+	}
+
+	try {
+		$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 3 ) ) );
+		$JSr_version = json_decode( @file_get_contents( PIMPMYLOG_VERSION_URL , false , $ctx ) , true );
+		if ( is_null( $JSr_version ) ) {
+			throw new Exception("Error Processing Request", 1);
+		}
+		$remote_version = $JSr_version[ 'version' ];
+		var_dump($JSr_version);
+
+$local_version = '';
+
+		if ( version_compare( $local_version , $remote_version ) < 0 ) {
+			echo '';
+			while () {
+
+			}
+			echo '';
+		}
+
+		return sprintf ( __('Your version %s is up to date') , $local_version );
+	}
+	catch ( Exception $e ) {
+		return $default . ' - <a href="'. PIMPMYLOG_VERSION_URL . '" target="check"><span class="text-danger" title="' . sprintf( __('Unable to fetch URL %s from the server hosting this Pimp my Log instance.') , PIMPMYLOG_VERSION_URL ) . '">' . __('Unable to check remote version!') . '</span></a>';
+	}
+}
+
+
+
+
+
 
 
