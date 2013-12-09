@@ -36,14 +36,6 @@
 			"new" : [
 				"This is a new #1",
 				"This is a new #2"
-			],
-			"changed" : [
-				"This is a change #1",
-				"This is a change #2",
-				"This is a change #3"
-			],
-			"fixed" : [
-				"This is a fix #1"
 			]
 		},
 		"0.2" : {
