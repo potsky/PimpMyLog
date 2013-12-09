@@ -2,12 +2,6 @@
 include_once 'functions.inc.php';
 
 
-//////////////////////////
-// Set common variables //
-//////////////////////////
-define( 'YEAR'     , date( "Y" ) );
-define( 'HELP_URL' , 'https://github.com/potsky/PHPApacheLogViewer' );
-
 
 ///////////////////////////////////
 // Define locale and translation //

@@ -17,7 +17,6 @@ if (( ! isset( $_POST['file'] ) ) ||
 ////////////////////
 // Error handling //
 ////////////////////
-/*
 function myErrorHandler( $errno, $errstr, $errfile, $errline ) {
 	global $logs;
 	if ( !( error_reporting() & $errno ) ) {
@@ -58,7 +57,7 @@ function shutdown() {
 		);
 	}
 }
-*/
+
 
 
 /////////////
@@ -72,6 +71,12 @@ $user_max            = @(int)$_POST['max'];
 $search              = @$_POST['search'];
 
 header('Content-type: application/json');
+
+if 	( ! csrf_verify() ) {
+	$logs['error'] = __( 'Please refresh the page.' );
+	echo json_encode( $logs );
+	die();
+}
 
 if ( ! isset( $files[$file_id] ) ) {
 	$logs['error'] = sprintf( __( 'File IeD <code>%s</code> does not exist, please review your configuration file and stop playing!' ) , $file_id );
@@ -93,6 +98,7 @@ if ( is_array( $errors ) ) {
 	die();
 }
 
+
 $file_max = ( isset( $files[$file_id]['max'] ) ) ? (int)$files[$file_id]['max'] : LOGS_MAX;
 $max      = ( $load_default_values == 'true' ) ? $file_max : $user_max;
 $regex    = $files[ $file_id ][ 'format' ][ 'regex' ];
@@ -101,8 +107,9 @@ $exclude  = $files[ $file_id ][ 'format' ][ 'exclude' ];
 
 
 
-// Chek the search regexp
-if ($search!='') {
+// Check the search regexp
+$regsearch = false;
+if ( $search != '' ) {
 	$test      = @preg_match( $search , 'this is just a test !' );
 	$regsearch = ( $test === false ) ? false : true;
 }
@@ -119,10 +126,14 @@ if ( $fl === false ) {
 	die();
 }
 
-$found = false;
-$bytes = 0;
-$skip  = 0;
-$error = 0;
+
+
+$found  = false;
+$bytes  = 0;
+$skip   = 0;
+$error  = 0;
+$abort  = false;
+
 for ( $x_pos = 0, $ln = 0, $line=''; fseek( $fl, $x_pos, SEEK_END ) !== -1; $x_pos-- ) {
 
 	$char = fgetc( $fl );
@@ -154,16 +165,20 @@ for ( $x_pos = 0, $ln = 0, $line=''; fseek( $fl, $x_pos, SEEK_END ) !== -1; $x_p
 					if ( $search != '' ) { // Search
 						if ( $regsearch ) { // Regex
 							$return_log = preg_match( $search , $deal );
-						} else { // simple string
+							if ( $return_log === 0 ) $return_log = false;
+						}
+						else { // simple string
 							$return_log = strpos( $deal , $search );
 						}
 					}
-					if ( $return_log === true ) {
-						$found = true;
+					if ( $return_log === false ) {
+						$skip++;
+					}
+					else {
+						$found            = true;
+						$log['pml']       = $deal;
 						$logs[ 'logs' ][] = $log;
 						$ln++;
-					} else {
-						$skip++;
 					}
 				}
 
@@ -172,11 +187,21 @@ for ( $x_pos = 0, $ln = 0, $line=''; fseek( $fl, $x_pos, SEEK_END ) !== -1; $x_p
 				$error++;
 			}
 		}
-		if ( $ln >= $max ) break;
+
+		if ( $ln >= $max )
+			break;
+
+		if ( microtime( true ) - $start > MAX_SEARCH_LOG_TIME ) {
+			$abort = true;
+			break;
+		}
+
 		continue;
 	}
+
 	$line = $char . $line;
 	$bytes++;
+
 }
 fclose( $fl );
 
@@ -191,9 +216,10 @@ if ( $found ) {
 }
 
 
-
-$logs['found']        = $found;
-$logs['fingerprint']  = md5( serialize( @$logs['logs'] ) );
+$logs['found']       = $found;
+$logs['abort']       = $abort;
+$logs['regsearch']   = $regsearch;
+$logs['fingerprint'] = md5( serialize( @$logs['logs'] ) );
 
 
 ////////////////

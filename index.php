@@ -1,7 +1,23 @@
 <?php
 include_once 'inc/global.inc.php';
 
-// Check if configured
+
+///////////////////////////////////
+// Check PHP Version             //
+///////////////////////////////////
+if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
+	$title    = __( 'Oups!' );
+	$message  = sprintf( __( 'PHP version %s is required but your server run %s.') , PHP_VERSION_REQUIRED , PHP_VERSION );
+	$link_url = HELP_URL;
+	$link_msg = __('Learn more');
+	include_once 'inc/error.php';
+	die();
+}
+
+
+/////////////////////////
+// Check if configured //
+/////////////////////////
 if ( ! file_exists( 'config.inc.php' ) ) {
 	$title    = __( 'Oups!' );
 	$message  = __( 'This site is not configured. Please create a <code>config.inc.php</code> file at root directory.' );
@@ -11,6 +27,10 @@ if ( ! file_exists( 'config.inc.php' ) ) {
 	die();
 }
 include_once 'config.inc.php';
+
+
+
+
 
 // Check if v2 compliant
 if ( isset( $_GET[ 'v1'] ) ) {
@@ -46,6 +66,8 @@ if ( is_array( $errors ) ) {
 $lemma = array(
 	'notification_deny' => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
 	'no_log'            => __( 'No log has been found.' ),
+	'regex_valid'       => __( 'Search was done with RegEx engine' ),
+	'regex_invalid'     => __( 'Search was done with regular engine' ),
 );
 
 ?><!DOCTYPE html>
@@ -90,6 +112,7 @@ $lemma = array(
 			bytes_parsed               = "<?php echo __( '%s of logs parsed' );?>",
 			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
 			severity_color_on_all_cols = <?php echo ( SEVERITY_COLOR_ON_ALL_COLS===true ) ? 'true' : 'false';?>,
+			csrf_token                 = "<?php echo csrf_get();?>",
 			notification_default       = <?php echo ( NOTIFICATION===true ) ? 'true' : 'false';?>;
 	</script>
 </head>
@@ -108,7 +131,7 @@ $lemma = array(
 				</button>
 				<div class="navbar-brand">
 					<span class="loader glyphicon glyphicon-download" style="display:none;" /></span>
-					<span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh' );?>" id="refresh"/></span>
+					<span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"/></span>
 					<a href="?"><?php echo NAV_TITLE;?></a>
 				</div>
 			</div>
@@ -125,10 +148,10 @@ foreach ( $files as $file_id=>$file ) {
 						</ul>
 					</li>
 				</ul>
-				<form class="navbar-form navbar-right">
-					<div class="form-group">
-						<input type="text" class="form-control input-sm" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>">
-					</div>
+				<form class="navbar-form navbar-right navbar-input-group" action="#">
+
+					<div class="form-group" id="searchctn"><input type="text" class="form-control input-sm" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>"></div><button id='searchreset' class="pmlbtn btn btn-sm btn-default" style="display:none"><span class="glyphicon glyphicon-remove"></span></button>
+
 					<div class="form-group">
 						<select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>">
 							<option value="0"><?php _e( 'No auto refresh' );?></option>
@@ -139,6 +162,7 @@ foreach ( get_refresh_options() as $r ) {
 ?>
 						</select>
 					</div>
+
 					<div class="form-group">
 						<select id="max" class="form-control input-sm" title="<?php _e( 'Max count of logs to display' );?>">
 <?php
@@ -148,6 +172,7 @@ foreach ( get_max_options() as $r ) {
 ?>
 						</select>
 					</div>
+
 					<button style="display:none;" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>">
 					  <span class="glyphicon glyphicon-bell"></span>
 					</button>
@@ -184,8 +209,7 @@ foreach ( get_max_options() as $r ) {
 		<footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer>
 	</div>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+	<script src="js/vendor/jquery-1.10.1.min.js"></script>
 	<script src="js/vendor/jquery.cookie.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/vendor/ua-parser.min.js"></script>

@@ -4,16 +4,18 @@
 ini_set( 'max_execution_time' , 10 );
 
 define( 'TITLE'                      , 'Pimp my Log' );
-define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp my Log</a>');
+define( 'NAV_TITLE'                  , '' );
+define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . date('Y') . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
 define( 'LOGS_MAX'                   , 10 );
 define( 'LOGS_REFRESH'               , 7 );
 define( 'NOTIFICATION'               , true );
-define( 'NOTIFICATION_TITLE'         , 'Logs [%f]' );
+define( 'NOTIFICATION_TITLE'         , 'New logs [%f]' );
 define( 'GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
 define( 'PULL_TO_REFRESH'            , true );
 define( 'SEVERITY_COLOR_ON_ALL_COLS' , false );
-define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
-//define( 'GEOIP_URL'                  , 'http://%p' ); // Use this to open the webserver of the IP address instead of the geoip
+define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' ); // Use 'http://%p' to open the webserver of the IP address instead of the geoip
+define( 'CHECK_UPGRADE'              , true );
+
 
 $files = array(
 
@@ -37,7 +39,7 @@ $files = array(
 				'User'    => 3,
 			),
 			'exclude' => array(
-				'URL' => array( '/favicon.ico/' , '/\.pml\.php/' ),
+				'URL' => array( '/favicon.ico/' , '/\.pml\.php$/' ),
 				'CMD' => array( '/OPTIONS/' )
 			),
 		),
@@ -59,7 +61,7 @@ $files = array(
 				'Referer'  => 7,
 			),
 			'exclude' => array(
-				'Log' => array( '/PHP Stack trace:/' , '/PHP *[0-9]*\. /' )
+				'Log' => array( '/inc\/functions.inc.php/' , '/inc\/getlog.pml.php/' , '/PHP Stack trace:/' , '/PHP *[0-9]*\. /' )
 			),
 		),
 	),

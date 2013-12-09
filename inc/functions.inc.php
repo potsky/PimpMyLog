@@ -1,4 +1,12 @@
 <?php
+//////////////////////////
+// Set common variables //
+//////////////////////////
+define( 'YEAR'                 , date( "Y" ) );
+define( 'PHP_VERSION_REQUIRED' , '5.2' );
+define( 'HELP_URL'             , 'http://pimpmylog.com' );
+
+
 /**
  * Simply return a localized text or empty string if the key is empty
  * Useful when localize variable which can be empty
@@ -93,6 +101,7 @@ function set_default_constants() {
 	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
 	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.json' );
 	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
+	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'        , 5 );
 }
 
 
@@ -228,4 +237,33 @@ function human_filesize( $bytes, $decimals = 0 ) {
 	return sprintf( "%.{$decimals}f", $bytes / pow( 1024, $factor ) ) . @$sz[$factor*2];
 }
 
+
+/**
+ * Get a Cross Script Request Forgery token
+ *
+ * @return  string  a token
+ */
+function csrf_get() {
+	if ( ! isset( $_SESSION[ 'csrf_token' ] ) ) {
+		session_start();
+		$_SESSION[ 'csrf_token' ] = md5( uniqid( '' , true ) );
+		session_write_close();
+	}
+	return $_SESSION[ 'csrf_token' ];
+}
+
+
+/**
+ * Verify a Cross Script Request Forgery token
+ *
+ * @return  boolean   verified ?
+ */
+function csrf_verify() {
+	session_start();
+	$s = @$_SESSION[ 'csrf_token' ];
+	session_write_close();
+	if ( ! isset( $_POST[ 'csrf_token' ] ) )
+		return false;
+	return ( $s === @$_POST[ 'csrf_token' ] );
+}
 

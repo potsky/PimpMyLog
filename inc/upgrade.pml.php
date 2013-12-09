@@ -20,7 +20,7 @@ if ( file_exists( '../version.json' ) ) {
 }
 
 else {
-	$upgrade['footer'] = __( 'Unable to check your current version!');
+	$upgrade['footer'] = '<span class="text-danger">' . __( 'Unable to check your current version!') . '</span>';;
 	echo json_encode( $upgrade );
 	die();
 }
@@ -44,6 +44,18 @@ try {
 
 		$notices = array();
 		$html    = '<ul>';
+
+		if ( ! isset( $JSr_version[ 'changelog' ] ) ) {
+			$upgrade['footer'] = $default . ' - <a href="'. PIMPMYLOG_VERSION_URL . '" target="check"><span class="text-danger" title="' . sprintf( __( 'Error while fetching URL %s from the server hosting this Pimp my Log instance.' ) , PIMPMYLOG_VERSION_URL ) . '">' . __( 'Remote version broken!') . '</span></a>';
+			echo json_encode( $upgrade );
+			die();
+		}
+
+		if ( ! is_array( $JSr_version[ 'changelog' ] ) ) {
+			$upgrade['footer'] = $default . ' - <a href="'. PIMPMYLOG_VERSION_URL . '" target="check"><span class="text-danger" title="' . sprintf( __( 'Error while fetching URL %s from the server hosting this Pimp my Log instance.' ) , PIMPMYLOG_VERSION_URL ) . '">' . __( 'Remote version broken!') . '</span></a>';
+			echo json_encode( $upgrade );
+			die();
+		}
 
 		foreach ( $JSr_version[ 'changelog' ] as $version => $version_details ) {
 

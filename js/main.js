@@ -109,10 +109,11 @@ var get_logs = function( load_default_values ) {
 	$.ajax( {
 		url     : 'inc/getlog.pml.php' ,
 		data    : {
-			'ldv'    : load_default_values,
-			'file'   : file,
-			'max'    : $('#max').val(),
-			'search' : $('#search').val(),
+			'ldv'        : load_default_values,
+			'file'       : file,
+			'max'        : $('#max').val(),
+			'search'     : $('#search').val(),
+			'csrf_token' : csrf_token,
 		} ,
 		type: 'POST',
 		dataType: 'json'
@@ -164,7 +165,16 @@ var get_logs = function( load_default_values ) {
 			$('#nolog').hide();
 		}
 
-		// header
+		// Search regex understood ?
+		if ( logs.regsearch ) {
+			$( '#searchctn' ).addClass('has-success');
+			$( '#searchctn' ).prop( 'title' , lemma.regex_valid );
+		} else {
+			$( '#searchctn' ).removeClass('has-success');
+			$( '#searchctn' ).prop( 'title' , lemma.regex_invalid );
+		}
+
+		// Header
 		var sort   = 'Date';
 		var sortsc = 'down';
 		for ( var h in logs.headers ) {
@@ -185,6 +195,9 @@ var get_logs = function( load_default_values ) {
 				var severityclass = '';
 				if ( val == '-' ) {
 					val = '';
+				}
+				if ( 'pml' == c ) {
+					continue;
 				}
 				if ( 'Severity' == c ) {
 					severityclass = severities[ logs.logs[log][ c ] ];
@@ -229,6 +242,7 @@ var get_logs = function( load_default_values ) {
 				}
 				else if ( 'Date' == c ) {
 					var tmp = val.split(' ');
+					title = logs.logs[log].pml;
 					val = '<span class="day">' + tmp[0] + '</span> <span class="time">' + tmp[1] + '</span>';
 				}
 				else if ( 'IP' == c ) {
@@ -237,7 +251,7 @@ var get_logs = function( load_default_values ) {
 				else if ( 'Referer' == c ) {
 					val = '<a href="' + val + '" target="referer">' + val + '</a>';
 				}
-				$( '<td title="' + title + '">' + val + '</td>' ).addClass( severityclass + c ).appendTo( tr );
+				$( '<td>' + val + '</td>' ).prop( "title" , title ).addClass( severityclass + c ).appendTo( tr );
 			}
 
 			tr.appendTo('#logsbody');
@@ -352,9 +366,49 @@ $(function() {
 		get_logs();
 	});
 
-	// Autorefresh menu
-	$('#search').change( function() {
+	// Refresh hotkey
+	$(document).keypress( 'r' , function(e) {
+        if ( $(e.target).is('input, textarea') ) {
+            return;
+        }
+		notify();
 		get_logs();
+	});
+
+	// Search input
+	$( '#search' ).change( function() {
+		$( '#search' ).blur();
+		get_logs();
+		if ( $('#search').val() === '') {
+			$( '#searchreset' ).hide();
+			$( '#search' ).removeClass( 'pmlinput' );
+		} else {
+			$( '#searchreset' ).show();
+			$( '#search' ).addClass( 'pmlinput' );
+		}
+	});
+
+	// Init Search reset button
+	if ( $( '#search' ).val() === '') {
+		$( '#searchreset' ).hide();
+		$( '#search' ).removeClass( 'pmlinput' );
+	} else {
+		$( '#searchreset' ).show();
+		$( '#search' ).addClass( 'pmlinput' );
+	}
+
+	// Click on the reset button
+	$( '#searchreset' ).mouseup( function() {
+		$( '#search' ).val('');
+		$( '#search' ).change();
+	});
+
+	// Refresh hotkey
+	$( '#search' ).keypress( function(e) {
+		var keycode = (e.keyCode ? e.keyCode : e.which);
+		if ( keycode == '13' ) {
+			$( '#search' ).blur();
+		}
 	});
 
 	// Autorefresh menu
@@ -369,12 +423,11 @@ $(function() {
 		get_logs();
 	});
 
-	// Upgrade
+	// Check for upgrade
 	$.ajax( {
 		url     : 'inc/upgrade.pml.php' ,
 		dataType: 'json'
-	} )
-	.done( function ( upgrade ) {
+	} ).done( function ( upgrade ) {
 		$( '#upgradefooter' ).html( ' - ' + upgrade.footer);
 		var hide = $.cookie( 'upgrade' + upgrade.to );
 		if ( hide !== 'hide' ) {

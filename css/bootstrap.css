@@ -1893,15 +1893,17 @@ textarea.input-lg {
 }
 
 .has-success .form-control {
-  border-color: #468847;
+  border-color: #ff4688;
+/*  border-color: #468847;*/
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
 .has-success .form-control:focus {
-  border-color: #356635;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
+  border-color: #ee2677;
+/*  border-color: #356635;*/
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ff56a7; /* #7aba7b; */
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ff56a7;
 }
 
 .has-success .input-group-addon {

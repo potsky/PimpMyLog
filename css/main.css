@@ -27,3 +27,13 @@
 	}
 }
 
+/* Search button is glued to input*/
+.pmlinput {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.pmlbtn {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-left: 0;
+}

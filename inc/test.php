@@ -48,11 +48,6 @@ function test( $type , $regex , $match , $log , $dateformat='Y/m/d h:i:s' , $sep
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
 				<a class="navbar-brand" href="#">Pimp my Log Regex Test</a>
 			</div>
 		</div>
@@ -147,7 +142,7 @@ test( $type , $regex , $match , $log );
 
 ?>
 		<hr>
-		<footer><small>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> <?php echo date('Y'); ?> - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp my Log</a></small></footer>
+		<footer><small>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-<?php echo date('Y'); ?> - <a href="<?php echo HELP_URL; ?>" target="doc">Pimp my Log</a></small></footer>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.1.min.js"><\/script>')</script>

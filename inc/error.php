@@ -29,16 +29,7 @@ include_once 'inc/global.inc.php';
 	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
 	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Pimp my Log</a>
-			</div>
-		</div>
+		<div class="logo"></div>
 	</div>
 
 	<div class="jumbotron">
@@ -52,7 +43,7 @@ include_once 'inc/global.inc.php';
 	</div>
 
 	<div class="container">
-		<footer><small>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> <?php echo date('Y'); ?> - <a href="https://github.com/potsky/PHPApacheLogViewer" target="doc">Pimp my Log</a></small></footer>
+		<footer><small>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-<?php echo date('Y'); ?> - <a href="<?php echo HELP_URL; ?>" target="doc">Pimp my Log</a></small></footer>
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
