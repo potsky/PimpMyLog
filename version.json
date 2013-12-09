@@ -20,22 +20,21 @@
 		"0.2.5" : {
 			"released" : "2013-11-08",
 			"new" : [
-				"This is a new #1",
-				"This is a new #2"
+				"This is a 2.5 new #1",
+				"This is a 2.5 new #2"
 			],
 			"changed" : [
-				"This is a change #1",
-				"This is a change #2",
-				"This is a change #3"
+				"This is a 2.5 change #1",
+				"This is a 2.5 change #2",
+				"This is a 2.5 change #3"
 			],
 			"fixed" : [
-				"This is a fix #1"
+				"This is a 2.5 fix #1"
 			]
 		},
 		"0.2.3" : {
 			"new" : [
-				"This is a new #1",
-				"This is a new #2"
+				"CACA Prout !"
 			]
 		},
 		"0.2" : {
@@ -51,7 +50,7 @@
 				"This is a change #3"
 			],
 			"fixed" : [
-				"This is a fix #1"
+				"This is a 2.0 fix #1"
 			]
 		},
 		"0.1.5" : "Intermediate version"
