@@ -101,7 +101,7 @@ function check_config() {
 	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
 	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
 	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.json' );
-	if ( ! defined( 'PIMPMYLOG_GITHUB_ISSUE'     ) ) define( 'PIMPMYLOG_GITHUB_ISSUE'     , 'https://github.com/potsky/PimpMyLog/issues/%ID%' );
+	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
 
 	if ( ! isset( $files ) ) {
 		$errors[] = __('array <code>$files</code> is not defined');
@@ -270,7 +270,7 @@ function check_upgrade() {
 						$upgrade .= '<li>' . $type_display;
 						$upgrade .= '<ul>';
 						foreach ( $version_details[$type] as $issue ) {
-							$upgrade .= '<li>' . preg_replace( '/#([0-9])/i' , '<a href="' . PIMPMYLOG_GITHUB_ISSUE . '$1">#$1</a>' , $issue) . '</li>';
+							$upgrade .= '<li>' . preg_replace( '/#([0-9]*)/i' , '<a href="' . PIMPMYLOG_ISSUE_LINK . '$1">#$1</a>' , $issue) . '</li>';
 						}
 						$upgrade .= '</ul>';
 						$upgrade .= '</li>';
@@ -282,10 +282,16 @@ function check_upgrade() {
 			$upgrade .= '</ul>';
 
 			$severity = ( count( $notices ) > 0 ) ? 'danger' : 'warning';
-			echo '<div class="alert alert-' . $severity . ' alert-dismissable">';
+			echo '<div id="upgradealert" class="alert alert-' . $severity . ' alert-dismissable">';
 			echo '  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
 			echo '<strong>' . __( 'An upgrade is available !') . '</strong> ';
-			echo sprintf( __('You have version %s and version %s is available.' ) , '<em>' . $local_version . '</em>' , '<em>' . $remote_version . '</em>');
+			echo sprintf( __('You have version %s and version %s is available' ) , '<em>' . $local_version . '</em>' , '<em>' . $remote_version . '</em>');
+			echo ' (<a href="#" class="alert-link" data-toggle="collapse" data-target="#changelog">' . __('release notes') . '</a>)';
+			echo '<br/>';
+			echo '<a href="#" id="upgradestop" data-version="' . $remote_version . '" class="alert-link">' . __("Don't bother me again with this upgrade!") . '</a>';
+
+			echo '<div id="changelog" class="panel-collapse collapse"><div class="panel-body panel panel-default">' . $upgrade . '</div></div>';
+
 			if ( count( $notices ) > 0 ) {
 				echo '<hr/>';
 				echo '<strong>' . __( 'You should upgrade right now :') . '</strong><ul>';
@@ -294,9 +300,6 @@ function check_upgrade() {
 				}
 				echo '</ul>';
 			}
-			echo '<hr/>';
-			echo '<a href="#" data-toggle="collapse" data-target="#changelog">' . __('Changelog') . '</a>';
-			echo '<div id="changelog" class="panel-collapse collapse"><div class="panel-body">' . $upgrade . '</div></div>';
 
 			echo '</div>';
 			return '<span class="text-warning">' . sprintf ( __('Your version %s is out of date') , $local_version ) . '</span>';

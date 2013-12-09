@@ -168,8 +168,7 @@ foreach ( get_max_options() as $r ) {
 	<div class="container">
 		<div id="error" style="display:none;"><br/><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
 		<div id="result">
-			<br/>
-<?php $no_upgrade = check_upgrade(); ?>
+			<br/><div id="upgrademessage" style="display:none"><?php $no_upgrade = check_upgrade(); ?></div>
 			<div id="notice"></div>
 			<div id="nolog" style="display:none"><div class="alert alert-info fade in"><?php echo __('No log found');?></div></div>
 			<div class="table-responsive">
@@ -186,6 +185,7 @@ foreach ( get_max_options() as $r ) {
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+	<script src="js/vendor/jquery.cookie.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/vendor/ua-parser.min.js"></script>
     <script src="js/vendor/Hook.js/mousewheel.js"></script>

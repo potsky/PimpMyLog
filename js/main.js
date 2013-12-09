@@ -369,6 +369,23 @@ $(function() {
 		get_logs();
 	});
 
+	// Upgrade
+	$( '#upgradestop' ).click( function() {
+		$.cookie( 'upgrade' + $(this).data('version') , 'hide' );
+		$("#upgradealert").alert('close');
+	});
+	var version = $('#upgradestop').data('version');
+	if ( version !== null ) {
+		var hide = $.cookie( 'upgrade' + version );
+		if ( hide === undefined ) {
+			if ( hide !== 'hide' ) {
+				$('#upgrademessage').show();
+			}
+		}
+	}
+
+
+
 	// Notification > init
 	if ( ( 'Notification' in window ) || ( 'webkitNotifications' in window ) ) {
 		$('#notification').show();
