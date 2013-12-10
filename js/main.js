@@ -425,8 +425,10 @@ $(function() {
 
 	// Check for upgrade
 	$.ajax( {
-		url     : 'inc/upgrade.pml.php' ,
-		dataType: 'json'
+		url      : 'inc/upgrade.pml.php' ,
+		dataType : 'json',
+		data     : { 'csrf_token' : csrf_token } ,
+		type     : 'POST',
 	} ).done( function ( upgrade ) {
 		$( '#upgradefooter' ).html( ' - ' + upgrade.footer);
 		var hide = $.cookie( 'upgrade' + upgrade.to );

@@ -5,6 +5,12 @@ set_default_constants();
 
 header('Content-type: application/json');
 
+if 	( ! csrf_verify() ) {
+	$logs['error'] = __( 'Please refresh the page.' );
+	echo json_encode( $logs );
+	die();
+}
+
 $upgrade = array(
 	'footer'  => '',
 	'alert'   => '',
