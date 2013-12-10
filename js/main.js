@@ -1,15 +1,23 @@
-var file           = '';
-var loading        = false;
-var fingerprint    = '';
-var notification;
-var auto_refresh_timer;
+var file                   = '',
+	fingerprint            = '',
+	last_line              = '',
+	reset                  = 0,
+	file_size              = 0,
+	first_launch           = true,
+	loading                = false,
+	notification_displayed = false,
+	notification,
+	auto_refresh_timer;
 
 
 /**
  * Just display a notification on the desktop
+ *
+ * @param   {string}  title    the title
+ * @param   {string}  message  the message
+ *
  * @return  {void}
  */
-var notification_displayed = false;
 var notify = function ( title , message ) {
 	if ( 'webkitNotifications' in window ) {
 		var havePermission = window.webkitNotifications.checkPermission();
@@ -77,48 +85,78 @@ var notify = function ( title , message ) {
 };
 
 
-
+/**
+ * Append a alert on user browser
+ *
+ * @param   {string}  message   the message
+ * @param   {string}  severity  the severity in danger, warning, success, info
+ *
+ * @return  {void}
+ */
 var pml_alert = function( message , severity) {
 	$('<div class="alert alert-' + severity + ' alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + message + '</div>').appendTo("#notice");
 };
-
 
 
 /**
  * Ajax call to get logs
  *
  * @param   {boolean}  load_default_values  If set to true, the ajax will use default values for the selected file if there are available
+ * @param   {boolean}  load_full_file       If set to true, the log file will be parsed without keeping history. It is a slow process but mandatory when search of file have changed.
  *
  * @return  {void}
  */
-var first_launch = true;
-var get_logs = function( load_default_values ) {
+var get_logs     = function( load_default_values , load_full_file ) {
 
+	// Auto refresh stop
+	if ( auto_refresh_timer !== null ) {
+		clearTimeout( auto_refresh_timer );
+		auto_refresh_timer = null;
+	}
+
+	// Load default values from file
 	if ( load_default_values === true ) {
 		set_max( files[file].max );
 		set_auto_refresh( files[file].refresh );
 		set_notification( files[file].notify );
+		load_full_file = true;
 	}
 	else {
 		load_default_values = false;
 	}
 
+	// Load full logs and not increment
+	if ( load_full_file === true ) {
+		reset     = 1;
+		file_size = 0;
+		last_line = '';
+	}
+	else {
+		reset     = 0;
+		load_full_file = false;
+	}
+
 	$('.loader').toggle();
-	loading = true;
+	loading      = true;
+	wanted_lines = $('#max').val();
 
 	$.ajax( {
-		url     : 'inc/getlog.pml.php' ,
+		url     : 'inc/getlog.pml.php?' + new Date().getTime() ,
 		data    : {
-			'ldv'        : load_default_values,
-			'file'       : file,
-			'max'        : $('#max').val(),
-			'search'     : $('#search').val(),
-			'csrf_token' : csrf_token,
+			'ldv'         : load_default_values,
+			'file'        : file,
+			'filesize'    : file_size,
+			'max'         : wanted_lines,
+			'search'      : $('#search').val(),
+			'csrf_token'  : csrf_token,
+			'lastline'    : last_line,
+			'reset'       : reset,
 		} ,
 		type: 'POST',
 		dataType: 'json'
 	} )
 	.fail( function ( logs ) {
+
 		// Layout
 		$('.loader').toggle();
 		loading = false;
@@ -128,20 +166,25 @@ var get_logs = function( load_default_values ) {
 			$("#result").hide();
 			$("#error").show();
 			$('#errortxt').html( logs.responseText );
+			notify( notification_title.replace( /%f/g , files[file].display ) , lemma.error );
 			return;
 		}
+
 	})
 	.done( function ( logs ) {
 
 		// Layout
 		$('.loader').toggle();
-		loading = false;
+		loading   = false;
+		file_size = logs.newfilesize;
+		last_line = logs.lastline;
 
 		// Error
 		if ( logs.error ) {
 			$("#result").hide();
 			$("#error").show();
 			$('#errortxt').html( logs.error );
+			notify( notification_title.replace( /%f/g , files[file].display ) , lemma.error );
 			return;
 		}
 
@@ -149,20 +192,36 @@ var get_logs = function( load_default_values ) {
 		if ( logs.warning )
 			pml_alert( logs.warning , 'warning' );
 		if ( logs.notice )
-			pml_alert( logs.notice , 'notice' );
+			pml_alert( logs.notice , 'info' );
 
 		// Render
-		$("#error").hide();
-		$("#result").show();
-		$("#footer").html( logs.footer );
-		$( "#logshead" ).text( '' );
-		$( "#logsbody" ).text( '' );
+		$( '#error' ).hide();
+		$( '#result' ).show();
 
-		// No log
-		if ( logs.found === false ) {
-			$('#nolog').show();
-		} else {
-			$('#nolog').hide();
+		// No log message
+		if ( logs.full ) {
+			if ( logs.found === false ) {
+				var nolog = lemma.no_log;
+				if ( logs.search !== '' ) {
+					if ( logs.regsearch ) {
+						nolog = lemma.search_no_regex.replace( '%s' , '<code>' + logs.search + '</code>' );
+					} else {
+						nolog = lemma.search_no_regular.replace( '%s' , '<code>' + logs.search + '</code>' );
+					}
+				}
+				$( '#nolog' ).html( nolog ).show();
+				$( '#logshead' ).hide();
+			}
+			else {
+				$( '#nolog' ).text( '' ).hide();
+				$( '#logshead' ).show();
+			}
+		}
+		else {
+			if ( logs.logs ) {
+				$( '#nolog' ).text( '' ).hide();
+				$( '#logshead' ).show();
+			}
 		}
 
 		// Search regex understood ?
@@ -175,14 +234,25 @@ var get_logs = function( load_default_values ) {
 		}
 
 		// Header
-		var sort   = 'Date';
-		var sortsc = 'down';
-		for ( var h in logs.headers ) {
-			var s = ( sort == h ) ? '<span class="glyphicon glyphicon-chevron-' + sortsc + '"/></span>' : '';
-			$( "<th>" + logs.headers[ h ] + s + "</th>" ).addClass( h ).appendTo( '#logshead' );
+		if ( logs.headers ) {
+			$( '#logshead' ).text( '' );
+			var sort   = 'Date';
+			var sortsc = 'down';
+			for ( var h in logs.headers ) {
+				var s = ( sort == h ) ? '<span class="glyphicon glyphicon-chevron-' + sortsc + '"/></span>' : '';
+				$( '<th>' + logs.headers[ h ] + s + '</th>' ).addClass( h ).appendTo( '#logshead' );
+			}
 		}
 
+		// Body
+		if ( logs.full ) {
+			$( '#logsbody' ).text( '' );
+		}
+		$( '#logsbody tr' ).removeClass( 'newlog' );
+
 		var uaparser = new UAParser();
+		var rowidx   = 0;
+		var rows     = [];
 
 		for ( var log in logs.logs ) {
 
@@ -201,13 +271,14 @@ var get_logs = function( load_default_values ) {
 				}
 				if ( 'Severity' == c ) {
 					severityclass = severities[ logs.logs[log][ c ] ];
+console.log(severityclass);
 					if (severity_color_on_all_cols) {
 						if ( severityclass !== '') {
 							tr.addClass( severityclass );
 						}
 						severityclass = '';
 					} else {
-						if ( severityclass === '') {
+						if ( severityclass === '' ) {
 							severityclass = 'default';
 						}
 						val = '<span class="label label-' + severityclass + '">' + val + '</span>';
@@ -251,31 +322,61 @@ var get_logs = function( load_default_values ) {
 				else if ( 'Referer' == c ) {
 					val = '<a href="' + val + '" target="referer">' + val + '</a>';
 				}
-				$( '<td>' + val + '</td>' ).prop( "title" , title ).addClass( severityclass + c ).appendTo( tr );
+				$( '<td>' + val + '</td>' ).prop( "title" , title ).addClass( c ).appendTo( tr );
 			}
 
-			tr.appendTo('#logsbody');
+			if ( ! logs.full ) {
+				tr.addClass('newlog');
+				rowidx++;
+			}
+
+			rows.push( tr );
 		}
+
+		if ( logs.full ) { // display all logs so append to bottom
+			$('#logsbody').append( rows );
+		}
+		else { // display only new logs, so append to top
+			$('#logsbody').prepend( rows );
+			var rowd = $('#logsbody tr').length;
+			if ( rowd > wanted_lines ) {
+				rowd = rowd - wanted_lines;
+				$('#logsbody').find( 'tr:nth-last-child(-n+' + rowd + ')' ).remove();
+			}
+		}
+
+		// Footer
+		var rowct = '';
+		var rowc  = $('#logsbody tr').length;
+		if ( rowc == 1 ) {
+			rowct = lemma.display_log + ' ';
+		} else if ( rowc > 1 ) {
+			rowct = lemma.display_nlogs.replace( '%s' , rowc ) + ' ';
+		}
+		$("#footer").html( rowct + logs.footer );
 
 		// Notification
 		if ( first_launch === false ) {
-			if ( logs.fingerprint != fingerprint ) {
-				notify( notification_title.replace( /%f/g , files[file].display ) , 'New logs !' );
-				fingerprint = logs.fingerprint;
+			if ( logs.full ) {
+				if ( logs.fingerprint != fingerprint ) {
+					notify( notification_title.replace( /%f/g , files[file].display ) , lemma.new_logs );
+					fingerprint = logs.fingerprint;
+				}
+			} else {
+				if ( rowidx == 1 ) {
+					notify( notification_title.replace( /%f/g , files[file].display ) , lemma.new_log );
+				} else if ( rowidx > 1 ) {
+					notify( notification_title.replace( /%f/g , files[file].display ) , lemma.new_nlogs.replace( '%s' , rowidx ) );
+				}
 			}
 		}
 		first_launch = false;
 
-		// Auto refresh
-		if ( auto_refresh_timer !== null ) {
-			clearTimeout( auto_refresh_timer );
-			auto_refresh_timer = null;
-		}
+		// Auto refresh go
 		var i = Math.max( 0 , parseInt( $('#autorefresh').val() , 10 ) );
 		if ( i > 0 ) {
 			auto_refresh_timer = setTimeout( function() { get_logs(); } , i * 1000 );
 		}
-
 
 	} )
 	.always( function () {
@@ -375,35 +476,22 @@ $(function() {
 		get_logs();
 	});
 
-	// Search input
-	$( '#search' ).change( function() {
-		$( '#search' ).blur();
-		get_logs();
-		if ( $('#search').val() === '') {
-			$( '#searchreset' ).hide();
-			$( '#search' ).removeClass( 'pmlinput' );
-		} else {
-			$( '#searchreset' ).show();
-			$( '#search' ).addClass( 'pmlinput' );
-		}
-	});
-
 	// Init Search reset button
-	if ( $( '#search' ).val() === '') {
-		$( '#searchreset' ).hide();
-		$( '#search' ).removeClass( 'pmlinput' );
-	} else {
-		$( '#searchreset' ).show();
-		$( '#search' ).addClass( 'pmlinput' );
-	}
-
-	// Click on the reset button
-	$( '#searchreset' ).mouseup( function() {
-		$( '#search' ).val('');
-		$( '#search' ).change();
+	function tog(v){return v?'addClass':'removeClass';}
+	$(document).on('input', '.clearable', function(){
+		$(this)[tog(this.value)]('x');
+	}).on('mousemove', '.x', function( e ){
+		$(this)[tog(this.offsetWidth-18 < e.clientX-this.getBoundingClientRect().left)]('onX');
+	}).on('click', '.onX', function(){
+		$(this).removeClass('x onX').val('');
 	});
 
-	// Refresh hotkey
+	// Search input
+	$( '#search' ).blur( function() {
+		get_logs( false , true );
+	});
+
+	// Search input enter button
 	$( '#search' ).keypress( function(e) {
 		var keycode = (e.keyCode ? e.keyCode : e.which);
 		if ( keycode == '13' ) {
@@ -411,21 +499,21 @@ $(function() {
 		}
 	});
 
-	// Autorefresh menu
+	// Auto-refresh menu
 	set_auto_refresh( logs_refresh_default );
 	$('#autorefresh').change( function() {
 		get_logs();
 	});
 
-	// Autorefresh menu
+	// Line count menu
 	set_max( logs_max_default );
 	$('#max').change( function() {
-		get_logs();
+		get_logs( false , true );
 	});
 
 	// Check for upgrade
 	$.ajax( {
-		url      : 'inc/upgrade.pml.php' ,
+		url      : 'inc/upgrade.pml.php?' + new Date().getTime() ,
 		dataType : 'json',
 		data     : { 'csrf_token' : csrf_token } ,
 		type     : 'POST',
@@ -441,12 +529,12 @@ $(function() {
 		}
 	} );
 
-
 	// Notification > init
 	if ( ( 'Notification' in window ) || ( 'webkitNotifications' in window ) ) {
 		$('#notification').show();
 		set_notification( notification_default );
 	}
+
 	$('#notification').click( function() {
 		if ( $(this).hasClass('btn-warning') ) {
 			notify();
@@ -458,6 +546,7 @@ $(function() {
 			set_notification( ! is_notification() );
 		}
 	});
+
 	notify();
 
 

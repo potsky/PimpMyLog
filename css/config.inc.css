@@ -30,7 +30,8 @@
 }
 
 .logs td.Severity {
-  font-size: 0.8em;
+  font-size: 1em;
+  text-align: center;
 }
 
 .logs td.Referer {
@@ -49,10 +50,17 @@
 
 .logs td.Code {
   font-size: 0.9em;
+  text-align: center;
 }
 
 .logs td.Size {
   font-size: 0.8em;
+  text-align: right;
+}
+
+.logs td.μs {
+  font-size: 0.8em;
+  text-align: right;
 }
 
 .logs td.UA {
@@ -71,4 +79,12 @@
 
 .logs td.User {
   font-size: 0.8em;
+}
+
+/* New log color on the row */
+.newlog td:first-child {
+  background-position: 0 0;
+  background-image:url(../img/1x1pink_low.gif);
+  background-size: 1px 100%;
+  background-repeat: no-repeat;
 }

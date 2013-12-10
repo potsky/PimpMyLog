@@ -68,6 +68,14 @@ $lemma = array(
 	'no_log'            => __( 'No log has been found.' ),
 	'regex_valid'       => __( 'Search was done with RegEx engine' ),
 	'regex_invalid'     => __( 'Search was done with regular engine' ),
+	'search_no_regular' => __( 'No log has been found with regular search %s' ),
+	'search_no_regex'   => __( 'No log has been found with Reg Ex search %s' ),
+	'new_logs'          => __( 'New logs are available' ),
+	'new_log'           => __( '1 new log is available' ),
+	'new_nlogs'         => __( '%s new logs are available' ),
+	'display_log'       => __( '1 log displayed,' ),
+	'display_nlogs'     => __( '%s logs displayed,' ),
+	'error'             => __( 'An error occurs!' ),
 );
 
 ?><!DOCTYPE html>
@@ -130,8 +138,8 @@ $lemma = array(
 					<span class="icon-bar"></span>
 				</button>
 				<div class="navbar-brand">
-					<span class="loader glyphicon glyphicon-download" style="display:none;" /></span>
-					<span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"/></span>
+					<span class="loader glyphicon glyphicon-download" style="display:none;"></span>
+					<span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span>
 					<a href="?"><?php echo NAV_TITLE;?></a>
 				</div>
 			</div>
@@ -150,7 +158,9 @@ foreach ( $files as $file_id=>$file ) {
 				</ul>
 				<form class="navbar-form navbar-right navbar-input-group" action="#">
 
-					<div class="form-group" id="searchctn"><input type="text" class="form-control input-sm" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>"></div><button id='searchreset' class="pmlbtn btn btn-sm btn-default" style="display:none"><span class="glyphicon glyphicon-remove"></span></button>
+					<div class="form-group" id="searchctn">
+						<input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>">
+					</div>
 
 					<div class="form-group">
 						<select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>">
@@ -196,7 +206,7 @@ foreach ( get_max_options() as $r ) {
 			<br/>
 			<div id="upgrademessage"></div>
 			<div id="notice"></div>
-			<div id="nolog" style="display:none"><div class="alert alert-info fade in"><?php echo __('No log found');?></div></div>
+			<div id="nolog" style="display:none" class="alert alert-info fade in"></div>
 			<div class="table-responsive">
 				<table id="logs" class="table table-striped table-bordered table-hover table-condensed logs">
 					<thead id="logshead"></thead>

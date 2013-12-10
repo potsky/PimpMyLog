@@ -1,6 +1,8 @@
 <?php
+
 include_once 'global.inc.php';
 include_once '../config.inc.php';
+set_default_constants();
 
 
 /////////////
@@ -67,8 +69,11 @@ $start               = microtime( true );
 $logs                = array();
 $file_id             = $_POST['file'];
 $load_default_values = $_POST['ldv'];
-$user_max            = @(int)$_POST['max'];
+$user_max            = (int)$_POST['max'];
+$reset               = @(int)$_POST['reset'];
+$old_file_size       = @(int)$_POST['filesize'];
 $search              = @$_POST['search'];
+$old_lastline        = @$_POST['lastline'];
 
 header('Content-type: application/json');
 
@@ -118,8 +123,16 @@ if ( $search != '' ) {
 //////////////
 // Let's Go //
 //////////////
-
-$fl = fopen( $file_path , "r" );
+$found           = false;
+$bytes           = 0;
+$skip            = 0;
+$error           = 0;
+$abort           = false;
+$full            = false;
+$tofarline       = '';
+$file_lastline   = '';
+$search_lastline = true;
+$fl              = fopen( $file_path , "r" );
 if ( $fl === false ) {
 	$logs['error'] = sprintf( __( 'File <code>%s</code> for file ID <code>%s</code> does not exist anymore...' ) , $file_path , $file_id );
 	echo json_encode( $logs );
@@ -127,21 +140,65 @@ if ( $fl === false ) {
 }
 
 
+//////////////////////////////////////////
+// Check how many bytes we have to read //
+//////////////////////////////////////////
+$new_file_size = filesize( $file_path ); // Must be the nearest of fseek !
+if ( $reset == 1 ) {
+	$full           = true;
+	$data_to_parse  = $new_file_size;
+}
+else {
+	$data_to_parse = $new_file_size - $old_file_size;
+	if ( $data_to_parse < 0 ) { // Log file has been rotated, read all. It is not possible on apache because server is restarted gracefully but perhaps user has done something...
+		$data_to_parse  = $new_file_size;
+		$full           = true;
+		$logs['notice'] = '<strong>'. date('Y/m/d H:i:s') . '</strong> &gt; ' . sprintf( __('Log file has been rotated (previous size was %s and new one is %s)') , human_filesize($old_file_size) , human_filesize($new_file_size) );
+	}
+	if ( $old_file_size == 0 ) {
+		$full           = true;
+	}
+}
 
-$found  = false;
-$bytes  = 0;
-$skip   = 0;
-$error  = 0;
-$abort  = false;
 
-for ( $x_pos = 0, $ln = 0, $line=''; fseek( $fl, $x_pos, SEEK_END ) !== -1; $x_pos-- ) {
+///////////////
+// Read file //
+///////////////
+for ( $x_pos = 0, $ln = 0, $line = '', $still = true; $still ; $x_pos-- ) {
 
-	$char = fgetc( $fl );
+	if ( fseek( $fl, $x_pos, SEEK_END ) === -1 ) {
+		$still = false;
+		$char = "\n";
+	}
+	else {
+		$char = fgetc( $fl );
+	}
 
 	if ( $char === "\n" ) {
 		$deal = $line;
+
 		$line = '';
+
 		if ( $deal != '' ) {
+
+			if ( $search_lastline ) { // Get the last line of the file
+				$file_lastline   = sha1( $deal );
+				$search_lastline = false;
+			}
+
+			if ( $bytes > $data_to_parse ) { // We have reach the bytes to manage
+				if ( $old_lastline != sha1( $deal ) ) { // So the new line should be the last line of the previous time
+					// This is not the case, so the file has been rotated and the new log file is bigger than the previous time
+					// So we have to contnue computing to find the user wanted count of lines (and alert user about the file change)
+					$logs['notice'] = '<strong>'. date('Y/m/d H:i:s') . '</strong> &gt; ' . __('Log file has been rotated');
+					$full = true;
+				}
+				else {
+					// Ok lines are the same so just stop and return found lines
+					break;
+				}
+			}
+
 			$log = parser( $regex , $match , $deal , 'Y/m/d H:i:s' , ' :: ' );
 			if ( is_array( $log ) ) {
 				$return_log = true;
@@ -186,23 +243,25 @@ for ( $x_pos = 0, $ln = 0, $line=''; fseek( $fl, $x_pos, SEEK_END ) !== -1; $x_p
 			else {
 				$error++;
 			}
+
+			if ( $ln >= $max ) { // Break if we have found the wanted count of logs
+				break;
+			}
+
 		}
 
-		if ( $ln >= $max )
-			break;
-
-		if ( microtime( true ) - $start > MAX_SEARCH_LOG_TIME ) {
+		if ( microtime( true ) - $start > MAX_SEARCH_LOG_TIME ) { // Break if time computing is too high
 			$abort = true;
 			break;
 		}
 
-		continue;
+		continue; // continue without keeping the \n
 	}
 
 	$line = $char . $line;
 	$bytes++;
-
 }
+
 fclose( $fl );
 
 
@@ -219,6 +278,10 @@ if ( $found ) {
 $logs['found']       = $found;
 $logs['abort']       = $abort;
 $logs['regsearch']   = $regsearch;
+$logs['search']      = $search;
+$logs['full']        = $full;
+$logs['newfilesize'] = $new_file_size;
+$logs['lastline']    = $file_lastline;
 $logs['fingerprint'] = md5( serialize( @$logs['logs'] ) );
 
 
@@ -227,16 +290,15 @@ $logs['fingerprint'] = md5( serialize( @$logs['logs'] ) );
 ////////////////
 $now              = microtime( true );
 $duration         = (int) ( ( $now - $start ) * 1000 );
-//$logs['duration'] = sprintf( __( 'Computed in %sms' ) , $duration );
-
-$logs['footer']   = sprintf( __( 'Computed in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</code> was last modified on <code>%s</code>, size is <code>%s</code>' )
+$logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</code> was last modified on <code>%s</code>, size is <code>%s</code>' )
+	, ( $ln > 1 ) ? sprintf( __('%s new logs found') , $ln ) : ( ( $ln ==0 ) ? __( 'no new log found') : __( '1 new log found') )
 	, $duration
 	, human_filesize($bytes)
 	, $skip
 	, $error
 	, $file_path
 	, date( 'Y/m/d H:i:s' , filemtime( $file_path ) )
-	, human_filesize(filesize( $file_path ))
+	, human_filesize( $new_file_size )
 );
 
 

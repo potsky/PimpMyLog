@@ -118,7 +118,7 @@ test( $type , $regex , $match , $log );
 
 $type  = 'Access Apache 2.2 with referer and user agent';
 $log   = '127.0.0.1 - - [27/Nov/2013:10:20:40 +0100] "GET /~potsky/PHPApacheLogViewer/inc/get_logs.php?ldv=false&file=access&max=27 HTTP/1.1" 200 33 "http://localhost/~potsky/PHPApacheLogViewer/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71"';
-$regex = '|^(.*) (.*) (.*) \[(.*)\] "(.*) (.*) (.*)" ([0-9]*) (.*) "(.*)" "(.*)"( [0-9]*/[0-9]*)*$|U';
+$regex = '|^(.*) (.*) (.*) \[(.*)\] "(.*) (.*) (.*)" ([0-9]*) (.*) "(.*)" "(.*)"( [0-9]*/([0-9]*))*$|U';
 $match = array(
 	'CMD'     => 5,
 	'Code'    => 8,
@@ -129,6 +129,7 @@ $match = array(
 	'UA'      => 11,
 	'URL'     => 6,
 	'User'    => 3,
+	'Time'    => 13,
 );
 test( $type , $regex , $match , $log );
 
