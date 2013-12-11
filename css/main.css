@@ -28,6 +28,10 @@
 	}
 }
 
+textarea.test {
+	font-family: monospace, serif;
+}
+
 /* Reset button in search */
 .clearable {
 	background-image:url(../img/inputclear.png);
