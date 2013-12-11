@@ -2,7 +2,7 @@
 //////////////////////////
 // Set common variables //
 //////////////////////////
-define( 'YEAR'                 , date( "Y" ) );
+define( 'YEAR'                 , @date( "Y" ) );
 define( 'PHP_VERSION_REQUIRED' , '5.2' );
 define( 'HELP_URL'             , 'http://pimpmylog.com' );
 
@@ -102,7 +102,11 @@ function set_default_constants() {
 	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.json' );
 	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
 	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'        , 5 );
-	if ( ! defined( 'NONCE_SALT'                 ) ) define( 'NONCE_SALT'                 , sha1( filemtime( dirname( __FILE__ ) . '/../config.inc.php' ) ) );
+
+	if ( defined( 'TIME_ZONE' ) ) {
+		date_default_timezone_set( TIME_ZONE );
+	}
+
 }
 
 
