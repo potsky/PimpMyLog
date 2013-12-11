@@ -28,26 +28,12 @@ if ( ! file_exists( 'config.inc.php' ) ) {
 }
 include_once 'config.inc.php';
 
+init();
 
 
-
-
-// Check if v2 compliant
-if ( isset( $_GET[ 'v1'] ) ) {
-	include_once 'inc/index-v1.php';
-	die();
-}
-else if ( ! defined( 'TITLE' ) ) {
-	$title    = __( 'Oups!' );
-	$message  = __( 'You was using <em>Pimp my Log</em> v1.' ) . '<br/>' . __('You need to update the <code>config.inc.php</code> configuration file at root to upgrade <em>Pimp my Log</em> v2.' );
-	$link_url = '?v1=1';
-	$link_msg = __('Use v1 anyway');
-	include_once 'inc/error.php';
-	die();
-}
-
-include_once 'config.inc.php';
-
+/////////////////////////
+// Check configuration //
+/////////////////////////
 $errors = check_config();
 if ( is_array( $errors ) ) {
 	$title    = __( 'Oups!' );
@@ -63,6 +49,9 @@ if ( is_array( $errors ) ) {
 }
 
 
+//////////////////////
+// Javascript Lemma //
+//////////////////////
 $lemma = array(
 	'notification_deny' => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
 	'no_log'            => __( 'No log has been found.' ),
@@ -77,6 +66,14 @@ $lemma = array(
 	'display_nlogs'     => __( '%s logs displayed,' ),
 	'error'             => __( 'An error occurs!' ),
 );
+
+
+
+///////////////////
+// Session tasks //
+///////////////////
+$csrf = csrf_get();
+
 
 ?><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -113,14 +110,13 @@ $lemma = array(
 			files                      = <?php echo json_encode($files);?>,
 			notification_title         = "<?php echo NOTIFICATION_TITLE;?>",
 			site_title                 = "<?php echo TITLE;?>",
-			severities                 = <?php echo json_encode($severities);?>,
-			httpcodes                  = <?php echo json_encode($httpcodes);?>,
+			badges                     = <?php echo json_encode($badges);?>,
 			lemma                      = <?php echo json_encode($lemma);?>,
 			geoip_url                  = "<?php echo GEOIP_URL;?>",
 			bytes_parsed               = "<?php echo __( '%s of logs parsed' );?>",
 			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
-			severity_color_on_all_cols = <?php echo ( SEVERITY_COLOR_ON_ALL_COLS===true ) ? 'true' : 'false';?>,
-			csrf_token                 = "<?php echo csrf_get();?>",
+			csrf_token                 = "<?php echo $csrf;?>",
+			user_time_zone             = "<?php echo @$_GET['tz'];?>",
 			notification_default       = <?php echo ( NOTIFICATION===true ) ? 'true' : 'false';?>;
 	</script>
 </head>

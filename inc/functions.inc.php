@@ -39,42 +39,54 @@ function _e( $text ) {
  * @param string  $regex      The regex which describes the user log format
  * @param array   $match      An array which links internal tokens to regex matches
  * @param string  $log        The text log
- * @param string  $dateformat The wanted date format
- * @param string  $separator  The wanted seperator between matches when the message is composed
+ * @param string  $types      A array of types for fields
  *
  * @return  mixed             An array where keys are internal tokens and values the corresponding values extracted from the log file. Or false if line is not matchable.
  */
-function parser( $regex , $match , $log , $dateformat = 'Y/m/d H:i:s' , $separator = ' :: ' ) {
+function parser( $regex , $match , $log , $types ) {
 	$result = array();
 	preg_match_all( $regex , $log , $out, PREG_PATTERN_ORDER );
 	if ( @count( $out[0] )==0 ) {
 		return false;
 	}
 	foreach ( $match as $token => $key ) {
-		if ( $token == 'Date' ) {
+
+		$type = ( isset ( $types[ $token ] ) ) ? $types[ $token ] : 'txt';
+
+		if ( substr( $type , 0 , 4 ) === 'date' ) {
+
 			if ( is_array( $key ) ) {
 				$newdate = array();
 				foreach ( $key as $k => $v ) {
-					$newdate[$k] = @$out[ $v ][0];
+					$newdate[ $k ] = @$out[ $v ][ 0 ];
 				}
 				$str = $newdate['M'] . ' ' . $newdate['D'] . ' ' . $newdate['H'] . ':' . $newdate['I'] . ':' . $newdate['S'] . ' ' . $newdate['Y'];
 			}
+
 			else {
 				$str = @$out[ $key ][0];
 			}
+
+			$dateformat = ( substr( $type , 0 , 5 ) === 'date:' ) ? substr( $type , 5 ) : 'Y/m/d H:i:s';
+
 			if ( ( $timestamp = strtotime( $str ) ) === false ) {
 				$date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
 			} else {
 				$date = date( $dateformat , $timestamp );
 			}
+
+
 			$result[ $token ] = $date;
 		}
+
 		else if ( is_array( $key ) ) {
 			$r = array();
-			foreach ( $key as $k )
+			$s = current($key);
+			while ( ( $k = next($key) ) !== false )
 				$r[] = @$out[ $k ][0];
-			$result[ $token ] = implode( $separator , $r );
+			$result[ $token ] = implode( $s , $r );
 		}
+
 		else {
 			$result[ $token ] = @$out[ $key ][0];
 		}
@@ -86,7 +98,7 @@ function parser( $regex , $match , $log , $dateformat = 'Y/m/d H:i:s' , $separat
 /**
  * Set unset constants
  */
-function set_default_constants() {
+function init() {
 	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp my Log' );
 	if ( ! defined( 'NAV_TITLE'                  ) ) define( 'NAV_TITLE'                  , '' );
 	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> ' . date('Y') . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
@@ -96,15 +108,17 @@ function set_default_constants() {
 	if ( ! defined( 'PULL_TO_REFRESH'            ) ) define( 'PULL_TO_REFRESH'            , true );
 	if ( ! defined( 'NOTIFICATION_TITLE'         ) ) define( 'NOTIFICATION_TITLE'         , 'New logs [%f]' );
 	if ( ! defined( 'GOOGLE_ANALYTICS'           ) ) define( 'GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
-	if ( ! defined( 'SEVERITY_COLOR_ON_ALL_COLS' ) ) define( 'SEVERITY_COLOR_ON_ALL_COLS' , true );
 	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
 	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
 	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.json' );
 	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
 	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'        , 5 );
 
-	if ( defined( 'TIME_ZONE' ) ) {
-		date_default_timezone_set( TIME_ZONE );
+	if ( isset( $_GET['tz'] ) ) {
+		date_default_timezone_set( $_GET['tz'] );
+	}
+	else if ( defined( 'USER_TIME_ZONE' ) ) {
+		date_default_timezone_set( USER_TIME_ZONE );
 	}
 
 }
@@ -121,8 +135,6 @@ function set_default_constants() {
 function check_config() {
 	global $files;
 	$errors = array();
-
-	set_default_constants();
 
 	if ( ! isset( $files ) ) {
 		$errors[] = __('array <code>$files</code> is not defined');
@@ -250,11 +262,11 @@ function human_filesize( $bytes, $decimals = 0 ) {
  * @return  string  a token
  */
 function csrf_get() {
+	session_start();
 	if ( ! isset( $_SESSION[ 'csrf_token' ] ) ) {
-		session_start();
 		$_SESSION[ 'csrf_token' ] = md5( uniqid( '' , true ) );
-		session_write_close();
 	}
+	session_write_close();
 	return $_SESSION[ 'csrf_token' ];
 }
 

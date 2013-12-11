@@ -1,8 +1,7 @@
 <?php
-
 include_once 'global.inc.php';
 include_once '../config.inc.php';
-set_default_constants();
+init();
 
 
 /////////////
@@ -109,6 +108,7 @@ $max      = ( $load_default_values == 'true' ) ? $file_max : $user_max;
 $regex    = $files[ $file_id ][ 'format' ][ 'regex' ];
 $match    = $files[ $file_id ][ 'format' ][ 'match' ];
 $exclude  = $files[ $file_id ][ 'format' ][ 'exclude' ];
+$types    = $files[ $file_id ][ 'format' ][ 'types' ];
 
 
 
@@ -199,7 +199,7 @@ for ( $x_pos = 0, $ln = 0, $line = '', $still = true; $still ; $x_pos-- ) {
 				}
 			}
 
-			$log = parser( $regex , $match , $deal , 'Y/m/d H:i:s' , ' :: ' );
+			$log = parser( $regex , $match , $deal , $types );
 			if ( is_array( $log ) ) {
 				$return_log = true;
 				foreach ( $log as $key => $value ) {
@@ -274,7 +274,6 @@ if ( $found ) {
 	}
 }
 
-
 $logs['found']       = $found;
 $logs['abort']       = $abort;
 $logs['regsearch']   = $regsearch;
@@ -303,3 +302,4 @@ $logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> o
 
 
 echo json_encode( $logs );
+

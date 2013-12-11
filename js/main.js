@@ -6,6 +6,7 @@ var file                   = '',
 	first_launch           = true,
 	loading                = false,
 	notification_displayed = false,
+	tz                     = ( user_time_zone === '' ) ? '' : 'tz=' + user_time_zone + '&',
 	notification,
 	auto_refresh_timer;
 
@@ -99,6 +100,66 @@ var pml_alert = function( message , severity) {
 
 
 /**
+ * Cut a type and returns an object with set values
+ *
+ * type_parser( 'date:H:i:s' )     => parser = date, param = 'H:i:s' , cut = -1
+ * type_parser( 'date:H:i/s/100' ) => parser = date, param = 'H:i/s' , cut = 100
+ * type_parser( 'date' )           => parser = date, param = ''      , cut = -1
+ * type_parser( )                  => parser = txt,  param = ''      , cut = -1
+ *
+ * @param   {string}  type  the type
+ *
+ * @return  {object}        the well-formatted object with parser,param,cut keys
+ */
+var type_parser = function( type ) {
+	var parser = 'txt';
+	var param  = '';
+	var cut    = 0;
+	if ( type !== undefined ) {
+		var a = type.split( '/' );
+		if ( a[1] !== undefined ) {
+			cut    = parseInt( type.split( '/' ).slice(-1) , 10 );
+			parser = type.split( '/' ).slice(0,-1).join( '/' );
+		} else {
+			parser = type;
+		}
+		a = parser.split( ':' );
+		if ( a[1] !== undefined ) {
+			param  = parser.split( ':' ).slice(1).join( ':' );
+			parser = a[0];
+		}
+	}
+	return { 'parser' : parser , 'param' : param , 'cut' : cut };
+};
+
+
+
+/**
+ * Cut val at cut chars and add &hellip; if val is really cutted
+ * if cut > 0 : nianian...
+ * if cut < 0 : ...aniania
+ *
+ * @param   {string}   val  the value to cut
+ * @param   {integer}  cut  the count of chars to keep
+ *
+ * @return  {string}        the cutted value
+ */
+var val_cut = function( val , cut ) {
+	if ( cut === undefined )
+		return val;
+	if ( cut === 0 )
+		return val;
+	if ( val.length <= Math.abs(cut) )
+		return val;
+	if ( cut > 0 ) {
+		return val.substr( 0 , cut ) + '&hellip;';
+	} else {
+		return '&hellip;' + val.substr( cut );
+	}
+};
+
+
+/**
  * Ajax call to get logs
  *
  * @param   {boolean}  load_default_values  If set to true, the ajax will use default values for the selected file if there are available
@@ -139,9 +200,8 @@ var get_logs     = function( load_default_values , load_full_file ) {
 	$('.loader').toggle();
 	loading      = true;
 	wanted_lines = $('#max').val();
-
 	$.ajax( {
-		url     : 'inc/getlog.pml.php?' + new Date().getTime() ,
+		url     : 'inc/getlog.pml.php?' + tz + new Date().getTime() ,
 		data    : {
 			'ldv'         : load_default_values,
 			'file'        : file,
@@ -256,73 +316,78 @@ var get_logs     = function( load_default_values , load_full_file ) {
 
 		for ( var log in logs.logs ) {
 
-			var tr = $('<tr>');
+			var tr = $('<tr>').addClass( 'file' );
 
-			for ( var c in logs.logs[log] ) {
+			for ( var c in logs.logs[ log ] ) {
 
-				var val           = logs.logs[log][ c ];
-				var title         = val;
-				var severityclass = '';
-				if ( val == '-' ) {
-					val = '';
-				}
 				if ( 'pml' == c ) {
 					continue;
 				}
-				if ( 'Severity' == c ) {
-					severityclass = severities[ logs.logs[log][ c ] ];
-console.log(severityclass);
-					if (severity_color_on_all_cols) {
-						if ( severityclass !== '') {
-							tr.addClass( severityclass );
-						}
-						severityclass = '';
+
+				var type  = type_parser( files[file].format.types[ c ] );
+				var val   = logs.logs[log][ c ];
+				var title = val;
+				if ( val === '-' ) {
+					val = '';
+				}
+
+				if ( 'badge' === type.parser ) {
+					var clas;
+					if ( type.param === 'http' ) {
+						clas = badges[ type.param ][ logs.logs[log][ c ].substr( 0 , 1 ) ];
+					} else if ( type.param === 'severity' ) {
+						clas = badges[ type.param ][ logs.logs[log][ c ] ];
 					} else {
-						if ( severityclass === '' ) {
-							severityclass = 'default';
+						clas = 'default';
+					}
+					val = '<span class="label label-' + clas + '">' + val_cut( val , type.cut ) + '</span>';
+				}
+				else if ( 'date' === type.parser ) {
+					title = logs.logs[ log ].pml;
+					val = val_cut( val , type.cut );
+				}
+				else if ( 'numeral' === type.parser ) {
+					if ( val !== '' ) {
+						if ( type.param !== '' ) {
+							val = numeral( val ).format( type.param );
 						}
-						val = '<span class="label label-' + severityclass + '">' + val + '</span>';
 					}
 				}
-				else if ( 'Code' == c ) {
-					httpcodeclass = httpcodes[ logs.logs[log][ c ].substring(0,1) ];
-					if ( ( httpcodeclass !== undefined ) && ( httpcodeclass !== '') ) {
-						val = '<span class="label label-' + httpcodeclass + '">' + val + '</span>';
+				else if ( 'ip' === type.parser ) {
+					if ( type.param === 'geo' ) {
+						val = '<a href="' + geoip_url.replace( "%p" , val ) + '" target="linkout">' + val_cut( val , type.cut ) + '</a>';
+					} else {
+						val = '<a href="' + type.param + '://' + val + ' target="linkout">' + val_cut( val , type.cut ) + '</a>';
 					}
 				}
-				else if ( 'UA' == c ) {
-					var ua = uaparser.setUA(val).getResult();
-					if (ua.os.name !== undefined) {
-							val = ua.os.name;
-							if (ua.os.version !== undefined ) {
-									val += ' ' + ua.os.version;
-							}
-							val+= ' | ';
+				else if ( 'link' === type.parser ) {
+					val = '<a href="' + val + ' target="linkout">' + val_cut( val , type.cut ) + '</a>';
+				}
+				else if ( 'ua' === type.parser ) {
+					var ua  = uaparser.setUA(val).getResult();
+					var uas = type.param.match(/\{[a-zA-Z.]*\}/g);
+					var uaf = false;
+					for (var i in uas) {
+						try {
+							a = eval( 'ua.' + uas[i].replace('{','').replace('}','') );
+						} catch (e) {
+							a = '';
+						}
+						if ( a !== '' ) {
+							uaf        = true;
+							type.param = type.param.replace( uas[i] , a );
+						}
 					}
-					if (ua.browser.name !== undefined) {
-							val+= ua.browser.name;
-							if (ua.browser.version !== undefined ) {
-									val += ' ' + ua.browser.version;
-							}
+					if ( uaf === true ) {
+						val = $.trim( type.param );
 					}
 				}
-				else if ( 'Size' == c ) {
-					if ( val != '-' ) {
-						val = numeral(val).format('0b');
-					}
+				else {
+					val = val_cut( val , type.cut );
 				}
-				else if ( 'Date' == c ) {
-					var tmp = val.split(' ');
-					title = logs.logs[log].pml;
-					val = '<span class="day">' + tmp[0] + '</span> <span class="time">' + tmp[1] + '</span>';
-				}
-				else if ( 'IP' == c ) {
-					val = '<a href="' + geoip_url.replace( "%p" , val ) + '" target="geoip">' + val + '</a>';
-				}
-				else if ( 'Referer' == c ) {
-					val = '<a href="' + val + '" target="referer">' + val + '</a>';
-				}
-				$( '<td>' + val + '</td>' ).prop( "title" , title ).addClass( c ).appendTo( tr );
+
+				$( '<td>' + val + '</td>' ).prop( "title" , title ).addClass( 'pml-' + c + " pml-" + type.parser ).appendTo( tr );
+
 			}
 
 			if ( ! logs.full ) {

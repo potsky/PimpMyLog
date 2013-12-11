@@ -1,7 +1,7 @@
 <?php
 include_once 'global.inc.php';
 include_once '../config.inc.php';
-set_default_constants();
+init();
 
 header('Content-type: application/json');
 
