@@ -10,7 +10,7 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 	$message  = sprintf( __( 'PHP version %s is required but your server run %s.') , PHP_VERSION_REQUIRED , PHP_VERSION );
 	$link_url = HELP_URL;
 	$link_msg = __('Learn more');
-	include_once 'inc/error.php';
+	include_once 'inc/error.inc.php';
 	die();
 }
 
@@ -19,15 +19,27 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 // Check if configured //
 /////////////////////////
 if ( ! file_exists( 'config.inc.php' ) ) {
-	$title    = __( 'Oups!' );
-	$message  = __( 'This site is not configured. Please create a <code>config.inc.php</code> file at root directory.' );
-	$link_url = HELP_URL;
-	$link_msg = __('Learn more');
-	include_once 'inc/error.php';
+	$title    = __( 'Welcome!' );
+	$message  = '<br/>';
+	$message .= __( 'Pimp my Log is not configured.');
+	$message .= '<br/><br/>';
+	$message .= '<span class="glyphicon glyphicon-cog"></span> ';
+	$message .= __( 'You can manually copy <code>cfg/config.example.inc.php</code> to <code>config.inc.php</code> in the root directory and change parameters. Then refresh this page.' );
+	$message .= '<br/><br/>';
+	$message .= '<span class="glyphicon glyphicon-heart-empty"></span> ';
+	$message .= __( 'Or let me try to configure it for you!' );
+	$message .= '<br/><br/>';
+	$link_url = 'inc/configure.php';
+	$link_msg = __('Configure now');
+	include_once 'inc/error.inc.php';
 	die();
 }
-include_once 'config.inc.php';
 
+
+//////////////////////////////
+// Load config and defaults //
+//////////////////////////////
+include_once 'config.inc.php';
 init();
 
 
@@ -37,14 +49,18 @@ init();
 $errors = check_config();
 if ( is_array( $errors ) ) {
 	$title    = __( 'Oups!' );
-	$message  = __( '<code>config.inc.php</code> configuration file is buggy :' ) . '<ul>';
+	$message  = '<br/>';
+	$message .= __( '<code>config.inc.php</code> configuration file is buggy :' ) . '<ul>';
 	foreach ( $errors as $error ) {
 		$message .= '<li>' . $error . '</li>';
 	}
 	$message .= '</ul>';
-	$link_url = '#';
-	$link_msg = __('Retry');
-	include_once 'inc/error.php';
+	$message .= '<br/>';
+	$message .= __( 'Do you want me to backup your configuration and create a new one ?' );
+	$message .= '<br/><br/>';
+	$link_url = 'inc/configure.php';
+	$link_msg = __('Backup and create a new one configuration');
+	include_once 'inc/error.inc.php';
 	die();
 }
 
@@ -68,7 +84,6 @@ $lemma = array(
 );
 
 
-
 ///////////////////
 // Session tasks //
 ///////////////////
@@ -85,25 +100,18 @@ $csrf = csrf_get();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<style>
-		body {
-			padding-top: 50px;
-			padding-bottom: 20px;
-		}
-	</style>
+	<title><?php echo TITLE;?></title>
 	<?php include_once 'inc/favicon.inc.php'; ?>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/main.css">
-<?php if ( file_exists( 'config.inc.css' ) ) { ?>
+	<?php if ( file_exists( 'config.inc.css' ) ) { ?>
 	<link rel="stylesheet" href="config.inc.css">
-<?php } else { ?>
+	<?php } else { ?>
 	<link rel="stylesheet" href="css/config.inc.css">
-<?php } ?>
+	<?php } ?>
 	<link rel="stylesheet" href="js/vendor/Hook.js/hook.css">
 	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-
-	<title></title>
 	<script>
 		var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
 			logs_max_default           = <?php echo (int)LOGS_MAX;?>,

@@ -3,7 +3,8 @@ if ( basename( __FILE__ ) !== 'test.run.php' ) {
 	die("Please copy <code>inc/test.php</code> to <code>inc/test.run.php</code> and load <code>inc/test.run.php</code> in your browser");
 }
 
-include_once 'functions.inc.php';
+include_once 'global.inc.php';
+init();
 
 function test( $type , $regex , $match , $types , $log ) {
 	$r  = '<h4>' . $type . '</h4>';
@@ -65,17 +66,11 @@ if ( isset( $_POST['s'] ) ) {
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title></title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
-
+	<title><?php echo TITLE;?></title>
+	<?php include_once 'favicon.inc.php'; ?>
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<style>
-		body {
-			padding-top: 50px;
-			padding-bottom: 20px;
-		}
-	</style>
 	<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="../css/main.css">
 	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -86,8 +81,9 @@ if ( isset( $_POST['s'] ) ) {
 	<![endif]-->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
+			<div class="logo"></div>
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Pimp my Log Debugger</a>
+				<a class="navbar-brand" href="#">Debugger</a>
 			</div>
 		</div>
 	</div>
@@ -373,7 +369,7 @@ echo test( $type , $regex , $match , $types , $log );
 			</div>
 		</div>
 		<hr>
-		<footer><small>&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-<?php echo date('Y'); ?> - <a href="<?php echo HELP_URL; ?>" target="doc">Pimp my Log</a></small></footer>
+		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
 	</div>
 	<script src="../js/vendor/jquery-1.10.1.min.js"></script>
 	<script src="../js/vendor/bootstrap.min.js"></script>

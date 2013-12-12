@@ -3,7 +3,6 @@ if(function_exists('xdebug_disable')) { xdebug_disable(); }
 include_once 'functions.inc.php';
 
 
-
 ///////////////////////////////////
 // Define locale and translation //
 ///////////////////////////////////
