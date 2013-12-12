@@ -4,7 +4,7 @@ $(function() {
 	$('#regextest').submit( function( event ) {
 
 		$.ajax( {
-			url  : 'test.run.php' ,
+			url  : 'test.REMOVE_UPPERCASE.php' ,
 			type : 'POST',
 			data : {
 				'r' : $( '#inputRegEx' ).val(),

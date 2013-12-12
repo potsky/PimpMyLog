@@ -1,10 +1,10 @@
 <?php
-if ( basename( __FILE__ ) !== 'test.run.php' ) {
-	die("Please copy <code>inc/test.php</code> to <code>inc/test.run.php</code> and load <code>inc/test.run.php</code> in your browser");
-}
-
 include_once 'global.inc.php';
 init();
+
+if ( basename( __FILE__ ) !== 'test.REMOVE_UPPERCASE.php' ) {
+	die( __('Please copy <code>inc/test.php</code> to <code>inc/test.REMOVE_UPPERCASE.php</code> and load <code>inc/test.REMOVE_UPPERCASE.php</code> in your browser') );
+}
 
 function test( $type , $regex , $match , $types , $log ) {
 	$r  = '<h4>' . $type . '</h4>';
@@ -38,22 +38,22 @@ if ( isset( $_POST['s'] ) ) {
 
 	if ( ! is_array( $match ) ) {
 		$return['err'] = 'inputMatch';
-		$return['msg'] = '<div class="alert alert-danger"><strong>Match Error</strong> Match is not a valid associative array.</div>';
-		echo json_encode( $return , true);
+		$return['msg'] = '<div class="alert alert-danger"><strong>' . __('Error') . '</strong> '. __('Match is not a valid associative array') . '</div>';
+		echo json_encode( $return );
 		die();
 	}
 
 	if ( @preg_match( $regex , 'this is just a test !' ) === false ) {
 		$return['err'] = 'inputRegEx';
-		$return['msg'] = '<div class="alert alert-danger"><strong>RegEx Error</strong> RegEx is not a valid PHP PCRE regular expression</div>';
-		echo json_encode( $return , true);
+		$return['msg'] = '<div class="alert alert-danger"><strong>' . __('Error') . '</strong> '. __('RegEx is not a valid PHP PCRE regular expression') . '</div>';
+		echo json_encode( $return );
 		die();
 	}
 
 	header('Content-type: application/json');
 	$return['msg'] = test( '' , $regex , $match, $types, $log );
 
-	echo json_encode( $return , true);
+	echo json_encode( $return );
 	die();
 }
 
@@ -83,7 +83,7 @@ if ( isset( $_POST['s'] ) ) {
 		<div class="container">
 			<div class="logo"></div>
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Debugger</a>
+				<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a>
 			</div>
 		</div>
 	</div>
@@ -95,7 +95,7 @@ if ( isset( $_POST['s'] ) ) {
 				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-							Regex tester
+							<?php _e('Regex tester');?>
 						</a>
 					</h4>
 				</div>
@@ -103,7 +103,7 @@ if ( isset( $_POST['s'] ) ) {
 					<div class="panel-body">
 						<form class="form-horizontal" role="form" id="regextest">
 							<div class="form-group" id="GPinputLog">
-								<label for="inputLog3" class="col-sm-2 control-label">Log</label>
+								<label for="inputLog3" class="col-sm-2 control-label"><?php _e('Log');?></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputLog" placeholder="Log"><?php
 									echo '127.0.0.1 - - [27/Nov/2013:10:20:40 +0100] "GET /~potsky/PHPApacheLogViewer/inc/get_logs.php?ldv=false&file=access&max=27 HTTP/1.1" 200 33 "http://localhost/~potsky/PHPApacheLogViewer/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71"';
@@ -111,7 +111,7 @@ if ( isset( $_POST['s'] ) ) {
 								</div>
 							</div>
 							<div class="form-group" id="GPinputRegEx">
-								<label for="inputRegEx3" class="col-sm-2 control-label">RegEx</label>
+								<label for="inputRegEx3" class="col-sm-2 control-label"><?php _e('RegEx');?></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputRegEx" placeholder="RegEx"><?php
 										echo '|^(.*) (.*) (.*) \[(.*)\] "(.*) (.*) (.*)" ([0-9]*) (.*) "(.*)" "(.*)"( [0-9]*/([0-9]*))*$|U';
@@ -119,7 +119,7 @@ if ( isset( $_POST['s'] ) ) {
 								</div>
 							</div>
 							<div class="form-group" id="GPinputMatch">
-								<label for="inputMatch3" class="col-sm-2 control-label">Match</label>
+								<label for="inputMatch3" class="col-sm-2 control-label"><?php _e('Match');?></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
 									$match = array(
@@ -140,7 +140,7 @@ if ( isset( $_POST['s'] ) ) {
 							</div>
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
-									<button type="submit" class="btn btn-primary">Test</button>
+									<button type="submit" class="btn btn-primary"><?php _e('Test');?></button>
 								</div>
 							</div>
 							<div id="regexresult"></div>
@@ -153,7 +153,7 @@ if ( isset( $_POST['s'] ) ) {
 				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-							Regex samples
+							<?php _e('Regex samples');?>
 						</a>
 					</h4>
 				</div>
@@ -295,7 +295,7 @@ echo test( $type , $regex , $match , $types , $log );
 								<div class="panel-heading">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2">
-											Rights
+											<?php _e('Rights');?>
 										</a>
 									</h4>
 								</div>
@@ -305,7 +305,7 @@ echo test( $type , $regex , $match , $types , $log );
 										if (function_exists('posix_getpwuid')) {
 											var_dump( @posix_getpwuid(posix_geteuid()) );
 										} else {
-											echo 'No POSIX functions...';
+											_e('No POSIX functions...');
 										}
 										?></pre>
 										<?php
@@ -326,15 +326,15 @@ echo test( $type , $regex , $match , $types , $log );
 											}
 
 											echo '<table>';
-											echo '<thead><tr><th>ID</th><th>Path</th><th>RealPath</th><th>Read</th><th>Write</th></tr></thead>';
+											echo '<thead><tr><th>ID</th><th>'.__('Path').'</th><th>'.__('Real path').'</th><th>'.__('Read').'</th><th>'.__('Write').'</th></tr></thead>';
 											echo '<tbody>';
 											foreach ($paths as $id=>$file) {
 												echo '<tr>
 												<td>'.$id.'</td>
 												<td><code>'.$file.'</code></td>
 												<td><code>'.realpath($file).'</code></td>
-												<td>' . ( is_readable($file) ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>'  ) . '</td>
-												<td>' . ( is_writable($file) ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>'  ) . '</td>
+												<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('Non').'</span>'  ) . '</td>
+												<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('Non').'</span>'  ) . '</td>
 												</tr>';
 											}
 											echo '</tbody>';

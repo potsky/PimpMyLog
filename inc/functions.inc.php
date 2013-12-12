@@ -330,4 +330,7 @@ function json_indent( $json ) {
 
 
 
+function get_server_user() {
+	return exec( 'whoami' );
+}
 

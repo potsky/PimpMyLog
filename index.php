@@ -56,10 +56,10 @@ if ( is_array( $errors ) ) {
 	}
 	$message .= '</ul>';
 	$message .= '<br/>';
-	$message .= __( 'Do you want me to backup your configuration and create a new one ?' );
+	$message .= __( 'If you want me to build the configuration for you, please remove <code>config.inc.php</code> and click below.' );
 	$message .= '<br/><br/>';
 	$link_url = 'inc/configure.php';
-	$link_msg = __('Backup and create a new one configuration');
+	$link_msg = __('Configure now');
 	include_once 'inc/error.inc.php';
 	die();
 }
