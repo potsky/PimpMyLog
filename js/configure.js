@@ -341,9 +341,11 @@ $(function() {
 							for ( var softid in data.soft ) {
 								var link = data.soft[ softid ].home;
 								var name = ( ( link === undefined ) || ( link === '' ) ) ? data.soft[ softid ].name : '<a href="' + link + '" target="doc">' + data.soft[ softid ].name + '</a>';
+alert(softid);
+//alert(data.soft[ softid ].load);
 								$( '<tr>' )
 									.data( 'softid' , softid )
-									.data( 'default' , data.soft[ softid ].default )
+									.data( 'load' , data.soft[ softid ].load )
 									.html( '<td><input type="checkbox"></td><td>' + name + '</td><td>' + data.soft[ softid ].desc + '</td><td>' + data.soft[ softid ].notes + '</td>' )
 									.appendTo( '#soft tbody' );
 							}
@@ -361,7 +363,7 @@ $(function() {
 							});
 
 							$( '#soft tbody tr input[type="checkbox"]').each( function() {
-								if ( $(this).parents('tr').data( 'default' ) ) {
+								if ( $(this).parents('tr').data( 'load' ) ) {
 									$(this).prop( 'checked' , true );
 									$(this).parents('tr').addClass( 'success' );
 								}

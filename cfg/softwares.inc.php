@@ -5,7 +5,7 @@ $softwares_all = array(
 		'desc'    => __('Apache Hypertext Transfer Protocol Server'),
 		'home'    => __('http://httpd.apache.org'),
 		'notes'   => __('All versions 2.x are supported.'),
-		'default' => true,
+		'load'    => true,
 	),
 );
 
