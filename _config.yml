@@ -1,7 +1,9 @@
-title : Pimp my Log
-author :
-    name : Potsky
-    email : potsky@me.com
-    github : potsky
+title    : Pimp my Log
+headline : Log viewer for your web server
+ga       : UA-44146210-2
+author   :
+    name    : Potsky
+    email   : potsky@me.com
+    github  : potsky
     twitter : potskymac
-    link : http://www.potsky.com
+    link    : http://www.potsky.com

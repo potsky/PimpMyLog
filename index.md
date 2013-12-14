@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Pimp my Log
+title: Home
 ---
 
 # Getting started
@@ -46,9 +46,9 @@ Coming soon in v0.3 :
 
 # Install
 
-```php
+{% highlight php linenos %}
 {% include file.php %}
-```
+{% endhighlight %}
 
 # Configuration
 
@@ -74,7 +74,9 @@ A special thanks goes out to :
 
 * [ENTP](http://entp.com/) for their amazing web support tool app [Tender](http://tenderapp.com/)
 * [GitHub](http://github.com) for code hosting
+* [Jekyll](http://jekyllrb.com)
 * [JetBrains](http://www.jetbrains.com/) and their fabulous [PHPStorm](http://www.jetbrains.com/phpstorm/) IDE free for open source project
+* [Steve Smith](https://github.com/orderedlist) for this *gh-pages* template
 
 *Pimp my Log* uses these tools, so really thank you to :
 
