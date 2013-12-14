@@ -341,8 +341,6 @@ $(function() {
 							for ( var softid in data.soft ) {
 								var link = data.soft[ softid ].home;
 								var name = ( ( link === undefined ) || ( link === '' ) ) ? data.soft[ softid ].name : '<a href="' + link + '" target="doc">' + data.soft[ softid ].name + '</a>';
-alert(softid);
-//alert(data.soft[ softid ].load);
 								$( '<tr>' )
 									.data( 'softid' , softid )
 									.data( 'load' , data.soft[ softid ].load )
