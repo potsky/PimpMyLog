@@ -1,3 +1,8 @@
+---
+layout: default
+title: Pimp my Log
+---
+
 # Getting started
 
 ## What is *Pimp my Log* ?
@@ -40,6 +45,10 @@ Coming soon in v0.3 :
 ## Supported browsers
 
 # Install
+
+```php
+{% include file.php %}
+```
 
 # Configuration
 
