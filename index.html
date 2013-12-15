@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<title>[Pimp my Log] Home </title>
+
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/pygment_trac.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<center>
+                <img src="assets/PML.png"/>
+    			<p>Log viewer for your web server</p>
+    			<ul>
+    				<li><a href="https://github.com/potsky/PimpMyLog/zipball/master">Download <strong>ZIP File</strong></a></li>
+    				<li><a href="https://github.com/potsky/PimpMyLog/tarball/master">Download <strong>TAR Ball</strong></a></li>
+    				<li><a href="https://github.com/potsky/PimpMyLog">View On <strong>GitHub</strong></a></li>
+    			</ul>
+            </center>
+		</header>
+		<section>
+			<h1 id='getting_started'>Getting started</h1>
+
+<h2 id='what_is_pimp_my_log_'>What is <em>Pimp my Log</em> ?</h2>
+
+<p><em>Pimp my Log</em> is a web app written in <em>PHP</em> which displays server logs friendly. Formerly named <em>PHP Apache Log Viewer</em>, we renamed it because you can in fact display logs from <em>Apache</em>, but <em>nginx</em>, <em>Ruby on Rails</em>, <em>Tomcat</em>, <em>sshd</em>, &#8230; too !</p>
+
+<p>I am a <em>ssh/vi/tail/grep -f</em> guy but tailing log files is finished now. I want a web app tool to view my logs and I want it to be better, prettier and faster.</p>
+
+<p><em>Pimp my Log</em> is useful too for mutualized web servers. <em>Chrooting</em> <em>SSH</em> accesses and web servers is a really boring task. While you often just want to give a <em>SFTP</em> access to your developers for code and logs. But have you really try to code with logs only available via <em>SFTP</em> or via simple <em>HTTP</em> ? :-)</p>
+
+<h2 id='key_features'>Key features</h2>
+
+<h3 id='configuration'>Configuration</h3>
+
+<ul>
+<li>Auto-configuration for web server access and error logs</li>
+
+<li>User-configuration and profiling in one PHP file</li>
+
+<li>App customization (wording and design) to embed it in your own products</li>
+
+<li>Easily extendable for any type of log. You can display what you want !</li>
+</ul>
+
+<h3 id='usage'>Usage</h3>
+
+<ul>
+<li>Auto-refresh</li>
+
+<li>Count of lines to display</li>
+
+<li>Search in log file with plain text or with PHP PECL RegEx</li>
+
+<li>Desktop notification as soon as new logs are available</li>
+</ul>
+
+<p>Coming soon in v0.3 :</p>
+
+<ul>
+<li>Column sorting</li>
+
+<li>Column selector when running</li>
+
+<li>Word colorizing in logs</li>
+
+<li>Log viewer Server / Agent for multiple servers (ideal for Round Robin servers without log sharing</li>
+</ul>
+
+<h2 id='screenshots'>Screenshots</h2>
+
+<h1 id='requirements'>Requirements</h1>
+
+<h2 id='supported_web_servers'>Supported web servers</h2>
+
+<h2 id='supported_browsers'>Supported browsers</h2>
+
+<h1 id='install'>Install</h1>
+<div class='highlight'><pre><code class='php'><span class='lineno'> 1</span> <span class='cp'>&lt;?php</span>
+<span class='lineno'> 2</span> 	<span class='nv'>$title</span>    <span class='o'>=</span> <span class='nx'>__</span><span class='p'>(</span> <span class='s1'>&#39;Welcome!&#39;</span> <span class='p'>);</span>
+<span class='lineno'> 3</span> 	<span class='nv'>$message</span>  <span class='o'>=</span> <span class='s1'>&#39;&lt;br/&gt;&#39;</span><span class='p'>;</span>
+<span class='lineno'> 4</span> 	<span class='nv'>$message</span> <span class='o'>.=</span> <span class='nx'>__</span><span class='p'>(</span> <span class='s1'>&#39;Pimp my Log is not configured.&#39;</span><span class='p'>);</span>
+<span class='lineno'> 5</span> 	<span class='nv'>$message</span> <span class='o'>.=</span> <span class='s1'>&#39;&lt;br/&gt;&lt;br/&gt;&#39;</span><span class='p'>;</span>
+<span class='lineno'> 6</span> 	<span class='nv'>$message</span> <span class='o'>.=</span> <span class='s1'>&#39;&lt;span class=&quot;glyphicon glyphicon-cog&quot;&gt;&lt;/span&gt; &#39;</span><span class='p'>;</span>
+<span class='lineno'> 7</span> 	<span class='nv'>$message</span> <span class='o'>.=</span> <span class='nx'>__</span><span class='p'>(</span> <span class='s1'>&#39;You can manually copy &lt;code&gt;cfg/config.example.inc.php&lt;/code&gt; to &lt;code&gt;config.inc.php&lt;/code&gt; in the root directory and change parameters. Then refresh this page.&#39;</span> <span class='p'>);</span>
+<span class='lineno'> 8</span> 	<span class='nv'>$message</span> <span class='o'>.=</span> <span class='s1'>&#39;&lt;br/&gt;&lt;br/&gt;&#39;</span><span class='p'>;</span>
+<span class='lineno'> 9</span> 	<span class='nv'>$message</span> <span class='o'>.=</span> <span class='s1'>&#39;&lt;span class=&quot;glyphicon glyphicon-heart-empty&quot;&gt;&lt;/span&gt; &#39;</span><span class='p'>;</span>
+<span class='lineno'>10</span> 	<span class='nv'>$message</span> <span class='o'>.=</span> <span class='nx'>__</span><span class='p'>(</span> <span class='s1'>&#39;Or let me try to configure it for you!&#39;</span> <span class='p'>);</span>
+<span class='lineno'>11</span> 	<span class='nv'>$message</span> <span class='o'>.=</span> <span class='s1'>&#39;&lt;br/&gt;&lt;br/&gt;&#39;</span><span class='p'>;</span>
+<span class='lineno'>12</span> 	<span class='nv'>$link_url</span> <span class='o'>=</span> <span class='s1'>&#39;inc/configure.php&#39;</span><span class='p'>;</span>
+<span class='lineno'>13</span> 	<span class='nv'>$link_msg</span> <span class='o'>=</span> <span class='nx'>__</span><span class='p'>(</span><span class='s1'>&#39;Configure now&#39;</span><span class='p'>);</span>
+<span class='lineno'>14</span> 	<span class='k'>include_once</span> <span class='s1'>&#39;inc/error.inc.php&#39;</span><span class='p'>;</span>
+<span class='lineno'>15</span> 	<span class='k'>die</span><span class='p'>();</span>
+<span class='lineno'>16</span> <span class='cp'>?&gt;</span><span class='x' />
+</code></pre></div>
+<h1 id='configuration'>Configuration</h1>
+
+<h1 id='usage'>Usage</h1>
+
+<h1 id='language'>Language</h1>
+
+<h1 id='support'>Support</h1>
+
+<p>Do you have a question ? Do you have found a hugly bug ? Do you need more assistance ? Please read our support page at <a href='http://support.pimpmylog.com'>support.pimpmylog.com</a> provided gracefully by Tender !</p>
+
+<h1 id='contribute'>Contribute</h1>
+
+<p><em>Pimp my Log</em> is open sourced and ready to grow. Do you want to contribute to add some amazing features, new supported web servers, &#8230; ? Get the code on <a href='https://github.com/potsky/PimpMyLog'>GitHub</a> and make some pull requests !</p>
+
+<h1 id='licensing__terms_of_use'>Licensing &amp; Terms of use</h1>
+
+<p>This plugin is licensed under the GNU General Public License and is copyright 2012 potsky.</p>
+
+<h1 id='special_thanks'>Special thanks</h1>
+
+<p>A special thanks goes out to :</p>
+
+<ul>
+<li><a href='http://entp.com/'>ENTP</a> for their amazing web support tool app <a href='http://tenderapp.com/'>Tender</a></li>
+
+<li><a href='http://github.com'>GitHub</a> for code hosting</li>
+
+<li><a href='http://jekyllrb.com'>Jekyll</a></li>
+
+<li><a href='http://www.jetbrains.com/'>JetBrains</a> and their fabulous <a href='http://www.jetbrains.com/phpstorm/'>PHPStorm</a> IDE free for open source project</li>
+
+<li><a href='https://github.com/orderedlist'>Steve Smith</a> for this <em>gh-pages</em> template</li>
+</ul>
+
+<p><em>Pimp my Log</em> uses these tools, so really thank you to :</p>
+
+<ul>
+<li><a href='https://github.com/twbs?tab=members'>Bootstrap Team</a> for their front-end framework <a href='http://getbootstrap.com/'>Bootstrap</a> which includes marvelous icons done by <a href='http://glyphicons.com/'>Glyphicons</a></li>
+
+<li><a href='http://usehook.com/'>hook.js</a> by <a href='https://github.com/jordansinger'>Jordan Singer</a></li>
+
+<li><a href='http://www.initializr.com/'>Initializer</a></li>
+
+<li><a href='http://jquery.com/'>jQuery</a> of course</li>
+
+<li><a href='https://github.com/carhartl/jquery-cookie'>jQuery Cookie</a></li>
+
+<li><a href='http://modernizr.com/'>Modernizr</a></li>
+
+<li><a href='http://numeraljs.com/'>Numeral.js</a> by <a href='https://github.com/adamwdraper'>Adam Draper</a></li>
+
+<li><a href='http://www.php.net'>PHP</a> of course</li>
+
+<li><a href='http://faisalman.github.io/ua-parser-js/'>ua-parser.js</a> by <a href='https://github.com/faisalman'>Faisal Salman</a></li>
+</ul>
+
+<p>And finally, thank you <em>Buzz</em> (<a href='http://www.ledouze.fr'>Ledouze</a> agency) for the logo!</p>
+		</section>
+		<footer>
+ 			<p>&copy; 2013 <a href="http://www.potsky.com">Potsky</a></p>
+		</footer>
+	</div>
+	<script src="js/scale.fix.js"></script>
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker(UA-44146210-2);
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+
+</body>
+</html>
