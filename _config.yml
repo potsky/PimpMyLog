@@ -1,3 +1,6 @@
+
+exclude  : [tools,src,Gemfile,Gemfile.lock]
+
 title    : Pimp my Log
 headline : Log viewer for your web server
 ga       : UA-44146210-2
