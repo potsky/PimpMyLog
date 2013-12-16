@@ -1,7 +1,32 @@
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Branch master
 /config.inc.css
 /config.inc.php
 /config.inc.php.tmp
 /cfg/software.user.inc.php
 /inc/test.REMOVE_UPPERCASE.php
 
+# Branch jekyll
 /_site
+/dist
+/fonts
+/tmp
+
+# Compiled Python files
+*.pyc
+
+# Application specific files
+node_modules
+bower_components
+Gemfile.lock
