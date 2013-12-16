@@ -1,2 +1,3 @@
-source 'https://rubygems.org'
-gem 'github-pages'
+source 'http://rubygems.org'
+
+gem 'jekyll',  '~>1.4.1'

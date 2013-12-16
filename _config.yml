@@ -1,12 +1,39 @@
 
-exclude  : [tools,src,Gemfile,Gemfile.lock]
-
-title    : Pimp my Log
-headline : Log viewer for your web server
-ga       : UA-44146210-2
-author   :
+title            : Pimp my Log
+headline         : Log viewer for your web server
+url              : http://pimpmylog.com
+google_analytics : UA-44146210-2
+author           :
     name    : Potsky
     email   : potsky@me.com
     github  : potsky
     twitter : potskymac
     link    : http://www.potsky.com
+
+markdown: redcarpet
+pygments: true
+exclude: [
+    'node_modules',
+    'bower_components',
+    'Gruntfile.js',
+    'package.json',
+    'bower.json',
+    'requirements.txt',
+    'Gemfile',
+    'Gemfile.lock',
+    'README.md',
+    'tmp'
+]
+
+assets:
+    root_url: '/assets'
+
+images:
+    root_url         : '/assets/img'
+    retina           : true
+    retina_suffix    : '@2x'
+    lazy             : true
+    lazy_placeholder : 'loading.gif'
+
+disqus:
+    shortname: 'pimpmylog'

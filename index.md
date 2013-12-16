@@ -46,8 +46,10 @@ Coming soon in v0.3 :
 
 # Install
 
+{% image my-image.png "Image alt text" "Optional image caption" %}
+
 {% highlight php linenos %}
-{% include file.php %}
+{% include snippets/file.php %}
 {% endhighlight %}
 
 # Configuration

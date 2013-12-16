@@ -1,0 +1,12 @@
+<section class="posts">
+  <ul class="posts--list">
+    {% for post in site.posts %}
+      <li>
+        <a class="posts--link" href="{{ post.url }}">
+          <div class="posts--title">{{ post.title }}</div>
+          <div class="posts--date">{{ post.date | date: "%d %B, %Y" }}</div>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
