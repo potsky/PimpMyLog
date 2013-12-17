@@ -1,14 +1,12 @@
-<footer class="footer">
-  <ul class="footer--links">
-    <li>
-      <a href="https://twitter.com/nicolas_hery">Twitter</a>
-    </li>
-    <li>
-      <a href="https://github.com/nicolashery">GitHub</a>
-    </li>
-    <li>
-      <a href="/feed.xml">RSS</a>
-    </li>
-  </ul>
-  <p class="footer--copyright">© Copyright 2013 Nicolas Hery</p>
-</footer>
+<div class="pull-left">
+	&copy; {{ site.time | date: '%Y' }} <a href="{{ site.author.link }}">{{ site.author.name }}</a>
+</div>
+
+<div class="pull-right">
+	<ul class="list-inline">
+		<li><a href="{{ site.url_support }}">Support</a></li>
+		<li><a href="{{ site.url_github }}">GitHub</a></li>
+		<li><a href="{{ site.rss_path }}">RSS</a></li>
+		<li><a href="{{ site.atom_path }}">Atom</a></li>
+	</ul>
+</div>

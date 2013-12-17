@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>            <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>                 <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>                 <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="description" content="{{ site.description }}">
+		<meta name="viewport" content="width=device-width">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+
+		<title>[{{ site.title }}] {{page.title}} </title>
+		{% include favicon.html %}
+
+		{% if site.env == 'prod' %}
+			<link rel="stylesheet" href="/dist/global.min.css">
+		{% else %}
+			<link rel="stylesheet" href="/dist/global.css">
+		{% endif %}
+
+		{% include google_analytics.html %}
+	</head>
+	<body>
+	<!--[if lt IE 7]>
+	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+	<![endif]-->
+	{% include menu.html %}
+
+	<div class="jumbotron">
+		<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4"><center><img src="/assets/PML.png" class="img-responsive"/></center></div>
+			<div class="hidden-xs  hidden-sm  hidden-md  visible-lg col-ld-8"><h1 style="padding-top:60px" class="text-center">{{ page.jumbo }}</h1></div>
+			<div class="hidden-xs  hidden-sm  visible-md hidden-lg  col-md-8"><p style="padding-top:80px" class="text-center">{{ page.jumbo }}</p></div>
+			<div class="hidden-xs  visible-sm hidden-md  hidden-lg  col-sm-12"><p class="text-center">{{ page.jumbo | replace:'<br/>',' '}}</p></div>
+			<div class="visible-xs hidden-sm  hidden-md  hidden-lg  col-xs-12"><p class="text-center"><small>{{ page.jumbo | replace:'<br/>',' '}}</small></p></div>
+		</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="media">
+		    <img class="pull-left media-object img-responsive" src="assets/icon-browser.png" style="width:78px;"/>
+			<div class="media-body">
+				<h4 class="media-heading">{{ page.icon1title }}</h4>
+				{{ page.icon1 }}
+			</div>
+		</div>
+
+		<div class="media">
+		    <img class="pull-left media-object img-responsive" src="assets/icon-notes.png" style="width:78px;"/>
+			<div class="media-body">
+				<h4 class="media-heading">{{ page.icon2title }}</h4>
+				{{ page.icon2 }}
+			</div>
+		</div>
+
+		<div class="media">
+		    <img class="pull-left media-object img-responsive" src="assets/icon-notifications.png" style="width:78px;"/>
+			<div class="media-body">
+				<h4 class="media-heading">{{ page.icon3title }}</h4>
+				{{ page.icon3 }}
+			</div>
+		</div>
+
+	</div>
+
+	<div class="jumbotron jborange">
+		<div class="container">
+		<div class="row">
+		{{content}}
+		</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<footer>
+			{% include footer.html %}
+		</footer>
+	</div>
+
+	{% if site.env == 'prod' %}
+		<script src="/dist/global.min.js"></script>
+	{% else %}
+		<script src="/dist/global.js"></script>
+	{% endif %}
+
+	</body>
+</html>

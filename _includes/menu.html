@@ -1,0 +1,54 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		<a href="/"><div class="logo"></div></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-right">
+			<ul class="nav navbar-nav">
+
+			{% if page.layout != 'home' %}
+				<li><a href="/">Home</a></li>
+			{% endif %}
+
+			{% assign current = page.url | split: '/' %}
+			{% assign crt_menu = current[1] %}
+			{% assign crt_page = current[2] %}
+
+			{% for menu in site.menus %}
+				{% assign path = menu | downcase | replace:' ','-'  %}
+				{% assign group = false %}
+
+				{% for p in site.pages %}
+					{% if p.layout == 'default' %}
+						{% assign pagemenu = p.url | split: '/' %}
+						{% assign pagename = pagemenu | last %}
+						{% if pagemenu[1] == path and pagename != 'index.html' %}
+							{% if group == false %}
+				<li class="dropdown{% if crt_menu == pagemenu[1] %} active{% endif %}">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ menu }} <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li{% if crt_page == 'index.html' and crt_menu == pagemenu[1] %} class="active"{% endif %}><a href="/{{ pagemenu[1] }}/">Introduction</a></li>
+								{% assign group = true %}
+							{% endif %}
+				<li{% if crt_page == pagename and crt_menu == pagemenu[1] %} class="active"{% endif %}><a href="{{ p.url }}">{{ pagename | capitalize | replace:'-',' ' | replace:'.html','' }}</a></li>
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+
+				{% if group == true %}
+					</ul>
+				</li>
+				{% else %}
+				<li{% if crt_menu == path %} class="active"{% endif %}><a href="/{{ path }}/">{{menu}}</a></li>
+				{% endif %}
+
+			{% endfor %}
+			</ul>
+		</div><!--/.navbar-collapse -->
+	</div>
+</div>

@@ -1,8 +1,6 @@
-
 title            : Pimp my Log
-headline         : Log viewer for your web server
-url              : http://pimpmylog.com
-google_analytics : UA-44146210-2
+description      : Log viewer for your web server
+production_url   : http://pimpmylog.com
 author           :
     name    : Potsky
     email   : potsky@me.com
@@ -10,19 +8,31 @@ author           :
     twitter : potskymac
     link    : http://www.potsky.com
 
-markdown: redcarpet
-pygments: true
-exclude: [
-    'node_modules',
+menus             : [ 'Getting Started' , 'Documentation' , 'API' , 'Blog' ]
+rss_path          : /rss.xml
+atom_path         : /atom.xml
+url_github        : https://github.com/potsky/PimpMyLog
+url_support       : http://support.pimpmylog.com
+google_analytics  : UA-44146210-2
+markdown          : redcarpet
+pygments          : true
+paginate          : 5
+paginate_path     : /blog/page:num
+permalink         : /:categories/:year/:month/:day/:title
+excerpt_separator : <!--more-->
+exclude           : [
+    'bower.json',
     'bower_components',
     'Gruntfile.js',
+    'node_modules',
     'package.json',
-    'bower.json',
-    'requirements.txt',
     'Gemfile',
     'Gemfile.lock',
-    'README.md',
-    'tmp'
+    'css',
+    'js',
+    'tmp',
+    'tools',
+    'README.md'
 ]
 
 assets:
@@ -37,3 +47,4 @@ images:
 
 disqus:
     shortname: 'pimpmylog'
+

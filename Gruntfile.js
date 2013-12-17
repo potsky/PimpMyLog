@@ -6,7 +6,10 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 
 		// Clean target directories
-		clean: [ 'dist' , 'fonts' , 'tmp' ],
+		clean: {
+			dev: [ 'dist' , 'fonts' , 'tmp' ],
+			all: [ 'upload/thumbs', 'dist' , 'fonts' , 'tmp' ]
+		},
 
 		// Concat
 		concat: {
@@ -43,9 +46,32 @@ module.exports = function(grunt) {
 		// Copy files
 		copy: {
 			bsfoots: {
-				files: [
-					{expand: true, flatten: true, src: ['bower_components/bootstrap/dist/fonts/*'], dest: 'fonts/', filter: 'isFile' }
-				]
+				files: [{
+					expand: true,
+					flatten: true,
+					src: ['bower_components/bootstrap/dist/fonts/*'],
+					dest: 'fonts/',
+					filter: 'isFile'
+				}]
+			}
+		},
+
+		// Make thumbs for blog posts
+		cropthumb: {
+			thumbs: {
+				options: {
+					width: 100,
+					height: 100,
+					cropAmount: 0,
+					overwrite: false
+				},
+				files: [{
+					expand: true,
+					cwd: '<%= meta.postimages %>',
+					src: [ '*.png' , '*.jpg' , '*.gif' ],
+					dest: '<%= meta.postthumbs %>',
+					filter: 'isFile'
+				}]
 			}
 		},
 
@@ -77,7 +103,7 @@ module.exports = function(grunt) {
 		less: {
 			convert: {
 				files: {
-					"tmp/style.css" : ["<%= meta.less %>"]
+					"tmp/style.css" : ["css/style.less"]
 				}
 			}
 		},
@@ -100,7 +126,9 @@ module.exports = function(grunt) {
 			],
 			less: [
 				'css/**/*.less',
-			]
+			],
+			postimages: 'upload/images/',
+			postthumbs: 'upload/thumbs/'
 		},
 
 		// Make pkg available
@@ -133,23 +161,34 @@ module.exports = function(grunt) {
 				files: ['<%= meta.less %>'],
 				tasks: ['less']
 			},
-			jekyll: {
-				files: ['_site/**/*.html'],
-				tasks: ['macreload']
+//			jekyll: {
+//				files: ['_site/**/*.html'],
+//				tasks: ['macreload']
+//			},
+			postimages: {
+				files: ['<%= meta.postimages %>/*'],
+				tasks: ['cropthumb:thumbs'],
+			},
+			postthumbs: {
+				files: ['<%= meta.postthumbs %>/*'],
+				tasks: ['cropthumb:thumbs'],
+				options: {
+					event:['deleted']
+				}
 			}
 		}
-
 	});
 
 	// Debug Task
 	grunt.registerTask('dev', function() {
 		grunt.task.run([
-			'clean',
+			'clean:dev',
 			'copy',
 			'less',
 			'concat',
 			'cssmin',
 			'uglify',
+			'cropthumb:thumbs',
 		]);
 		grunt.task.run('watch');
 	});

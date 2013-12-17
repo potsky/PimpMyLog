@@ -2,13 +2,47 @@
 layout: default
 ---
 
-<section class="post">
-  <h1>{{ page.title }}</h1>
-  <div class="post--date">{{ page.date | date: "%d %B, %Y" }}</div>
-  {{ content }}
-  <div class="post--comments">
+<!-- Paginator -->
+<div class="text-center">
+	<ul class="pagination">
+		{% if page.previous %}
+			<li><a href="{{ page.previous.url }}">&laquo; Newer</a></li>
+		{% endif %}
+		{% if page.next %}
+			<li><a href="{{ page.next.url }}">Older &raquo;</a></li>
+		{% endif %}
+	</ul>
+</div>
+
+<!-- The post ! -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ page.title }}</h3>
+  </div>
+  <div class="panel-body">
+	<div class="pull-right">
+		{% for tag in page.tags %}
+		<span class="label label-default">{{ tag }}</span>
+		{% endfor %}
+	</div>
+	<span class="text-muted">Published on <em>{{ page.date | date_to_long_string }}</em> in <em>{{ page.category | capitalize }}</em></span>
+	<hr/>
+    {{ content }}
     {% if page.comments != false %}
+      <hr/>
       {% include disqus.html %}
     {% endif %}
   </div>
-</section>
+</div>
+
+<!-- Paginator -->
+<div class="text-center">
+	<ul class="pagination">
+		{% if page.previous %}
+			<li><a href="{{ page.previous.url }}">&laquo; Newer</a></li>
+		{% endif %}
+		{% if page.next %}
+			<li><a href="{{ page.next.url }}">Older &raquo;</a></li>
+		{% endif %}
+	</ul>
+</div>

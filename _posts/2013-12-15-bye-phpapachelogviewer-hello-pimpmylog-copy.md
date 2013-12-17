@@ -3,6 +3,7 @@ title    : Bye-Bye PHP Apache Log Viewer, hello Pimp My Log !
 layout   : post
 category : general
 tags     : [changelog,release]
+thumb    : icon.100.png
 ---
 
 This Jekyll introduction will outline specifically  what Jekyll is and why you would want to use it.
