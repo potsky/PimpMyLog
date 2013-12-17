@@ -329,7 +329,23 @@ function json_indent( $json ) {
 }
 
 
+/**
+ * Remove jsonp callback from a version file
+ *
+ * @param   string  $data  the json file with callback
+ *
+ * @return  string         the json file without callback
+ */
+function clean_json_version( $data ) {
+	return str_replace(	array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/)/*PSK*/' ) , array( '' , '' ) , $data );
+}
 
+
+/**
+ * Try to guess who runs the server
+ *
+ * @return  string  a user information
+ */
 function get_server_user() {
 	return exec( 'whoami' );
 }

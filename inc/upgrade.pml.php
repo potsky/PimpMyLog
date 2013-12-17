@@ -18,8 +18,10 @@ $upgrade = array(
 	'to'      => '',
 );
 
+
+
 if ( file_exists( '../version.json' ) ) {
-	$JSl_version        = json_decode( @file_get_contents( '../version.json' ) , true );
+	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.json' ) ) , true );
 	$upgrade['current'] = $JSl_version[ 'version' ];
 	$default            = sprintf ( __( 'Current version %s' ) , $upgrade['current'] );
 	$upgrade['footer']  = $default;
@@ -39,7 +41,7 @@ if ( false === CHECK_UPGRADE ) {
 try {
 
 	$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 5 ) ) );
-	$JSr_version = json_decode( @file_get_contents( PIMPMYLOG_VERSION_URL . '?' . date("U") , false , $ctx ) , true );
+	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?' . date("U") ) , false , $ctx ) , true );
 	if ( is_null( $JSr_version ) ) {
 		throw new Exception( 'Unable to fetch remote version' , 1);
 	}
