@@ -1,4 +1,4 @@
-/*PSK*/version_cb(/*PSK*/
+/*PSK*/pml_version_cb(/*PSK*/
 {
 	"version" : "0.1.5"
 }
