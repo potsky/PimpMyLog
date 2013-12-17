@@ -16,7 +16,7 @@ $( document ).ready( function () {
 
 } );
 
-var version_cb = function( data ) {
+var pml_version_cb = function( data ) {
 	console.log( data );
 };
 

@@ -29,16 +29,16 @@
 
 	<div class="jumbotron">
 		<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-4"><center><img src="/assets/PML.png" class="img-responsive"/></center></div>
-			<div class="hidden-xs  hidden-sm  hidden-md  visible-lg col-ld-8"><h1 style="padding-top:60px" class="text-center">{{ page.jumbo }}</h1></div>
-			<div class="hidden-xs  hidden-sm  visible-md hidden-lg  col-md-8"><p style="padding-top:80px" class="text-center">{{ page.jumbo }}</p></div>
-			<div class="hidden-xs  visible-sm hidden-md  hidden-lg  col-sm-12"><p class="text-center">{{ page.jumbo | replace:'<br/>',' '}}</p></div>
-			<div class="visible-xs hidden-sm  hidden-md  hidden-lg  col-xs-12"><p class="text-center"><small>{{ page.jumbo | replace:'<br/>',' '}}</small></p></div>
-		</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-4"><center><img src="/assets/PML.png" class="img-responsive"/></center></div>
+				<div class="hidden-xs  hidden-sm  hidden-md  visible-lg col-ld-8"><h1 style="padding-top:60px" class="text-center">{{ page.jumbo }}</h1></div>
+				<div class="hidden-xs  hidden-sm  visible-md hidden-lg  col-md-8"><p style="padding-top:80px" class="text-center">{{ page.jumbo }}</p></div>
+				<div class="hidden-xs  visible-sm hidden-md  hidden-lg  col-sm-12"><p class="text-center">{{ page.jumbo | replace:'<br/>',' '}}</p></div>
+				<div class="visible-xs hidden-sm  hidden-md  hidden-lg  col-xs-12"><p class="text-center"><small>{{ page.jumbo | replace:'<br/>',' '}}</small></p></div>
+			</div>
 		</div>
 	</div>
-
+{% include download.html %}
 	<div class="container">
 
 		<div class="media">
@@ -70,6 +70,7 @@
 	<div class="jumbotron jborange">
 		<div class="container">
 		<div class="row">
+
 		{{content}}
 		</div>
 		</div>
