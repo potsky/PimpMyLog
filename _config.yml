@@ -28,10 +28,6 @@ exclude           : [
     'package.json',
     'Gemfile',
     'Gemfile.lock',
-    'css',
-    'js',
-    'tmp',
-    'tools',
     'README.md'
 ]
 

@@ -21,7 +21,7 @@ Thumbs.db
 /_site
 /dist
 /fonts
-/tmp
+/_tmp
 
 # Compiled Python files
 *.pyc

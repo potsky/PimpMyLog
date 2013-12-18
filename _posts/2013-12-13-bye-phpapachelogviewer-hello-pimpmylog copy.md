@@ -3,14 +3,17 @@ title    : Bye-Bye PHP Apache Log Viewer, hello Pimp My Log !
 layout   : post
 category : general
 tags     : [changelog,release]
-thumb    : icon.100.png
-comments : false
 ---
-
 This Jekyll introduction will outline specifically  what Jekyll is and why you would want to use it.
 Directly following the intro we'll learn exactly _how_ Jekyll does what it does.
 
 <!--more-->
+
+This page will be available at `http://yourdomain.com/people/bob/essay.html`
+
+
+Jekyll supports various configuration options that are fully outlined here:
+(<https://github.com/mojombo/jekyll/wiki/Configuration>)
 
 ## Overview
 

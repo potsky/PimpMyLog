@@ -17,12 +17,5 @@ $( document ).ready( function () {
 } );
 
 var pml_version_cb = function( data ) {
-	console.log( data );
+	$('.pmlversion').html( 'v ' + data.version );
 };
-
-window.addEventListener( "load" , function () {
-	setTimeout( function () {
-		window.scrollTo( 0 , 1 );
-	} , 0 );
-} );
-

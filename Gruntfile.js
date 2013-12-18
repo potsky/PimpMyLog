@@ -7,8 +7,8 @@ module.exports = function(grunt) {
 
 		// Clean target directories
 		clean: {
-			dev: [ 'dist' , 'fonts' , 'tmp' ],
-			all: [ 'upload/thumbs', 'dist' , 'fonts' , 'tmp' ]
+			dev: [ 'dist' , 'fonts' , '_tmp' ],
+			all: [ 'upload/thumbs', 'dist' , 'fonts' , '_tmp' ]
 		},
 
 		// Concat
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 					'bower_components/bootstrap/js/transition.js',
 					'bower_components/JAIL/src/jail.js',
 					'bower_components/fastclick/lib/fastclick.js',
-					'js/**/*.js'
+					'_js/**/*.js'
 				],
 				dest: 'dist/global.js',
 				options: {
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 				}
 			},
 			css: {
-				src: ['css/**/*.css' , 'tmp/**/*.css' ],
+				src: ['_css/**/*.css' , '_tmp/**/*.css' ],
 				dest: 'dist/global.css'
 			}
 		},
@@ -52,6 +52,55 @@ module.exports = function(grunt) {
 					src: ['bower_components/bootstrap/dist/fonts/*'],
 					dest: 'fonts/',
 					filter: 'isFile'
+				}]
+			},
+			jsvendor: { // copy js for dev instead of concat and minify
+				files: [{
+					expand: true,
+					cwd: 'bower_components',
+					src: [
+						'jquery/jquery.js',
+						'bootstrap/js/affix.js',
+						'bootstrap/js/alert.js',
+						'bootstrap/js/button.js',
+						'bootstrap/js/carousel.js',
+						'bootstrap/js/collapse.js',
+						'bootstrap/js/dropdown.js',
+						'bootstrap/js/modal.js',
+						'bootstrap/js/scrollspy.js',
+						'bootstrap/js/tab.js',
+						'bootstrap/js/tooltip.js',
+						'bootstrap/js/popover.js',
+						'bootstrap/js/transition.js',
+						'JAIL/src/jail.js',
+						'fastclick/lib/fastclick.js',
+					],
+					dest: 'dist/'
+				}]
+			},
+			js: { // copy js for dev instead of concat and minify
+				files: [{
+					expand: true,
+					cwd: '_js',
+					src: ['*.js'],
+					dest: 'dist/',
+					filter: 'isFile'
+				}]
+			},
+			cssless: {
+				files: [{
+					expand: true,
+					cwd: '_tmp',
+					src: ['style.css'],
+					dest: 'dist/'
+				}]
+			},
+			css: {
+				files: [{
+					expand: true,
+					cwd: '_css',
+					src: ['*.css'],
+					dest: 'dist/'
 				}]
 			}
 		},
@@ -103,7 +152,7 @@ module.exports = function(grunt) {
 		less: {
 			convert: {
 				files: {
-					"tmp/style.css" : ["css/style.less"]
+					"_tmp/style.css" : ["_css/style.less"]
 				}
 			}
 		},
@@ -118,14 +167,14 @@ module.exports = function(grunt) {
 		// Define files
 		meta: {
 			css: [
-				'css/**/*.css',
-				'tmp/**/*.css'
+				'_css/**/*.css',
+				'_tmp/**/*.css'
 			],
 			js: [
-				'js/**/*.js'
+				'_js/**/*.js'
 			],
 			less: [
-				'css/**/*.less',
+				'_css/**/*.less',
 			],
 			postimages: 'upload/images/',
 			postthumbs: 'upload/thumbs/'
@@ -150,16 +199,16 @@ module.exports = function(grunt) {
 		// Watch files for changes
 		watch: {
 			css: {
-				files: ['<%= meta.css %>'],
-				tasks: ['concat:css','cssmin']
+				files: [ '_css/**/*.css' ],
+				tasks: [ 'copy:css' ]
+			},
+			cssless: {
+				files: [ '_css/**/*.less' ],
+				tasks: [ 'less' , 'copy:cssless' ]
 			},
 			js: {
-				files: ['<%= meta.js %>'],
-				tasks: ['concat:js','uglify']
-			},
-			less: {
-				files: ['<%= meta.less %>'],
-				tasks: ['less']
+				files: [ '_js/**/*.js' ],
+				tasks: [ 'copy:js' ]
 			},
 //			jekyll: {
 //				files: ['_site/**/*.html'],
@@ -180,17 +229,32 @@ module.exports = function(grunt) {
 	});
 
 	// Debug Task
-	grunt.registerTask('dev', function() {
+	grunt.registerTask( 'dev' , function() {
 		grunt.task.run([
 			'clean:dev',
-			'copy',
+			'less',
+			'copy:bsfoots',
+			'copy:jsvendor',
+			'copy:js',
+			'copy:cssless',
+			'copy:css',
+			'cropthumb:thumbs',
+		]);
+		grunt.task.run('watch');
+	});
+
+	// Debug Task
+	grunt.registerTask( 'prod' , function() {
+		grunt.task.run([
+			'clean:all',
+			'copy:bsfoots',
 			'less',
 			'concat',
 			'cssmin',
 			'uglify',
+// TODO: HTML MIN
 			'cropthumb:thumbs',
 		]);
-		grunt.task.run('watch');
 	});
 
 	// Jekyll aliases
@@ -213,7 +277,7 @@ module.exports = function(grunt) {
 		grunt.log.writeln('Launching Jekyll DEV Build');
 		grunt.task.run( 'jekyll:build' );
 	});
-	grunt.registerTask('build', 'server-prod');
+//	grunt.registerTask('build', 'server-prod');
 
 	grunt.registerTask('default', [ 'dev' ] );
 

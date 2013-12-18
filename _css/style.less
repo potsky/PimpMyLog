@@ -30,3 +30,22 @@
 	color: #fff;
 }
 
+.breaklonglines {
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+	pre {
+		display: block;
+		width: auto;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+		white-space: pre;
+		word-wrap: normal;
+	}
+	pre code {
+		-webkit-hyphens: none!important;
+		-moz-hyphens: none!important;
+		hyphens: none!important;
+		white-space: inherit;
+	}
+}

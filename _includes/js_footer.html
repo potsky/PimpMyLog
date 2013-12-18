@@ -1,0 +1,21 @@
+{% if site.env == 'prod' %}
+	<script src="/dist/global.min.js"></script>
+{% else %}
+	<script src="/dist/jquery/jquery.js"> </script>
+	<script src="/dist/bootstrap/js/affix.js"> </script>
+	<script src="/dist/bootstrap/js/alert.js"> </script>
+	<script src="/dist/bootstrap/js/button.js"> </script>
+	<script src="/dist/bootstrap/js/carousel.js"> </script>
+	<script src="/dist/bootstrap/js/collapse.js"> </script>
+	<script src="/dist/bootstrap/js/dropdown.js"> </script>
+	<script src="/dist/bootstrap/js/modal.js"> </script>
+	<script src="/dist/bootstrap/js/scrollspy.js"> </script>
+	<script src="/dist/bootstrap/js/tab.js"> </script>
+	<script src="/dist/bootstrap/js/tooltip.js"> </script>
+	<script src="/dist/bootstrap/js/popover.js"> </script>
+	<script src="/dist/bootstrap/js/transition.js"> </script>
+	<script src="/dist/JAIL/src/jail.js"> </script>
+	<script src="/dist/fastclick/lib/fastclick.js"> </script>
+	<script src="/dist/social_icons.js"></script>
+	<script src="/dist/main.js"> </script>
+{% endif %}
