@@ -1,5 +1,5 @@
 {% if site.env == 'prod' %}
-	<link rel="stylesheet" href="/dist/global.min.css">
+	<link rel="stylesheet" href="/dist/global.min.css?pml={{ site.time | date: "%m%d%y%H%M" }}">
 {% else %}
 	<link rel="stylesheet" href="/dist/style.css">
 	<link rel="stylesheet" href="/dist/pygment.css">

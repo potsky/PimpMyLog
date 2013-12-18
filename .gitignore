@@ -19,14 +19,15 @@ Thumbs.db
 
 # Branch jekyll
 /_site
+/_build
+/_tmp
 /dist
 /fonts
-/_tmp
 
 # Compiled Python files
 *.pyc
 
 # Application specific files
-node_modules
-bower_components
-Gemfile.lock
+/node_modules
+/bower_components
+/Gemfile.lock

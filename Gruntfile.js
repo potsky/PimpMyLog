@@ -7,8 +7,9 @@ module.exports = function(grunt) {
 
 		// Clean target directories
 		clean: {
-			dev: [ 'dist' , 'fonts' , '_tmp' ],
-			all: [ 'upload/thumbs', 'dist' , 'fonts' , '_tmp' ]
+			all     : [ '_build' , 'upload/thumbs', 'dist' , 'fonts' , '_tmp' ],
+			build : [ '_build' ],
+			dev     : [ 'dist' , 'fonts' , '_tmp' ]
 		},
 
 		// Concat
@@ -45,6 +46,14 @@ module.exports = function(grunt) {
 
 		// Copy files
 		copy: {
+			build: {
+				files: [{
+					expand: true,
+					cwd: '_site/',
+					src: ['**'],
+					dest: '_build/'
+				}]
+			},
 			bsfoots: {
 				files: [{
 					expand: true,
@@ -133,6 +142,23 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// Minify HTML
+		htmlmin: {
+			jekyll: {
+				options: {
+					removeComments: true,
+					collapseWhitespace: true
+				},
+				files: [{
+					expand: true,
+					cwd: '_site/',
+					src: [ '**/*.html' ],
+					dest: '_build/',
+					filter: 'isFile'
+				}]
+			}
+		},
+
 		// Run Jekyll commands
 		jekyll: {
 			server: {
@@ -144,6 +170,15 @@ module.exports = function(grunt) {
 			build: {
 				options: {
 					serve: false
+				}
+			}
+		},
+
+		shell: {
+			launchwebserver: {
+				command: 'ruby -rwebrick -e \'WEBrick::HTTPServer.new(:Port=>4000,:DocumentRoot=>"_build").start\'',
+				options: {
+					stdout: true
 				}
 			}
 		},
@@ -239,6 +274,7 @@ module.exports = function(grunt) {
 			'copy:cssless',
 			'copy:css',
 			'cropthumb:thumbs',
+			'jekyll:build'
 		]);
 		grunt.task.run('watch');
 	});
@@ -247,13 +283,15 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'prod' , function() {
 		grunt.task.run([
 			'clean:all',
-			'copy:bsfoots',
 			'less',
+			'copy:bsfoots',
 			'concat',
 			'cssmin',
 			'uglify',
-// TODO: HTML MIN
 			'cropthumb:thumbs',
+			'jekyll:build',
+			'copy:build',
+			'htmlmin',
 		]);
 	});
 
@@ -261,22 +299,29 @@ module.exports = function(grunt) {
 	grunt.registerTask('server-prod', function() {
 		grunt.log.writeln('Launching Jekyll PROD Server');
 		process.env.JEKYLL_ENV = 'prod';
-		grunt.task.run( 'jekyll:server' );
+		grunt.task.run( 'shell:launchwebserver' );
 	});
+
 	grunt.registerTask('server-dev', function() {
 		grunt.log.writeln('Launching Jekyll DEV Server');
 		grunt.task.run( 'jekyll:server' );
 	});
 	grunt.registerTask('server', 'server-dev');
+
 	grunt.registerTask('build-prod', function() {
 		grunt.log.writeln('Launching Jekyll PROD Build');
 		process.env.JEKYLL_ENV = 'prod';
-		grunt.task.run( 'jekyll:build' );
+		grunt.task.run( 'prod' );
+		grunt.log.writeln('Now launch "grunt server-prod" to launch the web server in the _build directory !');
 	});
+	grunt.registerTask('build', 'build-prod');
+
 	grunt.registerTask('build-dev', function() {
 		grunt.log.writeln('Launching Jekyll DEV Build');
-		grunt.task.run( 'jekyll:build' );
+		grunt.task.run( 'clean-all' );
+		grunt.task.run( 'dev' );
 	});
+
 //	grunt.registerTask('build', 'server-prod');
 
 	grunt.registerTask('default', [ 'dev' ] );

@@ -3,6 +3,6 @@ layout: default
 title: Home
 ---
 
-![](/assets/getting-started/screenshot.png "Screenshot"){.img-responsive}
+{% image /assets/getting-started/screenshot.png class="img-responsive" alink="" atarget="" %}
 
 Coming soon !!!
