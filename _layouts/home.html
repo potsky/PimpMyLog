@@ -9,6 +9,7 @@
 		{% include js_header.html %}
 		{% include google_analytics.html %}
 	</head>
+
 	<body>
 	<!--[if lt IE 7]>
 	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
@@ -18,83 +19,42 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-4"><center><img src="/assets/PML.png" class="img-responsive"/></center></div>
-				<div class="hidden-xs  hidden-sm  hidden-md  visible-lg col-ld-8  text-center">
-					<h1>{{ site.title }}</h1>
-					<h4>{{ site.description }}</h4>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog/zipball/master"><span class="glyphicon glyphicon-cloud-download"></span> ZIP</a>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog/tarball/master"><span class="glyphicon glyphicon-download"></span> TAR</a>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog"><span class="glyphicon glyphicon-eye-open"></span> GitHub</a>
-					<br/>
-					<span class="badge pmlversion"></span>
-				</div>
-				<div class="hidden-xs  hidden-sm  visible-md hidden-lg  col-md-8  text-center">
-					<h2>{{ site.title }}</h2>
-					<h5>{{ site.description }}</h5>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog/zipball/master"><span class="glyphicon glyphicon-cloud-download"></span> ZIP</a>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog/tarball/master"><span class="glyphicon glyphicon-download"></span> TAR</a>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog"><span class="glyphicon glyphicon-eye-open"></span> GitHub</a>
-					<br/>
-					<span class="badge pmlversion"></span>
-				</div>
-				<div class="hidden-xs  visible-sm hidden-md  hidden-lg  col-sm-6 text-center">
-					<h3>{{ site.title }}</h3>
-					<h6>{{ site.description }}</h6>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog/zipball/master"><span class="glyphicon glyphicon-cloud-download"></span> ZIP</a>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog/tarball/master"><span class="glyphicon glyphicon-download"></span> TAR</a>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog"><span class="glyphicon glyphicon-eye-open"></span> GitHub</a>
-					<br/>
-					<span class="badge pmlversion"></span>
-				</div>
-				<div class="visible-xs hidden-sm  hidden-md  hidden-lg  col-xs-12 text-center">
-					<h2>{{ site.title }}</h2>
-					<h6>{{ site.description }}</h6>
-					<a type="button" class="btn btn-sm btn-warning" href="https://github.com/potsky/PimpMyLog"><span class="glyphicon glyphicon-eye-open"></span> View on GitHub</a>
-				</div>
+				{% include home_jumbo_1blue.html %}
 			</div>
 		</div>
 	</div>
 
-	<div class="container">
-
-		<div class="media">
-		    <img class="pull-left media-object img-responsive" src="assets/icon-browser.png" style="width:78px;"/>
-			<div class="media-body">
-				<h4 class="media-heading">{{ page.icon1title }}</h4>
-				{{ page.icon1 }}
+	<div class="jumbotron jbgray">
+		<div class="container">
+			<div class="row">
+				{% capture md %}{% include home_jumbo_2gray.md %}{% endcapture %}{{ md | unindent | markdownify }}
 			</div>
 		</div>
-
-		<div class="media">
-		    <img class="pull-left media-object img-responsive" src="assets/icon-notes.png" style="width:78px;"/>
-			<div class="media-body">
-				<h4 class="media-heading">{{ page.icon2title }}</h4>
-				{{ page.icon2 }}
-			</div>
-		</div>
-
-		<div class="media">
-		    <img class="pull-left media-object img-responsive" src="assets/icon-notifications.png" style="width:78px;"/>
-			<div class="media-body">
-				<h4 class="media-heading">{{ page.icon3title }}</h4>
-				{{ page.icon3 }}
-			</div>
-		</div>
-
 	</div>
 
 	<div class="jumbotron jborange">
 		<div class="container">
-		<div class="row">
-		{{content}}
-		</div>
+			<div class="row">
+				{% capture md %}{% include home_jumbo_3orange.md %}{% endcapture %}
+				{{ md | unindent | markdownify | replace:'<ul>','<ul class="fa-ul">' | replace:'[:','<i class="fa-li fa fa-' | replace:':]','"></i>' }}
+
+
+			</div>
 		</div>
 	</div>
 
-	<div class="container">
-		<footer>
-			{% include footer.html %}
-		</footer>
+	<div class="jumbotron jbgray">
+		<div class="container">
+			<div class="row">
+				{{content}}
+			</div>
+
+			<center><img src="/assets/madeinfrance.png" class="img-responsive" style="width:128px;"/>avec beaucoup d'amour</center>
+			<hr/>
+			<footer>
+				{% include footer.html %}
+			</footer>
+		</div>
 	</div>
 
 	{% include js_footer.html %}

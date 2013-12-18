@@ -5,6 +5,7 @@
     "jquery": "~2.0.3",
     "JAIL": "https://github.com/sebarmeli/JAIL.git#3f10d36bc0a9ae1946aac79a38c7ab4c474bed7f",
     "fastclick": "~0.6.10",
-    "bootstrap": "~3.0.3"
+    "bootstrap": "~3.0.3",
+    "font-awesome": "~4.0.3"
   }
 }
