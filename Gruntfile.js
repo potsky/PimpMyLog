@@ -334,7 +334,7 @@ module.exports = function(grunt) {
 	// Installation task which install the _build folder in gh-pages , commit and push
 	grunt.registerTask( 'install' , function() {
 		if ( grunt.file.exists( '_build/index.html' ) === false ) {
-			grunt.verbose.or.error().error( 'File "_build/index.html" does not exist. Please build before installing with "grunt prod"' );
+			grunt.verbose.or.error().error( 'File "_build/index.html" does not exist. Please build before installing with "grunt build"' );
 			grunt.fail.warn('Unable to continue');
 		}
 		else if ( grunt.file.exists( ghpages + '/.git/config' ) === false ) {
@@ -363,7 +363,7 @@ module.exports = function(grunt) {
 			grunt.fail.warn('Unable to continue');
 		}
 		else {
-			grunt.log.writeln('Installing in ' + ghpages );
+			grunt.log.writeln('Saving jekyll branch' );
 			grunt.task.run([
 				'shell:jekylladdcommitpush'
 			]);
