@@ -5,10 +5,9 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2013-12-19T12:01:10+01:00</lastBuildDate>
-        <pubDate>2013-12-19T12:01:10+01:00</pubDate>
+        <lastBuildDate>2013-12-19T12:44:50+01:00</lastBuildDate>
+        <pubDate>2013-12-19T12:44:50+01:00</pubDate>
         <ttl>1800</ttl>
-
 
         <item>
                 <title>Bye-Bye PHP Apache Log Viewer, hello Pimp My Log !</title>
@@ -22,7 +21,6 @@
                 <guid>http://pimpmylog.com/general/2013/12/13/bye-phpapachelogviewer-hello-pimpmylog</guid>
                 <pubDate>2013-12-13T00:00:00+01:00</pubDate>
         </item>
-
 
 </channel>
 </rss>

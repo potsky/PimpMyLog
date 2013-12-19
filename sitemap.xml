@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>/general/2013/12/13/bye-phpapachelogviewer-hello-pimpmylog</loc>
-        <lastmod>2013-12-18T17:59:08+01:00</lastmod>
+        <lastmod>2013-12-18T17:59:06+01:00</lastmod>
     </url>
     <url>
         <loc>/api/</loc>
@@ -38,10 +38,10 @@
     </url>
     <url>
         <loc>/next.html</loc>
-        <lastmod>2013-12-18T09:12:46+01:00</lastmod>
+        <lastmod>2013-12-18T09:12:35+01:00</lastmod>
     </url>
     <url>
         <loc>/rss.xml</loc>
-        <lastmod>2013-12-17T10:48:43+01:00</lastmod>
+        <lastmod>2013-12-19T12:25:11+01:00</lastmod>
     </url>
 </urlset>
