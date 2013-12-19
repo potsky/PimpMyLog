@@ -2,6 +2,8 @@ module.exports = function(grunt) {
 	// Load all NPM grunt tasks
 	require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
 
+	var ghpages = '../PimpMyLog-gh-pages';
+
 	// Project configuration
 	grunt.initConfig({
 
@@ -61,6 +63,22 @@ module.exports = function(grunt) {
 					src: ['bower_components/bootstrap/dist/fonts/*','bower_components/font-awesome/fonts/*'],
 					dest: 'fonts/',
 					filter: 'isFile'
+				}]
+			},
+			install: {
+				files: [{
+					expand: true,
+					cwd: '_build/',
+					src: ['**'],
+					dest: ghpages
+				}]
+			},
+			installREADME: {
+				files: [{
+					expand: true,
+					cwd: '_tools/',
+					src: [ 'README.md' ],
+					dest: ghpages
 				}]
 			},
 			jsvendor: { // copy js for dev instead of concat and minify
@@ -174,15 +192,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		shell: {
-			launchwebserver: {
-				command: 'ruby -rwebrick -e \'WEBrick::HTTPServer.new(:Port=>4000,:DocumentRoot=>"_build").start\'',
-				options: {
-					stdout: true
-				}
-			}
-		},
-
 		// LESS files to CSS
 		less: {
 			convert: {
@@ -217,6 +226,27 @@ module.exports = function(grunt) {
 
 		// Make pkg available
 		pkg: grunt.file.readJSON('package.json'),
+
+		shell: {
+			launchwebserver: {
+				command: 'ruby -rwebrick -e \'WEBrick::HTTPServer.new(:Port=>4000,:DocumentRoot=>"_build").start\'',
+				options: {
+					stdout: true
+				}
+			},
+			gitremove: {
+				command: 'cd "' + ghpages + '" && git rm -rf * ',
+				options: {
+					stdout: true
+				}
+			},
+			gitaddcommitpush : {
+				command: 'a=$(git rev-parse --short HEAD); cd "' + ghpages + '" && git add -A . && git commit -m "grunt install from branch jekyll commit $a" && git push origin gh-pages',
+				options: {
+					stdout: true
+				}
+			}
+		},
 
 		// Minify JS
 		uglify: {
@@ -263,7 +293,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-	// Debug Task
+	// Development task, build and watch for file modification
 	grunt.registerTask( 'dev' , function() {
 		grunt.task.run([
 			'clean:dev',
@@ -279,7 +309,7 @@ module.exports = function(grunt) {
 		grunt.task.run('watch');
 	});
 
-	// Debug Task
+	// Build task for production
 	grunt.registerTask( 'prod' , function() {
 		grunt.task.run([
 			'clean:all',
@@ -293,6 +323,27 @@ module.exports = function(grunt) {
 			'copy:build',
 			'htmlmin',
 		]);
+	});
+
+	// Installation task which install the _build folder in gh-pages , commit and push
+	grunt.registerTask( 'install' , function() {
+		if ( grunt.file.exists( '_build/index.html' ) === false ) {
+			grunt.verbose.or.error().error( 'File "_build/index.html" does not exist. Please build before installing with "grunt prod"' );
+			grunt.fail.warn('Unable to continue');
+		}
+		else if ( grunt.file.exists( ghpages + '/.git/config' ) === false ) {
+			grunt.verbose.or.error().error( 'File "' + ghpages + '/.git/config" does not exist. Please clone "git clone git@github.com:potsky/PimpMyLog.git -b gh-pages ' + ghpages +'"' );
+			grunt.fail.warn('Unable to continue');
+		}
+		else {
+			grunt.log.writeln('Installing in ' + ghpages );
+			grunt.task.run([
+				'shell:gitremove',
+				'copy:install',
+				'copy:installREADME',
+				'shell:gitaddcommitpush'
+			]);
+		}
 	});
 
 	// Jekyll aliases
@@ -312,7 +363,6 @@ module.exports = function(grunt) {
 		grunt.log.writeln('Launching Jekyll PROD Build');
 		process.env.JEKYLL_ENV = 'prod';
 		grunt.task.run( 'prod' );
-		grunt.log.writeln('Now launch "grunt server-prod" to launch the web server in the _build directory !');
 	});
 	grunt.registerTask('build', 'build-prod');
 

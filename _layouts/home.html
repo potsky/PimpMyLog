@@ -19,7 +19,7 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div class="row">
-				{% include home_jumbo_1blue.html %}
+				{% include home_jumbo_1head.html %}
 			</div>
 		</div>
 	</div>
@@ -27,7 +27,7 @@
 	<div class="jumbotron jbgray">
 		<div class="container">
 			<div class="row">
-				{% capture md %}{% include home_jumbo_2gray.md %}{% endcapture %}{{ md | unindent | markdownify }}
+				{% capture md %}{% include home_jumbo_2introduction.md %}{% endcapture %}{{ md | unindent | markdownify }}
 			</div>
 		</div>
 	</div>
@@ -35,10 +35,8 @@
 	<div class="jumbotron jborange">
 		<div class="container">
 			<div class="row">
-				{% capture md %}{% include home_jumbo_3orange.md %}{% endcapture %}
+				{% capture md %}{% include home_jumbo_3features.md %}{% endcapture %}
 				{{ md | unindent | markdownify | replace:'<ul>','<ul class="fa-ul">' | replace:'[:','<i class="fa-li fa fa-' | replace:':]','"></i>' }}
-
-
 			</div>
 		</div>
 	</div>

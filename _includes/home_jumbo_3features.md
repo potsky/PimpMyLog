@@ -1,6 +1,6 @@
 ##### Key features
 
-- [:desktop:] Display any log in your web browser
+- [:desktop:] Display any text log in your web browser
 - [:compass:] *Chrome*, *Safari*, *Firefox*, *IE8+*, *Opera* are supported
 - [:bell:] Be notified on your desktop as soon as a new log line is available (supported on *Chrome*, *Safari*, *x*)
 - [:bell-o:] Be notified when log file is rotated

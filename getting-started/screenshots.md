@@ -1,8 +1,6 @@
 ---
 layout: default
-title: Getting started
+title: Screenshots
 ---
 
 {% image /assets/getting-started/screenshot.png class="img-responsive" alink="" atarget="" %}
-
-Coming soon !!!

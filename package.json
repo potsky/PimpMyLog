@@ -15,7 +15,6 @@
     "grunt-contrib-less": "~0.8.3",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-macreload": "~0.1.3",
-    "grunt-images": "~0.2.1",
     "grunt-cropthumb": "git+http://github.com/potsky/grunt-cropthumb.git",
     "grunt-contrib-htmlmin": "~0.1.3",
     "grunt-shell": "~0.6.1"
