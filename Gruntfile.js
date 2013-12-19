@@ -234,14 +234,20 @@ module.exports = function(grunt) {
 					stdout: true
 				}
 			},
-			gitremove: {
+			ghpagesgitremove: {
 				command: 'cd "' + ghpages + '" && git rm -rf * ',
 				options: {
 					stdout: true
 				}
 			},
-			gitaddcommitpush : {
+			ghpagesgitaddcommitpush : {
 				command: 'a=$(git rev-parse --short HEAD); cd "' + ghpages + '" && git add -A . && git commit -m "grunt install from branch jekyll commit $a" && git push origin gh-pages',
+				options: {
+					stdout: true
+				}
+			},
+			jekylladdcommitpush : {
+				command: 'git add -A . && git commit -m "commit from my ipad, pages content" && git push origin jekyll',
 				options: {
 					stdout: true
 				}
@@ -338,10 +344,28 @@ module.exports = function(grunt) {
 		else {
 			grunt.log.writeln('Installing in ' + ghpages );
 			grunt.task.run([
-				'shell:gitremove',
+				'shell:ghpagesgitremove',
 				'copy:install',
 				'copy:installREADME',
-				'shell:gitaddcommitpush'
+				'shell:ghpagesgitaddcommitpush'
+			]);
+		}
+	});
+
+	// Save task which commit, add and push in jekyll branch (I call this task remotely from my ipad to work secretly during holidays :-) )
+	grunt.registerTask( 'save' , function() {
+		if ( grunt.file.exists( '_config.yml' ) === false ) {
+			grunt.verbose.or.error().error( 'File "_config.yml" does not exist. Please save in the jekyll branch !' );
+			grunt.fail.warn('Unable to continue');
+		}
+		else if ( grunt.file.exists( '.git/config' ) === false ) {
+			grunt.verbose.or.error().error( 'Not in a GIT Repo' );
+			grunt.fail.warn('Unable to continue');
+		}
+		else {
+			grunt.log.writeln('Installing in ' + ghpages );
+			grunt.task.run([
+				'shell:jekylladdcommitpush'
 			]);
 		}
 	});
@@ -371,8 +395,6 @@ module.exports = function(grunt) {
 		grunt.task.run( 'clean-all' );
 		grunt.task.run( 'dev' );
 	});
-
-//	grunt.registerTask('build', 'server-prod');
 
 	grunt.registerTask('default', [ 'dev' ] );
 

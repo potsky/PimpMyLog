@@ -8,6 +8,7 @@ Jekyll source for the *gh-pages* branch.
 - [Node.js](http://nodejs.org/)
 - [Grunt](http://gruntjs.com/) (`npm install -g grunt-cli`)
 - [Bower](http://bower.io/) (`npm install -g bower`)
+- [Jekyll](http://jekyllrb.com) (`gem install jekyll`)
 
 Clone this repo then install dependencies:
 
