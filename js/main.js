@@ -1,14 +1,58 @@
-var file                   = '',
-	fingerprint            = '',
-	last_line              = '',
-	reset                  = 0,
-	file_size              = 0,
-	first_launch           = true,
-	loading                = false,
-	notification_displayed = false,
-	tz                     = ( user_time_zone === '' ) ? '' : 'tz=' + user_time_zone + '&',
-	notification,
-	auto_refresh_timer;
+/*global numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,user_time_zone,notification_default*/
+var file, notification, auto_refresh_timer, fingerprint, first_launch, file_size, last_line, loading, reset, notification_displayed;
+
+
+
+/**
+ * Set the max selector to a given value
+ *
+ * @param  {string}  a  the value of the wanted selected option
+ */
+var set_auto_refresh = function( a ) {
+	$('#autorefresh').val( a );
+};
+
+
+/**
+ * Set the autorefresh selector to a given value
+ *
+ * @param  {string}  a  the value of the wanted selected option
+ */
+var set_max = function( a ) {
+	$('#max').val( a );
+};
+
+
+
+/**
+ * Set the btn with the provided value
+ * If the value is not set, it will simply ajust inner variables
+ *
+ * @param  {string}  a  the value of the wanted selected option
+ */
+var notification_class = 'warning';
+var set_notification   = function( a ) {
+	if ( a === undefined ) {
+		a = notification;
+	}
+	if ( a === true ) {
+		$('#notification').removeClass('btn-warning btn-success btn-danger').addClass('active btn-' + notification_class );
+		notification = true;
+	} else {
+		$('#notification').removeClass('btn-warning btn-success btn-danger active');
+		notification = false;
+	}
+};
+
+
+/**
+ * Return if notification is set or not
+ *
+ * @return  {Boolean}
+ */
+var is_notification = function() {
+	return $('#notification').hasClass('active');
+};
 
 
 /**
@@ -22,7 +66,7 @@ var file                   = '',
 var notify = function ( title , message ) {
 	if ( 'webkitNotifications' in window ) {
 		var havePermission = window.webkitNotifications.checkPermission();
-		if (havePermission === 0) {
+		if ( havePermission === 0 ) {
 			notification_class = 'success';
 			set_notification();
 			if ( ( notification === true ) && ( title !== undefined ) && ( notification_displayed === false ) ) {
@@ -41,7 +85,7 @@ var notify = function ( title , message ) {
 				setTimeout(	function(){try {noti.close();}catch(e){}} , 5000 );
 			}
 		}
-		else if (havePermission === 2) {
+		else if ( havePermission === 2 ) {
 			notification_class = 'danger';
 			set_notification();
 		}
@@ -49,26 +93,26 @@ var notify = function ( title , message ) {
 			notification_class = 'warning';
 			set_notification();
 
-			window.webkitNotifications.requestPermission(function (a) {
+			window.webkitNotifications.requestPermission(function() {
 				notify( title , message );
 			});
 		}
 	}
-	else if ('Notification' in window) {
-		if (Notification.permission === 'default') {
+	else if ( 'Notification' in window ) {
+		if ( window.Notification.permission === 'default') {
 			notification_class = 'warning';
 			set_notification();
 
-			Notification.requestPermission(function () {
+			window.Notification.requestPermission(function () {
 				notify( title , message );
 			});
 		}
-		else if (Notification.permission === 'granted') {
+		else if ( window.Notification.permission === 'granted') {
 			notification_class = 'success';
 			set_notification();
 			if ( ( notification === true ) && ( title !== undefined ) && ( notification_displayed === false ) ) {
 				notification_displayed = true;
-				var n = new Notification( title , { 'body': message , 'tag' : 'Pimp My Log' } );
+				var n = new window.Notification( title , { 'body': message , 'tag' : 'Pimp My Log' } );
 				n.onclick = function () {
 					this.close();
 				};
@@ -77,7 +121,7 @@ var notify = function ( title , message ) {
 				};
 			}
 		}
-		else if (Notification.permission === 'denied') {
+		else if ( window.Notification.permission === 'denied') {
 			notification_class = 'danger';
 			set_notification();
 			return;
@@ -96,6 +140,19 @@ var notify = function ( title , message ) {
  */
 var pml_alert = function( message , severity) {
 	$('<div class="alert alert-' + severity + ' alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + message + '</div>').appendTo("#notice");
+};
+
+
+/**
+ * Display a single alert on user browser
+ *
+ * @param   {string}  message   the message
+ * @param   {string}  severity  the severity in danger, warning, success, info
+ *
+ * @return  {void}
+ */
+var pml_singlealert = function( message , severity) {
+	$("#singlenotice").html('<div class="alert alert-' + severity + ' alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + message + '</div>');
 };
 
 
@@ -145,15 +202,19 @@ var type_parser = function( type ) {
  * @return  {string}        the cutted value
  */
 var val_cut = function( val , cut ) {
-	if ( cut === undefined )
+	if ( cut === undefined ) {
 		return val;
-	if ( cut === 0 )
+	}
+	if ( cut === 0 ) {
 		return val;
-	if ( val.length <= Math.abs(cut) )
+	}
+	if ( val.length <= Math.abs(cut) ) {
 		return val;
+	}
 	if ( cut > 0 ) {
 		return val.substr( 0 , cut ) + '&hellip;';
-	} else {
+	}
+	else {
 		return '&hellip;' + val.substr( cut );
 	}
 };
@@ -168,6 +229,8 @@ var val_cut = function( val , cut ) {
  * @return  {void}
  */
 var get_logs     = function( load_default_values , load_full_file ) {
+
+	var wanted_lines;
 
 	// Auto refresh stop
 	if ( auto_refresh_timer !== null ) {
@@ -201,7 +264,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 	loading      = true;
 	wanted_lines = $('#max').val();
 	$.ajax( {
-		url     : 'inc/getlog.pml.php?' + tz + new Date().getTime() ,
+		url     : 'inc/getlog.pml.php?' + user_time_zone + new Date().getTime() ,
 		data    : {
 			'ldv'         : load_default_values,
 			'file'        : file,
@@ -249,10 +312,18 @@ var get_logs     = function( load_default_values , load_full_file ) {
 		}
 
 		// PHP Internal notices
-		if ( logs.warning )
+		if ( logs.warning ) {
 			pml_alert( logs.warning , 'warning' );
-		if ( logs.notice )
+		}
+		if ( logs.notice ) {
 			pml_alert( logs.notice , 'info' );
+		}
+		if ( logs.singlewarning ) {
+			pml_singlealert( logs.singlewarning , 'warning' );
+		}
+		if ( logs.singlenotice ) {
+			pml_singlealert( logs.singlenotice , 'info' );
+		}
 
 		// Render
 		$( '#error' ).hide();
@@ -299,7 +370,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 			var sort   = 'Date';
 			var sortsc = 'down';
 			for ( var h in logs.headers ) {
-				var s = ( sort == h ) ? '<span class="glyphicon glyphicon-chevron-' + sortsc + '"/></span>' : '';
+				var s = ( sort === h ) ? '<span class="glyphicon glyphicon-chevron-' + sortsc + '"/></span>' : '';
 				$( '<th>' + logs.headers[ h ] + s + '</th>' ).addClass( h ).appendTo( '#logshead' );
 			}
 		}
@@ -320,7 +391,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 
 			for ( var c in logs.logs[ log ] ) {
 
-				if ( 'pml' == c ) {
+				if ( 'pml' === c ) {
 					continue;
 				}
 
@@ -368,9 +439,12 @@ var get_logs     = function( load_default_values , load_full_file ) {
 					var uas = type.param.match(/\{[a-zA-Z.]*\}/g);
 					var uaf = false;
 					for (var k in uas) {
+						var a;
 						try {
 							a = eval( 'ua.' + uas[k].replace('{','').replace('}','') );
-							if ( a === undefined ) a = '';
+							if ( a === undefined ) {
+								a = '';
+							}
 						} catch (e) {
 							a = '';
 						}
@@ -414,7 +488,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 		// Footer
 		var rowct = '';
 		var rowc  = $('#logsbody tr').length;
-		if ( rowc == 1 ) {
+		if ( rowc === 1 ) {
 			rowct = lemma.display_log + ' ';
 		} else if ( rowc > 1 ) {
 			rowct = lemma.display_nlogs.replace( '%s' , rowc ) + ' ';
@@ -424,12 +498,12 @@ var get_logs     = function( load_default_values , load_full_file ) {
 		// Notification
 		if ( first_launch === false ) {
 			if ( logs.full ) {
-				if ( logs.fingerprint != fingerprint ) {
+				if ( logs.fingerprint !== fingerprint ) {
 					notify( notification_title.replace( /%f/g , files[file].display ) , lemma.new_logs );
 					fingerprint = logs.fingerprint;
 				}
 			} else {
-				if ( rowidx == 1 ) {
+				if ( rowidx === 1 ) {
 					notify( notification_title.replace( /%f/g , files[file].display ) , lemma.new_log );
 				} else if ( rowidx > 1 ) {
 					notify( notification_title.replace( /%f/g , files[file].display ) , lemma.new_nlogs.replace( '%s' , rowidx ) );
@@ -447,57 +521,6 @@ var get_logs     = function( load_default_values , load_full_file ) {
 	} )
 	.always( function () {
 	});
-};
-
-
-/**
- * Set the max selector to a given value
- *
- * @param  {string}  a  the value of the wanted selected option
- */
-var set_auto_refresh = function( a ) {
-	$('#autorefresh').val( a );
-};
-
-
-/**
- * Set the autorefresh selector to a given value
- *
- * @param  {string}  a  the value of the wanted selected option
- */
-var set_max = function( a ) {
-	$('#max').val( a );
-};
-
-
-/**
- * Set the btn with the provided value
- * If the value is not set, it will simply ajust inner variables
- *
- * @param  {string}  a  the value of the wanted selected option
- */
-var notification_class = 'warning';
-var set_notification   = function( a ) {
-	if ( a === undefined ) {
-		a = notification;
-	}
-	if ( a === true ) {
-		$('#notification').removeClass('btn-warning btn-success btn-danger').addClass('active btn-' + notification_class );
-		notification = true;
-	} else {
-		$('#notification').removeClass('btn-warning btn-success btn-danger active');
-		notification = false;
-	}
-};
-
-
-/**
- * Return if notification is set or not
- *
- * @return  {Boolean}
- */
-var is_notification = function() {
-	return $('#notification').hasClass('active');
 };
 
 
@@ -560,7 +583,7 @@ $(function() {
 	// Search input enter button
 	$( '#search' ).keypress( function(e) {
 		var keycode = (e.keyCode ? e.keyCode : e.which);
-		if ( keycode == '13' ) {
+		if ( keycode === '13' ) {
 			$( '#search' ).blur();
 		}
 	});

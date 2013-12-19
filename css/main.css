@@ -22,6 +22,7 @@ body {
 	background-size: 36px 36px;
    	width: 36px;
    	height: 36px;
+   	cursor: pointer;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
  only screen and (-o-min-device-pixel-ratio: 3/2),

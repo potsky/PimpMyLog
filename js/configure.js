@@ -269,7 +269,7 @@ var action_select_logs = function( options ) {
 
 
 /**
- * Create config.inc.php with right values !
+ * Create config.json with right values !
  *
  * @param   {array}  logs_list  the array of file to configure
  *
@@ -295,9 +295,9 @@ var action_configue_now = function( logs_list ) {
 
 $(function() {
 
-	///////////////////////////////////////////
-	// Check if config.inc.php already exist //
-	///////////////////////////////////////////
+	////////////////////////////////////////
+	// Check if config.json already exist //
+	////////////////////////////////////////
 	progressbar_set(10);
 	pml_action( { s : 'exist' } , function( data ) {
 

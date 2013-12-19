@@ -126,28 +126,46 @@ function init() {
 
 
 /**
+ * Load config file
+ */
+function config_load( $path = 'config.json' ) {
+	global $files, $badges;
+	$files  = array();
+	$badges = array();
+
+	if ( ! file_exists( $path ) ) {
+		return false;
+	}
+	$config = json_decode( file_get_contents( $path ) , true );
+	if ( $config == null ) {
+		return false;
+	}
+	$badges = $config[ 'badges' ];
+	$files  = $config[ 'files' ];
+
+	foreach ( $config[ 'globals' ] as $cst => $val ) {
+		if ( $cst == strtoupper($cst) ) {
+			define( $cst , $val );
+		}
+	}
+	return true;
+}
+
+
+
+/**
  * Check the $files array and fix it with default values
  * If there is a problem, return an array of errors
  * If everything is ok, return true;
  *
  * @return  mixed  true if ok, otherwise an array of errors
  */
-function check_config() {
+function config_check() {
 	global $files;
 	$errors = array();
 
-	if ( ! isset( $files ) ) {
-		$errors[] = __('array <code>$files</code> is not defined');
-		return $errors;
-	}
-
-	if ( ! is_array( $files ) ) {
-		$errors[] = __('<code>$files</code> is not an array');
-		return $errors;
-	}
-
 	if ( count( $files ) == 0 ) {
-		$errors[] = __('No file is defined in <code>$files</code> array');
+		$errors[] = __('No file is defined in <code>files</code> array');
 		return $errors;
 	}
 

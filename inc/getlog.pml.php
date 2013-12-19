@@ -1,6 +1,6 @@
 <?php
 include_once 'global.inc.php';
-include_once '../config.inc.php';
+config_load( '../config.json' );
 init();
 
 
@@ -30,15 +30,15 @@ function myErrorHandler( $errno, $errstr, $errfile, $errline ) {
 		break;
 
 	case E_USER_WARNING:
-		$logs['warning'] = sprintf( __('<strong>PHP Warning</strong> [%s] %s') , $errno , $errstr );
+		$logs['singlewarning'] = sprintf( __('<strong>PHP Warning</strong> [%s] %s') , $errno , $errstr );
 		break;
 
 	case E_USER_NOTICE:
-		$logs['notice'] = sprintf( __('<strong>PHP Notice</strong> [%s] %s') , $errno , $errstr );
+		$logs['singlenotice'] = sprintf( __('<strong>PHP Notice</strong> [%s] %s') , $errno , $errstr );
 		break;
 
 	default:
-		$logs['warning'] = sprintf( __('<strong>PHP Unknown error</strong> [%s] %s') , $errno , $errstr );
+		$logs['singlewarning'] = sprintf( __('<strong>PHP Unknown error</strong> [%s] %s') , $errno , $errstr );
 		break;
 	}
 	return true;
@@ -95,7 +95,7 @@ if ( ! file_exists( $file_path ) ) {
 	die();
 }
 
-$errors = check_config();
+$errors = config_check();
 if ( is_array( $errors ) ) {
 	$logs['error'] = __( 'Configuration file has changed and is buggy now. Please refresh the page.' );
 	echo json_encode( $logs );

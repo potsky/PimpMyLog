@@ -18,13 +18,13 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 /////////////////////////
 // Check if configured //
 /////////////////////////
-if ( ! file_exists( 'config.inc.php' ) ) {
+if ( ! file_exists( 'config.json' ) ) {
 	$title    = __( 'Welcome!' );
 	$message  = '<br/>';
 	$message .= __( 'Pimp my Log is not configured.');
 	$message .= '<br/><br/>';
 	$message .= '<span class="glyphicon glyphicon-cog"></span> ';
-	$message .= __( 'You can manually copy <code>cfg/config.example.inc.php</code> to <code>config.inc.php</code> in the root directory and change parameters. Then refresh this page.' );
+	$message .= __( 'You can manually copy <code>cfg/config.json</code> to <code>config.json</code> in the root directory and change parameters. Then refresh this page.' );
 	$message .= '<br/><br/>';
 	$message .= '<span class="glyphicon glyphicon-heart-empty"></span> ';
 	$message .= __( 'Or let me try to configure it for you!' );
@@ -39,24 +39,24 @@ if ( ! file_exists( 'config.inc.php' ) ) {
 //////////////////////////////
 // Load config and defaults //
 //////////////////////////////
-include_once 'config.inc.php';
+config_load();
 init();
 
 
 /////////////////////////
 // Check configuration //
 /////////////////////////
-$errors = check_config();
+$errors = config_check();
 if ( is_array( $errors ) ) {
 	$title    = __( 'Oups!' );
 	$message  = '<br/>';
-	$message .= __( '<code>config.inc.php</code> configuration file is buggy :' ) . '<ul>';
+	$message .= __( '<code>config.json</code> configuration file is buggy :' ) . '<ul>';
 	foreach ( $errors as $error ) {
 		$message .= '<li>' . $error . '</li>';
 	}
 	$message .= '</ul>';
 	$message .= '<br/>';
-	$message .= __( 'If you want me to build the configuration for you, please remove <code>config.inc.php</code> and click below.' );
+	$message .= __( 'If you want me to build the configuration for you, please remove file <code>config.json</code> at root and click below.' );
 	$message .= '<br/><br/>';
 	$link_url = 'inc/configure.php';
 	$link_msg = __('Configure now');
@@ -117,14 +117,12 @@ $csrf = csrf_get();
 			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
 			files                      = <?php echo json_encode($files);?>,
 			notification_title         = "<?php echo NOTIFICATION_TITLE;?>",
-			site_title                 = "<?php echo TITLE;?>",
 			badges                     = <?php echo json_encode($badges);?>,
 			lemma                      = <?php echo json_encode($lemma);?>,
 			geoip_url                  = "<?php echo GEOIP_URL;?>",
-			bytes_parsed               = "<?php echo __( '%s of logs parsed' );?>",
 			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
 			csrf_token                 = "<?php echo $csrf;?>",
-			user_time_zone             = "<?php echo @$_GET['tz'];?>",
+			user_time_zone             = "<?php (isset($_GET['tz'])) ? 'tz=' . $_GET['tz'] . '&' : ''; ?>",
 			notification_default       = <?php echo ( NOTIFICATION===true ) ? 'true' : 'false';?>;
 	</script>
 </head>
@@ -209,6 +207,7 @@ foreach ( get_max_options() as $r ) {
 		<div id="result">
 			<br/>
 			<div id="upgrademessage"></div>
+			<div id="singlenotice"></div>
 			<div id="notice"></div>
 			<div id="nolog" style="display:none" class="alert alert-info fade in"></div>
 			<div class="table-responsive">
@@ -222,7 +221,6 @@ foreach ( get_max_options() as $r ) {
 		<hr>
 		<footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer>
 	</div>
-
 	<script src="js/vendor/jquery-1.10.1.min.js"></script>
 	<script src="js/vendor/jquery.cookie.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
@@ -236,7 +234,7 @@ foreach ( get_max_options() as $r ) {
 	numeral.language('<?php echo $lang;?>');
 	</script>
 <?php } ?>
-	<script src="js/main.js"></script>
+	<script src="js/main.min.js"></script>
 <?php if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
 	<script>
 		var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];

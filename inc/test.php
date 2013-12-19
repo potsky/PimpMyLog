@@ -267,13 +267,13 @@ echo test( $type , $regex , $match , $types , $log );
 								<div class="panel-heading">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">
-											Code <code>config.inc.php</code>
+											Code <code>config.json</code>
 										</a>
 									</h4>
 								</div>
 								<div id="collapseOne2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php show_source('../config.inc.php'); ?></pre>
+										<pre><?php show_source('../config.json'); ?></pre>
 									</div>
 								</div>
 							</div>
@@ -281,13 +281,13 @@ echo test( $type , $regex , $match , $types , $log );
 								<div class="panel-heading">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">
-											Stat <code>config.inc.php</code>
+											Stat <code>config.json</code>
 										</a>
 									</h4>
 								</div>
 								<div id="collapseTwo2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php var_export( stat('../config.inc.php') ); ?></pre>
+										<pre><?php var_export( stat('../config.json') ); ?></pre>
 									</div>
 								</div>
 							</div>
@@ -309,9 +309,9 @@ echo test( $type , $regex , $match , $types , $log );
 										}
 										?></pre>
 										<?php
-											include_once('../config.inc.php');
+											config_load( '../config.json' );
 											$paths = array(
-												'config' => '../config.inc.php',
+												'config' => '../config.json',
 											);
 											if ( is_array( @$files ) ) {
 												foreach ( $files as $fileid => $file ) {
