@@ -581,10 +581,14 @@ $(function() {
 	});
 
 	// Search input enter button
-	$( '#search' ).keypress( function(e) {
-		var keycode = (e.keyCode ? e.keyCode : e.which);
-		if ( keycode === '13' ) {
-			$( '#search' ).blur();
+	$( document ).keydown(function(event){
+		if( event.keyCode === 13) {
+			if ( $( '#search' ).is( ':focus' ) ) {
+				$( '#search' ).blur();
+				get_logs( false , true );
+			}
+			event.preventDefault();
+			return false;
 		}
 	});
 
