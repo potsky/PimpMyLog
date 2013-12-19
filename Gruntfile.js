@@ -247,7 +247,7 @@ module.exports = function(grunt) {
 				}
 			},
 			jekylladdcommitpush : {
-				command: 'git add -A . && git commit -m "commit from my ipad, pages content" && git pull origin jekyll && git push origin jekyll',
+				command: 'git add -A . && git commit --author=\'potskymini 4 Potsky <potsky@me.com>\' -m "pages content" && git pull origin jekyll && git push origin jekyll',
 				options: {
 					stdout: true
 				}
