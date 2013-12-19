@@ -223,19 +223,23 @@ echo test( $type , $regex , $match , $types , $log );
 
 $type  = 'Access Apache 2.2 with referer and user agent';
 $log   = '127.0.0.1 - - [27/Nov/2013:10:20:40 +0100] "GET /~potsky/PHPApacheLogViewer/inc/get_logs.php?ldv=false&file=access&max=27 HTTP/1.1" 200 33 "http://localhost/~potsky/PHPApacheLogViewer/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71"';
-$regex = '|^(.*) (.*) (.*) \[(.*)\] "(.*) (.*) (.*)" ([0-9]*) (.*) "(.*)" "(.*)"( [0-9]*/([0-9]*))*$|U';
+$regex = '|^((\S*) )*(\S*) (\S*) (\S*) \[(.*)\] "(\S*) (.*) (\S*)" ([0-9]*) (.*) "(.*)" "(.*)"( [0-9]*/([0-9]*))*$|U';
 $match = array(
-	'CMD'     => 5,
-	'Code'    => 8,
-	'Date'    => 4,
-	'IP'      => 1,
-	'Referer' => 10,
-	'Size'    => 9,
-	'UA'      => 11,
-	'URL'     => 6,
-	'User'    => 3,
-	'Time'    => 13,
+	'CMD'     => 7,
+	'Code'    => 10,
+	'Date'    => 6,
+	'IP'      => 3,
+	'Referer' => 12,
+	'Size'    => 11,
+	'UA'      => 13,
+	'URL'     => 8,
+	'User'    => 5,
+	'Time'    => 15,
 );
+echo test( $type , $regex , $match , $types , $log );
+
+$type  = 'Access Apache 2.2 with virtual host referer and user agent';
+$log   = 'potsky.com 62.129.4.154 - rb [19/Dec/2013:16:11:22 +0100] "POST /P1mpmyL0g-dev/inc/getlog.pml.php?1387465882519 HTTP/1.1" 200 7660 "https://home.potsky.com/P1mpmyL0g-dev/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.73.11 (KHTML, like Gecko) Version/7.0.1 Safari/537.73.11"';
 echo test( $type , $regex , $match , $types , $log );
 
 $type  = 'Access Apache 2.2 with tuning options';
