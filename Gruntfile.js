@@ -2,7 +2,9 @@ module.exports = function(grunt) {
 	// Load all NPM grunt tasks
 	require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
 
-	var ghpages = '../PimpMyLog-gh-pages';
+	var ghpage_path = '/tmp';
+	var ghpage_name = 'PimpMyLog-gh-pages';
+	var ghpages     = ghpage_path + '/' + ghpage_name;
 
 	// Project configuration
 	grunt.initConfig({
@@ -234,6 +236,12 @@ module.exports = function(grunt) {
 					stdout: true
 				}
 			},
+			ghpagesgitclone: {
+				command: 'cd "' + ghpage_path + '" && git clone git@github.com:potsky/PimpMyLog.git -b gh-pages "' + ghpage_name + '"',
+				options: {
+					stdout: true
+				}
+			},
 			ghpagesgitremove: {
 				command: 'cd "' + ghpages + '" && git rm -rf * ',
 				options: {
@@ -338,8 +346,7 @@ module.exports = function(grunt) {
 			grunt.fail.warn('Unable to continue');
 		}
 		else if ( grunt.file.exists( ghpages + '/.git/config' ) === false ) {
-			grunt.verbose.or.error().error( 'File "' + ghpages + '/.git/config" does not exist. Please clone "git clone git@github.com:potsky/PimpMyLog.git -b gh-pages ' + ghpages +'"' );
-			grunt.fail.warn('Unable to continue');
+			grunt.task.run(['shell:ghpagesgitclone' , 'shell:jekylladdcommitpush']);
 		}
 		else {
 			grunt.log.writeln('Installing in ' + ghpages );
