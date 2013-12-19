@@ -91,10 +91,6 @@ $csrf = csrf_get();
 
 
 ?><!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -112,6 +108,7 @@ $csrf = csrf_get();
 	<?php } ?>
 	<link rel="stylesheet" href="js/vendor/Hook.js/hook.css">
 	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<style type="text/css"> .navbar { filter:none !important; } </style>
 	<script>
 		var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
 			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
@@ -127,7 +124,7 @@ $csrf = csrf_get();
 	</script>
 </head>
 <body>
-	<!--[if lt IE 7]>
+	<!--[if lt IE 8]>
 	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -158,7 +155,7 @@ foreach ( $files as $file_id=>$file ) {
 						</ul>
 					</li>
 				</ul>
-				<form class="navbar-form navbar-right navbar-input-group" action="#">
+				<form class="navbar-form navbar-right navbar-input-group">
 
 					<div class="form-group" id="searchctn">
 						<input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>">
