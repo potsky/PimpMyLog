@@ -2,46 +2,70 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>/general/2013/12/13/bye-phpapachelogviewer-hello-pimpmylog</loc>
-        <lastmod>2013-12-18T17:59:06+01:00</lastmod>
-    </url>
-    <url>
-        <loc>/api/</loc>
-        <lastmod>2013-12-18T17:59:34+01:00</lastmod>
+        <lastmod>2013-12-18T17:59:08+01:00</lastmod>
     </url>
     <url>
         <loc>/blog/</loc>
         <lastmod>2013-12-18T13:21:12+01:00</lastmod>
     </url>
     <url>
-        <loc>/documentation/</loc>
-        <lastmod>2013-12-18T17:59:43+01:00</lastmod>
+        <loc>/developer/contribute.html</loc>
+        <lastmod>2013-12-20T09:05:43+01:00</lastmod>
     </url>
     <url>
-        <loc>/documentation/next.html</loc>
-        <lastmod>2013-12-18T17:59:46+01:00</lastmod>
+        <loc>/developer/debug.html</loc>
+        <lastmod>2013-12-20T09:06:11+01:00</lastmod>
+    </url>
+    <url>
+        <loc>/developer/</loc>
+        <lastmod>2013-12-20T09:06:02+01:00</lastmod>
+    </url>
+    <url>
+        <loc>/developer/log-format.html</loc>
+        <lastmod>2013-12-20T09:02:54+01:00</lastmod>
+    </url>
+    <url>
+        <loc>/developer/software-format.html</loc>
+        <lastmod>2013-12-20T09:03:11+01:00</lastmod>
+    </url>
+    <url>
+        <loc>/documentation/configuration.html</loc>
+        <lastmod>2013-12-20T09:03:43+01:00</lastmod>
+    </url>
+    <url>
+        <loc>/documentation/customization.html</loc>
+        <lastmod>2013-12-20T09:04:05+01:00</lastmod>
+    </url>
+    <url>
+        <loc>/documentation/</loc>
+        <lastmod>2013-12-20T09:05:07+01:00</lastmod>
+    </url>
+    <url>
+        <loc>/documentation/usage.html</loc>
+        <lastmod>2013-12-20T09:06:24+01:00</lastmod>
     </url>
     <url>
         <loc>/getting-started/</loc>
-        <lastmod>2013-12-19T11:19:33+01:00</lastmod>
+        <lastmod>2013-12-20T09:08:43+01:00</lastmod>
     </url>
     <url>
-        <loc>/getting-started/next.html</loc>
-        <lastmod>2013-12-18T17:59:58+01:00</lastmod>
+        <loc>/getting-started/quick-start.html</loc>
+        <lastmod>2013-12-20T09:09:06+01:00</lastmod>
+    </url>
+    <url>
+        <loc>/getting-started/requirements.html</loc>
+        <lastmod>2013-12-20T09:09:18+01:00</lastmod>
     </url>
     <url>
         <loc>/getting-started/screenshots.html</loc>
-        <lastmod>2013-12-19T11:19:26+01:00</lastmod>
+        <lastmod>2013-12-20T09:09:29+01:00</lastmod>
     </url>
     <url>
         <loc>/</loc>
-        <lastmod>2013-12-19T11:17:29+01:00</lastmod>
-    </url>
-    <url>
-        <loc>/next.html</loc>
-        <lastmod>2013-12-18T09:12:35+01:00</lastmod>
+        <lastmod>2013-12-20T09:47:46+01:00</lastmod>
     </url>
     <url>
         <loc>/rss.xml</loc>
-        <lastmod>2013-12-19T12:25:11+01:00</lastmod>
+        <lastmod>2013-12-19T12:25:10+01:00</lastmod>
     </url>
 </urlset>
