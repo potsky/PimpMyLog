@@ -337,8 +337,8 @@ echo test( $type , $regex , $match , $types , $log );
 												<td>'.$id.'</td>
 												<td><code>'.$file.'</code></td>
 												<td><code>'.realpath($file).'</code></td>
-												<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('Non').'</span>'  ) . '</td>
-												<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('Non').'</span>'  ) . '</td>
+												<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
+												<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
 												</tr>';
 											}
 											echo '</tbody>';

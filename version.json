@@ -1,24 +1,31 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version" : "0.2",
+	"version" : "0.9.0",
 	"changelog" : {
-		"0.2" : {
-			"notice" : "Hey this is a notice !",
-			"released" : "2013-12-08",
+		"1.0.0" : {
+			"notice" : "First release of Pimp my Log!",
+			"released" : "2014-01-13",
 			"new" : [
-				"This is a new #1",
-				"This is a new #2"
-			],
-			"changed" : [
-				"This is a change #1",
-				"This is a change #2",
-				"This is a change #3"
-			],
-			"fixed" : [
-				"This is a fix #1"
+				"Add french translations"
 			]
 		},
-		"0.1.5" : "Intermediate version"
+		"0.9.0" : {
+			"notice" : "First public pre-release of Pimp my Log!",
+			"released" : "2013-12-23"
+		},
+		"0.1.5" : {
+			"released" : "2013-12-01",
+			"new" : [
+				"New features"
+			],
+			"changed" : [
+				"Tons of changes"
+			],
+			"fixed" : [
+				"Merry Christmas"
+			]
+		},
+		"0.0.1" : "PHP Apache Log Viewer"
 	}
 }
 /*PSK*/)/*PSK*/

@@ -1,45 +1,5 @@
-/**
- * Permform an ajax action with object parameter and call the success callback
- *
- * @param   {object}    object  some POST values
- * @param   {function}  done    the success fallback
- *
- * @return  {void}
- */
-var pml_action = function ( object , done , options ) {
-	progressbar_active();
-	$.ajax( {
-		url      : 'configure.php?' + new Date().getTime() ,
-		data     : object,
-		type     : 'POST',
-		dataType : 'json'
-	} )
-	.fail( function ( a , b, c ) {
-		progressbar_color( 'danger' );
-		progressbar_set( 100 );
-		$('<div class="alert alert-danger fade in">' + c.message + '</div>').appendTo("#error");
-	})
-	.done( function ( data ) {
-		if ( data.error ) {
-			fatal_error( data.error );
-		} else {
-			done( data , options );
-		}
-	})
-	.always( function ( data ) {
-		if ( data.reload ) {
-			$("#reload").show();
-		} else {
-			$("#reload").hide();
-		}
-		if ( data.next ) {
-			$("#next").show();
-		} else {
-			$("#next").hide().unbind('click');
-		}
-		progressbar_deactive();
-	});
-};
+/* jshint devel:true */
+/*global lemma*/
 
 
 /**
@@ -99,13 +59,83 @@ var progressbar_color = function( value ) {
  * @return  {void}
  */
 var fatal_error = function( message ) {
-	if (!message) message = lemma.error;
+	if (!message) {
+		message = lemma.error;
+	}
 	progressbar_color( 'danger' );
 	progressbar_set( 100 );
 	$('<div class="alert alert-danger fade in">' + message + '</div>').appendTo("#error");
 	$('#user').text('');
 	$("#reload").hide();
 	$("#next").hide();
+};
+
+
+/**
+ * Permform an ajax action with object parameter and call the success callback
+ *
+ * @param   {object}    object  some POST values
+ * @param   {function}  done    the success fallback
+ *
+ * @return  {void}
+ */
+var pml_action = function ( object , done , options ) {
+	progressbar_active();
+	$.ajax( {
+		url      : 'configure.php?' + new Date().getTime() ,
+		data     : object,
+		type     : 'POST',
+		dataType : 'json'
+	} )
+	.fail( function ( a , b, c ) {
+		progressbar_color( 'danger' );
+		progressbar_set( 100 );
+		$('<div class="alert alert-danger fade in">' + c.message + '</div>').appendTo("#error");
+	})
+	.done( function ( data ) {
+		if ( data.error ) {
+			fatal_error( data.error );
+		} else {
+			done( data , options );
+		}
+	})
+	.always( function ( data ) {
+		if ( data.reload ) {
+			$("#reload").show();
+		} else {
+			$("#reload").hide();
+		}
+		if ( data.next ) {
+			$("#next").show();
+		} else {
+			$("#next").hide().unbind('click');
+		}
+		progressbar_deactive();
+	});
+};
+
+
+/**
+ * Create config.json with right values !
+ *
+ * @param   {array}  logs_list  the array of file to configure
+ *
+ * @return  {void}
+ */
+var action_configue_now = function( logs_list ) {
+	$( '#error' ).text('');
+	$( '#user' ).text('');
+	$( '.alert' ).remove();
+
+	progressbar_set(80);
+	pml_action( { s : 'configure' , l : logs_list } , function() {
+		progressbar_set(100);
+		progressbar_color('success');
+		$( '#congratulations').show();
+		$( '#error').hide();
+		$( '#user').hide();
+		$( '#buttons').hide();
+	});
 };
 
 
@@ -137,7 +167,7 @@ var action_select_logs = function( options ) {
 
 	var crt_software = softlist.pop();
 
-	pml_action( { s : 'find' , so : crt_software } , function( data , options ) {
+	pml_action( { s : 'find' , so : crt_software } , function( data ) {
 
 		/////////////////////////////////////////
 		// Let user choose which logs he wants //
@@ -148,7 +178,7 @@ var action_select_logs = function( options ) {
 		if ( data.found === 0 ) {
 			progressbar_color( 'danger' );
 		}
-		else if ( data.found == 1 ) {
+		else if ( data.found === 1 ) {
 			progressbar_color( 'warning' );
 		}
 		else {
@@ -217,12 +247,6 @@ var action_select_logs = function( options ) {
 
 			var found = false;
 
-			// List
-			$( '#find tbody tr input[type="checkbox"]:checked').each( function() {
-				logs_list.push( $(this).parents('tr').data( 'file' ) );
-				found = true;
-			});
-
 			// User inputs
 			var user_files = [];
 			$( '.userpaths' ).each( function() {
@@ -238,19 +262,30 @@ var action_select_logs = function( options ) {
 			});
 
 			if ( user_files.length > 0 ) {
-				pml_action( { s : 'check' , uf : user_files } , function( data , options ) {
+				pml_action( { s : 'check' , uf : user_files } , function( data ) {
 					// List with user inputs
 					if ( data.notice ) {
 						$( '.alert' ).removeClass( 'alert-success' ).addClass( 'alert-warning' ).html( data.notice );
 					} else {
 						$( '#error' ).text('');
 						$( '.alert' ).remove();
+
+						// SW List
+						$( '#find tbody tr input[type="checkbox"]:checked').each( function() {
+							logs_list.push( $(this).parents('tr').data( 'file' ) );
+						});
 						logs_list = $.merge( logs_list , data.found );
 						action_select_logs( { 'a' : softwares , 'b' : softlist , 'c' : softtotal } );
 					}
 				});
 				return;
 			}
+
+			// SW List
+			$( '#find tbody tr input[type="checkbox"]:checked').each( function() {
+				logs_list.push( $(this).parents('tr').data( 'file' ) );
+				found = true;
+			});
 
 			// List without user inputs
 			if ( found === true ) {
@@ -267,39 +302,13 @@ var action_select_logs = function( options ) {
 };
 
 
-
-/**
- * Create config.json with right values !
- *
- * @param   {array}  logs_list  the array of file to configure
- *
- * @return  {void}
- */
-var action_configue_now = function( logs_list ) {
-	$( '#error' ).text('');
-	$( '#user' ).text('');
-	$( '.alert' ).remove();
-
-	progressbar_set(80);
-	pml_action( { s : 'configure' , l : logs_list } , function( data ) {
-		progressbar_set(100);
-		progressbar_color('success');
-		$( '#congratulations').show();
-		$( '#error').hide();
-		$( '#user').hide();
-		$( '#buttons').hide();
-	});
-};
-
-
-
 $(function() {
 
 	////////////////////////////////////////
 	// Check if config.json already exist //
 	////////////////////////////////////////
 	progressbar_set(10);
-	pml_action( { s : 'exist' } , function( data ) {
+	pml_action( { s : 'exist' } , function() {
 
 		///////////////////////////////////
 		// Check if we can write at root //

@@ -365,6 +365,10 @@ function clean_json_version( $data ) {
  * @return  string  a user information
  */
 function get_server_user() {
-	return exec( 'whoami' );
+	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+		return '';
+	} else {
+		return @exec( 'whoami' );
+	}
 }
 

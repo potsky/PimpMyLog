@@ -57,13 +57,6 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 	min-width: 100px;
 }
 
-
-
-
-
-
-
-
 .pml-UA {
   font-size: 0.8em;
 }
@@ -81,8 +74,6 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 .pml-User {
 	font-size: 0.8em;
 }
-
-
 
 /* New log color on the row */
 .newlog td:first-child {
