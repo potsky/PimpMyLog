@@ -18,10 +18,13 @@ init();
 	<meta name="viewport" content="width=device-width">
 	<title><?php echo TITLE;?></title>
 	<?php include_once 'inc/favicon.inc.php'; ?>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/main.css">
-	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<?php
+?>
+<?php
+?>
+	<link rel="stylesheet" href="css/pml.min.css">
+<?php
+?>
 </head>
 <body>
 	<!--[if lt IE 7]>
@@ -45,8 +48,12 @@ init();
 		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
 	</div>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-	<script src="js/vendor/bootstrap.min.js"></script>
+<?php
+?>
+<?php
+?>
+	<script src="js/pml.min.js"></script>
+<?php
+?>
 </body>
 </html>

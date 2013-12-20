@@ -300,10 +300,13 @@ $lemma = array(
 	<title></title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="../css/main.css">
-	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<?php
+?>
+<?php
+?>
+	<link rel="stylesheet" href="../css/pml.min.css">
+<?php
+?>
 	<script>
 		var lemma = <?php echo json_encode($lemma);?>;
 	</script>
@@ -361,9 +364,13 @@ $lemma = array(
 		<hr>
 		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
 	</div>
-
-	<script src="../js/vendor/jquery-1.10.1.min.js"></script>
-	<script src="../js/vendor/bootstrap.min.js"></script>
-	<script src="../js/configure.js"></script>
+<?php
+?>
+<?php
+?>
+	<script src="../js/pml.min.js"></script>
+	<script src="../js/configure.min.js"></script>
+<?php
+?>
 </body>
 </html>

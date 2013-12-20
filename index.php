@@ -117,7 +117,7 @@ foreach ( get_max_options() as $r ) {
 }
 ?></select></div><button style="display:none" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>"><span class="glyphicon glyphicon-bell"></span></button></form></div></div></div><?php if ( PULL_TO_REFRESH === true ) { ?><div id="hook" class="hook"><div id="loader" class="hook-loader"><div class="hook-spinner"></div></div><span id="hook-text"></span></div><?php } ?><div class="container"><div id="error" style="display:none"><br><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div><div id="result"><br><div id="upgrademessage"></div><div id="singlenotice"></div><div id="notice"></div><div id="nolog" style="display:none" class="alert alert-info fade in"></div><div class="table-responsive"><table id="logs" class="table table-striped table-bordered table-hover table-condensed logs"><thead id="logshead"></thead><tbody id="logsbody"></tbody></table></div><small id="footer"></small></div><hr><footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer></div><?php
 ?><?php
-?><script src="js/pml.min.js"></script><?php
+?><script src="js/pml.min.js"></script><script src="js/main.min.js"></script><?php
 if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?><script>var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];
 		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 			g.src='//www.google-analytics.com/ga.js';
