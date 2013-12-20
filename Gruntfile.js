@@ -346,7 +346,14 @@ module.exports = function(grunt) {
 			grunt.fail.warn('Unable to continue');
 		}
 		else if ( grunt.file.exists( ghpages + '/.git/config' ) === false ) {
+			grunt.log.writeln('Cloning and installing in ' + ghpages );
 			grunt.task.run(['shell:ghpagesgitclone' , 'shell:jekylladdcommitpush']);
+			grunt.task.run([
+				'shell:ghpagesgitremove',
+				'copy:install',
+				'copy:installREADME',
+				'shell:ghpagesgitaddcommitpush'
+			]);
 		}
 		else {
 			grunt.log.writeln('Installing in ' + ghpages );
