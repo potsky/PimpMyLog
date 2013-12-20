@@ -1,74 +1,84 @@
+/*
+This stylesheet is located at /css/config.inc.css
+Your stylesheet will be loaded instead of this one if you create a file located at /config.inc.css
+ */
+
+
+/* For logs table header */
 .logs th {
 	text-align: center;
 }
 
-.logs td.Date {
+/* For all logs table cells */
+.logs td {
+	font-size: 0.8em;
+}
+
+/* Specific to cell types */
+.pml-pre,
+.pml-txt,
+.pml-link {
+	font-size: 0.8em;
+	white-space: pre-wrap;
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+}
+
+.pml-pre {
+	font-family: monospace, serif;
+}
+
+.pml-numeral {
+	font-size: 0.8em;
+	text-align: right;
+	white-space:nowrap;
+}
+
+
+.pml-badge {
+	font-size: 0.9em;
+	text-align: center;
+}
+
+/* Specific to column */
+.pml-Severity {
+	font-size: 1em;
+}
+
+.pml-Code {
+	text-align: center;
+}
+
+.pml-Referer {
+	min-width: 100px;
+}
+
+.pml-UA {
   font-size: 0.8em;
 }
 
-.logs td.Date .day {
-  display:none;
+.pml-URL {
+	font-size: 0.8em;
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
 }
 
-.logs td.Date .time {
+.pml-User {
+	font-size: 0.8em;
 }
 
-.logs td.IP {
-  font-size: 0.8em;
-}
-
-.logs td.Log {
-  font-family: monospace, serif;
-  font-size: 0.8em;
-  white-space: pre-wrap;
-  -ms-word-break: break-all;
-  word-break: break-all;
-  word-break: break-word;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  hyphens: auto;
-}
-
-.logs td.Severity {
-  font-size: 0.8em;
-}
-
-.logs td.Referer {
-  font-size: 0.8em;
-  -ms-word-break: break-all;
-  word-break: break-all;
-  word-break: break-word;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  hyphens: auto;
-}
-
-.logs td.CMD {
-  font-size: 0.8em;
-}
-
-.logs td.Code {
-  font-size: 0.9em;
-}
-
-.logs td.Size {
-  font-size: 0.8em;
-}
-
-.logs td.UA {
-  font-size: 0.8em;
-}
-
-.logs td.URL {
-  font-size: 0.8em;
-  -ms-word-break: break-all;
-  word-break: break-all;
-  word-break: break-word;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  hyphens: auto;
-}
-
-.logs td.User {
-  font-size: 0.8em;
+/* New log color on the row */
+.newlog td:first-child {
+	background-position: 0 0;
+	background-image:url(../img/1x1pink_low.gif);
+	background-size: 1px 100%;
+	background-repeat: no-repeat;
 }
