@@ -6,7 +6,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-		<a href="/"><div class="logo"></div></a>
+			<a href="/"><div class="logo"></div></a>
 		</div>
 		<div class="navbar-collapse collapse navbar-right">
 			<ul class="nav navbar-nav">
@@ -33,6 +33,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ menu }} <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li{% if crt_page == 'index.html' and crt_menu == pagemenu[1] %} class="active"{% endif %}><a href="/{{ pagemenu[1] }}/">Introduction</a></li>
+				        <li class="divider"></li>
 								{% assign group = true %}
 							{% endif %}
 				<li{% if crt_page == pagename and crt_menu == pagemenu[1] %} class="active"{% endif %}><a href="{{ p.url }}">{{ pagename | capitalize | replace:'-',' ' | replace:'.html','' }}</a></li>
@@ -51,6 +52,6 @@
 
 			<li><a href="http://support.pimpmylog.com">Support</a></li>
 			</ul>
-		</div><!--/.navbar-collapse -->
+		</div>
 	</div>
 </div>

@@ -11,10 +11,16 @@
 	</head>
 
 	<body>
-	<!--[if lt IE 7]>
-	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+	<!--[if lt IE 9]>
+	<br/>
+	<div class="alert alert-danger"><h4>
+	<p class="chromeframe text-center">You are using an <strong>outdated</strong> browser.<br/>Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to view this site.</p>
+	</h4></div>
 	<![endif]-->
+	<!--[if gte IE 9 | !IE ]><!-->
 	{% include menu.html %}
+	<!--
+	<![endif]-->
 
 	<div class="jumbotron">
 		<div class="container">
@@ -47,7 +53,7 @@
 				{{content}}
 			</div>
 
-			<center><img src="/assets/madeinfrance.png" class="img-responsive" style="width:128px;"/>avec beaucoup d'amour</center>
+			<center><img src="/assets/madeinfrance.png" class="img-responsive" style="width:128px;"/></center>
 			<hr/>
 			<footer>
 				{% include footer.html %}

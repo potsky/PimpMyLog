@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: Documentation
 ---
 
-Coming soon !!!
+TODO: Introduce what is in this chapter, what user can do, etc...

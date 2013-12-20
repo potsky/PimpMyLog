@@ -8,7 +8,7 @@ author           :
     twitter : potskymac
     link    : http://www.potsky.com
 
-menus             : [ 'Getting Started' , 'Documentation' , 'API' , 'Blog' ]
+menus             : [ 'Getting Started' , 'Documentation' , 'Developer' , 'Blog' ]
 rss_path          : /rss.xml
 atom_path         : /atom.xml
 url_github        : https://github.com/potsky/PimpMyLog

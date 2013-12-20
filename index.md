@@ -20,12 +20,11 @@ Please read our support page at [support.pimpmylog.com](http://support.pimpmylog
 
 *Pimp my Log* is open sourced and ready to grow.
 
-Do you want to contribute to add some amazing features, new supported web servers, ...?
+Do you want to contribute to add some amazing features and especially add new software logs (*nginx*, *Ruby on Rails*, *tomcat*, *IIS*, *sshd*, ...) ?
 
-- Get the code on [GitHub](https://github.com/potsky/PimpMyLog)
-- Read the [API](/api)
-- Post questions on [support.pimpmylog.com](http://support.pimpmylog.com)
-- Send pull requests
+**We need you** !
+
+Read how to contribute easily [here](http://localhost:4000/developer/contribute.html).
 
 ---
 
