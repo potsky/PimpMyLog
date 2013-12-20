@@ -13,8 +13,11 @@ Thumbs.db
 /config.inc.css
 /config.inc.php
 /config.inc.php.tmp
+/config.json
+/config.json.tmp
 /cfg/software.user.inc.php
 /inc/test.REMOVE_UPPERCASE.php
+
 
 # Branch jekyll
 /_site
