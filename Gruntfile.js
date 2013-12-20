@@ -224,7 +224,7 @@ module.exports = function(grunt) {
 
 		shell: {
 			mastergitclone: {
-				command: 'cd "' + maste_path + '" && git clone git@github.com:potsky/PimpMyLog.git -b master "' + maste_name + '"',
+				command: 'cd "' + maste_path + '" && git clone git@github.com:potsky/PimpMyLog.git "' + maste_name + '"',
 				options: {
 					stdout: true
 				}
@@ -292,8 +292,9 @@ module.exports = function(grunt) {
 		}
 		else if ( grunt.file.exists( master + '/.git/config' ) === false ) {
 			grunt.log.writeln('Cloning and installing in ' + master );
-			grunt.task.run(['shell:mastergitclone' , 'shell:devaddcommitpush']);
+			grunt.task.run(['shell:mastergitclone']);
 			grunt.task.run([
+				'shell:devaddcommitpush',
 				'shell:mastergitremove',
 				'copy:install',
 				'copy:installREADME',
