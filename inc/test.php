@@ -70,10 +70,20 @@ if ( isset( $_POST['s'] ) ) {
 	<meta name="viewport" content="width=device-width">
 	<title><?php echo TITLE;?></title>
 	<?php include_once 'favicon.inc.php'; ?>
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="../css/main.css">
-	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<?php
+// @if prod=='dev'
+?>
+	<link rel="stylesheet" href="../css/pml.css">
+<?php
+// @endif
+?>
+<?php
+// @if prod=='prod'
+?>
+	<link rel="stylesheet" href="../css/pml.min.css">
+<?php
+// @endif
+?>
 </head>
 <body>
 	<!--[if lt IE 7]>
@@ -375,8 +385,23 @@ echo test( $type , $regex , $match , $types , $log );
 		<hr>
 		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
 	</div>
+<?php
+// @if prod=='dev'
+?>
+	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script src="../js/vendor/jquery-1.10.1.min.js"></script>
 	<script src="../js/vendor/bootstrap.min.js"></script>
 	<script src="../js/test.js"></script>
+<?php
+// @endif
+?>
+<?php
+// @if prod=='prod'
+?>
+	<script src="../js/pml.min.js"></script>
+	<script src="../js/test.min.js"></script>
+<?php
+// @endif
+?>
 </body>
 </html>

@@ -245,14 +245,13 @@ foreach ( get_max_options() as $r ) {
     <script src="js/vendor/Hook-js/mousewheel.js"></script>
     <script src="js/vendor/Hook-js/hook.min.js"></script>
     <script src="js/vendor/Numeral-js/min/numeral.min.js"></script>
-	<script src="js/main.js"></script>
 <?php if ( file_exists( "js/vendor/Numeral-js/min/languages/$lang.min.js" ) ) { ?>
     <script src="js/vendor/Numeral-js/min/languages/<?php echo $lang;?>.min.js"></script>
 	<script>
 	numeral.language('<?php echo $lang;?>');
 	</script>
 <?php } ?>
-
+	<script src="js/main.js"></script>
 <?php
 // @endif
 ?>
@@ -261,6 +260,7 @@ foreach ( get_max_options() as $r ) {
 // @if prod=='prod'
 ?>
 	<script src="js/pml.min.js"></script>
+	<script src="js/main.min.js"></script>
 <?php
 if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
 	<script>

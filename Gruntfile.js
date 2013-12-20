@@ -38,8 +38,7 @@ module.exports = function(grunt) {
 					'js/vendor/ua-parser.min.js',
 					'js/vendor/Hook-js/mousewheel.js',
 					'js/vendor/Hook-js/hook.min.js',
-					'js/vendor/Numeral-js/min/numeral.min.js',
-					'js/main.js',
+					'js/vendor/Numeral-js/min/numeral.min.js'
 				],
 				dest: '_tmp/pml.js',
 				options: {
@@ -257,7 +256,10 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'_build/js/pml.min.js': ['<%= concat.js.dest %>']
+					'_build/js/pml.min.js': ['<%= concat.js.dest %>'],
+					'_build/js/main.min.js': ['js/main.js'],
+					'_build/js/test.min.js': ['js/test.js'],
+					'_build/js/configure.min.js': ['js/configure.js'],
 				}
 			}
 		},
