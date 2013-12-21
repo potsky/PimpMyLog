@@ -69,7 +69,6 @@ module.exports = function(grunt) {
 					expand: true,
 					src: [
 						'cfg/**',
-						'css/**',
 						'fonts/**',
 						'img/**',
 						'inc/**',
@@ -87,14 +86,14 @@ module.exports = function(grunt) {
 					expand: true,
 					flatten: true,
 					filter: 'isFile',
-					src: [ '_tmp/pml.css' , 'css/config.inc.css' ],
+					src: [ '_tmp/main.css' , 'css/config.inc.css' ],
 					dest: '_site/css/'
 				}]
 			},
 			devphp: {
 				files: [{
 					expand: true,
-					src: [ '*.php' , 'inc/*.php' ],
+					src: [ 'version.json' , '*.php' , 'inc/*', 'cfg/*' ],
 					dest: '_site/'
 				}]
 			},
@@ -134,7 +133,7 @@ module.exports = function(grunt) {
 						'inc/**',
 						'lang/**',
 						'version.json',
-						'config.json',
+						'config.user.json',
 						'version.txt',
 						'*.php'
 					],
@@ -275,7 +274,7 @@ module.exports = function(grunt) {
 				tasks: [ 'less' , 'copy:devcss' ]
 			},
 			html: {
-				files: [ '*.php' , 'inc/*.php' ],
+				files: [ 'version.json' , '*.php' , 'inc/*', 'cfg/*' ],
 				tasks: [ 'copy:devphp' , 'preprocess:dev' ]
 			},
 			js: {
@@ -314,7 +313,6 @@ module.exports = function(grunt) {
 			]);
 		}
 	});
-
 
 	// Development task, build and watch for file modification
 	grunt.registerTask( 'dev' , function() {

@@ -1,6 +1,6 @@
 <?php
 include_once 'global.inc.php';
-config_load( '../config.json' );
+config_load( '../config.user.json' );
 init();
 
 header('Content-type: application/json');

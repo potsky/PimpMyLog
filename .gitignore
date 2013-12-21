@@ -9,15 +9,16 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
-# Branch master
-/config.inc.css
+# Branch master old
 /config.inc.php
 /config.inc.php.tmp
-/config.json
-/config.json.tmp
-/cfg/software.user.inc.php
-/inc/test.REMOVE_UPPERCASE.php
 
+# Branch master
+/inc/test.REMOVE_UPPERCASE.php
+*.user.php
+*.user.css
+*.user.json
+*.user.json.tmp
 
 # Branch jekyll
 /_site

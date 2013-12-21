@@ -21,7 +21,7 @@ init();
 <?php
 // @if prod=='dev'
 ?>
-	<link rel="stylesheet" href="css/pml.css">
+	<link rel="stylesheet" href="css/main.css">
 <?php
 // @endif
 ?>

@@ -116,7 +116,7 @@ var pml_action = function ( object , done , options ) {
 
 
 /**
- * Create config.json with right values !
+ * Create config.user.json with right values !
  *
  * @param   {array}  logs_list  the array of file to configure
  *
@@ -165,7 +165,7 @@ var action_select_logs = function( options ) {
 		return;
 	}
 
-	var crt_software = softlist.pop();
+	var crt_software = softlist.shift();
 
 	pml_action( { s : 'find' , so : crt_software } , function( data ) {
 
@@ -214,15 +214,16 @@ var action_select_logs = function( options ) {
 		}
 
 		$( '#find tbody tr').click( function() {
-			var cb = $( this ).find( 'input[type="checkbox"]' );
-			if ( $(cb) ) {
-				var state = $( cb ).prop('checked');
-				$( cb ).prop( 'checked' , state );
-				if ( state ) {
-					$(this).addClass( 'success' );
-				} else {
-					$(this).removeClass( 'success' );
-				}
+			$( this ).find( 'input[type="checkbox"]' ).click();
+		});
+
+		$( '#find tbody tr input[type="checkbox"]').click( function( event ) {
+			event.stopPropagation();
+			var state = $( this ).prop('checked');
+			if ( state ) {
+				$( this ).parents('tr').addClass( 'success' );
+			} else {
+				$( this ).parents('tr').removeClass( 'success' );
 			}
 		});
 
@@ -305,7 +306,7 @@ var action_select_logs = function( options ) {
 $(function() {
 
 	////////////////////////////////////////
-	// Check if config.json already exist //
+	// Check if config.user.json already exist //
 	////////////////////////////////////////
 	progressbar_set(10);
 	pml_action( { s : 'exist' } , function() {
@@ -358,14 +359,16 @@ $(function() {
 							}
 
 							$( '#soft tbody tr').click( function() {
-								var cb = $( this ).find( 'input[type="checkbox"]' );
-								if ( $( cb ) ) {
-									var state = $( cb ).prop('checked');
-									if ( state ) {
-										$(this).addClass( 'success' );
-									} else {
-										$(this).removeClass( 'success' );
-									}
+								$( this ).find( 'input[type="checkbox"]' ).click();
+							});
+
+							$( '#soft tbody tr input[type="checkbox"]').click( function( event ) {
+								event.stopPropagation();
+								var state = $( this ).prop('checked');
+								if ( state ) {
+									$( this ).parents('tr').addClass( 'success' );
+								} else {
+									$( this ).parents('tr').removeClass( 'success' );
 								}
 							});
 

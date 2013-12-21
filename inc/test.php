@@ -73,7 +73,7 @@ if ( isset( $_POST['s'] ) ) {
 <?php
 // @if prod=='dev'
 ?>
-	<link rel="stylesheet" href="../css/pml.css">
+	<link rel="stylesheet" href="../css/main.css">
 <?php
 // @endif
 ?>
@@ -281,13 +281,13 @@ echo test( $type , $regex , $match , $types , $log );
 								<div class="panel-heading">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">
-											Code <code>config.json</code>
+											Code <code>config.user.json</code>
 										</a>
 									</h4>
 								</div>
 								<div id="collapseOne2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php show_source('../config.json'); ?></pre>
+										<pre><?php show_source('../config.user.json'); ?></pre>
 									</div>
 								</div>
 							</div>
@@ -295,13 +295,13 @@ echo test( $type , $regex , $match , $types , $log );
 								<div class="panel-heading">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">
-											Stat <code>config.json</code>
+											Stat <code>config.user.json</code>
 										</a>
 									</h4>
 								</div>
 								<div id="collapseTwo2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php var_export( stat('../config.json') ); ?></pre>
+										<pre><?php var_export( stat('../config.user.json') ); ?></pre>
 									</div>
 								</div>
 							</div>
@@ -323,9 +323,9 @@ echo test( $type , $regex , $match , $types , $log );
 										}
 										?></pre>
 										<?php
-											config_load( '../config.json' );
+											config_load( '../config.user.json' );
 											$paths = array(
-												'config' => '../config.json',
+												'config' => '../config.user.json',
 											);
 											if ( is_array( @$files ) ) {
 												foreach ( $files as $fileid => $file ) {

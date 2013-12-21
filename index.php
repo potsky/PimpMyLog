@@ -18,13 +18,13 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 /////////////////////////
 // Check if configured //
 /////////////////////////
-if ( ! file_exists( 'config.json' ) ) {
+if ( ! file_exists( 'config.user.json' ) ) {
 	$title    = __( 'Welcome!' );
 	$message  = '<br/>';
 	$message .= __( 'Pimp my Log is not configured.');
 	$message .= '<br/><br/>';
 	$message .= '<span class="glyphicon glyphicon-cog"></span> ';
-	$message .= __( 'You can manually copy <code>cfg/config.json</code> to <code>config.json</code> in the root directory and change parameters. Then refresh this page.' );
+	$message .= __( 'You can manually copy <code>cfg/config.example.json</code> to <code>config.user.json</code> in the root directory and change parameters. Then refresh this page.' );
 	$message .= '<br/><br/>';
 	$message .= '<span class="glyphicon glyphicon-heart-empty"></span> ';
 	$message .= __( 'Or let me try to configure it for you!' );
@@ -50,13 +50,13 @@ $errors = config_check();
 if ( is_array( $errors ) ) {
 	$title    = __( 'Oups!' );
 	$message  = '<br/>';
-	$message .= __( '<code>config.json</code> configuration file is buggy :' ) . '<ul>';
+	$message .= __( '<code>config.user.json</code> configuration file is buggy :' ) . '<ul>';
 	foreach ( $errors as $error ) {
 		$message .= '<li>' . $error . '</li>';
 	}
 	$message .= '</ul>';
 	$message .= '<br/>';
-	$message .= __( 'If you want me to build the configuration for you, please remove file <code>config.json</code> at root and click below.' );
+	$message .= __( 'If you want me to build the configuration for you, please remove file <code>config.user.json</code> at root and click below.' );
 	$message .= '<br/><br/>';
 	$link_url = 'inc/configure.php';
 	$link_msg = __('Configure now');
@@ -101,12 +101,7 @@ $csrf = csrf_get();
 <?php
 // @if prod=='dev'
 ?>
-	<link rel="stylesheet" href="css/pml.css">
-	<?php if ( file_exists( 'config.inc.css' ) ) { ?>
-	<link rel="stylesheet" href="config.inc.css">
-	<?php } else { ?>
-	<link rel="stylesheet" href="css/config.inc.css">
-	<?php } ?>
+	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="js/vendor/Hook-js/hook.css">
 <?php
 // @endif
@@ -116,14 +111,14 @@ $csrf = csrf_get();
 // @if prod=='prod'
 ?>
 	<link rel="stylesheet" href="css/pml.min.css">
-	<?php if ( file_exists( 'config.inc.css' ) ) { ?>
-	<link rel="stylesheet" href="config.inc.css">
-	<?php } else { ?>
-	<link rel="stylesheet" href="css/config.inc.css">
-	<?php } ?>
 <?php
 // @endif
 ?>
+	<?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?>
+	<link rel="stylesheet" href="css/config.inc.user.css">
+	<?php } else { ?>
+	<link rel="stylesheet" href="css/config.inc.css">
+	<?php } ?>
 	<script>
 		var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
 			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
@@ -170,11 +165,11 @@ foreach ( $files as $file_id=>$file ) {
 						</ul>
 					</li>
 				</ul>
-				<form class="navbar-form navbar-right navbar-input-group">
+				<form class="navbar-form navbar-right">
 
 					<div class="form-group" id="searchctn">
 						<input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>">
-					</div>
+					</div>&nbsp;
 
 					<div class="form-group">
 						<select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>">
@@ -185,7 +180,7 @@ foreach ( get_refresh_options() as $r ) {
 }
 ?>
 						</select>
-					</div>
+					</div>&nbsp;
 
 					<div class="form-group">
 						<select id="max" class="form-control input-sm" title="<?php _e( 'Max count of logs to display' );?>">
@@ -195,7 +190,7 @@ foreach ( get_max_options() as $r ) {
 }
 ?>
 						</select>
-					</div>
+					</div>&nbsp;
 
 					<button style="display:none;" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>">
 					  <span class="glyphicon glyphicon-bell"></span>

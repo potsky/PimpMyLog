@@ -128,7 +128,7 @@ function init() {
 /**
  * Load config file
  */
-function config_load( $path = 'config.json' ) {
+function config_load( $path = 'config.user.json' ) {
 	global $files, $badges;
 	$files  = array();
 	$badges = array();
