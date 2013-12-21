@@ -8,8 +8,8 @@ init();
 /////////////////////////////////
 include_once '../cfg/softwares.inc.php';
 
-define( 'CONFIG_FILE_TEMP' , '../config.json.tmp' );
-define( 'CONFIG_FILE'      , '../config.json' );
+define( 'CONFIG_FILE_TEMP' , '../config.user.json.tmp' );
+define( 'CONFIG_FILE'      , '../config.user.json' );
 define( 'CONFIG_FILE_MODE' , 0444 );
 
 
@@ -58,7 +58,7 @@ if ( isset( $_POST['s'] ) ) {
 			 * Return a list of software that the user could install
 			 */
 			case 'soft' :
-				$return[ 'notice' ] = '<h2>' . __( 'Choose softwares to search for') . '</h2>';
+				$return[ 'notice' ] = '<h2>' . __( 'Choose softwares to search log files for') . '</h2>';
 				$return[ 'notice' ].= '<div class="table-responsive"><table id="soft"></table></div>';
 				$return[ 'next' ]   = true;
 				$return[ 'sofn' ]   = count( $softwares_all );
@@ -75,13 +75,20 @@ if ( isset( $_POST['s'] ) ) {
 				$tried              = array();
 				$found              = 0;
 				$software_paths     = '../cfg/' . $software . '.paths.php';
+				$software_pathsuser = '../cfg/' . $software . '.paths.user.php';
 				$return[ 'notice' ] = '<h2>' . sprintf( __( 'Software <em>%s</em>') , $softwares_all[ $software ]['name'] ) . '</h2>';
 
-				if ( ! file_exists( $software_paths ) ) {
-					throw new Exception( sprintf( __( 'File <code>%s</code> does not exist. Please review your software configuration.') , $software_paths ) ) ;
+				if ( file_exists( $software_pathsuser ) ) {
+					include $software_pathsuser;
+					$software_paths = $software_pathsuser;
+				}
+				else if ( file_exists( $software_paths ) ) {
+					include $software_paths;
+				}
+				else {
+					throw new Exception( sprintf( __( 'Files <code>%s</code> or <code>%s</code> do not exist. Please review your software configuration.') , $software_paths , $software_pathsuser ) ) ;
 				}
 
-				include_once $software_paths;
 				$softuser[ $software ] = array();
 				foreach ( $paths as $path ) {
 					$tried[ $software ][ $path ] = false;
@@ -219,20 +226,26 @@ if ( isset( $_POST['s'] ) ) {
 					$get_config = $software . '_get_config';
 					$counter    = $counter + 1;
 					$config     = '../cfg/' . $software . '.config.php';
+					$configuser = '../cfg/' . $software . '.config.user.php';
 
-					if ( ! file_exists( $config ) ) {
-						@unlink( CONFIG_FILE_TEMP );
-						throw new Exception( sprintf( __( 'File <code>%s</code> does not exist. Please review your software configuration.') , $config ) ) ;
+					if ( file_exists( $configuser ) ) {
+						include $configuser;
+						$config = $configuser;
 					}
-
-					include_once $config;
+					else if ( file_exists( $config ) ) {
+						include $config;
+					}
+					else {
+						@unlink( CONFIG_FILE_TEMP );
+						throw new Exception( sprintf( __( 'Files <code>%s</code> or <code>%s</code> do not exist. Please review your software configuration.') , $config , $configuser ) ) ;
+					}
 
 					if ( function_exists( $get_config ) ) {
 						$config_files[] = call_user_func( $get_config , $type , $file , $software , $counter );
 					}
 					else {
 						@unlink( CONFIG_FILE_TEMP );
-						throw new Exception( sprintf( __( 'File <code>%s</code> does not define function %s. Please review your software configuration.') , $config , $get_config ) ) ;
+						throw new Exception( sprintf( __( 'File <code>%s</code> does not define function <code>%s</code>. Please review your software configuration.') , $config , $get_config ) ) ;
 					}
 				}
 

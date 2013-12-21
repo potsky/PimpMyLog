@@ -1,6 +1,6 @@
 <?php
 include_once 'global.inc.php';
-config_load( '../config.json' );
+config_load( '../config.user.json' );
 init();
 
 
@@ -83,7 +83,7 @@ if 	( ! csrf_verify() ) {
 }
 
 if ( ! isset( $files[$file_id] ) ) {
-	$logs['error'] = sprintf( __( 'File IeD <code>%s</code> does not exist, please review your configuration file and stop playing!' ) , $file_id );
+	$logs['error'] = sprintf( __( 'File ID <code>%s</code> does not exist, please review your configuration file and stop playing!' ) , $file_id );
 	echo json_encode( $logs );
 	die();
 }

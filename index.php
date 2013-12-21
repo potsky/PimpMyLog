@@ -18,13 +18,13 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 /////////////////////////
 // Check if configured //
 /////////////////////////
-if ( ! file_exists( 'config.json' ) ) {
+if ( ! file_exists( 'config.user.json' ) ) {
 	$title    = __( 'Welcome!' );
 	$message  = '<br/>';
 	$message .= __( 'Pimp my Log is not configured.');
 	$message .= '<br/><br/>';
 	$message .= '<span class="glyphicon glyphicon-cog"></span> ';
-	$message .= __( 'You can manually copy <code>cfg/config.json</code> to <code>config.json</code> in the root directory and change parameters. Then refresh this page.' );
+	$message .= __( 'You can manually copy <code>cfg/config.example.json</code> to <code>config.user.json</code> in the root directory and change parameters. Then refresh this page.' );
 	$message .= '<br/><br/>';
 	$message .= '<span class="glyphicon glyphicon-heart-empty"></span> ';
 	$message .= __( 'Or let me try to configure it for you!' );
@@ -50,13 +50,13 @@ $errors = config_check();
 if ( is_array( $errors ) ) {
 	$title    = __( 'Oups!' );
 	$message  = '<br/>';
-	$message .= __( '<code>config.json</code> configuration file is buggy :' ) . '<ul>';
+	$message .= __( '<code>config.user.json</code> configuration file is buggy :' ) . '<ul>';
 	foreach ( $errors as $error ) {
 		$message .= '<li>' . $error . '</li>';
 	}
 	$message .= '</ul>';
 	$message .= '<br/>';
-	$message .= __( 'If you want me to build the configuration for you, please remove file <code>config.json</code> at root and click below.' );
+	$message .= __( 'If you want me to build the configuration for you, please remove file <code>config.user.json</code> at root and click below.' );
 	$message .= '<br/><br/>';
 	$link_url = 'inc/configure.php';
 	$link_msg = __('Configure now');
@@ -92,8 +92,8 @@ $csrf = csrf_get();
 
 ?><!DOCTYPE html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><title><?php echo TITLE;?></title><?php include_once 'inc/favicon.inc.php'; ?><?php
 ?><?php
-?><link rel="stylesheet" href="css/pml.min.css"><?php if ( file_exists( 'config.inc.css' ) ) { ?><link rel="stylesheet" href="config.inc.css"><?php } else { ?><link rel="stylesheet" href="css/config.inc.css"><?php } ?><?php
-?><script>var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
+?><link rel="stylesheet" href="css/pml.min.css"><?php
+?><?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?><link rel="stylesheet" href="css/config.inc.user.css"><?php } else { ?><link rel="stylesheet" href="css/config.inc.css"><?php } ?><script>var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
 			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
 			files                      = <?php echo json_encode($files);?>,
 			notification_title         = "<?php echo NOTIFICATION_TITLE;?>",
@@ -107,15 +107,15 @@ $csrf = csrf_get();
 foreach ( $files as $file_id=>$file ) {
 	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
 }
-?></ul></li></ul><form class="navbar-form navbar-right navbar-input-group"><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>"></div><div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No auto refresh' );?></option><?php
+?></ul></li></ul><form class="navbar-form navbar-right"><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No auto refresh' );?></option><?php
 foreach ( get_refresh_options() as $r ) {
 	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh every %ss' ) , $r ) . '</option>';
 }
-?></select></div><div class="form-group"><select id="max" class="form-control input-sm" title="<?php _e( 'Max count of logs to display' );?>"><?php
+?></select></div>&nbsp;<div class="form-group"><select id="max" class="form-control input-sm" title="<?php _e( 'Max count of logs to display' );?>"><?php
 foreach ( get_max_options() as $r ) {
 	echo '<option value="' . $r . '">' . sprintf( ( (int)$r>1 ) ? __( '%s logs' ) : __( '%s log' ) , $r ) . '</option>';
 }
-?></select></div><button style="display:none" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>"><span class="glyphicon glyphicon-bell"></span></button></form></div></div></div><?php if ( PULL_TO_REFRESH === true ) { ?><div id="hook" class="hook"><div id="loader" class="hook-loader"><div class="hook-spinner"></div></div><span id="hook-text"></span></div><?php } ?><div class="container"><div id="error" style="display:none"><br><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div><div id="result"><br><div id="upgrademessage"></div><div id="singlenotice"></div><div id="notice"></div><div id="nolog" style="display:none" class="alert alert-info fade in"></div><div class="table-responsive"><table id="logs" class="table table-striped table-bordered table-hover table-condensed logs"><thead id="logshead"></thead><tbody id="logsbody"></tbody></table></div><small id="footer"></small></div><hr><footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer></div><?php
+?></select></div>&nbsp;<button style="display:none" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>"><span class="glyphicon glyphicon-bell"></span></button></form></div></div></div><?php if ( PULL_TO_REFRESH === true ) { ?><div id="hook" class="hook"><div id="loader" class="hook-loader"><div class="hook-spinner"></div></div><span id="hook-text"></span></div><?php } ?><div class="container"><div id="error" style="display:none"><br><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div><div id="result"><br><div id="upgrademessage"></div><div id="singlenotice"></div><div id="notice"></div><div id="nolog" style="display:none" class="alert alert-info fade in"></div><div class="table-responsive"><table id="logs" class="table table-striped table-bordered table-hover table-condensed logs"><thead id="logshead"></thead><tbody id="logsbody"></tbody></table></div><small id="footer"></small></div><hr><footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer></div><?php
 ?><?php
 ?><script src="js/pml.min.js"></script><script src="js/main.min.js"></script><?php
 if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?><script>var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];
