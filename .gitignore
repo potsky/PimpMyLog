@@ -25,7 +25,6 @@ Thumbs.db
 /_build
 /_tmp
 /dist
-/fonts
 
 # Compiled Python files
 *.pyc
