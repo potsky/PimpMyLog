@@ -229,11 +229,11 @@ if ( isset( $_POST['s'] ) ) {
 					$configuser = '../cfg/' . $software . '.config.user.php';
 
 					if ( file_exists( $configuser ) ) {
-						include $configuser;
+						include_once $configuser;
 						$config = $configuser;
 					}
 					else if ( file_exists( $config ) ) {
-						include $config;
+						include_once $config;
 					}
 					else {
 						@unlink( CONFIG_FILE_TEMP );
