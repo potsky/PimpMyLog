@@ -249,13 +249,13 @@ module.exports = function(grunt) {
 				}
 			},
 			ghpagesgitaddcommitpush : {
-				command: 'a=$(git rev-parse --short HEAD); cd "' + ghpages + '" && git add -A . && git commit -m "grunt install from branch jekyll commit $a" && git push origin gh-pages',
+				command: 'a=$(git rev-parse --short HEAD); cd "' + ghpages + '"; git add -A . 2>&1; git commit -m "grunt install from branch jekyll commit $a" 2>&1; git pull origin gh-pages 2>&1; git push origin gh-pages 2>&1',
 				options: {
 					stdout: true
 				}
 			},
 			jekylladdcommitpush : {
-				command: 'git add -A . && git commit --author=\'potskymini 4 Potsky <potsky@me.com>\' -m "pages content" && git pull origin jekyll && git push origin jekyll',
+				command: 'git add -A . 2>&1; git commit --author=\'potskymini 4 Potsky <potsky@me.com>\' -m "pages content" 2>&1; git pull origin jekyll 2>&1; git push origin jekyll 2>&1',
 				options: {
 					stdout: true
 				}
