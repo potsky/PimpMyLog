@@ -234,7 +234,7 @@ module.exports = function(grunt) {
 				}
 			},
 			mastergitaddcommitpush : {
-				command: 'a=$(git rev-parse --short HEAD); cd "' + master + '"; git add -A . 2>&1; git commit -m "grunt install from branch dev commit $a" 2>&1; git pull origin master 2>&1; git push origin master 2>&1',
+				command: 'a=$(git rev-parse --short HEAD); cd "' + master + '"; rm -f config.user.json; git add -A . 2>&1; git commit -m "grunt install from branch dev commit $a" 2>&1; git pull origin master 2>&1; git push origin master 2>&1',
 				options: {
 					stdout: true
 				}
