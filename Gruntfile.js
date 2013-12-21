@@ -235,13 +235,13 @@ module.exports = function(grunt) {
 				}
 			},
 			mastergitaddcommitpush : {
-				command: 'a=$(git rev-parse --short HEAD); echo $a; cd "' + master + '" && git add -A . && git commit -m "grunt install from branch dev commit $a" 2&>1 && git push origin master 2&>1 ',
+				command: 'a=$(git rev-parse --short HEAD); cd "' + master + '"; git add -A . 2>&1; git commit -m "grunt install from branch dev commit $a" 2>&1; git pull origin master 2>&1; git push origin master 2>&1',
 				options: {
 					stdout: true
 				}
 			},
 			devaddcommitpush : {
-				command: 'git add -A . && git commit --author=\'Potsky <potsky@me.com>\' -m "prepare to publish on master" && git pull origin dev && git push origin dev',
+				command: 'git add -A . 2>&1; git commit --author=\'Potsky <potsky@me.com>\' -m "prepare to publish on master" 2>&1; git pull origin dev 2>&1; git push origin dev 2>&1',
 				options: {
 					stdout: true
 				}
