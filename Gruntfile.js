@@ -235,13 +235,13 @@ module.exports = function(grunt) {
 				}
 			},
 			mastergitaddcommitpush : {
-				command: 'a=$(git rev-parse --short HEAD); cd "' + master + '" && git add -A . && git commit -m "grunt install from branch dev commit $a" && git push origin master',
+				command: 'a=$(git rev-parse --short HEAD); cd "' + master + '" && git add -A . && git commit -m "grunt install from branch dev commit $a" 2&>1 && git push origin master 2&>1 ',
 				options: {
 					stdout: true
 				}
 			},
 			devaddcommitpush : {
-				command: 'git add -A . && git commit --author=\'Potsky <potsky@me.com>\' -m "prepare to publsh on master" && git pull origin dev && git push origin dev',
+				command: 'git add -A . && git commit --author=\'Potsky <potsky@me.com>\' -m "prepare to publish on master" && git pull origin dev && git push origin dev',
 				options: {
 					stdout: true
 				}
@@ -309,8 +309,8 @@ module.exports = function(grunt) {
 				'shell:devaddcommitpush',
 				'shell:mastergitremove',
 				'copy:install',
-				'copy:installREADME'
-//				'shell:mastergitaddcommitpush'
+				'copy:installREADME',
+				'shell:mastergitaddcommitpush'
 			]);
 		}
 	});
