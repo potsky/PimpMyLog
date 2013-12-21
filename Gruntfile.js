@@ -111,7 +111,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					cwd: '_build/',
-					src: ['**'],
+					src: [ '**' ],
 					dest: master
 				}]
 			},
@@ -309,8 +309,8 @@ module.exports = function(grunt) {
 				'shell:devaddcommitpush',
 				'shell:mastergitremove',
 				'copy:install',
-				'copy:installREADME',
-				'shell:mastergitaddcommitpush'
+				'copy:installREADME'
+//				'shell:mastergitaddcommitpush'
 			]);
 		}
 	});
