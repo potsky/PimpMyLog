@@ -303,11 +303,11 @@ module.exports = function(grunt) {
 		// Watch files for changes in dev
 		watch: {
 			css: {
-				files: [ '_css/**/*.css' , '_tmp/**/*.css' ],
+				files: [ 'css/**/*.css' , '_tmp/**/*.css' ],
 				tasks: [ 'copy:devcss' ]
 			},
 			cssless: {
-				files: [ '_css/**/*.less' ],
+				files: [ 'css/**/*.less' ],
 				tasks: [ 'less' , 'copy:devcss' ]
 			},
 			html: {

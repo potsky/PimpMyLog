@@ -129,7 +129,7 @@ $csrf = csrf_get();
 			geoip_url                  = "<?php echo GEOIP_URL;?>",
 			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
 			csrf_token                 = "<?php echo $csrf;?>",
-			user_time_zone             = "<?php (isset($_GET['tz'])) ? 'tz=' . $_GET['tz'] . '&' : ''; ?>",
+			user_time_zone             = "<?php echo (isset($_GET['tz'])) ? 'tz=' . $_GET['tz'] . '&' : ''; ?>",
 			notification_default       = <?php echo ( NOTIFICATION===true ) ? 'true' : 'false';?>;
 	</script>
 </head>
