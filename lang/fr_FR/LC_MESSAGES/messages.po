@@ -1,664 +1,650 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2013-12-19 19:35+0100\n"
-"PO-Revision-Date: 2013-12-19 19:36+0100\n"
+"POT-Creation-Date: 2013-12-22 12:58+0100\n"
+"PO-Revision-Date: 2013-12-22 12:58+0100\n"
 "Last-Translator: potsky <potsky@me.com>\n"
 "Language-Team: potsky <potsky@me.com>\n"
-"Language: en_GB\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-KeywordsList: gettext;gettext_noop;_x;_e;__;esc_attr__;esc_attr_e;"
 "esc_html__;esc_html_e;_ex;esc_attr_x;esc_html_x;_n;_nx;_n_noop;_nx_noop\n"
-"X-Poedit-Basepath: ../\n"
+"X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: index.php:9 index.php:51
+#: index.php:9 index.php:51 _build/index.php:9 _build/index.php:51
+#: _tmp/index.php:9 _tmp/index.php:51
 msgid "Oups!"
 msgstr "Oups!"
 
-#: index.php:10
+#: index.php:10 _build/index.php:10 _tmp/index.php:10
 #, php-format
 msgid "PHP version %s is required but your server run %s."
 msgstr ""
 "La version %s au minimum de PHP est requise mais votre serveur est en %s."
 
-#: index.php:12
+#: index.php:12 _build/index.php:12 _tmp/index.php:12
 msgid "Learn more"
 msgstr "Plus d'info"
 
-#: index.php:22
+#: index.php:22 _build/index.php:22 _tmp/index.php:22
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
-#: index.php:24
+#: index.php:24 _build/index.php:24 _tmp/index.php:24
 msgid "Pimp my Log is not configured."
 msgstr "Pimp my Log n'est pas configuré."
 
-#: index.php:27
+#: index.php:27 _build/index.php:27 _tmp/index.php:27
 msgid ""
-"You can manually copy <code>cfg/config.user.json</code> to <code>config.user.json</"
-"code> in the root directory and change parameters. Then refresh this page."
+"You can manually copy <code>cfg/config.example.json</code> to <code>config."
+"user.json</code> in the root directory and change parameters. Then refresh "
+"this page."
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vous pouvez copier manuellement le fichier <code>cfg/config.example.json</"
+"code> vers <code>config.user.json</code> à la racine et changer les "
+"paramètres. Une fois ceci fait, rafraichissez la page."
 
-#: index.php:30
+#: index.php:30 _build/index.php:30 _tmp/index.php:30
 msgid "Or let me try to configure it for you!"
 msgstr "Ou sinon, laissez-moi le configurer pour vous !"
 
-#: index.php:33 index.php:62
+#: index.php:33 index.php:62 _build/index.php:33 _build/index.php:62
+#: _tmp/index.php:33 _tmp/index.php:62
 msgid "Configure now"
 msgstr "Configurer maintenant"
 
-#: index.php:53
+#: index.php:53 _build/index.php:53 _tmp/index.php:53
 msgid "<code>config.user.json</code> configuration file is buggy :"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
-#: index.php:59
+#: index.php:59 _build/index.php:59 _tmp/index.php:59
 msgid ""
 "If you want me to build the configuration for you, please remove file "
 "<code>config.user.json</code> at root and click below."
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlevez le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
-#: index.php:72
-#, fuzzy
+#: index.php:72 _build/index.php:72 _tmp/index.php:72
 msgid ""
 "Notifications are denied for this site. Go to your browser preferences to "
 "enable notifications for this site."
-msgstr "Impossible de vérifier votre version actuelle !"
+msgstr ""
+"Les notifications de bureau sont interdites pour cet site. Activez les dans "
+"les préférences de votre navigateur."
 
-#: index.php:73
-#, fuzzy
+#: index.php:73 _build/index.php:73 _tmp/index.php:73
 msgid "No log has been found."
-msgstr "Pimp my Log n'est pas configuré."
+msgstr "Aucun log n'a été trouvé."
 
-#: index.php:74
+#: index.php:74 _build/index.php:74 _tmp/index.php:74
 msgid "Search was done with RegEx engine"
-msgstr ""
+msgstr "Recherche effectuée avec Expression Regulière"
 
-#: index.php:75
+#: index.php:75 _build/index.php:75 _tmp/index.php:75
 msgid "Search was done with regular engine"
-msgstr ""
+msgstr "Recherche régulière effectuée"
 
-#: index.php:76
-#, fuzzy, php-format
+#: index.php:76 _build/index.php:76 _tmp/index.php:76
+#, php-format
 msgid "No log has been found with regular search %s"
-msgstr ""
-"Impossible de récupérer le contenu de l'adresse %s depuis le serveur qui "
-"héberge cette instance de Pimp my Log."
+msgstr "Aucun log n'a été trouvé avec la recherche régulière %s"
 
-#: index.php:77
-#, fuzzy, php-format
+#: index.php:77 _build/index.php:77 _tmp/index.php:77
+#, php-format
 msgid "No log has been found with Reg Ex search %s"
 msgstr ""
-"Impossible de récupérer le contenu de l'adresse %s depuis le serveur qui "
-"héberge cette instance de Pimp my Log."
+"Aucun log n'a été trouvé avec la recherche de type Expression Regulière %s"
 
-#: index.php:78
+#: index.php:78 _build/index.php:78 _tmp/index.php:78
 msgid "New logs are available"
-msgstr ""
+msgstr "Nouveaux logs disponibles"
 
-#: index.php:79
-#, fuzzy
+#: index.php:79 _build/index.php:79 _tmp/index.php:79
 msgid "1 new log is available"
-msgstr "Pimp my Log n'est pas configuré."
+msgstr "1 nouveau log disponible"
 
-#: index.php:80
-#, fuzzy, php-format
+#: index.php:80 _build/index.php:80 _tmp/index.php:80
+#, php-format
 msgid "%s new logs are available"
-msgstr "Version actuelle %s"
+msgstr "%s nouveaux logs disponibles"
 
-#: index.php:81
-#, fuzzy
+#: index.php:81 _build/index.php:81 _tmp/index.php:81
 msgid "1 log displayed,"
-msgstr "Pimp my Log n'est pas configuré."
+msgstr "1 log affiché"
 
-#: index.php:82
-#, fuzzy, php-format
+#: index.php:82 _build/index.php:82 _tmp/index.php:82
+#, php-format
 msgid "%s logs displayed,"
-msgstr "Version actuelle %s"
+msgstr "%s logs affichés,"
 
-#: index.php:83 inc/configure.php:274
+#: index.php:83 _build/index.php:83 _build/inc/configure.php:287
+#: _tmp/index.php:83 inc/configure.php:287
 msgid "An error occurs!"
-msgstr ""
+msgstr "Une erreur est survenue !"
 
-#: index.php:141
-#, fuzzy
+#: index.php:151 _build/index.php:106 _tmp/index.php:143
 msgid "Click to refresh or press the R key"
-msgstr ""
-"Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+msgstr "Cliquez pour rafraichir ou appuyez sur la touche R"
 
-#: index.php:147
-#, fuzzy
+#: index.php:157 _build/index.php:106 _tmp/index.php:149
 msgid "Select a log file to display"
-msgstr "Pimp my Log n'est pas configuré."
+msgstr "Sélectionnez un fichier de log à afficher"
 
-#: index.php:161
+#: index.php:171 _build/index.php:110 _tmp/index.php:163
 msgid "Search in logs"
-msgstr ""
+msgstr "Chercher dans les logs"
 
-#: index.php:165
-#, fuzzy
+#: index.php:175 _build/index.php:110 _tmp/index.php:167
 msgid "Select a duration to check for new logs automatically"
-msgstr "Vérification de la version impossible !"
+msgstr "Sélectionner une durée pour chercher de nouveaux logs automatiquement"
 
-#: index.php:166
-#, fuzzy
+#: index.php:176 _build/index.php:110 _tmp/index.php:168
 msgid "No auto refresh"
-msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+msgstr "Pas de rafraichissement automatique"
 
-#: index.php:169
-#, fuzzy, php-format
+#: index.php:179 _build/index.php:112 _tmp/index.php:171
+#, php-format
 msgid "Refresh every %ss"
-msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+msgstr "Rafraichir toutes les %ss"
 
-#: index.php:176
+#: index.php:186 _build/index.php:114 _tmp/index.php:178
 msgid "Max count of logs to display"
-msgstr ""
+msgstr "Nombre maximal de lignes à afficher"
 
-#: index.php:179
-#, fuzzy, php-format
+#: index.php:189 _build/index.php:116 _tmp/index.php:181
+#, php-format
 msgid "%s logs"
-msgstr "Version actuelle %s"
+msgstr "%s logs"
 
-#: index.php:179
-#, fuzzy, php-format
+#: index.php:189 _build/index.php:116 _tmp/index.php:181
+#, php-format
 msgid "%s log"
-msgstr ""
-"Impossible de récupérer le contenu de l'adresse %s depuis le serveur qui "
-"héberge cette instance de Pimp my Log."
+msgstr "%s log"
 
-#: index.php:185
+#: index.php:195 _build/index.php:118 _tmp/index.php:187
 msgid "Desktop notifications on supported modern browsers"
-msgstr ""
+msgstr "Notifications de bureau pour les navigateurs récents"
 
-#: cfg/softwares.inc.php:4
+#: _build/cfg/softwares.inc.php:4 cfg/softwares.inc.php:4
 msgid "Apache"
-msgstr ""
+msgstr "Apache"
 
-#: cfg/softwares.inc.php:5
-#, fuzzy
+#: _build/cfg/softwares.inc.php:5 cfg/softwares.inc.php:5
 msgid "Apache Hypertext Transfer Protocol Server"
-msgstr ""
-"La version %s au minimum de PHP est requise mais votre serveur est en %s."
+msgstr "Apache Hypertext Transfer Protocol Server"
 
-#: cfg/softwares.inc.php:6
+#: _build/cfg/softwares.inc.php:6 cfg/softwares.inc.php:6
 msgid "http://httpd.apache.org"
-msgstr ""
+msgstr "http://httpd.apache.org"
 
-#: cfg/softwares.inc.php:7
+#: _build/cfg/softwares.inc.php:7 cfg/softwares.inc.php:7
 msgid "All versions 2.x are supported."
-msgstr ""
+msgstr "Versions 2.x supportées"
 
-#: inc/configure.php:35
-#, fuzzy
-msgid "File <code>"
-msgstr ""
-"Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
-
-#: inc/configure.php:46
-#, fuzzy
-msgid "Unable to create file <code>"
-msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
-
-#: inc/configure.php:48
-#, fuzzy
-msgid "Please give temporary write access to the root directory :"
-msgstr "Ecrire"
-
-#: inc/configure.php:61
-msgid "Choose softwares to search for"
-msgstr ""
-
-#: inc/configure.php:78
-#, fuzzy, php-format
-msgid "Software <em>%s</em>"
-msgstr "Version actuelle %s"
-
-#: inc/configure.php:81 inc/configure.php:225
-#, fuzzy, php-format
+#: _build/inc/configure.php:35 inc/configure.php:35
+#, php-format
 msgid ""
-"File <code>%s</code> does not exist. Please review your software "
-"configuration."
+"File <code>%s</code> already exists. Please remove it manually if you want "
+"me to create it."
 msgstr ""
-"Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"Le fichier <code>%s</code> existe déjà. Supprimez le manuellement si vous "
+"souhaitez que je le crée."
 
-#: inc/configure.php:110
-#, fuzzy
+#: _build/inc/configure.php:46 inc/configure.php:46
+#, php-format
+msgid "Unable to create file <code>%s</code>"
+msgstr "Impossible de créer le fichier <code>%s</code>"
+
+#: _build/inc/configure.php:48 inc/configure.php:48
+msgid "Please give temporary write access to the root directory :"
+msgstr ""
+"Merci de donner temporairement l'accès en écriture au répertoire racine :"
+
+#: _build/inc/configure.php:61 inc/configure.php:61
+msgid "Choose softwares to search log files for"
+msgstr "Choisir les logiciels pour lesquels chercher des logs"
+
+#: _build/inc/configure.php:79 inc/configure.php:79
+#, php-format
+msgid "Software <em>%s</em>"
+msgstr "Logiciel <em>%s</em>"
+
+#: _build/inc/configure.php:89 _build/inc/configure.php:240
+#: inc/configure.php:89 inc/configure.php:240
+#, php-format
+msgid ""
+"Files <code>%s</code> or <code>%s</code> do not exist. Please review your "
+"software configuration."
+msgstr ""
+"Les fichiers <code>%s</code> ou <code>%s</code> n'existent pas. Revoyez "
+"votre configuration de logiciels."
+
+#: _build/inc/configure.php:117 inc/configure.php:117
 msgid "Unable to find any directory."
-msgstr "Vérification de la version impossible !"
+msgstr "Impossible de trouver un seul répertoire."
 
-#: inc/configure.php:111
-#, fuzzy
+#: _build/inc/configure.php:118 inc/configure.php:118
 msgid ""
 "Check in the following list if these directories are readable by the "
 "webserver user and refresh this page"
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vérifiez dans la liste suivante si les répertoires sont lisibles par "
+"l'utilisateur qui a lancé le serveur web et rafraichissez la page"
 
-#: inc/configure.php:114
-#, fuzzy
+#: _build/inc/configure.php:121 inc/configure.php:121
 msgid "Directories are available but unable to find files inside."
-msgstr "Vérification de la version impossible !"
+msgstr ""
+"Les répertoires sont disponibles mais impossible de trouver des fichiers de "
+"logs dedans."
 
-#: inc/configure.php:115
-#, fuzzy
+#: _build/inc/configure.php:122 inc/configure.php:122
 msgid ""
 "Check in the following list if these directories contain readable files by "
 "the webserver user and refresh this page."
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vérifiez dans la liste suivante si les répertoires contiennent des fichiers "
+"de logs lisibles par l'utilisateur qui a lancé le serveur web et "
+"rafraichissez la page."
 
-#: inc/configure.php:116
-#, fuzzy
+#: _build/inc/configure.php:123 inc/configure.php:123
 msgid ""
 "Don't forget that to read a file, ALL parent directories have to be "
 "accessible too!"
-msgstr "Lire"
+msgstr ""
+"N'oubliez pas que pour lire un fichier, TOUS les répertoires parents doivent "
+"être traversables !"
 
-#: inc/configure.php:126
+#: _build/inc/configure.php:133 inc/configure.php:133
 #, fuzzy, php-format
 msgid "These files have been checked in all paths: %s "
-msgstr "Version actuelle %s"
+msgstr "Aucun log n'a été trouvé avec la recherche régulière %s"
 
-#: inc/configure.php:129
+#: _build/inc/configure.php:136 inc/configure.php:136
 #, fuzzy
 msgid "Log files have been found!"
-msgstr "Pimp my Log n'est pas configuré."
+msgstr "Aucun log n'a été trouvé."
 
-#: inc/configure.php:130
+#: _build/inc/configure.php:137 inc/configure.php:137
 #, fuzzy
 msgid ""
 "Check in the following list files you want to configure. If files or "
 "directories are missing, verify that they are readable by the webserver user"
 msgstr "Ou sinon, laissez-moi le configurer pour vous !"
 
-#: inc/configure.php:135 inc/configure.php:183
+#: _build/inc/configure.php:142 _build/inc/configure.php:190
+#: inc/configure.php:142 inc/configure.php:190
 #, fuzzy
 msgid "unable to detect web server user"
 msgstr ""
 "Impossible de récupérer le contenu de l'adresse %s depuis le serveur qui "
 "héberge cette instance de Pimp my Log."
 
-#: inc/configure.php:136 inc/configure.php:184
+#: _build/inc/configure.php:143 _build/inc/configure.php:191
+#: inc/configure.php:143 inc/configure.php:191
 #, fuzzy, php-format
 msgid "web server user seems to be <code>%s</code>"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier <code>%s</code> existe déjà. Supprimez le manuellement si vous "
+"souhaitez que je le crée."
 
-#: inc/configure.php:140
+#: _build/inc/configure.php:147 inc/configure.php:147
 #, fuzzy
 msgid ""
 "You can also type log files path in the text area below separated by coma :"
-msgstr ""
-"Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+msgstr "Type"
 
-#: inc/configure.php:142 inc/configure.php:280
+#: _build/inc/configure.php:149 _build/inc/configure.php:293
+#: inc/configure.php:149 inc/configure.php:293
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
-#: inc/configure.php:142
+#: _build/inc/configure.php:149 inc/configure.php:149
 msgid "Custom paths"
-msgstr ""
+msgstr "Chemins personnalisés"
 
-#: inc/configure.php:161 inc/configure.php:205 inc/configure.php:209
+#: _build/inc/configure.php:168 _build/inc/configure.php:212
+#: _build/inc/configure.php:216 inc/configure.php:168 inc/configure.php:212
+#: inc/configure.php:216
+#, fuzzy
 msgid "Unknown error"
-msgstr ""
+msgstr "Une erreur est survenue !"
 
-#: inc/configure.php:180
+#: _build/inc/configure.php:187 inc/configure.php:187
 #, fuzzy
 msgid ""
 "Custom files below are not readable, please remove them or verify that they "
 "are readable by the webserver user"
-msgstr ""
-"Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+msgstr "Lisable"
 
-#: inc/configure.php:235
+#: _build/inc/configure.php:248 inc/configure.php:248
 #, fuzzy, php-format
 msgid ""
-"File <code>%s</code> does not define function %s. Please review your "
-"software configuration."
+"File <code>%s</code> does not define function <code>%s</code>. Please review "
+"your software configuration."
 msgstr ""
-"Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"Le fichier <code>%s</code> existe déjà. Supprimez le manuellement si vous "
+"souhaitez que je le crée."
 
-#: inc/configure.php:248
+#: _build/inc/configure.php:261 inc/configure.php:261
 #, fuzzy
 msgid "No configuration found for softwares!"
-msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+msgstr "Aucun log n'a été trouvé."
 
-#: inc/configure.php:254
+#: _build/inc/configure.php:267 inc/configure.php:267
 msgid "Unknown action, abort."
-msgstr ""
+msgstr "Action inconnue, stop."
 
-#: inc/configure.php:273
+#: _build/inc/configure.php:286 inc/configure.php:286
 #, fuzzy
 msgid "%s% Complete"
-msgstr "Version actuelle %s"
+msgstr "%s logs"
 
-#: inc/configure.php:275
+#: _build/inc/configure.php:288 inc/configure.php:288
 #, fuzzy
 msgid "Please wait..."
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.json</code> à la racine et cliquez en dessous s'il vous plait."
 
-#: inc/configure.php:276
+#: _build/inc/configure.php:289 inc/configure.php:289
 msgid "Software"
-msgstr ""
+msgstr "Logiciel"
 
-#: inc/configure.php:277 inc/test.php:333
+#: _build/inc/configure.php:290 _build/inc/test.php:336 inc/configure.php:290
+#: inc/test.php:343
 msgid "Path"
-msgstr ""
+msgstr "Chemin"
 
-#: inc/configure.php:278
+#: _build/inc/configure.php:291 inc/configure.php:291
 #, fuzzy
 msgid "File"
-msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+msgstr "fichier <code>"
 
-#: inc/configure.php:279
+#: _build/inc/configure.php:292 inc/configure.php:292
 msgid "Readable"
-msgstr ""
+msgstr "Lisable"
 
-#: inc/configure.php:281 inc/test.php:340 inc/test.php:341
+#: _build/inc/configure.php:294 _build/inc/test.php:343
+#: _build/inc/test.php:344 inc/configure.php:294 inc/test.php:350
+#: inc/test.php:351
 msgid "No"
 msgstr "Non"
 
-#: inc/configure.php:282 inc/test.php:340 inc/test.php:341
+#: _build/inc/configure.php:295 _build/inc/test.php:343
+#: _build/inc/test.php:344 inc/configure.php:295 inc/test.php:350
+#: inc/test.php:351
 msgid "Yes"
 msgstr "Oui"
 
-#: inc/configure.php:283
+#: _build/inc/configure.php:296 inc/configure.php:296
 msgid "Name"
 msgstr "Nom"
 
-#: inc/configure.php:284
+#: _build/inc/configure.php:297 inc/configure.php:297
 msgid "Description"
 msgstr "Description"
 
-#: inc/configure.php:285
+#: _build/inc/configure.php:298 inc/configure.php:298
 msgid "Notes"
 msgstr "Remarques"
 
-#: inc/configure.php:286
+#: _build/inc/configure.php:299 inc/configure.php:299
 #, fuzzy
 msgid "You have to select at least one software to configure!"
 msgstr "Ou sinon, laissez-moi le configurer pour vous !"
 
-#: inc/configure.php:287
+#: _build/inc/configure.php:300 inc/configure.php:300
 #, fuzzy
 msgid ""
 "You have to select at least one log file or type the path of a log file!"
-msgstr ""
-"Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+msgstr "Sélectionnez un fichier de log à afficher"
 
-#: inc/configure.php:319
+#: _build/inc/configure.php:335 inc/configure.php:342
 msgid "Configurator"
 msgstr "Configurateur"
 
-#: inc/configure.php:335
+#: _build/inc/configure.php:351 inc/configure.php:358
 msgid "Reload"
 msgstr "Racharger"
 
-#: inc/configure.php:336
+#: _build/inc/configure.php:352 inc/configure.php:359
 msgid "Continue"
 msgstr "Continuer"
 
-#: inc/configure.php:342
+#: _build/inc/configure.php:358 inc/configure.php:365
 msgid "Congratulations!"
 msgstr "Félicitations !"
 
-#: inc/configure.php:346
+#: _build/inc/configure.php:362 inc/configure.php:369
 #, fuzzy
 msgid "Your <em>Pimp my Log</em> instance is ready to use."
 msgstr "Pimp my Log n'est pas configuré."
 
-#: inc/configure.php:349
+#: _build/inc/configure.php:365 inc/configure.php:372
 #, fuzzy
 msgid "You can manually adjust settings in the <code>"
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
+"Vous pouvez copier manuellement le fichier <code>cfg/config.json</code> vers "
+"<code>config.json</code> à la racine et changer les paramètres. Une fois "
 "ceci fait, rafraichissez la page."
 
-#: inc/configure.php:351
+#: _build/inc/configure.php:367 inc/configure.php:374
 #, fuzzy
 msgid ""
 "Please visit <a href=\"http://pimpmylog.com\">pimpmylog.com</a> for more "
 "informations."
 msgstr "Plus d'info"
 
-#: inc/configure.php:354
+#: _build/inc/configure.php:370 inc/configure.php:377
 #, fuzzy
 msgid "Pimp my Logs now!"
 msgstr "Pimp my Log n'est pas configuré."
 
-#: inc/functions.inc.php:168
+#: _build/inc/functions.inc.php:168 inc/functions.inc.php:168
 #, fuzzy
 msgid "No file is defined in <code>files</code> array"
-msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+msgstr "fichier <code>"
 
-#: inc/functions.inc.php:176
+#: _build/inc/functions.inc.php:176 inc/functions.inc.php:176
 #, fuzzy, php-format
 msgid "<code>%s</code> is mandatory for file ID <code>%s</code>"
-msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+msgstr "fichier <code>"
 
-#: inc/functions.inc.php:271
+#: _build/inc/functions.inc.php:271 inc/functions.inc.php:271
 msgid "B KBMBGBTBPB"
 msgstr "o KoMoGoToPo"
 
-#: inc/getlog.pml.php:33
+#: _build/inc/getlog.pml.php:33 inc/getlog.pml.php:33
 #, fuzzy, php-format
 msgid "<strong>PHP Warning</strong> [%s] %s"
 msgstr ""
 "La version %s au minimum de PHP est requise mais votre serveur est en %s."
 
-#: inc/getlog.pml.php:37
+#: _build/inc/getlog.pml.php:37 inc/getlog.pml.php:37
 #, fuzzy, php-format
 msgid "<strong>PHP Notice</strong> [%s] %s"
 msgstr ""
 "La version %s au minimum de PHP est requise mais votre serveur est en %s."
 
-#: inc/getlog.pml.php:41
+#: _build/inc/getlog.pml.php:41 inc/getlog.pml.php:41
 #, fuzzy, php-format
 msgid "<strong>PHP Unknown error</strong> [%s] %s"
 msgstr ""
 "La version %s au minimum de PHP est requise mais votre serveur est en %s."
 
-#: inc/getlog.pml.php:56
+#: _build/inc/getlog.pml.php:56 inc/getlog.pml.php:56
 #, fuzzy, php-format
 msgid "<strong>PHP Error</strong> line %s : %s"
 msgstr ""
 "La version %s au minimum de PHP est requise mais votre serveur est en %s."
 
+#: _build/inc/getlog.pml.php:80 _build/inc/upgrade.pml.php:9
 #: inc/getlog.pml.php:80 inc/upgrade.pml.php:9
 #, fuzzy
 msgid "Please refresh the page."
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
+"Vous pouvez copier manuellement le fichier <code>cfg/config.json</code> vers "
+"<code>config.json</code> à la racine et changer les paramètres. Une fois "
 "ceci fait, rafraichissez la page."
 
-#: inc/getlog.pml.php:86
+#: _build/inc/getlog.pml.php:86 inc/getlog.pml.php:86
 #, fuzzy, php-format
 msgid ""
 "File ID <code>%s</code> does not exist, please review your configuration "
 "file and stop playing!"
 msgstr ""
-"Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"Le fichier de configuration <code>config.json</code> comporte des erreurs :"
 
-#: inc/getlog.pml.php:93
+#: _build/inc/getlog.pml.php:93 inc/getlog.pml.php:93
 #, fuzzy, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist, please "
 "review your configuration file."
-msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+msgstr "fichier <code>"
 
-#: inc/getlog.pml.php:100
+#: _build/inc/getlog.pml.php:100 inc/getlog.pml.php:100
 #, fuzzy
 msgid ""
 "Configuration file has changed and is buggy now. Please refresh the page."
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.json</code> comporte des erreurs :"
 
-#: inc/getlog.pml.php:137
+#: _build/inc/getlog.pml.php:137 inc/getlog.pml.php:137
 #, fuzzy, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist anymore..."
-msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+msgstr "fichier <code>"
 
-#: inc/getlog.pml.php:156
+#: _build/inc/getlog.pml.php:156 inc/getlog.pml.php:156
 #, fuzzy, php-format
 msgid "Log file has been rotated (previous size was %s and new one is %s)"
-msgstr ""
-"Impossible de récupérer le contenu de l'adresse %s depuis le serveur qui "
-"héberge cette instance de Pimp my Log."
+msgstr "Aucun log n'a été trouvé avec la recherche régulière %s"
 
-#: inc/getlog.pml.php:193
+#: _build/inc/getlog.pml.php:193 inc/getlog.pml.php:193
 #, fuzzy
 msgid "Log file has been rotated"
-msgstr "Pimp my Log n'est pas configuré."
+msgstr "Aucun log n'a été trouvé."
 
-#: inc/getlog.pml.php:292
+#: _build/inc/getlog.pml.php:292 inc/getlog.pml.php:292
 #, fuzzy, php-format
 msgid ""
 "%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "
 "skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</"
 "code> was last modified on <code>%s</code>, size is <code>%s</code>"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier <code>%s</code> existe déjà. Supprimez le manuellement si vous "
+"souhaitez que je le crée."
 
-#: inc/getlog.pml.php:293
+#: _build/inc/getlog.pml.php:293 inc/getlog.pml.php:293
 #, fuzzy, php-format
 msgid "%s new logs found"
-msgstr "Version actuelle %s"
+msgstr "%s nouveaux logs disponibles"
 
-#: inc/getlog.pml.php:293
+#: _build/inc/getlog.pml.php:293 inc/getlog.pml.php:293
 #, fuzzy
 msgid "no new log found"
-msgstr "Pimp my Log n'est pas configuré."
+msgstr "Aucun log n'a été trouvé."
 
-#: inc/getlog.pml.php:293
+#: _build/inc/getlog.pml.php:293 inc/getlog.pml.php:293
 #, fuzzy
 msgid "1 new log found"
-msgstr "Pimp my Log n'est pas configuré."
+msgstr "1 nouveau log disponible"
 
-#: inc/test.php:6
+#: _build/inc/test.php:6 inc/test.php:6
 #, fuzzy
 msgid ""
 "Please copy <code>inc/test.php</code> to <code>inc/test.REMOVE_UPPERCASE."
 "php</code> and load <code>inc/test.REMOVE_UPPERCASE.php</code> in your "
 "browser"
-msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+msgstr "fichier <code>"
 
-#: inc/test.php:41 inc/test.php:48
-msgid "Error"
-msgstr ""
-
-#: inc/test.php:41
-msgid "Match is not a valid associative array"
-msgstr ""
-
+#: _build/inc/test.php:41 _build/inc/test.php:48 inc/test.php:41
 #: inc/test.php:48
 #, fuzzy
+msgid "Error"
+msgstr "Une erreur est survenue !"
+
+#: _build/inc/test.php:41 inc/test.php:41
+msgid "Match is not a valid associative array"
+msgstr "Match n'est pas un tableau associatif valide"
+
+#: _build/inc/test.php:48 inc/test.php:48
+#, fuzzy
 msgid "RegEx is not a valid PHP PCRE regular expression"
-msgstr ""
-"La version %s au minimum de PHP est requise mais votre serveur est en %s."
+msgstr "Recherche effectuée avec Expression Regulière"
 
-#: inc/test.php:86
+#: _build/inc/test.php:89 inc/test.php:96
 msgid "Debugger"
-msgstr ""
+msgstr "Debugger"
 
-#: inc/test.php:98
+#: _build/inc/test.php:101 inc/test.php:108
+#, fuzzy
 msgid "Regex tester"
-msgstr ""
+msgstr "Recherche effectuée avec Expression Regulière"
 
-#: inc/test.php:106
+#: _build/inc/test.php:109 inc/test.php:116
 #, fuzzy
 msgid "Log"
-msgstr "Pimp my Log n'est pas configuré."
+msgstr "%s log"
 
-#: inc/test.php:114
+#: _build/inc/test.php:117 inc/test.php:124
+#, fuzzy
 msgid "RegEx"
-msgstr ""
+msgstr "Recherche effectuée avec Expression Regulière"
 
-#: inc/test.php:122
+#: _build/inc/test.php:125 inc/test.php:132
 msgid "Match"
-msgstr ""
+msgstr "Match"
 
-#: inc/test.php:143
+#: _build/inc/test.php:146 inc/test.php:153
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
-#: inc/test.php:156
+#: _build/inc/test.php:159 inc/test.php:166
+#, fuzzy
 msgid "Regex samples"
-msgstr ""
+msgstr "Recherche effectuée avec Expression Regulière"
 
-#: inc/test.php:302
+#: _build/inc/test.php:305 inc/test.php:312
 msgid "Rights"
-msgstr ""
+msgstr "Droits"
 
-#: inc/test.php:312
+#: _build/inc/test.php:315 inc/test.php:322
 msgid "No POSIX functions..."
-msgstr ""
+msgstr "Pas de fonction POSIX..."
 
-#: inc/test.php:333
+#: _build/inc/test.php:336 inc/test.php:343
 msgid "Real path"
-msgstr ""
+msgstr "Chemin réel"
 
-#: inc/test.php:333
+#: _build/inc/test.php:336 inc/test.php:343
 msgid "Read"
 msgstr "Lire"
 
-#: inc/test.php:333
+#: _build/inc/test.php:336 inc/test.php:343
 msgid "Write"
 msgstr "Ecrire"
 
-#: inc/upgrade.pml.php:26
+#: _build/inc/upgrade.pml.php:26 inc/upgrade.pml.php:26
 #, php-format
 msgid "Current version %s"
 msgstr "Version actuelle %s"
 
-#: inc/upgrade.pml.php:31
+#: _build/inc/upgrade.pml.php:31 inc/upgrade.pml.php:31
 msgid "Unable to check your current version!"
 msgstr "Impossible de vérifier votre version actuelle !"
 
+#: _build/inc/upgrade.pml.php:57 _build/inc/upgrade.pml.php:63
 #: inc/upgrade.pml.php:57 inc/upgrade.pml.php:63
 #, fuzzy, php-format
 msgid ""
@@ -668,55 +654,58 @@ msgstr ""
 "Impossible de récupérer le contenu de l'adresse %s depuis le serveur qui "
 "héberge cette instance de Pimp my Log."
 
+#: _build/inc/upgrade.pml.php:57 _build/inc/upgrade.pml.php:63
 #: inc/upgrade.pml.php:57 inc/upgrade.pml.php:63
 #, fuzzy
 msgid "Remote version broken!"
 msgstr "Vérification de la version impossible !"
 
-#: inc/upgrade.pml.php:84
+#: _build/inc/upgrade.pml.php:84 inc/upgrade.pml.php:84
 #, fuzzy, php-format
 msgid "Version %s released on %s"
 msgstr "Version actuelle %s"
 
-#: inc/upgrade.pml.php:85
+#: _build/inc/upgrade.pml.php:85 inc/upgrade.pml.php:85
 #, fuzzy, php-format
 msgid "Version %s"
 msgstr "Version actuelle %s"
 
-#: inc/upgrade.pml.php:121
+#: _build/inc/upgrade.pml.php:121 inc/upgrade.pml.php:121
+#, fuzzy
 msgid "An upgrade is available !"
-msgstr ""
+msgstr "Nouveaux logs disponibles"
 
-#: inc/upgrade.pml.php:122
+#: _build/inc/upgrade.pml.php:122 inc/upgrade.pml.php:122
 #, fuzzy, php-format
 msgid "You have version %s and version %s is available"
 msgstr "Version actuelle %s"
 
-#: inc/upgrade.pml.php:123
+#: _build/inc/upgrade.pml.php:123 inc/upgrade.pml.php:123
+#, fuzzy
 msgid "release notes"
-msgstr ""
+msgstr "Remarques"
 
-#: inc/upgrade.pml.php:125
+#: _build/inc/upgrade.pml.php:125 inc/upgrade.pml.php:125
 #, fuzzy
 msgid "Don't bother me again with this upgrade!"
 msgstr "Ou sinon, laissez-moi le configurer pour vous !"
 
-#: inc/upgrade.pml.php:131
+#: _build/inc/upgrade.pml.php:131 inc/upgrade.pml.php:131
 #, fuzzy
 msgid "You should upgrade right now :"
 msgstr "Configurer maintenant"
 
-#: inc/upgrade.pml.php:142
+#: _build/inc/upgrade.pml.php:142 inc/upgrade.pml.php:142
 #, php-format
 msgid "Your version %s is out of date"
 msgstr "Votre version %s n'est à jour"
 
-#: inc/upgrade.pml.php:147
+#: _build/inc/upgrade.pml.php:147 inc/upgrade.pml.php:147
 #, php-format
 msgid "Your version %s is up to date"
 msgstr "Votre version %s est à jour"
 
-#: inc/upgrade.pml.php:153
+#: _build/inc/upgrade.pml.php:153 inc/upgrade.pml.php:153
 #, php-format
 msgid ""
 "Unable to fetch URL %s from the server hosting this Pimp my Log instance."
@@ -724,9 +713,12 @@ msgstr ""
 "Impossible de récupérer le contenu de l'adresse %s depuis le serveur qui "
 "héberge cette instance de Pimp my Log."
 
-#: inc/upgrade.pml.php:153
+#: _build/inc/upgrade.pml.php:153 inc/upgrade.pml.php:153
 msgid "Unable to check remote version!"
 msgstr "Vérification de la version impossible !"
+
+#~ msgid "File <code>"
+#~ msgstr "fichier <code>"
 
 #~ msgid "Non"
 #~ msgstr "Non"

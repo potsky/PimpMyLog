@@ -32,7 +32,7 @@ if ( isset( $_POST['s'] ) ) {
 			 */
 			case 'exist':
 				if ( file_exists( CONFIG_FILE ) ) {
-					throw new Exception( __( 'File <code>' . CONFIG_FILE . '</code> already exists. Please remove it manually if you want me to create it.') );
+					throw new Exception( sprintf( __( 'File <code>%s</code> already exists. Please remove it manually if you want me to create it.') , CONFIG_FILE ) );
 				}
 				break;
 
@@ -43,7 +43,7 @@ if ( isset( $_POST['s'] ) ) {
 			case 'touch':
 				if ( ! @touch( CONFIG_FILE_TEMP ) ) {
 					$return[ 'notice' ] =
-						__( 'Unable to create file <code>' . CONFIG_FILE_TEMP . '</code>')
+						sprintf( __( 'Unable to create file <code>%s</code>') , CONFIG_FILE_TEMP)
 						. '<br/><br/>'
 						. __( 'Please give temporary write access to the root directory :' )
 						. '<pre>'

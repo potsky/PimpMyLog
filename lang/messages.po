@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
 "POT-Creation-Date: 2013-12-19 19:35+0100\n"
-"PO-Revision-Date: 2013-12-19 19:36+0100\n"
+"PO-Revision-Date: 2013-12-22 12:59+0100\n"
 "Last-Translator: potsky <potsky@me.com>\n"
 "Language-Team: potsky <potsky@me.com>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-KeywordsList: gettext;gettext_noop;_x;_e;__;esc_attr__;esc_attr_e;"
 "esc_html__;esc_html_e;_ex;esc_attr_x;esc_html_x;_n;_nx;_n_noop;_nx_noop\n"
 "X-Poedit-Basepath: ../\n"
@@ -41,12 +41,13 @@ msgstr "Pimp my Log n'est pas configuré."
 
 #: index.php:27
 msgid ""
-"You can manually copy <code>cfg/config.user.json</code> to <code>config.user.json</"
-"code> in the root directory and change parameters. Then refresh this page."
+"You can manually copy <code>cfg/config.user.json</code> to <code>config.user."
+"json</code> in the root directory and change parameters. Then refresh this "
+"page."
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> "
+"vers <code>config.user.json</code> à la racine et changer les paramètres. "
+"Une fois ceci fait, rafraichissez la page."
 
 #: index.php:30
 msgid "Or let me try to configure it for you!"
@@ -59,7 +60,8 @@ msgstr "Configurer maintenant"
 #: index.php:53
 msgid "<code>config.user.json</code> configuration file is buggy :"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: index.php:59
 msgid ""
@@ -67,7 +69,8 @@ msgid ""
 "<code>config.user.json</code> at root and click below."
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlevez le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: index.php:72
 #, fuzzy
@@ -136,7 +139,8 @@ msgstr ""
 msgid "Click to refresh or press the R key"
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: index.php:147
 #, fuzzy
@@ -156,17 +160,17 @@ msgstr "Vérification de la version impossible !"
 #, fuzzy
 msgid "No auto refresh"
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> "
+"vers <code>config.user.json</code> à la racine et changer les paramètres. "
+"Une fois ceci fait, rafraichissez la page."
 
 #: index.php:169
 #, fuzzy, php-format
 msgid "Refresh every %ss"
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> "
+"vers <code>config.user.json</code> à la racine et changer les paramètres. "
+"Une fois ceci fait, rafraichissez la page."
 
 #: index.php:176
 msgid "Max count of logs to display"
@@ -211,13 +215,15 @@ msgstr ""
 msgid "File <code>"
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: inc/configure.php:46
 #, fuzzy
 msgid "Unable to create file <code>"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/configure.php:48
 #, fuzzy
@@ -240,7 +246,8 @@ msgid ""
 "configuration."
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: inc/configure.php:110
 #, fuzzy
@@ -253,9 +260,9 @@ msgid ""
 "Check in the following list if these directories are readable by the "
 "webserver user and refresh this page"
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> "
+"vers <code>config.user.json</code> à la racine et changer les paramètres. "
+"Une fois ceci fait, rafraichissez la page."
 
 #: inc/configure.php:114
 #, fuzzy
@@ -268,9 +275,9 @@ msgid ""
 "Check in the following list if these directories contain readable files by "
 "the webserver user and refresh this page."
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> "
+"vers <code>config.user.json</code> à la racine et changer les paramètres. "
+"Une fois ceci fait, rafraichissez la page."
 
 #: inc/configure.php:116
 #, fuzzy
@@ -307,7 +314,8 @@ msgstr ""
 #, fuzzy, php-format
 msgid "web server user seems to be <code>%s</code>"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/configure.php:140
 #, fuzzy
@@ -315,7 +323,8 @@ msgid ""
 "You can also type log files path in the text area below separated by coma :"
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: inc/configure.php:142 inc/configure.php:280
 msgid "Type"
@@ -336,7 +345,8 @@ msgid ""
 "are readable by the webserver user"
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: inc/configure.php:235
 #, fuzzy, php-format
@@ -345,13 +355,15 @@ msgid ""
 "software configuration."
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: inc/configure.php:248
 #, fuzzy
 msgid "No configuration found for softwares!"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/configure.php:254
 msgid "Unknown action, abort."
@@ -367,7 +379,8 @@ msgstr "Version actuelle %s"
 msgid "Please wait..."
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: inc/configure.php:276
 msgid "Software"
@@ -381,7 +394,8 @@ msgstr ""
 #, fuzzy
 msgid "File"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/configure.php:279
 msgid "Readable"
@@ -418,7 +432,8 @@ msgid ""
 "You have to select at least one log file or type the path of a log file!"
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: inc/configure.php:319
 msgid "Configurator"
@@ -445,9 +460,9 @@ msgstr "Pimp my Log n'est pas configuré."
 #, fuzzy
 msgid "You can manually adjust settings in the <code>"
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> "
+"vers <code>config.user.json</code> à la racine et changer les paramètres. "
+"Une fois ceci fait, rafraichissez la page."
 
 #: inc/configure.php:351
 #, fuzzy
@@ -465,13 +480,15 @@ msgstr "Pimp my Log n'est pas configuré."
 #, fuzzy
 msgid "No file is defined in <code>files</code> array"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/functions.inc.php:176
 #, fuzzy, php-format
 msgid "<code>%s</code> is mandatory for file ID <code>%s</code>"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/functions.inc.php:271
 msgid "B KBMBGBTBPB"
@@ -505,9 +522,9 @@ msgstr ""
 #, fuzzy
 msgid "Please refresh the page."
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> "
+"vers <code>config.user.json</code> à la racine et changer les paramètres. "
+"Une fois ceci fait, rafraichissez la page."
 
 #: inc/getlog.pml.php:86
 #, fuzzy, php-format
@@ -516,7 +533,8 @@ msgid ""
 "file and stop playing!"
 msgstr ""
 "Si vous voulez que je fasse la configuration, enlever le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous plait."
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
 
 #: inc/getlog.pml.php:93
 #, fuzzy, php-format
@@ -524,21 +542,24 @@ msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist, please "
 "review your configuration file."
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/getlog.pml.php:100
 #, fuzzy
 msgid ""
 "Configuration file has changed and is buggy now. Please refresh the page."
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/getlog.pml.php:137
 #, fuzzy, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist anymore..."
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/getlog.pml.php:156
 #, fuzzy, php-format
@@ -559,7 +580,8 @@ msgid ""
 "skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</"
 "code> was last modified on <code>%s</code>, size is <code>%s</code>"
 msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des erreurs :"
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
 
 #: inc/getlog.pml.php:293
 #, fuzzy, php-format
@@ -583,9 +605,9 @@ msgid ""
 "php</code> and load <code>inc/test.REMOVE_UPPERCASE.php</code> in your "
 "browser"
 msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> vers "
-"<code>config.user.json</code> à la racine et changer les paramètres. Une fois "
-"ceci fait, rafraichissez la page."
+"Vous pouvez copier manuellement le fichier <code>cfg/config.user.json</code> "
+"vers <code>config.user.json</code> à la racine et changer les paramètres. "
+"Une fois ceci fait, rafraichissez la page."
 
 #: inc/test.php:41 inc/test.php:48
 msgid "Error"
