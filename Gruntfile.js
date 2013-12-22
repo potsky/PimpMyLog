@@ -2,9 +2,12 @@ module.exports = function(grunt) {
 	// Load all NPM grunt tasks
 	require('matchdep').filterAll('grunt-*').forEach( grunt.loadNpmTasks );
 
-	var maste_path = '/tmp';
-	var maste_name = 'PimpMyLog-master';
-	var master     = maste_path + '/' + maste_name;
+	var master_dir  = '/tmp';
+	var master_name = 'PimpMyLog-master';
+	var master      = master_dir + '/' + master_name;
+	var beta_dir    = '/tmp';
+	var beta_name   = 'PimpMyLog-beta';
+	var beta        = beta_dir + '/' + beta_name;
 
 	// Project configuration
 	grunt.initConfig({
@@ -106,7 +109,7 @@ module.exports = function(grunt) {
 					dest: '_site/js/'
 				}]
 			},
-			install: {
+			installmaster: {
 				files: [{
 					expand: true,
 					cwd: '_build/',
@@ -114,12 +117,28 @@ module.exports = function(grunt) {
 					dest: master
 				}]
 			},
-			installREADME: {
+			installmasterREADME: {
 				files: [{
 					expand: true,
 					cwd: '_tools/',
 					src: [ 'README.md' ],
 					dest: master
+				}]
+			},
+			installbeta: {
+				files: [{
+					expand: true,
+					cwd: '_build/',
+					src: [ '**' ],
+					dest: beta
+				}]
+			},
+			installbetaREADME: {
+				files: [{
+					expand: true,
+					cwd: '_tools/',
+					src: [ 'README.md' ],
+					dest: beta
 				}]
 			},
 			prod: {
@@ -221,8 +240,26 @@ module.exports = function(grunt) {
 
 
 		shell: {
+			betagitclone: {
+				command: 'cd "' + beta_dir + '" && git clone git@github.com:potsky/PimpMyLog.git -b beta "' + beta_name + '"',
+				options: {
+					stdout: true
+				}
+			},
+			betagitremove: {
+				command: 'cd "' + beta + '" && git rm -rf * ',
+				options: {
+					stdout: true
+				}
+			},
+			betagitaddcommitpush : {
+				command: 'a=$(git rev-parse --short HEAD); cd "' + beta + '"; rm -f config.user.json; git add -A . 2>&1; git commit -m "grunt install from branch dev commit $a" 2>&1; git pull origin beta 2>&1; git push origin beta 2>&1',
+				options: {
+					stdout: true
+				}
+			},
 			mastergitclone: {
-				command: 'cd "' + maste_path + '" && git clone git@github.com:potsky/PimpMyLog.git "' + maste_name + '"',
+				command: 'cd "' + master_dir + '" && git clone git@github.com:potsky/PimpMyLog.git -b master "' + master_name + '"',
 				options: {
 					stdout: true
 				}
@@ -240,7 +277,7 @@ module.exports = function(grunt) {
 				}
 			},
 			devaddcommitpush : {
-				command: 'git add -A . 2>&1; git commit --author=\'Potsky <potsky@me.com>\' -m "prepare to publish on master" 2>&1; git pull origin dev 2>&1; git push origin dev 2>&1',
+				command: 'git add -A . 2>&1; git commit --author=\'Potsky <potsky@me.com>\' -m "prepare to publish on master or beta" 2>&1; git pull origin dev 2>&1; git push origin dev 2>&1',
 				options: {
 					stdout: true
 				}
@@ -284,9 +321,37 @@ module.exports = function(grunt) {
 		}
 	});
 
+	// Installation task which install the _build folder in beta , commit and push
+	grunt.registerTask( 'installbeta' , function() {
+		if ( grunt.file.exists( '_build/index.php' ) === false ) {
+			grunt.verbose.or.error().error( 'File "_build/index.php" does not exist. Please build before installing with "grunt build"' );
+			grunt.fail.warn('Unable to continue');
+		}
+		else if ( grunt.file.exists( beta + '/.git/config' ) === false ) {
+			grunt.log.writeln('Cloning and installing in ' + beta );
+			grunt.task.run(['shell:betagitclone']);
+			grunt.task.run([
+				'shell:devaddcommitpush',
+				'shell:betagitremove',
+				'copy:installbeta',
+				'copy:installbetaREADME',
+				'shell:betagitaddcommitpush'
+			]);
+		}
+		else {
+			grunt.log.writeln('Installing in ' + beta );
+			grunt.task.run([
+				'shell:devaddcommitpush',
+				'shell:betagitremove',
+				'copy:installbeta',
+				'copy:installbetaREADME',
+				'shell:betagitaddcommitpush'
+			]);
+		}
+	});
 
 	// Installation task which install the _build folder in master , commit and push
-	grunt.registerTask( 'install' , function() {
+	grunt.registerTask( 'installmaster' , function() {
 		if ( grunt.file.exists( '_build/index.php' ) === false ) {
 			grunt.verbose.or.error().error( 'File "_build/index.php" does not exist. Please build before installing with "grunt build"' );
 			grunt.fail.warn('Unable to continue');
@@ -297,8 +362,8 @@ module.exports = function(grunt) {
 			grunt.task.run([
 				'shell:devaddcommitpush',
 				'shell:mastergitremove',
-				'copy:install',
-				'copy:installREADME',
+				'copy:installmaster',
+				'copy:installmasterREADME',
 				'shell:mastergitaddcommitpush'
 			]);
 		}
@@ -307,8 +372,8 @@ module.exports = function(grunt) {
 			grunt.task.run([
 				'shell:devaddcommitpush',
 				'shell:mastergitremove',
-				'copy:install',
-				'copy:installREADME',
+				'copy:installmaster',
+				'copy:installmasterREADME',
 				'shell:mastergitaddcommitpush'
 			]);
 		}
@@ -347,6 +412,14 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('build', function() {
 		grunt.task.run( 'prod' );
+	});
+
+	grunt.registerTask('install', function() {
+		grunt.task.run( 'installbeta' );
+	});
+
+	grunt.registerTask('install-production', function() {
+		grunt.task.run( 'installmaster' );
 	});
 
 	grunt.registerTask('default', [ 'dev' ] );
