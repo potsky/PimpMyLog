@@ -606,7 +606,7 @@ $(function() {
 
 	// Check for upgrade
 	$.ajax( {
-		url      : 'inc/upgrade.pml.php?' + new Date().getTime() ,
+		url      : 'inc/upgrade.pml.php?' + querystring,
 		dataType : 'json',
 		data     : { 'csrf_token' : csrf_token } ,
 		type     : 'POST',
