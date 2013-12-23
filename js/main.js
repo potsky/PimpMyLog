@@ -1,4 +1,4 @@
-/*global numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,user_time_zone,notification_default*/
+/*global numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,querystring,notification_default*/
 var file, notification, auto_refresh_timer, fingerprint, first_launch, file_size, last_line, loading, reset, notification_displayed;
 
 
@@ -264,7 +264,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 	loading      = true;
 	wanted_lines = $('#max').val();
 	$.ajax( {
-		url     : 'inc/getlog.pml.php?' + user_time_zone + new Date().getTime() ,
+		url     : 'inc/getlog.pml.php?' + querystring,
 		data    : {
 			'ldv'         : load_default_values,
 			'file'        : file,
