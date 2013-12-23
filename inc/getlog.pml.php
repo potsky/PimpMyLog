@@ -121,6 +121,25 @@ if ( $search != '' ) {
 
 
 //////////////
+// Timezone //
+//////////////
+if ( isset( $_GET['tz'] ) ) {
+	$tz = $_GET['tz'];
+}
+else if ( defined( 'USER_TIME_ZONE' ) ) {
+	$tz = USER_TIME_ZONE;
+}
+else {
+	$tz = NULL;
+}
+$now = new DateTime();
+if ( ! is_null( $tz ) ) {
+	$now->setTimezone( new DateTimeZone( $tz ) );
+}
+$now = $now->format( 'Y/m/d H:i:s' );
+
+
+//////////////
 // Let's Go //
 //////////////
 $found           = false;
@@ -153,7 +172,7 @@ else {
 	if ( $data_to_parse < 0 ) { // Log file has been rotated, read all. It is not possible on apache because server is restarted gracefully but perhaps user has done something...
 		$data_to_parse  = $new_file_size;
 		$full           = true;
-		$logs['notice'] = '<strong>'. date('Y/m/d H:i:s') . '</strong> &gt; ' . sprintf( __('Log file has been rotated (previous size was %s and new one is %s)') , human_filesize($old_file_size) , human_filesize($new_file_size) );
+		$logs['notice'] = '<strong>'. $now . '</strong> &gt; ' . sprintf( __('Log file has been rotated (previous size was %s and new one is %s)') , human_filesize($old_file_size) , human_filesize($new_file_size) );
 	}
 	if ( $old_file_size == 0 ) {
 		$full           = true;
@@ -190,7 +209,7 @@ for ( $x_pos = 0, $ln = 0, $line = '', $still = true; $still ; $x_pos-- ) {
 				if ( $old_lastline != sha1( $deal ) ) { // So the new line should be the last line of the previous time
 					// This is not the case, so the file has been rotated and the new log file is bigger than the previous time
 					// So we have to contnue computing to find the user wanted count of lines (and alert user about the file change)
-					$logs['notice'] = '<strong>'. date('Y/m/d H:i:s') . '</strong> &gt; ' . __('Log file has been rotated');
+					$logs['notice'] = '<strong>'. $now . '</strong> &gt; ' . __('Log file has been rotated');
 					$full = true;
 				}
 				else {
@@ -199,7 +218,7 @@ for ( $x_pos = 0, $ln = 0, $line = '', $still = true; $still ; $x_pos-- ) {
 				}
 			}
 
-			$log = parser( $regex , $match , $deal , $types );
+			$log = parser( $regex , $match , $deal , $types , $tz );
 			if ( is_array( $log ) ) {
 				$return_log = true;
 				foreach ( $log as $key => $value ) {
@@ -284,6 +303,17 @@ $logs['lastline']    = $file_lastline;
 $logs['fingerprint'] = md5( serialize( @$logs['logs'] ) );
 
 
+///////////////////////
+// File Modification //
+///////////////////////
+$filem = new DateTime( );
+$filem->setTimestamp( filemtime( $file_path ) );
+if ( ! is_null( $tz ) ) {
+	$filem->setTimezone( new DateTimeZone( $tz ) );
+}
+$filem = $filem->format( 'Y/m/d H:i:s' );
+
+
 ////////////////
 // End Tuning //
 ////////////////
@@ -296,7 +326,7 @@ $logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> o
 	, $skip
 	, $error
 	, $file_path
-	, date( 'Y/m/d H:i:s' , filemtime( $file_path ) )
+	, $filmem
 	, human_filesize( $new_file_size )
 );
 
