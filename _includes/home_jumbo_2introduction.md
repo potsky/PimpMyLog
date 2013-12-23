@@ -10,8 +10,6 @@ We are `ssh > vi | tail 2>&1 grep -f` guys but tailing log files is finished now
 
 <br/><center>
 
-<a type="button" class="btn btn-sm btn-warning" href="/getting-started/screenshots.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;Screenshots</a>
-
-<a type="button" class="btn btn-sm btn-warning" href="http://demo.pimpmylog.com"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;&nbsp;&nbsp;Demo</a>
+<a type="button" class="btn btn-sm btn-warning" href="/getting-started/screenshots.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;Screenshots</a> &nbsp; <a type="button" class="btn btn-sm btn-warning" href="http://demo.pimpmylog.com"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;&nbsp;&nbsp;Demo</a>
 
 </center>
