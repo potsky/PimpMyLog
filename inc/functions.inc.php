@@ -43,7 +43,8 @@ function _e( $text ) {
  *
  * @return  mixed             An array where keys are internal tokens and values the corresponding values extracted from the log file. Or false if line is not matchable.
  */
-function parser( $regex , $match , $log , $types ) {
+function parser( $regex , $match , $log , $types , $tz = NULL ) {
+
 	$result = array();
 	preg_match_all( $regex , $log , $out, PREG_PATTERN_ORDER );
 	if ( @count( $out[0] )==0 ) {
@@ -72,9 +73,13 @@ function parser( $regex , $match , $log , $types ) {
 			if ( ( $timestamp = strtotime( $str ) ) === false ) {
 				$date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
 			} else {
-				$date = date( $dateformat , $timestamp );
+				$date = new DateTime( );
+				$date->setTimestamp( $timestamp );
+				if ( ! is_null( $tz ) ) {
+					$date->setTimezone( new DateTimeZone( $tz ) );
+				}
+				$date = $date->format( $dateformat );
 			}
-
 
 			$result[ $token ] = $date;
 		}
@@ -113,14 +118,6 @@ function init() {
 	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.json' );
 	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
 	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'        , 5 );
-
-	if ( isset( $_GET['tz'] ) ) {
-		date_default_timezone_set( $_GET['tz'] );
-	}
-	else if ( defined( 'USER_TIME_ZONE' ) ) {
-		date_default_timezone_set( USER_TIME_ZONE );
-	}
-
 }
 
 
