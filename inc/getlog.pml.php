@@ -326,7 +326,7 @@ $logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> o
 	, $skip
 	, $error
 	, $file_path
-	, $filmem
+	, $filem
 	, human_filesize( $new_file_size )
 );
 
