@@ -4,8 +4,6 @@ Desktop.ini
 ._*
 Thumbs.db
 *.swp
-
-# Files that might appear on external disks
 .Spotlight-V100
 .Trashes
 
@@ -13,21 +11,16 @@ Thumbs.db
 /config.inc.php
 /config.inc.php.tmp
 
-# Branch master
 /inc/test.REMOVE_UPPERCASE.php
 *.user.php
 *.user.css
 *.user.json
 *.user.json.tmp
-
-# Branch jekyll
 /_site
 /_build
 /_tmp
 /dist
-
-# Compiled Python files
-*.pyc
+/fonts
 
 # Application specific files
 /node_modules
