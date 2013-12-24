@@ -29,6 +29,14 @@ Default: `"GEOIP_URL" : "http:\/\/www.geoiptool.com\/en\/?IP=%p"`
 
 Default: `"GOOGLE_ANALYTICS" : "UA-XXXXX-X"`
 
+## LOCALE
+
+You can set a default locale for all users. By default, this value is not set and the displayed language is the user browser one. 
+
+If you set `LOCALE : "fr_FR"` for example, all users will see *Pimp My Log* in French by default whatever is the browser language.
+
+Users can personally override this value with a GET parameter when launching *Pimp My Log*. More informations are available [here](/documentation/usage.html).
+
 ## LOGS_MAX
 
 
@@ -85,7 +93,7 @@ Default: `"USER_TIME_ZONE" : "Europe\/Paris`
 
 # Badges
 
-```javascript
+```json
 "badges": {
         "severity": {
                 "debug" : "success",
@@ -111,7 +119,7 @@ Default: `"USER_TIME_ZONE" : "Europe\/Paris`
 
 ## Structure
 
-```javascript
+```json
 "files": {
     "apacheaccess": {
     ...
@@ -124,7 +132,7 @@ Default: `"USER_TIME_ZONE" : "Europe\/Paris`
 
 ## Software structure
 
-```javascript
+```json
 "display" : "Apache Error #1",
 "path" : "\/opt\/local\/apache2\/logs\/error_log",
 "refresh" : 5,
@@ -162,7 +170,7 @@ Default: `"USER_TIME_ZONE" : "Europe\/Paris`
 
 Example:
 
-```javascript
+```json
 "display" : "Apache Error #1"
 ```
 
@@ -172,7 +180,7 @@ Example:
 
 Example:
 
-```javascript
+```json
 "path" : "\/opt\/local\/apache2\/logs\/error_log"
 ```
 
@@ -182,7 +190,7 @@ Example:
 
 Example:
 
-```javascript
+```json
 "refresh" : 5
 ```
 
@@ -192,7 +200,7 @@ Example:
 
 Example:
 
-```javascript
+```json
 "max" : 10
 ```
 
@@ -202,7 +210,7 @@ Example:
 
 Example:
 
-```javascript
+```json
 "notify" : true
 ```
 
@@ -214,7 +222,7 @@ Example:
 
 Example:
 
-```javascript
+```json
 "regex": "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U"
 ```
 
@@ -224,7 +232,7 @@ Example:
 
 Example:
 
-```javascript
+```json
 "match": {
     "Date" : 1,
     "IP" : 4,
@@ -236,7 +244,7 @@ Example:
 
 or special for date :
 
-```javascript
+```json
 "match": {
     "Date"    : {
         "M" : 2,
@@ -255,7 +263,7 @@ or special for date :
 
 or with concatenation :
 
-```javascript
+```json
 "match": {
     "IP"       : 12,
     "Log"      : { " : " , 10 , 14 },
@@ -271,7 +279,7 @@ or with concatenation :
 
 Example:
 
-```javascript
+```json
 "types": {
     "Date" : "date:H:i:s",
     "IP" : "ip:http",
@@ -344,7 +352,7 @@ Eg : `numeral:0b`
 
 Example:
 
-```javascript
+```json
 "exclude": {
     "Log": ["\/PHP Stack trace:\/", "\/PHP *[0-9]*\\. \/"]
 }

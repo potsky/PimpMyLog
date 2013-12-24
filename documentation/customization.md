@@ -3,16 +3,27 @@ layout: default
 title: Customization
 ---
 
+# Table display
+
+## Table headers
+
+```html
+<th class="Date">Date<span class="glyphicon glyphicon-chevron-down"></span></th>
+```
+
+## Table columns
+
 ```html
 <td title="Raw value" class="pml-Severity pml-badge">Formatted value</td>
 ```
 
-```css
-/*
+# Customize CSS
+
 This stylesheet is located at /css/config.inc.css
 Your stylesheet will be loaded instead of this one if you create a file located at /css/config.inc.user.css
- */
 
+
+```css
 
 /* For logs table header */
 .logs th {
