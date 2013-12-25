@@ -23,7 +23,7 @@ title: Usage
 
 You can easily change all time values according to your current timezone. By default, all time values are displayed as they are stored in log files, assuming they correspond to the server timezone. The server timezone is normally set in your `php.ini` file.
 
-If you are currently in an other timezone location and want to display logs according to your current timezone, you can specify your timezone in the GET parameter like this:
+If you are currently in an other timezone location and want to display logs according to your current timezone, you can specify your timezone in the GET parameter like this:![title]()
 
 `http://.../PimpMyLog/?tz=America/Los_Angeles`
 

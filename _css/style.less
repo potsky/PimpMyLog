@@ -50,6 +50,15 @@ body {
 	-webkit-hyphens: auto;
 	-moz-hyphens: auto;
 	hyphens: auto;
+	
+	code {
+		white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+	}
+
 	pre {
 		display: block;
 		width: auto;
@@ -57,12 +66,22 @@ body {
 		-webkit-overflow-scrolling: touch;
 		white-space: pre;
 		word-wrap: normal;
+		background-color:#eee;
+		border:1px solid #ddd;
 	}
 	pre code {
 		-webkit-hyphens: none!important;
 		-moz-hyphens: none!important;
 		hyphens: none!important;
-		white-space: inherit;
+		white-space: pre!important;
+		word-wrap: normal!important;
+	}
+
+}
+
+@media screen and (max-width:800px) {
+	pre {
+		font-size:0.6em;
 	}
 }
 

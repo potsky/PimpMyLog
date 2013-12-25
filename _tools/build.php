@@ -3,6 +3,7 @@ header("Content-Type: text/html");
 ?>
 <html>
 	<head>
+                <title>build</title>
 		<style>
 		body {
 			background-color:#333;

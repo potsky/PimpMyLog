@@ -9,7 +9,11 @@ title: Configuration
 
 
 
-Default: `"CHECK_UPGRADE" : true`
+Default:
+
+```json
+"CHECK_UPGRADE" : true
+```
 
 ## FOOTER
 
@@ -25,13 +29,21 @@ Default:
 
 
 
-Default: `"GEOIP_URL" : "http:\/\/www.geoiptool.com\/en\/?IP=%p"`
+Default:
+
+```json
+"GEOIP_URL" : "http:\/\/www.geoiptool.com\/en\/?IP=%p"
+```
 
 ## GOOGLE_ANALYTICS
 
 
 
-Default: `"GOOGLE_ANALYTICS" : "UA-XXXXX-X"`
+Default:
+
+```json
+"GOOGLE_ANALYTICS" : "UA-XXXXX-X"
+```
 
 ## LOCALE
 
@@ -45,54 +57,90 @@ Users can personally override this value with a GET parameter when launching *Pi
 
 
 
-Default: `"LOGS_MAX" : 10`
+Default:
+
+```json
+"LOGS_MAX" : 10
+```
 
 ## LOGS_REFRESH
 
 
 
-Default: `"LOGS_REFRESH" : 7`
+Default: 
+
+```json
+"LOGS_REFRESH" : 7
+```
 
 ## MAX\_SEARCH\_LOG\_TIME
 
 
 
-Default: `"MAX_SEARCH_LOG_TIME" : 3`
+Default:
+
+```json
+"MAX_SEARCH_LOG_TIME" : 3
+```
 
 ## NAV_TITLE
 
 
 
-Default: `"NAV_TITLE" : ""`
+Default:
+
+```json
+"NAV_TITLE" : ""
+```
 
 ## NOTIFICATION
 
 
 
-Default: `"NOTIFICATION" : true`
+Default:
+
+```json
+"NOTIFICATION" : true
+```
 
 ## NOTIFICATION_TITLE
 
 
 
-Default: `"NOTIFICATION_TITLE" : "New logs [%f]"`
+Default: 
+
+```json
+"NOTIFICATION_TITLE" : "New logs [%f]"
+```
 
 ## PULL\_TO\_REFRESH
 
 
 
-Default: `"PULL_TO_REFRESH" : true`
+Default:
+
+```json
+"PULL_TO_REFRESH" : true
+```
 
 ## TITLE
 
 
 
-Default: `"TITLE" : "Pimp my Log"`
+Default:
+
+```json
+"TITLE" : "Pimp my Log"
+```
 
 ## USER\_TIME\_ZONE
 
 
-Default: `"USER_TIME_ZONE" : "Europe\/Paris`
+Default:
+
+```json
+"USER_TIME_ZONE" : "Europe\/Paris"
+```
 
 
 # Badges
@@ -132,6 +180,7 @@ Default: `"USER_TIME_ZONE" : "Europe\/Paris`
     "nginx": {
     ...
     }
+}
 ```
 
 ## Software structure
@@ -293,9 +342,11 @@ Example:
 }
 ```
 
-##### format
+##### format of types
 
-`type[:value][/count][\count]`
+```json
+"field" : "type[:value][/count][\count]"
+```
 
 * `type/100`
 * `type:value/100`
@@ -327,24 +378,30 @@ Date format is PHP date format and is available [here](http://php.net/manual/fun
 
 Values are available [here](http://numeraljs.com)
 
+Eg: `numeral:0b`
 
 ##### type *ip*
 
-Default : value :// ...
+
 
 
 ###### value *geo*
 
+Eg: `ip:geo` will result in `http://www.geoiptool.com/en/?IP=...`. The global constant `GEOIP_URL` is used.
 
 ##### type *link*
 
+Eg: `ip:http` will result in `http://...`
 
+Eg: `ip:sunk ` will result in `sunk://...`
 
 ##### type *ua*
 
 Values are available [here](https://github.com/faisalman/ua-parser-js)
 
-Eg : `numeral:0b`
+Eg:
+
+`ua:{os.name} {os.version} | {browser.name} {browser.version}\/100`
 
 ##### other types
 

@@ -3,6 +3,7 @@ header("Content-Type: text/html");
 ?>
 <html>
 	<head>
+		<title>save build install</title>
 		<style>
 		body {
 			background-color:#333;
