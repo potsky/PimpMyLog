@@ -15,7 +15,11 @@ Default: `"CHECK_UPGRADE" : true`
 
 
 
-Default: `"FOOTER" : "&copy; Potsky<\/a> 2007-2013 - Pimp my Log<\/a>"`
+Default:
+
+```json
+"FOOTER" : "&copy; Potsky<\/a> 2007-2013 - Pimp my Log<\/a>"
+```
 
 ## GEOIP_URL
 
@@ -35,7 +39,7 @@ You can set a default locale for all users. By default, this value is not set an
 
 If you set `LOCALE : "fr_FR"` for example, all users will see *Pimp My Log* in French by default whatever is the browser language.
 
-Users can personally override this value with a GET parameter when launching *Pimp My Log*. More informations are available [here](/documentation/usage.html).
+Users can personally override this value with a GET parameter when launching *Pimp My Log*. More informations are available [here](/documentation/usage.html#languageselector).
 
 ## LOGS_MAX
 

@@ -35,7 +35,8 @@ All available timezone strings are available [here](http://php.net/manual/en/tim
 
 ##  Language selector
 
-Users can override the default language by setting a GET parameter named `l`.
+<a name="languageselector"></a>
+Users can override the default  by setting a GET parameter named `l`.
 
 `http://.../PimpMyLog/?l=fr_FR` will load *Pimp My Log* in French for example.
 
