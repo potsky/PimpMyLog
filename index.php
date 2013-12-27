@@ -50,7 +50,7 @@ $errors = config_check();
 if ( is_array( $errors ) ) {
 	$title    = __( 'Oups!' );
 	$message  = '<br/>';
-	$message .= __( '<code>config.user.json</code> configuration file is buggy :' ) . '<ul>';
+	$message .= __( '<code>config.user.json</code> configuration file is buggy:' ) . '<ul>';
 	foreach ( $errors as $error ) {
 		$message .= '<li>' . $error . '</li>';
 	}

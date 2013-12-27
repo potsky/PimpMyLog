@@ -128,7 +128,7 @@ try {
 		if ( count( $notices ) > 0 ) {
 
 			$upgrade['alert'] .= '<hr/>';
-			$upgrade['alert'] .= '<strong>' . __( 'You should upgrade right now :') . '</strong><ul>';
+			$upgrade['alert'] .= '<strong>' . __( 'You should upgrade right now:') . '</strong><ul>';
 
 			foreach ( $notices as $version => $notice ) {
 				$upgrade['alert'] .=  '<li><em>' . $version . '</em> : ' . $notice . '</li>';
