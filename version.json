@@ -1,12 +1,15 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version" : "0.9.0",
+	"version" : "0.9.1",
 	"changelog" : {
-		"1.0.0" : {
-			"notice" : "First release of Pimp my Log!",
-			"released" : "2014-01-13",
+		"0.9.1" : {
+			"notice" : "Language",
+			"released" : "2013-12-27",
 			"new" : [
 				"Add french translations"
+			],
+			"fixed" : [
+				"Language support in ajax requests"
 			]
 		},
 		"0.9.0" : {

@@ -328,7 +328,8 @@ $lemma = array(
 // @endif
 ?>
 	<script>
-		var lemma = <?php echo json_encode($lemma);?>;
+		var lemma       = <?php echo json_encode($lemma);?>,
+			querystring = "<?php echo $_SERVER['QUERY_STRING'];?>";
 	</script>
 	</head>
 <body>
