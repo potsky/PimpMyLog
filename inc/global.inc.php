@@ -38,7 +38,6 @@ if ( function_exists( 'bindtextdomain' ) ) {
 		setlocale( LC_ALL , $locale , $locale . '.utf8' );
 	}
 
-error_log(dirname( __FILE__ ) . '/../lang');
 	bindtextdomain( 'messages' , dirname( __FILE__ ) . '/../lang' );
 	bind_textdomain_codeset( 'messages' , 'UTF-8' );
 	textdomain( 'messages' );

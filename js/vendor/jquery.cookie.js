@@ -26,7 +26,7 @@
 	}
 
 	function stringifyCookieValue(value) {
-		return encode(config.user.json ? JSON.stringify(value) : String(value));
+		return encode(config.json ? JSON.stringify(value) : String(value));
 	}
 
 	function parseCookieValue(s) {
@@ -40,7 +40,7 @@
 			// If we can't decode the cookie, ignore it, it's unusable.
 			// If we can't parse the cookie, ignore it, it's unusable.
 			s = decodeURIComponent(s.replace(pluses, ' '));
-			return config.user.json ? JSON.parse(s) : s;
+			return config.json ? JSON.parse(s) : s;
 		} catch(e) {}
 	}
 
