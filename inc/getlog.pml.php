@@ -53,7 +53,7 @@ function shutdown() {
 	if ( $error['type'] === E_ERROR ) {
 		echo json_encode(
 			array(
-				'error' => sprintf( __('<strong>PHP Error</strong> line %s : %s') , $error['line'] , $error['message'] )
+				'error' => sprintf( __('<strong>PHP Error</strong> line %s: %s') , $error['line'] , $error['message'] )
 			)
 		);
 	}

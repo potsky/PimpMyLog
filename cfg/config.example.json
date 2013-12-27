@@ -4,6 +4,7 @@
 		"_remove_me_to_set_NAV_TITLE"           : "",
 		"_remove_me_to_set_FOOTER"              : "&copy; Potsky<\/a> 2007-2013 - Pimp my Log<\/a>",
 		"_remove_me_to_set_LOGS_MAX"            : 10,
+		"_remove_me_to_set_LOCALE"              : "fr_FR",
 		"_remove_me_to_set_LOGS_REFRESH"        : 7,
 		"_remove_me_to_set_NOTIFICATION"        : true,
 		"_remove_me_to_set_NOTIFICATION_TITLE"  : "New logs [%f]",

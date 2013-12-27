@@ -45,7 +45,7 @@ if ( isset( $_POST['s'] ) ) {
 					$return[ 'notice' ] =
 						sprintf( __( 'Unable to create file <code>%s</code>') , CONFIG_FILE_TEMP)
 						. '<br/><br/>'
-						. __( 'Please give temporary write access to the root directory :' )
+						. __( 'Please give temporary write access to the root directory:' )
 						. '<pre>'
 						. 'chmod 777 ' . dirname( dirname( __FILE__ ) )
 						. '</pre>';
@@ -139,12 +139,12 @@ if ( isset( $_POST['s'] ) ) {
 
 				$user = get_server_user();
 				$return[ 'notice' ] .= ( $user == '' )
-					? ' (<em>' . __( 'unable to detect web server user') . '</em>) :'
-					: ' (<em>' . sprintf( __( 'web server user seems to be <code>%s</code>') , $user ) . '</em>) :';
+					? ' (<em>' . __( 'unable to detect web server user') . '</em>):'
+					: ' (<em>' . sprintf( __( 'web server user seems to be <code>%s</code>') , $user ) . '</em>):';
 
 				$return[ 'notice' ] .= '<br/><br/>';
 				$return[ 'notice' ] .= '<div class="table-responsive"><table id="find"></table></div><hr/>';
-				$return[ 'notice' ] .= __('You can also type log files path in the text area below separated by coma :');
+				$return[ 'notice' ] .= __('You can also type log files path in the text area below separated by coma:');
 				$return[ 'notice' ] .= '<br/><br/>';
 				$return[ 'notice' ] .= '<div class="table-responsive"><table class="table table-striped table-bordered table-hover table-condensed"><thead><tr><th>' . __( 'Type' ) . '</th><th>' . __( 'Custom paths' ) . '</th></tr></thead><tbody>';
 				foreach( $softuser as $software => $types ) {
@@ -187,8 +187,8 @@ if ( isset( $_POST['s'] ) ) {
 					$return[ 'notice' ] = __( 'Custom files below are not readable, please remove them or verify that they are readable by the webserver user' );
 					$user = get_server_user();
 					$return[ 'notice' ] .= ( $user == '' )
-						? ' (<em>' . __( 'unable to detect web server user') . '</em>) :'
-						: ' (<em>' . sprintf( __( 'web server user seems to be <code>%s</code>') , $user ) . '</em>) :<ul>';
+						? ' (<em>' . __( 'unable to detect web server user') . '</em>):'
+						: ' (<em>' . sprintf( __( 'web server user seems to be <code>%s</code>') , $user ) . '</em>):<ul>';
 					foreach( $notfound as $file ) {
 						$return[ 'notice' ] .= '<li><code>' . $file . '</code></li>';
 					}
@@ -369,7 +369,7 @@ $lemma = array(
 				_e( 'Your <em>Pimp my Log</em> instance is ready to use.' );
 				echo '<br/>';
 				echo '<br/>';
-				_e( 'You can manually adjust settings in the <code>' . CONFIG_FILE . '</code> file.' );
+				echo sprintf( __( 'You can manually adjust settings in the <code>%s</code> file.' ) , CONFIG_FILE );
 				echo '<br/>';
 				_e( 'Please visit <a href="http://pimpmylog.com">pimpmylog.com</a> for more informations.' );
 				echo '<br/>';
