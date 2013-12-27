@@ -1,4 +1,4 @@
-##### Key features
+### Key features
 
 - [:desktop:] Display any text log in your web browser
 - [:compass:] *Chrome*, *Safari*, *Firefox*, *IE9+*, *Opera* are supported
@@ -9,9 +9,7 @@
 
 ---
 
-##### Configuration and customization
-
-<br/>
+### Configuration and customization
 
 - [:smile-o:] Auto-configuration on first launch
 - [:gear:] Configure manually your *Pimp my Log* instance (deploy easily tons of instances)
@@ -22,11 +20,9 @@
 
 ---
 
-##### Misc
+### Misc
 
 - [:rocket:] Really optimized, you can browse huge GB log files 
 - [:globe:] Translations ready (English and French available now)
 - [:apple:] Runs on Linux, Mac OSX and Window servers with PHP 5.2+
 
-
-<br/>

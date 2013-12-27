@@ -202,16 +202,11 @@ cite {
 }
 
 blockquote {
-	border-left-width: 1px;
-	color: @gray;
-
-	&.pull-right {
-		border-right-width: 1px;
-	}
-
-	small {
-		font-size: @font-size-small;
+	p, small {
+	    font-size: @font-size-base;
+	    line-height: 1;
 		font-weight: 300;
+		color: @gray-lighter;
 	}
 }
 

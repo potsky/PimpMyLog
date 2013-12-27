@@ -8,17 +8,17 @@
 	position: absolute;
 	left: 4px;
 	top: 4px;
-   	background: url(../assets/icon36.png) no-repeat;
+	background: url(../assets/icon36.png) no-repeat;
 	background-size: 36px 36px;
-   	width: 36px;
-   	height: 36px;
+	width: 36px;
+	height: 36px;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
- only screen and (-o-min-device-pixel-ratio: 3/2),
- only screen and (min--moz-device-pixel-ratio: 1.5),
- only screen and (min-device-pixel-ratio: 1.5) {
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
 	.logo{
-    	background: url(../assets/icon72.png) no-repeat;
+		background: url(../assets/icon72.png) no-repeat;
 		background-size: 36px 36px;
 	}
 }
@@ -40,23 +40,21 @@
 }
 
 .jbgray {
-	background-color: #f0f0f0;
+	background-color: @body-bg;
 	color: #3a4353;
 }
 
-.breaklonglines {
-}
 body {
 	-webkit-hyphens: auto;
 	-moz-hyphens: auto;
 	hyphens: auto;
-	
+
 	code {
-		white-space: pre-wrap;      /* CSS3 */   
-   white-space: -moz-pre-wrap; /* Firefox */    
-   white-space: -pre-wrap;     /* Opera <7 */   
-   white-space: -o-pre-wrap;   /* Opera 7 */    
-   word-wrap: break-word;      /* IE */
+		white-space: pre-wrap;      /* CSS3 */
+		white-space: -moz-pre-wrap; /* Firefox */
+		white-space: -pre-wrap;     /* Opera <7 */
+		white-space: -o-pre-wrap;   /* Opera 7 */
+		word-wrap: break-word;      /* IE */
 	}
 
 	pre {
@@ -66,8 +64,7 @@ body {
 		-webkit-overflow-scrolling: touch;
 		white-space: pre;
 		word-wrap: normal;
-		background-color:#eee;
-		border:1px solid #ddd;
+		border:1px solid @hr-border;
 	}
 	pre code {
 		-webkit-hyphens: none!important;
@@ -79,13 +76,22 @@ body {
 
 }
 
+
+h1 { margin-bottom:@font-size-h1; margin-top:@font-size-h1; border-bottom:1px solid @gray-lighter; }
+h2 { margin-bottom:@font-size-h2; margin-top:@font-size-h2; border-bottom:1px solid @gray-lighter; }
+h3 { margin-bottom:@font-size-h3; margin-top:@font-size-h3; }
+h4 { margin-bottom:@font-size-h4; margin-top:@font-size-h4; }
+h5 { margin-bottom:@font-size-h5; margin-top:@font-size-h5; }
+h6 { margin-bottom:@font-size-h6; margin-top:@font-size-h6; }
+.noborder {
+	border-bottom:0;
+	margin-top: (@line-height-computed / 2);
+	margin-bottom: (@line-height-computed / 2);
+}
+
+
 @media screen and (max-width:800px) {
 	pre {
 		font-size:0.6em;
 	}
 }
-
-p {
-	margin-left: 10px;
-}
-

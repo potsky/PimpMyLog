@@ -3,11 +3,28 @@ layout: default
 title: Configuration
 ---
 
+You can configure a standard profile for each *Pimp My Log* instance. A profile is stored in  the `config.user.json` file at root. If you have done the automatic configuration at first launch, this file has been automatically created and set up for you. You can now adjust settings to fit your daily usage.
+
+This file is not updated and is ignored when you perform a `git pull` so you can easily update *Pimp My Log*, your settings will be kept.
+
+The file is composed by these 3 objects:
+
+* `globals` : global constants for *Pimp My Log* that you can overwrite
+* `files` : the log files description with path, format, column definition, ...
+* `badges` : a matching array between some kind of values and CSS classes
+
+
+
 # Globals
 
-## CHECK_UPGRADE
+#### CHECK\_UPGRADE
 
+Whether *Pimp My Log* should check for a new available version on launch or not. You should let this value to `true` given that the check is done in background and only downloads a few bytes.
 
+> **Note**  
+> Turn it to `false` if your *Pimp My Log* instance is installed on an embedded device without internet connection (*box*, *player*, ...)
+
+<!-- -->
 
 Default:
 
@@ -15,19 +32,23 @@ Default:
 "CHECK_UPGRADE" : true
 ```
 
-## FOOTER
+---
 
+#### FOOTER
 
+This constant is the footer text in *HTML*.
 
 Default:
 
 ```json
-"FOOTER" : "&copy; Potsky<\/a> 2007-2013 - Pimp my Log<\/a>"
+"FOOTER" : "&copy; <a href=\"http:\/\/www.potsky.com\" target=\"doc\">Potsky<\/a> 2013 - <a href=\"http:\/\/pimpmylog.com\" target=\"doc\">Pimp my Log<\/a>"
 ```
 
-## GEOIP_URL
+---
 
+#### GEOIP\_URL
 
+This constant is used to generate links for fields with type *ip* (see below). The url is used and the IP address will replace all `%p` instance.
 
 Default:
 
@@ -35,9 +56,16 @@ Default:
 "GEOIP_URL" : "http:\/\/www.geoiptool.com\/en\/?IP=%p"
 ```
 
-## GOOGLE_ANALYTICS
+---
 
+#### GOOGLE\_ANALYTICS
 
+Your *Google Analytics tracking ID*. If you let the default value or empty, *Google Analytics* will not be loaded.
+
+> **Note**  
+> Do not set a *Google Analytics tracking ID* if your *Pimp My Log* instance runs offline.
+
+<!-- -->
 
 Default:
 
@@ -45,17 +73,21 @@ Default:
 "GOOGLE_ANALYTICS" : "UA-XXXXX-X"
 ```
 
-## LOCALE
+---
+
+#### LOCALE
 
 You can set a default locale for all users. By default, this value is not set and the displayed language is the user browser one. 
 
-If you set `LOCALE : "fr_FR"` for example, all users will see *Pimp My Log* in French by default whatever is the browser language.
+If you set `"LOCALE" : "fr_FR"` for example, *Pimp My Log* will be in French by default whatever is the browser language for all users.
 
-Users can personally override this value with a GET parameter when launching *Pimp My Log*. More informations are available [here](/documentation/usage.html#languageselector).
+Users can personally overwrite this value with a GET parameter when launching *Pimp My Log*. More informations are available [here](/documentation/usage.html#languageselector).
 
-## LOGS_MAX
+---
 
+#### LOGS\_MAX
 
+This is the number of logs to display by default for all log files. This value is overwritten by the `max` value of the `files` object.
 
 Default:
 
@@ -63,9 +95,11 @@ Default:
 "LOGS_MAX" : 10
 ```
 
-## LOGS_REFRESH
+--- 
 
+#### LOGS_REFRESH
 
+This is the frequency in seconds to refresh the logs for all log files. This value is overwritten by the `refresh` value of the `files` object.
 
 Default: 
 
@@ -73,9 +107,19 @@ Default:
 "LOGS_REFRESH" : 7
 ```
 
-## MAX\_SEARCH\_LOG\_TIME
+---
 
+#### MAX\_SEARCH\_LOG\_TIME
 
+This is the maximum duration in seconds to search for logs in log files. *Pimp My Log* parses logs from the end to the beginning of log files and stop parsing log files when :
+
+- the last line of the previous parsing process is reached (incremental parsing)
+- the maximum count of logs is reached
+- the beginning of file is reached
+
+So the first parsing can be long and search parsing too. When this duration is reached, parsed logs are returned even if the maximum logs count is not reached.
+
+Searching for an unexisting word in a several gigabytes log file will not retain a web server process for a long time.
 
 Default:
 
@@ -83,9 +127,11 @@ Default:
 "MAX_SEARCH_LOG_TIME" : 3
 ```
 
-## NAV_TITLE
+---
 
+#### NAV\_TITLE
 
+This is the text displayed in the navigation bar on top left. This text is hidden on devices which have a less than 768 pixels width.
 
 Default:
 
@@ -93,9 +139,11 @@ Default:
 "NAV_TITLE" : ""
 ```
 
-## NOTIFICATION
+---
 
+#### NOTIFICATION
 
+Whether desktop notifications are enabled or not on supported browsers for all log files. This value is overwritten by the `notify` value of the `files` object.
 
 Default:
 
@@ -103,9 +151,11 @@ Default:
 "NOTIFICATION" : true
 ```
 
-## NOTIFICATION_TITLE
+--- 
 
+#### NOTIFICATION_TITLE
 
+The title of the desktop notification if enabled.
 
 Default: 
 
@@ -113,9 +163,9 @@ Default:
 "NOTIFICATION_TITLE" : "New logs [%f]"
 ```
 
-## PULL\_TO\_REFRESH
+#### PULL\_TO\_REFRESH
 
-
+Whether a *pull to refresh* system is loaded or not to refresh logs. You can disable this feature if your browser always refresh logs as soon as you scroll in the window.
 
 Default:
 
@@ -123,9 +173,11 @@ Default:
 "PULL_TO_REFRESH" : true
 ```
 
-## TITLE
+---
 
+#### TITLE
 
+The HTML title of the *Pimp My Log* page.
 
 Default:
 
@@ -133,8 +185,13 @@ Default:
 "TITLE" : "Pimp my Log"
 ```
 
-## USER\_TIME\_ZONE
+---
 
+#### USER\_TIME\_ZONE
+
+You can easily change all time values of log files. By default, all time values are displayed as they are stored in log files, assuming they correspond to the server timezone. The server timezone is normally set in the `php.ini` configuration file on the server running your *Pimp My Log* instance. If all *Pimp My Log* users are in an other timezone, you can set this value to shift all time values in their time zone.
+
+Each user can shift its timezone by [setting a GET parameter](/documentation/usage.html#timezone).
 
 Default:
 
@@ -142,6 +199,7 @@ Default:
 "USER_TIME_ZONE" : "Europe\/Paris"
 ```
 
+---
 
 # Badges
 
@@ -169,7 +227,7 @@ Default:
 
 # Files
 
-## Structure
+#### Structure
 
 ```json
 "files": {
@@ -183,7 +241,7 @@ Default:
 }
 ```
 
-## Software structure
+#### Software structure
 
 ```json
 "display" : "Apache Error #1",
@@ -214,10 +272,10 @@ Default:
 ```
 
 
-## Keys
+#### Keys
 
 
-### display
+##### display
 
 
 
@@ -227,7 +285,7 @@ Example:
 "display" : "Apache Error #1"
 ```
 
-### path
+##### path
 
 
 
@@ -237,7 +295,7 @@ Example:
 "path" : "\/opt\/local\/apache2\/logs\/error_log"
 ```
 
-### refresh
+##### refresh
 
 
 
@@ -247,7 +305,7 @@ Example:
 "refresh" : 5
 ```
 
-### max
+##### max
 
 
 
@@ -257,7 +315,7 @@ Example:
 "max" : 10
 ```
 
-### notify
+##### notify
 
 
 
@@ -267,9 +325,9 @@ Example:
 "notify" : true
 ```
 
-### format
+##### format
 
-#### regex
+###### regex
 
 
 
@@ -279,7 +337,7 @@ Example:
 "regex": "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U"
 ```
 
-#### match
+###### match
 
 
 
@@ -326,7 +384,7 @@ or with concatenation :
 ```
 
 
-#### types
+###### types
 
 
 
@@ -342,7 +400,7 @@ Example:
 }
 ```
 
-##### format of types
+####### format of types
 
 ```json
 "field" : "type[:value][/count][\count]"
@@ -354,48 +412,48 @@ Example:
 
 
 
-##### type *badge*
+####### type *badge*
 
 Default : no color
 
 
 
-###### value *http*
+######## value *http*
 
 
 
-###### value *severity*
+######## value *severity*
 
 
 
-##### type *date*
+####### type *date*
 
 Eg: `date:H:i:s`
 
 Date format is PHP date format and is available [here](http://php.net/manual/function.date.php).
 
-##### type *numeral*
+####### type *numeral*
 
 Values are available [here](http://numeraljs.com)
 
 Eg: `numeral:0b`
 
-##### type *ip*
+####### type *ip*
 
 
 
 
-###### value *geo*
+######## value *geo*
 
 Eg: `ip:geo` will result in `http://www.geoiptool.com/en/?IP=...`. The global constant `GEOIP_URL` is used.
 
-##### type *link*
+####### type *link*
 
 Eg: `ip:http` will result in `http://...`
 
 Eg: `ip:sunk ` will result in `sunk://...`
 
-##### type *ua*
+####### type *ua*
 
 Values are available [here](https://github.com/faisalman/ua-parser-js)
 
@@ -403,11 +461,11 @@ Eg:
 
 `ua:{os.name} {os.version} | {browser.name} {browser.version}\/100`
 
-##### other types
+####### other types
 
 
 
-#### exclude
+###### exclude
 
 
 

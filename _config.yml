@@ -14,7 +14,6 @@ atom_path         : /atom.xml
 url_github        : https://github.com/potsky/PimpMyLog
 url_support       : http://support.pimpmylog.com
 google_analytics  : UA-44146210-2
-markdown          : redcarpet
 pygments          : true
 paginate          : 5
 paginate_path     : /blog/page:num
@@ -30,6 +29,10 @@ exclude           : [
     'Gemfile.lock',
     'README.md'
 ]
+
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data", "strikethrough", "underline"]
 
 assets:
     root_url: '/assets'
