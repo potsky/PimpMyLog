@@ -163,6 +163,20 @@ Default:
 "NOTIFICATION_TITLE" : "New logs [%f]"
 ```
 
+---
+
+#### PIMPMYLOG\_VERSION\_URL
+
+This is the url of the current version file in production. If you have installed the *beta* branch instead of the *master* one, install this constant and replace word *master* by *beta* in the url. *Pimp my Log* will then check for beta upgrades instead of production upgrades.
+
+Default:
+
+```json
+"PIMPMYLOG_VERSION_URL" : "http:\/\/raw.github.com\/potsky\/PimpMyLog\/master\/version.json"
+```
+
+---
+
 #### PULL\_TO\_REFRESH
 
 Whether a *pull to refresh* system is loaded or not to refresh logs. You can disable this feature if your browser always refresh logs as soon as you scroll in the window.
@@ -202,6 +216,7 @@ Default:
 ---
 
 # Badges
+
 
 ```json
 "badges": {
