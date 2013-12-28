@@ -12021,7 +12021,7 @@ if (typeof define !== 'undefined' && define.amd) {
 	} );
 
 	$.ajax({
-		url: 'https://raw.github.com/potsky/PimpMyLog/master/version.json?callback=?',
+		url: 'https://raw.github.com/potsky/PimpMyLog/master/version.jsonp?callback=?',
 		type: 'GET',
 		dataType: 'jsonp',
 		jsonp: 'version_cb'
