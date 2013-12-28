@@ -96,7 +96,7 @@ module.exports = function(grunt) {
 			devphp: {
 				files: [{
 					expand: true,
-					src: [ 'version.json' , '*.php' , 'inc/*', 'cfg/*' ],
+					src: [ 'version.jsonp' , '*.php' , 'inc/*', 'cfg/*' ],
 					dest: '_site/'
 				}]
 			},
@@ -151,7 +151,7 @@ module.exports = function(grunt) {
 						'img/**',
 						'inc/**',
 						'lang/**',
-						'version.json',
+						'version.jsonp',
 						'config.user.json',
 						'version.txt',
 						'*.php'
@@ -311,7 +311,7 @@ module.exports = function(grunt) {
 				tasks: [ 'less' , 'copy:devcss' ]
 			},
 			html: {
-				files: [ 'version.json' , '*.php' , 'inc/*', 'cfg/*' ],
+				files: [ 'version.jsonp' , '*.php' , 'inc/*', 'cfg/*' ],
 				tasks: [ 'copy:devphp' , 'preprocess:dev' ]
 			},
 			js: {
