@@ -3,7 +3,7 @@
 		"_remove_me_to_set_TITLE"                 : "Pimp my Log",
 		"_remove_me_to_set_NAV_TITLE"             : "",
 		"_remove_me_to_set_FOOTER"                : "&copy; <a href=\"http:\/\/www.potsky.com\" target=\"doc\">Potsky<\/a> 2013 - <a href=\"http:\/\/pimpmylog.com\" target=\"doc\">Pimp my Log<\/a>",
-		"_remove_me_to_set_PIMPMYLOG_VERSION_URL" : "http:\/\/raw.github.com\/potsky\/PimpMyLog\/master\/version.json",
+		"_remove_me_to_set_PIMPMYLOG_VERSION_URL" : "http:\/\/raw.github.com\/potsky\/PimpMyLog\/master\/version.jsonp",
 		"_remove_me_to_set_LOGS_MAX"              : 10,
 		"_remove_me_to_set_LOGS_REFRESH"          : 7,
 		"_remove_me_to_set_LOCALE"                : "fr_FR",

@@ -20,8 +20,8 @@ $upgrade = array(
 
 
 
-if ( file_exists( '../version.json' ) ) {
-	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.json' ) ) , true );
+if ( file_exists( '../version.jsonp' ) ) {
+	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.jsonp' ) ) , true );
 	$upgrade['current'] = $JSl_version[ 'version' ];
 	$default            = sprintf ( __( 'Current version %s' ) , $upgrade['current'] );
 	$upgrade['footer']  = $default;
