@@ -29,7 +29,7 @@ if ( ! file_exists( 'config.user.json' ) ) {
 	$message .= '<span class="glyphicon glyphicon-heart-empty"></span> ';
 	$message .= __( 'Or let me try to configure it for you!' );
 	$message .= '<br/><br/>';
-	$link_url = 'inc/configure.php';
+	$link_url = 'inc/configure.php?' . $_SERVER['QUERY_STRING'];
 	$link_msg = __('Configure now');
 	include_once 'inc/error.inc.php';
 	die();
@@ -50,7 +50,7 @@ $errors = config_check();
 if ( is_array( $errors ) ) {
 	$title    = __( 'Oups!' );
 	$message  = '<br/>';
-	$message .= __( '<code>config.user.json</code> configuration file is buggy :' ) . '<ul>';
+	$message .= __( '<code>config.user.json</code> configuration file is buggy:' ) . '<ul>';
 	foreach ( $errors as $error ) {
 		$message .= '<li>' . $error . '</li>';
 	}
@@ -58,7 +58,7 @@ if ( is_array( $errors ) ) {
 	$message .= '<br/>';
 	$message .= __( 'If you want me to build the configuration for you, please remove file <code>config.user.json</code> at root and click below.' );
 	$message .= '<br/><br/>';
-	$link_url = 'inc/configure.php';
+	$link_url = 'inc/configure.php?' . $_SERVER['QUERY_STRING'];
 	$link_msg = __('Configure now');
 	include_once 'inc/error.inc.php';
 	die();

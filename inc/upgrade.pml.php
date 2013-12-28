@@ -20,8 +20,8 @@ $upgrade = array(
 
 
 
-if ( file_exists( '../version.json' ) ) {
-	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.json' ) ) , true );
+if ( file_exists( '../version.jsonp' ) ) {
+	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.jsonp' ) ) , true );
 	$upgrade['current'] = $JSl_version[ 'version' ];
 	$default            = sprintf ( __( 'Current version %s' ) , $upgrade['current'] );
 	$upgrade['footer']  = $default;
@@ -128,7 +128,7 @@ try {
 		if ( count( $notices ) > 0 ) {
 
 			$upgrade['alert'] .= '<hr/>';
-			$upgrade['alert'] .= '<strong>' . __( 'You should upgrade right now :') . '</strong><ul>';
+			$upgrade['alert'] .= '<strong>' . __( 'You should upgrade right now:') . '</strong><ul>';
 
 			foreach ( $notices as $version => $notice ) {
 				$upgrade['alert'] .=  '<li><em>' . $version . '</em> : ' . $notice . '</li>';
