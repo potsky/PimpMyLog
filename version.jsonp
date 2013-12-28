@@ -3,9 +3,12 @@
 	"version" : "0.9.1",
 	"changelog" : {
 		"0.9.1" : {
-			"released" : "2013-12-27",
+			"released" : "2013-12-28",
 			"new" : [
-				"Add french translations"
+				"Add french translations #3"
+			],
+			"changed" : [
+				"Upgrade check management #41 #42"
 			],
 			"fixed" : [
 				"Language support in ajax requests"
