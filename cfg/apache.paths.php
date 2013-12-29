@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.1 - 9f01849a682f5a18cfb83a8f8ba416dd1261d160*/
+/*! pimpmylog - 0.9.1 - c3641bf1e5598c29ab1cbd9e49a392c343da9060*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -16,15 +16,15 @@
  * @var  array
  */
 $paths = array(
-//	'/var/log/',
+	'/var/log/',
 	'/var/log/apache/',
-//	'/var/log/apache2/',
+	'/var/log/apache2/',
 	'/var/log/httpd/',
 	'/usr/local/var/log/apache/',
 	'/usr/local/var/log/apache2/',
 	'/usr/local/var/log/httpd/',
 	'/opt/local/apache/logs/',
-//	'/opt/local/apache2/logs/',
+	'/opt/local/apache2/logs/',
 	'/opt/local/httpd/logs/',
 	'C:/wamp/logs/',
 );
