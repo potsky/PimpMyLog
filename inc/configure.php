@@ -1,4 +1,14 @@
 <?php
+/*! pimpmylog - 0.9.1 - 9f01849a682f5a18cfb83a8f8ba416dd1261d160*/
+/*
+ * pimpmylog
+ * http://pimpmylog.com
+ *
+ * Copyright (c) 2013 Potsky, contributors
+ * Licensed under the GPLv3 license.
+ */
+?>
+<?php
 include_once 'global.inc.php';
 init();
 
@@ -368,7 +378,7 @@ $lemma = array(
 				_e( 'Please visit <a href="http://pimpmylog.com">pimpmylog.com</a> for more informations.' );
 				echo '<br/>';
 				echo '<br/>';
-				echo '<a class="btn btn-success" href="../">' . __('Pimp my Logs now!') . '</a>';
+				echo '<a class="btn btn-success" href="../?' . $_SERVER['QUERY_STRING'] . '">' . __('Pimp my Logs now!') . '</a>';
 			?>
 			</p>
 		</div>

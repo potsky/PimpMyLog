@@ -1,4 +1,14 @@
 <?php
+/*! pimpmylog - 0.9.1 - 9f01849a682f5a18cfb83a8f8ba416dd1261d160*/
+/*
+ * pimpmylog
+ * http://pimpmylog.com
+ *
+ * Copyright (c) 2013 Potsky, contributors
+ * Licensed under the GPLv3 license.
+ */
+?>
+<?php
 if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
 	header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found');
 	die();
