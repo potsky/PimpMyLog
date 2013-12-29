@@ -1,4 +1,13 @@
 <?php
+/*! pimpmylog - 0.9.1 - 9f01849a682f5a18cfb83a8f8ba416dd1261d160*/
+/*
+ * pimpmylog
+ * http://pimpmylog.com
+ *
+ * Copyright (c) 2013 Potsky, contributors
+ * Licensed under the GPLv3 license.
+ */
+?><?php
 include_once 'inc/global.inc.php';
 
 
@@ -90,7 +99,7 @@ $lemma = array(
 $csrf = csrf_get();
 
 
-?><!DOCTYPE html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><title><?php echo TITLE;?></title><?php include_once 'inc/favicon.inc.php'; ?><?php
+?><!DOCTYPE html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><meta name="robots" content="none"><title><?php echo TITLE;?></title><?php include_once 'inc/favicon.inc.php'; ?><?php
 ?><?php
 ?><link rel="stylesheet" href="css/pml.min.css"><?php
 ?><?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?><link rel="stylesheet" href="css/config.inc.user.css"><?php } else { ?><link rel="stylesheet" href="css/config.inc.css"><?php } ?><script>var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,

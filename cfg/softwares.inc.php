@@ -1,4 +1,14 @@
 <?php
+/*! pimpmylog - 0.9.1 - 9f01849a682f5a18cfb83a8f8ba416dd1261d160*/
+/*
+ * pimpmylog
+ * http://pimpmylog.com
+ *
+ * Copyright (c) 2013 Potsky, contributors
+ * Licensed under the GPLv3 license.
+ */
+?>
+<?php
 $softwares_all = array(
 	'apache' => array(
 		'name'    => __('Apache'),
