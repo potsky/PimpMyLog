@@ -264,7 +264,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 	loading      = true;
 	wanted_lines = $('#max').val();
 	$.ajax( {
-		url     : 'inc/getlog.pml.php?' + (new Date).getTime() + '&' + querystring,
+		url     : 'inc/getlog.pml.php?' + (new Date()).getTime() + '&' + querystring,
 		data    : {
 			'ldv'         : load_default_values,
 			'file'        : file,
@@ -606,17 +606,17 @@ $(function() {
 
 	// Check for upgrade
 	$.ajax( {
-		url      : 'inc/upgrade.pml.php?' + (new Date).getTime() + '&' + querystring,
+		url      : 'inc/upgrade.pml.php?' + (new Date()).getTime() + '&' + querystring,
 		dataType : 'json',
 		data     : { 'csrf_token' : csrf_token } ,
 		type     : 'POST',
 	} ).done( function ( upgrade ) {
 		$( '#upgradefooter' ).html( ' - ' + upgrade.footer);
-		var hide = $.cookie( 'upgrade' + upgrade.to );
-		if ( hide !== 'hide' ) {
+		var hide = $.cookie( 'upgradehide' );
+		if ( hide !== upgrade.to ) {
 			$( '#upgrademessage' ).html( upgrade.alert );
 			$( '#upgradestop' ).click( function() {
-				$.cookie( 'upgrade' + $(this).data('version') , 'hide' );
+				$.cookie( 'upgradehide' , $(this).data('version') );
 				$("#upgradealert").alert('close');
 			});
 		}

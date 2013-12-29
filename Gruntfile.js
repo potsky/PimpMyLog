@@ -1,13 +1,25 @@
 module.exports = function(grunt) {
+
 	// Load all NPM grunt tasks
 	require('matchdep').filterAll('grunt-*').forEach( grunt.loadNpmTasks );
 
+	var shell       = require('shelljs');
+	var githash     = shell.exec('git rev-parse HEAD', {silent:true}).output.replace("\n","");
 	var master_dir  = '/tmp';
 	var master_name = 'PimpMyLog-master';
 	var master      = master_dir + '/' + master_name;
 	var beta_dir    = '/tmp';
 	var beta_name   = 'PimpMyLog-beta';
 	var beta        = beta_dir + '/' + beta_name;
+	var npmpkg      = grunt.file.readJSON('package.json');
+	var licence     = "/*! " + npmpkg.name + " - " + npmpkg.version + " - " + githash + "*/\n";
+		licence    += "/*\n";
+		licence    += " * " + npmpkg.name + "\n";
+		licence    += " * " + npmpkg.homepage + "\n";
+		licence    += " *\n";
+		licence    += " * Copyright (c) " + (new Date()).getFullYear() + " Potsky, contributors\n";
+		licence    += " * Licensed under the GPLv3 license.\n";
+		licence    += " */";
 
 	// Project configuration
 	grunt.initConfig({
@@ -96,7 +108,7 @@ module.exports = function(grunt) {
 			devphp: {
 				files: [{
 					expand: true,
-					src: [ 'version.jsonp' , '*.php' , 'inc/*', 'cfg/*' ],
+					src: [ '*.php' , 'inc/*', 'cfg/*' , 'lang/*' ],
 					dest: '_site/'
 				}]
 			},
@@ -146,18 +158,45 @@ module.exports = function(grunt) {
 					expand: true,
 					src: [
 						'cfg/**',
-						'css/*.css',
 						'fonts/**',
 						'img/**',
 						'inc/**',
 						'lang/**',
-						'version.jsonp',
 						'config.user.json',
-						'version.txt',
-						'*.php'
+						'*.txt'
 					],
 					dest: '_build/'
 				}]
+			},
+			prodcss: {
+				files: [{
+					expand: true,
+					src: [
+						'css/*.css'
+					],
+					dest: '_build/'
+				}],
+				options: {
+					processContent: function ( content , srcpath ) {
+						return licence + "\n" + content;
+					}
+				}
+			},
+			prodphp: {
+				files: [{
+					expand: true,
+					src: [
+						'inc/*.php',
+						'cfg/*.php',
+						'*.php'
+					],
+					dest: '_build/'
+				}],
+				options: {
+					processContent: function ( content , srcpath ) {
+						return "<?php\n" + licence + "\n?>\n" + content;
+					}
+				}
 			},
 			prodindex: {
 				src: '_build/index.php',
@@ -177,9 +216,12 @@ module.exports = function(grunt) {
 
 		// Minify CSS
 		cssmin: {
-			minify: {
+			minify : {
 				files: {
-					'_build/css/pml.min.css': [ '_tmp/pml.css' ]
+						'_build/css/pml.min.css': [ '_tmp/pml.css' ]
+				},
+				options: {
+					banner: licence
 				}
 			}
 		},
@@ -238,58 +280,124 @@ module.exports = function(grunt) {
 			}
 		},
 
+		replace: {
+			dev: {
+				options: {
+					patterns: [
+						{ match: 'VERSIONDEVH',	replacement: githash },
+						{ match: 'VERSIONDEV',	replacement: '<%= pkg.version %>' }
+					]
+				},
+				files: [{
+					expand: true,
+					flatten: true,
+					src: ['version.jsonp'],
+					dest: '_site/'
+				}]
+			},
+			prod: {
+				options: {
+					patterns: [
+						{ match: 'VERSIONDEVH',	replacement: githash },
+						{ match: 'VERSIONDEV',	replacement: '<%= pkg.version %>' }
+					]
+				},
+				files: [{
+					expand: true,
+					flatten: true,
+					src: ['version.jsonp'],
+					dest: '_build/'
+				}]
+			}
+		},
 
 		shell: {
 			betagitclone: {
-				command: 'cd "' + beta_dir + '" && git clone git@github.com:potsky/PimpMyLog.git -b beta "' + beta_name + '"',
+				command: [
+					'cd "' + beta_dir + '"',
+					'git clone git@github.com:potsky/PimpMyLog.git -b beta "' + beta_name + '"'
+				].join('&&'),
 				options: {
-					stdout: true
+					stdout: true,
+					stderr: true
 				}
 			},
 			betagitremove: {
-				command: 'cd "' + beta + '" && git rm -rf * ',
+				command: [
+					'cd "' + beta + '"',
+					'git rm -rf * '
+				].join('&&'),
 				options: {
-					stdout: true
+					stdout: true,
+					stderr: true
 				}
 			},
 			betagitaddcommitpush : {
-				command: 'a=$(git rev-parse --short HEAD); cd "' + beta + '"; rm -f config.user.json; git add -A . 2>&1; git commit -m "grunt install from branch dev commit $a" 2>&1; git pull origin beta 2>&1; git push origin beta 2>&1',
+				command: [
+					'a=$(git rev-parse --short HEAD)',
+					'cd "' + beta + '"',
+					'rm -f config.user.json',
+					'git add -A .',
+					'git commit -m "grunt install from branch dev commit $a"',
+					'git pull origin beta',
+					'git push origin beta'
+				].join(';'),
 				options: {
-					stdout: true
+					stdout: true,
+					stderr: true
 				}
 			},
 			mastergitclone: {
-				command: 'cd "' + master_dir + '" && git clone git@github.com:potsky/PimpMyLog.git -b master "' + master_name + '"',
+				command: [
+					'cd "' + master_dir + '"',
+					'git clone git@github.com:potsky/PimpMyLog.git -b master "' + master_name + '"'
+				].join('&&'),
 				options: {
-					stdout: true
+					stdout: true,
+					stderr: true
 				}
 			},
 			mastergitremove: {
-				command: 'cd "' + master + '" && git rm -rf * ',
+				command: [
+					'cd "' + master + '"',
+					'git rm -rf * '
+				].join('&&'),
 				options: {
-					stdout: true
+					stdout: true,
+					stderr: true
 				}
 			},
 			mastergitaddcommitpush : {
-				command: 'a=$(git rev-parse --short HEAD); cd "' + master + '"; rm -f config.user.json; git add -A . 2>&1; git commit -m "grunt install from branch dev commit $a" 2>&1; git pull origin master 2>&1; git push origin master 2>&1',
+				command: [
+					'a=$(git rev-parse --short HEAD)',
+					'cd "' + master + '"',
+					'rm -f config.user.json',
+					'git add -A .',
+					'git commit -m "grunt install from branch dev commit $a"',
+					'git pull origin master',
+					'git push origin master'
+				].join(';'),
 				options: {
-					stdout: true
+					stdout: true,
+					stderr: true
 				}
 			},
 			devaddcommitpush : {
-				command: 'git add -A . 2>&1; git commit --author=\'Potsky <potsky@me.com>\' -m "prepare to publish on master or beta" 2>&1; git pull origin dev 2>&1; git push origin dev 2>&1',
+				command: [
+					'git add -A .',
+					'git commit --author=\'Potsky <potsky@me.com>\' -m "prepare to publish on master or beta"',
+					'git pull origin dev',
+					'git push origin dev'
+				].join(';'),
 				options: {
-					stdout: true
+					stdout: true,
+					stderr: true
 				}
 			}
 		},
 
 		// Minify JS
 		uglify: {
-			options: {
-				// the banner is inserted at the top of the output
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-			},
 			dist: {
 				files: {
 					'_build/js/pml.min.js': ['<%= concat.js.dest %>'],
@@ -297,6 +405,9 @@ module.exports = function(grunt) {
 					'_build/js/test.min.js': ['js/test.js'],
 					'_build/js/configure.min.js': ['js/configure.js'],
 				}
+			},
+			options: {
+				banner: licence
 			}
 		},
 
@@ -311,8 +422,12 @@ module.exports = function(grunt) {
 				tasks: [ 'less' , 'copy:devcss' ]
 			},
 			html: {
-				files: [ 'version.jsonp' , '*.php' , 'inc/*', 'cfg/*' ],
+				files: [ '*.php' , 'inc/*', 'cfg/*' ],
 				tasks: [ 'copy:devphp' , 'preprocess:dev' ]
+			},
+			version: {
+				files: [ 'package.json' , 'version.jsonp' ],
+				tasks: [ 'checkversion' , 'replace:dev' ]
 			},
 			js: {
 				files: [ 'js/**/*.js' ],
@@ -381,10 +496,12 @@ module.exports = function(grunt) {
 
 	// Development task, build and watch for file modification
 	grunt.registerTask( 'dev' , function() {
+		grunt.task.run('checkversion');
 		grunt.task.run([
 			'clean:dev',
 			'copy:bsfoots',
 			'copy:dev',
+			'replace:dev',
 			'less',
 			'copy:devcss',
 			'preprocess:dev'
@@ -394,11 +511,15 @@ module.exports = function(grunt) {
 
 	// Build task for production
 	grunt.registerTask( 'prod' , function() {
+		grunt.task.run('checkversion');
 		grunt.task.run([
 			'clean:prod',
 			'copy:bsfoots',
 			'copy:prod',
 			'copy:prodcssimg',
+			'replace:prod',
+			'copy:prodphp',
+			'copy:prodcss',
 			'less',
 			'concat:css',
 			'cssmin',
@@ -408,6 +529,20 @@ module.exports = function(grunt) {
 			'copy:prodindex',
 			'htmlmin'
 		]);
+	});
+
+	grunt.registerTask('checkversion', function() {
+		var a;
+		try {
+			a = JSON.parse( grunt.file.read('./version.jsonp').replace('/*PSK*/pml_version_cb(/*PSK*/','').replace('/*PSK*/)/*PSK*/','') );
+			if ( ! a.changelog[ npmpkg.version ] ) {
+				grunt.verbose.or.error().error( 'Version ' + npmpkg.version + ' is not in the changelog in file version.jsonp!' );
+				grunt.fail.warn('Unable to continue');
+			}
+		} catch (e) {
+			grunt.verbose.or.error().error( 'version.jsonp is invalid!' );
+			grunt.fail.warn('Unable to continue');
+		}
 	});
 
 	grunt.registerTask('build', function() {
@@ -423,5 +558,4 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('default', [ 'dev' ] );
-
 };

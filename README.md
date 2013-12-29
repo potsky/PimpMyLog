@@ -8,6 +8,10 @@ This is the dev branch.
 - `npm install`
 - `bower install`
 
+## Version
+
+Change version in `package.json`, it will be automatically added in the `version.jsonp` file on dev and build.
+
 ## Dev
 
 - `grunt` to dev and watch : site available at ~/_site/_

@@ -82,7 +82,7 @@ var fatal_error = function( message ) {
 var pml_action = function ( object , done , options ) {
 	progressbar_active();
 	$.ajax( {
-		url      : 'configure.php?' + (new Date).getTime() + '&' + querystring,
+		url      : 'configure.php?' + (new Date()).getTime() + '&' + querystring,
 		data     : object,
 		type     : 'POST',
 		dataType : 'json'

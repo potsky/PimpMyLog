@@ -96,6 +96,7 @@ $csrf = csrf_get();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
+	<meta name="robots" content="none">
 	<title><?php echo TITLE;?></title>
 	<?php include_once 'inc/favicon.inc.php'; ?>
 <?php

@@ -375,7 +375,7 @@ $lemma = array(
 				_e( 'Please visit <a href="http://pimpmylog.com">pimpmylog.com</a> for more informations.' );
 				echo '<br/>';
 				echo '<br/>';
-				echo '<a class="btn btn-success" href="../">' . __('Pimp my Logs now!') . '</a>';
+				echo '<a class="btn btn-success" href="../?' . $_SERVER['QUERY_STRING'] . '">' . __('Pimp my Logs now!') . '</a>';
 			?>
 			</p>
 		</div>

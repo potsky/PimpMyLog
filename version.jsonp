@@ -1,6 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version" : "0.9.1",
+	"version"     : "@@VERSIONDEV",
+	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
 		"0.9.1" : {
 			"released" : "2013-12-28",
