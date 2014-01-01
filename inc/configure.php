@@ -1,10 +1,10 @@
 <?php
-/*! pimpmylog - 0.9.1 - c3641bf1e5598c29ab1cbd9e49a392c343da9060*/
+/*! pimpmylog - 0.9.2 - c3641bf1e5598c29ab1cbd9e49a392c343da9060*/
 /*
  * pimpmylog
  * http://pimpmylog.com
  *
- * Copyright (c) 2013 Potsky, contributors
+ * Copyright (c) 2014 Potsky, contributors
  * Licensed under the GPLv3 license.
  */
 ?>
@@ -99,14 +99,12 @@ if ( isset( $_POST['s'] ) ) {
 					throw new Exception( sprintf( __( 'Files <code>%s</code> or <code>%s</code> do not exist. Please review your software configuration.') , $software_paths , $software_pathsuser ) ) ;
 				}
 
-				$softuser[ $software ] = array();
 				foreach ( $paths as $path ) {
 					$tried[ $software ][ $path ] = false;
 					if ( is_dir( $path ) ) {
 						$found = 1;
 						$tried[ $software ][ $path ] = true;
 						foreach ( $files as $type => $fpaths) {
-							$softuser[ $software ][ $type ] = 1;
 							foreach ( $fpaths as $file ) {
 								$allfiles[ $file ] = $file;
 								if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
@@ -117,6 +115,13 @@ if ( isset( $_POST['s'] ) ) {
 								}
 							}
 						}
+					}
+				}
+
+				$softuser[ $software ] = array();
+				foreach ( $paths as $path ) {
+					foreach ( $files as $type => $fpaths) {
+						$softuser[ $software ][ $type ] = 1;
 					}
 				}
 
