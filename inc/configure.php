@@ -89,14 +89,12 @@ if ( isset( $_POST['s'] ) ) {
 					throw new Exception( sprintf( __( 'Files <code>%s</code> or <code>%s</code> do not exist. Please review your software configuration.') , $software_paths , $software_pathsuser ) ) ;
 				}
 
-				$softuser[ $software ] = array();
 				foreach ( $paths as $path ) {
 					$tried[ $software ][ $path ] = false;
 					if ( is_dir( $path ) ) {
 						$found = 1;
 						$tried[ $software ][ $path ] = true;
 						foreach ( $files as $type => $fpaths) {
-							$softuser[ $software ][ $type ] = 1;
 							foreach ( $fpaths as $file ) {
 								$allfiles[ $file ] = $file;
 								if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
@@ -107,6 +105,13 @@ if ( isset( $_POST['s'] ) ) {
 								}
 							}
 						}
+					}
+				}
+
+				$softuser[ $software ] = array();
+				foreach ( $paths as $path ) {
+					foreach ( $files as $type => $fpaths) {
+						$softuser[ $software ][ $type ] = 1;
 					}
 				}
 
