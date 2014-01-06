@@ -5,17 +5,25 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2013-12-28T15:50:32+01:00</lastBuildDate>
-        <pubDate>2013-12-28T15:50:32+01:00</pubDate>
+        <lastBuildDate>2014-01-06T17:12:52+01:00</lastBuildDate>
+        <pubDate>2014-01-06T17:12:52+01:00</pubDate>
         <ttl>1800</ttl>
 
         <item>
                 <title>Bye-Bye PHP Apache Log Viewer, hello Pimp My Log !</title>
-                <description>&lt;p&gt;Coming soon !!!&lt;/p&gt;
+                <description>&lt;p&gt;&lt;em&gt;PHP Apache Log Viewer&lt;/em&gt; now becomes &lt;em&gt;Pimp My Log&lt;/em&gt;. &lt;em&gt;Pimp My Log&lt;/em&gt; is in beta until mid-January and will be released in version 1.0.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-&lt;p&gt;This post will be removed and a new one will be created on product launched.&lt;/p&gt;
+&lt;p&gt;Why this change ?&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;PHP Apache Log Viewer&lt;/em&gt; was a simple buggy script.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Pimp My Log&lt;/em&gt; is an &lt;em&gt;enterprise class&lt;/em&gt; log viewer.&lt;/p&gt;
+
+&lt;p&gt;I am writing the documentation to let you install, use and extend &lt;em&gt;Pimp My Log&lt;/em&gt; easily. During this period, let me know if you encounter some problems to install or use &lt;em&gt;Pimp My Log&lt;/em&gt; via the &lt;a href=&quot;http://support.pimpmylog.com&quot;&gt;support page&lt;/a&gt; or by &lt;a href=&quot;support@pimpmylog.com&quot;&gt;email&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Have fun!&lt;/p&gt;
 </description>
                 <link>http://pimpmylog.com/general/2013/12/13/bye-phpapachelogviewer-hello-pimpmylog</link>
                 <guid>http://pimpmylog.com/general/2013/12/13/bye-phpapachelogviewer-hello-pimpmylog</guid>
