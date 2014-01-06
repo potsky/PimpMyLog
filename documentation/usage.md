@@ -3,9 +3,9 @@ layout: default
 title: Usage
 ---
 
-# Main features
+# 1 - Main features
 
-##  Introduction
+## Introduction
 
 ## Switch between log files
 
@@ -17,7 +17,7 @@ title: Usage
 
 ## Desktop notifications
 
-# Advanced features
+# 2 - Advanced features
 
 ## Timezone selector
 
@@ -35,7 +35,7 @@ Or:
 
 All available timezone strings are available [here](http://php.net/manual/en/timezones.php).
 
-##  Language selector
+## Language selector
 
 <a name="languageselector"></a>
 Users can override the default  by setting a GET parameter named `l`.

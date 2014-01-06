@@ -15,13 +15,16 @@ The file is composed by these 3 objects:
 
 
 
-# Globals
+# 1 - Globals
 
 #### CHECK\_UPGRADE
 
+<a name="checkupgrade"></a>
+
 Whether *Pimp My Log* should check for a new available version on launch or not. You should let this value to `true` given that the check is done in background and only downloads a few bytes.
 
-> **Note**  
+> **Note**
+>  
 > Turn it to `false` if your *Pimp My Log* instance is installed on an embedded device without internet connection (*box*, *player*, ...)
 
 <!-- -->
@@ -63,6 +66,7 @@ Default:
 Your *Google Analytics tracking ID*. If you let the default value or empty, *Google Analytics* will not be loaded.
 
 > **Note**  
+> 
 > Do not set a *Google Analytics tracking ID* if your *Pimp My Log* instance runs offline.
 
 <!-- -->
@@ -167,6 +171,8 @@ Default:
 
 #### PIMPMYLOG\_VERSION\_URL
 
+<a name="pimpmylog_version_url"></a>
+
 This is the url of the current version file in production. If you have installed the *beta* branch instead of the *master* one, install this constant and replace word *master* by *beta* in the url. *Pimp my Log* will then check for beta upgrades instead of production upgrades.
 
 Default:
@@ -215,7 +221,7 @@ Default:
 
 ---
 
-# Badges
+# 2 - Badges
 
 
 ```json
@@ -240,9 +246,9 @@ Default:
 }
 ```
 
-# Files
+# 3 - Files
 
-#### Structure
+## 3.1 - Structure
 
 ```json
 "files": {
@@ -256,7 +262,7 @@ Default:
 }
 ```
 
-#### Software structure
+### 3.1.1 - Software structure
 
 ```json
 "display" : "Apache Error #1",
@@ -287,10 +293,10 @@ Default:
 ```
 
 
-#### Keys
+### 3.1.2 - Keys
 
 
-##### display
+#### display
 
 
 
@@ -300,7 +306,7 @@ Example:
 "display" : "Apache Error #1"
 ```
 
-##### path
+#### path
 
 
 
@@ -310,7 +316,7 @@ Example:
 "path" : "\/opt\/local\/apache2\/logs\/error_log"
 ```
 
-##### refresh
+#### refresh
 
 
 
@@ -320,7 +326,7 @@ Example:
 "refresh" : 5
 ```
 
-##### max
+#### max
 
 
 
@@ -330,7 +336,7 @@ Example:
 "max" : 10
 ```
 
-##### notify
+#### notify
 
 
 
@@ -340,11 +346,14 @@ Example:
 "notify" : true
 ```
 
-##### format
+#### format
 
-###### regex
+The `format` key is an JSON array which describes how a line of log text is parsed and how it is understood by *Pimp My Log*. This array is explained in the next following paragraph.
 
 
+## 3.2 - Log parsing
+
+### 3.2.1 regex
 
 Example:
 
@@ -352,9 +361,8 @@ Example:
 "regex": "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U"
 ```
 
-###### match
 
-
+### 3.2.2 match
 
 Example:
 
@@ -399,90 +407,30 @@ or with concatenation :
 ```
 
 
-###### types
+### 3.2.3 types
 
+Each log token is typed in order to be displayed :
 
+- in the right column
+- with the right format
+- with the right style
 
-Example:
+Typing a token is easy. You just have to assign a type to a token name. Here is an example:
 
 ```json
 "types": {
-    "Date" : "date:H:i:s",
-    "IP" : "ip:http",
-    "Log" : "pre/100",
+    "Date"     : "date:H:i:s",
+    "IP"       : "ip:http",
+    "Log"      : "pre/100",
     "Severity" : "badge:severity",
-    "Referer" : "link"
+    "Referer"  : "link"
 }
 ```
 
-####### format of types
-
-```json
-"field" : "type[:value][/count][\count]"
-```
-
-* `type/100`
-* `type:value/100`
-* `type:value\20`
+You can find all supported types in the following paragraph
 
 
-
-####### type *badge*
-
-Default : no color
-
-
-
-######## value *http*
-
-
-
-######## value *severity*
-
-
-
-####### type *date*
-
-Eg: `date:H:i:s`
-
-Date format is PHP date format and is available [here](http://php.net/manual/function.date.php).
-
-####### type *numeral*
-
-Values are available [here](http://numeraljs.com)
-
-Eg: `numeral:0b`
-
-####### type *ip*
-
-
-
-
-######## value *geo*
-
-Eg: `ip:geo` will result in `http://www.geoiptool.com/en/?IP=...`. The global constant `GEOIP_URL` is used.
-
-####### type *link*
-
-Eg: `ip:http` will result in `http://...`
-
-Eg: `ip:sunk ` will result in `sunk://...`
-
-####### type *ua*
-
-Values are available [here](https://github.com/faisalman/ua-parser-js)
-
-Eg:
-
-`ua:{os.name} {os.version} | {browser.name} {browser.version}\/100`
-
-####### other types
-
-
-
-###### exclude
-
-
+### 3.2.4 exclude
 
 Example:
 
@@ -494,5 +442,61 @@ Example:
 
 
 
+## 3.3 Types format
 
+```json
+"field" : "type[:value][/count][\count]"
+```
+
+* `type/100`
+* `type:value/100`
+* `type:value\20`
+
+
+### type *badge*
+
+Default : no color
+
+- value *http*
+
+- value *severity*
+
+
+### type *date*
+
+Eg: `date:H:i:s`
+
+Date format is PHP date format and is available [here](http://php.net/manual/function.date.php).
+
+
+### type *numeral*
+
+Values are available [here](http://numeraljs.com)
+
+Eg: `numeral:0b`
+
+
+### type *ip*
+
+- value *geo*
+
+Eg: `ip:geo` will result in `http://www.geoiptool.com/en/?IP=...`. The global constant `GEOIP_URL` is used.
+
+- type *link*
+
+Eg: `ip:http` will result in `http://...`
+
+Eg: `ip:sunk ` will result in `sunk://...`
+
+
+### type *ua*
+
+Values are available [here](https://github.com/faisalman/ua-parser-js)
+
+Eg:
+
+`ua:{os.name} {os.version} | {browser.name} {browser.version}\/100`
+
+
+### other types
 

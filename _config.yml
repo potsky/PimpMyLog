@@ -11,7 +11,7 @@ author           :
 menus             : [ 'Getting Started' , 'Documentation' , 'Developer' , 'Blog' ]
 rss_path          : /rss.xml
 atom_path         : /atom.xml
-url_github        : https://github.com/potsky/PimpMyLog
+url_github        : {{ site.data.github.proj }}
 url_support       : http://support.pimpmylog.com
 google_analytics  : UA-44146210-2
 pygments          : true

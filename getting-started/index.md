@@ -1,6 +1,127 @@
 ---
 layout: default
-title: Getting started
+title: Introduction
 ---
 
-Introduce
+# 1 - Requirements
+
+You need the following softwares to run *Pimp my Log* :
+
+* A web server (*Apache*, *nginx*,*lighttpd*, *IIS*, ...)
+* At least PHP version 5.2
+* Log files readable from the web server
+
+That's all ! No database, no dependencies, ...
+
+
+# 2 - Installation
+
+## 2.1 - From GIT repository
+
+{% include documentation_install_git.md %}
+
+### Beta
+
+As it stands, there are two branches of interest:
+
+- `master`: this reflects tagged stable releases as found in the *.tar.gz* or *.zip* downloads. Use this if you want a stable system.
+- `beta`: the branch under active development. Use this if you want the latest but possibly unstable updates.
+
+> **Warning**  
+>
+> Avoid switching from a branch to an other because the configuration file is only upgraded and never downgraded. So you could have a *master* code with a *beta* configuration file...
+
+<!-- -->
+
+To install the *beta* version, clone the beta branch from the repository (`git clone {{ site.data.github.git }} -b beta`) instead of the full repository. In the configuration file, change the `PIMPMYLOG_VERSION_URL` as explained [here](/documentation/configuration.html?pimpmylog_version_url) to check for *beta* updates.
+
+
+### Update
+
+To update *Pimp My Log*, simply go to the root directory and pull the code :
+
+```sh
+$ cd /var/www/html/PimpMyLog
+$ git pull
+```
+
+User files are defined in the `.gitignore` file and are not overridden.
+
+## 2.2 - From archive
+
+{% include documentation_install_zip.md %}
+
+### Update
+
+You **must** backup your configuration files before updating:
+
+```sh
+$ destination="/tmp/PimpMyLog-backup"
+$ mkdir -p $destination/{css,cfg}
+$ cd /var/www/html/PimpMyLog
+$ for file in config.user.json css/*.user.css cfg/*.user.php; do
+    cp $file $destination/$file
+done;
+```
+
+Then copy the *Pimp My Log* archive, extract and replace all backed up files as in the installation process.
+
+
+# 3 - First configuration
+
+At the first launch, if you have not configured manually *Pimp My Log*, the configurator will be displayed. In most of case, you will just have to click on *Ok* or *Next* buttons.
+
+{% image /assets/ss/getting-started_autocfg_1.png class="img-responsive" alink="" atarget="" %}
+
+Click on the *Configure now* button.
+
+> **Note**  
+> 
+> The configurator will let you choose next between all softwares that you want to configure. In version *Pimp My Log 1.0*, the only available software is *Apache* so you will not see this screen.
+
+<!-- -->
+
+{% image /assets/ss/getting-started_autocfg_2.png class="img-responsive" alink="" atarget="" %}
+
+The configurator will look for *Apache* log files in common locations and will show you all log files found. They are all selected by default but you can select which files you want. If *Pimp My Log* cannot find log files while your are sure that there are in a common location:
+
+- please read the next paragraph
+- open a ticket on [support.pimpmylog.com](http://support.pimpmylog.com) and specify:
+    - your operating system
+    - your apache version and how you have installed it (package manager, manually, etc...)
+    - where are located your apache log files
+
+You can also specify custom paths in textareas below for:
+
+- error logs
+- access logs
+
+Click on the *Next* button.
+
+{% image /assets/ss/getting-started_autocfg_3.png class="img-responsive" alink="" atarget="" %}
+
+Got it! Your *Pimp My Log* instance is configured and ready to use. Click on the *Pimp my Logs now!* button.
+
+# 4 - Read access
+
+*Pimp My Log* needs a read access to log files you want to display. So log files have to be reached by your web server user. In the following example, let :
+
+- `apache` be the web server user on an UNIX system
+- `/var/log/httpd/access_log` be the path of the apache access log file
+
+Then the command (ran as *root* on the server) `sudo -u apache ls /var/log/httpd/access_log` must return `/var/log/httpd/access_log` and not an error.
+
+If this command fails, the webserver user has not access to the log file and *Pimp My Log* will not be able to read it.
+
+Don't forget that to read file `/var/log/httpd/access_log`, these directories must be reachable (flag `x` in a *chmod*) by the web server user :
+
+- `/var/log/httpd/`
+- `/var/log/`
+- `/var/`
+- `/`
+
+If you change log files access via a *chmod* command and lose these changes after several hours, days, ... verify that *logrotate* (or similar rotation log system) is well configured! There is an option in *logrotate* to set default rights on the new files.
+
+
+
+
