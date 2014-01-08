@@ -57,3 +57,9 @@ A special thanks goes out to :
 * [PHP](http://www.php.net) of course
 * [ua-parser.js](http://faisalman.github.io/ua-parser-js/) by [Faisal Salman](https://github.com/faisalman)
 
+---
+
+#### They *Pimp* their *Logs*
+
+[![](/assets/theypimplogs/tcpartners.png "TCPartners")](http://www.tcpartners.fr)
+[![](/assets/theypimplogs/videospot.png "VideoSpot")](http://www.videospot.com)

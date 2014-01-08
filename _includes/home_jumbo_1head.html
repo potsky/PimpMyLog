@@ -3,44 +3,25 @@
     <h1 class="noborder">{{ site.title }}</h1>
     <h4 class="noborder">{{ site.description }}</h4>
     <br/>
-    <p>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.zip }}"><span class="glyphicon glyphicon-cloud-download"></span> ZIP</a>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.tar }}"><span class="glyphicon glyphicon-download"></span> TAR</a>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.proj }}"><span class="glyphicon glyphicon-eye-open"></span> GitHub</a>
-        <br/>
-        <span class="badge pmlversion"></span>
-    </p>
+    <p>{% include download.html %}</p>
 </div>
 <!--[if gte IE 9 | !IE ]><!-->
 <div class="hidden-xs  hidden-sm  visible-md hidden-lg  col-md-8  text-center">
     <h2 class="noborder">{{ site.title }}</h2>
     <h5 class="noborder">{{ site.description }}</h5>
     <br/>
-    <p>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.zip }}"><span class="glyphicon glyphicon-cloud-download"></span> ZIP</a>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.tar }}"><span class="glyphicon glyphicon-download"></span> TAR</a>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.proj }}"><span class="glyphicon glyphicon-eye-open"></span> GitHub</a>
-        <br/>
-        <span class="badge pmlversion"></span>
-    </p>
+    <p>{% include download.html %}</p>
 </div>
 <div class="hidden-xs  visible-sm hidden-md  hidden-lg  col-sm-6 text-center">
     <h3 class="noborder">{{ site.title }}</h3>
     <h5 class="noborder">{{ site.description }}</h5>
     <br/>
-    <p>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.zip }}"><span class="glyphicon glyphicon-cloud-download"></span> ZIP</a>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.tar }}"><span class="glyphicon glyphicon-download"></span> TAR</a>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.proj }}"><span class="glyphicon glyphicon-eye-open"></span> GitHub</a>
-        <br/>
-        <span class="badge pmlversion"></span>
-    </p>
+    <p>{% include download.html %}</p>
 </div>
 <div class="visible-xs hidden-sm  hidden-md  hidden-lg  col-xs-12 text-center">
     <h1 class="noborder">{{ site.title }}</h1>
     <h6 class="noborder">{{ site.description }}</h6>
-    <p>
-        <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.proj }}"><span class="glyphicon glyphicon-eye-open"></span> View on GitHub</a>
+    <p> <a type="button" class="btn btn-sm btn-warning" href="{{ site.data.github.proj }}"><span class="glyphicon glyphicon-eye-open"></span> View on GitHub</a>
     </p>
 </div>
 <!--
