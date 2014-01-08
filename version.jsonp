@@ -3,6 +3,12 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"0.9.3" : {
+			"released" : "2014-01-08",
+			"fixed" : [
+				"[Main] Desktop notifications broken"
+			]
+		},
 		"0.9.2" : {
 			"released" : "2014-01-01",
 			"fixed" : [
