@@ -47,6 +47,6 @@ In a terminal, run :
 
 In a terminal, run :
 
-- `grunt install` to build the site and copy files from the *jekyll* branch to the *gh-pages*
+- `grunt save build install` to build the site and copy files from the *jekyll* branch to the *gh-pages*
 
 The install process can be called remotely on an pre-configured server with PHP servlets located in the `_tools` directory
