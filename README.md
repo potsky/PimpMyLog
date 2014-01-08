@@ -16,9 +16,7 @@ Clone this repo then install dependencies:
 $ bundle install
 $ npm install
 $ bower install
-
-??? npm install git+http://github.com/jbakse/grunt-cropthumb.git --save-dev ???
-$port install GraphicsMagick
+$ port install GraphicsMagick
 ```
 
 ## Development
