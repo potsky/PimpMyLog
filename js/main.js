@@ -1,6 +1,16 @@
-/*global numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,querystring,notification_default*/
-var file, notification, auto_refresh_timer, fingerprint, first_launch, file_size, last_line, loading, reset, notification_displayed;
+/*global numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,querystring,notification_default, UAParser */
+/*jshint unused:false*/
 
+var file,
+	notification,
+	auto_refresh_timer,
+	fingerprint,
+	first_launch,
+	file_size,
+	last_line,
+	loading,
+	reset,
+	notification_displayed = false;
 
 
 /**
@@ -441,6 +451,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 					for (var k in uas) {
 						var a;
 						try {
+							/*jshint -W061 */
 							a = eval( 'ua.' + uas[k].replace('{','').replace('}','') );
 							if ( a === undefined ) {
 								a = '';
