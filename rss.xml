@@ -5,9 +5,28 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2014-01-08T22:24:03+01:00</lastBuildDate>
-        <pubDate>2014-01-08T22:24:03+01:00</pubDate>
+        <lastBuildDate>2014-01-09T00:01:38+01:00</lastBuildDate>
+        <pubDate>2014-01-09T00:01:38+01:00</pubDate>
         <ttl>1800</ttl>
+
+        <item>
+                <title>Version 0.9.3 released</title>
+                <description>&lt;p&gt;This bulky update includes in fact versions &lt;code&gt;0.9.1&lt;/code&gt;, &lt;code&gt;0.9.2&lt;/code&gt; and &lt;code&gt;0.9.3&lt;/code&gt;. It includes several improvements and bug fixes.&lt;/p&gt;
+
+&lt;p&gt;This version is now on pre-production on embedded hardwares and ready to be deployed on thousands Digital Signage players. &lt;code&gt;V1&lt;/code&gt; is really really coming up!&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.3&quot;&gt;&lt;em&gt;Loading...&lt;/em&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.2&quot;&gt;&lt;em&gt;Loading...&lt;/em&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.1&quot;&gt;&lt;em&gt;Loading...&lt;/em&gt;&lt;/div&gt;
+</description>
+                <link>http://pimpmylog.com/general/2014/01/08/version-0.9.3-released</link>
+                <guid>http://pimpmylog.com/general/2014/01/08/version-0.9.3-released</guid>
+                <pubDate>2014-01-08T00:00:00+01:00</pubDate>
+        </item>
 
         <item>
                 <title>Bye-Bye PHP Apache Log Viewer, hello Pimp My Log !</title>
