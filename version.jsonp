@@ -1,8 +1,14 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "0.9.2",
-	"versiondevh" : "c3641bf1e5598c29ab1cbd9e49a392c343da9060",
+	"version"     : "0.9.3",
+	"versiondevh" : "025b2d4a83766301c407c25609337df0c6518bfe",
 	"changelog" : {
+		"0.9.3" : {
+			"released" : "2014-01-08",
+			"fixed" : [
+				"[Main] Desktop notifications broken"
+			]
+		},
 		"0.9.2" : {
 			"released" : "2014-01-01",
 			"fixed" : [
