@@ -21,7 +21,6 @@ $( document ).ready( function () {
 		.fail(function() {})
 		.always(function() {});
 	}
-
 } );
 
 var pml_version_cb = function( data ) {
