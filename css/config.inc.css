@@ -45,6 +45,10 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 }
 
 /* Specific to column */
+.pml-CMD {
+	white-space:nowrap;
+}
+
 .pml-Severity {
 	font-size: 1em;
 }

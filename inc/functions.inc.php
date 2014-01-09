@@ -68,11 +68,16 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
 				$str = @$out[ $key ][0];
 			}
 
+			// remove part next to the last /
 			$dateformat = ( substr( $type , 0 , 5 ) === 'date:' ) ? substr( $type , 5 ) : 'Y/m/d H:i:s';
+			if ( ( $p = strrpos(	$dateformat , '/' ) ) !== false ) {
+				$dateformat = substr( $dateformat , 0 , $p );
+			}
 
 			if ( ( $timestamp = strtotime( $str ) ) === false ) {
 				$date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
-			} else {
+			}
+			else {
 				$date = new DateTime( );
 				$date->setTimestamp( $timestamp );
 				if ( ! is_null( $tz ) ) {

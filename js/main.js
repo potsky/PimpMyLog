@@ -19,6 +19,7 @@ var file,
  * @param  {string}  a  the value of the wanted selected option
  */
 var set_auto_refresh = function( a ) {
+	"use strict";
 	$('#autorefresh').val( a );
 };
 
@@ -29,6 +30,7 @@ var set_auto_refresh = function( a ) {
  * @param  {string}  a  the value of the wanted selected option
  */
 var set_max = function( a ) {
+	"use strict";
 	$('#max').val( a );
 };
 
@@ -42,6 +44,7 @@ var set_max = function( a ) {
  */
 var notification_class = 'warning';
 var set_notification   = function( a ) {
+	"use strict";
 	if ( a === undefined ) {
 		a = notification;
 	}
@@ -61,6 +64,7 @@ var set_notification   = function( a ) {
  * @return  {Boolean}
  */
 var is_notification = function() {
+	"use strict";
 	return $('#notification').hasClass('active');
 };
 
@@ -74,6 +78,7 @@ var is_notification = function() {
  * @return  {void}
  */
 var notify = function ( title , message ) {
+	"use strict";
 	if ( 'webkitNotifications' in window ) {
 		var havePermission = window.webkitNotifications.checkPermission();
 		if ( havePermission === 0 ) {
@@ -149,6 +154,7 @@ var notify = function ( title , message ) {
  * @return  {void}
  */
 var pml_alert = function( message , severity) {
+	"use strict";
 	$('<div class="alert alert-' + severity + ' alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + message + '</div>').appendTo("#notice");
 };
 
@@ -162,6 +168,7 @@ var pml_alert = function( message , severity) {
  * @return  {void}
  */
 var pml_singlealert = function( message , severity) {
+	"use strict";
 	$("#singlenotice").html('<div class="alert alert-' + severity + ' alert-dismissable fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + message + '</div>');
 };
 
@@ -179,6 +186,7 @@ var pml_singlealert = function( message , severity) {
  * @return  {object}        the well-formatted object with parser,param,cut keys
  */
 var type_parser = function( type ) {
+	"use strict";
 	var parser = 'txt';
 	var param  = '';
 	var cut    = 0;
@@ -212,6 +220,7 @@ var type_parser = function( type ) {
  * @return  {string}        the cutted value
  */
 var val_cut = function( val , cut ) {
+	"use strict";
 	if ( cut === undefined ) {
 		return val;
 	}
@@ -239,6 +248,7 @@ var val_cut = function( val , cut ) {
  * @return  {void}
  */
 var get_logs     = function( load_default_values , load_full_file ) {
+	"use strict";
 
 	var wanted_lines;
 
@@ -418,9 +428,8 @@ var get_logs     = function( load_default_values , load_full_file ) {
 						clas = badges[ type.param ][ logs.logs[log][ c ].substr( 0 , 1 ) ];
 					} else if ( type.param === 'severity' ) {
 						clas = badges[ type.param ][ logs.logs[log][ c ] ];
-					} else {
-						clas = 'default';
 					}
+					if ( clas === undefined ) clas = 'default';
 					val = '<span class="label label-' + clas + '">' + val_cut( val , type.cut ) + '</span>';
 				}
 				else if ( 'date' === type.parser ) {
@@ -541,6 +550,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
  * @return  {void}
  */
 $(function() {
+	"use strict";
 
 	// File menu > init
 	$('#file_selector').text( $('.file_menu:first').text() );
