@@ -20,7 +20,7 @@
 		"severity": {
 			"debug"  : "success",
 			"info"   : "success",
-			"notice" : "",
+			"notice" : "default",
 			"warn"   : "warning",
 			"error"  : "danger",
 			"crit"   : "danger",
