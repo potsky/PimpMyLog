@@ -12028,8 +12028,8 @@ $( document ).ready( function () {
 	// A page need informations about versions
 	if ( $('.pmlversion').length > 0 ) {
 		$.ajax({
-			url: 'https://raw.github.com/potsky/PimpMyLog/master/version.jsonp?callback=?',
-//			url: 'http://demo.pimpmylog.com/version.jsonp?callback=?',
+			url: 'https://raw.github.com/potsky/PimpMyLog/master/version.js?callback=?',
+//			url: 'http://demo.pimpmylog.com/version.js?callback=?',
 			type: 'GET',
 			dataType: 'jsonp',
 			jsonp: 'version_cb'
