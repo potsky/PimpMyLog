@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.3 - 025b2d4a83766301c407c25609337df0c6518bfe*/
+/*! pimpmylog - 0.9.4 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -30,8 +30,8 @@ $upgrade = array(
 
 
 
-if ( file_exists( '../version.jsonp' ) ) {
-	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.jsonp' ) ) , true );
+if ( file_exists( '../version.js' ) ) {
+	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.js' ) ) , true );
 	$upgrade['current'] = $JSl_version[ 'version' ];
 	$default            = sprintf ( __( 'Current version %s' ) , $upgrade['current'] );
 	$upgrade['footer']  = $default;

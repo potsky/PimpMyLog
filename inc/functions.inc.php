@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.3 - 025b2d4a83766301c407c25609337df0c6518bfe*/
+/*! pimpmylog - 0.9.4 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -78,11 +78,16 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
 				$str = @$out[ $key ][0];
 			}
 
+			// remove part next to the last /
 			$dateformat = ( substr( $type , 0 , 5 ) === 'date:' ) ? substr( $type , 5 ) : 'Y/m/d H:i:s';
+			if ( ( $p = strrpos(	$dateformat , '/' ) ) !== false ) {
+				$dateformat = substr( $dateformat , 0 , $p );
+			}
 
 			if ( ( $timestamp = strtotime( $str ) ) === false ) {
 				$date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
-			} else {
+			}
+			else {
 				$date = new DateTime( );
 				$date->setTimestamp( $timestamp );
 				if ( ! is_null( $tz ) ) {
@@ -125,7 +130,7 @@ function init() {
 	if ( ! defined( 'GOOGLE_ANALYTICS'           ) ) define( 'GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
 	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
 	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
-	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.jsonp' );
+	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.js' );
 	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
 	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'        , 5 );
 }
