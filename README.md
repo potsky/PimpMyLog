@@ -10,7 +10,7 @@ This is the dev branch.
 
 ## Version
 
-Change version in `package.json`, it will be automatically added in the `version.jsonp` file on dev and build.
+Change version in `package.json`, it will be automatically added in the `version.js` file on dev and build.
 
 ## Dev
 

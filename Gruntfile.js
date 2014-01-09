@@ -291,7 +291,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					flatten: true,
-					src: ['version.jsonp'],
+					src: ['version.js'],
 					dest: '_site/'
 				}]
 			},
@@ -305,7 +305,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					flatten: true,
-					src: ['version.jsonp'],
+					src: ['version.js'],
 					dest: '_build/'
 				}]
 			}
@@ -426,7 +426,7 @@ module.exports = function(grunt) {
 				tasks: [ 'copy:devphp' , 'preprocess:dev' ]
 			},
 			version: {
-				files: [ 'package.json' , 'version.jsonp' ],
+				files: [ 'package.json' , 'version.js' ],
 				tasks: [ 'checkversion' , 'replace:dev' ]
 			},
 			js: {
@@ -534,13 +534,13 @@ module.exports = function(grunt) {
 	grunt.registerTask('checkversion', function() {
 		var a;
 		try {
-			a = JSON.parse( grunt.file.read('./version.jsonp').replace('/*PSK*/pml_version_cb(/*PSK*/','').replace('/*PSK*/)/*PSK*/','') );
+			a = JSON.parse( grunt.file.read('./version.js').replace('/*PSK*/pml_version_cb(/*PSK*/','').replace('/*PSK*/)/*PSK*/','') );
 			if ( ! a.changelog[ npmpkg.version ] ) {
-				grunt.verbose.or.error().error( 'Version ' + npmpkg.version + ' is not in the changelog in file version.jsonp!' );
+				grunt.verbose.or.error().error( 'Version ' + npmpkg.version + ' is not in the changelog in file version.js!' );
 				grunt.fail.warn('Unable to continue');
 			}
 		} catch (e) {
-			grunt.verbose.or.error().error( 'version.jsonp is invalid!' );
+			grunt.verbose.or.error().error( 'version.js is invalid!' );
 			grunt.fail.warn('Unable to continue');
 		}
 	});
