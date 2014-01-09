@@ -11,8 +11,9 @@ $( document ).ready( function () {
 	// A page need informations about versions
 	if ( $('.pmlversion').length > 0 ) {
 		$.ajax({
-			url: 'https://raw.github.com/potsky/PimpMyLog/master/version.js?callback=?',
-//			url: 'http://demo.pimpmylog.com/version.js?callback=?',
+// GitHub response is text/plain and it make IE9 crash on the jsonp request
+//			url: 'https://raw.github.com/potsky/PimpMyLog/master/version.js?callback=?',
+			url: 'http://demo.pimpmylog.com/version.js?callback=?',
 			type: 'GET',
 			dataType: 'jsonp',
 			jsonp: 'version_cb'
