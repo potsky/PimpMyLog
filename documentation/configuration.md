@@ -187,7 +187,7 @@ This is the url of the current version file in production. If you have installed
 Default:
 
 ```json
-"PIMPMYLOG_VERSION_URL" : "http:\/\/raw.github.com\/potsky\/PimpMyLog\/master\/version.jsonp"
+"PIMPMYLOG_VERSION_URL" : "http:\/\/raw.github.com\/potsky\/PimpMyLog\/master\/version.js"
 ```
 
 ---
