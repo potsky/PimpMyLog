@@ -1,8 +1,15 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "0.9.4",
+	"version"     : "0.9.5",
 	"versiondevh" : "b11d60337506ec7d21d0c0931f7c0aba4436aa6a",
 	"changelog" : {
+		"0.9.5" : {
+			"released" : "2014-01-10",
+			"changed" : [
+				"exclude object is optional now in configuration file",
+				"new date format support when month is a number"
+			]
+		},
 		"0.9.4" : {
 			"released" : "2014-01-09",
 			"fixed" : [

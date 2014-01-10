@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.4 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
+/*! pimpmylog - 0.9.5 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -71,9 +71,13 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
 				foreach ( $key as $k => $v ) {
 					$newdate[ $k ] = @$out[ $v ][ 0 ];
 				}
-				$str = $newdate['M'] . ' ' . $newdate['D'] . ' ' . $newdate['H'] . ':' . $newdate['I'] . ':' . $newdate['S'] . ' ' . $newdate['Y'];
+				if ( isset( $newdate['M'] ) ) {
+					$str = $newdate['M'] . ' ' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . $newdate['Y'];
+				}
+				else if ( isset( $newdate['m'] ) ) {
+					$str = $newdate['Y'] . '/' . $newdate['m'] . '/' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'];
+				}
 			}
-
 			else {
 				$str = @$out[ $key ][0];
 			}
