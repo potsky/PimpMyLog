@@ -448,12 +448,20 @@ In the example above :
 
 You can deal with odd date format as in the following example by capturing :
 
-- `D` : the day
-- `M` : the month
-- `Y` : the year
-- `H` : the hour value
-- `I` : the minute value
-- `S` : the second value
+- `d` : Day of the month, 2 digits with leading zeros. *eg*:`01` to `31`
+- `m` : Numeric representation of a month, with leading zeros. *eg*:`01` through `12`
+- `M` : A short textual representation of a month, three letters. *eg*:`Jan` through `Dec`
+- `Y` : A full numeric representation of a year, 4 digits. *eg*:`1978` or `2008`
+- `H` : 24-hour format of an hour with leading zeros *eg*:`00` through `23`
+- `i` : Minutes with leading zeros *eg*:`00` through `59`
+- `s` : Seconds with leading zeros *eg*:`00` through `59`
+
+> **Warning**  
+> 
+> Letter case is very important! `M` is not `m`!
+
+<!-- -->
+
 
 Example:
 
@@ -461,10 +469,10 @@ Example:
 "match": {
     "Date"    : {
         "M" : 2,
-        "D" : 3,
+        "d" : 3,
         "H" : 4,
-        "I" : 5,
-        "S" : 6,
+        "i" : 5,
+        "s" : 6,
         "Y" : 8
     },
     "IP"          : 12,
@@ -483,7 +491,7 @@ You can concatenate several tokens in a single field. This is useful when you wa
 ```json
 "match": {
     "IP"          : 12,
-    "Log"         : { " : " , 10 , 14 },
+    "Log"         : [ " : " , 10 , 14 ],
     "Severity"    : 10,
     "WhatYouWant" : 11,
     "Referer"     : 16,
