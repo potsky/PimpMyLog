@@ -23,9 +23,9 @@ First of all, you have to make it work for you! This is the most difficult part.
 
 Then you have share it with the community by adding some stuffs so that users will enable this new software during the auto-configuration process at first launch.
 
-You should read both pages [log-format](/developer/log-format.html) and [software-format](/developer/software-format.html) to understand how you can build your software configurator.
+You should read page [softwares](/developer/softwares.html) to understand how you can build your software configurator.
 
-As soon as you have built both files `cfg/my_awesome_software.config.php` and `cfg/my_awesome_software.paths.php`, you can send us these files via the [support site](http://support.pimpmylog.com) and we will include them in a next release.
+As soon as you have built both files `cfg/my_awesome_software.config.php` and `cfg/my_awesome_software.paths.php`, you can send us these files via the [support site](http://support.pimpmylog.com) and we will include them in a next release. Please send us your `softwares.inc.php` file to help us.
 
 # Active development
 
