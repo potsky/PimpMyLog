@@ -3,6 +3,13 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"0.9.5" : {
+			"released" : "2014-01-10",
+			"changed" : [
+				"exclude object is optional now in configuration file",
+				"new date format support when month is a number"
+			]
+		},
 		"0.9.4" : {
 			"released" : "2014-01-09",
 			"fixed" : [

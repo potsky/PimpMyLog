@@ -107,8 +107,8 @@ $file_max = ( isset( $files[$file_id]['max'] ) ) ? (int)$files[$file_id]['max'] 
 $max      = ( $load_default_values == 'true' ) ? $file_max : $user_max;
 $regex    = $files[ $file_id ][ 'format' ][ 'regex' ];
 $match    = $files[ $file_id ][ 'format' ][ 'match' ];
-$exclude  = $files[ $file_id ][ 'format' ][ 'exclude' ];
 $types    = $files[ $file_id ][ 'format' ][ 'types' ];
+$exclude  = isset( $files[ $file_id ][ 'format' ][ 'exclude' ] ) ? $files[ $file_id ][ 'format' ][ 'exclude' ] : array();
 
 
 
