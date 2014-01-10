@@ -38,10 +38,72 @@ You can set the default loaded file in the configuration file by setting its `fi
 
 ## Search
 
+The search input lets you type some words to search in the log file. The search is done line by line in every full line. The search is not performed on each separated token from a line.
 
+> **Warning**  
+> 
+> The search is done in a full line of logs. Take this log:
+>
+> `127.0.0.1 - - [21/Dec/2013:22:19:29 +0100] "GET /img/psk.png HTTP/1.1"`
+>
+> The line above will be returned if you search for text `+0100] "GET /img/` for example
+
+### Text search
+
+Simply type something and the text will be searched and displayed.
+
+### RegEx search
+
+If the search is a valid regular expression, it will be searched with the *PHP* `preg_match` version. The documentation about patterns is [here](http://www.php.net/manual/en/reference.pcre.pattern.syntax.php).
+
+When a RegEx is valid, the search input box becomes <span style="color:#f0f">pink</span>.
+
+The great thing in *PCRE* functions is that a RegEx delimiter can be any non-alphanumeric, non-backslash, non-whitespace character.
+
+To get all images from the root /img/ directory for example, you can use these RegEx:
+
+- `@ /img/@`
+- `+ /img/+`
+- `/ \/img\//`
+
+I put a space before the first slash because I don't forget that the RegEx is applied on full lines of logs and a line is something like this `127.0.0.1 - - [21/Dec/2013:22:19:29 +0100] "GET /img/psk.png HTTP/1.1"` so to match the `/img` directory at root, I know there is a space before. I could write this too:
+
+- `@GET /img/@`
+- `+GET /img/+`
+- `/GET \/img\//`
+
+### Search timer
+
+The search is done from the bottom to the top of log file and *Pimp My Log* collects matched lines until the number of lines you want to display is reached. The problem is that if you try to find something rare, *Pimp My Log* will scan the full log file and I am quite sure you have tons of megabytes!
+
+So there is a limitation timer and when *Pimp My Log* has reach this timer, it returns what it has found. 2 consequences :
+
+- *Pimp My Log* will not display the number of lines that you want
+- when refreshing the view, *Pimp My Log* will still add new logs which are matched by the search
+
+You can modify the default timer as explained [here](/documentation/configuration.html#max_search_log_time).
+
+You can see in the footer 2 interesting things :
+
+- *7 new logs found in `2870ms` with 331K of logs* for example. *Ouch!* almost 3 seconds to search the expression in my log file. But on the next refresh, duration comes back to `1ms`.
+- `1079` skipped line(s) for example. To perform the search, *Pimp My Log* has rejected 1079 unmatched lines of logs.
+
+If these values are too high and you cannot display what you want to find, change your search expression...
 
 ## Auto-refresh
 
+You can ask *Pimp My Log* to refresh the display automatically. It is really useful with desktop notification. You can leave *Pimp My Log* in a hidden tab in a window back to all others and you will receive desktop notification when a new log is available. Just click on the desktop notification and *Pimp My Log* will come on top!
+
+I use these settings when I develop a website:
+
+- `error.log` : auto refresh every second because I want to be alerted as soon as an error is thrown
+- `access.log` : no auto-refresh because I don't want to be alerted when *apache* serves somebody
+
+> **Note**  
+> 
+> Don't be afraid to use the 1 second auto-refresh even on production servers. *Pimp My Log* only performs incremental log scans (except for the first launch).
+
+<!-- -->
 
 
 ## Displayed lines

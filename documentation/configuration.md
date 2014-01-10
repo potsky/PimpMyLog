@@ -115,6 +115,8 @@ Default:
 
 #### MAX\_SEARCH\_LOG\_TIME
 
+<a name="max_search_log_time"></a>
+
 This is the maximum duration in seconds to search for logs in log files. *Pimp My Log* parses logs from the end to the beginning of log files and stop parsing log files when :
 
 - the last line of the previous parsing process is reached (incremental parsing)

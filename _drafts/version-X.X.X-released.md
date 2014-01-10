@@ -12,4 +12,4 @@ This update includes several updates and bug fixes.
 
 <!--more-->
 
-<div class="pmlversion pmlchangelog" data-version="X.X.X"><em>Loading...</em></div>
+<div class="pmlversion pmlchangelog" data-version="X.X.X"></div>
