@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.4 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
+/*! pimpmylog - 0.9.5 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -58,10 +58,10 @@ function apache_get_config( $type , $file , $software , $counter ) {
 				"match": {
 					"Date"    : {
 						"M" : 2,
-						"D" : 3,
+						"d" : 3,
 						"H" : 4,
-						"I" : 5,
-						"S" : 6,
+						"i" : 5,
+						"s" : 6,
 						"Y" : 8
 					},
 					"IP"       : 12,

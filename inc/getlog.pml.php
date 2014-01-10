@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.4 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
+/*! pimpmylog - 0.9.5 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -117,8 +117,8 @@ $file_max = ( isset( $files[$file_id]['max'] ) ) ? (int)$files[$file_id]['max'] 
 $max      = ( $load_default_values == 'true' ) ? $file_max : $user_max;
 $regex    = $files[ $file_id ][ 'format' ][ 'regex' ];
 $match    = $files[ $file_id ][ 'format' ][ 'match' ];
-$exclude  = $files[ $file_id ][ 'format' ][ 'exclude' ];
 $types    = $files[ $file_id ][ 'format' ][ 'types' ];
+$exclude  = isset( $files[ $file_id ][ 'format' ][ 'exclude' ] ) ? $files[ $file_id ][ 'format' ][ 'exclude' ] : array();
 
 
 
