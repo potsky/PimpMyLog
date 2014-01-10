@@ -48,20 +48,7 @@
 		"0.9.0" : {
 			"notice" : "First public pre-release of Pimp my Log!",
 			"released" : "2013-12-22"
-		},
-		"0.1.5" : {
-			"released" : "2013-12-01",
-			"new" : [
-				"New features"
-			],
-			"changed" : [
-				"Tons of changes"
-			],
-			"fixed" : [
-				"Merry Christmas"
-			]
-		},
-		"0.0.1" : "PHP Apache Log Viewer"
+		}
 	}
 }
-/*PSK*/)/*PSK*/
+/*PSK*/);/*PSK*/

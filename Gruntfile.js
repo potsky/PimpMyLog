@@ -534,7 +534,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('checkversion', function() {
 		var a;
 		try {
-			a = JSON.parse( grunt.file.read('./version.js').replace('/*PSK*/pml_version_cb(/*PSK*/','').replace('/*PSK*/)/*PSK*/','') );
+			a = JSON.parse( grunt.file.read('./version.js').replace('/*PSK*/pml_version_cb(/*PSK*/','').replace('/*PSK*/);/*PSK*/','') );
 			if ( ! a.changelog[ npmpkg.version ] ) {
 				grunt.verbose.or.error().error( 'Version ' + npmpkg.version + ' is not in the changelog in file version.js!' );
 				grunt.fail.warn('Unable to continue');

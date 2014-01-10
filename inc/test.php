@@ -287,7 +287,7 @@ echo test( $type , $regex , $match , $types , $log );
 								</div>
 								<div id="collapseOne2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php show_source('../config.user.json'); ?></pre>
+										<pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre>
 									</div>
 								</div>
 							</div>
@@ -301,7 +301,7 @@ echo test( $type , $regex , $match , $types , $log );
 								</div>
 								<div id="collapseTwo2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php var_export( stat('../config.user.json') ); ?></pre>
+										<pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre>
 									</div>
 								</div>
 							</div>

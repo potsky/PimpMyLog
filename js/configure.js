@@ -8,6 +8,7 @@
  * @return  {void}
  */
 var progressbar_active = function() {
+	"use strict";
 	$('.progress').addClass('progress-striped active');
 };
 
@@ -18,6 +19,7 @@ var progressbar_active = function() {
  * @return  {void}
  */
 var progressbar_deactive = function() {
+	"use strict";
 	$('.progress').removeClass('progress-striped active');
 };
 
@@ -30,6 +32,7 @@ var progressbar_deactive = function() {
  * @return  {void}
  */
 var progressbar_set = function( value ) {
+	"use strict";
 	var v = Math.max( 0 , Math.min( 100 , parseInt( value , 10 ) ) );
 	$('.progress .sr-only').text( lemma.complete.replace( '%s' , v ) );
 	$('.progress-bar').prop( 'aria-valuenow' , v ).width( v + '%' );
@@ -44,6 +47,7 @@ var progressbar_set = function( value ) {
  * @return  {void}
  */
 var progressbar_color = function( value ) {
+	"use strict";
 	$('.progress-bar').removeClass('progress-bar-success progress-bar-info progress-bar-warning progress-bar-success progress-bar-danger');
 	if ( value !== undefined ) {
 		$('.progress-bar').addClass( 'progress-bar-' + value );
@@ -59,6 +63,7 @@ var progressbar_color = function( value ) {
  * @return  {void}
  */
 var fatal_error = function( message ) {
+	"use strict";
 	if (!message) {
 		message = lemma.error;
 	}
@@ -80,6 +85,7 @@ var fatal_error = function( message ) {
  * @return  {void}
  */
 var pml_action = function ( object , done , options ) {
+	"use strict";
 	progressbar_active();
 	$.ajax( {
 		url      : 'configure.php?' + (new Date()).getTime() + '&' + querystring,
@@ -123,6 +129,7 @@ var pml_action = function ( object , done , options ) {
  * @return  {void}
  */
 var action_configue_now = function( logs_list ) {
+	"use strict";
 	$( '#error' ).text('');
 	$( '#user' ).text('');
 	$( '.alert' ).remove();
@@ -151,7 +158,7 @@ var action_configue_now = function( logs_list ) {
  */
 var logs_list = [];
 var action_select_logs = function( options ) {
-
+	"use strict";
 	var softwares  = options.a;
 	var softlist   = options.b;
 	var softtotal  = options.c;
@@ -304,6 +311,7 @@ var action_select_logs = function( options ) {
 
 
 $(function() {
+	"use strict";
 
 	////////////////////////////////////////
 	// Check if config.user.json already exist //

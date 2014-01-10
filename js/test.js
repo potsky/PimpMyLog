@@ -1,4 +1,6 @@
 $(function() {
+	"use strict";
+
 	$('table').addClass('table table-striped table-bordered table-hover table-condensed');
 
 	$('#regextest').submit( function( event ) {

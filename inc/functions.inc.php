@@ -361,7 +361,7 @@ function json_indent( $json ) {
  * @return  string         the json file without callback
  */
 function clean_json_version( $data ) {
-	return str_replace(	array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/)/*PSK*/' ) , array( '' , '' ) , $data );
+	return str_replace(	array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/);/*PSK*/' ) , array( '' , '' ) , $data );
 }
 
 
