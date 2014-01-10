@@ -12019,6 +12019,7 @@ if (typeof define !== 'undefined' && define.amd) {
 /* jshint unused: false */
 
 $( document ).ready( function () {
+	"use strict";
 
 	// To increase mobile click
 	$( function () {
@@ -12041,7 +12042,9 @@ $( document ).ready( function () {
 	}
 } );
 
+
 var pml_version_cb = function( data ) {
+	"use strict";
 
 	var types = {
 		'fixed' : {

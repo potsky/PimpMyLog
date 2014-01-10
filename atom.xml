@@ -4,13 +4,32 @@
  <title>Pimp my Log</title>
  <link href="http://pimpmylog.com/atom.xml" rel="self"/>
  <link href="http://pimpmylog.com"/>
- <updated>2014-01-10T12:19:31+01:00</updated>
+ <updated>2014-01-10T17:12:46+01:00</updated>
  <id>http://pimpmylog.com</id>
  <author>
    <name>Potsky</name>
    <email>potsky@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Version 0.9.5 released</title>
+   <link href="http://pimpmylog.com/general/2014/01/10/version-0.9.5-released"/>
+   <updated>2014-01-10T00:00:00+01:00</updated>
+   <id>http://pimpmylog.com/general/2014/01/10/version-0.9.5-released</id>
+   <content type="html">&lt;p&gt;This bulky update includes versions &lt;code&gt;0.9.4&lt;/code&gt; and &lt;code&gt;0.9.5&lt;/code&gt;. It includes several improvements and bug fixes.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://support.pimpmylog.com/discussions/problems/4-very-simple-log-format&quot;&gt;Henrik&lt;/a&gt; and &lt;a href=&quot;http://support.pimpmylog.com/discussions/suggestions/2-submission-config-for-checking-rsyslog-protocol-23-format-syslog-files&quot;&gt;Walter&lt;/a&gt; are both first writers in the &lt;a href=&quot;http://support.pimpmylog.com&quot;&gt;support&lt;/a&gt; site. Thank you guys for sharing and for your interest in &lt;em&gt;Pimp My Log&lt;/em&gt;!&lt;/p&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.5&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.4&quot;&gt;&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Version 0.9.3 released</title>
@@ -23,11 +42,11 @@
 
 &lt;!--more--&gt;
 
-&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.3&quot;&gt;&lt;em&gt;Loading...&lt;/em&gt;&lt;/div&gt;
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.3&quot;&gt;&lt;/div&gt;
 
-&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.2&quot;&gt;&lt;em&gt;Loading...&lt;/em&gt;&lt;/div&gt;
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.2&quot;&gt;&lt;/div&gt;
 
-&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.1&quot;&gt;&lt;em&gt;Loading...&lt;/em&gt;&lt;/div&gt;
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.1&quot;&gt;&lt;/div&gt;
 </content>
  </entry>
  
