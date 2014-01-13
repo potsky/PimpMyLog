@@ -4,8 +4,7 @@ title: Blog
 ---
 
 <!-- This loops through the paginated posts -->
-
-		{% for post in paginator.posts %}
+{% for post in paginator.posts %}
 <div class="panel panel-default">
   <div class="panel-body">
 		<div class="media">
@@ -24,7 +23,7 @@ title: Blog
 		</div>
 	</div>
 </div>
-		{% endfor %}
+{% endfor %}
 
 
 <!-- Paginator -->

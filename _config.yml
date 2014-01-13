@@ -8,7 +8,7 @@ author           :
     twitter : potskymac
     link    : http://www.potsky.com
 
-menus             : [ 'Getting Started' , 'Documentation' , 'Developer' , 'Blog' ]
+menus             : [ 'Getting Started' , 'Documentation' , 'Developer' , 'Blog' , 'Search' ]
 rss_path          : /rss.xml
 atom_path         : /atom.xml
 url_github        : {{ site.data.github.proj }}

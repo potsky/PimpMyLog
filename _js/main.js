@@ -14,6 +14,7 @@ $( document ).ready( function () {
 		$.ajax({
 // GitHub response is text/plain and it make IE9 crash on the jsonp request
 //			url: 'https://raw.github.com/potsky/PimpMyLog/master/version.js?callback=?',
+//			url: 'http://beta.pimpmylog.com/version.js?callback=?',
 			url: 'http://demo.pimpmylog.com/version.js?callback=?',
 			type: 'GET',
 			dataType: 'jsonp',
@@ -62,7 +63,7 @@ var pml_version_cb = function( data ) {
 			changelog += '  </div>';
 			changelog += '  <div class="panel-body">';
 			if ( data.changelog[version].notice !== undefined ) {
-				changelog += data.changelog[version].notice + "<br/>";
+				changelog += '<div class="alert alert-warning">' + data.changelog[version].notice + "</div><br/>";
 			}
 			for ( var type in types ) {
 				if ( data.changelog[version][type] !== undefined ) {
@@ -89,7 +90,7 @@ var pml_version_cb = function( data ) {
 			}
 			else {
 				if ( data.changelog[version].notice !== undefined ) {
-					changelog += data.changelog[version].notice + "<br/>";
+					changelog += '<div class="alert alert-warning">' + data.changelog[version].notice + "</div>";
 				}
 				for ( var type in types ) {
 					if ( data.changelog[version][type] !== undefined ) {

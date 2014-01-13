@@ -5,29 +5,74 @@ title: Developer
 
 There is essentially three ways to contribute to *Pimp My Log* :
 
-- Add new type of logs for new softwares (want to display logs from *sshd*, *nginx*, ...)
-- Add some new features, fix bugs, etc... in the main source code
-- Add a new language
+1. Add new type of logs for new softwares (want to display logs from *sshd*, *nginx*, ...)
+1. Add some new features, fix bugs, etc... in the main source code
+1. Add a new language
 
-# New logs
+# 1 - New logs
 
-## For your own usage
+## 1.1 - For your own usage
 
 Basically, you just have to modify the configuration file `config.user.json` at root and it will work. To understand how the configuration file works, just read the [documentation about configuration](/documentation/configuration.html), it is easy.
 
 The only difficulty should be the regular expression. There is a tool to help you to find the right expression. This tool is explained in the [debug](/developer/debug.html) page.
 
-## For the community
+## 1.2 - For the community
 
 First of all, you have to make it work for you! This is the most difficult part.
 
-Then you have share it with the community by adding some stuffs so that users will enable this new software during the auto-configuration process at first launch.
+## 1.2.1 - Simple way
 
-You should read page [softwares](/developer/softwares.html) to understand how you can build your software configurator.
+To share your configuration file with other users, create a new discussion on the [support](http://support.pimpmylog.com) website and provide these informations :
 
-As soon as you have built both files `cfg/my_awesome_software.config.php` and `cfg/my_awesome_software.paths.php`, you can send us these files via the [support site](http://support.pimpmylog.com) and we will include them in a next release. Please send us your `softwares.inc.php` file to help us.
+- the configuration file of course :-)
+- several lines of log file sample
+- additional informations about how to configure the software to make it generate the wanted log format ( *apache* `LogFormat` directive for example)
 
-# Active development
+Here is a discussion template ready to modify and post:
+
+Subject : `Submission: Config for ___SOFTWARE___`
+
+    Hi!
+
+    Here is a configuration excerpt for software *---SOFTWARE---*:
+
+    - **name**   : ---SOFTWARE_NAME---
+    - **url**    : ---SOFTWARE_URL IF AVAILABLE---
+    - **os**     : ---ON WHICH OPERATING SYSTEM IS THIS SOFTWARE AVAILABLE---
+    - **format** : ---SOME ADVICE TO CONFIGURE THE SOFTWARE ON THE SERVER TO HAVE SAME LOG FORMAT AS YOU---
+    - **config** :  
+    ```
+    "---SOFTWARE_ID---": {
+        "display" : "---SOFTWARE_NAME---",
+        "path"    : "---SOFTWARE__PATH---",
+        "refresh" : 20,
+        "max"     : 20,
+        "notify"  : false,
+        "format"  : {
+            ---YOUR_CONFIGURATION---
+        }
+    }
+    ```
+    - **sample** :  
+    ```
+    Jan 12 09:25:12 VNLAdapterStatus - ioctl: SIOCGIFFLAGS failed, error: Device not configured
+    Jan 12 09:25:12 VNL_EnableNetworkAdapter - Successfully enabled hostonly adapter on vnet: vmnet1
+    Jan 12 09:25:12 VNL_StartService - Started "DHCP" service for vnet: vmnet1
+    Jan 12 09:25:12 VNL_StartService - Started "NAT" service for vnet: vmnet8
+    ```
+
+
+
+## 1.2.2 - Add it in the configurator
+
+You can share it with the community by adding some stuffs so that users will enable this new software during the auto-configuration process at first launch.
+
+You must read the [softwares](/developer/softwares.html) page to understand how you can build your software own configurator.
+
+# 2 - Active development
+
+<a name="pullrequest"></a>
 
 If you want to add new features, fix some bugs or something else, it is easy :
 
@@ -148,7 +193,26 @@ Now you can watch the production documentation website ready to deploy at <http:
 
 As in the `dev` branch, this will minify css, js, html, build thumbnails, etc...
 
-# New language
+# 3 - Language
 
-If you want to add you favourite language in *Pimp My Log* (not the documentation website), download the [po template](https://raw.github.com/potsky/PimpMyLog/master/lang/messages.po) file and load it with [PoEdit](http://www.poedit.net/download.php) for example. Translate it and send it via the [support site](http://support.pimpmylog.com), we will include it in a next release.
+## Existing languages
+
+To contribute to an existing language in *Pimp My Log* (not the documentation website):
+
+- select a language and register on *Pimp My Log* [PoEditor](https://poeditor.com/join/project?hash=b767ddcd3dcd545253717a12d3fabfa1) project
+- wait for us to validate your account
+- translate some terms
+
+We will update *Pimp My Log* to embed your definitions.
+
+## New languages
+
+There are 2 ways to add a new language in *Pimp My Log* (not the documentation website):
+
+- Ask us the wanted locale (*eg*: `en_CA` for english in Canada) on the [support](http://support.pimpmylog.com) website.  
+We will create this file in the project and in [PoEditor](https://poeditor.com/join/project?hash=b767ddcd3dcd545253717a12d3fabfa1). Then you will be able to translates terms in [PoEditor](https://poeditor.com/join/project?hash=b767ddcd3dcd545253717a12d3fabfa1).
+- If you are familiar with *PO* files, download the latest [po template](https://raw.github.com/potsky/PimpMyLog/master/lang/messages.po) file and load it with [PoEdit](http://www.poedit.net/download.php) for example. Translate it and send it via the [support site](http://support.pimpmylog.com), we will include it in a next release and we will create this file in [PoEditor](https://poeditor.com/join/project?hash=b767ddcd3dcd545253717a12d3fabfa1).
+
+
+
 
