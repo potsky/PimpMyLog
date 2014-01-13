@@ -7875,6 +7875,7 @@ body pre code {
   white-space: pre!important;
   word-wrap: normal!important;
 }
+/* GitHub Style */
 h1 {
   margin-bottom: 30px;
   margin-top: 45px;
@@ -7906,8 +7907,50 @@ h6 {
   margin-top: 10.5px;
   margin-bottom: 10.5px;
 }
+/* Reduce code size on mobile devices */
 @media screen and (max-width: 800px) {
   pre {
     font-size: 0.6em;
   }
+}
+/* Google search */
+.gsc-above-wrapper-area,
+.gsc-above-wrapper-area-container,
+.gsc-result-info-container,
+.gsc-result-info,
+.gsc-orderby,
+.gsc-orderby-label,
+.gsc-option-menu-container,
+.gsc-result-info-container,
+.gsc-selected-option,
+.gsc-option-selector,
+.gsc-resultsRoot,
+.gsc-tabData,
+.gsc-tabdActive,
+.gsc-resultsHeader,
+.gsc-twiddleRegionCell,
+.gsc-twiddle-opened,
+.gsc-twiddle,
+.gsc-title,
+.gsc-stats,
+.gsc-results-selector,
+.gsc-all-results-active,
+.gsc-result-selector,
+.gsc-one-result,
+.gsc-more-results,
+.gsc-configLabelCell,
+.gsc-cursor-box,
+.gsc-expansionArea {
+  background-color: #f7f7f7;
+  border: 0!important;
+}
+.gsc-orderby-container,
+.gsc-clear-button,
+.gcsc-branding {
+  display: none;
+}
+.gsc-search-box table,
+.gsc-search-box table tr,
+.gsc-search-box table tr td {
+  border: 0!important;
 }
