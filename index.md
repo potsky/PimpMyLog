@@ -38,12 +38,11 @@ Read how to contribute easily [here](http://localhost:4000/developer/contribute.
 
 A special thanks goes out to :
 
-* *Buzz* ([Ledouze](http://www.ledouze.fr) agency) for the logo
+* *Buzz* @ [Ledouze](http://www.ledouze.fr) agency for the logo
 * [ENTP](http://entp.com/) for their amazing web support tool app [Tender](http://tenderapp.com/)
 * [GitHub](http://github.com) for code hosting
 * [Jekyll](http://jekyllrb.com)
-* [JetBrains](http://www.jetbrains.com/) and their fabulous [PHPStorm](http://www.jetbrains.com/phpstorm/) IDE free for open source project
-* [Steve Smith](https://github.com/orderedlist) for this *gh-pages* template
+* [POEditor](http://poeditor.com)
 
 *Pimp my Log* uses these tools, so really thank you to :
 
