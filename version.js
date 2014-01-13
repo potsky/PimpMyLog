@@ -1,9 +1,10 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "0.9.5",
-	"versiondevh" : "b11d60337506ec7d21d0c0931f7c0aba4436aa6a",
+	"versiondevh" : "403cc9e446503fddd9b70b885c880a644ca0fe37",
 	"changelog" : {
 		"0.9.5" : {
+			"notice" : "The date format in the match array has changed. Please read documentation to upgrade your configuration file.",
 			"released" : "2014-01-10",
 			"changed" : [
 				"exclude object is optional now in configuration file",
@@ -48,20 +49,7 @@
 		"0.9.0" : {
 			"notice" : "First public pre-release of Pimp my Log!",
 			"released" : "2013-12-22"
-		},
-		"0.1.5" : {
-			"released" : "2013-12-01",
-			"new" : [
-				"New features"
-			],
-			"changed" : [
-				"Tons of changes"
-			],
-			"fixed" : [
-				"Merry Christmas"
-			]
-		},
-		"0.0.1" : "PHP Apache Log Viewer"
+		}
 	}
 }
-/*PSK*/)/*PSK*/
+/*PSK*/);/*PSK*/

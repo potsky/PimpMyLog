@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.5 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
+/*! pimpmylog - 0.9.5 - 403cc9e446503fddd9b70b885c880a644ca0fe37*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -290,7 +290,7 @@ echo test( $type , $regex , $match , $types , $log );
 								</div>
 								<div id="collapseOne2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php show_source('../config.user.json'); ?></pre>
+										<pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre>
 									</div>
 								</div>
 							</div>
@@ -304,7 +304,7 @@ echo test( $type , $regex , $match , $types , $log );
 								</div>
 								<div id="collapseTwo2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php var_export( stat('../config.user.json') ); ?></pre>
+										<pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre>
 									</div>
 								</div>
 							</div>

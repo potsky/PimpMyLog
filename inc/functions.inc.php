@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.5 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
+/*! pimpmylog - 0.9.5 - 403cc9e446503fddd9b70b885c880a644ca0fe37*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -371,7 +371,7 @@ function json_indent( $json ) {
  * @return  string         the json file without callback
  */
 function clean_json_version( $data ) {
-	return str_replace(	array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/)/*PSK*/' ) , array( '' , '' ) , $data );
+	return str_replace(	array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/);/*PSK*/' ) , array( '' , '' ) , $data );
 }
 
 
