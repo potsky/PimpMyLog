@@ -44,6 +44,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 			"refresh" : 5,
 			"max"     : 10,
 			"notify"  : true,
+			"format"  : {
 				"regex": "|^\\\\[(.*) (.*) (.*) (.*):(.*):(.*)\\\\.(.*) (.*)\\\\] \\\\[(.*):(.*)\\\\] \\\\[pid (.*)\\\\] .*\\\\[client (.*):(.*)\\\\] (.*)(, referer: (.*))*\$|U",
 				"match": {
 					"Date"    : {
