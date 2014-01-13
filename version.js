@@ -4,6 +4,7 @@
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
 		"0.9.5" : {
+			"notice" : "The date format in the match array has changed. Please read documentation to upgrade your configuration file.",
 			"released" : "2014-01-10",
 			"changed" : [
 				"exclude object is optional now in configuration file",
