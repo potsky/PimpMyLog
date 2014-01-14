@@ -52,7 +52,7 @@ Values are :
 Default:
 
 ```json
-"FILE_SELECTOR" : "html"
+"FILE_SELECTOR" : "bs"
 ```
 
 ---
