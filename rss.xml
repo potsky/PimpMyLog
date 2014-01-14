@@ -5,32 +5,35 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2014-01-15T00:15:37+01:00</lastBuildDate>
-        <pubDate>2014-01-15T00:15:37+01:00</pubDate>
+        <lastBuildDate>2014-01-15T00:36:48+01:00</lastBuildDate>
+        <pubDate>2014-01-15T00:36:48+01:00</pubDate>
         <ttl>1800</ttl>
 
         <item>
                 <title>Version 0.9.6 released</title>
                 <description>&lt;p&gt;This version includes these both very cool new features:&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Multiline log files are now supported. I mean files which contain logs where the last field can be written on several lines or which contains the &lt;code&gt;\n&lt;/code&gt; char.&lt;br&gt;
-This is supported:&lt;br&gt;
-&lt;code&gt;
-[27-11-2013:23:20:40 +0100] This is an error
+&lt;h4 id=&quot;toc_0&quot;&gt;1. Multiline&lt;/h4&gt;
+
+&lt;p&gt;Multiline log files are now supported. I mean files which contain logs where the last field can be written on several lines or which contains the &lt;code&gt;\n&lt;/code&gt; char.  &lt;/p&gt;
+
+&lt;p&gt;This is supported:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;[27-11-2013:23:20:40 +0100] This is an error
 on several lines
 [27-11-2013:23:20:41 +0100] Single line is cool too
-&lt;/code&gt;
-not this:&lt;br&gt;
-&lt;code&gt;
---c7036611-F--
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;not this:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;--c7036611-F--
 Protocol: HTTP/1.1 404 Not Found
 --c7036611-H--
 Message: Warning. Match of &amp;quot;rx ^apache.*perl&amp;quot; against
 --c7036611-Z--
 ...
-&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The &lt;code&gt;match&lt;/code&gt; array has replaced its &lt;em&gt;seperator&lt;/em&gt; feature by a &lt;em&gt;concatenator&lt;/em&gt;! You can now display any field how you want in any column.&lt;/p&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&quot;toc_1&quot;&gt;2. Fields concatenation&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The &lt;code&gt;match&lt;/code&gt; array has replaced its &lt;em&gt;seperator&lt;/em&gt; feature by a &lt;em&gt;concatenator&lt;/em&gt;! You can now display any field how you want in any column.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;This fixes some bug of course.&lt;/p&gt;
