@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.5 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
+/*! pimpmylog - 0.9.6 - 7d7c7bee0ced17a14fb5e5dbeb571972dfcb650c*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -109,14 +109,25 @@ $csrf = csrf_get();
 			badges                     = <?php echo json_encode($badges);?>,
 			lemma                      = <?php echo json_encode($lemma);?>,
 			geoip_url                  = "<?php echo GEOIP_URL;?>",
-			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
+			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH === true ) ? 'true' : 'false';?>,
+			file_selector              = "<?php echo FILE_SELECTOR;?>",
 			csrf_token                 = "<?php echo $csrf;?>",
 			querystring                = "<?php echo $_SERVER['QUERY_STRING'];?>",
-			notification_default       = <?php echo ( NOTIFICATION===true ) ? 'true' : 'false';?>;</script></head><body><!--[if lt IE 8]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="logo"></div><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-brand"><span class="loader glyphicon glyphicon-download" style="display:none"></span><span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span><a href="?"><?php echo NAV_TITLE;?></a></div></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li class="dropdown" title="<?php _e( 'Select a log file to display' );?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a><ul class="dropdown-menu"><?php
+			notification_default       = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;</script></head><body><!--[if lt IE 8]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="logo"></div><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-brand"><span class="loader glyphicon glyphicon-download" style="display:none"></span><span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span><a href="?"><?php echo NAV_TITLE;?></a></div></div><div class="navbar-collapse collapse"><?php
+if ( FILE_SELECTOR == 'bs' ) {
+?><ul class="nav navbar-nav"><li class="dropdown" title="<?php _e( 'Select a log file to display' );?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a><ul class="dropdown-menu"><?php
 foreach ( $files as $file_id=>$file ) {
 	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
 }
-?></ul></li></ul><form class="navbar-form navbar-right"><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No auto refresh' );?></option><?php
+?></ul></li></ul><?php
+} else {
+?><form class="navbar-form navbar-left"><div class="form-group"><select id="file_selector_big" class="form-control input-sm" title="<?php _e( 'Select a log file to display' );?>"><?php
+foreach ( $files as $file_id=>$file ) {
+	echo '<option value="' . $file_id . '">' . $file['display'] . '</option>';
+}
+?></select></div>&nbsp;</form><?php
+}
+?><form class="navbar-form navbar-right"><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No auto refresh' );?></option><?php
 foreach ( get_refresh_options() as $r ) {
 	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh every %ss' ) , $r ) . '</option>';
 }

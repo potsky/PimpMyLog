@@ -1,13 +1,31 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "0.9.5",
-	"versiondevh" : "b11d60337506ec7d21d0c0931f7c0aba4436aa6a",
+	"version"     : "0.9.6",
+	"versiondevh" : "7d7c7bee0ced17a14fb5e5dbeb571972dfcb650c",
 	"changelog" : {
+		"0.9.6" : {
+			"notice" : "The separator feature in the match array has been replace by a concatenation of all tokens and provided strings. Your configuration will not be broken but the displayed result will differ.",
+			"released" : "2014-01-14",
+			"new" : [
+				"Multiline support closes (#46)",
+				"Enable multiline and types customization in the debugger",
+				"Debugger now supports exactly same features as the production parser",
+				"Match array separator no longer exists and is replaced by a concatenator which is more powerful (#47)",
+				"New file selector option (deactivate by default) to support several hundreds of log files (#45)"
+			],
+			"changed" : [
+				"Change the upgrade url, github is really too slow..."
+			],
+			"fixed" : [
+				"Fix a bug in the apache 2.4 configuration file"
+			]
+		},
 		"0.9.5" : {
+			"notice" : "The date format in the match array has changed. Please read documentation to upgrade your configuration file.",
 			"released" : "2014-01-10",
 			"changed" : [
-				"exclude object is optional now in configuration file",
-				"new date format support when month is a number"
+				"Exclude object is optional now in configuration file",
+				"New date format support when month is a number"
 			]
 		},
 		"0.9.4" : {
@@ -48,20 +66,7 @@
 		"0.9.0" : {
 			"notice" : "First public pre-release of Pimp my Log!",
 			"released" : "2013-12-22"
-		},
-		"0.1.5" : {
-			"released" : "2013-12-01",
-			"new" : [
-				"New features"
-			],
-			"changed" : [
-				"Tons of changes"
-			],
-			"fixed" : [
-				"Merry Christmas"
-			]
-		},
-		"0.0.1" : "PHP Apache Log Viewer"
+		}
 	}
 }
-/*PSK*/)/*PSK*/
+/*PSK*/);/*PSK*/

@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.5 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
+/*! pimpmylog - 0.9.6 - 7d7c7bee0ced17a14fb5e5dbeb571972dfcb650c*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -66,7 +66,8 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
 
 		if ( substr( $type , 0 , 4 ) === 'date' ) {
 
-			if ( is_array( $key ) ) {
+			// Date is an array description with keys ( 'Y' : 5 , 'M' : 2 , ... )
+			if ( is_array( $key ) && ( is_assoc( $key ) ) ) {
 				$newdate = array();
 				foreach ( $key as $k => $v ) {
 					$newdate[ $k ] = @$out[ $v ][ 0 ];
@@ -78,6 +79,13 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
 					$str = $newdate['Y'] . '/' . $newdate['m'] . '/' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'];
 				}
 			}
+			// Date is an array description without keys ( 2 , ':' , 3 , '-' , ... )
+			else if ( is_array( $key ) ) {
+				$str = '';
+				foreach ( $key as $v ) {
+					$str .= ( is_string( $v ) ) ? $v : @$out[ $v ][0];
+				}
+			}
 			else {
 				$str = @$out[ $key ][0];
 			}
@@ -87,7 +95,6 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
 			if ( ( $p = strrpos(	$dateformat , '/' ) ) !== false ) {
 				$dateformat = substr( $dateformat , 0 , $p );
 			}
-
 			if ( ( $timestamp = strtotime( $str ) ) === false ) {
 				$date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
 			}
@@ -102,13 +109,13 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
 
 			$result[ $token ] = $date;
 		}
-
+		// Array description without keys ( 2 , ':' , 3 , '-' , ... )
 		else if ( is_array( $key ) ) {
-			$r = array();
-			$s = current($key);
-			while ( ( $k = next($key) ) !== false )
-				$r[] = @$out[ $k ][0];
-			$result[ $token ] = implode( $s , $r );
+			$r = '';
+			foreach ( $key as $v ) {
+				$r .= ( is_string( $v ) ) ? $v : @$out[ $v ][0];
+			}
+			$result[ $token ] = $r;
 		}
 
 		else {
@@ -134,9 +141,10 @@ function init() {
 	if ( ! defined( 'GOOGLE_ANALYTICS'           ) ) define( 'GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
 	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
 	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
-	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://raw.github.com/potsky/PimpMyLog/master/version.js' );
+	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://demo.pimpmylog.com/version.js' );
 	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
 	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'        , 5 );
+	if ( ! defined( 'FILE_SELECTOR'              ) ) define( 'FILE_SELECTOR'              , 'bs' );
 }
 
 
@@ -160,7 +168,7 @@ function config_load( $path = 'config.user.json' ) {
 	$files  = $config[ 'files' ];
 
 	foreach ( $config[ 'globals' ] as $cst => $val ) {
-		if ( $cst == strtoupper($cst) ) {
+		if ( $cst == strtoupper( $cst ) ) {
 			define( $cst , $val );
 		}
 	}
@@ -181,7 +189,7 @@ function config_check() {
 	$errors = array();
 
 	if ( count( $files ) == 0 ) {
-		$errors[] = __('No file is defined in <code>files</code> array');
+		$errors[] = __( 'No file is defined in <code>files</code> array' );
 		return $errors;
 	}
 
@@ -189,14 +197,14 @@ function config_check() {
 		// error
 		foreach ( array( 'display' , 'path' , 'format' ) as $mandatory ) {
 			if ( ! isset( $file[ $mandatory ] ) ) {
-				$errors[] = sprintf( __('<code>%s</code> is mandatory for file ID <code>%s</code>') , $mandatory , $file_id );
+				$errors[] = sprintf( __( '<code>%s</code> is mandatory for file ID <code>%s</code>' ) , $mandatory , $file_id );
 			}
 		}
 		// fix
 		foreach ( array(
-			'max'     => LOGS_MAX,
-			'refresh' => LOGS_REFRESH,
-			'notify'  => NOTIFICATION,
+				'max'       => LOGS_MAX,
+				'refresh'   => LOGS_REFRESH,
+				'notify'    => NOTIFICATION,
 		) as $fix => $value ) {
 			if ( ! isset( $file[ $fix ] ) ) {
 				$file[ $fix ] = $value;
@@ -225,11 +233,11 @@ function config_check() {
 function get_refresh_options() {
 	global $files;
 	$options = array(
-		1 => 1,
-		2 => 2,
-		3 => 3,
-		4 => 4,
-		5 => 5,
+		1  => 1,
+		2  => 2,
+		3  => 3,
+		4  => 4,
+		5  => 5,
 		10 => 10,
 		15 => 15,
 		30 => 30,
@@ -258,10 +266,10 @@ function get_refresh_options() {
 function get_max_options() {
 	global $files;
 	$options = array(
-		5 => 5,
-		10 => 10,
-		20 => 20,
-		50 => 50,
+		5   => 5,
+		10  => 10,
+		20  => 20,
+		50  => 50,
 		100 => 100,
 		200 => 200
 	);
@@ -348,12 +356,12 @@ function json_indent( $json ) {
 			}
 		}
 		$result .= $char;
-		if (($char == ',' || $char == '{' || $char == '[') && $outOfQuotes) {
+		if ( ( $char == ',' || $char == '{' || $char == '[' ) && $outOfQuotes ) {
 			$result .= $newLine;
-			if ($char == '{' || $char == '[') {
+			if ( $char == '{' || $char == '[' ) {
 				$pos ++;
 			}
-			for ($j = 0; $j < $pos; $j++) {
+			for ( $j = 0 ; $j < $pos ; $j++ ) {
 				$result .= $indentStr;
 			}
 		}
@@ -371,7 +379,7 @@ function json_indent( $json ) {
  * @return  string         the json file without callback
  */
 function clean_json_version( $data ) {
-	return str_replace(	array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/)/*PSK*/' ) , array( '' , '' ) , $data );
+	return str_replace(	array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/);/*PSK*/' , '/*PSK*/)/*PSK*/' ) , array( '' , '' , '' ) , $data );
 }
 
 
@@ -388,3 +396,14 @@ function get_server_user() {
 	}
 }
 
+
+/**
+ * Tell whether this is a associative array (object in javascript) or not (array in javascript)
+ *
+ * @param   array   $arr  the array to test
+ *
+ * @return  boolean        true if $arr is an associative array
+ */
+function is_assoc( $arr ) {
+    return array_keys( $arr ) !== range( 0 , count( $arr ) - 1 );
+}

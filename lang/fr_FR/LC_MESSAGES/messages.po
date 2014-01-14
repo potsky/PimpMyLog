@@ -24,8 +24,7 @@ msgstr "Oups!"
 #: index.php:10 _site/index.php:10
 #, php-format
 msgid "PHP version %s is required but your server run %s."
-msgstr ""
-"La version %s au minimum de PHP est requise mais votre serveur est en %s."
+msgstr "La version %s au minimum de PHP est requise mais votre serveur est en %s."
 
 #: index.php:12 _site/index.php:12
 msgid "Learn more"

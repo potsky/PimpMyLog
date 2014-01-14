@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.5 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
+/*! pimpmylog - 0.9.6 - 7d7c7bee0ced17a14fb5e5dbeb571972dfcb650c*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -49,9 +49,8 @@ if ( false === CHECK_UPGRADE ) {
 }
 
 try {
-
 	$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 5 ) ) );
-	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?' . date("U") ) , false , $ctx ) , true );
+	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?' . date("U") , false , $ctx ) ), true );
 	if ( is_null( $JSr_version ) ) {
 		throw new Exception( 'Unable to fetch remote version' , 1);
 	}

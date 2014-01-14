@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.5 - b11d60337506ec7d21d0c0931f7c0aba4436aa6a*/
+/*! pimpmylog - 0.9.6 - 7d7c7bee0ced17a14fb5e5dbeb571972dfcb650c*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -16,39 +16,81 @@ if ( basename( __FILE__ ) !== 'test.REMOVE_UPPERCASE.php' ) {
 	die( __('Please copy <code>inc/test.php</code> to <code>inc/test.REMOVE_UPPERCASE.php</code> and load <code>inc/test.REMOVE_UPPERCASE.php</code> in your browser') );
 }
 
-function test( $type , $regex , $match , $types , $log ) {
+function test( $type , $regex , $match , $types , $logs , $headers = true , $multiline = '' ) {
 	$r  = '<h4>' . $type . '</h4>';
 	$r .= '<pre>';
-	$r .= '<strong>Regex</strong>: ' . $regex . "\n";
-	$r .= '<strong>Log  </strong>: ' . $log . "\n";
-	$r .= "\n";
-	$tokens = parser( $regex , $match , $log , $types );
-	if ( is_array($tokens) ) {
-		$maxlength = 0;
-		foreach ( $tokens as $token => $value ) $maxlength = max( $maxlength , strlen( $token ) );
-		foreach ( $tokens as $token => $value ) {
-			$r .= '<strong>' . str_pad( $token , $maxlength ) . '</strong>: ' . $value . "\n";
+	$r .= ( $headers === true ) ? '<strong>Regex</strong>: ' . $regex . "\n" : '';
+	$r .= ( $headers === true ) ? '<strong>Log  </strong>: ' . $logs . "\n" : '';
+	$r .= ( $headers === true ) ? "\n" : '';
+
+	$logs   = array_reverse( explode( "\n" , $logs ) );
+	$rank   = 0;
+	$size   = count( strval( count($logs) ) ) + 2;
+	$blan   = str_pad( '' , $size );
+	$buffer = array();
+
+	foreach( $logs as $log ) {
+
+		$tokens = parser( $regex , $match , $log , $types );
+
+		if ( is_array( $tokens ) ) {
+			$rank++;
+			$disp = ( $headers ) ? '' : str_pad( '#' . $rank , $size );
+
+			$maxlength = 0;
+			foreach ( $tokens as $token => $value ) $maxlength = max( $maxlength , strlen( $token ) );
+
+			$r .= ( $headers ) ? '' : '<strong>' . $disp . $log . "</strong>\n";
+
+			foreach ( $tokens as $token => $value ) {
+				$r .= $blan . '<strong>' . str_pad( $token , $maxlength ) . '</strong>: ' . $value;
+
+				if ( $token === $multiline ) {
+					if ( count( $buffer ) > 0 ) {
+						$buffer = array_reverse( $buffer );
+						foreach ( $buffer as $append ) {
+							$r .= "\n" . $blan . str_pad( '' , $maxlength ) . '  ' . $append;
+						}
+					}
+				}
+
+				$r .= "\n";
+			}
+
+			$r .= "\n";
+			$buffer = array();
 		}
+
+		else {
+			$buffer[] = $log;
+		}
+
 	}
+
 	$r .= '</pre>';
 	return $r;
 }
 
-$types = array(
-	'Date'    => 'date:Y/m/d H:i:s',
-);
-
 
 if ( isset( $_POST['s'] ) ) {
 
-	$return = array();
-	$match  = @json_decode( $_POST['m'] , true );
-	$regex  = $_POST['r'];
-	$log    = $_POST['l'];
+	$return    = array();
+	$match     = @json_decode( $_POST['m'] , true );
+	$types     = @json_decode( $_POST['t'] , true );
+	$regex     = $_POST['r'];
+	$log       = $_POST['l'];
+	$multiline = $_POST['u'];
 
 	if ( ! is_array( $match ) ) {
 		$return['err'] = 'inputMatch';
 		$return['msg'] = '<div class="alert alert-danger"><strong>' . __('Error') . '</strong> '. __('Match is not a valid associative array') . '</div>';
+		echo json_encode( $return );
+		die();
+	}
+
+	if ( ! is_array( $types ) ) {
+		$return['err'] = 'inputTypes';
+		$return['msg'] = '<div class="alert alert-danger"><strong>' . __('Error') . '</strong> '. __('Types is not a valid associative array') . '</div>';
 		echo json_encode( $return );
 		die();
 	}
@@ -61,7 +103,7 @@ if ( isset( $_POST['s'] ) ) {
 	}
 
 	header('Content-type: application/json');
-	$return['msg'] = test( '' , $regex , $match, $types, $log );
+	$return['msg'] = test( '' , $regex , $match, $types, $log , false , $multiline );
 
 	echo json_encode( $return );
 	die();
@@ -116,39 +158,62 @@ if ( isset( $_POST['s'] ) ) {
 					<div class="panel-body">
 						<form class="form-horizontal" role="form" id="regextest">
 							<div class="form-group" id="GPinputLog">
-								<label for="inputLog3" class="col-sm-2 control-label"><?php _e('Log');?></label>
+								<label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputLog" placeholder="Log"><?php
-									echo '127.0.0.1 - - [27/Nov/2013:10:20:40 +0100] "GET /~potsky/PHPApacheLogViewer/inc/get_logs.php?ldv=false&file=access&max=27 HTTP/1.1" 200 33 "http://localhost/~potsky/PHPApacheLogViewer/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71"';
+									echo '[27-11-2013:23:20:40 +0100] This is an error
+on several lines
+[27-11-2013:23:20:41 +0100] Single line is cool too';
 									?></textarea>
 								</div>
 							</div>
 							<div class="form-group" id="GPinputRegEx">
-								<label for="inputRegEx3" class="col-sm-2 control-label"><?php _e('RegEx');?></label>
+								<label for="inputRegEx" class="col-sm-2 control-label"><?php _e('RegEx');?></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputRegEx" placeholder="RegEx"><?php
-										echo '|^(.*) (.*) (.*) \[(.*)\] "(.*) (.*) (.*)" ([0-9]*) (.*) "(.*)" "(.*)"( [0-9]*/([0-9]*))*$|U';
+										echo '|^\[(.*)-(.*)-(.*):(.*):(.*):(.*) .*\] (.*)$|U';
 									?></textarea>
 								</div>
 							</div>
 							<div class="form-group" id="GPinputMatch">
-								<label for="inputMatch3" class="col-sm-2 control-label"><?php _e('Match');?></label>
+								<label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
 									$match = array(
-										'CMD'     => 5,
-										'Code'    => 8,
-										'Date'    => 4,
-										'IP'      => 1,
-										'Referer' => 10,
-										'Size'    => 9,
-										'UA'      => 11,
-										'URL'     => 6,
-										'User'    => 3,
-										'Time'    => 13,
+										'Date'  => array(
+											'Y' => 3,
+											'm' => 2,
+											'd' => 1,
+											'H' => 4,
+											'i' => 5,
+											's' => 6,
+										 ),
+										'Error' => 7,
+									);
+									$match = array(
+										'Date'  => array( 3 , '/' , 2 , '/' , 1 , ' ' , 4 , ':' , 5, ':' , 6 ),
+										'Error' => 7,
 									);
 									echo json_indent( json_encode($match))
 									?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="GPinputTypes">
+								<label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?></label>
+								<div class="col-sm-10">
+									<textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
+									$types = array(
+										'Date'  => 'date:d/m/Y H:i:s /100',
+										'Error' => 'txt',
+									);
+									echo json_indent( json_encode($types))
+									?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="GPinputMultiline">
+								<label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label>
+								<div class="col-sm-10">
+									<input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -290,7 +355,7 @@ echo test( $type , $regex , $match , $types , $log );
 								</div>
 								<div id="collapseOne2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php show_source('../config.user.json'); ?></pre>
+										<pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre>
 									</div>
 								</div>
 							</div>
@@ -304,7 +369,7 @@ echo test( $type , $regex , $match , $types , $log );
 								</div>
 								<div id="collapseTwo2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<pre><?php var_export( stat('../config.user.json') ); ?></pre>
+										<pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre>
 									</div>
 								</div>
 							</div>
