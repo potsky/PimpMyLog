@@ -37,6 +37,27 @@ Default:
 
 ---
 
+
+#### FILE\_SELECTOR
+
+<a name="fileselector"></a>
+
+Tell how *Pimp My Log* must display the log file selector.
+
+Values are :
+
+- `bs` : *BootStrap* design, pretty but does not support more than several dozen of log files (the list goes out of your screen when there is a lot of files)
+- `html` : a *select* form input element is used, it supports several hundreds of log files
+
+Default:
+
+```json
+"FILE_SELECTOR" : "html"
+```
+
+---
+
+
 #### FOOTER
 
 This constant is the footer text in *HTML*.
