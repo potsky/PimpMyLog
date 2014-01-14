@@ -5,9 +5,46 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2014-01-13T14:25:59+01:00</lastBuildDate>
-        <pubDate>2014-01-13T14:25:59+01:00</pubDate>
+        <lastBuildDate>2014-01-14T23:24:04+01:00</lastBuildDate>
+        <pubDate>2014-01-14T23:24:04+01:00</pubDate>
         <ttl>1800</ttl>
+
+        <item>
+                <title>Version 0.9.6 released</title>
+                <description>&lt;p&gt;This version includes these both very cool new features:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Multiline log files are now supported. I mean files which contain logs where the last field can be written on several lines or which contains the &lt;code&gt;\n&lt;/code&gt; char.&lt;br&gt;
+This is supported:&lt;br&gt;
+&lt;code&gt;
+[27-11-2013:23:20:40 +0100] This is an error
+on several lines
+[27-11-2013:23:20:41 +0100] Single line is cool too
+&lt;/code&gt;
+not this:&lt;br&gt;
+&lt;code&gt;
+--c7036611-F--
+Protocol: HTTP/1.1 404 Not Found
+--c7036611-H--
+Message: Warning. Match of &amp;quot;rx ^apache.*perl&amp;quot; against
+--c7036611-Z--
+...
+&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;match&lt;/code&gt; array has replaced its &lt;em&gt;seperator&lt;/em&gt; feature by a &lt;em&gt;concatenator&lt;/em&gt;! You can now display any field how you want in any column.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This fixes some bug of course.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Pimp My Log&lt;/em&gt; is on the final straight!&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.6&quot;&gt;&lt;/div&gt;
+</description>
+                <link>http://pimpmylog.com/general/2014/01/14/version-0.9.6-released</link>
+                <guid>http://pimpmylog.com/general/2014/01/14/version-0.9.6-released</guid>
+                <pubDate>2014-01-14T00:00:00+01:00</pubDate>
+        </item>
 
         <item>
                 <title>Version 0.9.5 released</title>
