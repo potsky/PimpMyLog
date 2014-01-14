@@ -5,17 +5,24 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2014-01-15T00:36:48+01:00</lastBuildDate>
-        <pubDate>2014-01-15T00:36:48+01:00</pubDate>
+        <lastBuildDate>2014-01-15T00:43:09+01:00</lastBuildDate>
+        <pubDate>2014-01-15T00:43:09+01:00</pubDate>
         <ttl>1800</ttl>
 
         <item>
                 <title>Version 0.9.6 released</title>
-                <description>&lt;p&gt;This version includes these both very cool new features:&lt;/p&gt;
+                <description>&lt;p&gt;This version includes both very cool new features:&lt;/p&gt;
 
-&lt;h4 id=&quot;toc_0&quot;&gt;1. Multiline&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Multi-line&lt;/li&gt;
+&lt;li&gt;Fields concatenation&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Multiline log files are now supported. I mean files which contain logs where the last field can be written on several lines or which contains the &lt;code&gt;\n&lt;/code&gt; char.  &lt;/p&gt;
+&lt;!--more--&gt;
+
+&lt;h4 id=&quot;toc_0&quot;&gt;1. Multi-line&lt;/h4&gt;
+
+&lt;p&gt;Multi-line log files are now supported. I mean files which contain logs where the last field can be written on several lines or which contains the &lt;code&gt;\n&lt;/code&gt; char.  &lt;/p&gt;
 
 &lt;p&gt;This is supported:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;[27-11-2013:23:20:40 +0100] This is an error
