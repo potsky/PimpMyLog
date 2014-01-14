@@ -305,6 +305,7 @@ The `file` object structure is something like this:
 "max" : 10,
 "notify" : true,
 "format" : {
+    "multiline": "Log",
     "regex": "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U",
     "match": {
         "Date" : 1,
@@ -488,19 +489,25 @@ Example:
 
 ##### Concatenation
 
-You can concatenate several tokens in a single field. This is useful when you want to build a field value with several tokens which do not stand side by side in a line of log.
+You can concatenate several tokens and strings in a single field. This is useful when you want to build a field value with several tokens which do not stand side by side in a line of log.
 
 ```json
 "match": {
     "IP"          : 12,
-    "Log"         : [ " : " , 10 , 14 ],
+    "Log"         : [ ">>>" , 10 , ": " , 14 , "<<<" ],
     "Severity"    : 10,
     "WhatYouWant" : 11,
     "Referer"     : 16,
 },
 ```
 
-2nd column values will look like this `token10 : token14`.
+2nd column values will look like this `>>>token10: token14<<<`.
+
+> **Note**  
+> Concatenation fits the unknown date format perfectly. Simpl
+>   "Date"    : [ 8 , '/' , 2 , '/' , 3 , ' ' , 4 , ':' , 5 , ':' 6 ],
+
+<!-- -->
 
 
 ### 3.2.3 types
@@ -542,6 +549,39 @@ In the example below, we don't want to retrieve:
 - logs which have a `Log` value which contains `PHP Stack trace:`
 - logs which have a `Log` value which looks like `PHP NUMBER. `
 - logs which have a `Url` value which contains `favicon.ico`
+
+
+### 3.2.5 multiline
+
+*Pimp My Log* can handle log files where the last field of each line can contains the `\n` char. Take this example:
+
+```
+[27-11-2013:23:20:40 +0100] This is an error
+on several lines
+[27-11-2013:23:20:41 +0100] Single line is cool too
+```
+
+Instead of rejecting the second line, if the multiline value is not empty and if its value is a token name then all unmatched lines will be appended to the token.
+
+
+Example:
+
+```json
+"multiline": "Log"
+```
+
+In the example above, the first `Log` value will be:
+
+```
+Single line is cool too
+```
+
+then the second `Log` value will be:
+
+```
+This is an error
+on several lines
+```
 
 
 ## 3.3 Types format
