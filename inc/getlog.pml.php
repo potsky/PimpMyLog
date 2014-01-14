@@ -103,12 +103,13 @@ if ( is_array( $errors ) ) {
 }
 
 
-$file_max = ( isset( $files[$file_id]['max'] ) ) ? (int)$files[$file_id]['max'] : LOGS_MAX;
-$max      = ( $load_default_values == 'true' ) ? $file_max : $user_max;
-$regex    = $files[ $file_id ][ 'format' ][ 'regex' ];
-$match    = $files[ $file_id ][ 'format' ][ 'match' ];
-$types    = $files[ $file_id ][ 'format' ][ 'types' ];
-$exclude  = isset( $files[ $file_id ][ 'format' ][ 'exclude' ] ) ? $files[ $file_id ][ 'format' ][ 'exclude' ] : array();
+$file_max  = ( isset( $files[$file_id]['max'] ) ) ? (int)$files[$file_id]['max'] : LOGS_MAX;
+$max       = ( $load_default_values == 'true' ) ? $file_max : $user_max;
+$regex     = $files[ $file_id ][ 'format' ][ 'regex' ];
+$match     = $files[ $file_id ][ 'format' ][ 'match' ];
+$types     = $files[ $file_id ][ 'format' ][ 'types' ];
+$multiline = ( isset( $files[ $file_id ][ 'format' ][ 'multiline' ] ) ) ? $files[ $file_id ][ 'format' ][ 'multiline' ] : '';
+$exclude   = isset( $files[ $file_id ][ 'format' ][ 'exclude' ] ) ? $files[ $file_id ][ 'format' ][ 'exclude' ] : array();
 
 
 
@@ -151,6 +152,7 @@ $full            = false;
 $tofarline       = '';
 $file_lastline   = '';
 $search_lastline = true;
+$buffer          = array();
 $fl              = fopen( $file_path , "r" );
 if ( $fl === false ) {
 	$logs['error'] = sprintf( __( 'File <code>%s</code> for file ID <code>%s</code> does not exist anymore...' ) , $file_path , $file_id );
@@ -220,10 +222,18 @@ for ( $x_pos = 0, $ln = 0, $line = '', $still = true; $still ; $x_pos-- ) {
 
 			$log = parser( $regex , $match , $deal , $types , $tz );
 			if ( is_array( $log ) ) {
-				$return_log = true;
+				$return_log        = true;
+				$last_field_append = ( count( $buffer ) > 0 ) ? "\n" . implode( "\n" ,  array_reverse( $buffer ) ) : '';;
+				$buffer            = array();
+
 				foreach ( $log as $key => $value ) {
-					if ( ( isset( $exclude[$key] ) ) && ( is_array( $exclude[$key] ) ) ) {
-						foreach ( $exclude[$key] as $ekey => $reg ) {
+					if ( $key === $multiline ) {
+						$value .= $last_field_append;
+						$deal  .= $last_field_append;
+						$log[ $key ] = $value;
+					}
+					if ( ( isset( $exclude[ $key ] ) ) && ( is_array( $exclude[ $key ] ) ) ) {
+						foreach ( $exclude[ $key ] as $ekey => $reg ) {
 							try {
 								if ( preg_match( $reg , $value ) ) {
 									$return_log = false;
@@ -240,11 +250,11 @@ for ( $x_pos = 0, $ln = 0, $line = '', $still = true; $still ; $x_pos-- ) {
 				else {
 					if ( $search != '' ) { // Search
 						if ( $regsearch ) { // Regex
-							$return_log = preg_match( $search , $deal );
+							$return_log = preg_match( $search , $deal . $last_field_append );
 							if ( $return_log === 0 ) $return_log = false;
 						}
 						else { // simple string
-							$return_log = strpos( $deal , $search );
+							$return_log = strpos( $deal . $last_field_append, $search );
 						}
 					}
 					if ( $return_log === false ) {
@@ -252,12 +262,14 @@ for ( $x_pos = 0, $ln = 0, $line = '', $still = true; $still ; $x_pos-- ) {
 					}
 					else {
 						$found            = true;
-						$log['pml']       = $deal;
+						$log['pml']       = $deal . $last_field_append;
 						$logs[ 'logs' ][] = $log;
 						$ln++;
 					}
 				}
-
+			}
+			else if ( $multiline != '' ) {
+				$buffer[] = $deal;
 			}
 			else {
 				$error++;

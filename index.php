@@ -128,10 +128,10 @@ $csrf = csrf_get();
 			badges                     = <?php echo json_encode($badges);?>,
 			lemma                      = <?php echo json_encode($lemma);?>,
 			geoip_url                  = "<?php echo GEOIP_URL;?>",
-			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH===true ) ? 'true' : 'false';?>,
+			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH === true ) ? 'true' : 'false';?>,
 			csrf_token                 = "<?php echo $csrf;?>",
 			querystring                = "<?php echo $_SERVER['QUERY_STRING'];?>",
-			notification_default       = <?php echo ( NOTIFICATION===true ) ? 'true' : 'false';?>;
+			notification_default       = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;
 	</script>
 </head>
 <body>

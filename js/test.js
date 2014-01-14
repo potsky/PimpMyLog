@@ -12,6 +12,8 @@ $(function() {
 				'r' : $( '#inputRegEx' ).val(),
 				'l' : $( '#inputLog' ).val(),
 				'm' : $( '#inputMatch' ).val(),
+				't' : $( '#inputTypes' ).val(),
+				'u' : $( '#inputMultiline' ).val(),
 				's' : '1',
 			} ,
 			dataType: 'json'

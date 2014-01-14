@@ -31,14 +31,23 @@ $types = array(
 
 if ( isset( $_POST['s'] ) ) {
 
-	$return = array();
-	$match  = @json_decode( $_POST['m'] , true );
-	$regex  = $_POST['r'];
-	$log    = $_POST['l'];
+	$return    = array();
+	$match     = @json_decode( $_POST['m'] , true );
+	$types     = @json_decode( $_POST['t'] , true );
+	$regex     = $_POST['r'];
+	$log       = $_POST['l'];
+	$multiline = $_POST['u'];
 
 	if ( ! is_array( $match ) ) {
 		$return['err'] = 'inputMatch';
 		$return['msg'] = '<div class="alert alert-danger"><strong>' . __('Error') . '</strong> '. __('Match is not a valid associative array') . '</div>';
+		echo json_encode( $return );
+		die();
+	}
+
+	if ( ! is_array( $types ) ) {
+		$return['err'] = 'inputTypes';
+		$return['msg'] = '<div class="alert alert-danger"><strong>' . __('Error') . '</strong> '. __('Types is not a valid associative array') . '</div>';
 		echo json_encode( $return );
 		die();
 	}
@@ -51,7 +60,7 @@ if ( isset( $_POST['s'] ) ) {
 	}
 
 	header('Content-type: application/json');
-	$return['msg'] = test( '' , $regex , $match, $types, $log );
+	$return['msg'] = test( $types , $regex , $match, $types, $log );
 
 	echo json_encode( $return );
 	die();
@@ -113,39 +122,51 @@ if ( isset( $_POST['s'] ) ) {
 					<div class="panel-body">
 						<form class="form-horizontal" role="form" id="regextest">
 							<div class="form-group" id="GPinputLog">
-								<label for="inputLog3" class="col-sm-2 control-label"><?php _e('Log');?></label>
+								<label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputLog" placeholder="Log"><?php
-									echo '127.0.0.1 - - [27/Nov/2013:10:20:40 +0100] "GET /~potsky/PHPApacheLogViewer/inc/get_logs.php?ldv=false&file=access&max=27 HTTP/1.1" 200 33 "http://localhost/~potsky/PHPApacheLogViewer/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71"';
+									echo '[27-11-2013:23:20:40 +0100] This is an error
+on several lines
+[27-11-2013:23:20:41 +0100] Single line is cool too';
 									?></textarea>
 								</div>
 							</div>
 							<div class="form-group" id="GPinputRegEx">
-								<label for="inputRegEx3" class="col-sm-2 control-label"><?php _e('RegEx');?></label>
+								<label for="inputRegEx" class="col-sm-2 control-label"><?php _e('RegEx');?></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputRegEx" placeholder="RegEx"><?php
-										echo '|^(.*) (.*) (.*) \[(.*)\] "(.*) (.*) (.*)" ([0-9]*) (.*) "(.*)" "(.*)"( [0-9]*/([0-9]*))*$|U';
+										echo '|^\[(.*)-(.*)-(.*):(.*):(.*):(.*) .*\] (.*)$|U';
 									?></textarea>
 								</div>
 							</div>
 							<div class="form-group" id="GPinputMatch">
-								<label for="inputMatch3" class="col-sm-2 control-label"><?php _e('Match');?></label>
+								<label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
 									$match = array(
-										'CMD'     => 5,
-										'Code'    => 8,
-										'Date'    => 4,
-										'IP'      => 1,
-										'Referer' => 10,
-										'Size'    => 9,
-										'UA'      => 11,
-										'URL'     => 6,
-										'User'    => 3,
-										'Time'    => 13,
+										'Date'  => array( 3 , '/' , 2 , '/' , 1 , ' ' , 4 , ':' , 5, ':' , 6 ),
+										'Error' => 7,
 									);
 									echo json_indent( json_encode($match))
 									?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="GPinputTypes">
+								<label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?></label>
+								<div class="col-sm-10">
+									<textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
+									$types = array(
+										'Date'  => 'date:H:i:s',
+										'Error' => 'txt',
+									);
+									echo json_indent( json_encode($types))
+									?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="GPinputMultiline">
+								<label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label>
+								<div class="col-sm-10">
+									<input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"/>
 								</div>
 							</div>
 							<div class="form-group">
