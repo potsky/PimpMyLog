@@ -6,27 +6,60 @@ if ( basename( __FILE__ ) !== 'test.REMOVE_UPPERCASE.php' ) {
 	die( __('Please copy <code>inc/test.php</code> to <code>inc/test.REMOVE_UPPERCASE.php</code> and load <code>inc/test.REMOVE_UPPERCASE.php</code> in your browser') );
 }
 
-function test( $type , $regex , $match , $types , $log ) {
+function test( $type , $regex , $match , $types , $logs , $headers = true , $multiline = '' ) {
 	$r  = '<h4>' . $type . '</h4>';
 	$r .= '<pre>';
-	$r .= '<strong>Regex</strong>: ' . $regex . "\n";
-	$r .= '<strong>Log  </strong>: ' . $log . "\n";
-	$r .= "\n";
-	$tokens = parser( $regex , $match , $log , $types );
-	if ( is_array($tokens) ) {
-		$maxlength = 0;
-		foreach ( $tokens as $token => $value ) $maxlength = max( $maxlength , strlen( $token ) );
-		foreach ( $tokens as $token => $value ) {
-			$r .= '<strong>' . str_pad( $token , $maxlength ) . '</strong>: ' . $value . "\n";
+	$r .= ( $headers === true ) ? '<strong>Regex</strong>: ' . $regex . "\n" : '';
+	$r .= ( $headers === true ) ? '<strong>Log  </strong>: ' . $logs . "\n" : '';
+	$r .= ( $headers === true ) ? "\n" : '';
+
+	$logs   = array_reverse( explode( "\n" , $logs ) );
+	$rank   = 0;
+	$size   = count( strval( count($logs) ) ) + 2;
+	$blan   = str_pad( '' , $size );
+	$buffer = array();
+
+	foreach( $logs as $log ) {
+
+		$tokens = parser( $regex , $match , $log , $types );
+
+		if ( is_array( $tokens ) ) {
+			$rank++;
+			$disp = ( $headers ) ? '' : str_pad( '#' . $rank , $size );
+
+			$maxlength = 0;
+			foreach ( $tokens as $token => $value ) $maxlength = max( $maxlength , strlen( $token ) );
+
+			$r .= ( $headers ) ? '' : '<strong>' . $disp . $log . "</strong>\n";
+
+			foreach ( $tokens as $token => $value ) {
+				$r .= $blan . '<strong>' . str_pad( $token , $maxlength ) . '</strong>: ' . $value;
+
+				if ( $token === $multiline ) {
+					if ( count( $buffer ) > 0 ) {
+						$buffer = array_reverse( $buffer );
+						foreach ( $buffer as $append ) {
+							$r .= "\n" . $blan . str_pad( '' , $maxlength ) . '  ' . $append;
+						}
+					}
+				}
+
+				$r .= "\n";
+			}
+
+			$r .= "\n";
+			$buffer = array();
 		}
+
+		else {
+			$buffer[] = $log;
+		}
+
 	}
+
 	$r .= '</pre>';
 	return $r;
 }
-
-$types = array(
-	'Date'    => 'date:Y/m/d H:i:s',
-);
 
 
 if ( isset( $_POST['s'] ) ) {
@@ -60,7 +93,7 @@ if ( isset( $_POST['s'] ) ) {
 	}
 
 	header('Content-type: application/json');
-	$return['msg'] = test( $types , $regex , $match, $types, $log );
+	$return['msg'] = test( '' , $regex , $match, $types, $log , false , $multiline );
 
 	echo json_encode( $return );
 	die();
@@ -144,6 +177,17 @@ on several lines
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
 									$match = array(
+										'Date'  => array(
+											'Y' => 3,
+											'm' => 2,
+											'd' => 1,
+											'H' => 4,
+											'i' => 5,
+											's' => 6,
+										 ),
+										'Error' => 7,
+									);
+									$match = array(
 										'Date'  => array( 3 , '/' , 2 , '/' , 1 , ' ' , 4 , ':' , 5, ':' , 6 ),
 										'Error' => 7,
 									);
@@ -156,7 +200,7 @@ on several lines
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
 									$types = array(
-										'Date'  => 'date:H:i:s',
+										'Date'  => 'date:d/m/Y H:i:s /100',
 										'Error' => 'txt',
 									);
 									echo json_indent( json_encode($types))
