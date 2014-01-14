@@ -552,19 +552,35 @@ var get_logs     = function( load_default_values , load_full_file ) {
 $(function() {
 	"use strict";
 
-	// File menu > init
-	$('#file_selector').text( $('.file_menu:first').text() );
-	$('.file_menu:first').parent().addClass('active');
-	file = $('.file_menu:first').parent().data('file');
+	// File selector bootstrap
+	if ( file_selector === 'bs' ) {
+		// File menu > init
+		$('#file_selector').text( $('.file_menu:first').text() );
+		$('.file_menu:first').parent().addClass('active');
+		file = $('.file_menu:first').parent().data('file');
 
-	// File Menu > handler
-	$('.file_menu').click( function() {
-		$('#file_selector').text( $(this).text() );
-		$('.file_menu').parent().removeClass('active');
-		$(this).parent().addClass('active');
-		file = $(this).parent().data('file');
-		get_logs( true );
-	});
+		// File Menu > handler
+		$('.file_menu').click( function() {
+			$('#file_selector').text( $(this).text() );
+			$('.file_menu').parent().removeClass('active');
+			$(this).parent().addClass('active');
+			file = $(this).parent().data('file');
+			get_logs( true );
+		});
+	}
+
+	// File selector select html
+	else {
+
+		// File menu > init
+		file = $('#file_selector_big').val();
+
+		// File Menu > handler
+		$('#file_selector_big').change( function() {
+			file = $('#file_selector_big').val();
+			get_logs( true );
+		});
+	}
 
 	// Logo click
 	$('.logo').click(function() {

@@ -129,6 +129,7 @@ $csrf = csrf_get();
 			lemma                      = <?php echo json_encode($lemma);?>,
 			geoip_url                  = "<?php echo GEOIP_URL;?>",
 			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH === true ) ? 'true' : 'false';?>,
+			file_selector              = "<?php echo FILE_SELECTOR;?>",
 			csrf_token                 = "<?php echo $csrf;?>",
 			querystring                = "<?php echo $_SERVER['QUERY_STRING'];?>",
 			notification_default       = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;
@@ -154,6 +155,9 @@ $csrf = csrf_get();
 				</div>
 			</div>
 			<div class="navbar-collapse collapse">
+<?php
+if ( FILE_SELECTOR == 'bs' ) {
+?>
 				<ul class="nav navbar-nav">
 					<li class="dropdown" title="<?php _e( 'Select a log file to display' );?>">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a>
@@ -166,6 +170,24 @@ foreach ( $files as $file_id=>$file ) {
 						</ul>
 					</li>
 				</ul>
+<?php
+} else {
+?>
+    			<form class="navbar-form navbar-left">
+					<div class="form-group">
+						<select id="file_selector_big" class="form-control input-sm" title="<?php _e( 'Select a log file to display' );?>">
+<?php
+foreach ( $files as $file_id=>$file ) {
+	echo '<option value="' . $file_id . '">' . $file['display'] . '</option>';
+}
+?>
+						</select>
+					</div>&nbsp;
+			    </form>
+<?php
+}
+?>
+
 				<form class="navbar-form navbar-right">
 
 					<div class="form-group" id="searchctn">

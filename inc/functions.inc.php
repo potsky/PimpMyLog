@@ -134,6 +134,7 @@ function init() {
 	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://demo.pimpmylog.com/version.js' );
 	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
 	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'        , 5 );
+	if ( ! defined( 'FILE_SELECTOR'              ) ) define( 'FILE_SELECTOR'              , 'bs' );
 }
 
 

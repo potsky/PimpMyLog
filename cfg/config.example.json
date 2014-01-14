@@ -14,6 +14,7 @@
 		"_remove_me_to_set_GEOIP_URL"             : "http:\/\/www.geoiptool.com\/en\/?IP=%p",
 		"_remove_me_to_set_CHECK_UPGRADE"         : true,
 		"_remove_me_to_set_MAX_SEARCH_LOG_TIME"   : 3,
+		"_remove_me_to_set_FILE_SELECTOR"         : "bs",
 		"_remove_me_to_set_USER_TIME_ZONE"        : "Europe\/Paris"
 	},
 	"badges": {
