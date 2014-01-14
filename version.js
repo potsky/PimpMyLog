@@ -11,7 +11,7 @@
 				"Enable multiline and types customization in the debugger",
 				"Debugger now supports exactly same features as the production parser",
 				"Match array separator no longer exists and is replaced by a concatenator which is more powerful (#47)",
-				"New file selector option (deactivate by default) to support several hundreds of log files"
+				"New file selector option (deactivate by default) to support several hundreds of log files (#45)"
 			],
 			"changed" : [
 				"Change the upgrade url, github is really too slow..."
