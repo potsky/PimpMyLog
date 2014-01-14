@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "0.9.6",
-	"versiondevh" : "ad5e112b482a04a31161e750045a73b9bb382915",
+	"versiondevh" : "7d7c7bee0ced17a14fb5e5dbeb571972dfcb650c",
 	"changelog" : {
 		"0.9.6" : {
 			"notice" : "The separator feature in the match array has been replace by a concatenation of all tokens and provided strings. Your configuration will not be broken but the displayed result will differ.",
@@ -11,7 +11,7 @@
 				"Enable multiline and types customization in the debugger",
 				"Debugger now supports exactly same features as the production parser",
 				"Match array separator no longer exists and is replaced by a concatenator which is more powerful (#47)",
-				"New file selector option (deactivate by default) to support several hundreds of log files"
+				"New file selector option (deactivate by default) to support several hundreds of log files (#45)"
 			],
 			"changed" : [
 				"Change the upgrade url, github is really too slow..."
