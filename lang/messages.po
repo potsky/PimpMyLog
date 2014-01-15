@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-01-15 11:42+0100\n"
-"PO-Revision-Date: 2014-01-15 11:42+0100\n"
+"POT-Creation-Date: 2014-01-15 16:38+0100\n"
+"PO-Revision-Date: 2014-01-15 16:38+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: potsky <potsky@me.com>\n"
 "Language: en_GB\n"
@@ -346,9 +346,10 @@ msgstr ""
 msgid "Software"
 msgstr ""
 
-#: _build/inc/configure.php:305 _build/inc/test.php:411
-#: _site/inc/configure.php:295 _site/inc/test.php:401 inc/configure.php:295
-#: inc/test.php:408
+#: _build/inc/configure.php:305 _build/inc/test.php:412
+#: _build/inc/test.REMOVE_UPPERCASE.php:412 _site/inc/configure.php:295
+#: _site/inc/test.php:402 _site/inc/test.REMOVE_UPPERCASE.php:402
+#: inc/configure.php:295 inc/test.php:409 inc/test.REMOVE_UPPERCASE.php:409
 msgid "Path"
 msgstr ""
 
@@ -362,17 +363,25 @@ msgstr ""
 msgid "Readable"
 msgstr ""
 
-#: _build/inc/configure.php:309 _build/inc/test.php:418
-#: _build/inc/test.php:419 _site/inc/configure.php:299 _site/inc/test.php:408
-#: _site/inc/test.php:409 inc/configure.php:299 inc/test.php:415
-#: inc/test.php:416
+#: _build/inc/configure.php:309 _build/inc/test.php:419
+#: _build/inc/test.php:420 _build/inc/test.REMOVE_UPPERCASE.php:419
+#: _build/inc/test.REMOVE_UPPERCASE.php:420 _site/inc/configure.php:299
+#: _site/inc/test.php:409 _site/inc/test.php:410
+#: _site/inc/test.REMOVE_UPPERCASE.php:409
+#: _site/inc/test.REMOVE_UPPERCASE.php:410 inc/configure.php:299
+#: inc/test.php:416 inc/test.php:417 inc/test.REMOVE_UPPERCASE.php:416
+#: inc/test.REMOVE_UPPERCASE.php:417
 msgid "No"
 msgstr ""
 
-#: _build/inc/configure.php:310 _build/inc/test.php:418
-#: _build/inc/test.php:419 _site/inc/configure.php:300 _site/inc/test.php:408
-#: _site/inc/test.php:409 inc/configure.php:300 inc/test.php:415
-#: inc/test.php:416
+#: _build/inc/configure.php:310 _build/inc/test.php:419
+#: _build/inc/test.php:420 _build/inc/test.REMOVE_UPPERCASE.php:419
+#: _build/inc/test.REMOVE_UPPERCASE.php:420 _site/inc/configure.php:300
+#: _site/inc/test.php:409 _site/inc/test.php:410
+#: _site/inc/test.REMOVE_UPPERCASE.php:409
+#: _site/inc/test.REMOVE_UPPERCASE.php:410 inc/configure.php:300
+#: inc/test.php:416 inc/test.php:417 inc/test.REMOVE_UPPERCASE.php:416
+#: inc/test.REMOVE_UPPERCASE.php:417
 msgid "Yes"
 msgstr ""
 
@@ -556,7 +565,9 @@ msgstr ""
 msgid "1 new log found"
 msgstr ""
 
-#: _build/inc/test.php:16 _site/inc/test.php:6 inc/test.php:6
+#: _build/inc/test.php:16 _build/inc/test.REMOVE_UPPERCASE.php:16
+#: _site/inc/test.php:6 _site/inc/test.REMOVE_UPPERCASE.php:6 inc/test.php:6
+#: inc/test.REMOVE_UPPERCASE.php:6
 msgid ""
 "Please copy <code>inc/test.php</code> to <code>inc/test.REMOVE_UPPERCASE."
 "php</code> and load <code>inc/test.REMOVE_UPPERCASE.php</code> in your "
@@ -564,76 +575,132 @@ msgid ""
 msgstr ""
 
 #: _build/inc/test.php:86 _build/inc/test.php:93 _build/inc/test.php:100
-#: _site/inc/test.php:76 _site/inc/test.php:83 _site/inc/test.php:90
-#: inc/test.php:76 inc/test.php:83 inc/test.php:90
+#: _build/inc/test.REMOVE_UPPERCASE.php:86
+#: _build/inc/test.REMOVE_UPPERCASE.php:93
+#: _build/inc/test.REMOVE_UPPERCASE.php:100 _site/inc/test.php:76
+#: _site/inc/test.php:83 _site/inc/test.php:90
+#: _site/inc/test.REMOVE_UPPERCASE.php:76
+#: _site/inc/test.REMOVE_UPPERCASE.php:83
+#: _site/inc/test.REMOVE_UPPERCASE.php:90 inc/test.php:76 inc/test.php:83
+#: inc/test.php:90 inc/test.REMOVE_UPPERCASE.php:76
+#: inc/test.REMOVE_UPPERCASE.php:83 inc/test.REMOVE_UPPERCASE.php:90
 msgid "Error"
 msgstr ""
 
-#: _build/inc/test.php:86 _site/inc/test.php:76 inc/test.php:76
+#: _build/inc/test.php:86 _build/inc/test.REMOVE_UPPERCASE.php:86
+#: _site/inc/test.php:76 _site/inc/test.REMOVE_UPPERCASE.php:76
+#: inc/test.php:76 inc/test.REMOVE_UPPERCASE.php:76
 msgid "Match is not a valid associative array"
 msgstr ""
 
-#: _build/inc/test.php:93 _site/inc/test.php:83 inc/test.php:83
+#: _build/inc/test.php:93 _build/inc/test.REMOVE_UPPERCASE.php:93
+#: _site/inc/test.php:83 _site/inc/test.REMOVE_UPPERCASE.php:83
+#: inc/test.php:83 inc/test.REMOVE_UPPERCASE.php:83
 msgid "Types is not a valid associative array"
 msgstr ""
 
-#: _build/inc/test.php:100 _site/inc/test.php:90 inc/test.php:90
+#: _build/inc/test.php:100 _build/inc/test.REMOVE_UPPERCASE.php:100
+#: _site/inc/test.php:90 _site/inc/test.REMOVE_UPPERCASE.php:90
+#: inc/test.php:90 inc/test.REMOVE_UPPERCASE.php:90
 msgid "RegEx is not a valid PHP PCRE regular expression"
 msgstr ""
 
-#: _build/inc/test.php:141 _site/inc/test.php:131 inc/test.php:138
+#: _build/inc/test.php:141 _build/inc/test.REMOVE_UPPERCASE.php:141
+#: _site/inc/test.php:131 _site/inc/test.REMOVE_UPPERCASE.php:131
+#: inc/test.php:138 inc/test.REMOVE_UPPERCASE.php:138
 msgid "Debugger"
 msgstr ""
 
-#: _build/inc/test.php:153 _site/inc/test.php:143 inc/test.php:150
+#: _build/inc/test.php:153 _build/inc/test.REMOVE_UPPERCASE.php:153
+#: _site/inc/test.php:143 _site/inc/test.REMOVE_UPPERCASE.php:143
+#: inc/test.php:150 inc/test.REMOVE_UPPERCASE.php:150
 msgid "Regex tester"
 msgstr ""
 
-#: _build/inc/test.php:161 _site/inc/test.php:151 inc/test.php:158
+#: _build/inc/test.php:161 _build/inc/test.REMOVE_UPPERCASE.php:161
+#: _site/inc/test.php:151 _site/inc/test.REMOVE_UPPERCASE.php:151
+#: inc/test.php:158 inc/test.REMOVE_UPPERCASE.php:158
 msgid "Log"
 msgstr ""
 
-#: _build/inc/test.php:171 _site/inc/test.php:161 inc/test.php:168
+#: _build/inc/test.php:171 _build/inc/test.REMOVE_UPPERCASE.php:171
+#: _site/inc/test.php:161 _site/inc/test.REMOVE_UPPERCASE.php:161
+#: inc/test.php:168 inc/test.REMOVE_UPPERCASE.php:168
 msgid "RegEx"
 msgstr ""
 
-#: _build/inc/test.php:179 _site/inc/test.php:169 inc/test.php:176
+#: _build/inc/test.php:179 _build/inc/test.REMOVE_UPPERCASE.php:179
+#: _site/inc/test.php:169 _site/inc/test.REMOVE_UPPERCASE.php:169
+#: inc/test.php:176 inc/test.REMOVE_UPPERCASE.php:176
 msgid "Match"
 msgstr ""
 
-#: _build/inc/test.php:202 _site/inc/test.php:192 inc/test.php:199
+#: _build/inc/test.php:179 _build/inc/test.php:202
+#: _build/inc/test.REMOVE_UPPERCASE.php:179
+#: _build/inc/test.REMOVE_UPPERCASE.php:202 _site/inc/test.php:169
+#: _site/inc/test.php:192 _site/inc/test.REMOVE_UPPERCASE.php:169
+#: _site/inc/test.REMOVE_UPPERCASE.php:192 inc/test.php:176 inc/test.php:199
+#: inc/test.REMOVE_UPPERCASE.php:176 inc/test.REMOVE_UPPERCASE.php:199
+msgid "must be json encoded"
+msgstr ""
+
+#: _build/inc/test.php:202 _build/inc/test.REMOVE_UPPERCASE.php:202
+#: _site/inc/test.php:192 _site/inc/test.REMOVE_UPPERCASE.php:192
+#: inc/test.php:199 inc/test.REMOVE_UPPERCASE.php:199
 msgid "Types"
 msgstr ""
 
-#: _build/inc/test.php:214 _site/inc/test.php:204 inc/test.php:211
+#: _build/inc/test.php:214 _build/inc/test.REMOVE_UPPERCASE.php:214
+#: _site/inc/test.php:204 _site/inc/test.REMOVE_UPPERCASE.php:204
+#: inc/test.php:211 inc/test.REMOVE_UPPERCASE.php:211
 msgid "Multiline"
 msgstr ""
 
-#: _build/inc/test.php:221 _site/inc/test.php:211 inc/test.php:218
+#: _build/inc/test.php:221 _build/inc/test.REMOVE_UPPERCASE.php:221
+#: _site/inc/test.php:211 _site/inc/test.REMOVE_UPPERCASE.php:211
+#: inc/test.php:218 inc/test.REMOVE_UPPERCASE.php:218
 msgid "Test"
 msgstr ""
 
-#: _build/inc/test.php:234 _site/inc/test.php:224 inc/test.php:231
+#: _build/inc/test.php:222 _build/inc/test.REMOVE_UPPERCASE.php:222
+#: _site/inc/test.php:212 _site/inc/test.REMOVE_UPPERCASE.php:212
+#: inc/test.php:219 inc/test.REMOVE_UPPERCASE.php:219
+msgid "Copy to clipboard"
+msgstr ""
+
+#: _build/inc/test.php:235 _build/inc/test.REMOVE_UPPERCASE.php:235
+#: _site/inc/test.php:225 _site/inc/test.REMOVE_UPPERCASE.php:225
+#: inc/test.php:232 inc/test.REMOVE_UPPERCASE.php:232
 msgid "Regex samples"
 msgstr ""
 
-#: _build/inc/test.php:380 _site/inc/test.php:370 inc/test.php:377
+#: _build/inc/test.php:381 _build/inc/test.REMOVE_UPPERCASE.php:381
+#: _site/inc/test.php:371 _site/inc/test.REMOVE_UPPERCASE.php:371
+#: inc/test.php:378 inc/test.REMOVE_UPPERCASE.php:378
 msgid "Rights"
 msgstr ""
 
-#: _build/inc/test.php:390 _site/inc/test.php:380 inc/test.php:387
+#: _build/inc/test.php:391 _build/inc/test.REMOVE_UPPERCASE.php:391
+#: _site/inc/test.php:381 _site/inc/test.REMOVE_UPPERCASE.php:381
+#: inc/test.php:388 inc/test.REMOVE_UPPERCASE.php:388
 msgid "No POSIX functions..."
 msgstr ""
 
-#: _build/inc/test.php:411 _site/inc/test.php:401 inc/test.php:408
+#: _build/inc/test.php:412 _build/inc/test.REMOVE_UPPERCASE.php:412
+#: _site/inc/test.php:402 _site/inc/test.REMOVE_UPPERCASE.php:402
+#: inc/test.php:409 inc/test.REMOVE_UPPERCASE.php:409
 msgid "Real path"
 msgstr ""
 
-#: _build/inc/test.php:411 _site/inc/test.php:401 inc/test.php:408
+#: _build/inc/test.php:412 _build/inc/test.REMOVE_UPPERCASE.php:412
+#: _site/inc/test.php:402 _site/inc/test.REMOVE_UPPERCASE.php:402
+#: inc/test.php:409 inc/test.REMOVE_UPPERCASE.php:409
 msgid "Read"
 msgstr ""
 
-#: _build/inc/test.php:411 _site/inc/test.php:401 inc/test.php:408
+#: _build/inc/test.php:412 _build/inc/test.REMOVE_UPPERCASE.php:412
+#: _site/inc/test.php:402 _site/inc/test.REMOVE_UPPERCASE.php:402
+#: inc/test.php:409 inc/test.REMOVE_UPPERCASE.php:409
 msgid "Write"
 msgstr ""
 
