@@ -3,6 +3,15 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"0.9.7" : {
+			"released" : "2014-01-14",
+			"changed" : [
+				"Update french language"
+			],
+			"fixed" : [
+				"Unencoded file paths in the configuration process"
+			]
+		},
 		"0.9.6" : {
 			"notice" : "The separator feature in the match array has been replace by a concatenation of all tokens and provided strings. Your configuration will not be broken but the displayed result will differ.",
 			"released" : "2014-01-14",
