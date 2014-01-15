@@ -28,11 +28,13 @@ This is the most interesting part :-) It will help you to build RegExs to match 
 
 Usage is quite simple :
 
-- enter a log line that you want to match in the *Log* text area
+- enter some log lines that you want to match in the *Log* text area
 - write your magical RegEx in the *RegEx* area
 - write your `match` array in the *Match* area
+- write your `types` array in the *Types* area
+- set the multi-line token name if you plan to manage this kind of log files
 
-Click on the *Test* button and *Pimp My Log* will use the same parser as the main log viewer to decode. Once your *RegEx* and `match` array are right, you can use them in your configuration file.
+Click on the *Test* button and *Pimp My Log* will use the same parser as the main log viewer to decode. Once your configuration is correct, click on the *Copy to clipboard* and use it in your configuration file!
 
 # Regex samples
 
