@@ -4,13 +4,26 @@
  <title>Pimp my Log</title>
  <link href="http://pimpmylog.com/atom.xml" rel="self"/>
  <link href="http://pimpmylog.com"/>
- <updated>2014-01-15T16:14:45+01:00</updated>
+ <updated>2014-01-15T16:37:05+01:00</updated>
  <id>http://pimpmylog.com</id>
  <author>
    <name>Potsky</name>
    <email>potsky@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Version 0.9.7 released</title>
+   <link href="http://pimpmylog.com/general/2014/01/15/version-0.9.7-released"/>
+   <updated>2014-01-15T00:00:00+01:00</updated>
+   <id>http://pimpmylog.com/general/2014/01/15/version-0.9.7-released</id>
+   <content type="html">&lt;p&gt;This update includes several improvements and bug fixes.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.7&quot;&gt;&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Version 0.9.6 released</title>
@@ -52,8 +65,6 @@ Message: Warning. Match of &amp;quot;rx ^apache.*perl&amp;quot; against
 &lt;p&gt;This fixes some bug of course.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Pimp My Log&lt;/em&gt; is on the final straight!&lt;/p&gt;
-
-&lt;!--more--&gt;
 
 &lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.6&quot;&gt;&lt;/div&gt;
 </content>
