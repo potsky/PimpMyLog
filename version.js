@@ -1,8 +1,17 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "0.9.6",
-	"versiondevh" : "7d7c7bee0ced17a14fb5e5dbeb571972dfcb650c",
+	"version"     : "0.9.7",
+	"versiondevh" : "005dab01a33b6f867a88fc3f357c89625d33ddd4",
 	"changelog" : {
+		"0.9.7" : {
+			"released" : "2014-01-14",
+			"changed" : [
+				"Update french language"
+			],
+			"fixed" : [
+				"Unencoded file paths in the configuration process"
+			]
+		},
 		"0.9.6" : {
 			"notice" : "The separator feature in the match array has been replace by a concatenation of all tokens and provided strings. Your configuration will not be broken but the displayed result will differ.",
 			"released" : "2014-01-14",
