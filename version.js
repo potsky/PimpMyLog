@@ -1,10 +1,13 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "0.9.7",
-	"versiondevh" : "005dab01a33b6f867a88fc3f357c89625d33ddd4",
+	"versiondevh" : "46effea90a9740661fe3f065e5c265c25600e9f1",
 	"changelog" : {
 		"0.9.7" : {
 			"released" : "2014-01-14",
+			"new" : [
+				"Copy the result of your debugger work to your clipboard. Then you just have to copy-paste in your configuration file."
+			],
 			"changed" : [
 				"Update french language"
 			],
