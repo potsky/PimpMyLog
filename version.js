@@ -16,7 +16,7 @@
 			]
 		},
 		"0.9.6" : {
-			"notice" : "The separator feature in the match array has been replace by a concatenation of all tokens and provided strings. Your configuration will not be broken but the displayed result will differ.",
+			"notice" : "The separator feature in the match array has been replaced by a concatenation of all tokens and provided strings. Your configuration will not be broken but the displayed result will differ.",
 			"released" : "2014-01-14",
 			"new" : [
 				"Multiline support closes (#46)",
