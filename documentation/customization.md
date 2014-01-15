@@ -109,6 +109,15 @@ And you can of course change the style of all `badge` columns like this:
 }
 ```
 
+## Per file type
+
+The HTML content for all rows (headers and logs) is:
+
+```html
+<tr class="apache1">...</tr>
+```
+
+The current parsed log file ID is defined as a CSS classname so you can customize distinct design according to each log file.
 
 # New logs
 
