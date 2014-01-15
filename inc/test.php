@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.7 - 005dab01a33b6f867a88fc3f357c89625d33ddd4*/
+/*! pimpmylog - 0.9.7 - 46effea90a9740661fe3f065e5c265c25600e9f1*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -176,7 +176,7 @@ on several lines
 								</div>
 							</div>
 							<div class="form-group" id="GPinputMatch">
-								<label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?></label>
+								<label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?><br/><small><?php _e('must be json encoded');?></small></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
 									$match = array(
@@ -199,7 +199,7 @@ on several lines
 								</div>
 							</div>
 							<div class="form-group" id="GPinputTypes">
-								<label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?></label>
+								<label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?><br/><small><?php _e('must be json encoded');?></small></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
 									$types = array(
@@ -219,6 +219,7 @@ on several lines
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<button type="submit" class="btn btn-primary"><?php _e('Test');?></button>
+									<a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a>
 								</div>
 							</div>
 							<div id="regexresult"></div>
