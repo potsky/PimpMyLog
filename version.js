@@ -5,6 +5,9 @@
 	"changelog" : {
 		"0.9.7" : {
 			"released" : "2014-01-14",
+			"new" : [
+				"Copy the result of your debugger work to your clipboard. Then you just have to copy-paste in your configuration file."
+			],
 			"changed" : [
 				"Update french language"
 			],

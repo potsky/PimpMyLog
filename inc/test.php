@@ -173,7 +173,7 @@ on several lines
 								</div>
 							</div>
 							<div class="form-group" id="GPinputMatch">
-								<label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?></label>
+								<label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?><br/><small><?php _e('must be json encoded');?></small></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
 									$match = array(
@@ -196,7 +196,7 @@ on several lines
 								</div>
 							</div>
 							<div class="form-group" id="GPinputTypes">
-								<label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?></label>
+								<label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?><br/><small><?php _e('must be json encoded');?></small></label>
 								<div class="col-sm-10">
 									<textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
 									$types = array(
@@ -216,6 +216,7 @@ on several lines
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<button type="submit" class="btn btn-primary"><?php _e('Test');?></button>
+									<a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a>
 								</div>
 							</div>
 							<div id="regexresult"></div>
@@ -455,6 +456,7 @@ echo test( $type , $regex , $match , $types , $log );
 ?>
 	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script src="../js/vendor/jquery-1.10.1.min.js"></script>
+	<script src="../js/jquery.zclip.js"></script>
 	<script src="../js/vendor/bootstrap.min.js"></script>
 	<script src="../js/test.js"></script>
 <?php

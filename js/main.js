@@ -385,15 +385,22 @@ var get_logs     = function( load_default_values , load_full_file ) {
 		}
 
 		// Header
-		if ( logs.headers ) {
-			$( '#logshead' ).text( '' );
-			var sort   = 'Date';
-			var sortsc = 'down';
-			for ( var h in logs.headers ) {
-				var s = ( sort === h ) ? '<span class="glyphicon glyphicon-chevron-' + sortsc + '"/></span>' : '';
-				$( '<th>' + logs.headers[ h ] + s + '</th>' ).addClass( h ).appendTo( '#logshead' );
+		$(function() {
+			if ( logs.headers ) {
+				$( '#logshead' ).text( '' );
+				var tr     = $('<tr>').addClass( file );
+				var sort   = 'Date';
+				var sortsc = 'down';
+				for ( var h in logs.headers ) {
+//					if ( sort === h ) {
+//						$( '<th><a class="glyphicon glyphicon-chevron-' + sortsc + '"/> ' + logs.headers[ h ] + ' </a></th>' ).addClass( h ).appendTo( tr );
+//					} else {
+						$( '<th>' + logs.headers[ h ] + '</th>' ).addClass( h ).appendTo( tr );
+//					}
+				}
+				tr.appendTo( '#logshead' );
 			}
-		}
+		});
 
 		// Body
 		if ( logs.full ) {
@@ -407,7 +414,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 
 		for ( var log in logs.logs ) {
 
-			var tr = $('<tr>').addClass( 'file' );
+			var tr = $('<tr>').addClass( file ).data( 'log' , logs.logs[ log ].pml );
 
 			for ( var c in logs.logs[ log ] ) {
 
@@ -434,7 +441,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 				}
 				else if ( 'date' === type.parser ) {
 					title = logs.logs[ log ].pml;
-					val = val_cut( val , type.cut );
+					val   = '<div class="nozclip" style="position: relative;">' + val_cut( val , type.cut ) + '</div>';
 				}
 				else if ( 'numeral' === type.parser ) {
 					if ( val !== '' ) {
@@ -493,10 +500,12 @@ var get_logs     = function( load_default_values , load_full_file ) {
 			rows.push( tr );
 		}
 
-		if ( logs.full ) { // display all logs so append to bottom
+		// display all logs so append to bottom
+		if ( logs.full ) {
 			$('#logsbody').append( rows );
 		}
-		else { // display only new logs, so append to top
+		// display only new logs, so append to top
+		else {
 			$('#logsbody').prepend( rows );
 			var rowd = $('#logsbody tr').length;
 			if ( rowd > wanted_lines ) {
@@ -504,6 +513,15 @@ var get_logs     = function( load_default_values , load_full_file ) {
 				$('#logsbody').find( 'tr:nth-last-child(-n+' + rowd + ')' ).remove();
 			}
 		}
+
+		/* Copy to clipboard too slow
+		$('#logsbody tr td div.nozclip').each(function() {
+			$(this).removeClass('nozclip').zclip({
+				path : 'js/ZeroClipboard.swf',
+				copy : $(this).parent().attr('title')
+			});
+		});
+		*/
 
 		// Footer
 		var rowct = '';
@@ -641,24 +659,6 @@ $(function() {
 		get_logs( false , true );
 	});
 
-	// Check for upgrade
-	$.ajax( {
-		url      : 'inc/upgrade.pml.php?' + (new Date()).getTime() + '&' + querystring,
-		dataType : 'json',
-		data     : { 'csrf_token' : csrf_token } ,
-		type     : 'POST',
-	} ).done( function ( upgrade ) {
-		$( '#upgradefooter' ).html( ' - ' + upgrade.footer);
-		var hide = $.cookie( 'upgradehide' );
-		if ( hide !== upgrade.to ) {
-			$( '#upgrademessage' ).html( upgrade.alert );
-			$( '#upgradestop' ).click( function() {
-				$.cookie( 'upgradehide' , $(this).data('version') );
-				$("#upgradealert").alert('close');
-			});
-		}
-	} );
-
 	// Notification > init
 	if ( ( 'Notification' in window ) || ( 'webkitNotifications' in window ) ) {
 		$('#notification').show();
@@ -692,7 +692,26 @@ $(function() {
 		});
 	}
 
+
 	// Here we go
 	get_logs( true );
 
+
+	// Finally check for upgrade
+	$.ajax( {
+		url      : 'inc/upgrade.pml.php?' + (new Date()).getTime() + '&' + querystring,
+		dataType : 'json',
+		data     : { 'csrf_token' : csrf_token } ,
+		type     : 'POST',
+	} ).done( function ( upgrade ) {
+		$( '#upgradefooter' ).html( ' - ' + upgrade.footer);
+		var hide = $.cookie( 'upgradehide' );
+		if ( hide !== upgrade.to ) {
+			$( '#upgrademessage' ).html( upgrade.alert );
+			$( '#upgradestop' ).click( function() {
+				$.cookie( 'upgradehide' , $(this).data('version') );
+				$("#upgradealert").alert('close');
+			});
+		}
+	} );
 });

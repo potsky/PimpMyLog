@@ -38,6 +38,7 @@ module.exports = function(grunt) {
 					'js/vendor/modernizr-2.6.2-respond-1.1.0.min.js',
 					'js/vendor/jquery-1.10.1.min.js',
 					'js/vendor/jquery.cookie.js',
+					'bower_components/jquery-zclip/jquery.zclip.js',
 					'bower_components/bootstrap/js/affix.js',
 					'bower_components/bootstrap/js/alert.js',
 					'bower_components/bootstrap/js/button.js',
@@ -110,6 +111,15 @@ module.exports = function(grunt) {
 					expand: true,
 					src: [ '*.php' , 'inc/*', 'cfg/*' , 'lang/*' ],
 					dest: '_site/'
+				}]
+			},
+			devswf: {
+				files: [{
+					expand: true,
+					flatten: true,
+					filter: 'isFile',
+					src: ['bower_components/jquery-zclip/ZeroClipboard.swf','bower_components/jquery-zclip/jquery.zclip.js'],
+					dest: '_site/js/'
 				}]
 			},
 			devjs: {
@@ -197,6 +207,15 @@ module.exports = function(grunt) {
 						return "<?php\n" + licence + "\n?>\n" + content;
 					}
 				}
+			},
+			prodswf: {
+				files: [{
+					expand: true,
+					flatten: true,
+					filter: 'isFile',
+					src: ['bower_components/jquery-zclip/ZeroClipboard.swf'],
+					dest: '_build/js/'
+				}]
 			},
 			prodindex: {
 				src: '_build/index.php',
@@ -500,6 +519,7 @@ module.exports = function(grunt) {
 		grunt.task.run([
 			'clean:dev',
 			'copy:bsfoots',
+			'copy:devswf',
 			'copy:dev',
 			'replace:dev',
 			'less',
@@ -527,6 +547,7 @@ module.exports = function(grunt) {
 			'uglify',
 			'preprocess:prod',
 			'copy:prodindex',
+			'copy:prodswf',
 			'htmlmin'
 		]);
 	});

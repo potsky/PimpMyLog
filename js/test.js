@@ -34,4 +34,38 @@ $(function() {
 		event.preventDefault();
 	});
 
+	$(document).ready(function(){
+		$('a.clipboard').zclip({
+			path:'../js/ZeroClipboard.swf',
+			copy:function(){
+				var t = '{\n';
+				t += '  "SOFTWARE_ID": {\n';
+				t += '    "display"   : "SOFTWARE NAME",\n';
+				t += '    "path"      : "SOFTWARE PATH",\n';
+				t += '    "format"    : {\n';
+				t += '      "multiline": ' + JSON.stringify($( '#inputMultiline' ).val()) + ',\n';
+				t += '      "regex"    : ' + JSON.stringify($( '#inputRegEx' ).val()) + ',\n';
+				t += '      "match"    : ' + $( '#inputMatch' ).val() + ',\n';
+				t += '      "types"    : ' + $( '#inputTypes' ).val() + '\n';
+				t += '    }\n';
+				t += '  }\n';
+				t += '}\n';
+				return t;
+			},
+			afterCopy:function() {
+				var a = $( 'a.clipboard' ).popover( {
+					html      : true ,
+					animation : true ,
+					placement : 'right',
+					container : 'body',
+					delay     : { show: 100, hide: 5000 },
+					content   : "Configuration array has been copied to your clipboard!"
+				} ).popover( 'show' );
+				$('a.clipboard').on('hidden.bs.popover', function () {
+					$( 'a.clipboard' ).show();
+				});
+			}
+		});
+	});
+
 });

@@ -258,6 +258,7 @@ foreach ( get_max_options() as $r ) {
 	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script src="js/vendor/jquery-1.10.1.min.js"></script>
 	<script src="js/vendor/jquery.cookie.js"></script>
+	<script src="js/jquery.zclip.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/vendor/ua-parser.min.js"></script>
     <script src="js/vendor/Hook-js/mousewheel.js"></script>
