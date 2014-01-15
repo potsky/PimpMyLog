@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.6 - 7d7c7bee0ced17a14fb5e5dbeb571972dfcb650c*/
+/*! pimpmylog - 0.9.7 - 005dab01a33b6f867a88fc3f357c89625d33ddd4*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -16,6 +16,8 @@ You must escape anti-slash 4 times and escape $ in regex.
 
 
 function apache_get_config( $type , $file , $software , $counter ) {
+
+	$file_json_encoded = json_encode( $file );
 
 	/////////////////////////////////////////////////////////
 	// Apache error files are not the same on 2.2 and 2.4 //
@@ -41,7 +43,6 @@ function apache_get_config( $type , $file , $software , $counter ) {
 			fclose($handle);
 		}
 
-
 		/////////////////////
 		// Error 2.4 style //
 		/////////////////////
@@ -50,7 +51,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 			return<<<EOF
 		"$software$counter": {
 			"display" : "Apache Error #$counter",
-			"path"    : "$file",
+			"path"    : $file_json_encoded,
 			"refresh" : 5,
 			"max"     : 10,
 			"notify"  : true,
@@ -95,7 +96,7 @@ EOF;
 			return<<<EOF
 		"$software$counter": {
 			"display" : "Apache Error #$counter",
-			"path"    : "$file",
+			"path"    : $file_json_encoded,
 			"refresh" : 5,
 			"max"     : 10,
 			"notify"  : true,
@@ -133,7 +134,7 @@ EOF;
 		return<<<EOF
 		"$software$counter": {
 			"display" : "Apache Access #$counter",
-			"path"    : "$file",
+			"path"    : $file_json_encoded,
 			"refresh" : 0,
 			"max"     : 10,
 			"notify"  : false,
