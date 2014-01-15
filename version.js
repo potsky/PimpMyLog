@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "0.9.7",
-	"versiondevh" : "46effea90a9740661fe3f065e5c265c25600e9f1",
+	"versiondevh" : "2e1d546f5342a1543b1b37c836a1e473ebdf2ae9",
 	"changelog" : {
 		"0.9.7" : {
 			"released" : "2014-01-14",
@@ -16,7 +16,7 @@
 			]
 		},
 		"0.9.6" : {
-			"notice" : "The separator feature in the match array has been replace by a concatenation of all tokens and provided strings. Your configuration will not be broken but the displayed result will differ.",
+			"notice" : "The separator feature in the match array has been replaced by a concatenation of all tokens and provided strings. Your configuration will not be broken but the displayed result will differ.",
 			"released" : "2014-01-14",
 			"new" : [
 				"Multiline support closes (#46)",
