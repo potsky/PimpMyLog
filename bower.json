@@ -2,6 +2,8 @@
   "name": "pimpmylog",
   "version": "1.0.0",
   "dependencies": {
-    "bootstrap": "~3.0.3"
+    "bootstrap": "~3.0.3",
+    "jquery-zclip": "~1.1.4",
+    "jquery": "~2.0.3"
   }
 }
