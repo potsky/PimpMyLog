@@ -361,7 +361,8 @@ $lemma = array(
 		<div id="user"></div>
 		<br/>
 		<p id="buttons">
-			<a id="reload" class="btn btn-primary" href="javascript:location.reload();" style="display:none;"><?php _e('Reload');?></a>
+			<a id="reload" class="btn btn-primary" href="javascript:location.reload();" style="display:none;"><?php _e('Reload');?></a>&nbsp;
+			&nbsp;
 			<a id="next" class="btn btn-success" href="#" style="display:none;"><?php _e('Continue');?></a>
 		</p>
 	</div>

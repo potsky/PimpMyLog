@@ -216,6 +216,7 @@ on several lines
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<button type="submit" class="btn btn-primary"><?php _e('Test');?></button>
+									&nbsp;
 									<a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a>
 								</div>
 							</div>

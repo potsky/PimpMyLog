@@ -39,15 +39,15 @@ module.exports = function(grunt) {
 					'js/vendor/jquery-1.10.1.min.js',
 					'js/vendor/jquery.cookie.js',
 					'bower_components/jquery-zclip/jquery.zclip.js',
-					'bower_components/bootstrap/js/affix.js',
+//					'bower_components/bootstrap/js/affix.js',
 					'bower_components/bootstrap/js/alert.js',
 					'bower_components/bootstrap/js/button.js',
-					'bower_components/bootstrap/js/carousel.js',
+//					'bower_components/bootstrap/js/carousel.js',
 					'bower_components/bootstrap/js/collapse.js',
 					'bower_components/bootstrap/js/dropdown.js',
-					'bower_components/bootstrap/js/modal.js',
-					'bower_components/bootstrap/js/scrollspy.js',
-					'bower_components/bootstrap/js/tab.js',
+//					'bower_components/bootstrap/js/modal.js',
+//					'bower_components/bootstrap/js/scrollspy.js',
+//					'bower_components/bootstrap/js/tab.js',
 					'bower_components/bootstrap/js/tooltip.js',
 					'bower_components/bootstrap/js/popover.js',
 					'bower_components/bootstrap/js/transition.js',
@@ -217,9 +217,15 @@ module.exports = function(grunt) {
 					dest: '_build/js/'
 				}]
 			},
-			prodindex: {
-				src: '_build/index.php',
-				dest: '_tmp/index.php'
+			prodphptmp: {
+				expand: true,
+				cwd: '_build/',
+				src: [
+					'index.php',
+					'inc/*.php'
+				],
+				dest: '_tmp/',
+				filter: 'isFile'
 			},
 			prodcssimg: {
 				expand: true,
@@ -253,8 +259,14 @@ module.exports = function(grunt) {
 					collapseWhitespace: true
 				},
 				files: [{
-					src: [ '<%= copy.prodindex.dest %>' ],
-					dest: '_build/index.php',
+					cwd: '_tmp/',
+					expand: true,
+					src: [
+						'index.php',
+						'inc/*.php'
+					],
+					dest: '_build/',
+					filter: 'isFile'
 				}]
 			}
 		},
@@ -534,23 +546,31 @@ module.exports = function(grunt) {
 		grunt.task.run('checkversion');
 		grunt.task.run([
 			'clean:prod',
-			'copy:bsfoots',
+
 			'copy:prod',
+
 			'copy:prodcssimg',
+			'copy:prodswf',
+			'copy:bsfoots',
+
 			'replace:prod',
+
 			'copy:prodphp',
+			'copy:prodphptmp',
+			'htmlmin',
+			'preprocess:prod',
+
 			'copy:prodcss',
 			'less',
 			'concat:css',
 			'cssmin',
+
 			'concat:js',
-			'uglify',
-			'preprocess:prod',
-			'copy:prodindex',
-			'copy:prodswf',
-			'htmlmin'
+			'uglify'
+
 		]);
 	});
+
 
 	grunt.registerTask('checkversion', function() {
 		var a;

@@ -344,4 +344,6 @@ $logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> o
 
 
 echo json_encode( $logs );
+die();
 
+?>

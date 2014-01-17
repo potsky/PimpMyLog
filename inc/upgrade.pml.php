@@ -155,5 +155,6 @@ catch ( Exception $e ) {
 }
 
 echo json_encode( $upgrade );
+die();
 
-
+?>
