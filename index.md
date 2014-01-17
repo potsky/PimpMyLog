@@ -2,6 +2,9 @@
 layout: home
 title: Home
 ---
+
+<div class="row"><div class="col-md-8">{% capture i %}
+
 #### Support
 
 Having some issues? Something not quite working right?
@@ -12,7 +15,20 @@ Do you have a suggestion? Need help to create your own log parser?
 
 Let us know what you think, we're always glad to hear opinions and help people!
 
-Please read our support page at [support.pimpmylog.com](http://support.pimpmylog.com) provided gracefully by Tender !
+Please read our support page at [support.pimpmylog.com](http://support.pimpmylog.com) provided gracefully by Tender!
+
+You can send us an email to [support@pimpmylog.com](mailto:support@pimpmylog.com).
+
+{% endcapture %}{{ i | markdownify }}</div><div class="col-md-4">{% capture i %}
+
+#### Mailing list
+
+Subscribe to the *Pimp My Log* mailing list and stay tuned about new huge features. We do send more than an email per month in the worst case because we do not like spam.
+
+{% include mailchimp.html %}
+
+{% endcapture %}{{ i | markdownify }}</div></div>
+
 
 ---
 
