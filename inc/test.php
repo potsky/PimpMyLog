@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.7 - 1f49ccc041cde078cfba119e42e5993517473c3d*/
+/*! pimpmylog - 0.9.7 - 29785a55b236b3d50ad811dfbab1cf042574aeb1*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -7,8 +7,7 @@
  * Copyright (c) 2014 Potsky, contributors
  * Licensed under the GPLv3 license.
  */
-?>
-<?php
+?><?php
 include_once 'global.inc.php';
 init();
 
@@ -109,76 +108,16 @@ if ( isset( $_POST['s'] ) ) {
 	die();
 }
 
-?>
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
-	<title><?php echo TITLE;?></title>
-	<?php include_once 'favicon.inc.php'; ?>
-<?php
-?>
-<?php
-?>
-	<link rel="stylesheet" href="../css/pml.min.css">
-<?php
-?>
-</head>
-<body>
-	<!--[if lt IE 7]>
-	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-	<![endif]-->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="logo"></div>
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a>
-			</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<br/>
-		<div class="panel-group" id="accordion">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-							<?php _e('Regex tester');?>
-						</a>
-					</h4>
-				</div>
-				<div id="collapseTwo" class="panel-collapse collapse in">
-					<div class="panel-body">
-						<form class="form-horizontal" role="form" id="regextest">
-							<div class="form-group" id="GPinputLog">
-								<label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label>
-								<div class="col-sm-10">
-									<textarea class="form-control test" id="inputLog" placeholder="Log"><?php
+?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><title><?php echo TITLE;?></title><?php include_once 'favicon.inc.php'; ?><?php
+?><?php
+?><link rel="stylesheet" href="../css/pml.min.css"><?php
+?></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a></div></div></div><div class="container"><br><div class="panel-group" id="accordion"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><?php _e('Regex tester');?></a></h4></div><div id="collapseTwo" class="panel-collapse collapse in"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
 									echo '[27-11-2013:23:20:40 +0100] This is an error
 on several lines
 [27-11-2013:23:20:41 +0100] Single line is cool too';
-									?></textarea>
-								</div>
-							</div>
-							<div class="form-group" id="GPinputRegEx">
-								<label for="inputRegEx" class="col-sm-2 control-label"><?php _e('RegEx');?></label>
-								<div class="col-sm-10">
-									<textarea class="form-control test" id="inputRegEx" placeholder="RegEx"><?php
+									?></textarea></div></div><div class="form-group" id="GPinputRegEx"><label for="inputRegEx" class="col-sm-2 control-label"><?php _e('RegEx');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputRegEx" placeholder="RegEx"><?php
 										echo '|^\[(.*)-(.*)-(.*):(.*):(.*):(.*) .*\] (.*)$|U';
-									?></textarea>
-								</div>
-							</div>
-							<div class="form-group" id="GPinputMatch">
-								<label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?><br/><small><?php _e('must be json encoded');?></small></label>
-								<div class="col-sm-10">
-									<textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
+									?></textarea></div></div><div class="form-group" id="GPinputMatch"><label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?><br><small><?php _e('must be json encoded');?></small></label><div class="col-sm-10"><textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
 									$match = array(
 										'Date'  => array(
 											'Y' => 3,
@@ -195,50 +134,13 @@ on several lines
 										'Error' => 7,
 									);
 									echo json_indent( json_encode($match))
-									?></textarea>
-								</div>
-							</div>
-							<div class="form-group" id="GPinputTypes">
-								<label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?><br/><small><?php _e('must be json encoded');?></small></label>
-								<div class="col-sm-10">
-									<textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
+									?></textarea></div></div><div class="form-group" id="GPinputTypes"><label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?><br><small><?php _e('must be json encoded');?></small></label><div class="col-sm-10"><textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
 									$types = array(
 										'Date'  => 'date:d/m/Y H:i:s /100',
 										'Error' => 'txt',
 									);
 									echo json_indent( json_encode($types))
-									?></textarea>
-								</div>
-							</div>
-							<div class="form-group" id="GPinputMultiline">
-								<label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label>
-								<div class="col-sm-10">
-									<input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"/>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<button type="submit" class="btn btn-primary"><?php _e('Test');?></button>
-									<a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a>
-								</div>
-							</div>
-							<div id="regexresult"></div>
-						</form>
-					</div>
-				</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-							<?php _e('Regex samples');?>
-						</a>
-					</h4>
-				</div>
-				<div id="collapseThree" class="panel-collapse collapse">
-					<div class="panel-body">
-<?php
+									?></textarea></div></div><div class="form-group" id="GPinputMultiline"><label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label><div class="col-sm-10"><input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-primary"><?php _e('Test');?></button>&nbsp;<a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a></div></div><div id="regexresult"></div></form></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><?php _e('Regex samples');?></a></h4></div><div id="collapseThree" class="panel-collapse collapse"><div class="panel-body"><?php
 $type  = 'Error Apache 2.2 with referer';
 $log   = '[Wed Nov 27 09:30:11 2013] [error] [client 127.0.0.1] PHP   1. {main}() /Users/potsky/Private/Work/GitHub/PHPApacheLogViewer/inc/get_logs.php:0, referer: http://localhost/~potsky/PHPApacheLogViewer/';
 $regex = '|^\[(.*)\] \[(.*)\] (\[client (.*)\] )*((?!\[client ).*)(, referer: (.*))*$|U';
@@ -328,70 +230,13 @@ echo test( $type , $regex , $match , $types , $log );
 $type  = 'Access Apache 2.2 dummy SSL connection';
 $log   = '::1 - - [27/Nov/2013:12:02:08 +0100] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.2.25 (Unix) mod_ssl/2.2.26 OpenSSL/1.0.1e DAV/2 PHP/5.3.27 (internal dummy connection)"';
 echo test( $type , $regex , $match , $types , $log );
-?>
-					</div>
-				</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-							Configuration
-						</a>
-					</h4>
-				</div>
-
-				<div id="collapseOne" class="panel-collapse collapse">
-					<div class="panel-body">
-
-						<div class="panel-group" id="accordion2">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">
-											Code <code>config.user.json</code>
-										</a>
-									</h4>
-								</div>
-								<div id="collapseOne2" class="panel-collapse collapse">
-									<div class="panel-body">
-										<pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">
-											Stat <code>config.user.json</code>
-										</a>
-									</h4>
-								</div>
-								<div id="collapseTwo2" class="panel-collapse collapse">
-									<div class="panel-body">
-										<pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2">
-											<?php _e('Rights');?>
-										</a>
-									</h4>
-								</div>
-								<div id="collapseFour2" class="panel-collapse collapse">
-									<div class="panel-body">
-										<pre><?php
+?></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Configuration</a></h4></div><div id="collapseOne" class="panel-collapse collapse"><div class="panel-body"><div class="panel-group" id="accordion2"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Code <code>config.user.json</code></a></h4></div><div id="collapseOne2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">Stat <code>config.user.json</code></a></h4></div><div id="collapseTwo2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2"><?php _e('Rights');?></a></h4></div><div id="collapseFour2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
 										if (function_exists('posix_getpwuid')) {
 											var_dump( @posix_getpwuid(posix_geteuid()) );
 										} else {
 											_e('No POSIX functions...');
 										}
-										?></pre>
-										<?php
+										?></pre><?php
 											config_load( '../config.user.json' );
 											$paths = array(
 												'config' => '../config.user.json',
@@ -422,45 +267,12 @@ echo test( $type , $regex , $match , $types , $log );
 											}
 											echo '</tbody>';
 											echo '</table>';
-										?>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2">
-											PHPInfo
-										</a>
-									</h4>
-								</div>
-								<div id="collapseThree2" class="panel-collapse collapse">
-									<div class="panel-body">
-										<?php
+										?></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2">PHPInfo</a></h4></div><div id="collapseThree2" class="panel-collapse collapse"><div class="panel-body"><?php
 										ob_start();
 										phpinfo();
 										preg_match ('%<style type="text/css">(.*?)</style>.*?(<body>.*</body>)%s', ob_get_clean(), $matches);
 										echo $matches[2];
-										?>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr>
-		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
-	</div>
-<?php
-?>
-<?php
-?>
-	<script src="../js/pml.min.js"></script>
-	<script src="../js/test.min.js"></script>
-<?php
-?>
-</body>
-</html>
+										?></div></div></div></div></div></div></div></div><hr><footer class="text-muted"><small><?php echo FOOTER;?></small></footer></div><?php
+?><?php
+?><script src="../js/pml.min.js"></script><script src="../js/test.min.js"></script><?php
+?></body></html>

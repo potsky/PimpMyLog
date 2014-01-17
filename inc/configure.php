@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.7 - 1f49ccc041cde078cfba119e42e5993517473c3d*/
+/*! pimpmylog - 0.9.7 - 29785a55b236b3d50ad811dfbab1cf042574aeb1*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -7,8 +7,7 @@
  * Copyright (c) 2014 Potsky, contributors
  * Licensed under the GPLv3 license.
  */
-?>
-<?php
+?><?php
 include_once 'global.inc.php';
 init();
 
@@ -316,64 +315,11 @@ $lemma = array(
 );
 
 
-?>
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title></title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
-<?php
-?>
-<?php
-?>
-	<link rel="stylesheet" href="../css/pml.min.css">
-<?php
-?>
-	<script>
-		var lemma       = <?php echo json_encode($lemma);?>,
-			querystring = "<?php echo $_SERVER['QUERY_STRING'];?>";
-	</script>
-	</head>
-<body>
-	<!--[if lt IE 7]>
-	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-	<![endif]-->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="logo"></div>
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Configurator');?></a>
-			</div>
-		</div>
-	</div>
-
-	<div class="container" id="process">
-		<br/>
-		<div class="progress">
-			<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-				<span class="sr-only"></span>
-			</div>
-		</div>
-		<div id="error"></div>
-		<div id="user"></div>
-		<br/>
-		<p id="buttons">
-			<a id="reload" class="btn btn-primary" href="javascript:location.reload();" style="display:none;"><?php _e('Reload');?></a>
-			<a id="next" class="btn btn-success" href="#" style="display:none;"><?php _e('Continue');?></a>
-		</p>
-	</div>
-
-	<div class="jumbotron" id="congratulations" style="display:none">
-		<div class="container">
-			<h1><?php _e( "Congratulations!" ); ?></h1>
-			<p>
-			<?php
+?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title></title><meta name="description" content=""><meta name="viewport" content="width=device-width"><?php
+?><?php
+?><link rel="stylesheet" href="../css/pml.min.css"><?php
+?><script>var lemma       = <?php echo json_encode($lemma);?>,
+			querystring = "<?php echo $_SERVER['QUERY_STRING'];?>";</script></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Configurator');?></a></div></div></div><div class="container" id="process"><br><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span class="sr-only"></span></div></div><div id="error"></div><div id="user"></div><br><p id="buttons"><a id="reload" class="btn btn-primary" href="javascript:location.reload();" style="display:none"><?php _e('Reload');?></a>&nbsp;&nbsp;<a id="next" class="btn btn-success" href="#" style="display:none"><?php _e('Continue');?></a></p></div><div class="jumbotron" id="congratulations" style="display:none"><div class="container"><h1><?php _e( "Congratulations!" ); ?></h1><p><?php
 				echo '<br/>';
 				_e( 'Your <em>Pimp my Log</em> instance is ready to use.' );
 				echo '<br/>';
@@ -384,22 +330,7 @@ $lemma = array(
 				echo '<br/>';
 				echo '<br/>';
 				echo '<a class="btn btn-success" href="../?' . $_SERVER['QUERY_STRING'] . '">' . __('Pimp my Logs now!') . '</a>';
-			?>
-			</p>
-		</div>
-	</div>
-
-	<div class="container">
-		<hr>
-		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
-	</div>
-<?php
-?>
-<?php
-?>
-	<script src="../js/pml.min.js"></script>
-	<script src="../js/configure.min.js"></script>
-<?php
-?>
-</body>
-</html>
+			?></p></div></div><div class="container"><hr><footer class="text-muted"><small><?php echo FOOTER;?></small></footer></div><?php
+?><?php
+?><script src="../js/pml.min.js"></script><script src="../js/configure.min.js"></script><?php
+?></body></html>
