@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.7 - 1f49ccc041cde078cfba119e42e5993517473c3d*/
+/*! pimpmylog - 0.9.7 - 29785a55b236b3d50ad811dfbab1cf042574aeb1*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -7,8 +7,7 @@
  * Copyright (c) 2014 Potsky, contributors
  * Licensed under the GPLv3 license.
  */
-?>
-<?php
+?><?php
 if(function_exists('xdebug_disable')) { xdebug_disable(); }
 include_once 'functions.inc.php';
 
@@ -61,3 +60,4 @@ else {
 
 }
 
+?>
