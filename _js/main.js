@@ -9,6 +9,7 @@ $( document ).ready( function () {
 		FastClick.attach( document.body );
 	} );
 
+
 	// A page need informations about versions
 	if ( $('.pmlversion').length > 0 ) {
 		$.ajax({

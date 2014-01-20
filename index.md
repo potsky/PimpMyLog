@@ -27,7 +27,7 @@ Do you want to contribute to add some amazing features and especially add new so
 
 **We need you** !
 
-Read how to contribute easily [here](http://localhost:4000/developer/contribute.html).
+Read how to contribute easily [here](/developer/contribute.html).
 
 ---
 

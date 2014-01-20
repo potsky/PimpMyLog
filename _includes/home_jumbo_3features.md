@@ -27,5 +27,5 @@
 - [:globe:] Translations ready (English and French available now)
 - [:apple:] Runs on Linux, Mac OSX and Window servers with PHP 5.2+
 - [:code:] Open-source code
-- [:magic:] Light code (full webapp weight is 800kb)
+- [:magic:] Lightweight code (full webapp weight is 800kb)
 
