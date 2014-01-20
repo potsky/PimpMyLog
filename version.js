@@ -3,6 +3,15 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"0.9.8" : {
+			"released" : "2014-01-20",
+			"changed" : [
+				"Clean code"
+			],
+			"fixed" : [
+				"Wrong path for chrome notification image #49"
+			]
+		},
 		"0.9.7" : {
 			"released" : "2014-01-14",
 			"new" : [

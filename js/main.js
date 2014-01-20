@@ -86,7 +86,7 @@ var notify = function ( title , message ) {
 			if ( ( notification === true ) && ( title !== undefined ) && ( notification_displayed === false ) ) {
 				notification_displayed = true;
 				var noti = window.webkitNotifications.createNotification(
-					'img/icon_072.png', title , message
+					'img/icon72.png', title , message
 				);
 				noti.onclick = function () {
 					window.focus();
