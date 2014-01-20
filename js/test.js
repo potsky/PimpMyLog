@@ -53,7 +53,7 @@ $(function() {
 				return t;
 			},
 			afterCopy:function() {
-				var a = $( 'a.clipboard' ).popover( {
+				$( 'a.clipboard' ).popover( {
 					html      : true ,
 					animation : true ,
 					placement : 'right',

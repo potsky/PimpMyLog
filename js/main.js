@@ -1,4 +1,4 @@
-/*global numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,querystring,notification_default, UAParser */
+/*global file_selector,numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,querystring,notification_default, UAParser */
 /*jshint unused:false*/
 
 var file,
@@ -33,7 +33,6 @@ var set_max = function( a ) {
 	"use strict";
 	$('#max').val( a );
 };
-
 
 
 /**
@@ -436,7 +435,9 @@ var get_logs     = function( load_default_values , load_full_file ) {
 					} else if ( type.param === 'severity' ) {
 						clas = badges[ type.param ][ logs.logs[log][ c ] ];
 					}
-					if ( clas === undefined ) clas = 'default';
+					if ( clas === undefined ) {
+						clas = 'default';
+					}
 					val = '<span class="label label-' + clas + '">' + val_cut( val , type.cut ) + '</span>';
 				}
 				else if ( 'date' === type.parser ) {
