@@ -1,8 +1,17 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "0.9.7",
-	"versiondevh" : "29785a55b236b3d50ad811dfbab1cf042574aeb1",
+	"version"     : "0.9.8",
+	"versiondevh" : "eab45ec213438a7d98d7f7c1763efed3d4577bf2",
 	"changelog" : {
+		"0.9.8" : {
+			"released" : "2014-01-20",
+			"changed" : [
+				"Clean code"
+			],
+			"fixed" : [
+				"Wrong path for chrome notification image #49"
+			]
+		},
 		"0.9.7" : {
 			"released" : "2014-01-14",
 			"new" : [
