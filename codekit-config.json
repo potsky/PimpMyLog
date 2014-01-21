@@ -19,20 +19,9 @@
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/img\/inputclear.png",
-      "processed" : 1,
+      "processed" : 0,
       "outputAbbreviatedPath" : "\/img\/inputclear.png",
       "initialSize" : 156,
-      "fileType" : 8192
-    },
-    "\/img\/apple-touch-icon-144x144.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/apple-touch-icon-144x144.png",
-      "processed" : 1,
-      "outputAbbreviatedPath" : "\/img\/apple-touch-icon-144x144.png",
-      "initialSize" : 4546,
       "fileType" : 8192
     },
     "\/index.php" : {
@@ -43,6 +32,17 @@
       "inputAbbreviatedPath" : "\/index.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/img\/apple-touch-icon-144x144.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/img\/apple-touch-icon-144x144.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/apple-touch-icon-144x144.png",
+      "initialSize" : 4546,
+      "fileType" : 8192
     },
     "\/css\/main.less" : {
       "ieCompatibility" : 0,
@@ -67,7 +67,7 @@
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/img\/apple-touch-icon-57x57.png",
-      "processed" : 1,
+      "processed" : 0,
       "outputAbbreviatedPath" : "\/img\/apple-touch-icon-57x57.png",
       "initialSize" : 1824,
       "fileType" : 8192
@@ -80,17 +80,6 @@
       "inputAbbreviatedPath" : "\/inc\/upgrade.pml.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
-    },
-    "\/img\/apple-touch-icon.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/apple-touch-icon.png",
-      "processed" : 1,
-      "outputAbbreviatedPath" : "\/img\/apple-touch-icon.png",
-      "initialSize" : 1824,
-      "fileType" : 8192
     },
     "\/css\/bootstrap.less" : {
       "ieCompatibility" : 1,
@@ -109,13 +98,24 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
+    "\/img\/apple-touch-icon.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/img\/apple-touch-icon.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/apple-touch-icon.png",
+      "initialSize" : 1824,
+      "fileType" : 8192
+    },
     "\/img\/apple-touch-icon-76x76.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/img\/apple-touch-icon-76x76.png",
-      "processed" : 1,
+      "processed" : 0,
       "outputAbbreviatedPath" : "\/img\/apple-touch-icon-76x76.png",
       "initialSize" : 2704,
       "fileType" : 8192
@@ -129,6 +129,46 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/img\/icon36.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/img\/icon36.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/icon36.png",
+      "initialSize" : 998,
+      "fileType" : 8192
+    },
+    "\/cfg\/apache.paths.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cfg\/apache.paths.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/css\/config.inc.css" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/css\/config.inc.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/img\/icon72.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/img\/icon72.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/icon72.png",
+      "initialSize" : 1597,
+      "fileType" : 8192
+    },
     "\/js\/configure.js" : {
       "ignoreWasSetByUser" : 1,
       "ignore" : 1,
@@ -140,26 +180,6 @@
       "outputAbbreviatedPath" : "\/js\/configure.min.js",
       "fileType" : 64
     },
-    "\/img\/icon72.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/icon72.png",
-      "processed" : 1,
-      "outputAbbreviatedPath" : "\/img\/icon72.png",
-      "initialSize" : 1597,
-      "fileType" : 8192
-    },
-    "\/css\/config.inc.css" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/css\/config.inc.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/inc\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -169,33 +189,13 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/img\/icon36.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/icon36.png",
-      "processed" : 1,
-      "outputAbbreviatedPath" : "\/img\/icon36.png",
-      "initialSize" : 998,
-      "fileType" : 8192
-    },
-    "\/cfg\/apache.config.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cfg\/apache.config.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/img\/apple-touch-icon-72x72.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/img\/apple-touch-icon-72x72.png",
-      "processed" : 1,
+      "processed" : 0,
       "outputAbbreviatedPath" : "\/img\/apple-touch-icon-72x72.png",
       "initialSize" : 2000,
       "fileType" : 8192
@@ -211,12 +211,12 @@
       "outputAbbreviatedPath" : "\/Gruntfile.min.js",
       "fileType" : 64
     },
-    "\/cfg\/apache.paths.php" : {
+    "\/cfg\/apache.config.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cfg\/apache.paths.php",
+      "inputAbbreviatedPath" : "\/cfg\/apache.config.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -226,7 +226,7 @@
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/img\/apple-touch-icon-114x114.png",
-      "processed" : 1,
+      "processed" : 0,
       "outputAbbreviatedPath" : "\/img\/apple-touch-icon-114x114.png",
       "initialSize" : 5942,
       "fileType" : 8192
@@ -278,16 +278,14 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/img\/apple-touch-icon-152x152.png" : {
+    "\/inc\/functions.inc.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/apple-touch-icon-152x152.png",
-      "processed" : 1,
-      "outputAbbreviatedPath" : "\/img\/apple-touch-icon-152x152.png",
-      "initialSize" : 6609,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/inc\/functions.inc.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/version.js" : {
       "ignoreWasSetByUser" : 1,
@@ -300,14 +298,16 @@
       "outputAbbreviatedPath" : "\/version.min.js",
       "fileType" : 64
     },
-    "\/inc\/functions.inc.php" : {
+    "\/img\/apple-touch-icon-152x152.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/functions.inc.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/img\/apple-touch-icon-152x152.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/apple-touch-icon-152x152.png",
+      "initialSize" : 6609,
+      "fileType" : 8192
     },
     "\/cfg\/softwares.inc.php" : {
       "ignoreWasSetByUser" : 0,
@@ -318,17 +318,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/img\/apple-touch-icon-120x120.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/apple-touch-icon-120x120.png",
-      "processed" : 1,
-      "outputAbbreviatedPath" : "\/img\/apple-touch-icon-120x120.png",
-      "initialSize" : 4229,
-      "fileType" : 8192
-    },
     "\/inc\/global.inc.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -337,6 +326,17 @@
       "inputAbbreviatedPath" : "\/inc\/global.inc.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/img\/apple-touch-icon-120x120.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/img\/apple-touch-icon-120x120.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/apple-touch-icon-120x120.png",
+      "initialSize" : 4229,
+      "fileType" : 8192
     }
   },
   "manualImportLinks" : [
