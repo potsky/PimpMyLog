@@ -12,7 +12,7 @@
 			"new" : [
 				"Add new global parameter TITLE_FILE to customize the page title according to the current displayed file #50",
 				"Add a copy to clipboard action when configuring Pimp My Log",
-				"PML can be launched with any log file by default, not the first defined only"
+				"PML can be launched with any log file by default, not the first defined only (use http://pml/?i=apache2 for example)"
 			]
 		},
 		"0.9.8" : {
