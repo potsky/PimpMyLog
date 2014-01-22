@@ -46,9 +46,10 @@ if ( isset( $_POST['s'] ) ) {
 						sprintf( __( 'Unable to create file <code>%s</code>') , CONFIG_FILE_TEMP)
 						. '<br/><br/>'
 						. __( 'Please give temporary write access to the root directory:' )
-						. '<pre>'
-						. 'chmod 777 ' . dirname( dirname( __FILE__ ) )
-						. '</pre>';
+						. '<div class="row">'
+						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'chmod 777 ' . dirname( dirname( __FILE__ ) ) . '</pre></div>'
+						. '  <div class="col-md-2"><a class="btn btn-success clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
+						. '</div>';
 					$return[ 'reload' ] = true;
 				}
 				break;
@@ -315,7 +316,7 @@ $lemma = array(
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title></title>
+	<title><?php echo TITLE;?></title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 <?php
@@ -396,6 +397,7 @@ $lemma = array(
 ?>
 	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script src="../js/vendor/jquery-1.10.1.min.js"></script>
+	<script src="../js/jquery.zclip.js"></script>
 	<script src="../js/vendor/bootstrap.min.js"></script>
 	<script src="../js/configure.js"></script>
 <?php

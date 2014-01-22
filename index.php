@@ -124,6 +124,7 @@ $csrf = csrf_get();
 		var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
 			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
 			files                      = <?php echo json_encode($files);?>,
+			title_file                 = "<?php echo TITLE_FILE;?>",
 			notification_title         = "<?php echo NOTIFICATION_TITLE;?>",
 			badges                     = <?php echo json_encode($badges);?>,
 			lemma                      = <?php echo json_encode($lemma);?>,

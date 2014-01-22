@@ -3,6 +3,17 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"0.9.9" : {
+			"released" : "2014-01-22",
+			"changed" : [
+				"Clean code again and reduce files size",
+				"You can now click on the logo in the debugger and in the configurator"
+			],
+			"new" : [
+				"Add new global parameter TITLE_FILE to customize the page title according to the current displayed file #50",
+				"Add a copy to clipboard action when configuring Pimp My Log"
+			]
+		},
 		"0.9.8" : {
 			"released" : "2014-01-20",
 			"changed" : [

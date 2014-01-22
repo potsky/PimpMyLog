@@ -310,8 +310,47 @@ var action_select_logs = function( options ) {
 };
 
 
+/**
+ * Command to enable a copy to clipboard button
+ *
+ * @param   {string}  btn    the DOM selector of buttons on which to apply the copy to clipboard action when clicked
+ * @param   {string}  ctn    the DOM selector of the content retrieved by the jQuery text() method
+ * @param   {string}  where  where to display the tooltip on successfull copy (left, right, bottom, top)
+ * @param   {string}  text   the text to display in the tooltip
+ *
+ * @return  {void}
+ */
+var clipboard_enable = function( btn , ctn , where , text) {
+	$(btn).zclip({
+		path:'../js/ZeroClipboard.swf',
+		copy:function(){
+			return $(ctn).text();
+		},
+		afterCopy:function() {
+			$( btn ).popover( {
+				html      : true ,
+				animation : true ,
+				placement : where,
+				container : 'body',
+				delay     : { show: 100, hide: 5000 },
+				content   : text,
+			} ).popover( 'show' );
+			$(btn).on('hidden.bs.popover', function () {
+				$( btn ).show();
+			});
+		}
+	});
+};
+
+
+
 $(function() {
 	"use strict";
+
+	// Logo click
+	$('.logo').click(function() {
+		location.reload();
+	});
 
 	////////////////////////////////////////
 	// Check if config.user.json already exist //
@@ -433,4 +472,5 @@ $(function() {
 		});
 	});
 });
+
 

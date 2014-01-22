@@ -1,6 +1,11 @@
 $(function() {
 	"use strict";
 
+	// Logo click
+	$('.logo').click(function() {
+		location.reload();
+	});
+
 	$('table').addClass('table table-striped table-bordered table-hover table-condensed');
 
 	$('#regextest').submit( function( event ) {

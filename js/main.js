@@ -1,4 +1,4 @@
-/*global file_selector,numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,querystring,notification_default, UAParser */
+/*global title_file,file_selector,numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,querystring,notification_default, UAParser */
 /*jshint unused:false*/
 
 var file,
@@ -32,6 +32,15 @@ var set_auto_refresh = function( a ) {
 var set_max = function( a ) {
 	"use strict";
 	$('#max').val( a );
+};
+
+
+/**
+ * Set the window title according to the current displayed file
+ */
+var set_title = function() {
+	"use strict";
+	document.title = title_file.replace( '%i' , file ).replace( '%f' , files[file].display );
 };
 
 
@@ -308,7 +317,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 			$("#result").hide();
 			$("#error").show();
 			$('#errortxt').html( logs.responseText );
-			notify( notification_title.replace( /%f/g , files[file].display ) , lemma.error );
+			notify( notification_title.replace( '%i' , file ).replace( '%f' , files[file].display ) , lemma.error );
 			return;
 		}
 
@@ -326,7 +335,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 			$("#result").hide();
 			$("#error").show();
 			$('#errortxt').html( logs.error );
-			notify( notification_title.replace( /%f/g , files[file].display ) , lemma.error );
+			notify( notification_title.replace( '%i' , file ).replace( '%f' , files[file].display ) , lemma.error );
 			return;
 		}
 
@@ -538,14 +547,14 @@ var get_logs     = function( load_default_values , load_full_file ) {
 		if ( first_launch === false ) {
 			if ( logs.full ) {
 				if ( logs.fingerprint !== fingerprint ) {
-					notify( notification_title.replace( /%f/g , files[file].display ) , lemma.new_logs );
+					notify( notification_title.replace( '%i' , file ).replace( '%f' , files[file].display ) , lemma.new_logs );
 					fingerprint = logs.fingerprint;
 				}
 			} else {
 				if ( rowidx === 1 ) {
-					notify( notification_title.replace( /%f/g , files[file].display ) , lemma.new_log );
+					notify( notification_title.replace( '%i' , file ).replace( '%f' , files[file].display ) , lemma.new_log );
 				} else if ( rowidx > 1 ) {
-					notify( notification_title.replace( /%f/g , files[file].display ) , lemma.new_nlogs.replace( '%s' , rowidx ) );
+					notify( notification_title.replace( '%i' , file ).replace( '%f' , files[file].display ) , lemma.new_nlogs.replace( '%s' , rowidx ) );
 				}
 			}
 		}
@@ -577,13 +586,14 @@ $(function() {
 		$('#file_selector').text( $('.file_menu:first').text() );
 		$('.file_menu:first').parent().addClass('active');
 		file = $('.file_menu:first').parent().data('file');
-
+		set_title();
 		// File Menu > handler
 		$('.file_menu').click( function() {
 			$('#file_selector').text( $(this).text() );
 			$('.file_menu').parent().removeClass('active');
 			$(this).parent().addClass('active');
 			file = $(this).parent().data('file');
+			set_title();
 			get_logs( true );
 		});
 	}
@@ -593,10 +603,11 @@ $(function() {
 
 		// File menu > init
 		file = $('#file_selector_big').val();
-
+		set_title();
 		// File Menu > handler
 		$('#file_selector_big').change( function() {
 			file = $('#file_selector_big').val();
+			set_title();
 			get_logs( true );
 		});
 	}
