@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "0.9.9",
-	"versiondevh" : "14132f2936e560fb2039b94645d42e6390671a22",
+	"versiondevh" : "b11d3978d597ecc949ce02857c74b77b963e8034",
 	"changelog" : {
 		"0.9.9" : {
 			"released" : "2014-01-22",
@@ -11,7 +11,8 @@
 			],
 			"new" : [
 				"Add new global parameter TITLE_FILE to customize the page title according to the current displayed file #50",
-				"Add a copy to clipboard action when configuring Pimp My Log"
+				"Add a copy to clipboard action when configuring Pimp My Log",
+				"PML can be launched with any log file by default, not the first defined only"
 			]
 		},
 		"0.9.8" : {
