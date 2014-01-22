@@ -12107,8 +12107,9 @@ var pml_version_cb = function( data ) {
 				changelog += '<div class="alert alert-danger">Version ' + version + ' does not exist in the <code>master</code> branch!</div>';
 			}
 			else {
+				changelog += '<hr/><strong>Version ' + version + '</strong>';
 				if ( data.changelog[version].notice !== undefined ) {
-					changelog += '<div class="alert alert-warning">' + data.changelog[version].notice + "</div>";
+					changelog += '<br/><br/><div class="alert alert-warning">' + data.changelog[version].notice + "</div>";
 				}
 				for ( var type in types ) {
 					if ( data.changelog[version][type] !== undefined ) {
