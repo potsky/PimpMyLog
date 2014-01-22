@@ -4,13 +4,32 @@
  <title>Pimp my Log</title>
  <link href="http://pimpmylog.com/atom.xml" rel="self"/>
  <link href="http://pimpmylog.com"/>
- <updated>2014-01-20T17:17:51+01:00</updated>
+ <updated>2014-01-22T11:36:57+01:00</updated>
  <id>http://pimpmylog.com</id>
  <author>
    <name>Potsky</name>
    <email>potsky@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Version 0.9.9 released</title>
+   <link href="http://pimpmylog.com/general/2014/01/22/version-0.9.9-released"/>
+   <updated>2014-01-22T00:00:00+01:00</updated>
+   <id>http://pimpmylog.com/general/2014/01/22/version-0.9.9-released</id>
+   <content type="html">&lt;p&gt;This bulky update includes versions &lt;code&gt;0.9.8&lt;/code&gt; and &lt;code&gt;0.9.9&lt;/code&gt;. It includes several improvements and bug fixes.&lt;/p&gt;
+
+&lt;p&gt;The new &lt;code&gt;TITLE_FILE&lt;/code&gt; global parameter let you customize the page title according to the current displayed file. It is really handy when you have several &lt;em&gt;Pimp My Log&lt;/em&gt; instances in several tabs.&lt;/p&gt;
+
+&lt;p&gt;Are you ok to release version 1.0.0 in a few days? Still some annoying bugs?&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.9&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;0.9.8&quot;&gt;&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Version 0.9.7 released</title>
