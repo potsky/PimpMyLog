@@ -65,3 +65,8 @@ A special thanks goes out to :
 
 [![](/assets/theypimplogs/tcpartners.png "TCPartners")](http://www.tcpartners.fr)
 [![](/assets/theypimplogs/videospot.png "VideoSpot")](http://www.videospot.com)
+
+Your company or your project uses *Pimp My Log*? Please [let me know](http://support.pimpmylog.com/discussion/new) and send me your logo and the link of your website!
+
+
+
