@@ -168,6 +168,16 @@ It can happen too when you write manually some data in the log file.
 
 # 2 - Advanced features
 
+## Default file
+
+<a name="defaultfile"></a>
+
+The first file defined in your configuration file is displayed by default.
+
+You can change this behaviour by adding a *GET* parameter in the *Pimp My Log* url. The *GET* parameter name is `i` and its value is the `fileid` of the log file as defined in the configuration file.
+
+eg: `http://.../PimpMyLog/?i=apache2`
+
 ## Timezone selector
 
 <a name="timezone"></a>
