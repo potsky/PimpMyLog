@@ -165,7 +165,8 @@ if ( FILE_SELECTOR == 'bs' ) {
 						<ul class="dropdown-menu">
 <?php
 foreach ( $files as $file_id=>$file ) {
-	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
+	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
+	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
 }
 ?>
 						</ul>
@@ -179,7 +180,8 @@ foreach ( $files as $file_id=>$file ) {
 						<select id="file_selector_big" class="form-control input-sm" title="<?php _e( 'Select a log file to display' );?>">
 <?php
 foreach ( $files as $file_id=>$file ) {
-	echo '<option value="' . $file_id . '">' . $file['display'] . '</option>';
+	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' selected="selected"' : '';
+	echo '<option value="' . $file_id . '"' . $selected . '>' . $file['display'] . '</option>';
 }
 ?>
 						</select>

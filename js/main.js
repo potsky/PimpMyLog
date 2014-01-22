@@ -582,15 +582,20 @@ $(function() {
 
 	// File selector bootstrap
 	if ( file_selector === 'bs' ) {
+
+		if ( ! $('.file_menup.active').length ) {
+			$('.file_menup:first').addClass('active');
+		}
+
 		// File menu > init
-		$('#file_selector').text( $('.file_menu:first').text() );
-		$('.file_menu:first').parent().addClass('active');
-		file = $('.file_menu:first').parent().data('file');
+		$('#file_selector').text( $('.file_menup.active a').text() );
+		file = $('.file_menup.active').data('file');
 		set_title();
+
 		// File Menu > handler
 		$('.file_menu').click( function() {
 			$('#file_selector').text( $(this).text() );
-			$('.file_menu').parent().removeClass('active');
+			$('.file_menup').removeClass('active');
 			$(this).parent().addClass('active');
 			file = $(this).parent().data('file');
 			set_title();
