@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.8 - 3d7eb0dfbd3c7abcb42482c74fa12e6205de1a98*/
+/*! pimpmylog - 0.9.8 - 5462b8b6c54dc138d01e2bf6cfae6f4e6d1eb35e*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -130,6 +130,7 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
  */
 function init() {
 	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp my Log' );
+	if ( ! defined( 'TITLE_FILE'                 ) ) define( 'TITLE_FILE'                 , 'Pimp my Log [%f]' );
 	if ( ! defined( 'NAV_TITLE'                  ) ) define( 'NAV_TITLE'                  , '' );
 	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . @date('Y') . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
 	if ( ! defined( 'LOGS_MAX'                   ) ) define( 'LOGS_MAX'                   , 50 );

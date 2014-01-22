@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.8 - 3d7eb0dfbd3c7abcb42482c74fa12e6205de1a98*/
+/*! pimpmylog - 0.9.8 - 5462b8b6c54dc138d01e2bf6cfae6f4e6d1eb35e*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -105,6 +105,7 @@ $csrf = csrf_get();
 ?><?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?><link rel="stylesheet" href="css/config.inc.user.css"><?php } else { ?><link rel="stylesheet" href="css/config.inc.css"><?php } ?><script>var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
 			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
 			files                      = <?php echo json_encode($files);?>,
+			title_file                 = "<?php echo TITLE_FILE;?>",
 			notification_title         = "<?php echo NOTIFICATION_TITLE;?>",
 			badges                     = <?php echo json_encode($badges);?>,
 			lemma                      = <?php echo json_encode($lemma);?>,
