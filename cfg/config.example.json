@@ -1,6 +1,7 @@
 {
 	"globals": {
 		"_remove_me_to_set_TITLE"                 : "Pimp my Log",
+		"_remove_me_to_set_TITLE_FILE"            : "Pimp my Log [%f]",
 		"_remove_me_to_set_NAV_TITLE"             : "",
 		"_remove_me_to_set_FOOTER"                : "&copy; <a href=\"http:\/\/www.potsky.com\" target=\"doc\">Potsky<\/a> 2013 - <a href=\"http:\/\/pimpmylog.com\" target=\"doc\">Pimp my Log<\/a>",
 		"_remove_me_to_set_PIMPMYLOG_VERSION_URL" : "http:\/\/demo.pimpmylog.com\/version.js",

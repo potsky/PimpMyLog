@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.8 - 3d7eb0dfbd3c7abcb42482c74fa12e6205de1a98*/
+/*! pimpmylog - 0.9.9 - 14132f2936e560fb2039b94645d42e6390671a22*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -55,9 +55,10 @@ if ( isset( $_POST['s'] ) ) {
 						sprintf( __( 'Unable to create file <code>%s</code>') , CONFIG_FILE_TEMP)
 						. '<br/><br/>'
 						. __( 'Please give temporary write access to the root directory:' )
-						. '<pre>'
-						. 'chmod 777 ' . dirname( dirname( __FILE__ ) )
-						. '</pre>';
+						. '<div class="row">'
+						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'chmod 777 ' . dirname( dirname( __FILE__ ) ) . '</pre></div>'
+						. '  <div class="col-md-2"><a class="btn btn-success clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
+						. '</div>';
 					$return[ 'reload' ] = true;
 				}
 				break;
@@ -315,7 +316,7 @@ $lemma = array(
 );
 
 
-?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title></title><meta name="description" content=""><meta name="viewport" content="width=device-width"><?php
+?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title><?php echo TITLE;?></title><meta name="description" content=""><meta name="viewport" content="width=device-width"><?php
 ?><?php
 ?><link rel="stylesheet" href="../css/pml.min.css"><?php
 ?><script>var lemma       = <?php echo json_encode($lemma);?>,

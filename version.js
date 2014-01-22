@@ -1,8 +1,19 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "0.9.8",
-	"versiondevh" : "3d7eb0dfbd3c7abcb42482c74fa12e6205de1a98",
+	"version"     : "0.9.9",
+	"versiondevh" : "14132f2936e560fb2039b94645d42e6390671a22",
 	"changelog" : {
+		"0.9.9" : {
+			"released" : "2014-01-22",
+			"changed" : [
+				"Clean code again and reduce files size",
+				"You can now click on the logo in the debugger and in the configurator"
+			],
+			"new" : [
+				"Add new global parameter TITLE_FILE to customize the page title according to the current displayed file #50",
+				"Add a copy to clipboard action when configuring Pimp My Log"
+			]
+		},
 		"0.9.8" : {
 			"released" : "2014-01-20",
 			"changed" : [
