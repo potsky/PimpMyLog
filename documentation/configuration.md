@@ -199,6 +199,12 @@ Default:
 "NOTIFICATION_TITLE" : "New logs [%f]"
 ```
 
+You can use this variable:
+
+- `%f`: the name of the file (the *display* attribute)
+- `%i`: the ID of the file
+
+
 ---
 
 #### PIMPMYLOG\_VERSION\_URL
@@ -229,13 +235,30 @@ Default:
 
 #### TITLE
 
-The HTML title of the *Pimp My Log* page.
+The HTML title of the *Pimp My Log* page when no file is loaded.
 
 Default:
 
 ```json
 "TITLE" : "Pimp my Log"
 ```
+
+---
+
+#### TITLE\_FILE
+
+The HTML title of the *Pimp My Log* page when a file is loaded
+
+Default:
+
+```json
+"TITLE_FILE" : "Pimp my Log [%n]"
+```
+
+You can use these variables:
+
+- `%f`: the name of the file (the *display* attribute)
+- `%i`: the ID of the file
 
 ---
 
