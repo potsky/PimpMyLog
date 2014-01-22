@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 14132f2936e560fb2039b94645d42e6390671a22*/
+/*! pimpmylog - 0.9.9 - b11d3978d597ecc949ce02857c74b77b963e8034*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -118,13 +118,15 @@ $csrf = csrf_get();
 if ( FILE_SELECTOR == 'bs' ) {
 ?><ul class="nav navbar-nav"><li class="dropdown" title="<?php _e( 'Select a log file to display' );?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a><ul class="dropdown-menu"><?php
 foreach ( $files as $file_id=>$file ) {
-	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
+	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
+	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
 }
 ?></ul></li></ul><?php
 } else {
 ?><form class="navbar-form navbar-left"><div class="form-group"><select id="file_selector_big" class="form-control input-sm" title="<?php _e( 'Select a log file to display' );?>"><?php
 foreach ( $files as $file_id=>$file ) {
-	echo '<option value="' . $file_id . '">' . $file['display'] . '</option>';
+	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' selected="selected"' : '';
+	echo '<option value="' . $file_id . '"' . $selected . '>' . $file['display'] . '</option>';
 }
 ?></select></div>&nbsp;</form><?php
 }
