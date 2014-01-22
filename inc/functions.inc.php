@@ -160,7 +160,7 @@ function config_load( $path = 'config.user.json' ) {
 
 	foreach ( $config[ 'globals' ] as $cst => $val ) {
 		if ( $cst == strtoupper( $cst ) ) {
-			define( $cst , $val );
+			@define( $cst , $val );
 		}
 	}
 	return true;

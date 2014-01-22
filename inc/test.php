@@ -111,7 +111,7 @@ if ( isset( $_POST['s'] ) ) {
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 	<title><?php echo TITLE;?></title>
-	<?php include_once 'favicon.inc.php'; ?>
+	<?php $fav = '../' ; include_once 'favicon.inc.php'; ?>
 <?php
 // @if prod=='dev'
 ?>
