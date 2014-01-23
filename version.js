@@ -3,6 +3,16 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"1.0.0" : {
+			"released" : "2014-01-23",
+			"fix" : [
+				"PHP Notice while configuration process when apache log file is empty #51"
+			],
+			"changed" : [
+				"Several custom log file paths can be separated by a coma or by a new line now"
+			],
+
+		},
 		"0.9.9" : {
 			"released" : "2014-01-22",
 			"changed" : [

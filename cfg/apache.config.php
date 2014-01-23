@@ -14,11 +14,13 @@ function apache_get_config( $type , $file , $software , $counter ) {
 	/////////////////////////////////////////////////////////
 	if ( $type == 'error' ) {
 
+
 		// Get the first 10 lines and try to guess
 		// This is not really
 		$firstline = '';
 		$handle    = @fopen( $file , 'r' );
 		$remain    = 10;
+		$test      = 0;
 		if ( $handle ) {
 			while ( ( $buffer = fgets( $handle , 4096 ) ) !== false ) {
 				$test = @preg_match('|^\[(.*) (.*) (.*) (.*):(.*):(.*)\.(.*) (.*)\] \[(.*):(.*)\] \[pid (.*)\] .*\[client (.*):(.*)\] (.*)(, referer: (.*))*$|U', $buffer );
@@ -32,6 +34,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 			}
 			fclose($handle);
 		}
+
 
 		/////////////////////
 		// Error 2.4 style //

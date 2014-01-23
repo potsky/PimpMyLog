@@ -258,7 +258,7 @@ var action_select_logs = function( options ) {
 			// User inputs
 			var user_files = [];
 			$( '.userpaths' ).each( function() {
-				var uf = $.trim( $(this).val() ).split(',');
+				var uf = $.trim( $(this).val() ).split(/[\n,]+/);
 				if ( uf.length > 0 ) {
 					for ( var u in uf ) {
 						var v = $.trim( uf[ u ] ) ;

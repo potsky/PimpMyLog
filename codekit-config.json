@@ -13,17 +13,6 @@
       "initialSize" : 4546,
       "fileType" : 8192
     },
-    "\/img\/inputclear.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/inputclear.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/img\/inputclear.png",
-      "initialSize" : 156,
-      "fileType" : 8192
-    },
     "\/index.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -43,6 +32,17 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/js\/test.min.js",
       "fileType" : 64
+    },
+    "\/img\/inputclear.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/img\/inputclear.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/inputclear.png",
+      "initialSize" : 156,
+      "fileType" : 8192
     },
     "\/css\/main.less" : {
       "ieCompatibility" : 0,
@@ -140,12 +140,32 @@
       "outputAbbreviatedPath" : "\/js\/configure.min.js",
       "fileType" : 64
     },
+    "\/img\/icon72.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/img\/icon72.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/icon72.png",
+      "initialSize" : 1597,
+      "fileType" : 8192
+    },
     "\/cfg\/apache.paths.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/cfg\/apache.paths.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/inc\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/index.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -157,26 +177,6 @@
       "inputAbbreviatedPath" : "\/css\/config.inc.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
-    },
-    "\/inc\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/img\/icon36.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/icon36.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/img\/icon36.png",
-      "initialSize" : 998,
-      "fileType" : 8192
     },
     "\/cfg\/apache.config.php" : {
       "ignoreWasSetByUser" : 0,
@@ -209,15 +209,15 @@
       "outputAbbreviatedPath" : "\/Gruntfile.min.js",
       "fileType" : 64
     },
-    "\/img\/icon72.png" : {
+    "\/img\/icon36.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/icon72.png",
+      "inputAbbreviatedPath" : "\/img\/icon36.png",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/img\/icon72.png",
-      "initialSize" : 1597,
+      "outputAbbreviatedPath" : "\/img\/icon36.png",
+      "initialSize" : 998,
       "fileType" : 8192
     },
     "\/img\/apple-touch-icon-114x114.png" : {
@@ -287,17 +287,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/version.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/version.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/version.min.js",
-      "fileType" : 64
-    },
     "\/js\/main.js" : {
       "ignoreWasSetByUser" : 1,
       "ignore" : 1,
@@ -309,12 +298,32 @@
       "outputAbbreviatedPath" : "\/js\/main.min.js",
       "fileType" : 64
     },
+    "\/version.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/version.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/version.min.js",
+      "fileType" : 64
+    },
     "\/cfg\/softwares.inc.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/cfg\/softwares.inc.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/inc\/global.inc.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/global.inc.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -328,15 +337,6 @@
       "outputAbbreviatedPath" : "\/img\/apple-touch-icon-120x120.png",
       "initialSize" : 4229,
       "fileType" : 8192
-    },
-    "\/inc\/global.inc.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/global.inc.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     }
   },
   "manualImportLinks" : [
