@@ -4,14 +4,20 @@
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
 		"1.0.0" : {
-			"released" : "2014-01-23",
+			"released" : "2014-01-27",
 			"fix" : [
 				"PHP Notice while configuration process when apache log file is empty #51"
 			],
 			"changed" : [
-				"Several custom log file paths can be separated by a coma or by a new line now"
+				"Several custom log file paths can be separated by a coma or by a new line now",
+				"Configuration paths can now use globs"
 			],
-
+			"new" : [
+				"Support PHP logs #52",
+				"Support NGINX server logs #53",
+				"Support IIS server logs #54",
+				"Manage a cache manifest to load PML faster #55"
+			]
 		},
 		"0.9.9" : {
 			"released" : "2014-01-22",

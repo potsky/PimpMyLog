@@ -1,4 +1,16 @@
 <?php
+
+function apache_load_software() {
+	return array(
+		'name'    => __('Apache'),
+		'desc'    => __('Apache Hypertext Transfer Protocol Server'),
+		'home'    => __('http://httpd.apache.org'),
+		'notes'   => __('All versions 2.x are supported.'),
+		'load'    => ( stripos( $_SERVER["SERVER_SOFTWARE"] , 'Apache' ) !== false )
+	);
+}
+
+
 /*
 You must escape anti-slash 4 times and escape $ in regex.
 (Two for PHP and finally two for json)

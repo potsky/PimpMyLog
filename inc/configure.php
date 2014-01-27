@@ -90,19 +90,41 @@ if ( isset( $_POST['s'] ) ) {
 					throw new Exception( sprintf( __( 'Files <code>%s</code> or <code>%s</code> do not exist. Please review your software configuration.') , $software_paths , $software_pathsuser ) ) ;
 				}
 
-				foreach ( $paths as $path ) {
-					$tried[ $software ][ $path ] = false;
-					if ( is_dir( $path ) ) {
-						$found = 1;
-						$tried[ $software ][ $path ] = true;
-						foreach ( $files as $type => $fpaths) {
-							foreach ( $fpaths as $file ) {
-								$allfiles[ $file ] = $file;
-								if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
-									if ( ! is_array( $tried[ $software ][ $path ] ) )
-										$tried[ $software ][ $path ] = array();
-									$tried[ $software ][ $path ][ $type ][] = $file;
-									$found = 2;
+				foreach ( $paths as $userpath ) {
+
+					$gpaths = glob( $userpath , GLOB_MARK | GLOB_NOCHECK | GLOB_ONLYDIR );
+
+					foreach( $gpaths as $path ) {
+
+						$tried[ $software ][ $path ] = false;
+
+						if ( is_dir( $path ) ) {
+
+							$found = 1;
+							$tried[ $software ][ $path ] = true;
+
+							foreach ( $files as $type => $fpaths) {
+
+								foreach ( $fpaths as $userfile ) {
+
+									$gfiles   = glob( $path . $userfile , GLOB_MARK | GLOB_NOCHECK );
+
+									foreach( $gfiles as $file ) {
+
+										$file              = str_replace( $path , '' , $file );
+										$allfiles[ $file ] = $file;
+
+										if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
+
+											if ( ! is_array( $tried[ $software ][ $path ] ) ) {
+												$tried[ $software ][ $path ] = array();
+											}
+
+											$tried[ $software ][ $path ][ $type ][] = $file;
+											$found = 2;
+										}
+
+									}
 								}
 							}
 						}

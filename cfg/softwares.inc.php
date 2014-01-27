@@ -1,18 +1,21 @@
 <?php
-$softwares_all = array(
-	'apache' => array(
-		'name'    => __('Apache'),
-		'desc'    => __('Apache Hypertext Transfer Protocol Server'),
-		'home'    => __('http://httpd.apache.org'),
-		'notes'   => __('All versions 2.x are supported.'),
-		'load'    => true,
-	),
-);
+$softwares_list = array( 'apache' , 'iis' , 'nginx' , 'php' );
+$softwares_all  = array();
 
+foreach ( $softwares_list as $sfw ) {
+	$config_file = '../cfg/' . $sfw . '.config.php';
+	include_once( $config_file );
+	$loader = $sfw . '_load_software';
+	if ( function_exists( $loader ) ) {
+		$cfg = call_user_func( $loader );
+		if ( is_array( $cfg ) ) {
+			$softwares_all[ $sfw ] = $cfg;
+		}
+	}
+}
 
 
 /*
-
 You can add your own softwares in file software.user.inc.php, it will not be erased on update (git pull).
 Just add a new software like this :
 
@@ -29,9 +32,7 @@ $softwares_all[ 'apache' ][ 'name' ] = 'Apache HTTPD';
 You have to add these files too :
 - my_software.config.user.php (which defines function my_software_get_config)
 - my_software.paths.user.php
-
 */
-
 if ( file_exists( '../cfg/softwares.inc.user.php' ) ) {
 	include_once '../cfg/softwares.inc.user.php';
 }

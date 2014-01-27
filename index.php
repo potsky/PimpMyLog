@@ -15,6 +15,7 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 }
 
 
+
 /////////////////////////
 // Check if configured //
 /////////////////////////

@@ -156,13 +156,51 @@ function config_load( $path = 'config.user.json' ) {
 		return false;
 	}
 	$badges = $config[ 'badges' ];
-	$files  = $config[ 'files' ];
 
 	foreach ( $config[ 'globals' ] as $cst => $val ) {
 		if ( $cst == strtoupper( $cst ) ) {
 			@define( $cst , $val );
 		}
 	}
+
+	// Try to generate the files tree if there are globs...
+	$files_tmp = $config[ 'files' ];
+	$files     = array();
+
+	foreach ( $files_tmp as $fileid => $file ) {
+
+		$path   = $file['path'];
+		$count  = max( 1 , @(int)$file['count']);
+		$gpaths = glob( $path , GLOB_MARK | GLOB_NOCHECK );
+
+		if ( count( $gpaths ) == 0 ) {
+		}
+
+		else if ( count( $gpaths ) == 1 ) {
+			$files[ $fileid ] = $file;
+		}
+
+		else {
+			$new_paths = array();
+			$i         = 1;
+
+			foreach ( $gpaths as $path ) {
+				$new_paths[ $path ] = filemtime( $path );
+			}
+
+			arsort( $new_paths , SORT_NUMERIC );
+
+			foreach ( $new_paths as $path => $lastmodified ) {
+				$files[ $fileid . '_' . $i ]         = $file;
+				$files[ $fileid . '_' . $i ]['path'] = $path;
+				if ( $i >= $count ) {
+					break;
+				}
+				$i++;
+			}
+		}
+	}
+
 	return true;
 }
 
