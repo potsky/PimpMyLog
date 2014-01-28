@@ -38,7 +38,9 @@ You can set the default loaded file in the configuration file by setting its `fi
 
 ## Search
 
-The search input lets you type some words to search in the log file. The search is done line by line in every full line. The search is not performed on each separated token from a line.
+The search input lets you type some words to search in the log file. Stroke key `F` to focus on the search input.
+
+The search is done line by line in every full line. The search is not performed on each separated token from a line.
 
 > **Warning**  
 > 
