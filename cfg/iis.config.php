@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.0.0 - 0a648001138e011a5721bf1e552b62958a8c94fc*/
+/*! pimpmylog - 1.0.0 - 707747a88ef4f48a6969038f23d56a727084002b*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -14,7 +14,7 @@ function iis_load_software() {
 		'name'    => __('IIS'),
 		'desc'    => __('A flexible & easy-to-manage web server...'),
 		'home'    => __('http://www.iis.net'),
-		'notes'   => __(''),
+		'notes'   => __('NCSA, IIS and W3C log formats are supported'),
 		'load'    => ( stripos( $_SERVER["SERVER_SOFTWARE"] , 'iis' ) !== false )
 		);
 }

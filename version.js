@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.0.0",
-	"versiondevh" : "0a648001138e011a5721bf1e552b62958a8c94fc",
+	"versiondevh" : "707747a88ef4f48a6969038f23d56a727084002b",
 	"changelog" : {
 		"1.0.0" : {
 			"released" : "2014-01-28",
@@ -10,7 +10,8 @@
 			],
 			"changed" : [
 				"Several custom log file paths can be separated by a coma or by a new line now",
-				"Configuration paths can now use globs"
+				"Configuration paths can now use globs",
+				"Log table is now full width streched"
 			],
 			"new" : [
 				"Support PHP logs #52",

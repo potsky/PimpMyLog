@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.0.0 - 0a648001138e011a5721bf1e552b62958a8c94fc*/
+/*! pimpmylog - 1.0.0 - 707747a88ef4f48a6969038f23d56a727084002b*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -15,7 +15,7 @@ function nginx_load_software() {
 		'name'    => __('NGINX'),
 		'desc'    => __('The high performance reverse proxy, load balancer, edge cache, origin server'),
 		'home'    => __('http://nginx.com'),
-		'notes'   => __(''),
+		'notes'   => __('Default log formats are supported'),
 		'load'    => ( stripos( $_SERVER["SERVER_SOFTWARE"] , 'nginx' ) !== false )
 	);
 }
@@ -82,7 +82,7 @@ EOF;
 			"max"     : 10,
 			"notify"  : false,
 			"format"  : {
-				"type" : "NCSA",
+				"type" : "NCSA Extended",
 				"regex": "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
 				"match": {
 					"Date"    : 6,
@@ -93,8 +93,7 @@ EOF;
 					"Size"    : 11,
 					"Referer" : 13,
 					"UA"      : 14,
-					"User"    : 5,
-					"\u03bcs" : 16
+					"User"    : 5
 				},
 				"types": {
 					"Date"    : "date:H:i:s",
@@ -103,8 +102,7 @@ EOF;
 					"Code"    : "badge:http",
 					"Size"    : "numeral:0b",
 					"Referer" : "link",
-					"UA"      : "ua:{os.name} {os.version} | {browser.name} {browser.version}\/100",
-					"\u03bcs" : "numeral:0,0"
+					"UA"      : "ua:{os.name} {os.version} | {browser.name} {browser.version}\/100"
 				},
 				"exclude": {
 					"URL": ["\/favicon.ico\/", "\/\\\\.pml\\\\.php\\\\.*\$\/"],
