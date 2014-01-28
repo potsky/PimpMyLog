@@ -132,10 +132,8 @@ if ( isset( $_POST['s'] ) ) {
 				}
 
 				$softuser[ $software ] = array();
-				foreach ( $paths as $path ) {
-					foreach ( $files as $type => $fpaths) {
-						$softuser[ $software ][ $type ] = 1;
-					}
+				foreach ( $files as $type => $fpaths) {
+					$softuser[ $software ][ $type ] = 1;
 				}
 
 				$return[ 'files' ]  = $tried;
