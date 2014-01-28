@@ -369,7 +369,7 @@ $lemma = array(
 		<div class="container">
 			<div class="logo"></div>
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Configurator');?></a>
+				<a class="navbar-brand" href="?<?php echo $_SERVER['QUERY_STRING'];?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Configurator');?></a>
 			</div>
 		</div>
 	</div>

@@ -242,18 +242,26 @@ foreach ( get_max_options() as $r ) {
 
 	<div class="container">
 		<div id="error" style="display:none;"><br/><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
-		<div id="result">
+		<div class="result">
 			<br/>
 			<div id="upgrademessage"></div>
 			<div id="singlenotice"></div>
 			<div id="notice"></div>
 			<div id="nolog" style="display:none" class="alert alert-info fade in"></div>
-			<div class="table-responsive">
-				<table id="logs" class="table table-striped table-bordered table-hover table-condensed logs">
-					<thead id="logshead"></thead>
-					<tbody id="logsbody"></tbody>
-				</table>
-			</div>
+		</div>
+	</div>
+
+	<div class="result">
+		<div id="logstr" class="table-responsive">
+			<table id="logs" class="table table-striped table-bordered table-hover table-condensed logs">
+				<thead id="logshead"></thead>
+				<tbody id="logsbody"></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="result">
 			<small id="footer"></small>
 		</div>
 		<hr>

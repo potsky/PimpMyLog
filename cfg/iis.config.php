@@ -4,7 +4,7 @@ function iis_load_software() {
 		'name'    => __('IIS'),
 		'desc'    => __('A flexible & easy-to-manage web server...'),
 		'home'    => __('http://www.iis.net'),
-		'notes'   => __(''),
+		'notes'   => __('NCSA, IIS and W3C log formats are supported'),
 		'load'    => ( stripos( $_SERVER["SERVER_SOFTWARE"] , 'iis' ) !== false )
 		);
 }

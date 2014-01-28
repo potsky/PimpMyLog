@@ -137,7 +137,7 @@ if ( isset( $_POST['s'] ) ) {
 		<div class="container">
 			<div class="logo"></div>
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a>
+				<a class="navbar-brand" href="?<?php echo $_SERVER['QUERY_STRING'];?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a>
 			</div>
 		</div>
 	</div>

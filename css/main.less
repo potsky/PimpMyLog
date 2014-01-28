@@ -89,79 +89,86 @@ Override the success color for input.
 This class is used in the search input field when a regular expression is detected
 */
 .has-success .form-control {
-	border-color: #ff00ff;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
-	   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
-	        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
+	border-color       : #ff00ff;
+	-webkit-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
+	   -moz-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
+	        box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
 }
 .has-success .form-control:focus {
-	border-color: #ff00ff;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
-	   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
-	        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
+	border-color       : #ff00ff;
+	-webkit-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
+	   -moz-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
+	        box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
 }
 
 
 body {
-	padding-top: 50px;
-	padding-bottom: 20px;
+	padding-top    : 50px;
+	padding-bottom : 20px;
 }
 
 
 /* Refresh button */
 .loader {
-	padding-left: 40px;
-	@media (max-width: 767px) {
-		padding-left: 130px;
+	padding-left : 40px;
+	@media (max-width : 767px) {
+		padding-left : 130px;
 	}
 }
 
 
 /* Retina logo */
 .logo {
-	position: absolute;
-	left: 7px;
-	top: 7px;
-	width: 36px;
-	height: 36px;
-	cursor: pointer;
+	position : absolute;
+	left     : 7px;
+	top      : 7px;
+	width    : 36px;
+	height   : 36px;
+	cursor   : pointer;
+	z-index  : 10000;
 
-	background: url(../img/icon36.png) no-repeat;
-	background-size: 36px 36px;
+	background      : url(../img/icon36.png) no-repeat;
+	background-size : 36px 36px;
 
 	@media	only screen and (-webkit-min-device-pixel-ratio: 1.5),
 			only screen and (-o-min-device-pixel-ratio: 3/2),
 			only screen and (min--moz-device-pixel-ratio: 1.5),
 			only screen and (min-device-pixel-ratio: 1.5) {
-		background: url(../img/icon72.png) no-repeat;
-		background-size: 36px 36px;
+		background      : url(../img/icon72.png) no-repeat;
+		background-size : 36px 36px;
 	}
 }
 
 
+#logstr {
+	margin-left : 2%;
+	max-width   : 96%;
+}
+
+
 textarea.test {
-	font-family: monospace, serif;
+	font-family : monospace, serif;
 }
 
 
 /* Reset button in search */
 .clearable {
-	background-image:url(../img/inputclear.png);
-	background-repeat:no-repeat;
-	background-position: right -10px center;
-	transition: background 0.4s;
+	background-image    : url(../img/inputclear.png);
+	background-repeat   : no-repeat;
+	background-position : right -10px center;
+	transition          : background 0.4s;
 }
 .clearable.x {
-	background-position: right 5px center;
+	background-position : right 5px center;
 }
 .clearable.onX {
-	cursor:pointer;
+	cursor : pointer;
 }
 
 
 /* IE8 Compat for menu popover */
 .navbar {
-	filter:none !important;
+	filter : none !important;
 }
 
 

@@ -46,7 +46,7 @@ init();
 			<h1><?php echo $title;?></h1>
 			<p><?php echo $message;?></p>
 <?php if ( '' != @$link_url ) { ?>
-			<p><a class="btn btn-primary btn-lg" href="<?php echo $link_url;?>"><?php echo $link_msg;?> &raquo;</a></p>
+			<p><a class="btn btn-primary btn-lg" href="<?php echo $link_url;?>"><?php echo $link_msg;?>&nbsp;&raquo;</a></p>
 <?php } ?>
 		</div>
 	</div>

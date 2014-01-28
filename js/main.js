@@ -314,7 +314,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 
 		// Error
 		if ( logs.error ) {
-			$("#result").hide();
+			$(".result").hide();
 			$("#error").show();
 			$('#errortxt').html( logs.responseText );
 			notify( notification_title.replace( '%i' , file ).replace( '%f' , files[file].display ) , lemma.error );
@@ -332,7 +332,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 
 		// Error
 		if ( logs.error ) {
-			$("#result").hide();
+			$(".result").hide();
 			$("#error").show();
 			$('#errortxt').html( logs.error );
 			notify( notification_title.replace( '%i' , file ).replace( '%f' , files[file].display ) , lemma.error );
@@ -355,7 +355,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 
 		// Render
 		$( '#error' ).hide();
-		$( '#result' ).show();
+		$( '.result' ).show();
 
 		// No log message
 		if ( logs.full ) {
@@ -636,13 +636,19 @@ $(function() {
 		get_logs();
 	});
 
-	// Refresh hotkey
-	$(document).keypress( 'r' , function(e) {
+	// Hotkeys
+	$(document).keypress( function(e) {
         if ( $(e.target).is('input, textarea') ) {
             return;
         }
-		notify();
-		get_logs();
+        if ( e.which === 114 ) { //r
+			notify();
+			get_logs();
+        }
+        else if ( ( e.which === 102 ) || ( e.which === 47 ) ) { //102=f 47=/
+			e.preventDefault();
+			$( '#search' ).focus();
+        }
 	});
 
 	// Init Search reset button
@@ -740,3 +746,4 @@ $(function() {
 		}
 	} );
 });
+

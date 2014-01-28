@@ -10,7 +10,8 @@
 			],
 			"changed" : [
 				"Several custom log file paths can be separated by a coma or by a new line now",
-				"Configuration paths can now use globs"
+				"Configuration paths can now use globs",
+				"Log table is now full width streched"
 			],
 			"new" : [
 				"Support PHP logs #52",
