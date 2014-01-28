@@ -3,7 +3,7 @@ layout: default
 title: Configuration
 ---
 
-You can configure a standard profile for each *Pimp My Log* instance. A profile is stored in  the `config.user.json` file at root. If you have done the automatic configuration at first launch, this file has been automatically created and set up for you. You can now adjust settings to fit your daily usage.
+You can configure a standard profile for each *Pimp My Log* instance. A profile is stored in the `config.user.json` file at root. If you have done the automatic configuration at first launch, this file has been automatically created and set up for you. You can now adjust settings to fit your daily usage.
 
 This file is not updated and is ignored when you perform a `git pull` so you can easily update *Pimp My Log*, your settings will be kept.
 
@@ -373,6 +373,12 @@ The `file` object structure is something like this:
 
 ### 3.1.2 - Keys
 
+#### count [optional]
+
+Specify the number of most recent files to display when path is a glob pattern. See paragraph **path** below to learn how to use it.
+
+If not specified, if less than 1 or if malformed, its default value is `1`.
+
 #### display
 
 This string is the name displayed in the *Pimp My Log* interface in the file selector on top left.
@@ -392,6 +398,20 @@ Example:
 ```json
 "path" : "\/opt\/local\/apache2\/logs\/error_log"
 ```
+
+You can use a glob pattern to match several types. eg:
+
+```json
+"path"  : "\/opt\/local\/apache2\/logs\/error-2014*_log",
+"count" : 2
+```
+
+It will return a list, updated at each launch with the 2 most recent files which look like `error-2014*_log`. The *recent* value uses the last modification time to sort elected files.
+
+It count is not specified, its default value is `1`.
+
+Of course, all matching files must have the same type given that the same regex, types and matches are used.
+
 
 #### refresh [optional]
 
