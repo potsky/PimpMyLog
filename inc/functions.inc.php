@@ -177,7 +177,8 @@ function config_load( $path = 'config.user.json' ) {
 		}
 
 		else if ( count( $gpaths ) == 1 ) {
-			$files[ $fileid ] = $file;
+			$files[ $fileid ]            = $file;
+			$files[ $fileid ]['path']    = $gpaths[0];
 		}
 
 		else {
@@ -191,8 +192,9 @@ function config_load( $path = 'config.user.json' ) {
 			arsort( $new_paths , SORT_NUMERIC );
 
 			foreach ( $new_paths as $path => $lastmodified ) {
-				$files[ $fileid . '_' . $i ]         = $file;
-				$files[ $fileid . '_' . $i ]['path'] = $path;
+				$files[ $fileid . '_' . $i ]            = $file;
+				$files[ $fileid . '_' . $i ]['path']    = $path;
+				$files[ $fileid . '_' . $i ]['display'].= ' > ' . basename( $path );
 				if ( $i >= $count ) {
 					break;
 				}

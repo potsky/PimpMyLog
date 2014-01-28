@@ -35,6 +35,7 @@ function php_get_config( $type , $file , $software , $counter ) {
 		"max"     : 10,
 		"notify"  : true,
 		"format"    : {
+			"type"     : "PHP",
 			"regex"    : "@^\\\\[(.*)-(.*)-(.*) (.*):(.*):(.*) .*\\\\] ((PHP (.*):  (.*) in (.*) on line (.*))|(.*))\$@U",
 			"match"    : {
 				"Date"     : [ 2 , " " , 1 , " " , 4 , ":" , 5 , ":" , 6 , " " , 3 ],

@@ -28,6 +28,7 @@ function nginx_get_config( $type , $file , $software , $counter ) {
 			"max"     : 10,
 			"notify"  : true,
 			"format"    : {
+				"type"     : "NGINX",
 				"regex"    : "@^(.*)/(.*)/(.*) (.*):(.*):(.*) \\\\[(.*)\\\\] [0-9#]*: \\\\*[0-9]+ (((.*), client: (.*), server: (.*), request: \"(.*) (.*) HTTP.*\", host: \"(.*)\"(, referrer: \"(.*)\")*)|(.*))\$@U",
 				"match"    : {
 					"Date"     : [1,"\/",2,"\/",3," ",4,":",5,":",6],
@@ -71,6 +72,7 @@ EOF;
 			"max"     : 10,
 			"notify"  : false,
 			"format"  : {
+				"type" : "NCSA",
 				"regex": "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
 				"match": {
 					"Date"    : 6,

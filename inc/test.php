@@ -2,9 +2,11 @@
 include_once 'global.inc.php';
 init();
 
-if ( basename( __FILE__ ) !== 'test.REMOVE_UPPERCASE.php' ) {
-	die( __('Please copy <code>inc/test.php</code> to <code>inc/test.REMOVE_UPPERCASE.php</code> and load <code>inc/test.REMOVE_UPPERCASE.php</code> in your browser') );
+
+if ( ! file_exists( 'test.REMOVE_UPPERCASE.php') ) {
+	die( __('Please touch file <code>inc/test.REMOVE_UPPERCASE.php</code> and reload this page') );
 }
+
 
 function test( $type , $regex , $match , $types , $logs , $headers = true , $multiline = '' ) {
 	$r  = '<h4>' . $type . '</h4>';
@@ -398,28 +400,30 @@ echo test( $type , $regex , $match , $types , $log );
 												foreach ( $files as $fileid => $file ) {
 													$paths[ '--> ' . $fileid ] = @$file['path'];
 													$dir_name = realpath( $file['path'] );
-													if (file_exists($dir_name)) {
-														while ( ( $dir_name = dirname( $dir_name ) ) != '/' ) {
+													if ( file_exists( $dir_name ) ) {
+														while ( $dir_name != dirname( $dir_name ) ) {
+ 															$dir_name = dirname( $dir_name );
 															$paths[ $dir_name ] = $dir_name;
 														}
 													}
 												}
 											}
 
-											echo '<table>';
-											echo '<thead><tr><th>ID</th><th>'.__('Path').'</th><th>'.__('Real path').'</th><th>'.__('Read').'</th><th>'.__('Write').'</th></tr></thead>';
+											echo '<div class="table-responsive"><table>';
+											echo '<thead><tr><th>'.__('Read').'</th><th>'.__('Write').'</th><th>ID</th><th>'.__('Path').'</th><th>'.__('Real path').'</th></tr></thead>';
 											echo '<tbody>';
-											foreach ($paths as $id=>$file) {
+											foreach ( $paths as $id => $file ) {
 												echo '<tr>
+												<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
+												<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
 												<td>'.$id.'</td>
 												<td><code>'.$file.'</code></td>
 												<td><code>'.realpath($file).'</code></td>
-												<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
-												<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
 												</tr>';
 											}
 											echo '</tbody>';
-											echo '</table>';
+											echo '</table></div>';
+
 										?>
 									</div>
 								</div>

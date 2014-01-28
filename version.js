@@ -4,7 +4,7 @@
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
 		"1.0.0" : {
-			"released" : "2014-01-27",
+			"released" : "2014-01-28",
 			"fix" : [
 				"PHP Notice while configuration process when apache log file is empty #51"
 			],
@@ -16,7 +16,7 @@
 				"Support PHP logs #52",
 				"Support NGINX server logs #53",
 				"Support IIS server logs #54",
-				"Manage a cache manifest to load PML faster #55"
+				"Add log type format in the footer"
 			]
 		},
 		"0.9.9" : {

@@ -61,6 +61,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 			"max"     : 10,
 			"notify"  : true,
 			"format"  : {
+				"type" : "HTTPD 2.4",
 				"regex": "|^\\\\[(.*) (.*) (.*) (.*):(.*):(.*)\\\\.(.*) (.*)\\\\] \\\\[(.*):(.*)\\\\] \\\\[pid (.*)\\\\] .*\\\\[client (.*):(.*)\\\\] (.*)(, referer: (.*))*\$|U",
 				"match": {
 					"Date"    : {
@@ -106,6 +107,7 @@ EOF;
 			"max"     : 10,
 			"notify"  : true,
 			"format"  : {
+				"type" : "HTTPD 2.2",
 				"regex": "|^\\\\[(.*)\\\\] \\\\[(.*)\\\\] (\\\\[client (.*)\\\\] )*((?!\\\\[client ).*)(, referer: (.*))*\$|U",
 				"match": {
 					"Date"     : 1,
@@ -144,6 +146,7 @@ EOF;
 			"max"     : 10,
 			"notify"  : false,
 			"format"  : {
+				"type" : "NCSA",
 				"regex": "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
 				"match": {
 					"Date"    : 6,

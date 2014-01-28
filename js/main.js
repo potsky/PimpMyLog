@@ -433,10 +433,18 @@ var get_logs     = function( load_default_values , load_full_file ) {
 				var type  = type_parser( files[file].format.types[ c ] );
 				var val   = logs.logs[log][ c ];
 				var title = val;
+
+				// Prepare values
 				if ( val === '-' ) {
 					val = '';
 				}
 
+				if ( type.parser === 'uaw3c' ) {
+					type.parser = 'ua';
+					val = val.replace( /\+/g , ' ' );
+				}
+
+				// Parse values
 				if ( 'badge' === type.parser ) {
 					var clas;
 					if ( type.param === 'http' ) {
@@ -471,7 +479,7 @@ var get_logs     = function( load_default_values , load_full_file ) {
 					val = '<a href="' + val + '" target="linkout">' + val_cut( val , type.cut ) + '</a>';
 				}
 				else if ( 'ua' === type.parser ) {
-					var ua  = uaparser.setUA(val).getResult();
+					var ua  = uaparser.setUA( val ).getResult();
 					var uas = type.param.match(/\{[a-zA-Z.]*\}/g);
 					var uaf = false;
 					for (var k in uas) {

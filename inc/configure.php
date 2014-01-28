@@ -111,7 +111,7 @@ if ( isset( $_POST['s'] ) ) {
 
 									foreach( $gfiles as $file ) {
 
-										$file              = str_replace( $path , '' , $file );
+										$file              = basename( $file );
 										$allfiles[ $file ] = $file;
 
 										if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {

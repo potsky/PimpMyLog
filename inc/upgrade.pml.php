@@ -113,7 +113,7 @@ try {
 
 		$html .= '</ul>';
 
-		$severity = ( count( $notices ) > 0 ) ? 'danger' : 'warning';
+		$severity = ( count( $notices ) > 0 ) ? 'danger' : 'info';
 
 		$upgrade['alert'] .= '<div id="upgradealert" class="alert alert-' . $severity . ' alert-dismissable">';
 		$upgrade['alert'] .= '  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
