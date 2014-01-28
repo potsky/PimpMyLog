@@ -16,17 +16,9 @@
  * @var  array
  */
 $paths = array(
-	'/var/log/',
-	'/var/log/apache/',
-	'/var/log/apache2/',
-	'/var/log/httpd/',
-	'/usr/local/var/log/apache/',
-	'/usr/local/var/log/apache2/',
-	'/usr/local/var/log/httpd/',
-	'/opt/local/apache/logs/',
-	'/opt/local/apache2/logs/',
-	'/opt/local/httpd/logs/',
-	'C:/wamp/logs/',
+	'C:\\inetpub\\logs\\LogFiles\\W3SVC*\\',
+	'C:\\WINDOWS\\system32\\LogFiles\\W3SVC*\\',
+	'C:\\WINNT\\system32\\LogFiles\\W3SVC*\\',
 );
 
 
@@ -41,15 +33,7 @@ $paths = array(
  * @var  array
  */
 $files = array(
-	'error' => array(
-		'error.log',
-		'error_log',
-		'apache_error.log',
-	),
 	'access' => array(
-		'access.log',
-		'access_log',
-		'apache.log',
-		'apache_access.log',
+		'*.log'
 	),
 );

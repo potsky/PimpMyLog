@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 3e01c3256951e084ecedfb16a130288885565637*/
+/*! pimpmylog - 1.0.0 - 18864f94ebcc087a4c568137670e2efd1fdbae6f*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -11,9 +11,11 @@
 include_once 'global.inc.php';
 init();
 
-if ( basename( __FILE__ ) !== 'test.REMOVE_UPPERCASE.php' ) {
-	die( __('Please copy <code>inc/test.php</code> to <code>inc/test.REMOVE_UPPERCASE.php</code> and load <code>inc/test.REMOVE_UPPERCASE.php</code> in your browser') );
+
+if ( ! file_exists( 'test.REMOVE_UPPERCASE.php') ) {
+	die( __('Please touch file <code>inc/test.REMOVE_UPPERCASE.php</code> and reload this page') );
 }
+
 
 function test( $type , $regex , $match , $types , $logs , $headers = true , $multiline = '' ) {
 	$r  = '<h4>' . $type . '</h4>';
@@ -111,7 +113,7 @@ if ( isset( $_POST['s'] ) ) {
 ?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><title><?php echo TITLE;?></title><?php $fav = '../' ; include_once 'favicon.inc.php'; ?><?php
 ?><?php
 ?><link rel="stylesheet" href="../css/pml.min.css"><?php
-?></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a></div></div></div><div class="container"><br><div class="panel-group" id="accordion"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><?php _e('Regex tester');?></a></h4></div><div id="collapseTwo" class="panel-collapse collapse in"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
+?></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="?<?php echo $_SERVER['QUERY_STRING'];?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a></div></div></div><div class="container"><br><div class="panel-group" id="accordion"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><?php _e('Regex tester');?></a></h4></div><div id="collapseTwo" class="panel-collapse collapse in"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
 									echo '[27-11-2013:23:20:40 +0100] This is an error
 on several lines
 [27-11-2013:23:20:41 +0100] Single line is cool too';
@@ -245,28 +247,30 @@ echo test( $type , $regex , $match , $types , $log );
 												foreach ( $files as $fileid => $file ) {
 													$paths[ '--> ' . $fileid ] = @$file['path'];
 													$dir_name = realpath( $file['path'] );
-													if (file_exists($dir_name)) {
-														while ( ( $dir_name = dirname( $dir_name ) ) != '/' ) {
+													if ( file_exists( $dir_name ) ) {
+														while ( $dir_name != dirname( $dir_name ) ) {
+ 															$dir_name = dirname( $dir_name );
 															$paths[ $dir_name ] = $dir_name;
 														}
 													}
 												}
 											}
 
-											echo '<table>';
-											echo '<thead><tr><th>ID</th><th>'.__('Path').'</th><th>'.__('Real path').'</th><th>'.__('Read').'</th><th>'.__('Write').'</th></tr></thead>';
+											echo '<div class="table-responsive"><table>';
+											echo '<thead><tr><th>'.__('Read').'</th><th>'.__('Write').'</th><th>ID</th><th>'.__('Path').'</th><th>'.__('Real path').'</th></tr></thead>';
 											echo '<tbody>';
-											foreach ($paths as $id=>$file) {
+											foreach ( $paths as $id => $file ) {
 												echo '<tr>
+												<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
+												<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
 												<td>'.$id.'</td>
 												<td><code>'.$file.'</code></td>
 												<td><code>'.realpath($file).'</code></td>
-												<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
-												<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
 												</tr>';
 											}
 											echo '</tbody>';
-											echo '</table>';
+											echo '</table></div>';
+
 										?></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2">PHPInfo</a></h4></div><div id="collapseThree2" class="panel-collapse collapse"><div class="panel-body"><?php
 										ob_start();
 										phpinfo();

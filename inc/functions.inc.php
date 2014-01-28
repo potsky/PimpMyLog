@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 3e01c3256951e084ecedfb16a130288885565637*/
+/*! pimpmylog - 1.0.0 - 18864f94ebcc087a4c568137670e2efd1fdbae6f*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -165,13 +165,53 @@ function config_load( $path = 'config.user.json' ) {
 		return false;
 	}
 	$badges = $config[ 'badges' ];
-	$files  = $config[ 'files' ];
 
 	foreach ( $config[ 'globals' ] as $cst => $val ) {
 		if ( $cst == strtoupper( $cst ) ) {
 			@define( $cst , $val );
 		}
 	}
+
+	// Try to generate the files tree if there are globs...
+	$files_tmp = $config[ 'files' ];
+	$files     = array();
+
+	foreach ( $files_tmp as $fileid => $file ) {
+
+		$path   = $file['path'];
+		$count  = max( 1 , @(int)$file['count']);
+		$gpaths = glob( $path , GLOB_MARK | GLOB_NOCHECK );
+
+		if ( count( $gpaths ) == 0 ) {
+		}
+
+		else if ( count( $gpaths ) == 1 ) {
+			$files[ $fileid ]            = $file;
+			$files[ $fileid ]['path']    = $gpaths[0];
+		}
+
+		else {
+			$new_paths = array();
+			$i         = 1;
+
+			foreach ( $gpaths as $path ) {
+				$new_paths[ $path ] = filemtime( $path );
+			}
+
+			arsort( $new_paths , SORT_NUMERIC );
+
+			foreach ( $new_paths as $path => $lastmodified ) {
+				$files[ $fileid . '_' . $i ]            = $file;
+				$files[ $fileid . '_' . $i ]['path']    = $path;
+				$files[ $fileid . '_' . $i ]['display'].= ' > ' . basename( $path );
+				if ( $i >= $count ) {
+					break;
+				}
+				$i++;
+			}
+		}
+	}
+
 	return true;
 }
 

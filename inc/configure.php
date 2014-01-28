@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 3e01c3256951e084ecedfb16a130288885565637*/
+/*! pimpmylog - 1.0.0 - 18864f94ebcc087a4c568137670e2efd1fdbae6f*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -99,19 +99,41 @@ if ( isset( $_POST['s'] ) ) {
 					throw new Exception( sprintf( __( 'Files <code>%s</code> or <code>%s</code> do not exist. Please review your software configuration.') , $software_paths , $software_pathsuser ) ) ;
 				}
 
-				foreach ( $paths as $path ) {
-					$tried[ $software ][ $path ] = false;
-					if ( is_dir( $path ) ) {
-						$found = 1;
-						$tried[ $software ][ $path ] = true;
-						foreach ( $files as $type => $fpaths) {
-							foreach ( $fpaths as $file ) {
-								$allfiles[ $file ] = $file;
-								if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
-									if ( ! is_array( $tried[ $software ][ $path ] ) )
-										$tried[ $software ][ $path ] = array();
-									$tried[ $software ][ $path ][ $type ][] = $file;
-									$found = 2;
+				foreach ( $paths as $userpath ) {
+
+					$gpaths = glob( $userpath , GLOB_MARK | GLOB_NOCHECK | GLOB_ONLYDIR );
+
+					foreach( $gpaths as $path ) {
+
+						$tried[ $software ][ $path ] = false;
+
+						if ( is_dir( $path ) ) {
+
+							$found = 1;
+							$tried[ $software ][ $path ] = true;
+
+							foreach ( $files as $type => $fpaths) {
+
+								foreach ( $fpaths as $userfile ) {
+
+									$gfiles   = glob( $path . $userfile , GLOB_MARK | GLOB_NOCHECK );
+
+									foreach( $gfiles as $file ) {
+
+										$file              = basename( $file );
+										$allfiles[ $file ] = $file;
+
+										if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
+
+											if ( ! is_array( $tried[ $software ][ $path ] ) ) {
+												$tried[ $software ][ $path ] = array();
+											}
+
+											$tried[ $software ][ $path ][ $type ][] = $file;
+											$found = 2;
+										}
+
+									}
 								}
 							}
 						}
@@ -320,7 +342,7 @@ $lemma = array(
 ?><?php
 ?><link rel="stylesheet" href="../css/pml.min.css"><?php
 ?><script>var lemma       = <?php echo json_encode($lemma);?>,
-			querystring = "<?php echo $_SERVER['QUERY_STRING'];?>";</script></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Configurator');?></a></div></div></div><div class="container" id="process"><br><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span class="sr-only"></span></div></div><div id="error"></div><div id="user"></div><br><p id="buttons"><a id="reload" class="btn btn-primary" href="javascript:location.reload();" style="display:none"><?php _e('Reload');?></a>&nbsp;&nbsp;<a id="next" class="btn btn-success" href="#" style="display:none"><?php _e('Continue');?></a></p></div><div class="jumbotron" id="congratulations" style="display:none"><div class="container"><h1><?php _e( "Congratulations!" ); ?></h1><p><?php
+			querystring = "<?php echo $_SERVER['QUERY_STRING'];?>";</script></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="?<?php echo $_SERVER['QUERY_STRING'];?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Configurator');?></a></div></div></div><div class="container" id="process"><br><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span class="sr-only"></span></div></div><div id="error"></div><div id="user"></div><br><p id="buttons"><a id="reload" class="btn btn-primary" href="javascript:location.reload();" style="display:none"><?php _e('Reload');?></a>&nbsp;&nbsp;<a id="next" class="btn btn-success" href="#" style="display:none"><?php _e('Continue');?></a></p></div><div class="jumbotron" id="congratulations" style="display:none"><div class="container"><h1><?php _e( "Congratulations!" ); ?></h1><p><?php
 				echo '<br/>';
 				_e( 'Your <em>Pimp my Log</em> instance is ready to use.' );
 				echo '<br/>';

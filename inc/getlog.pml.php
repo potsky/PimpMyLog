@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 3e01c3256951e084ecedfb16a130288885565637*/
+/*! pimpmylog - 1.0.0 - 18864f94ebcc087a4c568137670e2efd1fdbae6f*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -340,7 +340,7 @@ $filem = $filem->format( 'Y/m/d H:i:s' );
 ////////////////
 $now              = microtime( true );
 $duration         = (int) ( ( $now - $start ) * 1000 );
-$logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</code> was last modified on <code>%s</code>, size is <code>%s</code>' )
+$logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</code> was last modified on <code>%s</code>, size is <code>%s</code>%s' )
 	, ( $ln > 1 ) ? sprintf( __('%s new logs found') , $ln ) : ( ( $ln ==0 ) ? __( 'no new log found') : __( '1 new log found') )
 	, $duration
 	, human_filesize($bytes)
@@ -349,6 +349,7 @@ $logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> o
 	, $file_path
 	, $filem
 	, human_filesize( $new_file_size )
+	, ( isset( $files[ $file_id ][ 'format' ][ 'type' ] ) ) ? ', ' . sprintf( __('log type is <code>%s</code>') , $files[ $file_id ][ 'format' ][ 'type' ] ) : ''
 );
 
 

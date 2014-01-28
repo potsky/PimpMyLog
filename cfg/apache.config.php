@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 3e01c3256951e084ecedfb16a130288885565637*/
+/*! pimpmylog - 1.0.0 - 18864f94ebcc087a4c568137670e2efd1fdbae6f*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -9,6 +9,18 @@
  */
 ?>
 <?php
+
+function apache_load_software() {
+	return array(
+		'name'    => __('Apache'),
+		'desc'    => __('Apache Hypertext Transfer Protocol Server'),
+		'home'    => __('http://httpd.apache.org'),
+		'notes'   => __('All versions 2.x are supported.'),
+		'load'    => ( stripos( $_SERVER["SERVER_SOFTWARE"] , 'Apache' ) !== false )
+	);
+}
+
+
 /*
 You must escape anti-slash 4 times and escape $ in regex.
 (Two for PHP and finally two for json)
@@ -24,11 +36,13 @@ function apache_get_config( $type , $file , $software , $counter ) {
 	/////////////////////////////////////////////////////////
 	if ( $type == 'error' ) {
 
+
 		// Get the first 10 lines and try to guess
 		// This is not really
 		$firstline = '';
 		$handle    = @fopen( $file , 'r' );
 		$remain    = 10;
+		$test      = 0;
 		if ( $handle ) {
 			while ( ( $buffer = fgets( $handle , 4096 ) ) !== false ) {
 				$test = @preg_match('|^\[(.*) (.*) (.*) (.*):(.*):(.*)\.(.*) (.*)\] \[(.*):(.*)\] \[pid (.*)\] .*\[client (.*):(.*)\] (.*)(, referer: (.*))*$|U', $buffer );
@@ -43,6 +57,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 			fclose($handle);
 		}
 
+
 		/////////////////////
 		// Error 2.4 style //
 		/////////////////////
@@ -56,6 +71,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 			"max"     : 10,
 			"notify"  : true,
 			"format"  : {
+				"type" : "HTTPD 2.4",
 				"regex": "|^\\\\[(.*) (.*) (.*) (.*):(.*):(.*)\\\\.(.*) (.*)\\\\] \\\\[(.*):(.*)\\\\] \\\\[pid (.*)\\\\] .*\\\\[client (.*):(.*)\\\\] (.*)(, referer: (.*))*\$|U",
 				"match": {
 					"Date"    : {
@@ -101,6 +117,7 @@ EOF;
 			"max"     : 10,
 			"notify"  : true,
 			"format"  : {
+				"type" : "HTTPD 2.2",
 				"regex": "|^\\\\[(.*)\\\\] \\\\[(.*)\\\\] (\\\\[client (.*)\\\\] )*((?!\\\\[client ).*)(, referer: (.*))*\$|U",
 				"match": {
 					"Date"     : 1,
@@ -139,6 +156,7 @@ EOF;
 			"max"     : 10,
 			"notify"  : false,
 			"format"  : {
+				"type" : "NCSA",
 				"regex": "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
 				"match": {
 					"Date"    : 6,

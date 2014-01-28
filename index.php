@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 3e01c3256951e084ecedfb16a130288885565637*/
+/*! pimpmylog - 1.0.0 - 18864f94ebcc087a4c568137670e2efd1fdbae6f*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -22,6 +22,7 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 	include_once 'inc/error.inc.php';
 	die();
 }
+
 
 
 /////////////////////////
@@ -99,7 +100,7 @@ $lemma = array(
 $csrf = csrf_get();
 
 
-?><!DOCTYPE html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><meta name="robots" content="none"><title><?php echo TITLE;?></title><?php include_once 'inc/favicon.inc.php'; ?><?php
+?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><meta name="robots" content="none"><title><?php echo TITLE;?></title><?php include_once 'inc/favicon.inc.php'; ?><?php
 ?><?php
 ?><link rel="stylesheet" href="css/pml.min.css"><?php
 ?><?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?><link rel="stylesheet" href="css/config.inc.user.css"><?php } else { ?><link rel="stylesheet" href="css/config.inc.css"><?php } ?><script>var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
@@ -138,7 +139,7 @@ foreach ( get_refresh_options() as $r ) {
 foreach ( get_max_options() as $r ) {
 	echo '<option value="' . $r . '">' . sprintf( ( (int)$r>1 ) ? __( '%s logs' ) : __( '%s log' ) , $r ) . '</option>';
 }
-?></select></div>&nbsp;<button style="display:none" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>"><span class="glyphicon glyphicon-bell"></span></button></form></div></div></div><?php if ( PULL_TO_REFRESH === true ) { ?><div id="hook" class="hook"><div id="loader" class="hook-loader"><div class="hook-spinner"></div></div><span id="hook-text"></span></div><?php } ?><div class="container"><div id="error" style="display:none"><br><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div><div id="result"><br><div id="upgrademessage"></div><div id="singlenotice"></div><div id="notice"></div><div id="nolog" style="display:none" class="alert alert-info fade in"></div><div class="table-responsive"><table id="logs" class="table table-striped table-bordered table-hover table-condensed logs"><thead id="logshead"></thead><tbody id="logsbody"></tbody></table></div><small id="footer"></small></div><hr><footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer></div><?php
+?></select></div>&nbsp;<button style="display:none" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>"><span class="glyphicon glyphicon-bell"></span></button></form></div></div></div><?php if ( PULL_TO_REFRESH === true ) { ?><div id="hook" class="hook"><div id="loader" class="hook-loader"><div class="hook-spinner"></div></div><span id="hook-text"></span></div><?php } ?><div class="container"><div id="error" style="display:none"><br><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div><div class="result"><br><div id="upgrademessage"></div><div id="singlenotice"></div><div id="notice"></div><div id="nolog" style="display:none" class="alert alert-info fade in"></div></div></div><div class="result"><div id="logstr" class="table-responsive"><table id="logs" class="table table-striped table-bordered table-hover table-condensed logs"><thead id="logshead"></thead><tbody id="logsbody"></tbody></table></div></div><div class="container"><div class="result"><small id="footer"></small></div><hr><footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer></div><?php
 ?><?php
 ?><script src="js/pml.min.js"></script><script src="js/main.min.js"></script><?php
 if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?><script>var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];
@@ -147,4 +148,4 @@ if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?><s
 			s.parentNode.insertBefore(g,s)}(document,'script'));</script><?php
 }
 ?><?php
-?></body>
+?></body></html>

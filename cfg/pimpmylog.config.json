@@ -20,14 +20,19 @@
 
 	"badges": {
 		"severity": {
-			"debug"  : "success",
-			"info"   : "success",
-			"notice" : "default",
-			"warn"   : "warning",
-			"error"  : "danger",
-			"crit"   : "danger",
-			"alert"  : "danger",
-			"emerg"  : "danger"
+			"debug"       : "success",
+			"info"        : "success",
+			"notice"      : "default",
+			"Notice"      : "info",
+			"warn"        : "warning",
+			"error"       : "danger",
+			"crit"        : "danger",
+			"alert"       : "danger",
+			"emerg"       : "danger",
+			"Notice"      : "info",
+			"Fatal error" : "danger",
+			"Parse error" : "danger",
+			"Warning"     : "warning"
 		},
 		"http": {
 			"1" : "info",
