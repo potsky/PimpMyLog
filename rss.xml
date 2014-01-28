@@ -5,15 +5,19 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2014-01-28T15:15:18+01:00</lastBuildDate>
-        <pubDate>2014-01-28T15:15:18+01:00</pubDate>
+        <lastBuildDate>2014-01-28T16:35:23+01:00</lastBuildDate>
+        <pubDate>2014-01-28T16:35:23+01:00</pubDate>
         <ttl>1800</ttl>
 
         <item>
                 <title>Version 1.0.0 released</title>
                 <description>&lt;p&gt;Youpi!&lt;/p&gt;
 
-&lt;p&gt;Version 1.0.0 is finally released! It has been tested on &lt;em&gt;Apache&lt;/em&gt;, &lt;em&gt;NGINX&lt;/em&gt; and &lt;em&gt;IIS&lt;/em&gt; servers successfully. Thank you for all your feedbacks and I hope &lt;em&gt;Pimp My Log&lt;/em&gt; will help you. As usual, don&amp;#39;t hesitate to report bugs and more on the &lt;a href=&quot;http://support.pimpmylog.com&quot;&gt;support&lt;/a&gt; website.&lt;/p&gt;
+&lt;p&gt;Version 1.0.0 is finally released!&lt;/p&gt;
+
+&lt;p&gt;It has been tested on &lt;em&gt;Apache&lt;/em&gt;, &lt;em&gt;NGINX&lt;/em&gt; and &lt;em&gt;IIS&lt;/em&gt; servers successfully.&lt;/p&gt;
+
+&lt;p&gt;Thank you for all your feedbacks and I hope &lt;em&gt;Pimp My Log&lt;/em&gt; will help you. As usual, don&amp;#39;t hesitate to report bugs and more on the &lt;a href=&quot;http://support.pimpmylog.com&quot;&gt;support&lt;/a&gt; website.&lt;/p&gt;
 
 &lt;p&gt;Enjoy!&lt;/p&gt;
 
