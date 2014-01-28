@@ -32,7 +32,7 @@ function nginx_get_config( $type , $file , $software , $counter ) {
 
 		return<<<EOF
 		"$software$counter": {
-			"display" : "nginx Error #$counter",
+			"display" : "NGINX Error #$counter",
 			"path"    : $file_json_encoded,
 			"refresh" : 5,
 			"max"     : 10,
@@ -76,7 +76,7 @@ EOF;
 
 		return<<<EOF
 		"$software$counter": {
-			"display" : "nginx Access #$counter",
+			"display" : "NGINX Access #$counter",
 			"path"    : $file_json_encoded,
 			"refresh" : 0,
 			"max"     : 10,
