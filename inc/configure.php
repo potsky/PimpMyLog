@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 3e01c3256951e084ecedfb16a130288885565637*/
+/*! pimpmylog - 1.0.0 - 0a648001138e011a5721bf1e552b62958a8c94fc*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -99,19 +99,41 @@ if ( isset( $_POST['s'] ) ) {
 					throw new Exception( sprintf( __( 'Files <code>%s</code> or <code>%s</code> do not exist. Please review your software configuration.') , $software_paths , $software_pathsuser ) ) ;
 				}
 
-				foreach ( $paths as $path ) {
-					$tried[ $software ][ $path ] = false;
-					if ( is_dir( $path ) ) {
-						$found = 1;
-						$tried[ $software ][ $path ] = true;
-						foreach ( $files as $type => $fpaths) {
-							foreach ( $fpaths as $file ) {
-								$allfiles[ $file ] = $file;
-								if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
-									if ( ! is_array( $tried[ $software ][ $path ] ) )
-										$tried[ $software ][ $path ] = array();
-									$tried[ $software ][ $path ][ $type ][] = $file;
-									$found = 2;
+				foreach ( $paths as $userpath ) {
+
+					$gpaths = glob( $userpath , GLOB_MARK | GLOB_NOCHECK | GLOB_ONLYDIR );
+
+					foreach( $gpaths as $path ) {
+
+						$tried[ $software ][ $path ] = false;
+
+						if ( is_dir( $path ) ) {
+
+							$found = 1;
+							$tried[ $software ][ $path ] = true;
+
+							foreach ( $files as $type => $fpaths) {
+
+								foreach ( $fpaths as $userfile ) {
+
+									$gfiles   = glob( $path . $userfile , GLOB_MARK | GLOB_NOCHECK );
+
+									foreach( $gfiles as $file ) {
+
+										$file              = basename( $file );
+										$allfiles[ $file ] = $file;
+
+										if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
+
+											if ( ! is_array( $tried[ $software ][ $path ] ) ) {
+												$tried[ $software ][ $path ] = array();
+											}
+
+											$tried[ $software ][ $path ][ $type ][] = $file;
+											$found = 2;
+										}
+
+									}
 								}
 							}
 						}

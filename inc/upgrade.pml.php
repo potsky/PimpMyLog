@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 3e01c3256951e084ecedfb16a130288885565637*/
+/*! pimpmylog - 1.0.0 - 0a648001138e011a5721bf1e552b62958a8c94fc*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -122,7 +122,7 @@ try {
 
 		$html .= '</ul>';
 
-		$severity = ( count( $notices ) > 0 ) ? 'danger' : 'warning';
+		$severity = ( count( $notices ) > 0 ) ? 'danger' : 'info';
 
 		$upgrade['alert'] .= '<div id="upgradealert" class="alert alert-' . $severity . ' alert-dismissable">';
 		$upgrade['alert'] .= '  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';

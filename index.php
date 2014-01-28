@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 0.9.9 - 3e01c3256951e084ecedfb16a130288885565637*/
+/*! pimpmylog - 1.0.0 - 0a648001138e011a5721bf1e552b62958a8c94fc*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -22,6 +22,7 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 	include_once 'inc/error.inc.php';
 	die();
 }
+
 
 
 /////////////////////////
@@ -99,7 +100,7 @@ $lemma = array(
 $csrf = csrf_get();
 
 
-?><!DOCTYPE html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><meta name="robots" content="none"><title><?php echo TITLE;?></title><?php include_once 'inc/favicon.inc.php'; ?><?php
+?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><meta name="robots" content="none"><title><?php echo TITLE;?></title><?php include_once 'inc/favicon.inc.php'; ?><?php
 ?><?php
 ?><link rel="stylesheet" href="css/pml.min.css"><?php
 ?><?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?><link rel="stylesheet" href="css/config.inc.user.css"><?php } else { ?><link rel="stylesheet" href="css/config.inc.css"><?php } ?><script>var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
@@ -147,4 +148,4 @@ if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?><s
 			s.parentNode.insertBefore(g,s)}(document,'script'));</script><?php
 }
 ?><?php
-?></body>
+?></body></html>

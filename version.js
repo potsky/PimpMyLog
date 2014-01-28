@@ -1,8 +1,24 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "0.9.9",
-	"versiondevh" : "3e01c3256951e084ecedfb16a130288885565637",
+	"version"     : "1.0.0",
+	"versiondevh" : "0a648001138e011a5721bf1e552b62958a8c94fc",
 	"changelog" : {
+		"1.0.0" : {
+			"released" : "2014-01-28",
+			"fix" : [
+				"PHP Notice while configuration process when apache log file is empty #51"
+			],
+			"changed" : [
+				"Several custom log file paths can be separated by a coma or by a new line now",
+				"Configuration paths can now use globs"
+			],
+			"new" : [
+				"Support PHP logs #52",
+				"Support NGINX server logs #53",
+				"Support IIS server logs #54",
+				"Add log type format in the footer"
+			]
+		},
 		"0.9.9" : {
 			"released" : "2014-01-22",
 			"changed" : [
