@@ -51,6 +51,8 @@ User files are defined in the `.gitignore` file and are not overridden.
 
 {% include documentation_install_zip.md %}
 
+<a name="update"></a>
+
 ### Update
 
 You **must** backup your configuration files before updating:
