@@ -2,7 +2,7 @@
 
 * Move to the directory where you wish to install the source (`/var/www/html` for example)
 
-* Download and install with zip file:  
+* [Download](https://github.com/potsky/PimpMyLog/zipball/master) the latest version and install with zip file:  
 
 ```sh
 $ wget -O pml.zip {{ site.data.github.zip }} && unzip -o pml.zip && mv potsky-PimpMyLog-* PimpMyLog && rm pml.zip

@@ -66,7 +66,9 @@ $ for file in config.user.json css/*.user.css cfg/*.user.php; do
 done;
 ```
 
-Then copy the *Pimp My Log* archive, extract and replace all backed up files as in the installation process.
+- [Download](https://github.com/potsky/PimpMyLog/zipball/master) the *Pimp My Log* archive
+- Extract
+- Replace all backed up files as in the installation process
 
 
 # 3 - First configuration
