@@ -6,7 +6,7 @@
 		"1.0.1" : {
 			"released" : "2014-01-30",
 			"changed" : [
-				"Add a link in the upgrade message to the Pimp My Log upgrade documentation #"
+				"Add a link in the upgrade message to the Pimp My Log upgrade documentation #56"
 			],
 			"new" : [
 				"Add support for the LOCALE global parameter",
