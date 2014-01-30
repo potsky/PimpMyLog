@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.0.0 - 264a36b74cb923f831176798480483f218d52c4c*/
+/*! pimpmylog - 1.0.1 - d04a666ea205e762594c15f626f290eb3b5bc439*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -129,6 +129,9 @@ try {
 		$upgrade['alert'] .= '<strong>' . __( 'An upgrade is available !') . '</strong> ';
 		$upgrade['alert'] .= sprintf( __( 'You have version %s and version %s is available' ) , '<em>' . $upgrade['current'] . '</em>' , '<em>' . $upgrade['to'] . '</em>');
 		$upgrade['alert'] .= ' (<a href="#" class="alert-link" data-toggle="collapse" data-target="#changelog">' . __( 'release notes') . '</a>)';
+		$upgrade['alert'] .= '<br/>';
+		$upgrade['alert'] .= __('Simply <code>git pull</code> in your directory or <a href="http://pimpmylog.com/getting-started/#update" target="doc">follow instructions here</a>');
+		$upgrade['alert'] .= '<br/>';
 		$upgrade['alert'] .= '<br/>';
 		$upgrade['alert'] .= '<a href="#" id="upgradestop" data-version="' . $upgrade['to'] . '" class="alert-link">' . __("Don't bother me again with this upgrade!") . '</a>';
 		$upgrade['alert'] .= '<div id="changelog" class="panel-collapse collapse"><div class="panel-body panel panel-default">' . $html . '</div></div>';

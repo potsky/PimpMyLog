@@ -1,8 +1,23 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.0.0",
-	"versiondevh" : "264a36b74cb923f831176798480483f218d52c4c",
+	"version"     : "1.0.1",
+	"versiondevh" : "d04a666ea205e762594c15f626f290eb3b5bc439",
 	"changelog" : {
+		"1.0.1" : {
+			"released" : "2014-01-30",
+			"changed" : [
+				"Add a link in the upgrade message to the Pimp My Log upgrade documentation #"
+			],
+			"new" : [
+				"Add support for the LOCALE global parameter",
+				"Add user settings button",
+				"Add language selector user setting",
+				"Add timezone selector user setting",
+				"Add wide log table setting",
+				"Now clicking on the logo will reload Pimp My Log with default user settings",
+				"The url is automatically updated with the current user settings, so you can bookmark any view"
+			]
+		},
 		"1.0.0" : {
 			"released" : "2014-01-28",
 			"fix" : [
