@@ -1,12 +1,12 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.0.1",
-	"versiondevh" : "33fecb685f0e139e719dc6637264538013ec32ac",
+	"versiondevh" : "3e0b29ff203707fe8529fdd6883ac6b54163d782",
 	"changelog" : {
 		"1.0.1" : {
 			"released" : "2014-01-30",
 			"changed" : [
-				"Add a link in the upgrade message to the Pimp My Log upgrade documentation #"
+				"Add a link in the upgrade message to the Pimp My Log upgrade documentation #56"
 			],
 			"new" : [
 				"Add support for the LOCALE global parameter",
