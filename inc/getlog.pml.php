@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.0.0 - 264a36b74cb923f831176798480483f218d52c4c*/
+/*! pimpmylog - 1.0.1 - d04a666ea205e762594c15f626f290eb3b5bc439*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -113,7 +113,8 @@ if ( is_array( $errors ) ) {
 
 
 $file_max  = ( isset( $files[$file_id]['max'] ) ) ? (int)$files[$file_id]['max'] : LOGS_MAX;
-$max       = ( $load_default_values == 'true' ) ? $file_max : $user_max;
+//$max       = ( $load_default_values == 'true' ) ? $file_max : $user_max;
+$max       = $user_max;
 $regex     = $files[ $file_id ][ 'format' ][ 'regex' ];
 $match     = $files[ $file_id ][ 'format' ][ 'match' ];
 $types     = $files[ $file_id ][ 'format' ][ 'types' ];
@@ -133,15 +134,6 @@ if ( $search != '' ) {
 //////////////
 // Timezone //
 //////////////
-if ( isset( $_GET['tz'] ) ) {
-	$tz = $_GET['tz'];
-}
-else if ( defined( 'USER_TIME_ZONE' ) ) {
-	$tz = USER_TIME_ZONE;
-}
-else {
-	$tz = NULL;
-}
 $now = new DateTime();
 if ( ! is_null( $tz ) ) {
 	$now->setTimezone( new DateTimeZone( $tz ) );
@@ -340,7 +332,7 @@ $filem = $filem->format( 'Y/m/d H:i:s' );
 ////////////////
 $now              = microtime( true );
 $duration         = (int) ( ( $now - $start ) * 1000 );
-$logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</code> was last modified on <code>%s</code>, size is <code>%s</code>%s' )
+$logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</code> was last modified on <code>%s</code> at <code>%s</code>, size is <code>%s</code>%s' )
 	, ( $ln > 1 ) ? sprintf( __('%s new logs found') , $ln ) : ( ( $ln ==0 ) ? __( 'no new log found') : __( '1 new log found') )
 	, $duration
 	, human_filesize($bytes)
@@ -348,6 +340,7 @@ $logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> o
 	, $error
 	, $file_path
 	, $filem
+	, $tz
 	, human_filesize( $new_file_size )
 	, ( isset( $files[ $file_id ][ 'format' ][ 'type' ] ) ) ? ', ' . sprintf( __('log type is <code>%s</code>') , $files[ $file_id ][ 'format' ][ 'type' ] ) : ''
 );

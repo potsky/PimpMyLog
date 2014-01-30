@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.0.0 - 264a36b74cb923f831176798480483f218d52c4c*/
+/*! pimpmylog - 1.0.1 - d04a666ea205e762594c15f626f290eb3b5bc439*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -129,6 +129,7 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
  * Set unset constants
  */
 function init() {
+	if ( ! defined( 'LOCALE'                     ) ) define( 'LOCALE'                     , 'gb_GB' );
 	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp my Log' );
 	if ( ! defined( 'TITLE_FILE'                 ) ) define( 'TITLE_FILE'                 , 'Pimp my Log [%f]' );
 	if ( ! defined( 'NAV_TITLE'                  ) ) define( 'NAV_TITLE'                  , '' );
