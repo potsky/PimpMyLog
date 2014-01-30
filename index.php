@@ -146,7 +146,7 @@ $csrf = csrf_get();
 	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
 	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="logo"></div>
+		<div class="logo" title="<?php _e('Reload the page with default parameters'); ?>"></div>
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -227,6 +227,49 @@ foreach ( get_max_options() as $r ) {
 					  <span class="glyphicon glyphicon-bell"></span>
 					</button>
 				</form>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
+						<ul class="dropdown-menu cogmenu" style="padding: 15px;">
+
+							<li>
+								<a href="#" id="cog-wide" class="cog" data-cog="wideview" data-value="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? 'on' : 'off' ; ?>">
+									<span class="glyphicon glyphicon-fullscreen"></span>&nbsp;&nbsp;<?php _e('Wide view');?>&nbsp;
+									<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><?php _e('on')?></span>
+									<span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><?php _e('off')?></span>
+								</a>
+							</li>
+
+							<li>
+								<select id="cog-lang" class="form-control input-sm" title="<?php _e( 'Language' );?>">
+									<option value=""><?php _e( 'Change language...' );?></option>
+									<?php
+									foreach ( $locale_available as $l => $n ) {
+										echo '<option value="' . $l . '"';
+										if ( $l == $locale ) echo ' selected="selected"';
+										echo '>' . $n . '</option>';
+									}
+									?>
+								</select>
+							</li>
+
+							<li>
+								<select id="cog-tz" class="form-control input-sm" title="<?php _e( 'Timezone' );?>">
+									<option value=""><?php _e( 'Change timezone...' );?></option>
+									<?php
+									foreach ( $tz_available as $n ) {
+										echo '<option value="' . $n . '"';
+										if ( $n == $tz ) echo ' selected="selected"';
+										echo '>' . $n . '</option>';
+									}
+									?>
+								</select>
+							</li>
+
+						</ul>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -251,8 +294,8 @@ foreach ( get_max_options() as $r ) {
 		</div>
 	</div>
 
-	<div class="result">
-		<div id="logstr" class="table-responsive">
+	<div class="containerwide result tableresult">
+		<div class="table-responsive">
 			<table id="logs" class="table table-striped table-bordered table-hover table-condensed logs">
 				<thead id="logshead"></thead>
 				<tbody id="logsbody"></tbody>

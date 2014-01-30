@@ -13,8 +13,54 @@ var file,
 	notification_displayed = false;
 
 
+// Read a page's GET URL variables and return them as an associative array.
+// Source: http://jquery-howto.blogspot.com/2009/09/get-url-parameters-values-with-jquery.html
+var query_parameters = function () {
+	var vars = [], hash;
+	var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	for(var i = 0; i < hashes.length; i++) {
+		hash = hashes[i].split('=');
+		vars.push(hash[0]);
+		vars[hash[0]] = hash[1];
+	}
+	return vars;
+}();
+
+
 /**
- * Set the max selector to a given value
+ * Reload the page with query string context
+ *
+ * @param   {boolean}  urlonly  if set to false or undefined, the page will be reloaded. If set to something else, only the brower url will be updated.
+ *
+ * @return  {void}
+ */
+var reload_page = function( urlonly ) {
+	"use strict";
+
+	urlonly = typeof urlonly !== 'undefined' ? urlonly : false;
+
+	var u = window.location.href.split('?')[0] + '?' + $.param({
+		'tz' : $('select#cog-tz').val(),
+		'l'  : $('select#cog-lang').val(),
+		'w'  : $('#cog-wide').data("value"),
+		'i'  : file,
+		'm'  : $('#max').val(),
+		'r'  : $('#autorefresh').val(),
+		's'  : $('#search').val(),
+		'n'  : notification
+	});
+
+	if ( urlonly === false ) {
+		document.location.href = u;
+	}
+	else {
+		window.history.pushState({"pageTitle":document.title},"", u);
+	}
+};
+
+
+/**
+ * Set the autorefresh selector to a given value
  *
  * @param  {string}  a  the value of the wanted selected option
  */
@@ -25,7 +71,7 @@ var set_auto_refresh = function( a ) {
 
 
 /**
- * Set the autorefresh selector to a given value
+ * Set the max selector to a given value
  *
  * @param  {string}  a  the value of the wanted selected option
  */
@@ -252,10 +298,11 @@ var val_cut = function( val , cut ) {
  *
  * @param   {boolean}  load_default_values  If set to true, the ajax will use default values for the selected file if there are available
  * @param   {boolean}  load_full_file       If set to true, the log file will be parsed without keeping history. It is a slow process but mandatory when search of file have changed.
+ * @param   {boolean}  load_from_get        If set to true, the GET parameters will override default values. This is used for the first launch for example.
  *
  * @return  {void}
  */
-var get_logs     = function( load_default_values , load_full_file ) {
+var get_logs     = function( load_default_values , load_full_file , load_from_get ) {
 	"use strict";
 
 	var wanted_lines;
@@ -268,14 +315,57 @@ var get_logs     = function( load_default_values , load_full_file ) {
 
 	// Load default values from file
 	if ( load_default_values === true ) {
-		set_max( files[file].max );
-		set_auto_refresh( files[file].refresh );
-		set_notification( files[file].notify );
+
+		// Load parameters from the query string
+		if ( load_from_get === true ) {
+
+			var found;
+
+			// Notification
+			if ( query_parameters.n === 'true' ) {
+				set_notification( true );
+			} else if ( query_parameters.n === 'false' ) {
+				set_notification( false );
+			} else {
+				set_notification( files[file].notify );
+			}
+
+			// Max
+			found = files[file].max;
+			if ( typeof query_parameters.m !== undefined ) {
+				$('#max option').each(function(){
+					if ( this.value === query_parameters.m ) {
+						found = query_parameters.m;
+					}
+				});
+			}
+			set_max( found );
+
+			// Auto-refresh
+			found = files[file].refresh;
+			if ( typeof query_parameters.r !== undefined ) {
+				$('#autorefresh option').each(function(){
+					if ( this.value === query_parameters.r ) {
+						found = query_parameters.r;
+					}
+				});
+			}
+			set_auto_refresh( found );
+
+		}
+		else {
+			set_max( files[file].max );
+			set_auto_refresh( files[file].refresh );
+			set_notification( files[file].notify );
+		}
 		load_full_file = true;
 	}
 	else {
 		load_default_values = false;
 	}
+
+	// Set new paremeters in the url
+	reload_page( true );
 
 	// Load full logs and not increment
 	if ( load_full_file === true ) {
@@ -627,7 +717,7 @@ $(function() {
 
 	// Logo click
 	$('.logo').click(function() {
-		location.reload();
+		document.location.href = '?';
 	});
 
 	// Refresh button
@@ -636,19 +726,62 @@ $(function() {
 		get_logs();
 	});
 
+
+	// Parameters type cog on/off
+	$('.cog').click( function() {
+		switch ( $(this).data('cog') ) {
+			case 'wideview':
+				if ( $(this).data("value") === 'on' ) {
+					$(this).data('value','off');
+					$(this).find('.cogon').hide();
+					$(this).find('.cogoff').show();
+					$('.tableresult').removeClass('containerwide').addClass('container');
+				} else {
+					$(this).data('value','on');
+					$(this).find('.cogoff').hide();
+					$(this).find('.cogon').show();
+					$('.tableresult').addClass('containerwide').removeClass('container');
+				}
+				break;
+			default:
+		}
+		reload_page( true );
+	});
+	$('.cog').each( function() {
+		if ( $(this).data("value") === 'on' ) {
+			$(this).find('.cogon').show();
+			$(this).find('.cogoff').hide();
+			$('.tableresult').addClass('containerwide').removeClass('container');
+		} else {
+			$(this).find('.cogon').hide();
+			$(this).find('.cogoff').show();
+			$('.tableresult').addClass('container').removeClass('containerwide');
+		}
+	});
+
+	// Parameter language
+	$('#cog-lang').change( function() {
+		reload_page();
+	});
+
+	// Parameter time zone
+	$('#cog-tz').change( function() {
+		reload_page();
+	});
+
 	// Hotkeys
 	$(document).keypress( function(e) {
-        if ( $(e.target).is('input, textarea') ) {
-            return;
-        }
-        if ( e.which === 114 ) { //r
+		if ( $(e.target).is('input, textarea') ) {
+			return;
+		}
+		if ( e.which === 114 ) { //r
 			notify();
 			get_logs();
-        }
-        else if ( ( e.which === 102 ) || ( e.which === 47 ) ) { //102=f 47=/
+		}
+		else if ( ( e.which === 102 ) || ( e.which === 47 ) ) { //102=f 47=/
 			e.preventDefault();
 			$( '#search' ).focus();
-        }
+		}
 	});
 
 	// Init Search reset button
@@ -660,6 +793,11 @@ $(function() {
 	}).on('click', '.onX', function(){
 		$(this).removeClass('x onX').val('');
 	});
+
+	// Init the cross if there is a search term
+	if ( $('#search.clearable').val() !== '' ) {
+		$('#search.clearable')[tog($('#search.clearable').val())]('x');
+	}
 
 	// Search input
 	$( '#search' ).blur( function() {
@@ -706,6 +844,7 @@ $(function() {
 		else {
 			set_notification( ! is_notification() );
 		}
+		reload_page( true );
 	});
 
 	notify();
@@ -725,7 +864,7 @@ $(function() {
 
 
 	// Here we go
-	get_logs( true );
+	get_logs( true , true , true );
 
 
 	// Finally check for upgrade

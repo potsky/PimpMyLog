@@ -1,5 +1,6 @@
 {
 	"globals": {
+		"_remove_me_to_set_LOCALE"                : "fr_FR",
 		"_remove_me_to_set_TITLE"                 : "Pimp my Log",
 		"_remove_me_to_set_TITLE_FILE"            : "Pimp my Log [%f]",
 		"_remove_me_to_set_NAV_TITLE"             : "",

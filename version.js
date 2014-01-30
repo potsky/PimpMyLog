@@ -3,6 +3,21 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"1.0.1" : {
+			"released" : "2014-01-30",
+			"changed" : [
+				"Add a link in the upgrade message to the Pimp My Log upgrade documentation #"
+			],
+			"new" : [
+				"Add support for the LOCALE global parameter",
+				"Add user settings button",
+				"Add language selector user setting",
+				"Add timezone selector user setting",
+				"Add wide log table setting",
+				"Now clicking on the logo will reload Pimp My Log with default user settings",
+				"The url is automatically updated with the current user settings, so you can bookmark any view"
+			]
+		},
 		"1.0.0" : {
 			"released" : "2014-01-28",
 			"fix" : [

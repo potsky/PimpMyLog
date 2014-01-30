@@ -120,6 +120,7 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
  * Set unset constants
  */
 function init() {
+	if ( ! defined( 'LOCALE'                     ) ) define( 'LOCALE'                     , 'gb_GB' );
 	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp my Log' );
 	if ( ! defined( 'TITLE_FILE'                 ) ) define( 'TITLE_FILE'                 , 'Pimp my Log [%f]' );
 	if ( ! defined( 'NAV_TITLE'                  ) ) define( 'NAV_TITLE'                  , '' );

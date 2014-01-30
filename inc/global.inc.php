@@ -3,14 +3,37 @@ if(function_exists('xdebug_disable')) { xdebug_disable(); }
 include_once 'functions.inc.php';
 
 
+
+$tz_available     = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+$locale_default   = 'gb_GB';
+$locale_available = array(
+	'gb_GB' => 'English',
+	'fr_FR' => 'Français',
+);
+
+
+//////////////
+// Timezone //
+//////////////
+$tz = '';
+if ( isset( $_GET['tz'] ) ) {
+	$tz = $_GET['tz'];
+}
+else if ( defined( 'USER_TIME_ZONE' ) ) {
+	$tz = USER_TIME_ZONE;
+}
+if ( ! in_array( $tz , $tz_available ) ) {
+	$tz = date('e');
+}
+
+
 ///////////////////////////////////
 // Define locale and translation //
 ///////////////////////////////////
-$lang = '';
+$lang   = '';
+$locale = $locale_default;
 
 if ( function_exists( 'bindtextdomain' ) ) {
-
-	$locale = '';
 
 	if ( isset( $_GET['l'] ) ) {
 		$locale = $_GET['l'];
@@ -25,6 +48,11 @@ if ( function_exists( 'bindtextdomain' ) ) {
 	$locale         = str_replace( '-', '_', $locale );
 	@list( $lang, $b ) = explode( '_', $locale );
 	$locale         = strtolower( $lang ).'_'.strtoupper( $b );
+
+	if ( ! array_key_exists( $locale, $locale_available ) ) {
+		$locale = $locale_default;
+	}
+
 	putenv( 'LC_ALL=' . $locale );
 	putenv( 'LANGUAGE=' . $locale );
 
@@ -51,4 +79,5 @@ else {
 
 }
 
+error_log($locale);
 ?>
