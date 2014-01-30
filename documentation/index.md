@@ -170,7 +170,15 @@ It can happen too when you write manually some data in the log file.
 
 # 2 - Advanced features
 
-## Default file
+As a user, each time you change a parameter in the *Pimp My Log* interface, the URL is refreshed in your browser.
+
+You can save the current view by bookmarking *Pimp My Log*.
+
+If you click on the *Pimp My Log* logo at top left, all default settings from the `config.user.json` will be used.
+
+Here is the list of supported GET parameters.
+
+## Default file (`i`)
 
 <a name="defaultfile"></a>
 
@@ -180,7 +188,58 @@ You can change this behaviour by adding a *GET* parameter in the *Pimp My Log* u
 
 eg: `http://.../PimpMyLog/?i=apache2`
 
-## Timezone selector
+
+## Language selector (`l`)
+
+<a name="languageselector"></a>
+Users can override the default  by setting a GET parameter named `l`.
+
+`http://.../PimpMyLog/?l=fr_FR` will load *Pimp My Log* in French for example.
+
+Supported languages are :
+
+* `en_GB` or empty for English
+* `fr_FR` for French
+
+
+## Maximum count of logs (`m`)
+
+Users can override the maximum count of logs by setting a GET parameter named `m`.
+
+`http://.../PimpMyLog/?w=100` will display a maximum count of 100 logs.
+
+Supported values are pre-defined values ( configuration file value, 5, 10, 20, 50, ...)
+
+
+## Notification (`n`)
+
+Users can override the default notification preference by setting a GET parameter named `n`.
+
+`http://.../PimpMyLog/?n=false` will disable the notification.
+
+Supported views are :
+
+* `true` to enable notifications
+* `false` to disable notifications
+
+
+## Refresh timer (`r`)
+
+Users can override the auto-refresh value by setting a GET parameter named `r`.
+
+`http://.../PimpMyLog/?r=1` will refresh every second.
+
+Supported values are pre-defined values ( configuration file value, 1, 2, 5, ...)
+
+
+## Search (`s`)
+
+Users can launch a search by default by setting a GET parameter named `s`.
+
+`http://.../PimpMyLog/?s=what+am+I+searching+for+%3F`
+
+
+## Timezone selector (`tz`)
 
 <a name="timezone"></a>
 
@@ -196,17 +255,15 @@ Or:
 
 All available timezone strings are available [here](http://php.net/manual/en/timezones.php).
 
-## Language selector
 
-<a name="languageselector"></a>
-Users can override the default  by setting a GET parameter named `l`.
+## Wide view (`w`)
 
-`http://.../PimpMyLog/?l=fr_FR` will load *Pimp My Log* in French for example.
+Users can override the default view by setting a GET parameter named `w`.
 
-Supported languages are :
+`http://.../PimpMyLog/?w=false` will disable the wide view for example.
 
-* `en_GB` or empty for English
-* `fr_FR` for French
+Supported views are :
 
-
+* `true`, `on`, `1` or `` for a wide view
+* `false`, `off`, `0` for a narrow view
 
