@@ -2,15 +2,6 @@
   "CodeKitInfo" : "This is a CodeKit project configuration file. It is designed to sync project settings across multiple machines. Modifying the contents of this file can be a poor life decision if you don't know what you're doing. This file is not useful unless accompanied by the project that created it in CodeKit. For more information, see: http:\/\/incident57.com\/codekit",
   "creatorBuild" : "8403",
   "files" : {
-    "\/cfg\/softwares.inc.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cfg\/softwares.inc.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/inc\/functions.inc.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -19,6 +10,17 @@
       "inputAbbreviatedPath" : "\/inc\/functions.inc.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/img\/apple-touch-icon-72x72.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/img\/apple-touch-icon-72x72.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/apple-touch-icon-72x72.png",
+      "initialSize" : 2000,
+      "fileType" : 8192
     },
     "\/inc\/upgrade.pml.php" : {
       "ignoreWasSetByUser" : 0,
@@ -127,15 +129,6 @@
       "outputAbbreviatedPath" : "\/js\/test.min.js",
       "fileType" : 64
     },
-    "\/inc\/getlog.pml.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/getlog.pml.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/img\/apple-touch-icon-76x76.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -146,6 +139,15 @@
       "outputAbbreviatedPath" : "\/img\/apple-touch-icon-76x76.png",
       "initialSize" : 2704,
       "fileType" : 8192
+    },
+    "\/inc\/getlog.pml.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/getlog.pml.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/js\/main.js" : {
       "ignoreWasSetByUser" : 1,
@@ -302,28 +304,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/Gruntfile.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/Gruntfile.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/Gruntfile.min.js",
-      "fileType" : 64
-    },
-    "\/img\/apple-touch-icon-72x72.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/apple-touch-icon-72x72.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/img\/apple-touch-icon-72x72.png",
-      "initialSize" : 2000,
-      "fileType" : 8192
-    },
     "\/version.js" : {
       "ignoreWasSetByUser" : 1,
       "ignore" : 1,
@@ -333,6 +313,26 @@
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/version.min.js",
+      "fileType" : 64
+    },
+    "\/cfg\/softwares.inc.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cfg\/softwares.inc.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/Gruntfile.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/Gruntfile.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/Gruntfile.min.js",
       "fileType" : 64
     },
     "\/img\/apple-touch-icon-57x57.png" : {

@@ -79,5 +79,4 @@ else {
 
 }
 
-error_log($locale);
 ?>
