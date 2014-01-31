@@ -17,9 +17,9 @@
 #
 # Examples:
 #   Input:
-#     {% image url class="img-responsive" title="My image" link="" aclass="aclass" atarget="_self" %}
+#     {% image url class="img-responsive" title="My image" alink="toto" aclass="aclass" atarget="_self" %}
 #   Output:
-#     <a href="url" class="aclass" target="_self"><img src="url" class="img-responsive" title="My image"/></a>
+#     <a href="toto" class="aclass" target="_self"><img src="url" class="img-responsive" title="My image"/></a>
 #
 #   Input:
 #     {% image url title="oh"%}

@@ -5,73 +5,71 @@
 
 /* Retina logo */
 .logo {
-	position: absolute;
-	left: 4px;
-	top: 4px;
-	background: url(../assets/icon36.png) no-repeat;
-	background-size: 36px 36px;
-	width: 36px;
-	height: 36px;
-}
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (-o-min-device-pixel-ratio: 3/2),
-only screen and (min--moz-device-pixel-ratio: 1.5),
-only screen and (min-device-pixel-ratio: 1.5) {
-	.logo{
-		background: url(../assets/icon72.png) no-repeat;
-		background-size: 36px 36px;
+	position        : absolute;
+	left            : 4px;
+	top             : 4px;
+	width           : 36px;
+	height          : 36px;
+	background      : url(../assets/icon36.png) no-repeat;
+	background-size : 36px 36px;
+
+	@media	only screen and (-webkit-min-device-pixel-ratio: 1.5),
+			only screen and (-o-min-device-pixel-ratio: 3/2),
+			only screen and (min--moz-device-pixel-ratio: 1.5),
+			only screen and (min-device-pixel-ratio: 1.5) {
+		background      : url(../assets/icon72.png) no-repeat;
+		background-size : 36px 36px;
 	}
 }
 
 .jborange {
-	background-color: #454545;
-	color: #ffffff;
-
+	background-color : #454545;
+	color            : #ffffff;
 	i {
-		line-height: 32px;
-		color: #439cf9
+		line-height : 32px;
+		color       : #439cf9
 	}
 	hr {
-		border-top-color: #565656;
+		border-top-color : #565656;
 	}
 	code {
-		background-color: #565656;
+		background-color : #565656;
 	}
 }
 
 .jbgray {
-	background-color: @body-bg;
-	color: #3a4353;
+	background-color : @body-bg;
+	color            : #3a4353;
 }
 
 body {
-	-webkit-hyphens: auto;
-	-moz-hyphens: auto;
-	hyphens: auto;
+	-webkit-hyphens : auto;
+	-moz-hyphens    : auto;
+	hyphens         : auto;
 
 	code {
-		white-space: pre-wrap;      /* CSS3 */
-		white-space: -moz-pre-wrap; /* Firefox */
-		white-space: -pre-wrap;     /* Opera <7 */
-		white-space: -o-pre-wrap;   /* Opera 7 */
-		word-wrap: break-word;      /* IE */
+		white-space : pre-wrap;      /* CSS3 */
+		white-space : -moz-pre-wrap; /* Firefox */
+		white-space : -pre-wrap;     /* Opera <7 */
+		white-space : -o-pre-wrap;   /* Opera 7 */
+		word-wrap   : break-word;      /* IE */
 	}
 
 	pre {
-		display: block;
-		width: auto;
-		overflow: auto;
-		-webkit-overflow-scrolling: touch;
-		white-space: pre;
-		word-wrap: normal;
-		border:1px solid @hr-border;
+		display                    : block;
+		width                      : auto;
+		overflow                   : auto;
+		-webkit-overflow-scrolling : touch;
+		white-space                : pre;
+		word-wrap                  : normal;
+		border                     : 1px solid @hr-border;
 	}
 	pre code {
-		-webkit-hyphens: none!important;
-		-moz-hyphens: none!important;
-		hyphens: none!important;
-		white-space: pre!important;
-		word-wrap: normal!important;
+		-webkit-hyphens : none!important;
+		   -moz-hyphens : none!important;
+		        hyphens : none!important;
+		white-space     : pre!important;
+		word-wrap       : normal!important;
 	}
 
 }
@@ -85,16 +83,16 @@ h4 { margin-bottom:@font-size-h4; margin-top:@font-size-h4; }
 h5 { margin-bottom:@font-size-h5; margin-top:@font-size-h5; }
 h6 { margin-bottom:@font-size-h6; margin-top:@font-size-h6; }
 .noborder {
-	border-bottom:0;
-	margin-top: (@line-height-computed / 2);
-	margin-bottom: (@line-height-computed / 2);
+	border-bottom : 0;
+	margin-top    : (@line-height-computed / 2);
+	margin-bottom : (@line-height-computed / 2);
 }
 
 
 /* Reduce code size on mobile devices */
 @media screen and (max-width:800px) {
 	pre {
-		font-size:0.6em;
+		font-size : 0.6em;
 	}
 }
 
@@ -128,19 +126,19 @@ h6 { margin-bottom:@font-size-h6; margin-top:@font-size-h6; }
 .gsc-cursor-box,
 .gsc-expansionArea,
 {
-	background-color: @body-bg;
-	border:0!important;
+	background-color : @body-bg;
+	border           : 0!important;
 }
 
 .gsc-orderby-container,
 .gsc-clear-button,
 .gcsc-branding {
-	display:none;
+	display : none;
 }
 
 .gsc-search-box table,
 .gsc-search-box table tr,
 .gsc-search-box table tr td
 {
-	border:0!important;
+	border : 0!important;
 }

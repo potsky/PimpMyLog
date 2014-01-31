@@ -61,10 +61,11 @@ A special thanks goes out to :
 
 ---
 
-#### They *Pimp* their *Logs*
+#### They *Pimp*&nbsp;&nbsp;their *Logs*
 
-[![](/assets/theypimplogs/tcpartners.png "TCPartners")](http://www.tcpartners.fr)
-[![](/assets/theypimplogs/videospot.png "VideoSpot")](http://www.videospot.com)
+{% image /assets/theypimplogs/doz.png class="theypimplogs" title="DOZ" alink="http://www.doz.com" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/tcpartners.png class="theypimplogs" title="TCPartners" alink="http://www.tcpartners.fr" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/videospot.png class="theypimplogs" title="VideoSpot" alink="http://www.videospot.com" aclass="" atarget="theypimplogs" %}
 
 Your company or your project uses *Pimp My Log*? Please [let me know](http://support.pimpmylog.com/discussion/new) and send me your logo and the link of your website!
 
