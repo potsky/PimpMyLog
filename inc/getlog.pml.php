@@ -68,7 +68,7 @@ $start               = microtime( true );
 $logs                = array();
 $file_id             = $_POST['file'];
 $load_default_values = $_POST['ldv'];
-$user_max            = (int)$_POST['max'];
+$max                 = (int)$_POST['max'];
 $reset               = @(int)$_POST['reset'];
 $old_file_size       = @(int)$_POST['filesize'];
 $search              = @$_POST['search'];
@@ -103,9 +103,6 @@ if ( is_array( $errors ) ) {
 }
 
 
-$file_max  = ( isset( $files[$file_id]['max'] ) ) ? (int)$files[$file_id]['max'] : LOGS_MAX;
-//$max       = ( $load_default_values == 'true' ) ? $file_max : $user_max;
-$max       = $user_max;
 $regex     = $files[ $file_id ][ 'format' ][ 'regex' ];
 $match     = $files[ $file_id ][ 'format' ][ 'match' ];
 $types     = $files[ $file_id ][ 'format' ][ 'types' ];

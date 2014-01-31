@@ -3,6 +3,12 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"1.0.2" : {
+			"released" : "2014-01-31",
+			"changed" : [
+				"Clean PHP code"
+			]
+		},
 		"1.0.1" : {
 			"released" : "2014-01-30",
 			"changed" : [
