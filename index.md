@@ -63,7 +63,7 @@ A special thanks goes out to :
 
 #### They *Pimp*&nbsp;&nbsp;their *Logs*
 
-{% image /assets/theypimplogs/doz.png class="theypimplogs" title="DOZ" alink="http://www.doz.com" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/doz.jpg class="theypimplogs" title="DOZ" alink="http://www.doz.com" aclass="" atarget="theypimplogs" %}
 {% image /assets/theypimplogs/tcpartners.png class="theypimplogs" title="TCPartners" alink="http://www.tcpartners.fr" aclass="" atarget="theypimplogs" %}
 {% image /assets/theypimplogs/videospot.png class="theypimplogs" title="VideoSpot" alink="http://www.videospot.com" aclass="" atarget="theypimplogs" %}
 
