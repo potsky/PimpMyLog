@@ -1,8 +1,15 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.0.3",
-	"versiondevh" : "5b7bb5b6c9c809fc9d5d18ba5cdfa631d1789f2d",
+	"versiondevh" : "eac7667590eb370772338c2424ade2e88f16d3e8",
 	"changelog" : {
+		"1.0.4" : {
+			"released" : "2014-04-20",
+			"fix" : [
+				"PHP error file now support referer",
+				"Severity badges are case insensitive now, really this time !"
+			]
+		},
 		"1.0.3" : {
 			"released" : "2014-04-20",
 			"new" : [
