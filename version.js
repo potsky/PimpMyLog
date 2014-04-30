@@ -3,6 +3,13 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"1.0.4" : {
+			"released" : "2014-04-20",
+			"fix" : [
+				"PHP error file now support referer",
+				"Severity badges are case insensitive now, really this time !"
+			]
+		},
 		"1.0.3" : {
 			"released" : "2014-04-20",
 			"new" : [

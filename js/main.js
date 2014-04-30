@@ -541,6 +541,9 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 						clas = badges[ type.param ][ logs.logs[log][ c ].substr( 0 , 1 ) ];
 					} else if ( type.param === 'severity' ) {
 						clas = badges[ type.param ][ logs.logs[log][ c ].toLowerCase() ];
+						if ( clas === undefined ) {
+							clas = badges[ type.param ][ logs.logs[log][ c ] ];
+						}
 					}
 					if ( clas === undefined ) {
 						clas = 'default';
