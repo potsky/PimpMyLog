@@ -30,8 +30,8 @@
 			"alert"       : "danger",
 			"emerg"       : "danger",
 			"Notice"      : "info",
-			"Fatal error" : "danger",
-			"Parse error" : "danger",
+			"fatal error" : "danger",
+			"parse error" : "danger",
 			"Warning"     : "warning"
 		},
 		"http": {
