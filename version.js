@@ -1,8 +1,20 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.0.1",
-	"versiondevh" : "61190b810033440534ecd5a8edf5572c7bf9e0ba",
+	"version"     : "1.0.3",
+	"versiondevh" : "5b7bb5b6c9c809fc9d5d18ba5cdfa631d1789f2d",
 	"changelog" : {
+		"1.0.3" : {
+			"released" : "2014-04-20",
+			"new" : [
+				"Severity badges are case insensitive now"
+			]
+		},
+		"1.0.2" : {
+			"released" : "2014-01-31",
+			"changed" : [
+				"Clean PHP code"
+			]
+		},
 		"1.0.1" : {
 			"released" : "2014-01-30",
 			"changed" : [
