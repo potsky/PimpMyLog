@@ -4,13 +4,30 @@
  <title>Pimp my Log</title>
  <link href="http://pimpmylog.com/atom.xml" rel="self"/>
  <link href="http://pimpmylog.com"/>
- <updated>2014-02-01T19:41:56+01:00</updated>
+ <updated>2014-04-30T08:43:09+02:00</updated>
  <id>http://pimpmylog.com</id>
  <author>
    <name>Potsky</name>
    <email>potsky@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Version 1.0.3 released</title>
+   <link href="http://pimpmylog.com/general/2014/04/30/version-1.0.3-released"/>
+   <updated>2014-04-30T00:00:00+02:00</updated>
+   <id>http://pimpmylog.com/general/2014/04/30/version-1.0.3-released</id>
+   <content type="html">&lt;p&gt;Hi folks!&lt;/p&gt;
+
+&lt;p&gt;Version 1.1 is still on the road with new awesome features of course. For the moment, this release just add some convenient improvements for badges display.&lt;/p&gt;
+
+&lt;p&gt;See you in upcoming weeks...&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.0.3&quot;&gt;&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Version 1.0.0 released</title>
