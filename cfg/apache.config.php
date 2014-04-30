@@ -19,6 +19,9 @@ You must escape anti-slash 4 times and escape $ in regex.
 
 function apache_get_config( $type , $file , $software , $counter ) {
 
+error_log($file);
+error_log( realpath( $file ) );
+
 	$file_json_encoded = json_encode( $file );
 
 	/////////////////////////////////////////////////////////

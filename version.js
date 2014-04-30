@@ -3,6 +3,12 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"1.0.3" : {
+			"released" : "2014-04-20",
+			"new" : [
+				"Severity badges are case insensitive now"
+			]
+		},
 		"1.0.2" : {
 			"released" : "2014-01-31",
 			"changed" : [
