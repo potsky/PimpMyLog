@@ -1,8 +1,14 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.0.4",
-	"versiondevh" : "4078d68399fd8c3b712fe7d31324c91b4d0599cb",
+	"version"     : "1.0.5",
+	"versiondevh" : "25a31db6cef9815983f2f9c1595a45502c70a162",
 	"changelog" : {
+		"1.0.5" : {
+			"released" : "2014-06-05",
+			"fix" : [
+				"Apache 2.4 error in auto-configuation"
+			]
+		},
 		"1.0.4" : {
 			"released" : "2014-04-20",
 			"fix" : [
