@@ -78,7 +78,7 @@ error_log( realpath( $file ) );
 					"IP"       : 12,
 					"Log"      : 14,
 					"Severity" : 10,
-					"Referer"  : 16,
+					"Referer"  : 16
 				},
 				"types": {
 					"Date"     : "date:H:i:s",
