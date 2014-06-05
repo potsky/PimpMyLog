@@ -45,7 +45,7 @@
 		},
 		"1.0.0" : {
 			"released" : "2014-01-28",
-			"fix" : [
+			"fixed" : [
 				"PHP Notice while configuration process when apache log file is empty #51"
 			],
 			"changed" : [
