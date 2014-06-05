@@ -1,17 +1,17 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.0.5",
-	"versiondevh" : "25b2c7b3c902ec75852dcf5d4c6c6dd8cbeffc0c",
+	"versiondevh" : "86ce93c662e780e46b8c5bdd32ee4f19ecc7bc63",
 	"changelog" : {
 		"1.0.5" : {
 			"released" : "2014-06-05",
-			"fix" : [
+			"fixed" : [
 				"Apache 2.4 error in auto-configuation"
 			]
 		},
 		"1.0.4" : {
 			"released" : "2014-04-20",
-			"fix" : [
+			"fixed" : [
 				"PHP error file now support referer",
 				"Severity badges are case insensitive now, really this time !"
 			]
@@ -45,7 +45,7 @@
 		},
 		"1.0.0" : {
 			"released" : "2014-01-28",
-			"fix" : [
+			"fixed" : [
 				"PHP Notice while configuration process when apache log file is empty #51"
 			],
 			"changed" : [
