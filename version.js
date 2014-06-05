@@ -5,13 +5,13 @@
 	"changelog" : {
 		"1.0.5" : {
 			"released" : "2014-06-05",
-			"fix" : [
+			"fixed" : [
 				"Apache 2.4 error in auto-configuation"
 			]
 		},
 		"1.0.4" : {
 			"released" : "2014-04-20",
-			"fix" : [
+			"fixed" : [
 				"PHP error file now support referer",
 				"Severity badges are case insensitive now, really this time !"
 			]
