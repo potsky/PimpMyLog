@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.0.5",
-	"versiondevh" : "25a31db6cef9815983f2f9c1595a45502c70a162",
+	"versiondevh" : "304e44fae52b81256e7624dbca2a9cb3d005808e",
 	"changelog" : {
 		"1.0.5" : {
 			"released" : "2014-06-05",
@@ -45,7 +45,7 @@
 		},
 		"1.0.0" : {
 			"released" : "2014-01-28",
-			"fix" : [
+			"fixed" : [
 				"PHP Notice while configuration process when apache log file is empty #51"
 			],
 			"changed" : [
