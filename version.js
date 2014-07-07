@@ -3,6 +3,12 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"1.0.6" : {
+			"released" : "2014-07-06",
+			"fixed" : [
+				"Add Brazilian Portuguese by Cassio Santos"
+			]
+		},
 		"1.0.5" : {
 			"released" : "2014-06-05",
 			"fixed" : [
