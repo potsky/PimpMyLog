@@ -1,4 +1,4 @@
-/*! pimpmylog - 1.0.5 - 304e44fae52b81256e7624dbca2a9cb3d005808e*/
+/*! pimpmylog - 1.0.5 - 86ce93c662e780e46b8c5bdd32ee4f19ecc7bc63*/
 /*
  * pimpmylog
  * http://pimpmylog.com
