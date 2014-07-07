@@ -1,8 +1,14 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.0.5",
-	"versiondevh" : "86ce93c662e780e46b8c5bdd32ee4f19ecc7bc63",
+	"version"     : "1.0.6",
+	"versiondevh" : "3bd72fd3e5c16505d276f59f25ae9c549d6536f3",
 	"changelog" : {
+		"1.0.6" : {
+			"released" : "2014-07-06",
+			"fixed" : [
+				"Add Brazilian Portuguese by Cassio Santos"
+			]
+		},
 		"1.0.5" : {
 			"released" : "2014-06-05",
 			"fixed" : [
