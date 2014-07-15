@@ -1,214 +1,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-01-30 17:38+0100\n"
-"PO-Revision-Date: 2014-01-30 17:38+0100\n"
+"POT-Creation-Date: 2014-07-15 13:02+0100\n"
+"PO-Revision-Date: 2014-07-15 13:02+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: potsky <potsky@me.com>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.6.6\n"
 "X-Poedit-KeywordsList: gettext;gettext_noop;_x;_e;__;esc_attr__;esc_attr_e;"
 "esc_html__;esc_html_e;_ex;esc_attr_x;esc_html_x;_n;_nx;_n_noop;_nx_noop\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: .\n"
-
-#: index.php:9 index.php:52 _build/index.php:18 _build/index.php:61
-#: _site/index.php:9 _site/index.php:52 _tmp/index.php:19 _tmp/index.php:62
-msgid "Oups!"
-msgstr "Oups!"
-
-#: index.php:10 _build/index.php:19 _site/index.php:10 _tmp/index.php:20
-#, php-format
-msgid "PHP version %s is required but your server run %s."
-msgstr ""
-"La version %s au minimum de PHP est requise mais votre serveur est en %s."
-
-#: index.php:12 _build/index.php:21 _site/index.php:12 _tmp/index.php:22
-msgid "Learn more"
-msgstr "Plus d'info"
-
-#: index.php:23 _build/index.php:32 _site/index.php:23 _tmp/index.php:33
-msgid "Welcome!"
-msgstr "Bienvenue !"
-
-#: index.php:25 _build/index.php:34 _site/index.php:25 _tmp/index.php:35
-msgid "Pimp my Log is not configured."
-msgstr "Pimp my Log n'est pas configuré."
-
-#: index.php:28 _build/index.php:37 _site/index.php:28 _tmp/index.php:38
-msgid ""
-"You can manually copy <code>cfg/config.example.json</code> to <code>config."
-"user.json</code> in the root directory and change parameters. Then refresh "
-"this page."
-msgstr ""
-"Vous pouvez copier manuellement le fichier <code>cfg/config.example.json</"
-"code> vers <code>config.user.json</code> à la racine et changer les "
-"paramètres. Une fois ceci fait, rafraichissez la page."
-
-#: index.php:31 _build/index.php:40 _site/index.php:31 _tmp/index.php:41
-msgid "Or let me try to configure it for you!"
-msgstr "Ou sinon, laissez-moi le configurer pour vous !"
-
-#: index.php:34 index.php:63 _build/index.php:43 _build/index.php:72
-#: _site/index.php:34 _site/index.php:63 _tmp/index.php:44 _tmp/index.php:73
-msgid "Configure now"
-msgstr "Configurer maintenant"
-
-#: index.php:54 _build/index.php:63 _site/index.php:54 _tmp/index.php:64
-msgid "<code>config.user.json</code> configuration file is buggy:"
-msgstr ""
-"Le fichier de configuration <code>config.user.json</code> comporte des "
-"erreurs :"
-
-#: index.php:60 _build/index.php:69 _site/index.php:60 _tmp/index.php:70
-msgid ""
-"If you want me to build the configuration for you, please remove file "
-"<code>config.user.json</code> at root and click below."
-msgstr ""
-"Si vous voulez que je fasse la configuration, enlevez le fichier "
-"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
-"plait."
-
-#: index.php:73 _build/index.php:82 _site/index.php:73 _tmp/index.php:83
-msgid ""
-"Notifications are denied for this site. Go to your browser preferences to "
-"enable notifications for this site."
-msgstr ""
-"Les notifications de bureau sont interdites pour cet site. Activez les dans "
-"les préférences de votre navigateur."
-
-#: index.php:74 _build/index.php:83 _site/index.php:74 _tmp/index.php:84
-msgid "No log has been found."
-msgstr "Aucun log n'a été trouvé."
-
-#: index.php:75 _build/index.php:84 _site/index.php:75 _tmp/index.php:85
-msgid "Search was done with RegEx engine"
-msgstr "Recherche effectuée avec Expression Regulière"
-
-#: index.php:76 _build/index.php:85 _site/index.php:76 _tmp/index.php:86
-msgid "Search was done with regular engine"
-msgstr "Recherche régulière effectuée"
-
-#: index.php:77 _build/index.php:86 _site/index.php:77 _tmp/index.php:87
-#, php-format
-msgid "No log has been found with regular search %s"
-msgstr "Aucun log n'a été trouvé avec la recherche régulière %s"
-
-#: index.php:78 _build/index.php:87 _site/index.php:78 _tmp/index.php:88
-#, php-format
-msgid "No log has been found with Reg Ex search %s"
-msgstr ""
-"Aucun log n'a été trouvé avec la recherche de type Expression Regulière %s"
-
-#: index.php:79 _build/index.php:88 _site/index.php:79 _tmp/index.php:89
-msgid "New logs are available"
-msgstr "Nouveaux logs disponibles"
-
-#: index.php:80 _build/index.php:89 _site/index.php:80 _tmp/index.php:90
-msgid "1 new log is available"
-msgstr "1 nouveau log disponible"
-
-#: index.php:81 _build/index.php:90 _site/index.php:81 _tmp/index.php:91
-#, php-format
-msgid "%s new logs are available"
-msgstr "%s nouveaux logs disponibles"
-
-#: index.php:82 _build/index.php:91 _site/index.php:82 _tmp/index.php:92
-msgid "1 log displayed,"
-msgstr "1 log affiché"
-
-#: index.php:83 _build/index.php:92 _site/index.php:83 _tmp/index.php:93
-#, php-format
-msgid "%s logs displayed,"
-msgstr "%s logs affichés,"
-
-#: index.php:84 _build/index.php:93 _build/inc/configure.php:322
-#: _site/index.php:84 _site/inc/configure.php:313 _tmp/index.php:94
-#: _tmp/inc/configure.php:323 inc/configure.php:313
-msgid "An error occurs!"
-msgstr "Une erreur est survenue !"
-
-#: index.php:149 _site/index.php:142
-msgid "Reload the page with default parameters"
-msgstr "Recharger la page avec les paramètres par défaut"
-
-#: index.php:159 _build/index.php:118 _site/index.php:152 _tmp/index.php:169
-msgid "Click to refresh or press the R key"
-msgstr "Cliquez pour rafraichir ou appuyez sur la touche R"
-
-#: index.php:168 index.php:185 _build/index.php:120 _build/index.php:127
-#: _site/index.php:161 _site/index.php:178 _tmp/index.php:178
-#: _tmp/index.php:195
-msgid "Select a log file to display"
-msgstr "Sélectionnez un fichier de log à afficher"
-
-#: index.php:202 _build/index.php:134 _site/index.php:195 _tmp/index.php:212
-msgid "Search in logs"
-msgstr "Recherche"
-
-#: index.php:206 _build/index.php:134 _site/index.php:199 _tmp/index.php:216
-msgid "Select a duration to check for new logs automatically"
-msgstr "Sélectionner une durée pour chercher de nouveaux logs automatiquement"
-
-#: index.php:207 _build/index.php:134 _site/index.php:200 _tmp/index.php:217
-msgid "No auto refresh"
-msgstr "Rafraichissement manuel"
-
-#: index.php:210 _build/index.php:136 _site/index.php:203 _tmp/index.php:220
-#, php-format
-msgid "Refresh every %ss"
-msgstr "Rafraichir toutes les %ss"
-
-#: index.php:217 _build/index.php:138 _site/index.php:210 _tmp/index.php:227
-msgid "Max count of logs to display"
-msgstr "Nombre maximal de lignes à afficher"
-
-#: index.php:220 _build/index.php:140 _site/index.php:213 _tmp/index.php:230
-#, php-format
-msgid "%s logs"
-msgstr "%s logs"
-
-#: index.php:220 _build/index.php:140 _site/index.php:213 _tmp/index.php:230
-#, php-format
-msgid "%s log"
-msgstr "%s log"
-
-#: index.php:226 _build/index.php:142 _site/index.php:219 _tmp/index.php:236
-msgid "Desktop notifications on supported modern browsers"
-msgstr "Notifications de bureau pour les navigateurs récents"
-
-#: index.php:238 _site/index.php:231
-msgid "Wide view"
-msgstr "Vue élargie"
-
-#: index.php:239 _site/index.php:232
-msgid "on"
-msgstr "oui"
-
-#: index.php:240 _site/index.php:233
-msgid "off"
-msgstr "non"
-
-#: index.php:245 _site/index.php:238
-msgid "Language"
-msgstr "Langue"
-
-#: index.php:246 _site/index.php:239
-msgid "Change language..."
-msgstr "Choisir une langue"
-
-#: index.php:258 _site/index.php:251
-msgid "Timezone"
-msgstr "Fuseau horaire"
-
-#: index.php:259 _site/index.php:252
-msgid "Change timezone..."
-msgstr "Changer fuseau horaire"
 
 #: _build/cfg/apache.config.php:15 _site/cfg/apache.config.php:5
 #: cfg/apache.config.php:5
@@ -513,6 +320,12 @@ msgstr "Action inconnue, stop."
 msgid "%s% Complete"
 msgstr "%s% complété"
 
+#: _build/inc/configure.php:322 _build/index.php:93
+#: _site/inc/configure.php:313 _site/index.php:84 _tmp/inc/configure.php:323
+#: _tmp/index.php:94 inc/configure.php:313 index.php:84
+msgid "An error occurs!"
+msgstr "Une erreur est survenue !"
+
 #: _build/inc/configure.php:323 _site/inc/configure.php:314
 #: _tmp/inc/configure.php:324 inc/configure.php:314
 msgid "Please wait..."
@@ -629,19 +442,19 @@ msgstr ""
 msgid "Pimp my Logs now!"
 msgstr "Pimp my Log maintenant !"
 
-#: _build/inc/functions.inc.php:232 _site/inc/functions.inc.php:224
-#: _tmp/inc/functions.inc.php:233 inc/functions.inc.php:224
+#: _build/inc/functions.inc.php:233 _site/inc/functions.inc.php:224
+#: _tmp/inc/functions.inc.php:234 inc/functions.inc.php:224
 msgid "No file is defined in <code>files</code> array"
 msgstr "Aucun fichier n'est défini dans le tableau <code>files</code>"
 
-#: _build/inc/functions.inc.php:240 _site/inc/functions.inc.php:232
-#: _tmp/inc/functions.inc.php:241 inc/functions.inc.php:232
+#: _build/inc/functions.inc.php:241 _site/inc/functions.inc.php:232
+#: _tmp/inc/functions.inc.php:242 inc/functions.inc.php:232
 #, php-format
 msgid "<code>%s</code> is mandatory for file ID <code>%s</code>"
 msgstr "<code>%s</code> est obligatoire pour le fichier d'ID <code>%s</code>"
 
-#: _build/inc/functions.inc.php:335 _site/inc/functions.inc.php:327
-#: _tmp/inc/functions.inc.php:336 inc/functions.inc.php:327
+#: _build/inc/functions.inc.php:336 _site/inc/functions.inc.php:327
+#: _tmp/inc/functions.inc.php:337 inc/functions.inc.php:327
 msgid "B KBMBGBTBPB"
 msgstr "o KoMoGoToPo"
 
@@ -704,8 +517,8 @@ msgstr ""
 "Le fichier de configuration a changé et comporte des erreurs maintenant. "
 "Merci de rafraichir la page."
 
-#: _build/inc/getlog.pml.php:167 _site/inc/getlog.pml.php:150
-#: _tmp/inc/getlog.pml.php:168 inc/getlog.pml.php:150
+#: _build/inc/getlog.pml.php:156 _site/inc/getlog.pml.php:147
+#: _tmp/inc/getlog.pml.php:157 inc/getlog.pml.php:147
 #, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist anymore..."
@@ -713,49 +526,51 @@ msgstr ""
 "Le fichier <code>%s</code> pour le fichier d'ID <code>%s</code> n'existe "
 "plus..."
 
-#: _build/inc/getlog.pml.php:186 _site/inc/getlog.pml.php:169
-#: _tmp/inc/getlog.pml.php:187 inc/getlog.pml.php:169
+#: _build/inc/getlog.pml.php:175 _site/inc/getlog.pml.php:166
+#: _tmp/inc/getlog.pml.php:176 inc/getlog.pml.php:166
 #, php-format
 msgid "Log file has been rotated (previous size was %s and new one is %s)"
 msgstr ""
 "Le fichier de log a été remplacé (la taille précédente était %s et la "
 "nouvelle est %s)"
 
-#: _build/inc/getlog.pml.php:223 _site/inc/getlog.pml.php:206
-#: _tmp/inc/getlog.pml.php:224 inc/getlog.pml.php:206
+#: _build/inc/getlog.pml.php:212 _site/inc/getlog.pml.php:203
+#: _tmp/inc/getlog.pml.php:213 inc/getlog.pml.php:203
 msgid "Log file has been rotated"
 msgstr "Le fichier de log a été remplacé."
 
-#: _build/inc/getlog.pml.php:343 _tmp/inc/getlog.pml.php:344
+#: _build/inc/getlog.pml.php:332 _site/inc/getlog.pml.php:323
+#: _tmp/inc/getlog.pml.php:333 inc/getlog.pml.php:323
 #, php-format
 msgid ""
 "%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "
 "skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</"
-"code> was last modified on <code>%s</code>, size is <code>%s</code>%s"
+"code> was last modified on <code>%s</code> at <code>%s</code>, size is <code>"
+"%s</code>%s"
 msgstr ""
 "%s en <code>%sms</code> avec <code>%s</code> de logs, <code>%s</code> "
 "ligne(s) ignorée(s), <code>%s</code> ligne(s) illisible(s).<br/>Le fichier "
-"<code>%s</code> a été modifié le <code>%s</code>, sa taille est <code>%s</"
-"code>%s"
+"<code>%s</code> a été modifié le <code>%s</code> (<code>%s</code>), sa "
+"taille est <code>%s</code>%s"
 
-#: _build/inc/getlog.pml.php:344 _site/inc/getlog.pml.php:327
-#: _tmp/inc/getlog.pml.php:345 inc/getlog.pml.php:327
+#: _build/inc/getlog.pml.php:333 _site/inc/getlog.pml.php:324
+#: _tmp/inc/getlog.pml.php:334 inc/getlog.pml.php:324
 #, php-format
 msgid "%s new logs found"
 msgstr "%s nouveaux logs trouvés"
 
-#: _build/inc/getlog.pml.php:344 _site/inc/getlog.pml.php:327
-#: _tmp/inc/getlog.pml.php:345 inc/getlog.pml.php:327
+#: _build/inc/getlog.pml.php:333 _site/inc/getlog.pml.php:324
+#: _tmp/inc/getlog.pml.php:334 inc/getlog.pml.php:324
 msgid "no new log found"
 msgstr "aucun nouveau log"
 
-#: _build/inc/getlog.pml.php:344 _site/inc/getlog.pml.php:327
-#: _tmp/inc/getlog.pml.php:345 inc/getlog.pml.php:327
+#: _build/inc/getlog.pml.php:333 _site/inc/getlog.pml.php:324
+#: _tmp/inc/getlog.pml.php:334 inc/getlog.pml.php:324
 msgid "1 new log found"
 msgstr "1 nouveau log trouvé"
 
-#: _build/inc/getlog.pml.php:352 _site/inc/getlog.pml.php:336
-#: _tmp/inc/getlog.pml.php:353 inc/getlog.pml.php:336
+#: _build/inc/getlog.pml.php:342 _site/inc/getlog.pml.php:333
+#: _tmp/inc/getlog.pml.php:343 inc/getlog.pml.php:333
 #, php-format
 msgid "log type is <code>%s</code>"
 msgstr "le type de log est <code>%s</code>"
@@ -925,56 +740,8 @@ msgstr "Vous avez la version %s et la version %s est disponible"
 msgid "release notes"
 msgstr "Remarques de mise à jour"
 
-#: _build/inc/upgrade.pml.php:133 _site/inc/upgrade.pml.php:127
-#: _tmp/inc/upgrade.pml.php:134 inc/upgrade.pml.php:127
-msgid "Don't bother me again with this upgrade!"
-msgstr "Ne plus me déranger avec cette mise à jour !"
-
-#: _build/inc/upgrade.pml.php:139 _site/inc/upgrade.pml.php:133
-#: _tmp/inc/upgrade.pml.php:140 inc/upgrade.pml.php:133
-msgid "You should upgrade right now:"
-msgstr "Vous devriez mettre à jour dès maintenant :"
-
-#: _build/inc/upgrade.pml.php:150 _site/inc/upgrade.pml.php:144
-#: _tmp/inc/upgrade.pml.php:151 inc/upgrade.pml.php:144
-#, php-format
-msgid "Your version %s is out of date"
-msgstr "Votre version %s n'est à jour"
-
-#: _build/inc/upgrade.pml.php:155 _site/inc/upgrade.pml.php:149
-#: _tmp/inc/upgrade.pml.php:156 inc/upgrade.pml.php:149
-#, php-format
-msgid "Your version %s is up to date"
-msgstr "Votre version %s est à jour"
-
-#: _build/inc/upgrade.pml.php:161 _site/inc/upgrade.pml.php:155
-#: _tmp/inc/upgrade.pml.php:162 inc/upgrade.pml.php:155
-#, php-format
-msgid ""
-"Unable to fetch URL %s from the server hosting this Pimp my Log instance."
-msgstr ""
-"Impossible de récupérer le contenu de l'adresse %s depuis le serveur qui "
-"héberge cette instance de Pimp my Log."
-
-#: _build/inc/upgrade.pml.php:161 _site/inc/upgrade.pml.php:155
-#: _tmp/inc/upgrade.pml.php:162 inc/upgrade.pml.php:155
-msgid "Unable to check remote version!"
-msgstr "Vérification de la version impossible !"
-
-#: _site/inc/getlog.pml.php:326 inc/getlog.pml.php:326
-#, php-format
-msgid ""
-"%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "
-"skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</"
-"code> was last modified on <code>%s</code> at <code>%s</code>, size is <code>"
-"%s</code>%s"
-msgstr ""
-"%s en <code>%sms</code> avec <code>%s</code> de logs, <code>%s</code> "
-"ligne(s) ignorée(s), <code>%s</code> ligne(s) illisible(s).<br/>Le fichier "
-"<code>%s</code> a été modifié le <code>%s</code> (<code>%s</code>), sa "
-"taille est <code>%s</code>%s"
-
-#: _site/inc/upgrade.pml.php:124 inc/upgrade.pml.php:124
+#: _build/inc/upgrade.pml.php:133 _site/inc/upgrade.pml.php:124
+#: _tmp/inc/upgrade.pml.php:134 inc/upgrade.pml.php:124
 msgid ""
 "Simply <code>git pull</code> in your directory or <a href=\"http://pimpmylog."
 "com/getting-started/#update\" target=\"doc\">follow instructions here</a>"
@@ -982,6 +749,249 @@ msgstr ""
 "Faites un <code>git pull</code> dans le répertoire ou <a href=\"http://"
 "pimpmylog.com/getting-started/#update\" target=\"doc\">suivez les "
 "instructions ici</a>"
+
+#: _build/inc/upgrade.pml.php:136 _site/inc/upgrade.pml.php:127
+#: _tmp/inc/upgrade.pml.php:137 inc/upgrade.pml.php:127
+msgid "Don't bother me again with this upgrade!"
+msgstr "Ne plus me déranger avec cette mise à jour !"
+
+#: _build/inc/upgrade.pml.php:142 _site/inc/upgrade.pml.php:133
+#: _tmp/inc/upgrade.pml.php:143 inc/upgrade.pml.php:133
+msgid "You should upgrade right now:"
+msgstr "Vous devriez mettre à jour dès maintenant :"
+
+#: _build/inc/upgrade.pml.php:153 _site/inc/upgrade.pml.php:144
+#: _tmp/inc/upgrade.pml.php:154 inc/upgrade.pml.php:144
+#, php-format
+msgid "Your version %s is out of date"
+msgstr "Votre version %s n'est à jour"
+
+#: _build/inc/upgrade.pml.php:158 _site/inc/upgrade.pml.php:149
+#: _tmp/inc/upgrade.pml.php:159 inc/upgrade.pml.php:149
+#, php-format
+msgid "Your version %s is up to date"
+msgstr "Votre version %s est à jour"
+
+#: _build/inc/upgrade.pml.php:164 _site/inc/upgrade.pml.php:155
+#: _tmp/inc/upgrade.pml.php:165 inc/upgrade.pml.php:155
+#, php-format
+msgid ""
+"Unable to fetch URL %s from the server hosting this Pimp my Log instance."
+msgstr ""
+"Impossible de récupérer le contenu de l'adresse %s depuis le serveur qui "
+"héberge cette instance de Pimp my Log."
+
+#: _build/inc/upgrade.pml.php:164 _site/inc/upgrade.pml.php:155
+#: _tmp/inc/upgrade.pml.php:165 inc/upgrade.pml.php:155
+msgid "Unable to check remote version!"
+msgstr "Vérification de la version impossible !"
+
+#: _build/index.php:18 _build/index.php:61 _site/index.php:9
+#: _site/index.php:52 _tmp/index.php:19 _tmp/index.php:62 index.php:9
+#: index.php:52
+msgid "Oups!"
+msgstr "Oups!"
+
+#: _build/index.php:19 _site/index.php:10 _tmp/index.php:20 index.php:10
+#, php-format
+msgid "PHP version %s is required but your server run %s."
+msgstr ""
+"La version %s au minimum de PHP est requise mais votre serveur est en %s."
+
+#: _build/index.php:21 _site/index.php:12 _tmp/index.php:22 index.php:12
+msgid "Learn more"
+msgstr "Plus d'info"
+
+#: _build/index.php:32 _site/index.php:23 _tmp/index.php:33 index.php:23
+msgid "Welcome!"
+msgstr "Bienvenue !"
+
+#: _build/index.php:34 _site/index.php:25 _tmp/index.php:35 index.php:25
+msgid "Pimp my Log is not configured."
+msgstr "Pimp my Log n'est pas configuré."
+
+#: _build/index.php:37 _site/index.php:28 _tmp/index.php:38 index.php:28
+msgid ""
+"You can manually copy <code>cfg/config.example.json</code> to <code>config."
+"user.json</code> in the root directory and change parameters. Then refresh "
+"this page."
+msgstr ""
+"Vous pouvez copier manuellement le fichier <code>cfg/config.example.json</"
+"code> vers <code>config.user.json</code> à la racine et changer les "
+"paramètres. Une fois ceci fait, rafraichissez la page."
+
+#: _build/index.php:40 _site/index.php:31 _tmp/index.php:41 index.php:31
+msgid "Or let me try to configure it for you!"
+msgstr "Ou sinon, laissez-moi le configurer pour vous !"
+
+#: _build/index.php:43 _build/index.php:72 _site/index.php:34
+#: _site/index.php:63 _tmp/index.php:44 _tmp/index.php:73 index.php:34
+#: index.php:63
+msgid "Configure now"
+msgstr "Configurer maintenant"
+
+#: _build/index.php:63 _site/index.php:54 _tmp/index.php:64 index.php:54
+msgid "<code>config.user.json</code> configuration file is buggy:"
+msgstr ""
+"Le fichier de configuration <code>config.user.json</code> comporte des "
+"erreurs :"
+
+#: _build/index.php:69 _site/index.php:60 _tmp/index.php:70 index.php:60
+msgid ""
+"If you want me to build the configuration for you, please remove file "
+"<code>config.user.json</code> at root and click below."
+msgstr ""
+"Si vous voulez que je fasse la configuration, enlevez le fichier "
+"<code>config.user.json</code> à la racine et cliquez en dessous s'il vous "
+"plait."
+
+#: _build/index.php:82 _site/index.php:73 _tmp/index.php:83 index.php:73
+msgid ""
+"Notifications are denied for this site. Go to your browser preferences to "
+"enable notifications for this site."
+msgstr ""
+"Les notifications de bureau sont interdites pour cet site. Activez les dans "
+"les préférences de votre navigateur."
+
+#: _build/index.php:83 _site/index.php:74 _tmp/index.php:84 index.php:74
+msgid "No log has been found."
+msgstr "Aucun log n'a été trouvé."
+
+#: _build/index.php:84 _site/index.php:75 _tmp/index.php:85 index.php:75
+msgid "Search was done with RegEx engine"
+msgstr "Recherche effectuée avec Expression Regulière"
+
+#: _build/index.php:85 _site/index.php:76 _tmp/index.php:86 index.php:76
+msgid "Search was done with regular engine"
+msgstr "Recherche régulière effectuée"
+
+#: _build/index.php:86 _site/index.php:77 _tmp/index.php:87 index.php:77
+#, php-format
+msgid "No log has been found with regular search %s"
+msgstr "Aucun log n'a été trouvé avec la recherche régulière %s"
+
+#: _build/index.php:87 _site/index.php:78 _tmp/index.php:88 index.php:78
+#, php-format
+msgid "No log has been found with Reg Ex search %s"
+msgstr ""
+"Aucun log n'a été trouvé avec la recherche de type Expression Regulière %s"
+
+#: _build/index.php:88 _site/index.php:79 _tmp/index.php:89 index.php:79
+msgid "New logs are available"
+msgstr "Nouveaux logs disponibles"
+
+#: _build/index.php:89 _site/index.php:80 _tmp/index.php:90 index.php:80
+msgid "1 new log is available"
+msgstr "1 nouveau log disponible"
+
+#: _build/index.php:90 _site/index.php:81 _tmp/index.php:91 index.php:81
+#, php-format
+msgid "%s new logs are available"
+msgstr "%s nouveaux logs disponibles"
+
+#: _build/index.php:91 _site/index.php:82 _tmp/index.php:92 index.php:82
+msgid "1 log displayed,"
+msgstr "1 log affiché"
+
+#: _build/index.php:92 _site/index.php:83 _tmp/index.php:93 index.php:83
+#, php-format
+msgid "%s logs displayed,"
+msgstr "%s logs affichés,"
+
+#: _build/index.php:118 _site/index.php:142 _tmp/index.php:159 index.php:149
+msgid "Reload the page with default parameters"
+msgstr "Recharger la page avec les paramètres par défaut"
+
+#: _build/index.php:118 _site/index.php:152 _tmp/index.php:169 index.php:159
+msgid "Click to refresh or press the R key"
+msgstr "Cliquez pour rafraichir ou appuyez sur la touche R"
+
+#: _build/index.php:120 _build/index.php:127 _site/index.php:161
+#: _site/index.php:178 _tmp/index.php:178 _tmp/index.php:195 index.php:168
+#: index.php:185
+msgid "Select a log file to display"
+msgstr "Sélectionnez un fichier de log à afficher"
+
+#: _build/index.php:134 _site/index.php:195 _tmp/index.php:212 index.php:202
+msgid "Search in logs"
+msgstr "Recherche"
+
+#: _build/index.php:134 _site/index.php:199 _tmp/index.php:216 index.php:206
+msgid "Select a duration to check for new logs automatically"
+msgstr "Sélectionner une durée pour chercher de nouveaux logs automatiquement"
+
+#: _build/index.php:134 _site/index.php:200 _tmp/index.php:217 index.php:207
+msgid "No auto refresh"
+msgstr "Rafraichissement manuel"
+
+#: _build/index.php:136 _site/index.php:203 _tmp/index.php:220 index.php:210
+#, php-format
+msgid "Refresh every %ss"
+msgstr "Rafraichir toutes les %ss"
+
+#: _build/index.php:138 _site/index.php:210 _tmp/index.php:227 index.php:217
+msgid "Max count of logs to display"
+msgstr "Nombre maximal de lignes à afficher"
+
+#: _build/index.php:140 _site/index.php:213 _tmp/index.php:230 index.php:220
+#, php-format
+msgid "%s logs"
+msgstr "%s logs"
+
+#: _build/index.php:140 _site/index.php:213 _tmp/index.php:230 index.php:220
+#, php-format
+msgid "%s log"
+msgstr "%s log"
+
+#: _build/index.php:142 _site/index.php:219 _tmp/index.php:236 index.php:226
+msgid "Desktop notifications on supported modern browsers"
+msgstr "Notifications de bureau pour les navigateurs récents"
+
+#: _build/index.php:142 _site/index.php:231 _tmp/index.php:248 index.php:238
+msgid "Wide view"
+msgstr "Vue élargie"
+
+#: _build/index.php:142 _site/index.php:232 _tmp/index.php:249 index.php:239
+msgid "on"
+msgstr "oui"
+
+#: _build/index.php:142 _site/index.php:233 _tmp/index.php:250 index.php:240
+msgid "off"
+msgstr "non"
+
+#: _build/index.php:142 _site/index.php:242 _tmp/index.php:255 index.php:249
+msgid "Language"
+msgstr "Langue"
+
+#: _build/index.php:142 _site/index.php:243 _tmp/index.php:256 index.php:250
+msgid "Change language..."
+msgstr "Choisir une langue"
+
+#: _build/index.php:148 _site/index.php:255 _tmp/index.php:268 index.php:262
+msgid "Timezone"
+msgstr "Fuseau horaire"
+
+#: _build/index.php:148 _site/index.php:256 _tmp/index.php:269 index.php:263
+msgid "Change timezone..."
+msgstr "Changer fuseau horaire"
+
+#: _site/index.php:238 index.php:245
+msgid "Click on a date field to mark a row"
+msgstr "Cliquer sur une date pour marquer une ligne"
+
+#: _site/index.php:238 index.php:245
+msgid "Clear markers"
+msgstr "Effacer les marqueurs"
+
+#~ msgid ""
+#~ "%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "
+#~ "skipped line(s), <code>%s</code> unreadable line(s).<br/>File <code>%s</"
+#~ "code> was last modified on <code>%s</code>, size is <code>%s</code>%s"
+#~ msgstr ""
+#~ "%s en <code>%sms</code> avec <code>%s</code> de logs, <code>%s</code> "
+#~ "ligne(s) ignorée(s), <code>%s</code> ligne(s) illisible(s).<br/>Le "
+#~ "fichier <code>%s</code> a été modifié le <code>%s</code>, sa taille est "
+#~ "<code>%s</code>%s"
 
 #~ msgid ""
 #~ "Please copy <code>inc/test.php</code> to <code>inc/test.REMOVE_UPPERCASE."

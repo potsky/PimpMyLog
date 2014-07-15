@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.0.6 - 3bd72fd3e5c16505d276f59f25ae9c549d6536f3*/
+/*! pimpmylog - 1.1 - 3bd72fd3e5c16505d276f59f25ae9c549d6536f3*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -18,6 +18,7 @@ $locale_default   = 'gb_GB';
 $locale_available = array(
 	'gb_GB' => 'English',
 	'fr_FR' => 'Français',
+	'pt_BR' => 'Português do Brasil',
 );
 
 

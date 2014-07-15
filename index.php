@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.0.6 - 3bd72fd3e5c16505d276f59f25ae9c549d6536f3*/
+/*! pimpmylog - 1.1 - 3bd72fd3e5c16505d276f59f25ae9c549d6536f3*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -139,7 +139,7 @@ foreach ( get_refresh_options() as $r ) {
 foreach ( get_max_options() as $r ) {
 	echo '<option value="' . $r . '">' . sprintf( ( (int)$r>1 ) ? __( '%s logs' ) : __( '%s log' ) , $r ) . '</option>';
 }
-?></select></div>&nbsp;<button style="display:none" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>"><span class="glyphicon glyphicon-bell"></span></button></form><ul class="nav navbar-nav navbar-right"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a><ul class="dropdown-menu cogmenu" style="padding: 15px"><li><a href="#" id="cog-wide" class="cog" data-cog="wideview" data-value="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? 'on' : 'off' ; ?>"><span class="glyphicon glyphicon-fullscreen"></span>&nbsp;&nbsp;<?php _e('Wide view');?>&nbsp;<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><?php _e('on')?></span><span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><?php _e('off')?></span></a></li><li><select id="cog-lang" class="form-control input-sm" title="<?php _e( 'Language' );?>"><option value=""><?php _e( 'Change language...' );?></option><?php
+?></select></div>&nbsp;<button style="display:none" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>"><span class="glyphicon glyphicon-bell"></span></button></form><ul class="nav navbar-nav navbar-right"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a><ul class="dropdown-menu cogmenu" style="padding: 15px"><li><a href="#" id="cog-wide" class="cog btn btn-default" data-cog="wideview" data-value="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? 'on' : 'off' ; ?>"><span class="glyphicon glyphicon-fullscreen"></span>&nbsp;&nbsp;<?php _e('Wide view');?>&nbsp;<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><?php _e('on')?></span><span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><?php _e('off')?></span></a></li><li><a href="#" id="clear-markers" class="btn btn-default" title="<?php _e('Click on a date field to mark a row');?>"><?php _e('Clear markers');?></a></li><li><select id="cog-lang" class="form-control input-sm" title="<?php _e( 'Language' );?>"><option value=""><?php _e( 'Change language...' );?></option><?php
 									foreach ( $locale_available as $l => $n ) {
 										echo '<option value="' . $l . '"';
 										if ( $l == $locale ) echo ' selected="selected"';

@@ -4,15 +4,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-07-07 12:15+0100\n"
-"PO-Revision-Date: 2014-07-07 12:15+0100\n"
+"POT-Creation-Date: 2014-07-15 13:01+0100\n"
+"PO-Revision-Date: 2014-07-15 13:01+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: Português <>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.6.6\n"
 "X-Poedit-KeywordsList: gettext;gettext_noop;_x;_e;__;esc_attr__;esc_attr_e;"
 "esc_html__;esc_html_e;_ex;esc_attr_x;esc_html_x;_n;_nx;_n_noop;_nx_noop\n"
 "X-Poedit-Basepath: ../../..\n"
@@ -958,21 +958,29 @@ msgstr "ligado"
 msgid "off"
 msgstr "desligado"
 
-#: _build/index.php:142 _site/index.php:238 _tmp/index.php:255 index.php:245
+#: _build/index.php:142 _site/index.php:242 _tmp/index.php:255 index.php:249
 msgid "Language"
 msgstr "Idioma"
 
-#: _build/index.php:142 _site/index.php:239 _tmp/index.php:256 index.php:246
+#: _build/index.php:142 _site/index.php:243 _tmp/index.php:256 index.php:250
 msgid "Change language..."
 msgstr "Alterar idioma..."
 
-#: _build/index.php:148 _site/index.php:251 _tmp/index.php:268 index.php:258
+#: _build/index.php:148 _site/index.php:255 _tmp/index.php:268 index.php:262
 msgid "Timezone"
 msgstr "Fuso horário"
 
-#: _build/index.php:148 _site/index.php:252 _tmp/index.php:269 index.php:259
+#: _build/index.php:148 _site/index.php:256 _tmp/index.php:269 index.php:263
 msgid "Change timezone..."
 msgstr "Alterar o fuso horário"
+
+#: _site/index.php:238 index.php:245
+msgid "Click on a date field to mark a row"
+msgstr ""
+
+#: _site/index.php:238 index.php:245
+msgid "Clear markers"
+msgstr ""
 
 #~ msgid ""
 #~ "%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "
