@@ -4,7 +4,7 @@
  <title>Pimp my Log</title>
  <link href="http://pimpmylog.com/atom.xml" rel="self"/>
  <link href="http://pimpmylog.com"/>
- <updated>2014-04-30T08:43:09+02:00</updated>
+ <updated>2014-07-15T13:48:21+02:00</updated>
  <id>http://pimpmylog.com</id>
  <author>
    <name>Potsky</name>
@@ -13,10 +13,31 @@
 
  
  <entry>
-   <title>Version 1.0.3 released</title>
-   <link href="http://pimpmylog.com/general/2014/04/30/version-1.0.3-released"/>
+   <title>Version 1.1 released</title>
+   <link href="http://pimpmylog.com/general/2014/07/14/version-1.1-released"/>
+   <updated>2014-07-14T00:00:00+02:00</updated>
+   <id>http://pimpmylog.com/general/2014/07/14/version-1.1-released</id>
+   <content type="html">&lt;p&gt;Hi folks!&lt;/p&gt;
+
+&lt;p&gt;long time no see!&lt;/p&gt;
+
+&lt;p&gt;Version 1.1 is finally released with a useful feature when working on large set of logs : &lt;strong&gt;Markers&lt;/strong&gt;. Click on the date and the line will be marked during your current session. Go to the settings and click on the &lt;code&gt;clear markers&lt;/code&gt; button to clear all current markers.&lt;/p&gt;
+
+&lt;p&gt;This version also adds a new language : &lt;em&gt;portugese do brasil&lt;/em&gt; tribute to &lt;em&gt;FIFA 2014&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;It finally adds a better support for copy/paste rows and especially for Firefox users.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.1&quot;&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Version 1.0.4 released</title>
+   <link href="http://pimpmylog.com/general/2014/04/30/version-1.0.4-released"/>
    <updated>2014-04-30T00:00:00+02:00</updated>
-   <id>http://pimpmylog.com/general/2014/04/30/version-1.0.3-released</id>
+   <id>http://pimpmylog.com/general/2014/04/30/version-1.0.4-released</id>
    <content type="html">&lt;p&gt;Hi folks!&lt;/p&gt;
 
 &lt;p&gt;Version 1.1 is still on the road with new awesome features of course. For the moment, this release just add some convenient improvements for badges display.&lt;/p&gt;
@@ -26,6 +47,8 @@
 &lt;!--more--&gt;
 
 &lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.0.3&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.0.4&quot;&gt;&lt;/div&gt;
 </content>
  </entry>
  

@@ -5,12 +5,33 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2014-04-30T08:43:09+02:00</lastBuildDate>
-        <pubDate>2014-04-30T08:43:09+02:00</pubDate>
+        <lastBuildDate>2014-07-15T13:48:21+02:00</lastBuildDate>
+        <pubDate>2014-07-15T13:48:21+02:00</pubDate>
         <ttl>1800</ttl>
 
         <item>
-                <title>Version 1.0.3 released</title>
+                <title>Version 1.1 released</title>
+                <description>&lt;p&gt;Hi folks!&lt;/p&gt;
+
+&lt;p&gt;long time no see!&lt;/p&gt;
+
+&lt;p&gt;Version 1.1 is finally released with a useful feature when working on large set of logs : &lt;strong&gt;Markers&lt;/strong&gt;. Click on the date and the line will be marked during your current session. Go to the settings and click on the &lt;code&gt;clear markers&lt;/code&gt; button to clear all current markers.&lt;/p&gt;
+
+&lt;p&gt;This version also adds a new language : &lt;em&gt;portugese do brasil&lt;/em&gt; tribute to &lt;em&gt;FIFA 2014&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;It finally adds a better support for copy/paste rows and especially for Firefox users.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.1&quot;&gt;&lt;/div&gt;
+</description>
+                <link>http://pimpmylog.com/general/2014/07/14/version-1.1-released</link>
+                <guid>http://pimpmylog.com/general/2014/07/14/version-1.1-released</guid>
+                <pubDate>2014-07-14T00:00:00+02:00</pubDate>
+        </item>
+
+        <item>
+                <title>Version 1.0.4 released</title>
                 <description>&lt;p&gt;Hi folks!&lt;/p&gt;
 
 &lt;p&gt;Version 1.1 is still on the road with new awesome features of course. For the moment, this release just add some convenient improvements for badges display.&lt;/p&gt;
@@ -20,9 +41,11 @@
 &lt;!--more--&gt;
 
 &lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.0.3&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.0.4&quot;&gt;&lt;/div&gt;
 </description>
-                <link>http://pimpmylog.com/general/2014/04/30/version-1.0.3-released</link>
-                <guid>http://pimpmylog.com/general/2014/04/30/version-1.0.3-released</guid>
+                <link>http://pimpmylog.com/general/2014/04/30/version-1.0.4-released</link>
+                <guid>http://pimpmylog.com/general/2014/04/30/version-1.0.4-released</guid>
                 <pubDate>2014-04-30T00:00:00+02:00</pubDate>
         </item>
 
