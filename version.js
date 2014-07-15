@@ -1,8 +1,20 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.0.6",
+	"version"     : "1.1",
 	"versiondevh" : "3bd72fd3e5c16505d276f59f25ae9c549d6536f3",
 	"changelog" : {
+		"1.1" : {
+			"released" : "2014-07-14",
+			"new" : [
+				"New parser type prefake to simulate a pre field. This is a workaround for copy/paste logs from Firefox",
+				"Log marker: click on the date field to toggle a row marker",
+				"Log marker: new button in settings to clear all markers"
+			],
+			"fixed" : [
+				"Brazilian Portuguese is now available in the settings menu",
+				"You can now copy/paste all logs in Excel, formatting is preserved"
+			]
+		},
 		"1.0.6" : {
 			"released" : "2014-07-06",
 			"fixed" : [
