@@ -200,6 +200,7 @@ Supported languages are :
 
 * `en_GB` or empty for English
 * `fr_FR` for French
+* `pt_BR` for portugues do Brasil
 
 
 ## Maximum count of logs (`m`)

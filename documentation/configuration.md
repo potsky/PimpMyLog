@@ -716,14 +716,6 @@ The value of this type is dynamic. Date format is a PHP date format and is avail
 <!-- -->
 
 
-### type *numeral*
-
-Numeral uses the awesome library *Numeral.js* available [here](http://numeraljs.com).
-
-- *eg:* `numeral:0b` will produce an whole number of bytes
-- *eg:* `numeral:0.0` will produce an whole number formated with a thousand separator
-
-
 ### type *ip*
 
 The *IP* type assumes that the value is a valid IP address.
@@ -740,11 +732,43 @@ The value will be linked to address `WhatYouWant://value`
 
 ### type *link*
 
-The *link* type simply add a link to the value.
+The *link* type simply adds a link to the value.
 
 - *eg*: type `link` on value `http://93.184.216.119` will produce text `http://93.184.216.119` linked to <http://93.184.216.119>  
 - *eg*: type `link` on value `http://www.google.fr` will produce text `http://www.google.fr` linked to <http://www.google.fr>  
 
+
+
+### type *numeral*
+
+Numeral uses the awesome library *Numeral.js* available [here](http://numeraljs.com).
+
+- *eg:* `numeral:0b` will produce an whole number of bytes
+- *eg:* `numeral:0.0` will produce an whole number formated with a thousand separator
+
+
+
+### type *pre*
+
+The *pre* type simply formats text with standart CSS `white-space : pre;`. It means that it respects spaces, tabs and line breaks;
+
+- *eg:* `pre`
+
+
+### type *prefake*
+
+The *prefake* type is a replacement for the *pre* type for Firefox user who wants to copy/paste *multiline* logs. This is a workaround for [the older bug of history](https://bugzilla.mozilla.org/show_bug.cgi?id=116083) ouch !
+
+It will only simulate breaklines, not spaces.
+
+- *eg:* `prefake`
+
+### type *numeral*
+
+Numeral uses the awesome library *Numeral.js* available [here](http://numeraljs.com).
+
+- *eg:* `numeral:0b` will produce an whole number of bytes
+- *eg:* `numeral:0.0` will produce an whole number formated with a thousand separator
 
 ### type *ua*
 
