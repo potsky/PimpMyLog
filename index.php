@@ -234,11 +234,15 @@ foreach ( get_max_options() as $r ) {
 						<ul class="dropdown-menu cogmenu" style="padding: 15px;">
 
 							<li>
-								<a href="#" id="cog-wide" class="cog" data-cog="wideview" data-value="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? 'on' : 'off' ; ?>">
+								<a href="#" id="cog-wide" class="cog btn btn-default" data-cog="wideview" data-value="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? 'on' : 'off' ; ?>">
 									<span class="glyphicon glyphicon-fullscreen"></span>&nbsp;&nbsp;<?php _e('Wide view');?>&nbsp;
 									<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><?php _e('on')?></span>
 									<span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><?php _e('off')?></span>
 								</a>
+							</li>
+
+							<li>
+								<a href="#" id="clear-markers" class="btn btn-default" title="<?php _e('Click on a date field to mark a row');?>"><?php _e('Clear markers');?></a>
 							</li>
 
 							<li>

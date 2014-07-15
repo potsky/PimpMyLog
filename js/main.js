@@ -552,7 +552,7 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 				}
 				else if ( 'date' === type.parser ) {
 					title = logs.logs[ log ].pml;
-					val   = '<div class="nozclip" style="position: relative;">' + val_cut( val , type.cut ) + '</div>';
+					val   = val_cut( val , type.cut );
 				}
 				else if ( 'numeral' === type.parser ) {
 					if ( val !== '' ) {
@@ -594,6 +594,9 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 					if ( uaf === true ) {
 						val = $.trim( type.param );
 					}
+				}
+				else if ( 'prefake' === type.parser ) {
+					val = val_cut( val.replace(/(?:\r\n|\r|\n)/g,'<br/>') , type.cut );
 				}
 				else {
 					val = val_cut( val , type.cut );
@@ -852,6 +855,18 @@ $(function() {
 
 	notify();
 
+	// Marker
+	$('#logsbody').click(function(e) {
+		var a = $(e.target);
+		if ( $(a).hasClass('pml-date') ) {
+			$(a).siblings().toggleClass('marker');
+			$(a).toggleClass('marker');
+		}
+
+	});
+	$('#clear-markers').click(function() {
+		$('.marker').removeClass('marker');
+	});
 
 	// Pull to refresh
 	if ( pull_to_refresh === true ) {

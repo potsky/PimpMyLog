@@ -9,6 +9,7 @@ $locale_default   = 'gb_GB';
 $locale_available = array(
 	'gb_GB' => 'English',
 	'fr_FR' => 'Français',
+	'pt_BR' => 'Português do Brasil',
 );
 
 

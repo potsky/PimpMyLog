@@ -3,76 +3,75 @@ This stylesheet is located at /css/config.inc.css
 Your stylesheet will be loaded instead of this one if you create a file located at /css/config.inc.user.css
  */
 
-
 /* For logs table header */
 .logs th {
-	text-align: center;
+	text-align : center;
 }
 
 /* For all logs table cells */
 .logs td {
-	font-size: 0.8em;
+	font-size : 0.8em;
 }
 
 /* Specific to cell types */
 .pml-pre,
 .pml-txt,
 .pml-link {
-	font-size: 0.8em;
-	white-space: pre-wrap;
-	-ms-word-break: break-all;
-	word-break: break-all;
-	word-break: break-word;
-	-webkit-hyphens: auto;
-	-moz-hyphens: auto;
-	hyphens: auto;
+	font-size       : 0.8em;
+	white-space     : pre-wrap;
+	-ms-word-break  : break-all;
+	word-break      : break-all;
+	word-break      : break-word;
+	-webkit-hyphens : auto;
+	-moz-hyphens    : auto;
+	hyphens         : auto;
 }
 
-.pml-pre {
-	font-family: monospace, serif;
+.pml-pre, .pml-prefake {
+	font-family : monospace, serif;
 }
 
 .pml-numeral {
-	font-size: 0.8em;
-	text-align: right;
-	white-space:nowrap;
+	font-size   : 0.8em;
+	text-align  : right;
+	white-space : nowrap;
 }
 
 
 .pml-badge {
-	font-size: 0.9em;
-	text-align: center;
+	font-size  : 0.9em;
+	text-align : center;
 }
 
 /* Specific to column */
 .pml-CMD {
-	white-space:nowrap;
+	white-space :nowrap;
 }
 
 .pml-Severity {
-	font-size: 1em;
+	font-size : 1em;
 }
 
 .pml-Code {
-	text-align: center;
+	text-align : center;
 }
 
 .pml-Referer {
-	min-width: 100px;
+	min-width : 100px;
 }
 
 .pml-UA {
-  font-size: 0.8em;
+	font-size : 0.8em;
 }
 
 .pml-URL {
-	font-size: 0.8em;
-	-ms-word-break: break-all;
-	word-break: break-all;
-	word-break: break-word;
-	-webkit-hyphens: auto;
-	-moz-hyphens: auto;
-	hyphens: auto;
+	font-size       : 0.8em;
+	-ms-word-break  : break-all;
+	word-break      : break-all;
+	word-break      : break-word;
+	-webkit-hyphens : auto;
+	-moz-hyphens    : auto;
+	hyphens         : auto;
 }
 
 .pml-User {
@@ -81,8 +80,18 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 
 /* New log color on the row */
 .newlog td:first-child {
-	background-position: 0 0;
-	background-image:url(../img/1x1pink_low.gif);
-	background-size: 1px 100%;
-	background-repeat: no-repeat;
+	background-position : 0 0;
+	background-image    : url(../img/1x1pink_low.gif);
+	background-size     : 1px 100%;
+	background-repeat   : no-repeat;
 }
+
+/* Marker colors when you click on a date field */
+td.pml-date {
+	cursor:pointer;
+}
+tr:nth-child(odd)        td.marker { background-color : #efef00!important; }
+tr:nth-child(even)       td.marker { background-color : #ffff00!important; }
+tr:nth-child(odd):hover  td.marker { background-color : #e8e800!important; }
+tr:nth-child(even):hover td.marker { background-color : #f8f800!important; }
+
