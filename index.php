@@ -130,7 +130,31 @@ foreach ( $files as $file_id=>$file ) {
 	echo '<option value="' . $file_id . '"' . $selected . '>' . $file['display'] . '</option>';
 }
 ?></select></div>&nbsp;</form><?php
-}
+}   
+?>
+
+<dl class="DropDown nav navbar-nav"> 
+    <dt>
+    <a href="#">
+        <span class="hida">Select</span>    
+        <p class="multiSel"></p>  
+    </a>
+    </dt>
+
+    <dd>
+        <div class="mutliSelect">
+            <ul id = "chooseColumn" class = "classChooseColumn"></ul>
+        </div>
+    </dd>
+</dl>
+                    
+                    
+                    
+<?php
+
+
+
+
 ?><form class="navbar-form navbar-right"><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No auto refresh' );?></option><?php
 foreach ( get_refresh_options() as $r ) {
 	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh every %ss' ) , $r ) . '</option>';
