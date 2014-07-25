@@ -1,12 +1,12 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.1.1",
-	"versiondevh" : "af493591572050437f495b8e3cec9e0ec6ce18fe",
+	"versiondevh" : "a6f1baed5bba8a7a23619306d2526cdbc77bf5fa",
 	"changelog" : {
 		"1.1.1" : {
 			"released" : "2014-07-25",
 			"new" : [
-				"You can now choose which columns to display at runtime"
+				"You can now choose which columns to display at runtime #19"
 			]
 		},
 		"1.1" : {
