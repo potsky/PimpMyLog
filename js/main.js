@@ -105,7 +105,11 @@ var get_columns = function( a ) {
 var set_columns = function( a ) {
 	"use strict";
 	if ( $.isArray( a ) === true ) {
-		displayed_th = a;
+		if ( ( a.length === 1 ) && ( a[0] === "-1" ) ) {
+			displayed_th = false;
+		} else {
+			displayed_th = a;
+		}
 	} else {
 		displayed_th = false;
 	}
