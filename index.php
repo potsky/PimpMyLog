@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.1 - 3bd72fd3e5c16505d276f59f25ae9c549d6536f3*/
+/*! pimpmylog - 1.1.1 - 6b7d150acb620370ee6fac774549e5ccda68ba69*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -49,7 +49,11 @@ if ( ! file_exists( 'config.user.json' ) ) {
 //////////////////////////////
 // Load config and defaults //
 //////////////////////////////
+
+// $files is defined as global here
 config_load();
+
+// Constants are defined here
 init();
 
 
@@ -91,6 +95,7 @@ $lemma = array(
 	'display_log'       => __( '1 log displayed,' ),
 	'display_nlogs'     => __( '%s logs displayed,' ),
 	'error'             => __( 'An error occurs!' ),
+	'toggle_column'     => __( 'Toggle column %s' ),
 );
 
 
@@ -131,15 +136,15 @@ foreach ( $files as $file_id=>$file ) {
 }
 ?></select></div>&nbsp;</form><?php
 }
-?><form class="navbar-form navbar-right"><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No auto refresh' );?></option><?php
+?><form class="navbar-form navbar-right"><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No refresh' );?></option><?php
 foreach ( get_refresh_options() as $r ) {
-	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh every %ss' ) , $r ) . '</option>';
+	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh %ss' ) , $r ) . '</option>';
 }
 ?></select></div>&nbsp;<div class="form-group"><select id="max" class="form-control input-sm" title="<?php _e( 'Max count of logs to display' );?>"><?php
 foreach ( get_max_options() as $r ) {
 	echo '<option value="' . $r . '">' . sprintf( ( (int)$r>1 ) ? __( '%s logs' ) : __( '%s log' ) , $r ) . '</option>';
 }
-?></select></div>&nbsp;<button style="display:none" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>"><span class="glyphicon glyphicon-bell"></span></button></form><ul class="nav navbar-nav navbar-right"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a><ul class="dropdown-menu cogmenu" style="padding: 15px"><li><a href="#" id="cog-wide" class="cog btn btn-default" data-cog="wideview" data-value="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? 'on' : 'off' ; ?>"><span class="glyphicon glyphicon-fullscreen"></span>&nbsp;&nbsp;<?php _e('Wide view');?>&nbsp;<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><?php _e('on')?></span><span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><?php _e('off')?></span></a></li><li><a href="#" id="clear-markers" class="btn btn-default" title="<?php _e('Click on a date field to mark a row');?>"><?php _e('Clear markers');?></a></li><li><select id="cog-lang" class="form-control input-sm" title="<?php _e( 'Language' );?>"><option value=""><?php _e( 'Change language...' );?></option><?php
+?></select></div>&nbsp;<button style="display:none" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>"><span class="glyphicon glyphicon-bell"></span></button></form><ul class="nav navbar-nav navbar-right"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="thmenuicon glyphicon glyphicon-th-list"></span></a><ul class="dropdown-menu thmenu" style="padding: 15px"><li><a href="#" class="" title="<?php _e('Displayed columns');?>"><?php _e('Displayed columns');?></a></li></ul></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a><ul class="dropdown-menu cogmenu" style="padding: 15px"><li><a href="#" id="cog-wide" class="cog btn btn-default" data-cog="wideview" data-value="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? 'on' : 'off' ; ?>"><span class="glyphicon glyphicon-fullscreen"></span>&nbsp;&nbsp;<?php _e('Wide view');?>&nbsp;<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><?php _e('on')?></span><span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><?php _e('off')?></span></a></li><li><a href="#" id="clear-markers" class="btn btn-default" title="<?php _e('Click on a date field to mark a row');?>"><?php _e('Clear markers');?></a></li><li><select id="cog-lang" class="form-control input-sm" title="<?php _e( 'Language' );?>"><option value=""><?php _e( 'Change language...' );?></option><?php
 									foreach ( $locale_available as $l => $n ) {
 										echo '<option value="' . $l . '"';
 										if ( $l == $locale ) echo ' selected="selected"';
