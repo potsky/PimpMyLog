@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.1 - 3bd72fd3e5c16505d276f59f25ae9c549d6536f3*/
+/*! pimpmylog - 1.1.1 - 6b7d150acb620370ee6fac774549e5ccda68ba69*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -155,18 +155,19 @@ function init() {
  */
 function config_load( $path = 'config.user.json' ) {
 	global $files, $badges;
-	$files  = array();
-	$badges = array();
 
 	if ( ! file_exists( $path ) ) {
 		return false;
 	}
+
+	// Read config file
 	$config = json_decode( file_get_contents( $path ) , true );
 	if ( $config == null ) {
 		return false;
 	}
-	$badges = $config[ 'badges' ];
 
+	// Get badges
+	$badges = $config[ 'badges' ];
 	foreach ( $config[ 'globals' ] as $cst => $val ) {
 		if ( $cst == strtoupper( $cst ) ) {
 			@define( $cst , $val );
