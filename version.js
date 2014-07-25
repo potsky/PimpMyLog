@@ -3,6 +3,12 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"1.1.1" : {
+			"released" : "2014-07-25",
+			"new" : [
+				"You can now choose which columns to display at runtime"
+			]
+		},
 		"1.1" : {
 			"released" : "2014-07-14",
 			"new" : [

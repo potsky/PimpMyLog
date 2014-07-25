@@ -40,7 +40,11 @@ if ( ! file_exists( 'config.user.json' ) ) {
 //////////////////////////////
 // Load config and defaults //
 //////////////////////////////
+
+// $files is defined as global here
 config_load();
+
+// Constants are defined here
 init();
 
 
@@ -82,6 +86,7 @@ $lemma = array(
 	'display_log'       => __( '1 log displayed,' ),
 	'display_nlogs'     => __( '%s logs displayed,' ),
 	'error'             => __( 'An error occurs!' ),
+	'toggle_column'     => __( 'Toggle column %s' ),
 );
 
 
@@ -204,10 +209,10 @@ foreach ( $files as $file_id=>$file ) {
 
 					<div class="form-group">
 						<select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>">
-							<option value="0"><?php _e( 'No auto refresh' );?></option>
+							<option value="0"><?php _e( 'No refresh' );?></option>
 <?php
 foreach ( get_refresh_options() as $r ) {
-	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh every %ss' ) , $r ) . '</option>';
+	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh %ss' ) , $r ) . '</option>';
 }
 ?>
 						</select>
@@ -229,6 +234,16 @@ foreach ( get_max_options() as $r ) {
 				</form>
 
 				<ul class="nav navbar-nav navbar-right">
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="thmenuicon glyphicon glyphicon-th-list"></span></a>
+						<ul class="dropdown-menu thmenu" style="padding: 15px;">
+							<li>
+								<a href="#" class="" title="<?php _e('Displayed columns');?>"><?php _e('Displayed columns');?></a>
+							</li>
+						</ul>
+					</li>
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
 						<ul class="dropdown-menu cogmenu" style="padding: 15px;">

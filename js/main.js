@@ -3,6 +3,7 @@
 
 var file,
 	notification,
+	displayed_th,
 	auto_refresh_timer,
 	fingerprint,
 	first_launch,
@@ -21,7 +22,7 @@ var query_parameters = function () {
 	for(var i = 0; i < hashes.length; i++) {
 		hash = hashes[i].split('=');
 		vars.push(hash[0]);
-		vars[hash[0]] = hash[1];
+		vars[hash[0]] = decodeURIComponent( hash[1] );
 	}
 	return vars;
 }();
@@ -47,7 +48,8 @@ var reload_page = function( urlonly ) {
 		'm'  : $('#max').val(),
 		'r'  : $('#autorefresh').val(),
 		's'  : $('#search').val(),
-		'n'  : notification
+		't'  : get_columns(),
+		'n'  : notification,
 	});
 
 	if ( urlonly === false ) {
@@ -80,6 +82,34 @@ var set_max = function( a ) {
 	$('#max').val( a );
 };
 
+
+/**
+ * Get the displayed columns
+ *
+ * @return  {Array}
+ */
+var get_columns = function( a ) {
+	"use strict";
+	if ( $.isArray( displayed_th ) === true ) {
+		return displayed_th.join(',');
+	} else {
+		return -1;
+	}
+};
+
+/**
+ * Set the displayed columns
+ *
+ * @param  {string}  a  the value of the wanted selected option
+ */
+var set_columns = function( a ) {
+	"use strict";
+	if ( $.isArray( a ) === true ) {
+		displayed_th = a;
+	} else {
+		displayed_th = false;
+	}
+};
 
 /**
  * Set the window title according to the current displayed file
@@ -121,6 +151,61 @@ var is_notification = function() {
 	"use strict";
 	return $('#notification').hasClass('active');
 };
+
+
+/**
+ * Return if a colum should be displayed or not
+ *
+ * @return  {Boolean}
+ */
+var is_column_displayed = function( h ) {
+	"use strict";
+	if ( $.isArray( displayed_th ) === true ) {
+		return ( $.inArray( h , displayed_th ) > -1 );
+	} else {
+		return true;
+	}
+};
+
+
+/**
+ * Remove a column
+ */
+var remove_column = function( target ) {
+	"use strict";
+	$( '.thmenuitem[data-h="' + target + '"]' ).removeClass('thmenuon');
+	$( '.thmenuitem[data-h="' + target + '"]' ).addClass('thmenuoff');
+	$( "." + target ).hide();
+	$( ".pml-" + target ).hide();
+
+	var index = $.inArray( target , displayed_th );
+	if (index > -1) {
+	    displayed_th.splice( index, 1 );
+	}
+};
+
+
+/**
+ * Add a column
+ */
+var add_column = function( target ) {
+	"use strict";
+	$( '.thmenuitem[data-h="' + target + '"]' ).removeClass('thmenuoff');
+	$( '.thmenuitem[data-h="' + target + '"]' ).addClass('thmenuon');
+	$( "." + target ).show();
+	$( ".pml-" + target ).show();
+
+	if ( $.isArray( displayed_th ) === true ) {
+		if ( $.inArray( target , displayed_th ) === -1 ) {
+			displayed_th.push( target );
+		}
+	} else {
+		displayed_th = [ target ];
+	}
+};
+
+
+
 
 
 /**
@@ -352,11 +437,18 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			}
 			set_auto_refresh( found );
 
+			// Displayed columns
+			if ( query_parameters.t !== undefined ) {
+				set_columns( query_parameters.t.split(',') );
+			} else {
+				set_columns( files[file].thinit );
+			}
 		}
 		else {
 			set_max( files[file].max );
 			set_auto_refresh( files[file].refresh );
 			set_notification( files[file].notify );
+			set_columns( files[file].thinit );
 		}
 		load_full_file = true;
 	}
@@ -483,22 +575,45 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 		}
 
 		// Header
-		$(function() {
-			if ( logs.headers ) {
-				$( '#logshead' ).text( '' );
-				var tr     = $('<tr>').addClass( file );
-				var sort   = 'Date';
-				var sortsc = 'down';
-				for ( var h in logs.headers ) {
-//					if ( sort === h ) {
-//						$( '<th><a class="glyphicon glyphicon-chevron-' + sortsc + '"/> ' + logs.headers[ h ] + ' </a></th>' ).addClass( h ).appendTo( tr );
-//					} else {
-						$( '<th>' + logs.headers[ h ] + '</th>' ).addClass( h ).appendTo( tr );
-//					}
+		if ( logs.headers ) {
+			$( '#logshead' ).text( '' );
+			$( '.thmenucol' ).remove();
+
+			var tr = $('<tr>').addClass( file );
+			for ( var h in logs.headers ) {
+				$('.thmenuicon').removeClass( 'text-danger' );
+				var a = $( '<th>' + logs.headers[ h ] + '</th>' ).addClass( h ).appendTo( tr );
+				if ( is_column_displayed( h ) ) {
+					var c = 'on';
+				} else {
+					$(a).hide();
+					var c = 'off';
+					$('.thmenuicon').addClass( 'text-danger' );
 				}
-				tr.appendTo( '#logshead' );
+				$( '<li class="thmenucol"><a href="#" class="btn btn-default thmenuitem thmenu' + c + '" data-h="' + h + '" title="' + lemma.toggle_column.replace( '%s' , logs.headers[ h ] ) + '">' + logs.headers[ h ] + '</a></li>' ).appendTo( '.thmenu' );
 			}
-		});
+			tr.appendTo( '#logshead' );
+
+			// Refresh th menu buttons when click
+			$('.thmenuitem').click(function(e) {
+			    e.stopPropagation(); // Do not close the dropdown
+				if ( $(this).hasClass('thmenuon') ) {
+					remove_column( $(this).attr('data-h') );
+				}
+				else {
+					add_column( $(this).attr('data-h') );
+				}
+console.log( $('.thmenuoff').length );
+				if ( $('.thmenuoff').length > 0 ) {
+					$('.thmenuicon').addClass( 'text-danger' );
+				} else {
+					$('.thmenuicon').removeClass( 'text-danger' );
+				}
+				reload_page( true );
+			});
+		}
+
+
 
 		// Body
 		if ( logs.full ) {
@@ -602,8 +717,8 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 					val = val_cut( val , type.cut );
 				}
 
-				$( '<td>' + val + '</td>' ).prop( "title" , title ).addClass( 'pml-' + c + " pml-" + type.parser ).appendTo( tr );
-
+				var a = $( '<td>&nbsp;' + val + '</td>' ).prop( "title" , title ).addClass( 'pml-' + c + " pml-" + type.parser ).appendTo( tr );
+				if ( ! is_column_displayed( c ) ) $(a).hide();
 			}
 
 			if ( ! logs.full ) {

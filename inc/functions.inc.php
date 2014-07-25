@@ -146,18 +146,19 @@ function init() {
  */
 function config_load( $path = 'config.user.json' ) {
 	global $files, $badges;
-	$files  = array();
-	$badges = array();
 
 	if ( ! file_exists( $path ) ) {
 		return false;
 	}
+
+	// Read config file
 	$config = json_decode( file_get_contents( $path ) , true );
 	if ( $config == null ) {
 		return false;
 	}
-	$badges = $config[ 'badges' ];
 
+	// Get badges
+	$badges = $config[ 'badges' ];
 	foreach ( $config[ 'globals' ] as $cst => $val ) {
 		if ( $cst == strtoupper( $cst ) ) {
 			@define( $cst , $val );
