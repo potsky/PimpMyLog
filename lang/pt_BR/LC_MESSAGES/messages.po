@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-07-15 13:01+0100\n"
-"PO-Revision-Date: 2014-07-15 13:01+0100\n"
+"POT-Creation-Date: 2014-07-25 12:58+0100\n"
+"PO-Revision-Date: 2014-07-25 13:00+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: Português <>\n"
 "Language: pt\n"
@@ -321,9 +321,9 @@ msgstr "Ação desconhecida, abortar."
 msgid "%s% Complete"
 msgstr "%s% Completo"
 
-#: _build/inc/configure.php:322 _build/index.php:93
-#: _site/inc/configure.php:313 _site/index.php:84 _tmp/inc/configure.php:323
-#: _tmp/index.php:94 inc/configure.php:313 index.php:84
+#: _build/inc/configure.php:322 _build/index.php:97
+#: _site/inc/configure.php:313 _site/index.php:88 _tmp/inc/configure.php:323
+#: _tmp/index.php:98 inc/configure.php:313 index.php:88
 msgid "An error occurs!"
 msgstr "Um erro ocorreu!"
 
@@ -444,19 +444,19 @@ msgstr ""
 msgid "Pimp my Logs now!"
 msgstr "Pimp my Logs agora!"
 
-#: _build/inc/functions.inc.php:233 _site/inc/functions.inc.php:224
-#: _tmp/inc/functions.inc.php:234 inc/functions.inc.php:224
+#: _build/inc/functions.inc.php:234 _site/inc/functions.inc.php:225
+#: _tmp/inc/functions.inc.php:235 inc/functions.inc.php:225
 msgid "No file is defined in <code>files</code> array"
 msgstr "Nenhum arquivo está definido no vetor <code>files</code>"
 
-#: _build/inc/functions.inc.php:241 _site/inc/functions.inc.php:232
-#: _tmp/inc/functions.inc.php:242 inc/functions.inc.php:232
+#: _build/inc/functions.inc.php:242 _site/inc/functions.inc.php:233
+#: _tmp/inc/functions.inc.php:243 inc/functions.inc.php:233
 #, php-format
 msgid "<code>%s</code> is mandatory for file ID <code>%s</code>"
 msgstr "<code>%s</code> é mandatório para o arquivo de ID <code>%s</code>"
 
-#: _build/inc/functions.inc.php:336 _site/inc/functions.inc.php:327
-#: _tmp/inc/functions.inc.php:337 inc/functions.inc.php:327
+#: _build/inc/functions.inc.php:337 _site/inc/functions.inc.php:328
+#: _tmp/inc/functions.inc.php:338 inc/functions.inc.php:328
 msgid "B KBMBGBTBPB"
 msgstr "B KBMBGBTBPB"
 
@@ -787,9 +787,9 @@ msgstr ""
 msgid "Unable to check remote version!"
 msgstr "Não é possível verificar a versão remota!"
 
-#: _build/index.php:18 _build/index.php:61 _site/index.php:9
-#: _site/index.php:52 _tmp/index.php:19 _tmp/index.php:62 index.php:9
-#: index.php:52
+#: _build/index.php:18 _build/index.php:65 _site/index.php:9
+#: _site/index.php:56 _tmp/index.php:19 _tmp/index.php:66 index.php:9
+#: index.php:56
 msgid "Oups!"
 msgstr "Oups!"
 
@@ -826,17 +826,17 @@ msgstr ""
 msgid "Or let me try to configure it for you!"
 msgstr "Ou deixe-me tentar configurá-lo para você."
 
-#: _build/index.php:43 _build/index.php:72 _site/index.php:34
-#: _site/index.php:63 _tmp/index.php:44 _tmp/index.php:73 index.php:34
-#: index.php:63
+#: _build/index.php:43 _build/index.php:76 _site/index.php:34
+#: _site/index.php:67 _tmp/index.php:44 _tmp/index.php:77 index.php:34
+#: index.php:67
 msgid "Configure now"
 msgstr "Configurar agora"
 
-#: _build/index.php:63 _site/index.php:54 _tmp/index.php:64 index.php:54
+#: _build/index.php:67 _site/index.php:58 _tmp/index.php:68 index.php:58
 msgid "<code>config.user.json</code> configuration file is buggy:"
 msgstr "O arquivo de configuração <code>config.user.json</code> está bugado:"
 
-#: _build/index.php:69 _site/index.php:60 _tmp/index.php:70 index.php:60
+#: _build/index.php:73 _site/index.php:64 _tmp/index.php:74 index.php:64
 msgid ""
 "If you want me to build the configuration for you, please remove file "
 "<code>config.user.json</code> at root and click below."
@@ -844,7 +844,7 @@ msgstr ""
 "Se você quer que eu construa a configuração para você, por favor remova o "
 "arquivo <code>config.user.json</code> no diretório raiz e clique abaixo."
 
-#: _build/index.php:82 _site/index.php:73 _tmp/index.php:83 index.php:73
+#: _build/index.php:86 _site/index.php:77 _tmp/index.php:87 index.php:77
 msgid ""
 "Notifications are denied for this site. Go to your browser preferences to "
 "enable notifications for this site."
@@ -852,135 +852,144 @@ msgstr ""
 "Notificações estão bloqueadas para este site. Vá para as preferências do seu "
 "navegador para ativar as notificações para este site."
 
-#: _build/index.php:83 _site/index.php:74 _tmp/index.php:84 index.php:74
+#: _build/index.php:87 _site/index.php:78 _tmp/index.php:88 index.php:78
 msgid "No log has been found."
 msgstr "Nenhum log foi encontrado."
 
-#: _build/index.php:84 _site/index.php:75 _tmp/index.php:85 index.php:75
+#: _build/index.php:88 _site/index.php:79 _tmp/index.php:89 index.php:79
 msgid "Search was done with RegEx engine"
 msgstr "Busca efetuada com o motor de Expressões Regulares."
 
-#: _build/index.php:85 _site/index.php:76 _tmp/index.php:86 index.php:76
+#: _build/index.php:89 _site/index.php:80 _tmp/index.php:90 index.php:80
 msgid "Search was done with regular engine"
 msgstr "Busca efetuada com o motor padrão."
 
-#: _build/index.php:86 _site/index.php:77 _tmp/index.php:87 index.php:77
+#: _build/index.php:90 _site/index.php:81 _tmp/index.php:91 index.php:81
 #, php-format
 msgid "No log has been found with regular search %s"
 msgstr "Nenhum log foi encontrado com a busca padrão %s"
 
-#: _build/index.php:87 _site/index.php:78 _tmp/index.php:88 index.php:78
+#: _build/index.php:91 _site/index.php:82 _tmp/index.php:92 index.php:82
 #, php-format
 msgid "No log has been found with Reg Ex search %s"
 msgstr "Nenhum log foi encontrado com a busca por Expressões Regulares %s"
 
-#: _build/index.php:88 _site/index.php:79 _tmp/index.php:89 index.php:79
+#: _build/index.php:92 _site/index.php:83 _tmp/index.php:93 index.php:83
 msgid "New logs are available"
 msgstr "Novos logs disponíveis"
 
-#: _build/index.php:89 _site/index.php:80 _tmp/index.php:90 index.php:80
+#: _build/index.php:93 _site/index.php:84 _tmp/index.php:94 index.php:84
 msgid "1 new log is available"
 msgstr "1 novo log está disponível"
 
-#: _build/index.php:90 _site/index.php:81 _tmp/index.php:91 index.php:81
+#: _build/index.php:94 _site/index.php:85 _tmp/index.php:95 index.php:85
 #, php-format
 msgid "%s new logs are available"
 msgstr "%s novos logs estão disponíveis"
 
-#: _build/index.php:91 _site/index.php:82 _tmp/index.php:92 index.php:82
+#: _build/index.php:95 _site/index.php:86 _tmp/index.php:96 index.php:86
 msgid "1 log displayed,"
 msgstr "1 log exibido,"
 
-#: _build/index.php:92 _site/index.php:83 _tmp/index.php:93 index.php:83
+#: _build/index.php:96 _site/index.php:87 _tmp/index.php:97 index.php:87
 #, php-format
 msgid "%s logs displayed,"
 msgstr "%s logs exibidos,"
 
-#: _build/index.php:118 _site/index.php:142 _tmp/index.php:159 index.php:149
+#: _build/index.php:98 _site/index.php:89 _tmp/index.php:99 index.php:89
+#, php-format
+msgid "Toggle column %s"
+msgstr "Alternar coluna %s"
+
+#: _build/index.php:123 _site/index.php:147 _tmp/index.php:164 index.php:154
 msgid "Reload the page with default parameters"
 msgstr "Recarregue a página com os parâmetros iniciais."
 
-#: _build/index.php:118 _site/index.php:152 _tmp/index.php:169 index.php:159
+#: _build/index.php:123 _site/index.php:157 _tmp/index.php:174 index.php:164
 msgid "Click to refresh or press the R key"
 msgstr "Clique em recarregar ou pressione a tecla R"
 
-#: _build/index.php:120 _build/index.php:127 _site/index.php:161
-#: _site/index.php:178 _tmp/index.php:178 _tmp/index.php:195 index.php:168
-#: index.php:185
+#: _build/index.php:125 _build/index.php:132 _site/index.php:166
+#: _site/index.php:183 _tmp/index.php:183 _tmp/index.php:200 index.php:173
+#: index.php:190
 msgid "Select a log file to display"
 msgstr "Selecione um arquivo de log para exibir"
 
-#: _build/index.php:134 _site/index.php:195 _tmp/index.php:212 index.php:202
+#: _build/index.php:139 _site/index.php:200 _tmp/index.php:217 index.php:207
 msgid "Search in logs"
 msgstr "Buscar nos logs"
 
-#: _build/index.php:134 _site/index.php:199 _tmp/index.php:216 index.php:206
+#: _build/index.php:139 _site/index.php:204 _tmp/index.php:221 index.php:211
 msgid "Select a duration to check for new logs automatically"
 msgstr "Selecione o período para verificar por novos logs automaticamente"
 
-#: _build/index.php:134 _site/index.php:200 _tmp/index.php:217 index.php:207
-msgid "No auto refresh"
-msgstr "Sem atualização automática"
+#: _build/index.php:139 _site/index.php:205 _tmp/index.php:222 index.php:212
+msgid "No refresh"
+msgstr "Sem atualização"
 
-#: _build/index.php:136 _site/index.php:203 _tmp/index.php:220 index.php:210
+#: _build/index.php:141 _site/index.php:208 _tmp/index.php:225 index.php:215
 #, php-format
-msgid "Refresh every %ss"
-msgstr "Atualizar a cada %ss"
+msgid "Refresh %ss"
+msgstr "Atualizar %ss"
 
-#: _build/index.php:138 _site/index.php:210 _tmp/index.php:227 index.php:217
+#: _build/index.php:143 _site/index.php:215 _tmp/index.php:232 index.php:222
 msgid "Max count of logs to display"
 msgstr "Número máximo de logs a exibir"
 
-#: _build/index.php:140 _site/index.php:213 _tmp/index.php:230 index.php:220
+#: _build/index.php:145 _site/index.php:218 _tmp/index.php:235 index.php:225
 #, php-format
 msgid "%s logs"
 msgstr "%s logs"
 
-#: _build/index.php:140 _site/index.php:213 _tmp/index.php:230 index.php:220
+#: _build/index.php:145 _site/index.php:218 _tmp/index.php:235 index.php:225
 #, php-format
 msgid "%s log"
 msgstr "%s log"
 
-#: _build/index.php:142 _site/index.php:219 _tmp/index.php:236 index.php:226
+#: _build/index.php:147 _site/index.php:224 _tmp/index.php:241 index.php:231
 msgid "Desktop notifications on supported modern browsers"
 msgstr ""
 "Notificações de área de trabalho nos navegadores modernos que o suportam"
 
-#: _build/index.php:142 _site/index.php:231 _tmp/index.php:248 index.php:238
+#: _build/index.php:147 _site/index.php:235 _tmp/index.php:252 index.php:242
+msgid "Displayed columns"
+msgstr "Colunas exibidas"
+
+#: _build/index.php:147 _site/index.php:246 _tmp/index.php:263 index.php:253
 msgid "Wide view"
 msgstr "Vista expandida"
 
-#: _build/index.php:142 _site/index.php:232 _tmp/index.php:249 index.php:239
+#: _build/index.php:147 _site/index.php:247 _tmp/index.php:264 index.php:254
 msgid "on"
 msgstr "ligado"
 
-#: _build/index.php:142 _site/index.php:233 _tmp/index.php:250 index.php:240
+#: _build/index.php:147 _site/index.php:248 _tmp/index.php:265 index.php:255
 msgid "off"
 msgstr "desligado"
 
-#: _build/index.php:142 _site/index.php:242 _tmp/index.php:255 index.php:249
+#: _build/index.php:147 _site/index.php:253 _tmp/index.php:270 index.php:260
+msgid "Click on a date field to mark a row"
+msgstr "Clique em um campo de data para marcar uma linha"
+
+#: _build/index.php:147 _site/index.php:253 _tmp/index.php:270 index.php:260
+msgid "Clear markers"
+msgstr "Marcadores claros"
+
+#: _build/index.php:147 _site/index.php:257 _tmp/index.php:274 index.php:264
 msgid "Language"
 msgstr "Idioma"
 
-#: _build/index.php:142 _site/index.php:243 _tmp/index.php:256 index.php:250
+#: _build/index.php:147 _site/index.php:258 _tmp/index.php:275 index.php:265
 msgid "Change language..."
 msgstr "Alterar idioma..."
 
-#: _build/index.php:148 _site/index.php:255 _tmp/index.php:268 index.php:262
+#: _build/index.php:153 _site/index.php:270 _tmp/index.php:287 index.php:277
 msgid "Timezone"
 msgstr "Fuso horário"
 
-#: _build/index.php:148 _site/index.php:256 _tmp/index.php:269 index.php:263
+#: _build/index.php:153 _site/index.php:271 _tmp/index.php:288 index.php:278
 msgid "Change timezone..."
 msgstr "Alterar o fuso horário"
-
-#: _site/index.php:238 index.php:245
-msgid "Click on a date field to mark a row"
-msgstr ""
-
-#: _site/index.php:238 index.php:245
-msgid "Clear markers"
-msgstr ""
 
 #~ msgid ""
 #~ "%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "
