@@ -39,8 +39,7 @@ var reload_page = function( urlonly ) {
 	"use strict";
 
 	urlonly = typeof urlonly !== 'undefined' ? urlonly : false;
-
-	var u = window.location.href.split('?')[0] + '?' + $.param({
+	var p = {
 		'tz' : $('select#cog-tz').val(),
 		'l'  : $('select#cog-lang').val(),
 		'w'  : $('#cog-wide').data("value"),
@@ -48,9 +47,14 @@ var reload_page = function( urlonly ) {
 		'm'  : $('#max').val(),
 		'r'  : $('#autorefresh').val(),
 		's'  : $('#search').val(),
-		't'  : get_columns(),
 		'n'  : notification,
-	});
+	};
+
+	if ( custom_columns() === true ) {
+		p.t = get_columns();
+	}
+
+	var u = window.location.href.split('?')[0] + '?' + $.param( p );
 
 	if ( urlonly === false ) {
 		document.location.href = u;
@@ -93,7 +97,7 @@ var get_columns = function( a ) {
 	if ( $.isArray( displayed_th ) === true ) {
 		return displayed_th.join(',');
 	} else {
-		return -1;
+		return false;
 	}
 };
 
@@ -105,7 +109,7 @@ var get_columns = function( a ) {
 var set_columns = function( a ) {
 	"use strict";
 	if ( $.isArray( a ) === true ) {
-		if ( ( a.length === 1 ) && ( a[0] === "-1" ) ) {
+		if ( a.length === 0 ) {
 			displayed_th = false;
 		} else {
 			displayed_th = a;
@@ -114,6 +118,75 @@ var set_columns = function( a ) {
 		displayed_th = false;
 	}
 };
+
+/**
+ * Parse the DOM to set columns
+ */
+var parse_columns = function() {
+	var a = [];
+	$('.thmenuon').each(function() {
+		a.push( $(this).data('h') );
+	});
+	set_columns( a );
+
+	reload_page( true );
+};
+
+/**
+ * Tell if there are some custom columns or not
+ *
+ * @return  {[type]}  [description]
+ */
+var custom_columns = function() {
+	"use strict";
+	return $.isArray( displayed_th );
+};
+
+
+
+/**
+ * Return if a colum should be displayed or not
+ *
+ * @return  {Boolean}
+ */
+var is_column_displayed = function( h ) {
+	"use strict";
+	if ( $.isArray( displayed_th ) === true ) {
+		return ( $.inArray( h , displayed_th ) > -1 );
+	} else {
+		return true;
+	}
+};
+
+
+/**
+ * Remove a column
+ */
+var remove_column = function( target ) {
+	"use strict";
+	$( '.thmenuitem[data-h="' + target + '"]' ).removeClass('thmenuon');
+	$( '.thmenuitem[data-h="' + target + '"]' ).addClass('thmenuoff');
+	$( "." + target ).hide();
+	$( ".pml-" + target ).hide();
+
+	parse_columns();
+};
+
+
+/**
+ * Add a column
+ */
+var add_column = function( target ) {
+	"use strict";
+	$( '.thmenuitem[data-h="' + target + '"]' ).removeClass('thmenuoff');
+	$( '.thmenuitem[data-h="' + target + '"]' ).addClass('thmenuon');
+	$( "." + target ).show();
+	$( ".pml-" + target ).show();
+
+	parse_columns();
+};
+
+
 
 /**
  * Set the window title according to the current displayed file
@@ -155,61 +228,6 @@ var is_notification = function() {
 	"use strict";
 	return $('#notification').hasClass('active');
 };
-
-
-/**
- * Return if a colum should be displayed or not
- *
- * @return  {Boolean}
- */
-var is_column_displayed = function( h ) {
-	"use strict";
-	if ( $.isArray( displayed_th ) === true ) {
-		return ( $.inArray( h , displayed_th ) > -1 );
-	} else {
-		return true;
-	}
-};
-
-
-/**
- * Remove a column
- */
-var remove_column = function( target ) {
-	"use strict";
-	$( '.thmenuitem[data-h="' + target + '"]' ).removeClass('thmenuon');
-	$( '.thmenuitem[data-h="' + target + '"]' ).addClass('thmenuoff');
-	$( "." + target ).hide();
-	$( ".pml-" + target ).hide();
-
-	var index = $.inArray( target , displayed_th );
-	if (index > -1) {
-	    displayed_th.splice( index, 1 );
-	}
-};
-
-
-/**
- * Add a column
- */
-var add_column = function( target ) {
-	"use strict";
-	$( '.thmenuitem[data-h="' + target + '"]' ).removeClass('thmenuoff');
-	$( '.thmenuitem[data-h="' + target + '"]' ).addClass('thmenuon');
-	$( "." + target ).show();
-	$( ".pml-" + target ).show();
-
-	if ( $.isArray( displayed_th ) === true ) {
-		if ( $.inArray( target , displayed_th ) === -1 ) {
-			displayed_th.push( target );
-		}
-	} else {
-		displayed_th = [ target ];
-	}
-};
-
-
-
 
 
 /**
@@ -607,13 +625,11 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 				else {
 					add_column( $(this).attr('data-h') );
 				}
-console.log( $('.thmenuoff').length );
 				if ( $('.thmenuoff').length > 0 ) {
 					$('.thmenuicon').addClass( 'text-danger' );
 				} else {
 					$('.thmenuicon').removeClass( 'text-danger' );
 				}
-				reload_page( true );
 			});
 		}
 

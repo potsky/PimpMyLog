@@ -6,7 +6,7 @@
 		"1.1.1" : {
 			"released" : "2014-07-25",
 			"new" : [
-				"You can now choose which columns to display at runtime"
+				"You can now choose which columns to display at runtime #19"
 			]
 		},
 		"1.1" : {
