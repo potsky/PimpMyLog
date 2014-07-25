@@ -4,13 +4,55 @@
  <title>Pimp my Log</title>
  <link href="http://pimpmylog.com/atom.xml" rel="self"/>
  <link href="http://pimpmylog.com"/>
- <updated>2014-07-15T13:48:21+02:00</updated>
+ <updated>2014-07-25T14:16:53+02:00</updated>
  <id>http://pimpmylog.com</id>
  <author>
    <name>Potsky</name>
    <email>potsky@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Version 1.1.1 released</title>
+   <link href="http://pimpmylog.com/general/2014/07/25/version-1.1.1-released"/>
+   <updated>2014-07-25T00:00:00+02:00</updated>
+   <id>http://pimpmylog.com/general/2014/07/25/version-1.1.1-released</id>
+   <content type="html">&lt;p&gt;Hi folks!&lt;/p&gt;
+
+&lt;p&gt;This new version gives you the ability to show and hide columns on runtime.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/posts/v1.1.1-1.png&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Your settings are set in the URL when you show/hide columns so if you bookmark the current displayed page, you should retrieve exactly the same display when loading the bookmark.&lt;/p&gt;
+
+&lt;p&gt;You can also decide to hide some columns by default. Just add the &lt;code&gt;thinit&lt;/code&gt; in your configuration file.&lt;/p&gt;
+
+&lt;p&gt;Here is a &lt;code&gt;config.user.json&lt;/code&gt; sample:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;...
+&amp;quot;files&amp;quot;: {
+    &amp;quot;apache1&amp;quot;: {
+        &amp;quot;display&amp;quot; : &amp;quot;Apache Error #1&amp;quot;,
+        &amp;quot;path&amp;quot;    : &amp;quot;\/var\/log\/apache2\/error.log&amp;quot;,
+        &amp;quot;thinit&amp;quot;  : [ &amp;quot;Log&amp;quot; , &amp;quot;Severity&amp;quot; ],
+        &amp;quot;format&amp;quot;  : {
+            &amp;quot;type&amp;quot; : &amp;quot;HTTPD 2.2&amp;quot;,
+            &amp;quot;regex&amp;quot;: &amp;quot;|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U&amp;quot;,
+            &amp;quot;match&amp;quot;: {
+                &amp;quot;Date&amp;quot;     : 1,
+                &amp;quot;IP&amp;quot;       : 4,
+                &amp;quot;Log&amp;quot;      : 5,
+                &amp;quot;Severity&amp;quot; : 2,
+                &amp;quot;Referer&amp;quot;  : 7
+            },
+            ...
+        }
+    },
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.1.1&quot;&gt;&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Version 1.1 released</title>
