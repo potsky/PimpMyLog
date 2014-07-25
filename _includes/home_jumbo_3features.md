@@ -6,6 +6,8 @@
 - [:bell-o:] Be notified when log file is rotated
 - [:search:] Apply a search filter (plain text or regular expression) on the log file
 - [:refresh:] Refresh logs : *Pull to refresh*, push key stroke `R`, click on the refresh button or set an auto-refresh timer
+- [:th-list:] Show/hide columns during runtime to improve readability
+- [:tag:] Mark lines during runtime to improve readability
 
 ---
 

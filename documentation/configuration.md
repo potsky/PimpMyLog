@@ -373,7 +373,7 @@ The `file` object structure is something like this:
 
 ### 3.1.2 - Keys
 
-#### count [optional]
+#### count <small>[optional]</small>
 
 Specify the number of most recent files to display when path is a glob pattern. See paragraph **path** below to learn how to use it.
 
@@ -413,7 +413,7 @@ It count is not specified, its default value is `1`.
 Of course, all matching files must have the same type given that the same regex, types and matches are used.
 
 
-#### refresh [optional]
+#### refresh <small>[optional]</small>
 
 This integer overwrite the global `LOGS_REFRESH` constant defined above only for the current file. This is the frequency in seconds to refresh the logs for the current file. If set to `0`, auto-refresh is disabled and users will have to pull to refresh, click on the refresh button or stroke the key `R`.
 
@@ -441,6 +441,16 @@ Example:
 
 ```json
 "notify" : true
+```
+
+#### thinit <small>[optional][since v1.1.1]</small>
+
+This value defines the default columns to display when loading the selected file. This is an array of columns defined in the `format` key below.
+
+Example:
+
+```json
+"thinit" : [ "IP" , "Log" , "Severity" ]
 ```
 
 #### format
