@@ -119,6 +119,18 @@ var set_columns = function( a ) {
 	}
 };
 
+
+/**
+ * Set the color icon according to completed column list
+ */
+var set_column_icon = function() {
+	if ( $('.thmenuoff').length > 0 ) {
+		$('.thmenuicon').addClass( 'text-danger' );
+	} else {
+		$('.thmenuicon').removeClass( 'text-danger' );
+	}
+};
+
 /**
  * Parse the DOM to set columns
  */
@@ -129,6 +141,7 @@ var parse_columns = function() {
 	});
 	set_columns( a );
 
+	set_column_icon();
 	reload_page( true );
 };
 
@@ -610,11 +623,11 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 				} else {
 					$(a).hide();
 					var c = 'off';
-					$('.thmenuicon').addClass( 'text-danger' );
 				}
 				$( '<li class="thmenucol"><a href="#" class="btn btn-default thmenuitem thmenu' + c + '" data-h="' + h + '" title="' + lemma.toggle_column.replace( '%s' , logs.headers[ h ] ) + '">' + logs.headers[ h ] + '</a></li>' ).appendTo( '.thmenu' );
 			}
 			tr.appendTo( '#logshead' );
+			set_column_icon();
 
 			// Refresh th menu buttons when click
 			$('.thmenuitem').click(function(e) {
@@ -624,11 +637,6 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 				}
 				else {
 					add_column( $(this).attr('data-h') );
-				}
-				if ( $('.thmenuoff').length > 0 ) {
-					$('.thmenuicon').addClass( 'text-danger' );
-				} else {
-					$('.thmenuicon').removeClass( 'text-danger' );
 				}
 			});
 		}
