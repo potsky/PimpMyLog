@@ -87,6 +87,11 @@ $lemma = array(
 	'display_nlogs'     => __( '%s logs displayed,' ),
 	'error'             => __( 'An error occurs!' ),
 	'toggle_column'     => __( 'Toggle column %s' ),
+	'sort_msg'          => __( 'Sorting let you order the <b>last lines</b> of the log file according to a column. Sort <b>is not performed on the whole</b> log file.<br/>Please note that sorting is incompatible with markers too.' ),
+	'got_it'            => __( 'Got it!' ),
+	'mark_msg'          => __( 'Markers are not compatible with sorting so marking is disable.' ),
+	'disable_sort'      => __( 'Disable sort and enable markers' ),
+	'cancel'            => __( 'Cancel' ),
 );
 
 

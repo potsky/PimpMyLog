@@ -3,6 +3,12 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"1.2" : {
+			"released" : "2014-08-31",
+			"new" : [
+				"Column sorting #5"
+			]
+		},
 		"1.1.1" : {
 			"released" : "2014-07-25",
 			"new" : [

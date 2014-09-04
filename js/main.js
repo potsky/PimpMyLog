@@ -11,6 +11,8 @@ var file,
 	last_line,
 	loading,
 	reset,
+	sort,
+	sorto,
 	notification_displayed = false;
 
 
@@ -43,6 +45,8 @@ var reload_page = function( urlonly ) {
 		'tz' : $('select#cog-tz').val(),
 		'l'  : $('select#cog-lang').val(),
 		'w'  : $('#cog-wide').data("value"),
+		'o'  : sort,
+		'p'  : sorto,
 		'i'  : file,
 		'm'  : $('#max').val(),
 		'r'  : $('#autorefresh').val(),
@@ -414,6 +418,33 @@ var val_cut = function( val , cut ) {
 
 
 /**
+ * Sort column according to field in right direction
+ *
+ * @param   {string}  field      the name of the column
+ * @param   {integer} direction  the direction 1 ascending or -1 descending
+ *
+ * @return  {void}
+ */
+function s( field , direction ) {
+	"use strict";
+	sort  = field;
+	sorto = direction;
+	reload_page( true );
+	get_logs( false , true );
+
+	if ( $.cookie( 'sortmsg' ) === undefined ) {
+		if ( $('#sort_alert').length === 0 ) {
+			$( '<div class="alert alert-info fade in" id="sort_alert">' + lemma.sort_msg + '<br/><br/>' + '<button type="button" class="btn btn-default" id="sort_got_it">' + lemma.got_it + '</button></div>' ).appendTo( "#notice" );
+			$( '#sort_got_it' ).click( function () {
+				$('#sort_alert').remove();
+				$.cookie( 'sortmsg' , 'gotit' );
+			});
+		}
+	}
+}
+
+
+/**
  * Ajax call to get logs
  *
  * @param   {boolean}  load_default_values  If set to true, the ajax will use default values for the selected file if there are available
@@ -478,6 +509,14 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			} else {
 				set_columns( files[file].thinit );
 			}
+
+			// Sorting
+			if ( query_parameters.o !== undefined ) {
+				sort = query_parameters.o;
+			}
+			if ( query_parameters.p !== undefined ) {
+				sorto = query_parameters.p;
+			}
 		}
 		else {
 			set_max( files[file].max );
@@ -519,6 +558,8 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			'csrf_token'  : csrf_token,
 			'lastline'    : last_line,
 			'reset'       : reset,
+			'sort'        : sort,
+			'sorto'       : sorto,
 		} ,
 		type: 'POST',
 		dataType: 'json'
@@ -614,24 +655,36 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			$( '#logshead' ).text( '' );
 			$( '.thmenucol' ).remove();
 
-			var tr = $('<tr>').addClass( file );
+			var thtr = $('<tr>').addClass( file );
+			sorto = ( parseInt( sorto , 10 ) === 1 ) ? 1 : -1;
+			var sortn = -1;
 			for ( var h in logs.headers ) {
+
 				$('.thmenuicon').removeClass( 'text-danger' );
-				var a = $( '<th>' + logs.headers[ h ] + '</th>' ).addClass( h ).appendTo( tr );
+
+				var ic = '';
+				if ( sort === h ) {
+					sortn = sorto * -1;
+					var c = ( sorto === 1 ) ? 'up' : 'down';
+					ic    = '&nbsp;<span class="glyphicon glyphicon-chevron-' + c + '"></span>';
+				}
+				var a = $( '<th style="white-space:nowrap;"><a href=\'javascript:s("' + h + '",' + sortn + ')\'>' + logs.headers[ h ] + ic + '</a></th>' ).addClass( h ).appendTo( thtr );
+
+				var f;
 				if ( is_column_displayed( h ) ) {
-					var c = 'on';
+					f = 'on';
 				} else {
 					$(a).hide();
-					var c = 'off';
+					f = 'off';
 				}
-				$( '<li class="thmenucol"><a href="#" class="btn btn-default thmenuitem thmenu' + c + '" data-h="' + h + '" title="' + lemma.toggle_column.replace( '%s' , logs.headers[ h ] ) + '">' + logs.headers[ h ] + '</a></li>' ).appendTo( '.thmenu' );
+				$( '<li class="thmenucol"><a href="#" class="btn btn-default thmenuitem thmenu' + f + '" data-h="' + h + '" title="' + lemma.toggle_column.replace( '%s' , logs.headers[ h ] ) + '">' + logs.headers[ h ] + '</a></li>' ).appendTo( '.thmenu' );
 			}
-			tr.appendTo( '#logshead' );
+			thtr.appendTo( '#logshead' );
 			set_column_icon();
 
 			// Refresh th menu buttons when click
 			$('.thmenuitem').click(function(e) {
-			    e.stopPropagation(); // Do not close the dropdown
+				e.stopPropagation(); // Do not close the dropdown
 				if ( $(this).hasClass('thmenuon') ) {
 					remove_column( $(this).attr('data-h') );
 				}
@@ -719,19 +772,19 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 					var uas = type.param.match(/\{[a-zA-Z.]*\}/g);
 					var uaf = false;
 					for (var k in uas) {
-						var a;
+						var d;
 						try {
 							/*jshint -W061 */
-							a = eval( 'ua.' + uas[k].replace('{','').replace('}','') );
-							if ( a === undefined ) {
-								a = '';
+							d = eval( 'ua.' + uas[k].replace('{','').replace('}','') );
+							if ( d === undefined ) {
+								d = '';
 							}
 						} catch (e) {
-							a = '';
+							d = '';
 						}
-						if ( a !== '' ) {
+						if ( d !== '' ) {
 							uaf        = true;
-							type.param = type.param.replace( uas[k] , a );
+							type.param = type.param.replace( uas[k] , d );
 						}
 					}
 					if ( uaf === true ) {
@@ -745,8 +798,8 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 					val = val_cut( val , type.cut );
 				}
 
-				var a = $( '<td>&nbsp;' + val + '</td>' ).prop( "title" , title ).addClass( 'pml-' + c + " pml-" + type.parser ).appendTo( tr );
-				if ( ! is_column_displayed( c ) ) $(a).hide();
+				var b = $( '<td>&nbsp;' + val + '</td>' ).prop( "title" , title ).addClass( 'pml-' + c + " pml-" + type.parser ).appendTo( tr );
+				if ( ! is_column_displayed( c ) ) $( b ).hide();
 			}
 
 			if ( ! logs.full ) {
@@ -1000,13 +1053,21 @@ $(function() {
 
 	// Marker
 	$('#logsbody').click(function(e) {
-		var a = $(e.target);
-		if ( $(a).hasClass('pml-date') ) {
-			$(a).siblings().toggleClass('marker');
-			$(a).toggleClass('marker');
+		if ( sort === undefined ) {
+			var a = $(e.target);
+			if ( $(a).hasClass('pml-date') ) {
+				$(a).siblings().toggleClass('marker');
+				$(a).toggleClass('marker');
+			}
+		} else {
+			$( '<div class="alert alert-info alert-dismissable fade in" id="mark_alert">' + lemma.mark_msg + '<br/><br/>' + '<button type="button" class="btn btn-success" id="mark_disable_sort">' + lemma.disable_sort + '</button> <button type="button" class="btn btn-default" class="close" data-dismiss="alert" aria-hidden="true">' + lemma.cancel + '</button></div>' ).appendTo( "#notice" );
+			$( '#mark_disable_sort' ).click( function () {
+				s( undefined , 1 );
+				$('#mark_alert').alert('close');
+			});
 		}
-
 	});
+
 	$('#clear-markers').click(function() {
 		$('.marker').removeClass('marker');
 	});
