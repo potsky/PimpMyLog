@@ -7,6 +7,9 @@
 			"released" : "2014-08-31",
 			"new" : [
 				"Column sorting #5"
+			],
+			"changed" : [
+				"Left colored new log marker is displayed until new logs are displayed and is no more removed on next refresh"
 			]
 		},
 		"1.1.1" : {

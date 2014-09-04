@@ -4,6 +4,8 @@ config_load( '../config.user.json' );
 init();
 
 
+error_log(sha1(time()));
+
 /////////////
 //  Check  //
 /////////////
@@ -13,7 +15,6 @@ if (( ! isset( $_POST['file'] ) ) ||
 ) {
 	die();
 }
-
 
 ////////////////////
 // Error handling //
@@ -73,8 +74,6 @@ $reset               = @(int)$_POST['reset'];
 $old_file_size       = @(int)$_POST['filesize'];
 $search              = @$_POST['search'];
 $old_lastline        = @$_POST['lastline'];
-$sort                = @$_POST['sort'];
-$sorto               = @$_POST['sorto'];
 
 header('Content-type: application/json');
 
@@ -149,14 +148,6 @@ if ( $fl === false ) {
 	$logs['error'] = sprintf( __( 'File <code>%s</code> for file ID <code>%s</code> does not exist anymore...' ) , $file_path , $file_id );
 	echo json_encode( $logs );
 	die();
-}
-
-
-//////////////////////////////////////////
-// Sort log file                        //
-//////////////////////////////////////////
-if ( ! empty( $sort ) ) {
-	$reset = 1;
 }
 
 

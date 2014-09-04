@@ -431,16 +431,6 @@ function s( field , direction ) {
 	sorto = direction;
 	reload_page( true );
 	get_logs( false , true );
-
-	if ( $.cookie( 'sortmsg' ) === undefined ) {
-		if ( $('#sort_alert').length === 0 ) {
-			$( '<div class="alert alert-info fade in" id="sort_alert">' + lemma.sort_msg + '<br/><br/>' + '<button type="button" class="btn btn-default" id="sort_got_it">' + lemma.got_it + '</button></div>' ).appendTo( "#notice" );
-			$( '#sort_got_it' ).click( function () {
-				$('#sort_alert').remove();
-				$.cookie( 'sortmsg' , 'gotit' );
-			});
-		}
-	}
 }
 
 
@@ -513,9 +503,14 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			// Sorting
 			if ( query_parameters.o !== undefined ) {
 				sort = query_parameters.o;
+			} else {
+				sort = files[file].sort;
 			}
+
 			if ( query_parameters.p !== undefined ) {
 				sorto = query_parameters.p;
+			} else {
+				sorto = files[file].order;
 			}
 		}
 		else {
@@ -523,6 +518,7 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			set_auto_refresh( files[file].refresh );
 			set_notification( files[file].notify );
 			set_columns( files[file].thinit );
+			sort = files[file].sort;
 		}
 		load_full_file = true;
 	}
@@ -558,8 +554,6 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			'csrf_token'  : csrf_token,
 			'lastline'    : last_line,
 			'reset'       : reset,
-			'sort'        : sort,
-			'sorto'       : sorto,
 		} ,
 		type: 'POST',
 		dataType: 'json'
@@ -665,8 +659,8 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 				var ic = '';
 				if ( sort === h ) {
 					sortn = sorto * -1;
-					var c = ( sorto === 1 ) ? 'up' : 'down';
-					ic    = '&nbsp;<span class="glyphicon glyphicon-chevron-' + c + '"></span>';
+					var q = ( sorto === 1 ) ? 'up' : 'down';
+					ic    = '&nbsp;<span class="glyphicon glyphicon-chevron-' + q + '"></span>';
 				}
 				var a = $( '<th style="white-space:nowrap;"><a href=\'javascript:s("' + h + '",' + sortn + ')\'>' + logs.headers[ h ] + ic + '</a></th>' ).addClass( h ).appendTo( thtr );
 
@@ -695,12 +689,15 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 		}
 
 
-
 		// Body
 		if ( logs.full ) {
 			$( '#logsbody' ).text( '' );
 		}
-		$( '#logsbody tr' ).removeClass( 'newlog' );
+
+		// New logs are available so remove the previous new log let marker
+		if ( logs.logs !== undefined ) {
+			$( '#logsbody tr' ).removeClass( 'newlog' );
+		}
 
 		var uaparser = new UAParser();
 		var rowidx   = 0;
@@ -814,6 +811,7 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 		if ( logs.full ) {
 			$('#logsbody').append( rows );
 		}
+
 		// display only new logs, so append to top
 		else {
 			$('#logsbody').prepend( rows );
@@ -824,14 +822,30 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			}
 		}
 
-		/* Copy to clipboard too slow
-		$('#logsbody tr td div.nozclip').each(function() {
-			$(this).removeClass('nozclip').zclip({
-				path : 'js/ZeroClipboard.swf',
-				copy : $(this).parent().attr('title')
+		// Sort table
+		if ( sort !== undefined ) {
+			// Find column
+			var i   = 0,
+				col = -1;
+			$('#logshead tr th').each(function() {
+				if ( $(this).hasClass( sort ) ) {
+					col = i;
+				}
+				i++;
 			});
-		});
-		*/
+			if ( col >= 0 ) {
+				var tbody = document.getElementById( 'logsbody' ),
+					trs   = Array.prototype.slice.call( tbody.rows , 0 );
+				trs = trs.sort( function (a, b) {
+					a = a.cells[col].getAttribute("title");
+					b = b.cells[col].getAttribute("title");
+					return ( $.isNumeric( a ) && $.isNumeric( b ) ) ? sorto * ( parseFloat( a ) - parseFloat( b ) ) : sorto * a.toLowerCase().localeCompare( b.toLowerCase() );
+				});
+				for( i = 0 ; i < trs.length; ++i ) {
+					tbody.appendChild( trs[i] );
+				}
+			}
+		}
 
 		// Footer
 		var rowct = '';
@@ -861,9 +875,9 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 		first_launch = false;
 
 		// Auto refresh go
-		var i = Math.max( 0 , parseInt( $('#autorefresh').val() , 10 ) );
-		if ( i > 0 ) {
-			auto_refresh_timer = setTimeout( function() { get_logs(); } , i * 1000 );
+		var p = Math.max( 0 , parseInt( $('#autorefresh').val() , 10 ) );
+		if ( p > 0 ) {
+			auto_refresh_timer = setTimeout( function() { get_logs(); } , p * 1000 );
 		}
 
 	} )
@@ -1053,18 +1067,10 @@ $(function() {
 
 	// Marker
 	$('#logsbody').click(function(e) {
-		if ( sort === undefined ) {
-			var a = $(e.target);
-			if ( $(a).hasClass('pml-date') ) {
-				$(a).siblings().toggleClass('marker');
-				$(a).toggleClass('marker');
-			}
-		} else {
-			$( '<div class="alert alert-info alert-dismissable fade in" id="mark_alert">' + lemma.mark_msg + '<br/><br/>' + '<button type="button" class="btn btn-success" id="mark_disable_sort">' + lemma.disable_sort + '</button> <button type="button" class="btn btn-default" class="close" data-dismiss="alert" aria-hidden="true">' + lemma.cancel + '</button></div>' ).appendTo( "#notice" );
-			$( '#mark_disable_sort' ).click( function () {
-				s( undefined , 1 );
-				$('#mark_alert').alert('close');
-			});
+		var a = $(e.target);
+		if ( $(a).hasClass('pml-date') ) {
+			$(a).siblings().toggleClass('marker');
+			$(a).toggleClass('marker');
 		}
 	});
 
