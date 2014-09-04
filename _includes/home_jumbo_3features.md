@@ -8,6 +8,7 @@
 - [:refresh:] Refresh logs : *Pull to refresh*, push key stroke `R`, click on the refresh button or set an auto-refresh timer
 - [:th-list:] Show/hide columns during runtime to improve readability
 - [:tag:] Mark lines during runtime to improve readability
+- [:chevron-down:] Sort lines
 
 ---
 
