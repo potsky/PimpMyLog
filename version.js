@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.2",
-	"versiondevh" : "76a5944cc153406521a771a181974d3f5c2375d6",
+	"versiondevh" : "5d92f96d24ce016c0ecfc1b736f0de84c18c7147",
 	"changelog" : {
 		"1.2" : {
 			"released" : "2014-08-31",
