@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.1.1 - b783e56eb75f086edafa88d8ab71a1d5c5b802e3*/
+/*! pimpmylog - 1.2 - 76a5944cc153406521a771a181974d3f5c2375d6*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -13,6 +13,8 @@ config_load( '../config.user.json' );
 init();
 
 
+error_log(sha1(time()));
+
 /////////////
 //  Check  //
 /////////////
@@ -22,7 +24,6 @@ if (( ! isset( $_POST['file'] ) ) ||
 ) {
 	die();
 }
-
 
 ////////////////////
 // Error handling //

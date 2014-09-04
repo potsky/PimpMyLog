@@ -1,8 +1,17 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.1.1",
-	"versiondevh" : "b783e56eb75f086edafa88d8ab71a1d5c5b802e3",
+	"version"     : "1.2",
+	"versiondevh" : "76a5944cc153406521a771a181974d3f5c2375d6",
 	"changelog" : {
+		"1.2" : {
+			"released" : "2014-08-31",
+			"new" : [
+				"Column sorting #5"
+			],
+			"changed" : [
+				"Left colored new log marker is displayed until new logs are displayed and is no more removed on next refresh"
+			]
+		},
 		"1.1.1" : {
 			"released" : "2014-07-25",
 			"new" : [
