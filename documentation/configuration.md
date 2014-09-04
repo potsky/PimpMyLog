@@ -443,6 +443,35 @@ Example:
 "notify" : true
 ```
 
+#### order <small>[optional][since v1.2]</small>
+
+This value defines the order to sort logs. Valid values are :
+
+- `1` : ascending sorting
+- `-1` : descending sorting
+
+Example:
+
+```json
+"order" : -1
+```
+
+#### sort <small>[optional][since v1.2]</small>
+
+This value defines the default column to use to sort logs. This is a value defined in the `format` key below.
+
+> **Warning**  
+> 
+> Sorting is not performed on the whole file but only with the N last lines !
+
+Sorting is case insensitive and detects numerical values.
+
+Example:
+
+```json
+"order" : "Log"
+```
+
 #### thinit <small>[optional][since v1.1.1]</small>
 
 This value defines the default columns to display when loading the selected file. This is an array of columns defined in the `format` key below.
