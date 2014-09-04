@@ -4,8 +4,6 @@ config_load( '../config.user.json' );
 init();
 
 
-error_log(sha1(time()));
-
 /////////////
 //  Check  //
 /////////////
