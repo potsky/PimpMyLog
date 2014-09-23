@@ -8,7 +8,7 @@
 - [:refresh:] Refresh logs : *Pull to refresh*, push key stroke `R`, click on the refresh button or set an auto-refresh timer
 - [:th-list:] Show/hide columns during runtime to improve readability
 - [:tag:] Mark lines during runtime to improve readability
-- [:chevron-down:] Sort lines
+- [:chevron-down:] Sort lines and view new logs lines directly in list
 
 ---
 
@@ -27,7 +27,7 @@
 ### Misc
 
 - [:rocket:] Really optimized, you can browse huge GB log files
-- [:globe:] Translations ready (English and French available now)
+- [:globe:] Translations ready (English, French and Portuges available now)
 - [:apple:] Runs on Linux, Mac OSX and Window servers with PHP 5.2+
 - [:code:] Open-source code
 - [:magic:] Lightweight code (full webapp weight is 800kb)
