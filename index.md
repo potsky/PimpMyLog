@@ -66,7 +66,7 @@ A special thanks goes out to :
 
 {% image /assets/theypimplogs/doz.jpg class="theypimplogs" title="DOZ" alink="http://www.doz.com" aclass="" atarget="theypimplogs" %}
 {% image /assets/theypimplogs/tcpartners.png class="theypimplogs" title="TCPartners" alink="http://www.tcpartners.fr" aclass="" atarget="theypimplogs" %}
-{% image /assets/theypimplogs/dinnerbooking.png class="theypimplogs" title="Dinner Booking" alink="http://www.dinnerbooking.com" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/dinnerbooking.png class="theypimplogs" title="Dinner Booking" alink="http://dinnerbooking.com" aclass="" atarget="theypimplogs" %}
 {% image /assets/theypimplogs/u232.png class="theypimplogs" title="U-232" alink="https://github.com/Bigjoos" aclass="" atarget="theypimplogs" %}
 {% image /assets/theypimplogs/videospot.png class="theypimplogs" title="VideoSpot" alink="http://www.videospot.com" aclass="" atarget="theypimplogs" %}
 
