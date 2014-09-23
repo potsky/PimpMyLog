@@ -3,6 +3,12 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"changelog" : {
+		"1.2.1" : {
+			"released" : "2014-09-21",
+			"fixed" : [
+				"Support non ASCII log files"
+			]
+		},
 		"1.2" : {
 			"released" : "2014-08-31",
 			"new" : [

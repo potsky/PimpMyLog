@@ -559,7 +559,6 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 		dataType: 'json'
 	} )
 	.fail( function ( logs ) {
-
 		// Layout
 		$('.loader').toggle();
 		loading = false;
