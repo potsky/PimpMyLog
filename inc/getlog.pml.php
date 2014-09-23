@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2 - 5d92f96d24ce016c0ecfc1b736f0de84c18c7147*/
+/*! pimpmylog - 1.2.1 - 07115d6c500451e34cff968a18ccd4a8c2421b9f*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -193,7 +193,7 @@ for ( $x_pos = 0, $ln = 0, $line = '', $still = true; $still ; $x_pos-- ) {
 	}
 
 	if ( $char === "\n" ) {
-		$deal = $line;
+		$deal = utf8_encode( $line );
 
 		$line = '';
 
@@ -341,8 +341,8 @@ $logs['footer']   = sprintf( __( '%s in <code>%sms</code> with <code>%s</code> o
 	, ( isset( $files[ $file_id ][ 'format' ][ 'type' ] ) ) ? ', ' . sprintf( __('log type is <code>%s</code>') , $files[ $file_id ][ 'format' ][ 'type' ] ) : ''
 );
 
-
 echo json_encode( $logs );
+
 die();
 
 ?>
