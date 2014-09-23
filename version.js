@@ -1,8 +1,14 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.2",
-	"versiondevh" : "5d92f96d24ce016c0ecfc1b736f0de84c18c7147",
+	"version"     : "1.2.1",
+	"versiondevh" : "07115d6c500451e34cff968a18ccd4a8c2421b9f",
 	"changelog" : {
+		"1.2.1" : {
+			"released" : "2014-09-21",
+			"fixed" : [
+				"Support non ASCII log files"
+			]
+		},
 		"1.2" : {
 			"released" : "2014-08-31",
 			"new" : [
