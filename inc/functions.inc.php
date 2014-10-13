@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.2 - 2670dfed3c34baa3b899b40e4ca9a1fb6a44caa7*/
+/*! pimpmylog - 1.2.2 - f5f0c5c908441039d03c5599bf676ea2eb23409f*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -142,7 +142,8 @@ function init() {
 	if ( ! defined( 'GOOGLE_ANALYTICS'           ) ) define( 'GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
 	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
 	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
-	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://demo.pimpmylog.com/version.js' );
+	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://beta.pimpmylog.com/version.js' );
+// TODO:	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://demo.pimpmylog.com/version.js' );
 	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
 	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'        , 5 );
 	if ( ! defined( 'FILE_SELECTOR'              ) ) define( 'FILE_SELECTOR'              , 'bs' );

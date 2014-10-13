@@ -1,12 +1,17 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.2.2",
-	"versiondevh" : "2670dfed3c34baa3b899b40e4ca9a1fb6a44caa7",
-	"changelog" : {
-
+	"versiondevh" : "f5f0c5c908441039d03c5599bf676ea2eb23409f",
+	"messages"    : {
+		"20141012" : "Please support Pimp My Log1, star the project in GitHub ! <iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
+		"20141011" : "Please support Pimp My Log2, star the project in GitHub ! <iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
+		"20141010" : "Please support Pimp My Log3, star the project in GitHub ! <iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
+		"20141009" : "Please support Pimp My Log4, star the project in GitHub ! <iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
+		"20141008" : "Please support Pimp My Log4, star the project in GitHub ! <iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>"
+	},
+	"changelog"   : {
 		"1.2.2" : {
 			"released" : "2014-10-12",
-			"message"  : "Please support Pimp My Log, star the project in GitHub ! <iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
 			"new"      : [
 				"Configuration file can be split in subfolder <code>config.user.d</code> #62"
 			]
