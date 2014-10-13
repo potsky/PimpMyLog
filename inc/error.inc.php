@@ -4,7 +4,7 @@ if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
 	die();
 }
 include_once 'inc/global.inc.php';
-init();
+load_default_constants();
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -18,20 +18,7 @@ init();
 	<meta name="viewport" content="width=device-width">
 	<title><?php echo TITLE;?></title>
 	<?php include_once 'inc/favicon.inc.php'; ?>
-<?php
-// @if prod=='dev'
-?>
-	<link rel="stylesheet" href="css/main.css">
-<?php
-// @endif
-?>
-<?php
-// @if prod=='prod'
-?>
 	<link rel="stylesheet" href="css/pml.min.css">
-<?php
-// @endif
-?>
 </head>
 <body>
 	<!--[if lt IE 7]>
@@ -55,21 +42,6 @@ init();
 		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
 	</div>
 
-<?php
-// @if prod=='dev'
-?>
-	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	<script src="js/vendor/jquery-1.10.1.min.js"></script>
-	<script src="js/vendor/bootstrap.min.js"></script>
-<?php
-// @endif
-?>
-<?php
-// @if prod=='prod'
-?>
 	<script src="js/pml.min.js"></script>
-<?php
-// @endif
-?>
 </body>
 </html>

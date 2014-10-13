@@ -1,0 +1,128 @@
+$gray-darker:            lighten(#000, 13.5%) !default; // #222
+$gray-dark:              lighten(#000, 20%) !default;   // #333
+$gray:                   lighten(#000, 33.5%) !default; // #555
+$gray-light:             lighten(#000, 46.7%) !default; // #777
+$gray-lighter:           lighten(#000, 93.5%) !default; // #eee
+
+$navbar-inverse-color               : $gray-light;
+$navbar-inverse-bg                  : #33333f;
+$navbar-inverse-border              : darken($navbar-inverse-bg, 10%);
+$navbar-inverse-link-color          : $gray-light;
+$navbar-inverse-link-hover-color    : $gray-lighter;
+$navbar-inverse-link-active-color   : $navbar-inverse-link-hover-color;
+$navbar-inverse-link-active-bg      : darken($navbar-inverse-bg, 10%);
+$navbar-inverse-brand-color         : $navbar-inverse-link-color;
+
+@import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+
+/*
+Override the success color for input.
+This class is used in the search input field when a regular expression is detected
+*/
+.has-success .form-control {
+	border-color       : #ff00ff;
+	-webkit-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
+	   -moz-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
+	        box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
+}
+.has-success .form-control:focus {
+	border-color       : #ff00ff;
+	-webkit-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
+	   -moz-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
+	        box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
+}
+
+
+body {
+	padding-top    : 50px;
+	padding-bottom : 20px;
+}
+
+
+/* Refresh button */
+.loader {
+	padding-left : 40px;
+	@media (max-width : 767px) {
+		padding-left : 130px;
+	}
+}
+
+
+/* Retina logo */
+.logo {
+	position : absolute;
+	left     : 7px;
+	top      : 7px;
+	width    : 36px;
+	height   : 36px;
+	cursor   : pointer;
+	z-index  : 10000;
+
+	background      : url(../img/icon36.png) no-repeat;
+	background-size : 36px 36px;
+
+	@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+			only screen and (-o-min-device-pixel-ratio: 3/2),
+			only screen and (min--moz-device-pixel-ratio: 1.5),
+			only screen and (min-device-pixel-ratio: 1.5) {
+		background      : url(../img/icon72.png) no-repeat;
+		background-size : 36px 36px;
+	}
+}
+
+.cogmenu li, .thmenu li {
+	padding-bottom: 2px;
+	text-align: left;
+}
+
+.containerwide {
+	margin-left : 2%;
+	max-width   : 96%;
+}
+
+.cogon {
+	color: $brand-success!important;
+}
+
+.cogoff {
+	color: $brand-danger!important;
+}
+
+.thmenuon {
+	color: $brand-success!important;
+}
+
+.thmenuoff {
+	color: $brand-danger!important;
+}
+
+textarea.test {
+	font-family : monospace, serif;
+}
+
+
+/* Reset button in search */
+.clearable {
+	background-image    : url(../img/inputclear.png);
+	background-repeat   : no-repeat;
+	background-position : right -10px center;
+	transition          : background 0.4s;
+}
+.clearable.x {
+	background-position : right 5px center;
+}
+.clearable.onX {
+	cursor : pointer;
+}
+
+
+/* IE8 Compat for menu popover */
+.navbar {
+	filter : none !important;
+}
+
+
+
+
+

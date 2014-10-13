@@ -21,40 +21,46 @@ module.exports = function(grunt) {
 		licence    += " * Licensed under the GPLv3 license.\n";
 		licence    += " */";
 
-	// Project configuration
+	/*
+	|--------------------------------------------------------------------------
+	| Grunt configuration
+	|--------------------------------------------------------------------------
+	|
+	*/
 	grunt.initConfig({
 
-		// Clean target directories
+		/*
+		|--------------------------------------------------------------------------
+		| Clean
+		|--------------------------------------------------------------------------
+		|
+		*/
 		clean: {
 			all  : [ '_build' , '_site' , '_tmp' ],
 			dev  : [ '_site' ],
 			prod : [ '_build' , '_tmp' ]
 		},
 
-		// Concat
+		/*
+		|--------------------------------------------------------------------------
+		| Concatenation
+		|--------------------------------------------------------------------------
+		|
+		*/
 		concat: {
 			js: {
 				src: [
-					'js/vendor/modernizr-2.6.2-respond-1.1.0.min.js',
-					'js/vendor/jquery-1.10.1.min.js',
-					'js/vendor/jquery.cookie.js',
+					'bower_components/modernizr/modernizr.js',
+					'bower_components/respondJs/dest/respond.src.js',
+					'bower_components/jquery/dist/jquery.js',
+					'bower_components/jquery.cookie/jquery.cookie.js',
 					'bower_components/jquery-zclip/jquery.zclip.js',
-//					'bower_components/bootstrap/js/affix.js',
-					'bower_components/bootstrap/js/alert.js',
-					'bower_components/bootstrap/js/button.js',
-//					'bower_components/bootstrap/js/carousel.js',
-					'bower_components/bootstrap/js/collapse.js',
-					'bower_components/bootstrap/js/dropdown.js',
-//					'bower_components/bootstrap/js/modal.js',
-//					'bower_components/bootstrap/js/scrollspy.js',
-//					'bower_components/bootstrap/js/tab.js',
-					'bower_components/bootstrap/js/tooltip.js',
-					'bower_components/bootstrap/js/popover.js',
-					'bower_components/bootstrap/js/transition.js',
-					'js/vendor/ua-parser.min.js',
-					'js/vendor/Hook-js/mousewheel.js',
-					'js/vendor/Hook-js/hook.min.js',
-					'js/vendor/Numeral-js/min/numeral.min.js'
+					'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+					'bower_components/ua-parser-js/src/ua-parser.js',
+					'bower_components/hook/mousewheel.js',
+					'bower_components/hook/hook.min.js',
+					'bower_components/numeral/numeral.js',
+					'bower_components/numeral/languages/*.js',
 				],
 				dest: '_tmp/pml.js',
 				options: {
@@ -64,31 +70,26 @@ module.exports = function(grunt) {
 			css: {
 				src: [
 					'_tmp/main.css',
-					'js/vendor/Hook-js/hook.css',
+					'bower_components/hook/hook.css',
 				],
 				dest: '_tmp/pml.css'
 			}
 		},
 
+		/*
+		|--------------------------------------------------------------------------
+		| Copy
+		|--------------------------------------------------------------------------
+		|
+		*/
 		copy: {
-			bsfoots: {
-				files: [{
-					expand: true,
-					flatten: true,
-					src: ['bower_components/bootstrap/dist/fonts/*'],
-					dest: 'fonts/',
-					filter: 'isFile'
-				}]
-			},
 			dev: {
 				files: [{
 					expand: true,
 					src: [
 						'cfg/**',
-						'fonts/**',
 						'img/**',
 						'inc/**',
-						'js/**',
 						'lang/**',
 						'*.json',
 						'*.txt',
@@ -100,11 +101,9 @@ module.exports = function(grunt) {
 			devcss: {
 				files: [{
 					expand: true,
-					flatten: true,
-					filter: 'isFile',
-					src: [ '_tmp/main.css' , 'css/config.inc.css' ],
-					dest: '_site/css/'
-				}]
+					src: [ 'css/*.css' ],
+					dest: '_site/'
+				}],
 			},
 			devphp: {
 				files: [{
@@ -113,12 +112,20 @@ module.exports = function(grunt) {
 					dest: '_site/'
 				}]
 			},
+			devfonts: {
+				files: [{
+					expand  : true,
+					cwd     : 'bower_components/bootstrap-sass-official/assets/fonts/',
+					src     : [ '**/*' ],
+					dest    : '_site/fonts/'
+				}]
+			},
 			devswf: {
 				files: [{
 					expand: true,
 					flatten: true,
 					filter: 'isFile',
-					src: ['bower_components/jquery-zclip/ZeroClipboard.swf','bower_components/jquery-zclip/jquery.zclip.js'],
+					src: ['bower_components/jquery-zclip/ZeroClipboard.swf'],
 					dest: '_site/js/'
 				}]
 			},
@@ -168,7 +175,6 @@ module.exports = function(grunt) {
 					expand: true,
 					src: [
 						'cfg/**',
-						'fonts/**',
 						'img/**',
 						'inc/**',
 						'lang/**',
@@ -191,6 +197,14 @@ module.exports = function(grunt) {
 						return licence + "\n" + content;
 					}
 				}
+			},
+			prodfonts: {
+				files: [{
+					expand  : true,
+					cwd     : 'bower_components/bootstrap-sass-official/assets/fonts/',
+					src     : [ '**/*' ],
+					dest    : '_build/fonts/'
+				}]
 			},
 			prodphp: {
 				files: [{
@@ -231,27 +245,20 @@ module.exports = function(grunt) {
 				expand: true,
 				flatten: true,
 				src: [
-					'js/vendor/Hook-js/*.png',
-					'js/vendor/Hook-js/*.gif'
+					'bower_components/hook/*.png',
+					'bower_components/hook/*.gif'
 				],
 				dest: '_build/css/',
 				filter: 'isFile'
 			}
 		},
 
-		// Minify CSS
-		cssmin: {
-			minify : {
-				files: {
-						'_build/css/pml.min.css': [ '_tmp/pml.css' ]
-				},
-				options: {
-					banner: licence
-				}
-			}
-		},
-
-		// Minify HTML
+		/*
+		|--------------------------------------------------------------------------
+		| Minify HTML
+		|--------------------------------------------------------------------------
+		|
+		*/
 		htmlmin: {
 			prod: {
 				options: {
@@ -271,19 +278,49 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// LESS files to CSS
-		less: {
-			main: {
+
+		/*
+		|--------------------------------------------------------------------------
+		| SASS
+		|--------------------------------------------------------------------------
+		|
+		*/
+		sass: {
+			prod: {
+				options: {
+					style : 'compressed'
+				},
 				files: {
-					"_tmp/main.css" : ["css/main.less"]
+					"_build/css/pml.min.css" : ["css/main.scss"]
 				}
-			}
+			},
+			dev: {
+				options: {
+					style  : 'nested',
+					update : true,
+				},
+				files: {
+					"_site/css/pml.min.css" : ["css/main.scss"]
+				}
+			},
 		},
 
-		// Make pkg available
+
+		/*
+		|--------------------------------------------------------------------------
+		| Package access
+		|--------------------------------------------------------------------------
+		|
+		*/
 		pkg: grunt.file.readJSON('package.json'),
 
-		// Prod <> Dev
+
+		/*
+		|--------------------------------------------------------------------------
+		| Deprecated, inject if/else/endif in code
+		|--------------------------------------------------------------------------
+		|
+		*/
 		preprocess : {
 			dev : {
 				src  : [
@@ -311,6 +348,12 @@ module.exports = function(grunt) {
 			}
 		},
 
+		/*
+		|--------------------------------------------------------------------------
+		| Preprocessing
+		|--------------------------------------------------------------------------
+		|
+		*/
 		replace: {
 			dev: {
 				options: {
@@ -342,6 +385,12 @@ module.exports = function(grunt) {
 			}
 		},
 
+		/*
+		|--------------------------------------------------------------------------
+		| Shell
+		|--------------------------------------------------------------------------
+		|
+		*/
 		shell: {
 			betagitclone: {
 				command: [
@@ -427,22 +476,55 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// Minify JS
+		/*
+		|--------------------------------------------------------------------------
+		| Minify JS
+		|--------------------------------------------------------------------------
+		|
+		*/
 		uglify: {
 			dist: {
 				files: {
-					'_build/js/pml.min.js': ['<%= concat.js.dest %>'],
-					'_build/js/main.min.js': ['js/main.js'],
-					'_build/js/test.min.js': ['js/test.js'],
-					'_build/js/configure.min.js': ['js/configure.js'],
+					'_build/js/pml.min.js'       : ['<%= concat.js.dest %>'],
+					'_build/js/main.min.js'      : ['js/main.js'],
+					'_build/js/test.min.js'      : ['js/test.js'],
+					'_build/js/configure.min.js' : ['js/configure.js'],
+				},
+				options: {
+					banner       : licence,
+					drop_console : true
 				}
 			},
-			options: {
-				banner: licence
+
+			devvendor: {
+				files: {
+					'_site/js/pml.min.js' : ['<%= concat.js.dest %>'],
+				},
+				options : {
+					mangle   : false,
+					beautify : true
+				}
+			},
+
+			dev: {
+				files: {
+					'_site/js/main.min.js'      : ['js/main.js'],
+					'_site/js/test.min.js'      : ['js/test.js'],
+					'_site/js/configure.min.js' : ['js/configure.js'],
+				},
+				options : {
+					mangle   : false,
+					beautify : true
+				}
 			}
 		},
 
-		// Watch files for changes in dev
+		/*
+		|--------------------------------------------------------------------------
+		| Watch
+		|--------------------------------------------------------------------------
+		|
+		*/
 		watch: {
 			css: {
 				files: [ 'css/**/*.css' , '_tmp/**/*.css' ],
@@ -462,10 +544,22 @@ module.exports = function(grunt) {
 			},
 			js: {
 				files: [ 'js/**/*.js' ],
-				tasks: [ 'copy:devjs' ]
-			}
+				tasks: [ 'uglify:dev' ]
+			},
+			vendorjs: {
+				files: [ 'bower_components/**/*.js' ],
+				tasks: [ 'concat:js' , 'uglify:devvendor' ]
+			},
 		}
 	});
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Tasks
+	|--------------------------------------------------------------------------
+	|
+	*/
 
 	// Installation task which install the _build folder in beta , commit and push
 	grunt.registerTask( 'installbeta' , function() {
@@ -530,13 +624,21 @@ module.exports = function(grunt) {
 		grunt.task.run('checkversion');
 		grunt.task.run([
 			'clean:dev',
-			'copy:bsfoots',
+
+			'copy:devfonts',
 			'copy:devswf',
 			'copy:dev',
+
 			'replace:dev',
-			'less',
+
+			'sass:dev',
 			'copy:devcss',
-			'preprocess:dev'
+
+			'preprocess:dev',
+
+			'concat:js',
+			'uglify:dev',
+			'uglify:devvendor'
 		]);
 		grunt.task.run('watch');
 	});
@@ -550,8 +652,8 @@ module.exports = function(grunt) {
 			'copy:prod',
 
 			'copy:prodcssimg',
+			'copy:prodfonts',
 			'copy:prodswf',
-			'copy:bsfoots',
 
 			'replace:prod',
 
@@ -561,13 +663,11 @@ module.exports = function(grunt) {
 			'preprocess:prod',
 
 			'copy:prodcss',
-			'less',
+			'sass:prod',
 			'concat:css',
-			'cssmin',
 
 			'concat:js',
-			'uglify'
-
+			'uglify:dist',
 		]);
 	});
 

@@ -1,7 +1,6 @@
 <?php
 include_once 'global.inc.php';
-config_load( '../config.user.json' );
-init();
+config_load();
 
 
 /////////////

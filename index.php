@@ -40,12 +40,7 @@ if ( ! file_exists( 'config.user.json' ) ) {
 //////////////////////////////
 // Load config and defaults //
 //////////////////////////////
-
-// $files is defined as global here
 config_load();
-
-// Constants are defined here
-init();
 
 
 /////////////////////////
@@ -109,22 +104,7 @@ $csrf = csrf_get();
 	<meta name="robots" content="none">
 	<title><?php echo TITLE;?></title>
 	<?php include_once 'inc/favicon.inc.php'; ?>
-<?php
-// @if prod=='dev'
-?>
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="js/vendor/Hook-js/hook.css">
-<?php
-// @endif
-?>
-
-<?php
-// @if prod=='prod'
-?>
 	<link rel="stylesheet" href="css/pml.min.css">
-<?php
-// @endif
-?>
 	<?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?>
 	<link rel="stylesheet" href="css/config.inc.user.css">
 	<?php } else { ?>
@@ -331,34 +311,12 @@ foreach ( get_max_options() as $r ) {
 		<footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer>
 	</div>
 
-<?php
-// @if prod=='dev'
-?>
-	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	<script src="js/vendor/jquery-1.10.1.min.js"></script>
-	<script src="js/vendor/jquery.cookie.js"></script>
-	<script src="js/jquery.zclip.js"></script>
-	<script src="js/vendor/bootstrap.min.js"></script>
-	<script src="js/vendor/ua-parser.min.js"></script>
-    <script src="js/vendor/Hook-js/mousewheel.js"></script>
-    <script src="js/vendor/Hook-js/hook.min.js"></script>
-    <script src="js/vendor/Numeral-js/min/numeral.min.js"></script>
-<?php if ( file_exists( "js/vendor/Numeral-js/min/languages/$lang.min.js" ) ) { ?>
-    <script src="js/vendor/Numeral-js/min/languages/<?php echo $lang;?>.min.js"></script>
-	<script>
-	numeral.language('<?php echo $lang;?>');
-	</script>
-<?php } ?>
-	<script src="js/main.js"></script>
-<?php
-// @endif
-?>
-
-<?php
-// @if prod=='prod'
-?>
 	<script src="js/pml.min.js"></script>
 	<script src="js/main.min.js"></script>
+	<script>
+	numeral.language('<?php echo $localejs;?>');
+	</script>
+
 <?php
 if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
 	<script>
@@ -370,10 +328,5 @@ if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
 <?php
 }
 ?>
-
-<?php
-// @endif
-?>
-
 </body>
 </html>

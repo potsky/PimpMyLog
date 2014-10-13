@@ -1,9 +1,14 @@
 {
   "name": "pimpmylog",
   "version": "1.0.0",
-  "dependencies": {
-    "bootstrap": "~3",
-    "jquery-zclip": "~1",
-    "jquery": "~2"
+  "devDependencies": {
+    "respondJs"               : "~1.4.2",
+    "modernizr"               : "~2.8.3",
+    "numeral"                 : "~1.5.3",
+    "hook"                    : "*",
+    "ua-parser-js"            : "~0.7.0",
+    "jquery.cookie"           : "~1.4.1",
+    "jquery-zclip"            : "~1.1.5",
+    "bootstrap-sass-official" : "~3.2.0+2"
   }
 }

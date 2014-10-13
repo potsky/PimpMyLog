@@ -1,16 +1,12 @@
 <?php
 include_once 'global.inc.php';
-init();
+load_default_constants();
 
 
 /////////////////////////////////
 // softwares                   //
 /////////////////////////////////
 include_once '../cfg/softwares.inc.php';
-
-define( 'CONFIG_FILE_TEMP' , '../config.user.json.tmp' );
-define( 'CONFIG_FILE'      , '../config.user.json' );
-define( 'CONFIG_FILE_MODE' , 0444 );
 
 
 /////////////////////////////////
@@ -340,20 +336,7 @@ $lemma = array(
 	<?php $fav = '../' ; include_once 'favicon.inc.php'; ?>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
-<?php
-// @if prod=='dev'
-?>
-	<link rel="stylesheet" href="../css/main.css">
-<?php
-// @endif
-?>
-<?php
-// @if prod=='prod'
-?>
 	<link rel="stylesheet" href="../css/pml.min.css">
-<?php
-// @endif
-?>
 	<script>
 		var lemma       = <?php echo json_encode($lemma);?>,
 			querystring = "<?php echo $_SERVER['QUERY_STRING'];?>";
@@ -398,7 +381,7 @@ $lemma = array(
 				_e( 'Your <em>Pimp my Log</em> instance is ready to use.' );
 				echo '<br/>';
 				echo '<br/>';
-				echo sprintf( __( 'You can manually adjust settings in the <code>%s</code> file.' ) , CONFIG_FILE );
+				echo sprintf( __( 'You can manually adjust settings in the <code>%s</code> file.' ) , CONFIG_FILE_NAME );
 				echo '<br/>';
 				_e( 'Please visit <a href="http://pimpmylog.com">pimpmylog.com</a> for more informations.' );
 				echo '<br/>';
@@ -413,24 +396,8 @@ $lemma = array(
 		<hr>
 		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
 	</div>
-<?php
-// @if prod=='dev'
-?>
-	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	<script src="../js/vendor/jquery-1.10.1.min.js"></script>
-	<script src="../js/jquery.zclip.js"></script>
-	<script src="../js/vendor/bootstrap.min.js"></script>
-	<script src="../js/configure.js"></script>
-<?php
-// @endif
-?>
-<?php
-// @if prod=='prod'
-?>
+
 	<script src="../js/pml.min.js"></script>
 	<script src="../js/configure.min.js"></script>
-<?php
-// @endif
-?>
 </body>
 </html>

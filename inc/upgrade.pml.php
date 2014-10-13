@@ -1,7 +1,6 @@
 <?php
 include_once 'global.inc.php';
-config_load( '../config.user.json' );
-init();
+config_load( false );
 
 header('Content-type: application/json');
 
@@ -48,7 +47,7 @@ if ( false === CHECK_UPGRADE ) {
 */
 try {
 	$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 5 ) ) );
-	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?' . date("U") , false , $ctx ) ), true );
+	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?v=' . $upgrade['current'] . '&' . date("U") , false , $ctx ) ), true );
 	if ( is_null( $JSr_version ) ) {
 		throw new Exception( 'Unable to fetch remote version' , 1);
 	}

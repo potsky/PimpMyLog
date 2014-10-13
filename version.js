@@ -13,11 +13,14 @@
 				"New messaging system for development team... First message scheduled for version 1.3 :-)"
 			],
 			"fixed" : [
-				"Remove debug logs while configuration"
+				"Remove debug logs while configuration",
+				"Numeral language was not set correctly"
 			],
 			"changed" : [
 				"Change design on some elements",
-				"Upgrade Bootstrap to 3.2.0, jQuery to 2.1.1 and ZClip to 1.1.5"
+				"Upgrade Bootstrap to 3.2.0, jQuery to 2.1.1 and ZClip to 1.1.5",
+				"Global refactoring to make it faster",
+				"Remove LESS and use SASS now"
 			]
 		},
 		"1.2.1" : {
