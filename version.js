@@ -3,17 +3,20 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"messages"    : {
-		"20141012" : "Please support Pimp My Log1, star the project in GitHub !<br/><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
-		"20141011" : "Please support Pimp My Log2, star the project in GitHub !<br/><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
-		"20141010" : "Please support Pimp My Log3, star the project in GitHub !<br/><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
-		"20141009" : "Please support Pimp My Log4, star the project in GitHub !<br/><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
-		"20141008" : "Please support Pimp My Log4, star the project in GitHub !<br/><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>"
+		"20141012" : "Please support <em>Pimp My Log</em>, star the project in GitHub !<br/><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>"
 	},
 	"changelog"   : {
 		"1.2.2" : {
 			"released" : "2014-10-12",
 			"new"      : [
-				"Configuration file can be split in subfolder <code>config.user.d</code> #62"
+				"Configuration file can be splitted in several files in subfolder <code>config.user.d</code> #62"
+			],
+			"fixed" : [
+				"Remove debug logs while configuration"
+			],
+			"changed" : [
+				"Change design on some elements",
+				"Upgrade Bootstrap to 3.2.0, jQuery to 2.1.1 and ZClip to 1.1.5"
 			]
 		},
 		"1.2.1" : {

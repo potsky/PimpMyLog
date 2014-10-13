@@ -1116,13 +1116,11 @@ $(function() {
 		// Ignore Messages
 		if ( upgrade.messagesto ) {
 			var hidemessages = $.cookie( 'messageshide' );
-			if ( hide !== upgrade.messagesto ) {
-				$( '#upgrademessages' ).html( upgrade.messages );
-				$( '#upgrademessagesstop' ).click( function() {
-					$.cookie( 'messageshide' , $(this).data('version') );
-					$("#messagesalert").alert('close');
-				});
-			}
+			$( '#upgrademessages' ).html( upgrade.messages );
+			$( '#messagesstop' ).click( function() {
+				$.cookie( 'messageshide' , $(this).data('version') );
+				$("#messagesalert").alert('close');
+			});
 		}
 
 	} );

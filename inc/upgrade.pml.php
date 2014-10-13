@@ -21,7 +21,6 @@ $upgrade = array(
 );
 
 
-
 if ( file_exists( '../version.js' ) ) {
 	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.js' ) ) , true );
 	$upgrade['current'] = $JSl_version[ 'version' ];
@@ -39,6 +38,8 @@ if ( false === CHECK_UPGRADE ) {
 	echo json_encode( $upgrade );
 	die();
 }
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -74,37 +75,48 @@ try {
 		foreach ( $local_messages  as $local_messages_version  => $m ) break;
 		foreach ( $remote_messages as $remote_messages_version => $m ) break;
 
-		$new_messages          = array();
-		$max_messages          = 3;
-		$upgrade['messagesto'] = $remote_messages_version;
+		$new_messages           = array();
+		$max_messages           = 3;
+		$upgrade['messagesto']  = $remote_messages_version;
+		$show_only_greater_then = (int)@$_COOKIE['messageshide'];
 
 		// New messages are available,
 		//
-		foreach ( $remote_messages as $remote_messages_version => $message ) {
-			if ( ( (int)$local_messages_version >= (int)$remote_messages_version ) || ( $max_messages === 0 ) ) break;
-			$new_messages[ $remote_messages_version ] = $message;
-			$max_messages--;
+		foreach ( $remote_messages as $version => $message ) {
+			if ( ( (int)$local_messages_version >= (int)$version ) || ( $max_messages === 0 ) ) break;
+			if ( (int)$version > $show_only_greater_then ) {
+				$new_messages[ $version ] = $message;
+				$max_messages--;
+			}
 		}
 
-		$message = '<div id="messagedalert" class="alert alert-info alert-dismissable">';
-		$message .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-		$message .= '<strong>' . __( 'Dev Team Message') . '</strong><br/>';
-		foreach ( $new_messages as $date => $content ) {
+		if ( count( $new_messages ) > 0 ) {
+			$message = '<div id="messagesalert" class="alert alert-info alert-dismissable">';
+			$message .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+			$message .= '<strong>' . __( 'Messages from the development team') . '</strong>';
+			foreach ( $new_messages as $date => $content ) {
+				$message .= '<hr style="margin-top:5px;margin-bottom:5px;"/>';
+				$message .= '<div class="row">';
+				$message .= '<div class="col-sm-2">';
+				$message .= '<strong>' . substr( $date , 0 , 4 ) . '-' . substr( $date , 4 , 2 ) . '-' . substr( $date , 6 , 2 ) . '</strong>';
+				$message .= '</div>';
+				$message .= '<div class="col-sm-10">';
+				$message .= $content;
+				$message .= '</div>';
+				$message .= '</div>';
+			}
 			$message .= '<div class="row">';
-			$message .= '<div class="col-md-2">';
-			$message .= $date;
-			$message .= '</div>';
-			$message .= '<div class="col-md-10">';
-			$message .= $content;
+			$message .= '<div class="col-xs-12 text-right">';
+			$message .= '<a href="#" id="messagesstop" data-version="' . $remote_messages_version . '" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> ' . __("Mark as read") . '</a>';
 			$message .= '</div>';
 			$message .= '</div>';
-		}
-		$message .= '<a href="#" id="messagesstop" data-version="' . $remote_messages_version . '" class="alert-link">' . __("Mark this message as read") . '</a>';
-		$message .= '</div>';
+			$message .= '</div>';
 
-		$upgrade['messages'] = $message;
+			$upgrade['messages'] = $message;
+		}
 
 	}
+
 
 	/*
 	|--------------------------------------------------------------------------
@@ -188,11 +200,15 @@ try {
 		$upgrade['alert'] .= sprintf( __( 'You have version %s and version %s is available' ) , '<em>' . $upgrade['current'] . '</em>' , '<em>' . $upgrade['to'] . '</em>');
 		$upgrade['alert'] .= ' (<a href="#" class="alert-link" data-toggle="collapse" data-target="#changelog">' . __( 'release notes') . '</a>)';
 		$upgrade['alert'] .= '<br/>';
-		$upgrade['alert'] .= __('Simply <code>git pull</code> in your directory or <a href="http://pimpmylog.com/getting-started/#update" target="doc">follow instructions here</a>');
-		$upgrade['alert'] .= '<br/>';
-		$upgrade['alert'] .= '<br/>';
-		$upgrade['alert'] .= '<a href="#" id="upgradestop" data-version="' . $upgrade['to'] . '" class="alert-link">' . __("Don't bother me again with this upgrade!") . '</a>';
-		$upgrade['alert'] .= '<div id="changelog" class="panel-collapse collapse"><div class="panel-body panel panel-default">' . $html . '</div></div>';
+		$upgrade['alert'] .= __('Simply <code>git pull</code> in your directory or <a href="http://pimpmylog.com/getting-started/#update" target="doc" class="alert-link">follow instructions here</a>');
+		$upgrade['alert'] .= '<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+		$upgrade['alert'] .= '<div class="row">';
+		$upgrade['alert'] .= '<div class="col-xs-12 text-right">';
+		$upgrade['alert'] .= '<a href="#" id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> ' . __("Skip this upgrade") . '</a>';
+		$upgrade['alert'] .= '</div>';
+		$upgrade['alert'] .= '</div>';
+
+
 
 		if ( count( $notices ) > 0 ) {
 
