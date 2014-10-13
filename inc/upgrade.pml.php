@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.2 - 27a0907315bd6bcbb4879e819470475f8f8a1332*/
+/*! pimpmylog - 1.2.2 - 638869857fe5608be5876ccc287606072e30413c*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -9,8 +9,7 @@
  */
 ?><?php
 include_once 'global.inc.php';
-config_load( '../config.user.json' );
-init();
+config_load( false );
 
 header('Content-type: application/json');
 
@@ -57,7 +56,7 @@ if ( false === CHECK_UPGRADE ) {
 */
 try {
 	$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 5 ) ) );
-	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?' . date("U") , false , $ctx ) ), true );
+	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?v=' . $upgrade['current'] . '&' . date("U") , false , $ctx ) ), true );
 	if ( is_null( $JSr_version ) ) {
 		throw new Exception( 'Unable to fetch remote version' , 1);
 	}

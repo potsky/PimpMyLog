@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.2.2",
-	"versiondevh" : "27a0907315bd6bcbb4879e819470475f8f8a1332",
+	"versiondevh" : "638869857fe5608be5876ccc287606072e30413c",
 	"messages"    : {
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
@@ -13,11 +13,14 @@
 				"New messaging system for development team... First message scheduled for version 1.3 :-)"
 			],
 			"fixed" : [
-				"Remove debug logs while configuration"
+				"Remove debug logs while configuration",
+				"Numeral language was not set correctly"
 			],
 			"changed" : [
 				"Change design on some elements",
-				"Upgrade Bootstrap to 3.2.0, jQuery to 2.1.1 and ZClip to 1.1.5"
+				"Upgrade Bootstrap to 3.2.0, jQuery to 2.1.1 and ZClip to 1.1.5",
+				"Global refactoring to make it faster",
+				"Remove LESS and use SASS now"
 			]
 		},
 		"1.2.1" : {

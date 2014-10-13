@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.2 - 27a0907315bd6bcbb4879e819470475f8f8a1332*/
+/*! pimpmylog - 1.2.2 - 638869857fe5608be5876ccc287606072e30413c*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -9,8 +9,7 @@
  */
 ?><?php
 include_once 'global.inc.php';
-config_load( '../config.user.json' );
-init();
+config_load();
 
 
 /////////////

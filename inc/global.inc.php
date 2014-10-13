@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.2 - 27a0907315bd6bcbb4879e819470475f8f8a1332*/
+/*! pimpmylog - 1.2.2 - 638869857fe5608be5876ccc287606072e30413c*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -16,16 +16,44 @@ if(function_exists('xdebug_disable')) { xdebug_disable(); }
 |--------------------------------------------------------------------------
 |
 */
-define( 'YEAR'                 , @date( "Y" ) );
-define( 'PHP_VERSION_REQUIRED' , '5.2' );
-define( 'HELP_URL'             , 'http://pimpmylog.com' );
+define( 'YEAR'                               , @date( "Y" ) );
+define( 'PHP_VERSION_REQUIRED'               , '5.2' );
+define( 'HELP_URL'                           , 'http://pimpmylog.com' );
+define( 'CONFIG_FILE_NAME'                   , 'config.user.json' );
+define( 'CONFIG_FILE_TEMP'                   , '../' . CONFIG_FILE_NAME . '.tmp' );
+define( 'CONFIG_FILE'                        , '../' . CONFIG_FILE_NAME );
+define( 'CONFIG_FILE_MODE'                   , 0444 );
+define( 'DEFAULT_LOCALE'                     , 'gb_GB' );
+define( 'DEFAULT_TITLE'                      , 'Pimp my Log' );
+define( 'DEFAULT_TITLE_FILE'                 , 'Pimp my Log [%f]' );
+define( 'DEFAULT_NAV_TITLE'                  , '' );
+define( 'DEFAULT_FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . YEAR . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
+define( 'DEFAULT_LOGS_MAX'                   , 50 );
+define( 'DEFAULT_LOGS_REFRESH'               , 0 );
+define( 'DEFAULT_NOTIFICATION'               , false );
+define( 'DEFAULT_PULL_TO_REFRESH'            , true );
+define( 'DEFAULT_NOTIFICATION_TITLE'         , 'New logs [%f]' );
+define( 'DEFAULT_GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
+define( 'DEFAULT_GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
+define( 'DEFAULT_CHECK_UPGRADE'              , true );
+define( 'DEFAULT_PIMPMYLOG_VERSION_URL'      , 'http://demo.pimpmylog.com/version.js' );
+define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
+define( 'DEFAULT_MAX_SEARCH_LOG_TIME'        , 5 );
+define( 'DEFAULT_FILE_SELECTOR'              , 'bs' );
+define( 'DEFAULT_USER_CONFIGURATION_DIR'     , 'config.user.d' );
+
 
 $tz_available     = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
-$locale_default   = 'gb_GB';
+$locale_default   = 'en_GB';
 $locale_available = array(
-	'gb_GB' => 'English',
+	'en_GB' => 'English',
 	'fr_FR' => 'Français',
 	'pt_BR' => 'Português do Brasil',
+);
+$locale_numeraljs = array(
+	'en_GB' => 'en-gb',
+	'fr_FR' => 'fr',
+	'pt_BR' => 'pt-br',
 );
 
 
@@ -141,28 +169,29 @@ function parser( $regex , $match , $log , $types , $tz = NULL ) {
 
 
 /**
- * Set unset constants
+ * Load all unset constants
  *
  * @return
  */
-function init() {
-	if ( ! defined( 'LOCALE'                     ) ) define( 'LOCALE'                     , 'gb_GB' );
-	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                      , 'Pimp my Log' );
-	if ( ! defined( 'TITLE_FILE'                 ) ) define( 'TITLE_FILE'                 , 'Pimp my Log [%f]' );
-	if ( ! defined( 'NAV_TITLE'                  ) ) define( 'NAV_TITLE'                  , '' );
-	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . @date('Y') . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
-	if ( ! defined( 'LOGS_MAX'                   ) ) define( 'LOGS_MAX'                   , 50 );
-	if ( ! defined( 'LOGS_REFRESH'               ) ) define( 'LOGS_REFRESH'               , 0 );
-	if ( ! defined( 'NOTIFICATION'               ) ) define( 'NOTIFICATION'               , false );
-	if ( ! defined( 'PULL_TO_REFRESH'            ) ) define( 'PULL_TO_REFRESH'            , true );
-	if ( ! defined( 'NOTIFICATION_TITLE'         ) ) define( 'NOTIFICATION_TITLE'         , 'New logs [%f]' );
-	if ( ! defined( 'GOOGLE_ANALYTICS'           ) ) define( 'GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
-	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
-	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'              , true );
-	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'      , 'http://demo.pimpmylog.com/version.js' );
-	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
-	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'        , 5 );
-	if ( ! defined( 'FILE_SELECTOR'              ) ) define( 'FILE_SELECTOR'              , 'bs' );
+function load_default_constants() {
+	if ( ! defined( 'LOCALE'                     ) ) define( 'LOCALE'                 , DEFAULT_LOCALE );
+	if ( ! defined( 'TITLE'                      ) ) define( 'TITLE'                  , DEFAULT_TITLE );
+	if ( ! defined( 'TITLE_FILE'                 ) ) define( 'TITLE_FILE'             , DEFAULT_TITLE_FILE );
+	if ( ! defined( 'NAV_TITLE'                  ) ) define( 'NAV_TITLE'              , DEFAULT_NAV_TITLE );
+	if ( ! defined( 'FOOTER'                     ) ) define( 'FOOTER'                 , DEFAULT_FOOTER );
+	if ( ! defined( 'LOGS_MAX'                   ) ) define( 'LOGS_MAX'               , DEFAULT_LOGS_MAX );
+	if ( ! defined( 'LOGS_REFRESH'               ) ) define( 'LOGS_REFRESH'           , DEFAULT_LOGS_REFRESH );
+	if ( ! defined( 'NOTIFICATION'               ) ) define( 'NOTIFICATION'           , DEFAULT_NOTIFICATION );
+	if ( ! defined( 'PULL_TO_REFRESH'            ) ) define( 'PULL_TO_REFRESH'        , DEFAULT_PULL_TO_REFRESH );
+	if ( ! defined( 'NOTIFICATION_TITLE'         ) ) define( 'NOTIFICATION_TITLE'     , DEFAULT_NOTIFICATION_TITLE );
+	if ( ! defined( 'GOOGLE_ANALYTICS'           ) ) define( 'GOOGLE_ANALYTICS'       , DEFAULT_GOOGLE_ANALYTICS );
+	if ( ! defined( 'GEOIP_URL'                  ) ) define( 'GEOIP_URL'              , DEFAULT_GEOIP_URL );
+	if ( ! defined( 'CHECK_UPGRADE'              ) ) define( 'CHECK_UPGRADE'          , DEFAULT_CHECK_UPGRADE );
+	if ( ! defined( 'PIMPMYLOG_VERSION_URL'      ) ) define( 'PIMPMYLOG_VERSION_URL'  , DEFAULT_PIMPMYLOG_VERSION_URL );
+	if ( ! defined( 'PIMPMYLOG_ISSUE_LINK'       ) ) define( 'PIMPMYLOG_ISSUE_LINK'   , DEFAULT_PIMPMYLOG_ISSUE_LINK );
+	if ( ! defined( 'MAX_SEARCH_LOG_TIME'        ) ) define( 'MAX_SEARCH_LOG_TIME'    , DEFAULT_MAX_SEARCH_LOG_TIME );
+	if ( ! defined( 'FILE_SELECTOR'              ) ) define( 'FILE_SELECTOR'          , DEFAULT_FILE_SELECTOR );
+	if ( ! defined( 'USER_CONFIGURATION_DIR'     ) ) define( 'USER_CONFIGURATION_DIR' , DEFAULT_USER_CONFIGURATION_DIR );
 }
 
 
@@ -172,14 +201,20 @@ function init() {
  * The file object will be load in a global $files variable.
  * Global beeeeurk ? Yeah I know... pml v2 will be full OO
  *
- * @param   string  $path  the file path
+ * @param   string   $path                         the configuration file path
+ * @param   boolean  $load_user_configuration_dir  do we have to parse all user configuration files ? No for upgrade for example...
  *
  * @return  boolean        Is there an error ?
  */
-function config_load( $path = 'config.user.json' ) {
+function config_load( $load_user_configuration_dir = true ) {
 	global $files, $badges;
 
-	if ( ! file_exists( $path ) ) {
+	$path = '';
+	if ( file_exists( CONFIG_FILE ) ) {
+		$path = CONFIG_FILE;
+	} else if ( file_exists( CONFIG_FILE_NAME ) ) {
+		$path = CONFIG_FILE_NAME;
+	} else {
 		return false;
 	}
 
@@ -191,11 +226,49 @@ function config_load( $path = 'config.user.json' ) {
 
 	// Get badges
 	$badges = $config[ 'badges' ];
+
+	// Set user constant
 	foreach ( $config[ 'globals' ] as $cst => $val ) {
 		if ( $cst == strtoupper( $cst ) ) {
 			@define( $cst , $val );
 		}
 	}
+
+	// Set unset constants
+	load_default_constants();
+
+	// Append files from the USER_CONFIGURATION_DIR
+	if ( $load_user_configuration_dir === true ) {
+		$dir = null;
+		if ( is_dir( USER_CONFIGURATION_DIR ) ) {
+			$dir  = USER_CONFIGURATION_DIR;
+			$base = 0;
+		} else if ( is_dir( '..' . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR ) ) {
+			$dir  = '..' . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR;
+			$base = 3;
+		}
+
+		if ( ! is_null( $dir ) ) {
+            $userfiles = new \RegexIterator(
+                new \RecursiveIteratorIterator(
+                    new \RecursiveDirectoryIterator( $dir , \RecursiveDirectoryIterator::SKIP_DOTS ),
+                    \RecursiveIteratorIterator::SELF_FIRST,
+                    \RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
+                    ),
+                '/^.+\.json$/i',
+                \RecursiveRegexIterator::GET_MATCH
+            );
+            foreach ( $userfiles as $userfile ) {
+				$c = json_decode( file_get_contents( $userfile[0] ) , true );
+				if ( ! is_null( $c ) ) {
+					foreach ( $c as $k => $v ) {
+						$fileid = get_slug( mb_substr( $userfile[0] . '/' . $k , $base ) );
+						$config[ 'files' ][ $fileid ] = $v;
+					}
+				}
+            }
+        }
+    }
 
 	// Try to generate the files tree if there are globs...
 	$files_tmp = $config[ 'files' ];
@@ -209,12 +282,10 @@ function config_load( $path = 'config.user.json' ) {
 
 		if ( count( $gpaths ) == 0 ) {
 		}
-
 		else if ( count( $gpaths ) == 1 ) {
 			$files[ $fileid ]            = $file;
 			$files[ $fileid ]['path']    = $gpaths[0];
 		}
-
 		else {
 			$new_paths = array();
 			$i         = 1;
@@ -394,6 +465,26 @@ function csrf_verify() {
 
 
 /**
+ * [get_slug description]
+ *
+ * @param   string  $string     the string to slugify
+ * @param   string  $separator  the separator
+ *
+ * @return  string              th slugified string
+ */
+function get_slug( $string, $separator = '-' ) {
+	$accents_regex = '~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i';
+	$special_cases = array( '&' => 'and');
+	$string        = mb_strtolower( trim( $string ), 'UTF-8' );
+	$string        = str_replace( array_keys($special_cases), array_values( $special_cases), $string );
+	$string        = preg_replace( $accents_regex, '$1', htmlentities( $string, ENT_QUOTES, 'UTF-8' ) );
+	$string        = preg_replace("/[^a-z0-9]/u", "$separator", $string);
+	$string        = preg_replace("/[$separator]+/u", "$separator", $string);
+    return $string;
+}
+
+
+/**
  * Indents a flat JSON string to make it more human-readable.
  * For PHP < 5.4
  *
@@ -498,8 +589,9 @@ if ( ! in_array( $tz , $tz_available ) ) {
 |--------------------------------------------------------------------------
 |
 */
-$lang   = '';
-$locale = $locale_default;
+$lang     = '';
+$locale   = $locale_default;
+$localejs = $locale_numeraljs[ $locale_default ];
 
 if ( function_exists( 'bindtextdomain' ) ) {
 
@@ -513,9 +605,9 @@ if ( function_exists( 'bindtextdomain' ) ) {
 		@list( $locale, $dumb ) = @explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'], 2 );
 	}
 
-	$locale         = str_replace( '-', '_', $locale );
+	$locale            = str_replace( '-', '_', $locale );
 	@list( $lang, $b ) = explode( '_', $locale );
-	$locale         = strtolower( $lang ).'_'.strtoupper( $b );
+	$locale            = strtolower( $lang ).'_'.strtoupper( $b );
 
 	if ( ! array_key_exists( $locale, $locale_available ) ) {
 		$locale = $locale_default;
