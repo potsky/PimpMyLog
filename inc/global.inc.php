@@ -2,8 +2,6 @@
 if(function_exists('xdebug_disable')) { xdebug_disable(); }
 include_once 'functions.inc.php';
 
-
-
 $tz_available     = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
 $locale_default   = 'gb_GB';
 $locale_available = array(
