@@ -4,13 +4,13 @@ config_load( '../config.user.json' );
 init();
 
 header('Content-type: application/json');
-/*
-if 	( ! csrf_verify() ) {
+
+if ( ! csrf_verify() ) {
 	$logs['error'] = __( 'Please refresh the page.' );
 	echo json_encode( $logs );
 	die();
 }
-*/
+
 $upgrade = array(
 	'footer'     => '',
 	'alert'      => '',
@@ -19,7 +19,6 @@ $upgrade = array(
 	'messages'   => '',
 	'messagesto' => '',
 );
-
 
 if ( file_exists( '../version.js' ) ) {
 	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.js' ) ) , true );
@@ -62,6 +61,8 @@ try {
 	| We can send a message to all pml users to give them important informations
 	| about security features, etc...
 	|
+	| PML get the local last message and will display new messages only available remotely
+	|
 	*/
 	$local_messages  = @$JSl_version['messages'];
 	$remote_messages = @$JSr_version['messages'];
@@ -75,13 +76,16 @@ try {
 		foreach ( $local_messages  as $local_messages_version  => $m ) break;
 		foreach ( $remote_messages as $remote_messages_version => $m ) break;
 
+		// Uncomment this to show all remote messages
+		// and remote cookie if needed...
+		//$local_messages_version = 0;
+
 		$new_messages           = array();
 		$max_messages           = 3;
 		$upgrade['messagesto']  = $remote_messages_version;
 		$show_only_greater_then = (int)@$_COOKIE['messageshide'];
 
 		// New messages are available,
-		//
 		foreach ( $remote_messages as $version => $message ) {
 			if ( ( (int)$local_messages_version >= (int)$version ) || ( $max_messages === 0 ) ) break;
 			if ( (int)$version > $show_only_greater_then ) {
