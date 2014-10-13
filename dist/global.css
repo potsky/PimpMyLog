@@ -7825,10 +7825,47 @@ td.visible-print {
   }
 }
 /* Images */
+.theypimplogs {
+  margin-right: 20px;
+}
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
   .theypimplogs {
     height: 50px!important;
   }
+}
+.theypimplogs {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+  /* Firefox 3.5+ */
+  filter: gray;
+  /* IE6-9 */
+  -webkit-filter: grayscale(100%);
+  /* Chrome 19+ & Safari 6+ */
+}
+.theypimplogs:hover {
+  filter: none;
+  -webkit-filter: grayscale(0%);
+}
+.orangebutton {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+table.pmlversionblock {
+  background: transparent!important;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+table.pmlversionblock tr {
+  background: transparent!important;
+  border: 0;
+}
+table.pmlversionblock tr td {
+  background: transparent!important;
+  border: 0;
+}
+table.pmlversionblock tr td .pmlversion {
+  margin-top: 1px;
+  margin-right: 30px;
 }
 .jborange {
   background-color: #454545;
