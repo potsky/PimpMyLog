@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.2 - 5dba8fca66bf7d247c097b1cec9ae643121a2a7b*/
+/*! pimpmylog - 1.2.2 - 97dbe9c6d654a2d26d1d3011ecead8510ce417fa*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -28,9 +28,6 @@ You must escape anti-slash 4 times and escape $ in regex.
 
 
 function apache_get_config( $type , $file , $software , $counter ) {
-
-error_log($file);
-error_log( realpath( $file ) );
 
 	$file_json_encoded = json_encode( $file );
 
