@@ -1,8 +1,16 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.2.1",
-	"versiondevh" : "07115d6c500451e34cff968a18ccd4a8c2421b9f",
+	"versiondevh" : "ff3f188288e4c2db6475c2dce8443e25233667c7",
 	"changelog" : {
+
+		"1.2.2" : {
+			"released" : "2014-10-12",
+			"notice"   : "Please support Pimp My Log, star the project in GitHub ! <iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
+			"new"      : [
+				"Configuration file can be split in subfolder <code>config.user.d</code> #62"
+			]
+		},
 		"1.2.1" : {
 			"released" : "2014-09-21",
 			"fixed" : [
