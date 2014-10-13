@@ -35,7 +35,7 @@ var progressbar_set = function( value ) {
 	"use strict";
 	var v = Math.max( 0 , Math.min( 100 , parseInt( value , 10 ) ) );
 	$('.progress .sr-only').text( lemma.complete.replace( '%s' , v ) );
-	$('.progress-bar').prop( 'aria-valuenow' , v ).width( v + '%' );
+	$('.progress-bar').attr( 'aria-valuenow' , v ).width( v + '%' );
 };
 
 
