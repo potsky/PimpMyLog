@@ -65,37 +65,44 @@ try {
 	$local_messages  = @$JSl_version['messages'];
 	$remote_messages = @$JSr_version['messages'];
 
-//var_dump($JSr_version);
-//die();
+	if ( ! is_array( $local_messages ) ) $local_messages = array();
 
-	if ( ( is_array( $local_messages ) ) && ( is_array( $remote_messages ) ) ) {
+	if ( is_array( $remote_messages ) ) {
 
+		$local_messages_version  = 0;
+		$remote_messages_version = 0;
 		foreach ( $local_messages  as $local_messages_version  => $m ) break;
 		foreach ( $remote_messages as $remote_messages_version => $m ) break;
 
-		$new_messages         = array();
-		$max_messages         = 3;
-		$upgrade['messageto'] = $remote_messages_version;
+		$new_messages          = array();
+		$max_messages          = 3;
+		$upgrade['messagesto'] = $remote_messages_version;
 
 		// New messages are available,
 		//
 		foreach ( $remote_messages as $remote_messages_version => $message ) {
-			if ( ( (int)$local_messages_version >= (int)$remote_messages_version ) || ( $max_message === 0 ) ) break;
+			if ( ( (int)$local_messages_version >= (int)$remote_messages_version ) || ( $max_messages === 0 ) ) break;
 			$new_messages[ $remote_messages_version ] = $message;
 			$max_messages--;
 		}
 
 		$message = '<div id="messagedalert" class="alert alert-info alert-dismissable">';
-		$message .= '  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-		$message .= '<strong>' . __( 'Dev Team Message') . '</strong> ';
+		$message .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+		$message .= '<strong>' . __( 'Dev Team Message') . '</strong><br/>';
 		foreach ( $new_messages as $date => $content ) {
+			$message .= '<div class="row">';
+			$message .= '<div class="col-md-2">';
 			$message .= $date;
-			$message .= '<hr/>';
+			$message .= '</div>';
+			$message .= '<div class="col-md-10">';
 			$message .= $content;
-			$message .= '<br/><br/>';
+			$message .= '</div>';
+			$message .= '</div>';
 		}
 		$message .= '<a href="#" id="messagesstop" data-version="' . $remote_messages_version . '" class="alert-link">' . __("Mark this message as read") . '</a>';
 		$message .= '</div>';
+
+		$upgrade['messages'] = $message;
 
 	}
 
