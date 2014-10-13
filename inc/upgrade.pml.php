@@ -4,18 +4,20 @@ config_load( '../config.user.json' );
 init();
 
 header('Content-type: application/json');
-
+/*
 if 	( ! csrf_verify() ) {
 	$logs['error'] = __( 'Please refresh the page.' );
 	echo json_encode( $logs );
 	die();
 }
-
+*/
 $upgrade = array(
-	'footer'  => '',
-	'alert'   => '',
-	'current' => '',
-	'to'      => '',
+	'footer'     => '',
+	'alert'      => '',
+	'current'    => '',
+	'to'         => '',
+	'messages'   => '',
+	'messagesto' => '',
 );
 
 
@@ -38,6 +40,12 @@ if ( false === CHECK_UPGRADE ) {
 	die();
 }
 
+/*
+|--------------------------------------------------------------------------
+| Retrieve remote server upgrade informations
+|--------------------------------------------------------------------------
+|
+*/
 try {
 	$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 5 ) ) );
 	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?' . date("U") , false , $ctx ) ), true );
@@ -45,6 +53,58 @@ try {
 		throw new Exception( 'Unable to fetch remote version' , 1);
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| Manage messaging system
+	|--------------------------------------------------------------------------
+	|
+	| We can send a message to all pml users to give them important informations
+	| about security features, etc...
+	|
+	*/
+	$local_messages  = @$JSl_version['messages'];
+	$remote_messages = @$JSr_version['messages'];
+
+//var_dump($JSr_version);
+//die();
+
+	if ( ( is_array( $local_messages ) ) && ( is_array( $remote_messages ) ) ) {
+
+		foreach ( $local_messages  as $local_messages_version  => $m ) break;
+		foreach ( $remote_messages as $remote_messages_version => $m ) break;
+
+		$new_messages         = array();
+		$max_messages         = 3;
+		$upgrade['messageto'] = $remote_messages_version;
+
+		// New messages are available,
+		//
+		foreach ( $remote_messages as $remote_messages_version => $message ) {
+			if ( ( (int)$local_messages_version >= (int)$remote_messages_version ) || ( $max_message === 0 ) ) break;
+			$new_messages[ $remote_messages_version ] = $message;
+			$max_messages--;
+		}
+
+		$message = '<div id="messagedalert" class="alert alert-info alert-dismissable">';
+		$message .= '  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+		$message .= '<strong>' . __( 'Dev Team Message') . '</strong> ';
+		foreach ( $new_messages as $date => $content ) {
+			$message .= $date;
+			$message .= '<hr/>';
+			$message .= $content;
+			$message .= '<br/><br/>';
+		}
+		$message .= '<a href="#" id="messagesstop" data-version="' . $remote_messages_version . '" class="alert-link">' . __("Mark this message as read") . '</a>';
+		$message .= '</div>';
+
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Manage upgrade now
+	|--------------------------------------------------------------------------
+	|
+	*/
 	$upgrade['to'] = $JSr_version[ 'version' ];
 
 	if ( version_compare( $upgrade['current'] , $upgrade['to'] ) < 0 ) {

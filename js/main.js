@@ -1101,6 +1101,8 @@ $(function() {
 		data     : { 'csrf_token' : csrf_token } ,
 		type     : 'POST',
 	} ).done( function ( upgrade ) {
+
+		// Ignore Upgrade alert
 		$( '#upgradefooter' ).html( ' - ' + upgrade.footer);
 		var hide = $.cookie( 'upgradehide' );
 		if ( hide !== upgrade.to ) {
@@ -1110,6 +1112,19 @@ $(function() {
 				$("#upgradealert").alert('close');
 			});
 		}
+
+		// Ignore Messages
+		if ( upgrade.messagesto ) {
+			var hidemessages = $.cookie( 'messageshide' );
+			if ( hide !== upgrade.messagesto ) {
+				$( '#upgrademessages' ).html( upgrade.messages );
+				$( '#upgrademessagesstop' ).click( function() {
+					$.cookie( 'messageshide' , $(this).data('version') );
+					$("#messagesalert").alert('close');
+				});
+			}
+		}
+
 	} );
 });
 

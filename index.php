@@ -306,6 +306,7 @@ foreach ( get_max_options() as $r ) {
 		<div id="error" style="display:none;"><br/><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
 		<div class="result">
 			<br/>
+			<div id="upgrademessages"></div>
 			<div id="upgrademessage"></div>
 			<div id="singlenotice"></div>
 			<div id="notice"></div>
