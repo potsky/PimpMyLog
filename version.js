@@ -6,7 +6,7 @@
 
 		"1.2.2" : {
 			"released" : "2014-10-12",
-			"notice"   : "Please support Pimp My Log, star the project in GitHub ! <iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
+			"message"  : "Please support Pimp My Log, star the project in GitHub ! <iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe>",
 			"new"      : [
 				"Configuration file can be split in subfolder <code>config.user.d</code> #62"
 			]
