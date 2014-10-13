@@ -19,6 +19,7 @@ Thumbs.db
 *.user.css
 *.user.json
 *.user.json.tmp
+/config.user.d/*
 
 # Branch jekyll
 /_site
