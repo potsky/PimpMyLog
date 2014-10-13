@@ -64,11 +64,18 @@ A special thanks goes out to :
 
 #### They *Pimp*&nbsp;&nbsp;their *Logs*
 
-{% image /assets/theypimplogs/doz.jpg class="theypimplogs" title="DOZ" alink="http://www.doz.com" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/doz.png class="theypimplogs" title="DOZ" alink="http://www.doz.com" aclass="" atarget="theypimplogs" %}
 {% image /assets/theypimplogs/tcpartners.png class="theypimplogs" title="TCPartners" alink="http://www.tcpartners.fr" aclass="" atarget="theypimplogs" %}
 {% image /assets/theypimplogs/dinnerbooking.png class="theypimplogs" title="Dinner Booking" alink="http://dinnerbooking.com" aclass="" atarget="theypimplogs" %}
 {% image /assets/theypimplogs/u232.png class="theypimplogs" title="U-232" alink="https://github.com/Bigjoos" aclass="" atarget="theypimplogs" %}
 {% image /assets/theypimplogs/videospot.png class="theypimplogs" title="VideoSpot" alink="http://www.videospot.com" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/codesnippets.png class="theypimplogs" title="Code Snippets" alink="http://codesnippets.pl" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/nousrassemble.png class="theypimplogs" title="Nous Rassemble" alink="http://nousrassemble.com" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/pydio.png class="theypimplogs" title="Pydio" alink="http://pydio.com" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/Capcom.png class="theypimplogs" title="Capcom US" alink="http://www.capcom.com/us/" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/JoyPrice.png class="theypimplogs" title="JoyPrice" alink="" aclass="http://www.joyprice.com" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/mymxlog.png class="theypimplogs" title="mymxlog" alink="http://mymxlog.com" aclass="" atarget="theypimplogs" %}
+{% image /assets/theypimplogs/SensioLabs.png class="theypimplogs" title="Sensio Labs" alink="http://sensiolabs.com/fr" aclass="" atarget="theypimplogs" %}
 
 
 Your company or your project uses *Pimp My Log*? Please [let me know](http://support.pimpmylog.com/discussion/new) and send me your logo and the link of your website!

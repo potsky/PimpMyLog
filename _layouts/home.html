@@ -33,7 +33,14 @@
 	<div class="jumbotron jbgray">
 		<div class="container">
 			<div class="row">
-				{% capture md %}{% include home_jumbo_2introduction.md %}{% endcapture %}{{ md | unindent | markdownify }}
+				<div class="col-md-8">
+					{% capture md %}{% include home_jumbo_2introduction.md %}{% endcapture %}{{ md | unindent | markdownify }}
+				</div>
+				<div class="col-md-4 text-center">
+					<a type="button" class="btn btn-sm btn-warning orangebutton" href="/getting-started/screenshots.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;Screenshots</a>
+					<a type="button" class="btn btn-sm btn-warning orangebutton" href="http://demo.pimpmylog.com"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;&nbsp;Demo</a>
+					<a type="button" class="btn btn-sm btn-warning orangebutton" href="/getting-started/quick-start.html"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;&nbsp;Quick start</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -41,8 +48,18 @@
 	<div class="jumbotron jborange">
 		<div class="container">
 			<div class="row">
-				{% capture md %}{% include home_jumbo_3features.md %}{% endcapture %}
-				{{ md | unindent | markdownify | replace:'<ul>','<ul class="fa-ul">' | replace:'[:','<i class="fa-li fa fa-' | replace:':]','"></i>' }}
+				<div class="col-lg-4">
+					{% capture md %}{% include home_jumbo_3features1.md %}{% endcapture %}
+					{{ md | unindent | markdownify | replace:'<ul>','<ul class="fa-ul">' | replace:'[:','<i class="fa-li fa fa-' | replace:':]','"></i>' }}
+				</div>
+				<div class="col-lg-4">
+					{% capture md %}{% include home_jumbo_3features2.md %}{% endcapture %}
+					{{ md | unindent | markdownify | replace:'<ul>','<ul class="fa-ul">' | replace:'[:','<i class="fa-li fa fa-' | replace:':]','"></i>' }}
+				</div>
+				<div class="col-lg-4">
+					{% capture md %}{% include home_jumbo_3features3.md %}{% endcapture %}
+					{{ md | unindent | markdownify | replace:'<ul>','<ul class="fa-ul">' | replace:'[:','<i class="fa-li fa fa-' | replace:':]','"></i>' }}
+				</div>
 			</div>
 		</div>
 	</div>

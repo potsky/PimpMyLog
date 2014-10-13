@@ -13,9 +13,3 @@ By default, *Pimp My Log* supports :
 - *PHP* log files
 
 You can find other log formats on the [support](http://support.pimpmylog.com) site.
-
-<br/><center>
-<a type="button" class="btn btn-sm btn-warning" href="/getting-started/screenshots.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;Screenshots</a>
-&nbsp;<a type="button" class="btn btn-sm btn-warning" href="http://demo.pimpmylog.com"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;&nbsp;Demo</a>
-&nbsp;<a type="button" class="btn btn-sm btn-warning" href="/getting-started/quick-start.html"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;&nbsp;Quick start</a>
-</center>
