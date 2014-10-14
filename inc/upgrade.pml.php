@@ -176,7 +176,7 @@ try {
 						$html .= '<ul>';
 
 						foreach ( $version_details[ $type ] as $issue ) {
-							$html .= '<li>' . preg_replace( '/#([0-9]*)/i' , '<a href="' . PIMPMYLOG_ISSUE_LINK . '$1">#$1</a>' , $issue) . '</li>';
+							$html .= '<li>' . preg_replace( '/#([0-9]+)/i' , '<a href="' . PIMPMYLOG_ISSUE_LINK . '$1">#$1</a>' , $issue) . '</li>';
 						}
 
 						$html .= '</ul>';
