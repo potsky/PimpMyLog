@@ -1,11 +1,7 @@
 <?php
 include_once 'global.inc.php';
 
-
-if ( ! file_exists( 'test.REMOVE_UPPERCASE.php') ) {
-	die( __('Please touch file <code>inc/test.REMOVE_UPPERCASE.php</code> and reload this page') );
-}
-
+load_default_constants();
 
 function test( $type , $regex , $match , $types , $logs , $headers = true , $multiline = '' ) {
 	$r  = '<h4>' . $type . '</h4>';
@@ -63,7 +59,7 @@ function test( $type , $regex , $match , $types , $logs , $headers = true , $mul
 }
 
 
-if ( isset( $_POST['s'] ) ) {
+if ( ( isset( $_POST['s'] ) ) && ( file_exists( 'test.REMOVE_UPPERCASE.php') ) ) {
 
 	$return    = array();
 	$match     = @json_decode( $_POST['m'] , true );
@@ -100,6 +96,15 @@ if ( isset( $_POST['s'] ) ) {
 	die();
 }
 
+//////////////////////
+// Javascript Lemma //
+//////////////////////
+$lemma = array(
+	"command_copied"       => __( "Command has been copied to your clipboard!" ),
+	"configuration_copied" => __( "Configuration array has been copied to your clipboard!" ),
+);
+
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -114,7 +119,10 @@ if ( isset( $_POST['s'] ) ) {
 	<title><?php echo TITLE;?></title>
 	<?php $fav = '../' ; include_once 'favicon.inc.php'; ?>
 	<link rel="stylesheet" href="../css/pml.min.css">
-</head>
+	<script>
+		var lemma = <?php echo json_encode($lemma);?>;
+	</script>
+	</head>
 <body>
 	<!--[if lt IE 7]>
 	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
@@ -130,6 +138,29 @@ if ( isset( $_POST['s'] ) ) {
 
 	<div class="container">
 		<br/>
+
+<?php
+if ( ! file_exists( 'test.REMOVE_UPPERCASE.php') ) {
+	echo '<div class="row">';
+	echo 	'<div class="col-xs-12"><div class="alert alert-danger">';
+	echo 			__( 'This page is protected for security reasons.');
+	echo 		'</div><br/>';
+	echo 		__('To grant access, please create this temporary file on your server:');
+	echo 		'<br/><br/>';
+	echo 	'</div>';
+	echo 	'<div class="col-md-8"><pre class="clipboard2content">' . 'touch \'' . dirname( __FILE__ ) . '/test.REMOVE_UPPERCASE.php\'</pre></div>';
+	echo 	'<div class="col-md-4"><a class="btn btn-success clipboard2">' . __('Copy to clipboard') . '</a></div>';
+	echo 	'<div class="col-xs-12">';
+	echo 		'<br/>';
+	echo 		__("Then reload this page.");
+	echo 		'<br/><br/><div class="alert alert-info">';
+	echo 			__("Don't forget to remove this temporary file when you have finished...");
+	echo 		'</div>';
+	echo 	'</div>';
+	echo '</div>';
+}
+else {
+?>
 		<div class="panel-group" id="accordion">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -360,6 +391,26 @@ echo test( $type , $regex , $match , $types , $log );
 									</div>
 								</div>
 							</div>
+
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2">
+											Generated files with includes
+										</a>
+									</h4>
+								</div>
+								<div id="collapseFive2" class="panel-collapse collapse">
+									<div class="panel-body">
+										<pre><?php
+											config_load();
+											echo json_encode($files,JSON_PRETTY_PRINT);
+										?></pre>
+									</div>
+								</div>
+							</div>
+
+
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
@@ -378,7 +429,6 @@ echo test( $type , $regex , $match , $types , $log );
 										}
 										?></pre>
 										<?php
-											config_load();
 											$paths = array(
 												'config' => '../config.user.json',
 											);
@@ -439,9 +489,15 @@ echo test( $type , $regex , $match , $types , $log );
 				</div>
 			</div>
 		</div>
+
+<?php
+}
+?>
+
 		<hr>
 		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
 	</div>
+
 	<script src="../js/pml.min.js"></script>
 	<script src="../js/test.min.js"></script>
 </body>

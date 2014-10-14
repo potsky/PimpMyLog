@@ -254,7 +254,8 @@ function config_load( $load_user_configuration_dir = true ) {
 				if ( ! is_null( $c ) ) {
 					foreach ( $c as $k => $v ) {
 						$fileid = get_slug( mb_substr( $userfile[0] . '/' . $k , $base ) );
-						$config[ 'files' ][ $fileid ] = $v;
+						$config[ 'files' ][ $fileid ]                  = $v;
+						$config[ 'files' ][ $fileid ]['included_from'] = $userfile[0];
 					}
 				}
             }
@@ -262,6 +263,10 @@ function config_load( $load_user_configuration_dir = true ) {
     }
 
 	// Try to generate the files tree if there are globs...
+    if (! isset($config[ 'files' ])) {
+    	return false;
+    }
+
 	$files_tmp = $config[ 'files' ];
 	$files     = array();
 

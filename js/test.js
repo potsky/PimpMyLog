@@ -40,6 +40,27 @@ $(function() {
 	});
 
 	$(document).ready(function(){
+
+		$('a.clipboard2').zclip({
+			path:'../js/ZeroClipboard.swf',
+			copy:function(){
+				return $("pre.clipboard2content").text();
+			},
+			afterCopy:function() {
+				$( 'a.clipboard2' ).popover( {
+					html      : true ,
+					animation : true ,
+					placement : 'right',
+					container : 'body',
+					delay     : { show: 100, hide: 5000 },
+					content   : lemma.command_copied
+				} ).popover( 'show' );
+				$('a.clipboard2').on('hidden.bs.popover', function () {
+					$( 'a.clipboard2' ).show();
+				});
+			}
+		});
+
 		$('a.clipboard').zclip({
 			path:'../js/ZeroClipboard.swf',
 			copy:function(){
@@ -64,7 +85,7 @@ $(function() {
 					placement : 'right',
 					container : 'body',
 					delay     : { show: 100, hide: 5000 },
-					content   : "Configuration array has been copied to your clipboard!"
+					content   : lemma.configuration_copied
 				} ).popover( 'show' );
 				$('a.clipboard').on('hidden.bs.popover', function () {
 					$( 'a.clipboard' ).show();

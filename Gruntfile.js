@@ -544,6 +544,20 @@ module.exports = function(grunt) {
 
 		/*
 		|--------------------------------------------------------------------------
+		| PHPUnit
+		|--------------------------------------------------------------------------
+		|
+		*/
+		phpunit: {
+			dev: {
+			    options: {
+					bin : 'vendor/bin/phpunit'
+			    }
+			}
+		},
+
+		/*
+		|--------------------------------------------------------------------------
 		| Watch
 		|--------------------------------------------------------------------------
 		|
@@ -583,7 +597,6 @@ module.exports = function(grunt) {
 	|--------------------------------------------------------------------------
 	|
 	*/
-
 	// Installation task which install the _build folder in beta , commit and push
 	grunt.registerTask( 'installbeta' , function() {
 		if ( grunt.file.exists( '_build/index.php' ) === false ) {
@@ -692,10 +705,11 @@ module.exports = function(grunt) {
 
 			'concat:js',
 			'uglify:prod',
-			'uglify:prodvendor'
+			'uglify:prodvendor',
+
+			'phpunit:dev'
 		]);
 	});
-
 
 	grunt.registerTask('checkversion', function() {
 		var a;
@@ -711,17 +725,15 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('build', function() {
-		grunt.task.run( 'prod' );
-	});
-
-	grunt.registerTask('install', function() {
-		grunt.task.run( 'installbeta' );
-	});
-
-	grunt.registerTask('install-production', function() {
-		grunt.task.run( 'installmaster' );
-	});
-
-	grunt.registerTask('default', [ 'dev' ] );
+	/*
+	|--------------------------------------------------------------------------
+	| Shortcuts
+	|--------------------------------------------------------------------------
+	|
+	*/
+	grunt.registerTask( 'build'              , function() { grunt.task.run( 'prod' ); });
+	grunt.registerTask( 'test'               , function() { grunt.task.run( 'prod' ); });
+	grunt.registerTask( 'install'            , function() { grunt.task.run( 'installbeta' ); });
+	grunt.registerTask( 'install-production' , function() { grunt.task.run( 'installmaster' ); });
+	grunt.registerTask( 'default' , [ 'dev' ] );
 };

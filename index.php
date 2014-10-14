@@ -154,9 +154,11 @@ if ( FILE_SELECTOR == 'bs' ) {
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 <?php
-foreach ( $files as $file_id=>$file ) {
+foreach ( $files as $file_id => $file ) {
 	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
-	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
+	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
+	echo ( isset( $file['included_from'] ) ) ? htmlentities( 'Log file #' . $file_id . ' defined in ' . $file['included_from'] ) : htmlentities( 'Log file #' . $file_id . ' defined in main configuration file' );
+	echo '">' . $file['display'] . '</a></li>';
 }
 ?>
 						</ul>

@@ -7,19 +7,15 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 /.sass-cache
-
-# Branch master old
-/config.inc.php
-/config.inc.php.tmp
-
-/inc/test.REMOVE_UPPERCASE.php
 *.user.php
 *.user.css
 *.user.json
 *.user.json.tmp
+test.REMOVE_UPPERCASE.php
 /config.user.d/*
-/_site
 /_build
+/_build
+/_site
 /_tmp
 /dist
 /fonts
@@ -27,4 +23,4 @@ Thumbs.db
 # Application specific files
 /node_modules
 /bower_components
-/Gemfile.lock
+/vendor

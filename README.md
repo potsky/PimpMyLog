@@ -7,6 +7,7 @@ This is the dev branch.
 
 - `npm install`
 - `bower install`
+- `composer install`
 
 ## Version
 
