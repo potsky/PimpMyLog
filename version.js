@@ -1,12 +1,12 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.3",
-	"versiondevh" : "820fbed3ca50fcf8ffb327f7cda4f88987488a9e",
+	"version"     : "1.3.0",
+	"versiondevh" : "08bba8d8ea1927a5cc5e68f95839426c5da058be",
 	"messages"    : {
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
-		"1.3" : {
+		"1.3.0" : {
 			"released" : "2014-10-12",
 			"new"      : [
 				"Configuration file can be splitted in several files in subfolder <code>config.user.d</code>. Documentation is <a href=\"http://pimpmylog.com/documentation/configuration.html#USER_CONFIGURATION_DIR\">here</a>. (#62)",

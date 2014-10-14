@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.3 - 820fbed3ca50fcf8ffb327f7cda4f88987488a9e*/
+/*! pimpmylog - 1.3.0 - 08bba8d8ea1927a5cc5e68f95839426c5da058be*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -164,7 +164,7 @@ on several lines
 										'Error' => 'txt',
 									);
 									echo json_indent( json_encode($types))
-									?></textarea></div></div><div class="form-group" id="GPinputMultiline"><label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label><div class="col-sm-10"><input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-primary"><?php _e('Test');?></button>&nbsp;<a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a></div></div><div id="regexresult"></div></form></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><?php _e('Regex samples');?></a></h4></div><div id="collapseThree" class="panel-collapse collapse"><div class="panel-body"><?php
+									?></textarea></div></div><div class="form-group" id="GPinputMultiline"><label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label><div class="col-sm-10"><input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-primary"><?php _e('Test');?></button> &nbsp; <a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a></div></div><div id="regexresult"></div></form></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><?php _e('Regex samples');?></a></h4></div><div id="collapseThree" class="panel-collapse collapse"><div class="panel-body"><?php
 $type  = 'Error Apache 2.2 with referer';
 $log   = '[Wed Nov 27 09:30:11 2013] [error] [client 127.0.0.1] PHP   1. {main}() /Users/potsky/Private/Work/GitHub/PHPApacheLogViewer/inc/get_logs.php:0, referer: http://localhost/~potsky/PHPApacheLogViewer/';
 $regex = '|^\[(.*)\] \[(.*)\] (\[client (.*)\] )*((?!\[client ).*)(, referer: (.*))*$|U';
