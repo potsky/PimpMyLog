@@ -6,7 +6,7 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
-		"1.3" : {
+		"1.3.0" : {
 			"released" : "2014-10-12",
 			"new"      : [
 				"Configuration file can be splitted in several files in subfolder <code>config.user.d</code>. Documentation is <a href=\"http://pimpmylog.com/documentation/configuration.html#USER_CONFIGURATION_DIR\">here</a>. (#62)",
