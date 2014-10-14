@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.2 - f43d5244a26576f01f8cc690157815b0451266fe*/
+/*! pimpmylog - 1.2.2 - 9a33cb1ddeb7bd8ba31267bb07e4d3ef2d7295ea*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -185,7 +185,7 @@ try {
 						$html .= '<ul>';
 
 						foreach ( $version_details[ $type ] as $issue ) {
-							$html .= '<li>' . preg_replace( '/#([0-9]*)/i' , '<a href="' . PIMPMYLOG_ISSUE_LINK . '$1">#$1</a>' , $issue) . '</li>';
+							$html .= '<li>' . preg_replace( '/#([0-9]+)/i' , '<a href="' . PIMPMYLOG_ISSUE_LINK . '$1">#$1</a>' , $issue) . '</li>';
 						}
 
 						$html .= '</ul>';
