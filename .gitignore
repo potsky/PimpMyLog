@@ -6,6 +6,7 @@ Thumbs.db
 *.swp
 .Spotlight-V100
 .Trashes
+/.sass-cache
 
 # Branch master old
 /config.inc.php

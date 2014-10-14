@@ -69,10 +69,10 @@ module.exports = function(grunt) {
 			},
 			css: {
 				src: [
-					'_tmp/main.css',
+					'css/main.scss',
 					'bower_components/hook/hook.css',
 				],
-				dest: '_tmp/pml.css'
+				dest: '_tmp/pml.scss'
 			}
 		},
 
@@ -118,6 +118,18 @@ module.exports = function(grunt) {
 					cwd     : 'bower_components/bootstrap-sass-official/assets/fonts/',
 					src     : [ '**/*' ],
 					dest    : '_site/fonts/'
+				}]
+			},
+			devhook: {
+				files: [{
+					expand: true,
+					flatten: true,
+					filter: 'isFile',
+					src: [
+						'bower_components/hook/*.png',
+						'bower_components/hook/*.gif'
+					],
+					dest: '_site/css/'
 				}]
 			},
 			devswf: {
@@ -222,6 +234,18 @@ module.exports = function(grunt) {
 					}
 				}
 			},
+			prodhook: {
+				files: [{
+					expand: true,
+					flatten: true,
+					filter: 'isFile',
+					src: [
+						'bower_components/hook/*.png',
+						'bower_components/hook/*.gif'
+					],
+					dest: '_build/css/'
+				}]
+			},
 			prodswf: {
 				files: [{
 					expand: true,
@@ -241,16 +265,6 @@ module.exports = function(grunt) {
 				dest: '_tmp/',
 				filter: 'isFile'
 			},
-			prodcssimg: {
-				expand: true,
-				flatten: true,
-				src: [
-					'bower_components/hook/*.png',
-					'bower_components/hook/*.gif'
-				],
-				dest: '_build/css/',
-				filter: 'isFile'
-			}
 		},
 
 		/*
@@ -291,7 +305,7 @@ module.exports = function(grunt) {
 					style : 'compressed'
 				},
 				files: {
-					"_build/css/pml.min.css" : ["css/main.scss"]
+					"_build/css/pml.min.css" : ["_tmp/pml.scss"]
 				}
 			},
 			dev: {
@@ -300,7 +314,7 @@ module.exports = function(grunt) {
 					update : true,
 				},
 				files: {
-					"_site/css/pml.min.css" : ["css/main.scss"]
+					"_site/css/pml.min.css" : ["_tmp/pml.scss"]
 				}
 			},
 		},
@@ -483,9 +497,18 @@ module.exports = function(grunt) {
 		|
 		*/
 		uglify: {
-			dist: {
+			prodvendor: {
 				files: {
-					'_build/js/pml.min.js'       : ['<%= concat.js.dest %>'],
+					'_build/js/pml.min.js' : ['<%= concat.js.dest %>'],
+				},
+				options: {
+					banner       : licence,
+					drop_console : true
+				}
+			},
+
+			prod: {
+				files: {
 					'_build/js/main.min.js'      : ['js/main.js'],
 					'_build/js/test.min.js'      : ['js/test.js'],
 					'_build/js/configure.min.js' : ['js/configure.js'],
@@ -627,14 +650,16 @@ module.exports = function(grunt) {
 
 			'copy:devfonts',
 			'copy:devswf',
+			'copy:devhook',
 			'copy:dev',
 
 			'replace:dev',
 
-			'sass:dev',
-			'copy:devcss',
-
 			'preprocess:dev',
+
+			'copy:devcss',
+			'concat:css',
+			'sass:dev',
 
 			'concat:js',
 			'uglify:dev',
@@ -649,11 +674,10 @@ module.exports = function(grunt) {
 		grunt.task.run([
 			'clean:prod',
 
-			'copy:prod',
-
-			'copy:prodcssimg',
 			'copy:prodfonts',
 			'copy:prodswf',
+			'copy:prodhook',
+			'copy:prod',
 
 			'replace:prod',
 
@@ -663,11 +687,12 @@ module.exports = function(grunt) {
 			'preprocess:prod',
 
 			'copy:prodcss',
-			'sass:prod',
 			'concat:css',
+			'sass:prod',
 
 			'concat:js',
-			'uglify:dist',
+			'uglify:prod',
+			'uglify:prodvendor'
 		]);
 	});
 

@@ -9,7 +9,7 @@
 		"1.2.2" : {
 			"released" : "2014-10-12",
 			"new"      : [
-				"Configuration file can be splitted in several files in subfolder <code>config.user.d</code> #62",
+				"Configuration file can be splitted in several files in subfolder <code>config.user.d</code>. Documentation is <a href=\"http://www.pimpmylog.com/documentation/configuration.html#USER_CONFIGURATION_DIR\">here</a>. (#62)",
 				"New messaging system for development team... First message scheduled for version 1.3 :-)"
 			],
 			"fixed" : [
