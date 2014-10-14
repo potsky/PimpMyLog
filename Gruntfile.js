@@ -567,9 +567,9 @@ module.exports = function(grunt) {
 				files: [ 'css/**/*.css' , '_tmp/**/*.css' ],
 				tasks: [ 'copy:devcss' ]
 			},
-			cssless: {
-				files: [ 'css/**/*.less' ],
-				tasks: [ 'less' , 'copy:devcss' ]
+			csssass: {
+				files: [ 'css/**/*.scss' ],
+				tasks: [ 'concat:css' , 'sass:dev' ]
 			},
 			html: {
 				files: [ '*.php' , 'inc/*', 'cfg/*' ],

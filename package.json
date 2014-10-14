@@ -29,10 +29,10 @@
     "grunt-preprocess": "~4.0.0",
     "grunt-shell": "~0.6.1",
     "grunt-replace": "~0.5.1",
+    "grunt-phpunit": "~0.3.5",
     "time-grunt": "~0.2.9",
     "shelljs": "~0.2.6",
-    "preprocess": "~2.0.0",
-    "grunt-phpunit": "~0.3.5"
+    "preprocess": "~2.0.0"
   },
   "engines": {
     "node": "0.10.x",
