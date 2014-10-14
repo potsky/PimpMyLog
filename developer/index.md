@@ -9,6 +9,8 @@ There is essentially three ways to contribute to *Pimp My Log* :
 1. Add some new features, fix bugs, etc... in the main source code
 1. Add a new language
 
+Current dev build status is [![Build Status](https://travis-ci.org/potsky/PimpMyLog.svg)](https://travis-ci.org/potsky/PimpMyLog)
+
 # 1 - New logs
 
 ## 1.1 - For your own usage
@@ -104,11 +106,21 @@ $ git clone https://github.com/potsky/PimpMyLog.git -b dev PimpMyLog-dev
 $ cd PimpMyLog-dev
 ```
 
+You will need these tools on your computer:
+
+- [Ruby](http://www.ruby-lang.org/)
+- [SASS](http://sass-lang.com) (`gem install sass`)
+- [Node.js](http://nodejs.org/)
+- [Composer](https://getcomposer.org) (`curl -sS https://getcomposer.org/installer | php; mv composer.phar /usr/local/bin/composer`)
+- [Grunt](http://gruntjs.com/) (`npm install -g grunt-cli`)
+- [Bower](http://bower.io/) (`npm install -g bower`)
+
 Install some tools:
 
 ```sh
 $ npm install
 $ bower install
+$ composer install
 ```
 
 And launch `grunt` to watch your modifications and rebuild what is necessary:
@@ -127,11 +139,11 @@ When you are ready, test your code in production. Stop `grunt` and launch the pr
 $ grunt build
 ```
 
-Your *Pimp My Log* development instance ready for production is now available at <http://localhost/PimpMyLog-dev/_build/>
+Your *Pimp My Log* development instance ready for production is now available at <http://localhost/PimpMyLog-dev/_build/>.
 
 This code will be the same as in the `master` branch :
 
-- less files converted to a single css minified file
+- sass files converted to a single css minified file
 - javascripts in a single file minified
 - licences added
 - version checked

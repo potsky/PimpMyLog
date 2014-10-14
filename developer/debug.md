@@ -14,7 +14,7 @@ There is a modest tool:
 
 This tool is deactivated by default and you need explicitly to activate it because it can contain some confidential informations about your configuration, about your *PHP* installation, ...
 
-The tool is `inc/test.php`. If you directly call it in your browser, it will fail and ask you to copy the file to `inc/test.REMOVE_UPPERCASE.php`. Do it and load in your browser <http://.../PimpMyLog/inc/test.REMOVE_UPPERCASE.php>.
+The tool is `inc/test.php`. Call <http://.../PimpMyLog/inc/test.php> in your browser and follow instructions.
 
 # Uninstall
 
