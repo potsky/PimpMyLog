@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.1 - 07115d6c500451e34cff968a18ccd4a8c2421b9f*/
+/*! pimpmylog - 1.3 - 820fbed3ca50fcf8ffb327f7cda4f88987488a9e*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -9,25 +9,24 @@
  */
 ?><?php
 include_once 'global.inc.php';
-config_load( '../config.user.json' );
-init();
+config_load( false );
 
 header('Content-type: application/json');
 
-if 	( ! csrf_verify() ) {
+if ( ! csrf_verify() ) {
 	$logs['error'] = __( 'Please refresh the page.' );
 	echo json_encode( $logs );
 	die();
 }
 
 $upgrade = array(
-	'footer'  => '',
-	'alert'   => '',
-	'current' => '',
-	'to'      => '',
+	'footer'     => '',
+	'alert'      => '',
+	'current'    => '',
+	'to'         => '',
+	'messages'   => '',
+	'messagesto' => '',
 );
-
-
 
 if ( file_exists( '../version.js' ) ) {
 	$JSl_version        = json_decode( clean_json_version( @file_get_contents( '../version.js' ) ) , true );
@@ -47,13 +46,96 @@ if ( false === CHECK_UPGRADE ) {
 	die();
 }
 
+
+
+/*
+|--------------------------------------------------------------------------
+| Retrieve remote server upgrade informations
+|--------------------------------------------------------------------------
+|
+*/
 try {
 	$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 5 ) ) );
-	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?' . date("U") , false , $ctx ) ), true );
+	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?v=' . $upgrade['current'] . '&' . date("U") , false , $ctx ) ), true );
 	if ( is_null( $JSr_version ) ) {
 		throw new Exception( 'Unable to fetch remote version' , 1);
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| Manage messaging system
+	|--------------------------------------------------------------------------
+	|
+	| We can send a message to all pml users to give them important informations
+	| about security features, etc...
+	|
+	| PML get the local last message and will display new messages only available remotely
+	|
+	*/
+	$local_messages  = @$JSl_version['messages'];
+	$remote_messages = @$JSr_version['messages'];
+
+	if ( ! is_array( $local_messages ) ) $local_messages = array();
+
+	if ( is_array( $remote_messages ) ) {
+
+		$local_messages_version  = 0;
+		$remote_messages_version = 0;
+		foreach ( $local_messages  as $local_messages_version  => $m ) break;
+		foreach ( $remote_messages as $remote_messages_version => $m ) break;
+
+		// Uncomment this to show all remote messages
+		// and remote cookie if needed...
+		//$local_messages_version = 0;
+
+		$new_messages           = array();
+		$max_messages           = 3;
+		$upgrade['messagesto']  = $remote_messages_version;
+		$show_only_greater_then = (int)@$_COOKIE['messageshide'];
+
+		// New messages are available,
+		foreach ( $remote_messages as $version => $message ) {
+			if ( ( (int)$local_messages_version >= (int)$version ) || ( $max_messages === 0 ) ) break;
+			if ( (int)$version > $show_only_greater_then ) {
+				$new_messages[ $version ] = $message;
+				$max_messages--;
+			}
+		}
+
+		if ( count( $new_messages ) > 0 ) {
+			$message = '<div id="messagesalert" class="alert alert-info alert-dismissable">';
+			$message .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+			$message .= '<strong>' . __( 'Messages from the development team') . '</strong>';
+			foreach ( $new_messages as $date => $content ) {
+				$message .= '<hr style="margin-top:5px;margin-bottom:5px;"/>';
+				$message .= '<div class="row">';
+				$message .= '<div class="col-sm-2">';
+				$message .= '<strong>' . substr( $date , 0 , 4 ) . '-' . substr( $date , 4 , 2 ) . '-' . substr( $date , 6 , 2 ) . '</strong>';
+				$message .= '</div>';
+				$message .= '<div class="col-sm-10">';
+				$message .= $content;
+				$message .= '</div>';
+				$message .= '</div>';
+			}
+			$message .= '<div class="row">';
+			$message .= '<div class="col-xs-12 text-right">';
+			$message .= '<a href="#" id="messagesstop" data-version="' . $remote_messages_version . '" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> ' . __("Mark as read") . '</a>';
+			$message .= '</div>';
+			$message .= '</div>';
+			$message .= '</div>';
+
+			$upgrade['messages'] = $message;
+		}
+
+	}
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Manage upgrade now
+	|--------------------------------------------------------------------------
+	|
+	*/
 	$upgrade['to'] = $JSr_version[ 'version' ];
 
 	if ( version_compare( $upgrade['current'] , $upgrade['to'] ) < 0 ) {
@@ -103,7 +185,7 @@ try {
 						$html .= '<ul>';
 
 						foreach ( $version_details[ $type ] as $issue ) {
-							$html .= '<li>' . preg_replace( '/#([0-9]*)/i' , '<a href="' . PIMPMYLOG_ISSUE_LINK . '$1">#$1</a>' , $issue) . '</li>';
+							$html .= '<li>' . preg_replace( '/#([0-9]+)/i' , '<a href="' . PIMPMYLOG_ISSUE_LINK . '$1">#$1</a>' , $issue) . '</li>';
 						}
 
 						$html .= '</ul>';
@@ -130,11 +212,15 @@ try {
 		$upgrade['alert'] .= sprintf( __( 'You have version %s and version %s is available' ) , '<em>' . $upgrade['current'] . '</em>' , '<em>' . $upgrade['to'] . '</em>');
 		$upgrade['alert'] .= ' (<a href="#" class="alert-link" data-toggle="collapse" data-target="#changelog">' . __( 'release notes') . '</a>)';
 		$upgrade['alert'] .= '<br/>';
-		$upgrade['alert'] .= __('Simply <code>git pull</code> in your directory or <a href="http://pimpmylog.com/getting-started/#update" target="doc">follow instructions here</a>');
-		$upgrade['alert'] .= '<br/>';
-		$upgrade['alert'] .= '<br/>';
-		$upgrade['alert'] .= '<a href="#" id="upgradestop" data-version="' . $upgrade['to'] . '" class="alert-link">' . __("Don't bother me again with this upgrade!") . '</a>';
-		$upgrade['alert'] .= '<div id="changelog" class="panel-collapse collapse"><div class="panel-body panel panel-default">' . $html . '</div></div>';
+		$upgrade['alert'] .= __('Simply <code>git pull</code> in your directory or <a href="http://pimpmylog.com/getting-started/#update" target="doc" class="alert-link">follow instructions here</a>');
+		$upgrade['alert'] .= '<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+		$upgrade['alert'] .= '<div class="row">';
+		$upgrade['alert'] .= '<div class="col-xs-12 text-right">';
+		$upgrade['alert'] .= '<a href="#" id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> ' . __("Skip this upgrade") . '</a>';
+		$upgrade['alert'] .= '</div>';
+		$upgrade['alert'] .= '</div>';
+
+
 
 		if ( count( $notices ) > 0 ) {
 

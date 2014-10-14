@@ -4,15 +4,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-07-25 12:58+0100\n"
-"PO-Revision-Date: 2014-07-25 13:00+0100\n"
+"POT-Creation-Date: 2014-10-14 15:31+0100\n"
+"PO-Revision-Date: 2014-10-14 15:31+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: Português <>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.6\n"
+"X-Generator: Poedit 1.6.9\n"
 "X-Poedit-KeywordsList: gettext;gettext_noop;_x;_e;__;esc_attr__;esc_attr_e;"
 "esc_html__;esc_html_e;_ex;esc_attr_x;esc_html_x;_n;_nx;_n_noop;_nx_noop\n"
 "X-Poedit-Basepath: ../../..\n"
@@ -127,8 +127,8 @@ msgstr ""
 "Ative este software apenas se você utilizar a diretiva "
 "<code>ini_set('error_log')</code> diretamente em seus scripts, por exemplo."
 
-#: _build/inc/configure.php:44 _site/inc/configure.php:35
-#: _tmp/inc/configure.php:45 inc/configure.php:35
+#: _build/inc/configure.php:40 _site/inc/configure.php:31
+#: _tmp/inc/configure.php:41 inc/configure.php:31
 #, php-format
 msgid ""
 "File <code>%s</code> already exists. Please remove it manually if you want "
@@ -137,43 +137,44 @@ msgstr ""
 "O arquivo <code>%s</code> já existe. Por favor remova-o manualmente se você "
 "quiser que eu crie este arquivo."
 
-#: _build/inc/configure.php:55 _site/inc/configure.php:46
-#: _tmp/inc/configure.php:56 inc/configure.php:46
+#: _build/inc/configure.php:51 _site/inc/configure.php:42
+#: _tmp/inc/configure.php:52 inc/configure.php:42
 #, php-format
 msgid "Unable to create file <code>%s</code>"
 msgstr "Não foi possível criar o arquivo <code>%s</code>"
 
-#: _build/inc/configure.php:57 _site/inc/configure.php:48
-#: _tmp/inc/configure.php:58 inc/configure.php:48
+#: _build/inc/configure.php:53 _site/inc/configure.php:44
+#: _tmp/inc/configure.php:54 inc/configure.php:44
 msgid "Please give temporary write access to the root directory:"
 msgstr "Favor fornecer permissão de escrita temporária ao diretório raiz:"
 
-#: _build/inc/configure.php:60 _build/inc/test.php:145
-#: _site/inc/configure.php:51 _site/inc/test.php:215 _tmp/inc/configure.php:61
-#: _tmp/inc/test.php:232 inc/configure.php:51 inc/test.php:222
+#: _build/inc/configure.php:56 _build/inc/test.php:141
+#: _site/inc/configure.php:47 _site/inc/test.php:152 _site/inc/test.php:239
+#: _tmp/inc/configure.php:57 _tmp/inc/test.php:218 inc/configure.php:47
+#: inc/test.php:152 inc/test.php:239
 msgid "Copy to clipboard"
 msgstr "Copiar para a área de trabalho"
 
-#: _build/inc/configure.php:60 _site/inc/configure.php:51
-#: _tmp/inc/configure.php:61 inc/configure.php:51
+#: _build/inc/configure.php:56 _site/inc/configure.php:47
+#: _tmp/inc/configure.php:57 inc/configure.php:47
 msgid "Command copied!"
 msgstr "Comando copiado!"
 
-#: _build/inc/configure.php:71 _site/inc/configure.php:62
-#: _tmp/inc/configure.php:72 inc/configure.php:62
+#: _build/inc/configure.php:67 _site/inc/configure.php:58
+#: _tmp/inc/configure.php:68 inc/configure.php:58
 msgid "Choose softwares to search log files for"
 msgstr "Escolha os softwares para procurar por arquivos de log"
 
-#: _build/inc/configure.php:89 _site/inc/configure.php:80
-#: _tmp/inc/configure.php:90 inc/configure.php:80
+#: _build/inc/configure.php:85 _site/inc/configure.php:76
+#: _tmp/inc/configure.php:86 inc/configure.php:76
 #, php-format
 msgid "Software <em>%s</em>"
 msgstr "Software <em>%s</em>"
 
-#: _build/inc/configure.php:99 _build/inc/configure.php:275
-#: _site/inc/configure.php:90 _site/inc/configure.php:266
-#: _tmp/inc/configure.php:100 _tmp/inc/configure.php:276 inc/configure.php:90
-#: inc/configure.php:266
+#: _build/inc/configure.php:95 _build/inc/configure.php:271
+#: _site/inc/configure.php:86 _site/inc/configure.php:262
+#: _tmp/inc/configure.php:96 _tmp/inc/configure.php:272 inc/configure.php:86
+#: inc/configure.php:262
 #, php-format
 msgid ""
 "Files <code>%s</code> or <code>%s</code> do not exist. Please review your "
@@ -182,13 +183,13 @@ msgstr ""
 "Arquivos <code>%s</code> ou <code>%s</code> não existem. Favor verificar as "
 "configurações do seu software."
 
-#: _build/inc/configure.php:152 _site/inc/configure.php:143
-#: _tmp/inc/configure.php:153 inc/configure.php:143
+#: _build/inc/configure.php:148 _site/inc/configure.php:139
+#: _tmp/inc/configure.php:149 inc/configure.php:139
 msgid "Unable to find any directory."
 msgstr "Não é possível localizar qualquer diretório."
 
-#: _build/inc/configure.php:153 _site/inc/configure.php:144
-#: _tmp/inc/configure.php:154 inc/configure.php:144
+#: _build/inc/configure.php:149 _site/inc/configure.php:140
+#: _tmp/inc/configure.php:150 inc/configure.php:140
 msgid ""
 "Check in the following list if these directories are readable by the "
 "webserver user and refresh this page"
@@ -196,15 +197,15 @@ msgstr ""
 "Verifique na lista a seguir se estes diretórios possuem permissão de leitura "
 "pelo usuário do servidor web e recarregue esta página"
 
-#: _build/inc/configure.php:156 _site/inc/configure.php:147
-#: _tmp/inc/configure.php:157 inc/configure.php:147
+#: _build/inc/configure.php:152 _site/inc/configure.php:143
+#: _tmp/inc/configure.php:153 inc/configure.php:143
 msgid "Directories are available but unable to find files inside."
 msgstr ""
 "Diretórios estão disponíveis mas não é possível procurar por arquivos dentro "
 "deles."
 
-#: _build/inc/configure.php:157 _site/inc/configure.php:148
-#: _tmp/inc/configure.php:158 inc/configure.php:148
+#: _build/inc/configure.php:153 _site/inc/configure.php:144
+#: _tmp/inc/configure.php:154 inc/configure.php:144
 msgid ""
 "Check in the following list if these directories contain readable files by "
 "the webserver user and refresh this page."
@@ -212,8 +213,8 @@ msgstr ""
 "Verifique na lista a seguir se estes diretórios possuem arquivos com "
 "permissão de leitura pelo usuário do servidor web e recarregue esta página."
 
-#: _build/inc/configure.php:158 _site/inc/configure.php:149
-#: _tmp/inc/configure.php:159 inc/configure.php:149
+#: _build/inc/configure.php:154 _site/inc/configure.php:145
+#: _tmp/inc/configure.php:155 inc/configure.php:145
 msgid ""
 "Don't forget that to read a file, ALL parent directories have to be "
 "accessible too!"
@@ -221,19 +222,19 @@ msgstr ""
 "Não se esqueça que para ler um arquivo, TODOS os diretórios pais precisam "
 "estar acessíveis também!"
 
-#: _build/inc/configure.php:168 _site/inc/configure.php:159
-#: _tmp/inc/configure.php:169 inc/configure.php:159
+#: _build/inc/configure.php:164 _site/inc/configure.php:155
+#: _tmp/inc/configure.php:165 inc/configure.php:155
 #, php-format
 msgid "These files have been checked in all paths: %s "
 msgstr "Estes arquivos foram verificados em todos os caminhos: %s."
 
-#: _build/inc/configure.php:171 _site/inc/configure.php:162
-#: _tmp/inc/configure.php:172 inc/configure.php:162
+#: _build/inc/configure.php:167 _site/inc/configure.php:158
+#: _tmp/inc/configure.php:168 inc/configure.php:158
 msgid "Log files have been found!"
 msgstr "Arquivos de log foram encontrados!"
 
-#: _build/inc/configure.php:172 _site/inc/configure.php:163
-#: _tmp/inc/configure.php:173 inc/configure.php:163
+#: _build/inc/configure.php:168 _site/inc/configure.php:159
+#: _tmp/inc/configure.php:169 inc/configure.php:159
 msgid ""
 "Check in the following list files you want to configure. If files or "
 "directories are missing, verify that they are readable by the webserver user"
@@ -242,52 +243,52 @@ msgstr ""
 "arquivos ou diretórios estiverem faltando, verifique se eles estão com "
 "permissão de escrita pelo usuário do servidor web"
 
-#: _build/inc/configure.php:177 _build/inc/configure.php:225
-#: _site/inc/configure.php:168 _site/inc/configure.php:216
-#: _tmp/inc/configure.php:178 _tmp/inc/configure.php:226 inc/configure.php:168
-#: inc/configure.php:216
+#: _build/inc/configure.php:173 _build/inc/configure.php:221
+#: _site/inc/configure.php:164 _site/inc/configure.php:212
+#: _tmp/inc/configure.php:174 _tmp/inc/configure.php:222 inc/configure.php:164
+#: inc/configure.php:212
 msgid "unable to detect web server user"
 msgstr "não é possível detectar o usuário do servidor web"
 
-#: _build/inc/configure.php:178 _build/inc/configure.php:226
-#: _site/inc/configure.php:169 _site/inc/configure.php:217
-#: _tmp/inc/configure.php:179 _tmp/inc/configure.php:227 inc/configure.php:169
-#: inc/configure.php:217
+#: _build/inc/configure.php:174 _build/inc/configure.php:222
+#: _site/inc/configure.php:165 _site/inc/configure.php:213
+#: _tmp/inc/configure.php:175 _tmp/inc/configure.php:223 inc/configure.php:165
+#: inc/configure.php:213
 #, php-format
 msgid "web server user seems to be <code>%s</code>"
 msgstr "o usuário do servidor web parece ser <code>%s</code>"
 
-#: _build/inc/configure.php:182 _site/inc/configure.php:173
-#: _tmp/inc/configure.php:183 inc/configure.php:173
+#: _build/inc/configure.php:178 _site/inc/configure.php:169
+#: _tmp/inc/configure.php:179 inc/configure.php:169
 msgid ""
 "You can also type log files path in the text area below separated by coma:"
 msgstr ""
 "Você também pode digitar caminhos para os arquios de log na caixa de texto "
 "abaixo (separe por vírgula):"
 
-#: _build/inc/configure.php:184 _build/inc/configure.php:328
-#: _site/inc/configure.php:175 _site/inc/configure.php:319
-#: _tmp/inc/configure.php:185 _tmp/inc/configure.php:329 inc/configure.php:175
-#: inc/configure.php:319
+#: _build/inc/configure.php:180 _build/inc/configure.php:324
+#: _site/inc/configure.php:171 _site/inc/configure.php:315
+#: _tmp/inc/configure.php:181 _tmp/inc/configure.php:325 inc/configure.php:171
+#: inc/configure.php:315
 msgid "Type"
 msgstr "Tipo"
 
-#: _build/inc/configure.php:184 _site/inc/configure.php:175
-#: _tmp/inc/configure.php:185 inc/configure.php:175
+#: _build/inc/configure.php:180 _site/inc/configure.php:171
+#: _tmp/inc/configure.php:181 inc/configure.php:171
 msgid "Custom paths"
 msgstr "Caminhos personalizados"
 
-#: _build/inc/configure.php:203 _build/inc/configure.php:247
-#: _build/inc/configure.php:251 _site/inc/configure.php:194
-#: _site/inc/configure.php:238 _site/inc/configure.php:242
-#: _tmp/inc/configure.php:204 _tmp/inc/configure.php:248
-#: _tmp/inc/configure.php:252 inc/configure.php:194 inc/configure.php:238
-#: inc/configure.php:242
+#: _build/inc/configure.php:199 _build/inc/configure.php:243
+#: _build/inc/configure.php:247 _site/inc/configure.php:190
+#: _site/inc/configure.php:234 _site/inc/configure.php:238
+#: _tmp/inc/configure.php:200 _tmp/inc/configure.php:244
+#: _tmp/inc/configure.php:248 inc/configure.php:190 inc/configure.php:234
+#: inc/configure.php:238
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
-#: _build/inc/configure.php:222 _site/inc/configure.php:213
-#: _tmp/inc/configure.php:223 inc/configure.php:213
+#: _build/inc/configure.php:218 _site/inc/configure.php:209
+#: _tmp/inc/configure.php:219 inc/configure.php:209
 msgid ""
 "Custom files below are not readable, please remove them or verify that they "
 "are readable by the webserver user"
@@ -296,8 +297,8 @@ msgstr ""
 "removê-los ou verificar se eles possuem permissão de leitura pelo usuário do "
 "servidor web"
 
-#: _build/inc/configure.php:283 _site/inc/configure.php:274
-#: _tmp/inc/configure.php:284 inc/configure.php:274
+#: _build/inc/configure.php:279 _site/inc/configure.php:270
+#: _tmp/inc/configure.php:280 inc/configure.php:270
 #, php-format
 msgid ""
 "File <code>%s</code> does not define function <code>%s</code>. Please review "
@@ -306,132 +307,132 @@ msgstr ""
 "O arquivo <code>%s</code> não define a função <code>%s</code>. Favor "
 "verificar as configurações do seu software."
 
-#: _build/inc/configure.php:296 _site/inc/configure.php:287
-#: _tmp/inc/configure.php:297 inc/configure.php:287
+#: _build/inc/configure.php:292 _site/inc/configure.php:283
+#: _tmp/inc/configure.php:293 inc/configure.php:283
 msgid "No configuration found for softwares!"
 msgstr "Nenhuma configuração encontrada para os softwares!"
 
-#: _build/inc/configure.php:302 _site/inc/configure.php:293
-#: _tmp/inc/configure.php:303 inc/configure.php:293
+#: _build/inc/configure.php:298 _site/inc/configure.php:289
+#: _tmp/inc/configure.php:299 inc/configure.php:289
 msgid "Unknown action, abort."
 msgstr "Ação desconhecida, abortar."
 
-#: _build/inc/configure.php:321 _site/inc/configure.php:312
-#: _tmp/inc/configure.php:322 inc/configure.php:312
+#: _build/inc/configure.php:317 _site/inc/configure.php:308
+#: _tmp/inc/configure.php:318 inc/configure.php:308
 msgid "%s% Complete"
 msgstr "%s% Completo"
 
-#: _build/inc/configure.php:322 _build/index.php:97
-#: _site/inc/configure.php:313 _site/index.php:88 _tmp/inc/configure.php:323
-#: _tmp/index.php:98 inc/configure.php:313 index.php:88
+#: _build/inc/configure.php:318 _build/index.php:92
+#: _site/inc/configure.php:309 _site/index.php:83 _tmp/inc/configure.php:319
+#: _tmp/index.php:93 inc/configure.php:309 index.php:83
 msgid "An error occurs!"
 msgstr "Um erro ocorreu!"
 
-#: _build/inc/configure.php:323 _site/inc/configure.php:314
-#: _tmp/inc/configure.php:324 inc/configure.php:314
+#: _build/inc/configure.php:319 _site/inc/configure.php:310
+#: _tmp/inc/configure.php:320 inc/configure.php:310
 msgid "Please wait..."
 msgstr "Aguarde..."
 
-#: _build/inc/configure.php:324 _site/inc/configure.php:315
-#: _tmp/inc/configure.php:325 inc/configure.php:315
+#: _build/inc/configure.php:320 _site/inc/configure.php:311
+#: _tmp/inc/configure.php:321 inc/configure.php:311
 msgid "Software"
 msgstr "Software"
 
-#: _build/inc/configure.php:325 _build/inc/test.php:260
-#: _site/inc/configure.php:316 _site/inc/test.php:406
-#: _tmp/inc/configure.php:326 _tmp/inc/test.php:423 inc/configure.php:316
-#: inc/test.php:413
+#: _build/inc/configure.php:321 _build/inc/test.php:256
+#: _site/inc/configure.php:312 _site/inc/test.php:449
+#: _tmp/inc/configure.php:322 _tmp/inc/test.php:409 inc/configure.php:312
+#: inc/test.php:449
 msgid "Path"
 msgstr "Caminho"
 
-#: _build/inc/configure.php:326 _site/inc/configure.php:317
-#: _tmp/inc/configure.php:327 inc/configure.php:317
+#: _build/inc/configure.php:322 _site/inc/configure.php:313
+#: _tmp/inc/configure.php:323 inc/configure.php:313
 msgid "File"
 msgstr "Arquivo"
 
-#: _build/inc/configure.php:327 _site/inc/configure.php:318
-#: _tmp/inc/configure.php:328 inc/configure.php:318
+#: _build/inc/configure.php:323 _site/inc/configure.php:314
+#: _tmp/inc/configure.php:324 inc/configure.php:314
 msgid "Readable"
 msgstr "Com permissão de leitura"
 
-#: _build/inc/configure.php:329 _build/inc/test.php:264
-#: _build/inc/test.php:265 _site/inc/configure.php:320 _site/inc/test.php:410
-#: _site/inc/test.php:411 _tmp/inc/configure.php:330 _tmp/inc/test.php:427
-#: _tmp/inc/test.php:428 inc/configure.php:320 inc/test.php:417
-#: inc/test.php:418
+#: _build/inc/configure.php:325 _build/inc/test.php:260
+#: _build/inc/test.php:261 _site/inc/configure.php:316 _site/inc/test.php:453
+#: _site/inc/test.php:454 _tmp/inc/configure.php:326 _tmp/inc/test.php:413
+#: _tmp/inc/test.php:414 inc/configure.php:316 inc/test.php:453
+#: inc/test.php:454
 msgid "No"
 msgstr "Não"
 
-#: _build/inc/configure.php:330 _build/inc/test.php:264
-#: _build/inc/test.php:265 _site/inc/configure.php:321 _site/inc/test.php:410
-#: _site/inc/test.php:411 _tmp/inc/configure.php:331 _tmp/inc/test.php:427
-#: _tmp/inc/test.php:428 inc/configure.php:321 inc/test.php:417
-#: inc/test.php:418
+#: _build/inc/configure.php:326 _build/inc/test.php:260
+#: _build/inc/test.php:261 _site/inc/configure.php:317 _site/inc/test.php:453
+#: _site/inc/test.php:454 _tmp/inc/configure.php:327 _tmp/inc/test.php:413
+#: _tmp/inc/test.php:414 inc/configure.php:317 inc/test.php:453
+#: inc/test.php:454
 msgid "Yes"
 msgstr "Sim"
 
-#: _build/inc/configure.php:331 _site/inc/configure.php:322
-#: _tmp/inc/configure.php:332 inc/configure.php:322
+#: _build/inc/configure.php:327 _site/inc/configure.php:318
+#: _tmp/inc/configure.php:328 inc/configure.php:318
 msgid "Name"
 msgstr "Nome"
 
-#: _build/inc/configure.php:332 _site/inc/configure.php:323
-#: _tmp/inc/configure.php:333 inc/configure.php:323
+#: _build/inc/configure.php:328 _site/inc/configure.php:319
+#: _tmp/inc/configure.php:329 inc/configure.php:319
 msgid "Description"
 msgstr "Descrição"
 
-#: _build/inc/configure.php:333 _site/inc/configure.php:324
-#: _tmp/inc/configure.php:334 inc/configure.php:324
+#: _build/inc/configure.php:329 _site/inc/configure.php:320
+#: _tmp/inc/configure.php:330 inc/configure.php:320
 msgid "Notes"
 msgstr "Observações"
 
-#: _build/inc/configure.php:334 _site/inc/configure.php:325
-#: _tmp/inc/configure.php:335 inc/configure.php:325
+#: _build/inc/configure.php:330 _site/inc/configure.php:321
+#: _tmp/inc/configure.php:331 inc/configure.php:321
 msgid "You have to select at least one software to configure!"
 msgstr "Você tem que selecionar ao menos um software para configurar!"
 
-#: _build/inc/configure.php:335 _site/inc/configure.php:326
-#: _tmp/inc/configure.php:336 inc/configure.php:326
+#: _build/inc/configure.php:331 _site/inc/configure.php:322
+#: _tmp/inc/configure.php:332 inc/configure.php:322
 msgid ""
 "You have to select at least one log file or type the path of a log file!"
 msgstr ""
 "Você deve selecionar ao menos um arquivo de log ou digitar o caminho de um "
 "arquivo de log! "
 
-#: _build/inc/configure.php:343 _site/inc/configure.php:363
-#: _tmp/inc/configure.php:380 inc/configure.php:370
+#: _build/inc/configure.php:336 _site/inc/configure.php:353
+#: _tmp/inc/configure.php:363 inc/configure.php:353
 msgid "Configurator"
 msgstr "Configurador"
 
-#: _build/inc/configure.php:343 _site/inc/configure.php:379
-#: _tmp/inc/configure.php:396 inc/configure.php:386
+#: _build/inc/configure.php:336 _site/inc/configure.php:369
+#: _tmp/inc/configure.php:379 inc/configure.php:369
 msgid "Reload"
 msgstr "Recarregar"
 
-#: _build/inc/configure.php:343 _site/inc/configure.php:381
-#: _tmp/inc/configure.php:398 inc/configure.php:388
+#: _build/inc/configure.php:336 _site/inc/configure.php:371
+#: _tmp/inc/configure.php:381 inc/configure.php:371
 msgid "Continue"
 msgstr "Continuar"
 
-#: _build/inc/configure.php:343 _site/inc/configure.php:387
-#: _tmp/inc/configure.php:404 inc/configure.php:394
+#: _build/inc/configure.php:336 _site/inc/configure.php:377
+#: _tmp/inc/configure.php:387 inc/configure.php:377
 msgid "Congratulations!"
 msgstr "Parabéns!"
 
-#: _build/inc/configure.php:345 _site/inc/configure.php:391
-#: _tmp/inc/configure.php:408 inc/configure.php:398
+#: _build/inc/configure.php:338 _site/inc/configure.php:381
+#: _tmp/inc/configure.php:391 inc/configure.php:381
 msgid "Your <em>Pimp my Log</em> instance is ready to use."
 msgstr "Sua instância do <em>Pimp my Log</em> está pronta para uso."
 
-#: _build/inc/configure.php:348 _site/inc/configure.php:394
-#: _tmp/inc/configure.php:411 inc/configure.php:401
+#: _build/inc/configure.php:341 _site/inc/configure.php:384
+#: _tmp/inc/configure.php:394 inc/configure.php:384
 #, php-format
 msgid "You can manually adjust settings in the <code>%s</code> file."
 msgstr ""
 "Você pode ajustar manualmente as configurações no arquivo <code>%s</code>."
 
-#: _build/inc/configure.php:350 _site/inc/configure.php:396
-#: _tmp/inc/configure.php:413 inc/configure.php:403
+#: _build/inc/configure.php:343 _site/inc/configure.php:386
+#: _tmp/inc/configure.php:396 inc/configure.php:386
 msgid ""
 "Please visit <a href=\"http://pimpmylog.com\">pimpmylog.com</a> for more "
 "informations."
@@ -439,60 +440,44 @@ msgstr ""
 "Favor visitar <a href=\"http://pimpmylog.com\">pimpmylog.com</a> para mais "
 "informações."
 
-#: _build/inc/configure.php:353 _site/inc/configure.php:399
-#: _tmp/inc/configure.php:416 inc/configure.php:406
+#: _build/inc/configure.php:346 _site/inc/configure.php:389
+#: _tmp/inc/configure.php:399 inc/configure.php:389
 msgid "Pimp my Logs now!"
 msgstr "Pimp my Logs agora!"
 
-#: _build/inc/functions.inc.php:234 _site/inc/functions.inc.php:225
-#: _tmp/inc/functions.inc.php:235 inc/functions.inc.php:225
-msgid "No file is defined in <code>files</code> array"
-msgstr "Nenhum arquivo está definido no vetor <code>files</code>"
-
-#: _build/inc/functions.inc.php:242 _site/inc/functions.inc.php:233
-#: _tmp/inc/functions.inc.php:243 inc/functions.inc.php:233
-#, php-format
-msgid "<code>%s</code> is mandatory for file ID <code>%s</code>"
-msgstr "<code>%s</code> é mandatório para o arquivo de ID <code>%s</code>"
-
-#: _build/inc/functions.inc.php:337 _site/inc/functions.inc.php:328
-#: _tmp/inc/functions.inc.php:338 inc/functions.inc.php:328
-msgid "B KBMBGBTBPB"
-msgstr "B KBMBGBTBPB"
-
-#: _build/inc/getlog.pml.php:42 _site/inc/getlog.pml.php:33
-#: _tmp/inc/getlog.pml.php:43 inc/getlog.pml.php:33
+#: _build/inc/getlog.pml.php:40 _site/inc/getlog.pml.php:31
+#: _tmp/inc/getlog.pml.php:41 inc/getlog.pml.php:31
 #, php-format
 msgid "<strong>PHP Warning</strong> [%s] %s"
 msgstr "<strong>PHP Warning</strong> [%s] %s"
 
-#: _build/inc/getlog.pml.php:46 _site/inc/getlog.pml.php:37
-#: _tmp/inc/getlog.pml.php:47 inc/getlog.pml.php:37
+#: _build/inc/getlog.pml.php:44 _site/inc/getlog.pml.php:35
+#: _tmp/inc/getlog.pml.php:45 inc/getlog.pml.php:35
 #, php-format
 msgid "<strong>PHP Notice</strong> [%s] %s"
 msgstr "<strong>PHP Notice</strong> [%s] %s"
 
-#: _build/inc/getlog.pml.php:50 _site/inc/getlog.pml.php:41
-#: _tmp/inc/getlog.pml.php:51 inc/getlog.pml.php:41
+#: _build/inc/getlog.pml.php:48 _site/inc/getlog.pml.php:39
+#: _tmp/inc/getlog.pml.php:49 inc/getlog.pml.php:39
 #, php-format
 msgid "<strong>PHP Unknown error</strong> [%s] %s"
 msgstr "<strong>PHP Unknown error</strong> [%s] %s"
 
-#: _build/inc/getlog.pml.php:65 _site/inc/getlog.pml.php:56
-#: _tmp/inc/getlog.pml.php:66 inc/getlog.pml.php:56
+#: _build/inc/getlog.pml.php:63 _site/inc/getlog.pml.php:54
+#: _tmp/inc/getlog.pml.php:64 inc/getlog.pml.php:54
 #, php-format
 msgid "<strong>PHP Error</strong> line %s: %s"
 msgstr "<strong>PHP Error</strong> linha %s: %s"
 
-#: _build/inc/getlog.pml.php:89 _build/inc/upgrade.pml.php:18
-#: _site/inc/getlog.pml.php:80 _site/inc/upgrade.pml.php:9
-#: _tmp/inc/getlog.pml.php:90 _tmp/inc/upgrade.pml.php:19
-#: inc/getlog.pml.php:80 inc/upgrade.pml.php:9
+#: _build/inc/getlog.pml.php:87 _build/inc/upgrade.pml.php:17
+#: _site/inc/getlog.pml.php:78 _site/inc/upgrade.pml.php:8
+#: _tmp/inc/getlog.pml.php:88 _tmp/inc/upgrade.pml.php:18
+#: inc/getlog.pml.php:78 inc/upgrade.pml.php:8
 msgid "Please refresh the page."
 msgstr "Favor atualizar a página."
 
-#: _build/inc/getlog.pml.php:95 _site/inc/getlog.pml.php:86
-#: _tmp/inc/getlog.pml.php:96 inc/getlog.pml.php:86
+#: _build/inc/getlog.pml.php:93 _site/inc/getlog.pml.php:84
+#: _tmp/inc/getlog.pml.php:94 inc/getlog.pml.php:84
 #, php-format
 msgid ""
 "File ID <code>%s</code> does not exist, please review your configuration "
@@ -501,8 +486,8 @@ msgstr ""
 "O arquivo de ID <code>%s</code> não existe. Favor reveja o seu arquivo de "
 "configuração e pare de brincar!"
 
-#: _build/inc/getlog.pml.php:102 _site/inc/getlog.pml.php:93
-#: _tmp/inc/getlog.pml.php:103 inc/getlog.pml.php:93
+#: _build/inc/getlog.pml.php:100 _site/inc/getlog.pml.php:91
+#: _tmp/inc/getlog.pml.php:101 inc/getlog.pml.php:91
 #, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist, please "
@@ -511,16 +496,16 @@ msgstr ""
 "O arquivo <code>%s</code> para o arquivo de ID <code>%s</code> não exite. "
 "Favor reveja o seu arquivo de configuração."
 
-#: _build/inc/getlog.pml.php:109 _site/inc/getlog.pml.php:100
-#: _tmp/inc/getlog.pml.php:110 inc/getlog.pml.php:100
+#: _build/inc/getlog.pml.php:107 _site/inc/getlog.pml.php:98
+#: _tmp/inc/getlog.pml.php:108 inc/getlog.pml.php:98
 msgid ""
 "Configuration file has changed and is buggy now. Please refresh the page."
 msgstr ""
 "O arquivo de configuração foi modificado e agora está bugado. Favor "
 "recarregar a página."
 
-#: _build/inc/getlog.pml.php:156 _site/inc/getlog.pml.php:147
-#: _tmp/inc/getlog.pml.php:157 inc/getlog.pml.php:147
+#: _build/inc/getlog.pml.php:154 _site/inc/getlog.pml.php:145
+#: _tmp/inc/getlog.pml.php:155 inc/getlog.pml.php:145
 #, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist anymore..."
@@ -528,20 +513,20 @@ msgstr ""
 "O arquivo <code>%s</code> para o arquivo de ID <code>%s</code> não existe "
 "mais..."
 
-#: _build/inc/getlog.pml.php:175 _site/inc/getlog.pml.php:166
-#: _tmp/inc/getlog.pml.php:176 inc/getlog.pml.php:166
+#: _build/inc/getlog.pml.php:173 _site/inc/getlog.pml.php:164
+#: _tmp/inc/getlog.pml.php:174 inc/getlog.pml.php:164
 #, php-format
 msgid "Log file has been rotated (previous size was %s and new one is %s)"
 msgstr ""
 "O arquivo de log foi rotacionado (o tamanho anterior era %s e o novo é %s)"
 
-#: _build/inc/getlog.pml.php:212 _site/inc/getlog.pml.php:203
-#: _tmp/inc/getlog.pml.php:213 inc/getlog.pml.php:203
+#: _build/inc/getlog.pml.php:210 _site/inc/getlog.pml.php:201
+#: _tmp/inc/getlog.pml.php:211 inc/getlog.pml.php:201
 msgid "Log file has been rotated"
 msgstr "O arquivo de logs foi rotacionado"
 
-#: _build/inc/getlog.pml.php:332 _site/inc/getlog.pml.php:323
-#: _tmp/inc/getlog.pml.php:333 inc/getlog.pml.php:323
+#: _build/inc/getlog.pml.php:330 _site/inc/getlog.pml.php:321
+#: _tmp/inc/getlog.pml.php:331 inc/getlog.pml.php:321
 #, php-format
 msgid ""
 "%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "
@@ -554,30 +539,45 @@ msgstr ""
 "<code>%s</code> foi modificado pela última vez em <code>%s</code> no fuso "
 "horário <code>%s</code>, o tamanho é <code>%s</code>%s"
 
-#: _build/inc/getlog.pml.php:333 _site/inc/getlog.pml.php:324
-#: _tmp/inc/getlog.pml.php:334 inc/getlog.pml.php:324
+#: _build/inc/getlog.pml.php:331 _site/inc/getlog.pml.php:322
+#: _tmp/inc/getlog.pml.php:332 inc/getlog.pml.php:322
 #, php-format
 msgid "%s new logs found"
 msgstr "%s novos logs encontrados"
 
-#: _build/inc/getlog.pml.php:333 _site/inc/getlog.pml.php:324
-#: _tmp/inc/getlog.pml.php:334 inc/getlog.pml.php:324
+#: _build/inc/getlog.pml.php:331 _site/inc/getlog.pml.php:322
+#: _tmp/inc/getlog.pml.php:332 inc/getlog.pml.php:322
 msgid "no new log found"
 msgstr "nenhum novo log encontrado"
 
-#: _build/inc/getlog.pml.php:333 _site/inc/getlog.pml.php:324
-#: _tmp/inc/getlog.pml.php:334 inc/getlog.pml.php:324
+#: _build/inc/getlog.pml.php:331 _site/inc/getlog.pml.php:322
+#: _tmp/inc/getlog.pml.php:332 inc/getlog.pml.php:322
 msgid "1 new log found"
 msgstr "1 novo log encontrado"
 
-#: _build/inc/getlog.pml.php:342 _site/inc/getlog.pml.php:333
-#: _tmp/inc/getlog.pml.php:343 inc/getlog.pml.php:333
+#: _build/inc/getlog.pml.php:340 _site/inc/getlog.pml.php:331
+#: _tmp/inc/getlog.pml.php:341 inc/getlog.pml.php:331
 #, php-format
 msgid "log type is <code>%s</code>"
 msgstr "o tipo do log é <code>%s</code>"
 
-#: _build/inc/test.php:16 _site/inc/test.php:7 _tmp/inc/test.php:17
-#: inc/test.php:7
+#: _build/inc/global.inc.php:328 _site/inc/global.inc.php:320
+#: _tmp/inc/global.inc.php:329 inc/global.inc.php:320
+msgid "No file is defined in <code>files</code> array"
+msgstr "Nenhum arquivo está definido no vetor <code>files</code>"
+
+#: _build/inc/global.inc.php:336 _site/inc/global.inc.php:328
+#: _tmp/inc/global.inc.php:337 inc/global.inc.php:328
+#, php-format
+msgid "<code>%s</code> is mandatory for file ID <code>%s</code>"
+msgstr "<code>%s</code> é mandatório para o arquivo de ID <code>%s</code>"
+
+#: _build/inc/global.inc.php:431 _site/inc/global.inc.php:423
+#: _tmp/inc/global.inc.php:432 inc/global.inc.php:423
+msgid "B KBMBGBTBPB"
+msgstr "B KBMBGBTBPB"
+
+#: _build/inc/test.php:15 _tmp/inc/test.php:16
 msgid ""
 "Please touch file <code>inc/test.REMOVE_UPPERCASE.php</code> and reload this "
 "page"
@@ -585,119 +585,129 @@ msgstr ""
 "Favor criar o arquivo <code>inc/test.REMOVE_UPPERCASE.php</code> e "
 "recarregue esta página"
 
-#: _build/inc/test.php:87 _build/inc/test.php:94 _build/inc/test.php:101
-#: _site/inc/test.php:78 _site/inc/test.php:85 _site/inc/test.php:92
-#: _tmp/inc/test.php:88 _tmp/inc/test.php:95 _tmp/inc/test.php:102
-#: inc/test.php:78 inc/test.php:85 inc/test.php:92
+#: _build/inc/test.php:86 _build/inc/test.php:93 _build/inc/test.php:100
+#: _site/inc/test.php:73 _site/inc/test.php:80 _site/inc/test.php:87
+#: _tmp/inc/test.php:87 _tmp/inc/test.php:94 _tmp/inc/test.php:101
+#: inc/test.php:73 inc/test.php:80 inc/test.php:87
 msgid "Error"
 msgstr "Erro"
 
-#: _build/inc/test.php:87 _site/inc/test.php:78 _tmp/inc/test.php:88
-#: inc/test.php:78
+#: _build/inc/test.php:86 _site/inc/test.php:73 _tmp/inc/test.php:87
+#: inc/test.php:73
 msgid "Match is not a valid associative array"
 msgstr "Match não é um array associativo válido"
 
-#: _build/inc/test.php:94 _site/inc/test.php:85 _tmp/inc/test.php:95
-#: inc/test.php:85
+#: _build/inc/test.php:93 _site/inc/test.php:80 _tmp/inc/test.php:94
+#: inc/test.php:80
 msgid "Types is not a valid associative array"
 msgstr "Types não é um array associativo válido"
 
-#: _build/inc/test.php:101 _site/inc/test.php:92 _tmp/inc/test.php:102
-#: inc/test.php:92
+#: _build/inc/test.php:100 _site/inc/test.php:87 _tmp/inc/test.php:101
+#: inc/test.php:87
 msgid "RegEx is not a valid PHP PCRE regular expression"
 msgstr "A expressão regular não é válida pelo padrão PHP PCRE"
 
-#: _build/inc/test.php:116 _site/inc/test.php:133 _tmp/inc/test.php:150
-#: inc/test.php:140
+#: _build/inc/test.php:112 _site/inc/test.php:134 _tmp/inc/test.php:136
+#: inc/test.php:134
 msgid "Debugger"
 msgstr "Debugger"
 
-#: _build/inc/test.php:116 _site/inc/test.php:145 _tmp/inc/test.php:162
-#: inc/test.php:152
+#: _build/inc/test.php:112 _site/inc/test.php:169 _tmp/inc/test.php:148
+#: inc/test.php:169
 msgid "Regex tester"
 msgstr "Testador de Expressões Regulares"
 
-#: _build/inc/test.php:116 _site/inc/test.php:153 _tmp/inc/test.php:170
-#: inc/test.php:160
+#: _build/inc/test.php:112 _site/inc/test.php:177 _tmp/inc/test.php:156
+#: inc/test.php:177
 msgid "Log"
 msgstr "Log"
 
-#: _build/inc/test.php:120 _site/inc/test.php:163 _tmp/inc/test.php:180
-#: inc/test.php:170
+#: _build/inc/test.php:116 _site/inc/test.php:187 _tmp/inc/test.php:166
+#: inc/test.php:187
 msgid "RegEx"
 msgstr "Expressão Regular"
 
-#: _build/inc/test.php:122 _site/inc/test.php:171 _tmp/inc/test.php:188
-#: inc/test.php:178
+#: _build/inc/test.php:118 _site/inc/test.php:195 _tmp/inc/test.php:174
+#: inc/test.php:195
 msgid "Match"
 msgstr "Correspondência"
 
-#: _build/inc/test.php:122 _build/inc/test.php:139 _site/inc/test.php:171
-#: _site/inc/test.php:194 _tmp/inc/test.php:188 _tmp/inc/test.php:211
-#: inc/test.php:178 inc/test.php:201
+#: _build/inc/test.php:118 _build/inc/test.php:135 _site/inc/test.php:195
+#: _site/inc/test.php:218 _tmp/inc/test.php:174 _tmp/inc/test.php:197
+#: inc/test.php:195 inc/test.php:218
 msgid "must be json encoded"
 msgstr "deve ser um JSON válido"
 
-#: _build/inc/test.php:139 _site/inc/test.php:194 _tmp/inc/test.php:211
-#: inc/test.php:201
+#: _build/inc/test.php:135 _site/inc/test.php:218 _tmp/inc/test.php:197
+#: inc/test.php:218
 msgid "Types"
 msgstr "Tipos"
 
-#: _build/inc/test.php:145 _site/inc/test.php:206 _tmp/inc/test.php:223
-#: inc/test.php:213
+#: _build/inc/test.php:141 _site/inc/test.php:230 _tmp/inc/test.php:209
+#: inc/test.php:230
 msgid "Multiline"
 msgstr "Múltiplas linhas"
 
-#: _build/inc/test.php:145 _site/inc/test.php:213 _tmp/inc/test.php:230
-#: inc/test.php:220
+#: _build/inc/test.php:141 _site/inc/test.php:237 _tmp/inc/test.php:216
+#: inc/test.php:237
 msgid "Test"
 msgstr "Teste"
 
-#: _build/inc/test.php:145 _site/inc/test.php:228 _tmp/inc/test.php:245
-#: inc/test.php:235
+#: _build/inc/test.php:141 _site/inc/test.php:252 _tmp/inc/test.php:231
+#: inc/test.php:252
 msgid "Regex samples"
 msgstr "Exemplos de expressões regulares"
 
-#: _build/inc/test.php:235 _site/inc/test.php:374 _tmp/inc/test.php:391
-#: inc/test.php:381
+#: _build/inc/test.php:231 _site/inc/test.php:418 _tmp/inc/test.php:377
+#: inc/test.php:418
 msgid "Rights"
 msgstr "Direitos"
 
-#: _build/inc/test.php:239 _site/inc/test.php:384 _tmp/inc/test.php:401
-#: inc/test.php:391
+#: _build/inc/test.php:235 _site/inc/test.php:428 _tmp/inc/test.php:387
+#: inc/test.php:428
 msgid "No POSIX functions..."
 msgstr "Funções POSIX indisponíveis..."
 
-#: _build/inc/test.php:260 _site/inc/test.php:406 _tmp/inc/test.php:423
-#: inc/test.php:413
+#: _build/inc/test.php:256 _site/inc/test.php:449 _tmp/inc/test.php:409
+#: inc/test.php:449
 msgid "Read"
 msgstr "Leitura"
 
-#: _build/inc/test.php:260 _site/inc/test.php:406 _tmp/inc/test.php:423
-#: inc/test.php:413
+#: _build/inc/test.php:256 _site/inc/test.php:449 _tmp/inc/test.php:409
+#: inc/test.php:449
 msgid "Write"
 msgstr "Escrita"
 
-#: _build/inc/test.php:260 _site/inc/test.php:406 _tmp/inc/test.php:423
-#: inc/test.php:413
+#: _build/inc/test.php:256 _site/inc/test.php:449 _tmp/inc/test.php:409
+#: inc/test.php:449
 msgid "Real path"
 msgstr "Caminho real"
 
-#: _build/inc/upgrade.pml.php:35 _site/inc/upgrade.pml.php:26
-#: _tmp/inc/upgrade.pml.php:36 inc/upgrade.pml.php:26
+#: _build/inc/upgrade.pml.php:34 _site/inc/upgrade.pml.php:25
+#: _tmp/inc/upgrade.pml.php:35 inc/upgrade.pml.php:25
 #, php-format
 msgid "Current version %s"
 msgstr "Versão atual %s"
 
-#: _build/inc/upgrade.pml.php:40 _site/inc/upgrade.pml.php:31
-#: _tmp/inc/upgrade.pml.php:41 inc/upgrade.pml.php:31
+#: _build/inc/upgrade.pml.php:39 _site/inc/upgrade.pml.php:30
+#: _tmp/inc/upgrade.pml.php:40 inc/upgrade.pml.php:30
 msgid "Unable to check your current version!"
 msgstr "Não é possível verificar sua versão atual!"
 
-#: _build/inc/upgrade.pml.php:65 _build/inc/upgrade.pml.php:71
-#: _site/inc/upgrade.pml.php:56 _site/inc/upgrade.pml.php:62
-#: _tmp/inc/upgrade.pml.php:66 _tmp/inc/upgrade.pml.php:72
-#: inc/upgrade.pml.php:56 inc/upgrade.pml.php:62
+#: _build/inc/upgrade.pml.php:108 _site/inc/upgrade.pml.php:99
+#: _tmp/inc/upgrade.pml.php:109 inc/upgrade.pml.php:99
+msgid "Messages from the development team"
+msgstr "Mensagens da equipe de desenvolvimento"
+
+#: _build/inc/upgrade.pml.php:122 _site/inc/upgrade.pml.php:113
+#: _tmp/inc/upgrade.pml.php:123 inc/upgrade.pml.php:113
+msgid "Mark as read"
+msgstr "Marcar como lido"
+
+#: _build/inc/upgrade.pml.php:147 _build/inc/upgrade.pml.php:153
+#: _site/inc/upgrade.pml.php:138 _site/inc/upgrade.pml.php:144
+#: _tmp/inc/upgrade.pml.php:148 _tmp/inc/upgrade.pml.php:154
+#: inc/upgrade.pml.php:138 inc/upgrade.pml.php:144
 #, php-format
 msgid ""
 "Error while fetching URL %s from the server hosting this Pimp my Log "
@@ -706,75 +716,76 @@ msgstr ""
 "Ocorreu um erro enquanto recebíamos a URL %s do servidor que hospeda esta "
 "instância do Pimp my Log."
 
-#: _build/inc/upgrade.pml.php:65 _build/inc/upgrade.pml.php:71
-#: _site/inc/upgrade.pml.php:56 _site/inc/upgrade.pml.php:62
-#: _tmp/inc/upgrade.pml.php:66 _tmp/inc/upgrade.pml.php:72
-#: inc/upgrade.pml.php:56 inc/upgrade.pml.php:62
+#: _build/inc/upgrade.pml.php:147 _build/inc/upgrade.pml.php:153
+#: _site/inc/upgrade.pml.php:138 _site/inc/upgrade.pml.php:144
+#: _tmp/inc/upgrade.pml.php:148 _tmp/inc/upgrade.pml.php:154
+#: inc/upgrade.pml.php:138 inc/upgrade.pml.php:144
 msgid "Remote version broken!"
 msgstr "Versão remota quebrada!"
 
-#: _build/inc/upgrade.pml.php:92 _site/inc/upgrade.pml.php:83
-#: _tmp/inc/upgrade.pml.php:93 inc/upgrade.pml.php:83
+#: _build/inc/upgrade.pml.php:174 _site/inc/upgrade.pml.php:165
+#: _tmp/inc/upgrade.pml.php:175 inc/upgrade.pml.php:165
 #, php-format
 msgid "Version %s released on %s"
 msgstr "Versão %s disponibilizada em %s"
 
-#: _build/inc/upgrade.pml.php:93 _site/inc/upgrade.pml.php:84
-#: _tmp/inc/upgrade.pml.php:94 inc/upgrade.pml.php:84
+#: _build/inc/upgrade.pml.php:175 _site/inc/upgrade.pml.php:166
+#: _tmp/inc/upgrade.pml.php:176 inc/upgrade.pml.php:166
 #, php-format
 msgid "Version %s"
 msgstr "Versão %s"
 
-#: _build/inc/upgrade.pml.php:129 _site/inc/upgrade.pml.php:120
-#: _tmp/inc/upgrade.pml.php:130 inc/upgrade.pml.php:120
+#: _build/inc/upgrade.pml.php:211 _site/inc/upgrade.pml.php:202
+#: _tmp/inc/upgrade.pml.php:212 inc/upgrade.pml.php:202
 msgid "An upgrade is available !"
 msgstr "Uma atualização está disponível !"
 
-#: _build/inc/upgrade.pml.php:130 _site/inc/upgrade.pml.php:121
-#: _tmp/inc/upgrade.pml.php:131 inc/upgrade.pml.php:121
+#: _build/inc/upgrade.pml.php:212 _site/inc/upgrade.pml.php:203
+#: _tmp/inc/upgrade.pml.php:213 inc/upgrade.pml.php:203
 #, php-format
 msgid "You have version %s and version %s is available"
 msgstr "Você possui a versão %s e a versão %s está disponível"
 
-#: _build/inc/upgrade.pml.php:131 _site/inc/upgrade.pml.php:122
-#: _tmp/inc/upgrade.pml.php:132 inc/upgrade.pml.php:122
+#: _build/inc/upgrade.pml.php:213 _site/inc/upgrade.pml.php:204
+#: _tmp/inc/upgrade.pml.php:214 inc/upgrade.pml.php:204
 msgid "release notes"
 msgstr "notas da versão"
 
-#: _build/inc/upgrade.pml.php:133 _site/inc/upgrade.pml.php:124
-#: _tmp/inc/upgrade.pml.php:134 inc/upgrade.pml.php:124
+#: _build/inc/upgrade.pml.php:215 _site/inc/upgrade.pml.php:206
+#: _tmp/inc/upgrade.pml.php:216 inc/upgrade.pml.php:206
 msgid ""
 "Simply <code>git pull</code> in your directory or <a href=\"http://pimpmylog."
-"com/getting-started/#update\" target=\"doc\">follow instructions here</a>"
+"com/getting-started/#update\" target=\"doc\" class=\"alert-link\">follow "
+"instructions here</a>"
 msgstr ""
 "Simplesmente execute <code>git pull</code> no seu diretório ou <a href="
-"\"http://pimpmylog.com/getting-started/#update\" target=\"doc\">siga as "
-"instruções aqui</a>"
+"\"http://pimpmylog.com/getting-started/#update\" target=\"doc\" class="
+"\"alert-link\">siga as instruções aqui</a>"
 
-#: _build/inc/upgrade.pml.php:136 _site/inc/upgrade.pml.php:127
-#: _tmp/inc/upgrade.pml.php:137 inc/upgrade.pml.php:127
-msgid "Don't bother me again with this upgrade!"
-msgstr "Não me incomode novamente com esta atualização!"
+#: _build/inc/upgrade.pml.php:219 _site/inc/upgrade.pml.php:210
+#: _tmp/inc/upgrade.pml.php:220 inc/upgrade.pml.php:210
+msgid "Skip this upgrade"
+msgstr "Pule esta atualização"
 
-#: _build/inc/upgrade.pml.php:142 _site/inc/upgrade.pml.php:133
-#: _tmp/inc/upgrade.pml.php:143 inc/upgrade.pml.php:133
+#: _build/inc/upgrade.pml.php:228 _site/inc/upgrade.pml.php:219
+#: _tmp/inc/upgrade.pml.php:229 inc/upgrade.pml.php:219
 msgid "You should upgrade right now:"
 msgstr "Você deve atualizar agora:"
 
-#: _build/inc/upgrade.pml.php:153 _site/inc/upgrade.pml.php:144
-#: _tmp/inc/upgrade.pml.php:154 inc/upgrade.pml.php:144
+#: _build/inc/upgrade.pml.php:239 _site/inc/upgrade.pml.php:230
+#: _tmp/inc/upgrade.pml.php:240 inc/upgrade.pml.php:230
 #, php-format
 msgid "Your version %s is out of date"
 msgstr "Sua versão %s está desatualizada"
 
-#: _build/inc/upgrade.pml.php:158 _site/inc/upgrade.pml.php:149
-#: _tmp/inc/upgrade.pml.php:159 inc/upgrade.pml.php:149
+#: _build/inc/upgrade.pml.php:244 _site/inc/upgrade.pml.php:235
+#: _tmp/inc/upgrade.pml.php:245 inc/upgrade.pml.php:235
 #, php-format
 msgid "Your version %s is up to date"
 msgstr "Sua versão %s está atualizada"
 
-#: _build/inc/upgrade.pml.php:164 _site/inc/upgrade.pml.php:155
-#: _tmp/inc/upgrade.pml.php:165 inc/upgrade.pml.php:155
+#: _build/inc/upgrade.pml.php:250 _site/inc/upgrade.pml.php:241
+#: _tmp/inc/upgrade.pml.php:251 inc/upgrade.pml.php:241
 #, php-format
 msgid ""
 "Unable to fetch URL %s from the server hosting this Pimp my Log instance."
@@ -782,14 +793,14 @@ msgstr ""
 "Não é possível obter a URL %s do servidor que está hospedando esta instância "
 "do Pimp my Log."
 
-#: _build/inc/upgrade.pml.php:164 _site/inc/upgrade.pml.php:155
-#: _tmp/inc/upgrade.pml.php:165 inc/upgrade.pml.php:155
+#: _build/inc/upgrade.pml.php:250 _site/inc/upgrade.pml.php:241
+#: _tmp/inc/upgrade.pml.php:251 inc/upgrade.pml.php:241
 msgid "Unable to check remote version!"
 msgstr "Não é possível verificar a versão remota!"
 
-#: _build/index.php:18 _build/index.php:65 _site/index.php:9
-#: _site/index.php:56 _tmp/index.php:19 _tmp/index.php:66 index.php:9
-#: index.php:56
+#: _build/index.php:18 _build/index.php:60 _site/index.php:9
+#: _site/index.php:51 _tmp/index.php:19 _tmp/index.php:61 index.php:9
+#: index.php:51
 msgid "Oups!"
 msgstr "Oups!"
 
@@ -826,17 +837,17 @@ msgstr ""
 msgid "Or let me try to configure it for you!"
 msgstr "Ou deixe-me tentar configurá-lo para você."
 
-#: _build/index.php:43 _build/index.php:76 _site/index.php:34
-#: _site/index.php:67 _tmp/index.php:44 _tmp/index.php:77 index.php:34
-#: index.php:67
+#: _build/index.php:43 _build/index.php:71 _site/index.php:34
+#: _site/index.php:62 _tmp/index.php:44 _tmp/index.php:72 index.php:34
+#: index.php:62
 msgid "Configure now"
 msgstr "Configurar agora"
 
-#: _build/index.php:67 _site/index.php:58 _tmp/index.php:68 index.php:58
+#: _build/index.php:62 _site/index.php:53 _tmp/index.php:63 index.php:53
 msgid "<code>config.user.json</code> configuration file is buggy:"
 msgstr "O arquivo de configuração <code>config.user.json</code> está bugado:"
 
-#: _build/index.php:73 _site/index.php:64 _tmp/index.php:74 index.php:64
+#: _build/index.php:68 _site/index.php:59 _tmp/index.php:69 index.php:59
 msgid ""
 "If you want me to build the configuration for you, please remove file "
 "<code>config.user.json</code> at root and click below."
@@ -844,7 +855,7 @@ msgstr ""
 "Se você quer que eu construa a configuração para você, por favor remova o "
 "arquivo <code>config.user.json</code> no diretório raiz e clique abaixo."
 
-#: _build/index.php:86 _site/index.php:77 _tmp/index.php:87 index.php:77
+#: _build/index.php:81 _site/index.php:72 _tmp/index.php:82 index.php:72
 msgid ""
 "Notifications are denied for this site. Go to your browser preferences to "
 "enable notifications for this site."
@@ -852,144 +863,171 @@ msgstr ""
 "Notificações estão bloqueadas para este site. Vá para as preferências do seu "
 "navegador para ativar as notificações para este site."
 
-#: _build/index.php:87 _site/index.php:78 _tmp/index.php:88 index.php:78
+#: _build/index.php:82 _site/index.php:73 _tmp/index.php:83 index.php:73
 msgid "No log has been found."
 msgstr "Nenhum log foi encontrado."
 
-#: _build/index.php:88 _site/index.php:79 _tmp/index.php:89 index.php:79
+#: _build/index.php:83 _site/index.php:74 _tmp/index.php:84 index.php:74
 msgid "Search was done with RegEx engine"
 msgstr "Busca efetuada com o motor de Expressões Regulares."
 
-#: _build/index.php:89 _site/index.php:80 _tmp/index.php:90 index.php:80
+#: _build/index.php:84 _site/index.php:75 _tmp/index.php:85 index.php:75
 msgid "Search was done with regular engine"
 msgstr "Busca efetuada com o motor padrão."
 
-#: _build/index.php:90 _site/index.php:81 _tmp/index.php:91 index.php:81
+#: _build/index.php:85 _site/index.php:76 _tmp/index.php:86 index.php:76
 #, php-format
 msgid "No log has been found with regular search %s"
 msgstr "Nenhum log foi encontrado com a busca padrão %s"
 
-#: _build/index.php:91 _site/index.php:82 _tmp/index.php:92 index.php:82
+#: _build/index.php:86 _site/index.php:77 _tmp/index.php:87 index.php:77
 #, php-format
 msgid "No log has been found with Reg Ex search %s"
 msgstr "Nenhum log foi encontrado com a busca por Expressões Regulares %s"
 
-#: _build/index.php:92 _site/index.php:83 _tmp/index.php:93 index.php:83
+#: _build/index.php:87 _site/index.php:78 _tmp/index.php:88 index.php:78
 msgid "New logs are available"
 msgstr "Novos logs disponíveis"
 
-#: _build/index.php:93 _site/index.php:84 _tmp/index.php:94 index.php:84
+#: _build/index.php:88 _site/index.php:79 _tmp/index.php:89 index.php:79
 msgid "1 new log is available"
 msgstr "1 novo log está disponível"
 
-#: _build/index.php:94 _site/index.php:85 _tmp/index.php:95 index.php:85
+#: _build/index.php:89 _site/index.php:80 _tmp/index.php:90 index.php:80
 #, php-format
 msgid "%s new logs are available"
 msgstr "%s novos logs estão disponíveis"
 
-#: _build/index.php:95 _site/index.php:86 _tmp/index.php:96 index.php:86
+#: _build/index.php:90 _site/index.php:81 _tmp/index.php:91 index.php:81
 msgid "1 log displayed,"
 msgstr "1 log exibido,"
 
-#: _build/index.php:96 _site/index.php:87 _tmp/index.php:97 index.php:87
+#: _build/index.php:91 _site/index.php:82 _tmp/index.php:92 index.php:82
 #, php-format
 msgid "%s logs displayed,"
 msgstr "%s logs exibidos,"
 
-#: _build/index.php:98 _site/index.php:89 _tmp/index.php:99 index.php:89
+#: _build/index.php:93 _site/index.php:84 _tmp/index.php:94 index.php:84
 #, php-format
 msgid "Toggle column %s"
 msgstr "Alternar coluna %s"
 
-#: _build/index.php:123 _site/index.php:147 _tmp/index.php:164 index.php:154
+#: _build/index.php:115 _site/index.php:134 _tmp/index.php:144 index.php:134
 msgid "Reload the page with default parameters"
 msgstr "Recarregue a página com os parâmetros iniciais."
 
-#: _build/index.php:123 _site/index.php:157 _tmp/index.php:174 index.php:164
+#: _build/index.php:115 _site/index.php:144 _tmp/index.php:154 index.php:144
 msgid "Click to refresh or press the R key"
 msgstr "Clique em recarregar ou pressione a tecla R"
 
-#: _build/index.php:125 _build/index.php:132 _site/index.php:166
-#: _site/index.php:183 _tmp/index.php:183 _tmp/index.php:200 index.php:173
-#: index.php:190
+#: _build/index.php:117 _build/index.php:124 _site/index.php:153
+#: _site/index.php:170 _tmp/index.php:163 _tmp/index.php:180 index.php:153
+#: index.php:170
 msgid "Select a log file to display"
 msgstr "Selecione um arquivo de log para exibir"
 
-#: _build/index.php:139 _site/index.php:200 _tmp/index.php:217 index.php:207
+#: _build/index.php:131 _site/index.php:187 _tmp/index.php:197 index.php:187
 msgid "Search in logs"
 msgstr "Buscar nos logs"
 
-#: _build/index.php:139 _site/index.php:204 _tmp/index.php:221 index.php:211
+#: _build/index.php:131 _site/index.php:191 _tmp/index.php:201 index.php:191
 msgid "Select a duration to check for new logs automatically"
 msgstr "Selecione o período para verificar por novos logs automaticamente"
 
-#: _build/index.php:139 _site/index.php:205 _tmp/index.php:222 index.php:212
+#: _build/index.php:131 _site/index.php:192 _tmp/index.php:202 index.php:192
 msgid "No refresh"
 msgstr "Sem atualização"
 
-#: _build/index.php:141 _site/index.php:208 _tmp/index.php:225 index.php:215
+#: _build/index.php:133 _site/index.php:195 _tmp/index.php:205 index.php:195
 #, php-format
 msgid "Refresh %ss"
 msgstr "Atualizar %ss"
 
-#: _build/index.php:143 _site/index.php:215 _tmp/index.php:232 index.php:222
+#: _build/index.php:135 _site/index.php:202 _tmp/index.php:212 index.php:202
 msgid "Max count of logs to display"
 msgstr "Número máximo de logs a exibir"
 
-#: _build/index.php:145 _site/index.php:218 _tmp/index.php:235 index.php:225
+#: _build/index.php:137 _site/index.php:205 _tmp/index.php:215 index.php:205
 #, php-format
 msgid "%s logs"
 msgstr "%s logs"
 
-#: _build/index.php:145 _site/index.php:218 _tmp/index.php:235 index.php:225
+#: _build/index.php:137 _site/index.php:205 _tmp/index.php:215 index.php:205
 #, php-format
 msgid "%s log"
 msgstr "%s log"
 
-#: _build/index.php:147 _site/index.php:224 _tmp/index.php:241 index.php:231
+#: _build/index.php:139 _site/index.php:211 _tmp/index.php:221 index.php:211
 msgid "Desktop notifications on supported modern browsers"
 msgstr ""
 "Notificações de área de trabalho nos navegadores modernos que o suportam"
 
-#: _build/index.php:147 _site/index.php:235 _tmp/index.php:252 index.php:242
+#: _build/index.php:139 _site/index.php:222 _tmp/index.php:232 index.php:222
 msgid "Displayed columns"
 msgstr "Colunas exibidas"
 
-#: _build/index.php:147 _site/index.php:246 _tmp/index.php:263 index.php:253
+#: _build/index.php:139 _site/index.php:233 _tmp/index.php:243 index.php:233
 msgid "Wide view"
 msgstr "Vista expandida"
 
-#: _build/index.php:147 _site/index.php:247 _tmp/index.php:264 index.php:254
+#: _build/index.php:139 _site/index.php:234 _tmp/index.php:244 index.php:234
 msgid "on"
 msgstr "ligado"
 
-#: _build/index.php:147 _site/index.php:248 _tmp/index.php:265 index.php:255
+#: _build/index.php:139 _site/index.php:235 _tmp/index.php:245 index.php:235
 msgid "off"
 msgstr "desligado"
 
-#: _build/index.php:147 _site/index.php:253 _tmp/index.php:270 index.php:260
+#: _build/index.php:139 _site/index.php:240 _tmp/index.php:250 index.php:240
 msgid "Click on a date field to mark a row"
 msgstr "Clique em um campo de data para marcar uma linha"
 
-#: _build/index.php:147 _site/index.php:253 _tmp/index.php:270 index.php:260
+#: _build/index.php:139 _site/index.php:240 _tmp/index.php:250 index.php:240
 msgid "Clear markers"
 msgstr "Marcadores claros"
 
-#: _build/index.php:147 _site/index.php:257 _tmp/index.php:274 index.php:264
+#: _build/index.php:139 _site/index.php:244 _tmp/index.php:254 index.php:244
 msgid "Language"
 msgstr "Idioma"
 
-#: _build/index.php:147 _site/index.php:258 _tmp/index.php:275 index.php:265
+#: _build/index.php:139 _site/index.php:245 _tmp/index.php:255 index.php:245
 msgid "Change language..."
 msgstr "Alterar idioma..."
 
-#: _build/index.php:153 _site/index.php:270 _tmp/index.php:287 index.php:277
+#: _build/index.php:145 _site/index.php:257 _tmp/index.php:267 index.php:257
 msgid "Timezone"
 msgstr "Fuso horário"
 
-#: _build/index.php:153 _site/index.php:271 _tmp/index.php:288 index.php:278
+#: _build/index.php:145 _site/index.php:258 _tmp/index.php:268 index.php:258
 msgid "Change timezone..."
 msgstr "Alterar o fuso horário"
+
+#: _site/inc/test.php:103 inc/test.php:103
+msgid "Command has been copied to your clipboard!"
+msgstr ""
+
+#: _site/inc/test.php:104 inc/test.php:104
+msgid "Configuration array has been copied to your clipboard!"
+msgstr ""
+
+#: _site/inc/test.php:146 inc/test.php:146
+msgid "This page is protected for security reasons."
+msgstr ""
+
+#: _site/inc/test.php:148 inc/test.php:148
+msgid "To grant access, please create this temporary file on your server:"
+msgstr ""
+
+#: _site/inc/test.php:155 inc/test.php:155
+msgid "Then reload this page."
+msgstr ""
+
+#: _site/inc/test.php:157 inc/test.php:157
+msgid "Don't forget to remove this temporary file when you have finished..."
+msgstr ""
+
+#~ msgid "Don't bother me again with this upgrade!"
+#~ msgstr "Não me incomode novamente com esta atualização!"
 
 #~ msgid ""
 #~ "%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "

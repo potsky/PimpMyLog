@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.1 - 07115d6c500451e34cff968a18ccd4a8c2421b9f*/
+/*! pimpmylog - 1.3 - 820fbed3ca50fcf8ffb327f7cda4f88987488a9e*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -9,13 +9,8 @@
  */
 ?><?php
 include_once 'global.inc.php';
-init();
 
-
-if ( ! file_exists( 'test.REMOVE_UPPERCASE.php') ) {
-	die( __('Please touch file <code>inc/test.REMOVE_UPPERCASE.php</code> and reload this page') );
-}
-
+load_default_constants();
 
 function test( $type , $regex , $match , $types , $logs , $headers = true , $multiline = '' ) {
 	$r  = '<h4>' . $type . '</h4>';
@@ -73,7 +68,7 @@ function test( $type , $regex , $match , $types , $logs , $headers = true , $mul
 }
 
 
-if ( isset( $_POST['s'] ) ) {
+if ( ( isset( $_POST['s'] ) ) && ( file_exists( 'test.REMOVE_UPPERCASE.php') ) ) {
 
 	$return    = array();
 	$match     = @json_decode( $_POST['m'] , true );
@@ -110,10 +105,37 @@ if ( isset( $_POST['s'] ) ) {
 	die();
 }
 
-?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><title><?php echo TITLE;?></title><?php $fav = '../' ; include_once 'favicon.inc.php'; ?><?php
-?><?php
-?><link rel="stylesheet" href="../css/pml.min.css"><?php
-?></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="?<?php echo $_SERVER['QUERY_STRING'];?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a></div></div></div><div class="container"><br><div class="panel-group" id="accordion"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><?php _e('Regex tester');?></a></h4></div><div id="collapseTwo" class="panel-collapse collapse in"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
+//////////////////////
+// Javascript Lemma //
+//////////////////////
+$lemma = array(
+	"command_copied"       => __( "Command has been copied to your clipboard!" ),
+	"configuration_copied" => __( "Configuration array has been copied to your clipboard!" ),
+);
+
+
+?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><title><?php echo TITLE;?></title><?php $fav = '../' ; include_once 'favicon.inc.php'; ?><link rel="stylesheet" href="../css/pml.min.css"><script>var lemma = <?php echo json_encode($lemma);?>;</script></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="?<?php echo $_SERVER['QUERY_STRING'];?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a></div></div></div><div class="container"><br><?php
+if ( ! file_exists( 'test.REMOVE_UPPERCASE.php') ) {
+	echo '<div class="row">';
+	echo 	'<div class="col-xs-12"><div class="alert alert-danger">';
+	echo 			__( 'This page is protected for security reasons.');
+	echo 		'</div><br/>';
+	echo 		__('To grant access, please create this temporary file on your server:');
+	echo 		'<br/><br/>';
+	echo 	'</div>';
+	echo 	'<div class="col-md-8"><pre class="clipboard2content">' . 'touch \'' . dirname( __FILE__ ) . '/test.REMOVE_UPPERCASE.php\'</pre></div>';
+	echo 	'<div class="col-md-4"><a class="btn btn-success clipboard2">' . __('Copy to clipboard') . '</a></div>';
+	echo 	'<div class="col-xs-12">';
+	echo 		'<br/>';
+	echo 		__("Then reload this page.");
+	echo 		'<br/><br/><div class="alert alert-info">';
+	echo 			__("Don't forget to remove this temporary file when you have finished...");
+	echo 		'</div>';
+	echo 	'</div>';
+	echo '</div>';
+}
+else {
+?><div class="panel-group" id="accordion"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><?php _e('Regex tester');?></a></h4></div><div id="collapseTwo" class="panel-collapse collapse in"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
 									echo '[27-11-2013:23:20:40 +0100] This is an error
 on several lines
 [27-11-2013:23:20:41 +0100] Single line is cool too';
@@ -232,14 +254,16 @@ echo test( $type , $regex , $match , $types , $log );
 $type  = 'Access Apache 2.2 dummy SSL connection';
 $log   = '::1 - - [27/Nov/2013:12:02:08 +0100] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.2.25 (Unix) mod_ssl/2.2.26 OpenSSL/1.0.1e DAV/2 PHP/5.3.27 (internal dummy connection)"';
 echo test( $type , $regex , $match , $types , $log );
-?></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Configuration</a></h4></div><div id="collapseOne" class="panel-collapse collapse"><div class="panel-body"><div class="panel-group" id="accordion2"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Code <code>config.user.json</code></a></h4></div><div id="collapseOne2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">Stat <code>config.user.json</code></a></h4></div><div id="collapseTwo2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2"><?php _e('Rights');?></a></h4></div><div id="collapseFour2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
+?></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Configuration</a></h4></div><div id="collapseOne" class="panel-collapse collapse"><div class="panel-body"><div class="panel-group" id="accordion2"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Code <code>config.user.json</code></a></h4></div><div id="collapseOne2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">Stat <code>config.user.json</code></a></h4></div><div id="collapseTwo2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2">Generated files with includes</a></h4></div><div id="collapseFive2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
+											config_load();
+											echo json_encode($files,JSON_PRETTY_PRINT);
+										?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2"><?php _e('Rights');?></a></h4></div><div id="collapseFour2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
 										if (function_exists('posix_getpwuid')) {
 											var_dump( @posix_getpwuid(posix_geteuid()) );
 										} else {
 											_e('No POSIX functions...');
 										}
 										?></pre><?php
-											config_load( '../config.user.json' );
 											$paths = array(
 												'config' => '../config.user.json',
 											);
@@ -276,7 +300,6 @@ echo test( $type , $regex , $match , $types , $log );
 										phpinfo();
 										preg_match ('%<style type="text/css">(.*?)</style>.*?(<body>.*</body>)%s', ob_get_clean(), $matches);
 										echo $matches[2];
-										?></div></div></div></div></div></div></div></div><hr><footer class="text-muted"><small><?php echo FOOTER;?></small></footer></div><?php
-?><?php
-?><script src="../js/pml.min.js"></script><script src="../js/test.min.js"></script><?php
-?></body></html>
+										?></div></div></div></div></div></div></div></div><?php
+}
+?><hr><footer class="text-muted"><small><?php echo FOOTER;?></small></footer></div><script src="../js/pml.min.js"></script><script src="../js/test.min.js"></script></body></html>

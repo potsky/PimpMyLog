@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.1 - 07115d6c500451e34cff968a18ccd4a8c2421b9f*/
+/*! pimpmylog - 1.3 - 820fbed3ca50fcf8ffb327f7cda4f88987488a9e*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -49,12 +49,7 @@ if ( ! file_exists( 'config.user.json' ) ) {
 //////////////////////////////
 // Load config and defaults //
 //////////////////////////////
-
-// $files is defined as global here
 config_load();
-
-// Constants are defined here
-init();
 
 
 /////////////////////////
@@ -105,10 +100,7 @@ $lemma = array(
 $csrf = csrf_get();
 
 
-?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><meta name="robots" content="none"><title><?php echo TITLE;?></title><?php include_once 'inc/favicon.inc.php'; ?><?php
-?><?php
-?><link rel="stylesheet" href="css/pml.min.css"><?php
-?><?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?><link rel="stylesheet" href="css/config.inc.user.css"><?php } else { ?><link rel="stylesheet" href="css/config.inc.css"><?php } ?><script>var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
+?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><meta name="robots" content="none"><title><?php echo TITLE;?></title><?php include_once 'inc/favicon.inc.php'; ?><link rel="stylesheet" href="css/pml.min.css"><?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?><link rel="stylesheet" href="css/config.inc.user.css"><?php } else { ?><link rel="stylesheet" href="css/config.inc.css"><?php } ?><script>var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
 			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
 			files                      = <?php echo json_encode($files);?>,
 			title_file                 = "<?php echo TITLE_FILE;?>",
@@ -120,12 +112,14 @@ $csrf = csrf_get();
 			file_selector              = "<?php echo FILE_SELECTOR;?>",
 			csrf_token                 = "<?php echo $csrf;?>",
 			querystring                = "<?php echo $_SERVER['QUERY_STRING'];?>",
-			notification_default       = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;</script></head><body><!--[if lt IE 8]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="logo" title="<?php _e('Reload the page with default parameters'); ?>"></div><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-brand"><span class="loader glyphicon glyphicon-download" style="display:none"></span><span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span><a href="?"><?php echo NAV_TITLE;?></a></div></div><div class="navbar-collapse collapse"><?php
+			notification_default       = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;</script></head><body><!--[if lt IE 8]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="logo" title="<?php _e('Reload the page with default parameters'); ?>"></div><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-brand"><span class="loader glyphicon glyphicon-refresh icon-spin" style="display:none;width:18px"></span><span class="loader glyphicon glyphicon-repeat" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span><a href="?"><?php echo NAV_TITLE;?></a></div></div><div class="navbar-collapse collapse"><?php
 if ( FILE_SELECTOR == 'bs' ) {
 ?><ul class="nav navbar-nav"><li class="dropdown" title="<?php _e( 'Select a log file to display' );?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a><ul class="dropdown-menu"><?php
-foreach ( $files as $file_id=>$file ) {
+foreach ( $files as $file_id => $file ) {
 	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
-	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
+	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
+	echo ( isset( $file['included_from'] ) ) ? htmlentities( 'Log file #' . $file_id . ' defined in ' . $file['included_from'] ) : htmlentities( 'Log file #' . $file_id . ' defined in main configuration file' );
+	echo '">' . $file['display'] . '</a></li>';
 }
 ?></ul></li></ul><?php
 } else {
@@ -156,13 +150,10 @@ foreach ( get_max_options() as $r ) {
 										if ( $n == $tz ) echo ' selected="selected"';
 										echo '>' . $n . '</option>';
 									}
-									?></select></li></ul></li></ul></div></div></div><?php if ( PULL_TO_REFRESH === true ) { ?><div id="hook" class="hook"><div id="loader" class="hook-loader"><div class="hook-spinner"></div></div><span id="hook-text"></span></div><?php } ?><div class="container"><div id="error" style="display:none"><br><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div><div class="result"><br><div id="upgrademessage"></div><div id="singlenotice"></div><div id="notice"></div><div id="nolog" style="display:none" class="alert alert-info fade in"></div></div></div><div class="containerwide result tableresult"><div class="table-responsive"><table id="logs" class="table table-striped table-bordered table-hover table-condensed logs"><thead id="logshead"></thead><tbody id="logsbody"></tbody></table></div></div><div class="container"><div class="result"><small id="footer"></small></div><hr><footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer></div><?php
-?><?php
-?><script src="js/pml.min.js"></script><script src="js/main.min.js"></script><?php
+									?></select></li></ul></li></ul></div></div></div><?php if ( PULL_TO_REFRESH === true ) { ?><div id="hook" class="hook"><div id="loader" class="hook-loader"><div class="hook-spinner"></div></div><span id="hook-text"></span></div><?php } ?><div class="container"><div id="error" style="display:none"><br><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div><div class="result"><br><div id="upgrademessages"></div><div id="upgrademessage"></div><div id="singlenotice"></div><div id="notice"></div><div id="nolog" style="display:none" class="alert alert-info fade in"></div></div></div><div class="containerwide result tableresult"><div class="table-responsive"><table id="logs" class="table table-striped table-bordered table-hover table-condensed logs"><thead id="logshead"></thead><tbody id="logsbody"></tbody></table></div></div><div class="container"><div class="result"><small id="footer"></small></div><hr><footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer></div><script src="js/pml.min.js"></script><script src="js/main.min.js"></script><script>numeral.language('<?php echo $localejs;?>');</script><?php
 if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?><script>var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];
 		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 			g.src='//www.google-analytics.com/ga.js';
 			s.parentNode.insertBefore(g,s)}(document,'script'));</script><?php
 }
-?><?php
 ?></body></html>
