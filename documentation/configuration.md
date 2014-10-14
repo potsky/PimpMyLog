@@ -262,6 +262,68 @@ You can use these variables:
 
 ---
 
+<a name="USER_CONFIGURATION_DIR"></a>
+
+#### USER\_CONFIGURATION\_DIR
+
+You can split your files configuration file in several parts. `config.user.json` is mandatory and you can add files parts in several files in a folder. By default, this folder is named `config.user.d`  and is next to `config.user.json` file. But you can change the location. Changing this folder is useful if you have several *Pimp my Log* instances on the same server and want to share some configurations.
+
+All files are recursively parsed in this folder and in its all sub-folders.
+
+Only files with `json` extension are parsed.
+
+Here is `config.user.d/httpd.json` for example :
+
+```
+{
+    "apache1": {
+        "display" : "Apache Error #1",
+        "path"    : "\/var\/log\/apache2\/error.log",
+        "refresh" : 5,
+        "max"     : 10,
+        "notify"  : true,
+        "format"  : {
+            "type" : "HTTPD 2.2",
+            "regex": "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U",
+            "match": {
+                "Date"     : 1,
+                "IP"       : 4,
+                "Log"      : 5,
+                "Severity" : 2,
+                "Referer"  : 7
+            },
+            "types": {
+                "Date"     : "date:H:i:s",
+                "IP"       : "ip:http",
+                "Log"      : "pre",
+                "Severity" : "badge:severity",
+                "Referer"  : "link"
+            },
+            "exclude": {
+                "Log": ["\/PHP Stack trace:\/", "\/PHP *[0-9]*\\. \/"]
+            }
+        }
+    }
+}
+```
+
+> **Warning**  
+> 
+> This folder, its sub-folders and inner files have to be readable and crossable by the webserver user.
+> 
+> No warning is thrown if the webserver user cannot have access to a file or a folder.
+
+<!-- -->
+
+
+Default:
+
+```json
+"USER_CONFIGURATION_DIR" : "config.user.d"
+```
+
+---
+
 #### USER\_TIME\_ZONE
 
 You can easily change all time values of log files. By default, all time values are displayed as they are stored in log files, assuming they correspond to the server timezone. The server timezone is normally set in the `php.ini` configuration file on the server running your *Pimp My Log* instance. If all *Pimp My Log* users are in an other timezone, you can set this value to shift all time values in their time zone.
