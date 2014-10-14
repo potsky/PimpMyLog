@@ -9,6 +9,6 @@
     "ua-parser-js"            : "~0.7.0",
     "jquery.cookie"           : "~1.4.1",
     "jquery-zclip"            : "~1.1.5",
-    "bootstrap-sass-official" : "~3.2.0+2"
+    "bootstrap-sass-official" : "~3.2.0"
   }
 }
