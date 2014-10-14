@@ -69,7 +69,7 @@ var pml_version_cb = function( data ) {
 			for ( var type in types ) {
 				if ( data.changelog[version][type] !== undefined ) {
 					for ( var item in data.changelog[version][type] ) {
-						var text = data.changelog[version][type][item].replace( /#([0-9]*)/g , '<a href="https://github.com/potsky/PimpMyLog/issues/$1" target="ghissue">#$1</a>' );
+						var text = data.changelog[version][type][item].replace( /#([0-9]+)/g , '<a href="https://github.com/potsky/PimpMyLog/issues/$1" target="ghissue">#$1</a>' );
 						changelog += '<div class="row"><div class="col-sm-2"><span class="label label-' + types[type].class + '">' + types[type].name + '</span></div><div class="col-sm-10">' + text + '</div></div>';
 					}
 				}
@@ -97,7 +97,7 @@ var pml_version_cb = function( data ) {
 				for ( var type in types ) {
 					if ( data.changelog[version][type] !== undefined ) {
 						for ( var item in data.changelog[version][type] ) {
-							text = data.changelog[version][type][item].replace( /#([0-9]*)/g , '<a href="https://github.com/potsky/PimpMyLog/issues/$1" target="ghissue">#$1</a>' );
+							text = data.changelog[version][type][item].replace( /#([0-9]+)/g , '<a href="https://github.com/potsky/PimpMyLog/issues/$1" target="ghissue">#$1</a>' );
 							changelog += '<div class="row"><div class="col-sm-2"><span class="label label-' + types[type].class + '">' + types[type].name + '</span></div><div class="col-sm-10">' + text + '</div></div>';
 						}
 					}
