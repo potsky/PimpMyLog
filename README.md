@@ -1,6 +1,8 @@
 Pimp my Log 
 ===========
 
+[![Build Status](https://travis-ci.org/potsky/PimpMyLog.svg)](https://travis-ci.org/potsky/PimpMyLog)
+
 All informations are available on [pimpmylog.com](http://pimpmylog.com).
 
 Please **do not open issues on GitHub**, this is for dev only.  

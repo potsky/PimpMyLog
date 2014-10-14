@@ -1,12 +1,12 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.2.2",
-	"versiondevh" : "d98b77566444f061ea88ada36c25bc0f8e05aadd",
+	"version"     : "1.3",
+	"versiondevh" : "820fbed3ca50fcf8ffb327f7cda4f88987488a9e",
 	"messages"    : {
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
-		"1.2.2" : {
+		"1.3" : {
 			"released" : "2014-10-12",
 			"new"      : [
 				"Configuration file can be splitted in several files in subfolder <code>config.user.d</code>. Documentation is <a href=\"http://pimpmylog.com/documentation/configuration.html#USER_CONFIGURATION_DIR\">here</a>. (#62)",
@@ -20,7 +20,8 @@
 				"Change design on some elements",
 				"Upgrade Bootstrap to 3.2.0, jQuery to 2.1.1 and ZClip to 1.1.5",
 				"Global refactoring to make it faster",
-				"Remove LESS and use SASS now"
+				"Remove LESS and use SASS now",
+				"Loading icon is now animating (not in IE8 and IE9)"
 			]
 		},
 		"1.2.1" : {
