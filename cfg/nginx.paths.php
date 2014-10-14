@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.2 - 0d143958a018315c18b1d57e4c8d1c22cc815229*/
+/*! pimpmylog - 1.2.2 - f43d5244a26576f01f8cc690157815b0451266fe*/
 /*
  * pimpmylog
  * http://pimpmylog.com
