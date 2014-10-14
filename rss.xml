@@ -5,8 +5,8 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2014-10-14T18:23:59+02:00</lastBuildDate>
-        <pubDate>2014-10-14T18:23:59+02:00</pubDate>
+        <lastBuildDate>2014-10-14T18:40:45+02:00</lastBuildDate>
+        <pubDate>2014-10-14T18:40:45+02:00</pubDate>
         <ttl>1800</ttl>
 
         <item>
@@ -74,7 +74,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;!--more--&gt;
 
-&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.3&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.3.0&quot;&gt;&lt;/div&gt;
 </description>
                 <link>http://pimpmylog.com/general/2014/10/12/version-1.3</link>
                 <guid>http://pimpmylog.com/general/2014/10/12/version-1.3</guid>
