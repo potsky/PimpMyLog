@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.2.2 - 9a33cb1ddeb7bd8ba31267bb07e4d3ef2d7295ea*/
+/*! pimpmylog - 1.2.2 - d98b77566444f061ea88ada36c25bc0f8e05aadd*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -115,9 +115,11 @@ $csrf = csrf_get();
 			notification_default       = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;</script></head><body><!--[if lt IE 8]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="logo" title="<?php _e('Reload the page with default parameters'); ?>"></div><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="navbar-brand"><span class="loader glyphicon glyphicon-download" style="display:none"></span><span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span><a href="?"><?php echo NAV_TITLE;?></a></div></div><div class="navbar-collapse collapse"><?php
 if ( FILE_SELECTOR == 'bs' ) {
 ?><ul class="nav navbar-nav"><li class="dropdown" title="<?php _e( 'Select a log file to display' );?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a><ul class="dropdown-menu"><?php
-foreach ( $files as $file_id=>$file ) {
+foreach ( $files as $file_id => $file ) {
 	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
-	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#">' . $file['display'] . '</a></li>';
+	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
+	echo ( isset( $file['included_from'] ) ) ? htmlentities( 'Log file #' . $file_id . ' defined in ' . $file['included_from'] ) : htmlentities( 'Log file #' . $file_id . ' defined in main configuration file' );
+	echo '">' . $file['display'] . '</a></li>';
 }
 ?></ul></li></ul><?php
 } else {

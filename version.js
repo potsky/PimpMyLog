@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.2.2",
-	"versiondevh" : "9a33cb1ddeb7bd8ba31267bb07e4d3ef2d7295ea",
+	"versiondevh" : "d98b77566444f061ea88ada36c25bc0f8e05aadd",
 	"messages"    : {
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},

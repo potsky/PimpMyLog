@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-10-13 20:11+0100\n"
-"PO-Revision-Date: 2014-10-13 20:13+0100\n"
+"POT-Creation-Date: 2014-10-14 15:31+0100\n"
+"PO-Revision-Date: 2014-10-14 15:31+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: Português <>\n"
 "Language: pt\n"
@@ -149,8 +149,9 @@ msgid "Please give temporary write access to the root directory:"
 msgstr "Favor fornecer permissão de escrita temporária ao diretório raiz:"
 
 #: _build/inc/configure.php:56 _build/inc/test.php:141
-#: _site/inc/configure.php:47 _site/inc/test.php:208 _tmp/inc/configure.php:57
-#: _tmp/inc/test.php:218 inc/configure.php:47 inc/test.php:208
+#: _site/inc/configure.php:47 _site/inc/test.php:152 _site/inc/test.php:239
+#: _tmp/inc/configure.php:57 _tmp/inc/test.php:218 inc/configure.php:47
+#: inc/test.php:152 inc/test.php:239
 msgid "Copy to clipboard"
 msgstr "Copiar para a área de trabalho"
 
@@ -338,9 +339,9 @@ msgid "Software"
 msgstr "Software"
 
 #: _build/inc/configure.php:321 _build/inc/test.php:256
-#: _site/inc/configure.php:312 _site/inc/test.php:399
+#: _site/inc/configure.php:312 _site/inc/test.php:449
 #: _tmp/inc/configure.php:322 _tmp/inc/test.php:409 inc/configure.php:312
-#: inc/test.php:399
+#: inc/test.php:449
 msgid "Path"
 msgstr "Caminho"
 
@@ -355,18 +356,18 @@ msgid "Readable"
 msgstr "Com permissão de leitura"
 
 #: _build/inc/configure.php:325 _build/inc/test.php:260
-#: _build/inc/test.php:261 _site/inc/configure.php:316 _site/inc/test.php:403
-#: _site/inc/test.php:404 _tmp/inc/configure.php:326 _tmp/inc/test.php:413
-#: _tmp/inc/test.php:414 inc/configure.php:316 inc/test.php:403
-#: inc/test.php:404
+#: _build/inc/test.php:261 _site/inc/configure.php:316 _site/inc/test.php:453
+#: _site/inc/test.php:454 _tmp/inc/configure.php:326 _tmp/inc/test.php:413
+#: _tmp/inc/test.php:414 inc/configure.php:316 inc/test.php:453
+#: inc/test.php:454
 msgid "No"
 msgstr "Não"
 
 #: _build/inc/configure.php:326 _build/inc/test.php:260
-#: _build/inc/test.php:261 _site/inc/configure.php:317 _site/inc/test.php:403
-#: _site/inc/test.php:404 _tmp/inc/configure.php:327 _tmp/inc/test.php:413
-#: _tmp/inc/test.php:414 inc/configure.php:317 inc/test.php:403
-#: inc/test.php:404
+#: _build/inc/test.php:261 _site/inc/configure.php:317 _site/inc/test.php:453
+#: _site/inc/test.php:454 _tmp/inc/configure.php:327 _tmp/inc/test.php:413
+#: _tmp/inc/test.php:414 inc/configure.php:317 inc/test.php:453
+#: inc/test.php:454
 msgid "Yes"
 msgstr "Sim"
 
@@ -560,24 +561,23 @@ msgstr "1 novo log encontrado"
 msgid "log type is <code>%s</code>"
 msgstr "o tipo do log é <code>%s</code>"
 
-#: _build/inc/global.inc.php:328 _site/inc/global.inc.php:319
-#: _tmp/inc/global.inc.php:329 inc/global.inc.php:319
+#: _build/inc/global.inc.php:328 _site/inc/global.inc.php:320
+#: _tmp/inc/global.inc.php:329 inc/global.inc.php:320
 msgid "No file is defined in <code>files</code> array"
 msgstr "Nenhum arquivo está definido no vetor <code>files</code>"
 
-#: _build/inc/global.inc.php:336 _site/inc/global.inc.php:327
-#: _tmp/inc/global.inc.php:337 inc/global.inc.php:327
+#: _build/inc/global.inc.php:336 _site/inc/global.inc.php:328
+#: _tmp/inc/global.inc.php:337 inc/global.inc.php:328
 #, php-format
 msgid "<code>%s</code> is mandatory for file ID <code>%s</code>"
 msgstr "<code>%s</code> é mandatório para o arquivo de ID <code>%s</code>"
 
-#: _build/inc/global.inc.php:431 _site/inc/global.inc.php:422
-#: _tmp/inc/global.inc.php:432 inc/global.inc.php:422
+#: _build/inc/global.inc.php:431 _site/inc/global.inc.php:423
+#: _tmp/inc/global.inc.php:432 inc/global.inc.php:423
 msgid "B KBMBGBTBPB"
 msgstr "B KBMBGBTBPB"
 
-#: _build/inc/test.php:15 _site/inc/test.php:6 _tmp/inc/test.php:16
-#: inc/test.php:6
+#: _build/inc/test.php:15 _tmp/inc/test.php:16
 msgid ""
 "Please touch file <code>inc/test.REMOVE_UPPERCASE.php</code> and reload this "
 "page"
@@ -586,100 +586,100 @@ msgstr ""
 "recarregue esta página"
 
 #: _build/inc/test.php:86 _build/inc/test.php:93 _build/inc/test.php:100
-#: _site/inc/test.php:77 _site/inc/test.php:84 _site/inc/test.php:91
+#: _site/inc/test.php:73 _site/inc/test.php:80 _site/inc/test.php:87
 #: _tmp/inc/test.php:87 _tmp/inc/test.php:94 _tmp/inc/test.php:101
-#: inc/test.php:77 inc/test.php:84 inc/test.php:91
+#: inc/test.php:73 inc/test.php:80 inc/test.php:87
 msgid "Error"
 msgstr "Erro"
 
-#: _build/inc/test.php:86 _site/inc/test.php:77 _tmp/inc/test.php:87
-#: inc/test.php:77
+#: _build/inc/test.php:86 _site/inc/test.php:73 _tmp/inc/test.php:87
+#: inc/test.php:73
 msgid "Match is not a valid associative array"
 msgstr "Match não é um array associativo válido"
 
-#: _build/inc/test.php:93 _site/inc/test.php:84 _tmp/inc/test.php:94
-#: inc/test.php:84
+#: _build/inc/test.php:93 _site/inc/test.php:80 _tmp/inc/test.php:94
+#: inc/test.php:80
 msgid "Types is not a valid associative array"
 msgstr "Types não é um array associativo válido"
 
-#: _build/inc/test.php:100 _site/inc/test.php:91 _tmp/inc/test.php:101
-#: inc/test.php:91
+#: _build/inc/test.php:100 _site/inc/test.php:87 _tmp/inc/test.php:101
+#: inc/test.php:87
 msgid "RegEx is not a valid PHP PCRE regular expression"
 msgstr "A expressão regular não é válida pelo padrão PHP PCRE"
 
-#: _build/inc/test.php:112 _site/inc/test.php:126 _tmp/inc/test.php:136
-#: inc/test.php:126
+#: _build/inc/test.php:112 _site/inc/test.php:134 _tmp/inc/test.php:136
+#: inc/test.php:134
 msgid "Debugger"
 msgstr "Debugger"
 
-#: _build/inc/test.php:112 _site/inc/test.php:138 _tmp/inc/test.php:148
-#: inc/test.php:138
+#: _build/inc/test.php:112 _site/inc/test.php:169 _tmp/inc/test.php:148
+#: inc/test.php:169
 msgid "Regex tester"
 msgstr "Testador de Expressões Regulares"
 
-#: _build/inc/test.php:112 _site/inc/test.php:146 _tmp/inc/test.php:156
-#: inc/test.php:146
+#: _build/inc/test.php:112 _site/inc/test.php:177 _tmp/inc/test.php:156
+#: inc/test.php:177
 msgid "Log"
 msgstr "Log"
 
-#: _build/inc/test.php:116 _site/inc/test.php:156 _tmp/inc/test.php:166
-#: inc/test.php:156
+#: _build/inc/test.php:116 _site/inc/test.php:187 _tmp/inc/test.php:166
+#: inc/test.php:187
 msgid "RegEx"
 msgstr "Expressão Regular"
 
-#: _build/inc/test.php:118 _site/inc/test.php:164 _tmp/inc/test.php:174
-#: inc/test.php:164
+#: _build/inc/test.php:118 _site/inc/test.php:195 _tmp/inc/test.php:174
+#: inc/test.php:195
 msgid "Match"
 msgstr "Correspondência"
 
-#: _build/inc/test.php:118 _build/inc/test.php:135 _site/inc/test.php:164
-#: _site/inc/test.php:187 _tmp/inc/test.php:174 _tmp/inc/test.php:197
-#: inc/test.php:164 inc/test.php:187
+#: _build/inc/test.php:118 _build/inc/test.php:135 _site/inc/test.php:195
+#: _site/inc/test.php:218 _tmp/inc/test.php:174 _tmp/inc/test.php:197
+#: inc/test.php:195 inc/test.php:218
 msgid "must be json encoded"
 msgstr "deve ser um JSON válido"
 
-#: _build/inc/test.php:135 _site/inc/test.php:187 _tmp/inc/test.php:197
-#: inc/test.php:187
+#: _build/inc/test.php:135 _site/inc/test.php:218 _tmp/inc/test.php:197
+#: inc/test.php:218
 msgid "Types"
 msgstr "Tipos"
 
-#: _build/inc/test.php:141 _site/inc/test.php:199 _tmp/inc/test.php:209
-#: inc/test.php:199
+#: _build/inc/test.php:141 _site/inc/test.php:230 _tmp/inc/test.php:209
+#: inc/test.php:230
 msgid "Multiline"
 msgstr "Múltiplas linhas"
 
-#: _build/inc/test.php:141 _site/inc/test.php:206 _tmp/inc/test.php:216
-#: inc/test.php:206
+#: _build/inc/test.php:141 _site/inc/test.php:237 _tmp/inc/test.php:216
+#: inc/test.php:237
 msgid "Test"
 msgstr "Teste"
 
-#: _build/inc/test.php:141 _site/inc/test.php:221 _tmp/inc/test.php:231
-#: inc/test.php:221
+#: _build/inc/test.php:141 _site/inc/test.php:252 _tmp/inc/test.php:231
+#: inc/test.php:252
 msgid "Regex samples"
 msgstr "Exemplos de expressões regulares"
 
-#: _build/inc/test.php:231 _site/inc/test.php:367 _tmp/inc/test.php:377
-#: inc/test.php:367
+#: _build/inc/test.php:231 _site/inc/test.php:418 _tmp/inc/test.php:377
+#: inc/test.php:418
 msgid "Rights"
 msgstr "Direitos"
 
-#: _build/inc/test.php:235 _site/inc/test.php:377 _tmp/inc/test.php:387
-#: inc/test.php:377
+#: _build/inc/test.php:235 _site/inc/test.php:428 _tmp/inc/test.php:387
+#: inc/test.php:428
 msgid "No POSIX functions..."
 msgstr "Funções POSIX indisponíveis..."
 
-#: _build/inc/test.php:256 _site/inc/test.php:399 _tmp/inc/test.php:409
-#: inc/test.php:399
+#: _build/inc/test.php:256 _site/inc/test.php:449 _tmp/inc/test.php:409
+#: inc/test.php:449
 msgid "Read"
 msgstr "Leitura"
 
-#: _build/inc/test.php:256 _site/inc/test.php:399 _tmp/inc/test.php:409
-#: inc/test.php:399
+#: _build/inc/test.php:256 _site/inc/test.php:449 _tmp/inc/test.php:409
+#: inc/test.php:449
 msgid "Write"
 msgstr "Escrita"
 
-#: _build/inc/test.php:256 _site/inc/test.php:399 _tmp/inc/test.php:409
-#: inc/test.php:399
+#: _build/inc/test.php:256 _site/inc/test.php:449 _tmp/inc/test.php:409
+#: inc/test.php:449
 msgid "Real path"
 msgstr "Caminho real"
 
@@ -1001,6 +1001,30 @@ msgstr "Fuso horário"
 #: _build/index.php:145 _site/index.php:258 _tmp/index.php:268 index.php:258
 msgid "Change timezone..."
 msgstr "Alterar o fuso horário"
+
+#: _site/inc/test.php:103 inc/test.php:103
+msgid "Command has been copied to your clipboard!"
+msgstr ""
+
+#: _site/inc/test.php:104 inc/test.php:104
+msgid "Configuration array has been copied to your clipboard!"
+msgstr ""
+
+#: _site/inc/test.php:146 inc/test.php:146
+msgid "This page is protected for security reasons."
+msgstr ""
+
+#: _site/inc/test.php:148 inc/test.php:148
+msgid "To grant access, please create this temporary file on your server:"
+msgstr ""
+
+#: _site/inc/test.php:155 inc/test.php:155
+msgid "Then reload this page."
+msgstr ""
+
+#: _site/inc/test.php:157 inc/test.php:157
+msgid "Don't forget to remove this temporary file when you have finished..."
+msgstr ""
 
 #~ msgid "Don't bother me again with this upgrade!"
 #~ msgstr "Não me incomode novamente com esta atualização!"
