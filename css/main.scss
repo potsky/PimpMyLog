@@ -42,9 +42,9 @@ body {
 
 /* Refresh button */
 .loader {
-	padding-left : 40px;
+	margin-left : 40px;
 	@media (max-width : 767px) {
-		padding-left : 130px;
+		margin-left : 130px;
 	}
 }
 
@@ -122,12 +122,11 @@ textarea.test {
 	filter : none !important;
 }
 
-
+/* Spinning class from awesome fonts */
 .icon-spin {
   -webkit-animation: kf-spin 2s infinite linear;
           animation: kf-spin 2s infinite linear;
 }
-
 @-webkit-keyframes kf-spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -138,7 +137,6 @@ textarea.test {
             transform: rotate(359deg);
   }
 }
-
 @keyframes kf-spin {
   0% {
     -webkit-transform: rotate(0deg);

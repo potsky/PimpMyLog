@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
 	// Load all NPM grunt tasks
 	require('matchdep').filterAll('grunt-*').forEach( grunt.loadNpmTasks );
+	require('time-grunt')(grunt);
 
 	var shell       = require('shelljs');
 	var githash     = shell.exec('git rev-parse HEAD', {silent:true}).output.replace("\n","");
@@ -541,6 +542,22 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+
+
+		/*
+		|--------------------------------------------------------------------------
+		| Notify
+		|--------------------------------------------------------------------------
+		|
+		*/
+		notify_hooks: {
+			options: {
+				enabled                  : true,
+				max_jshint_notifications : 5,
+				title                    : "Pimp My Log Dev"
+			}
+		},
+
 
 		/*
 		|--------------------------------------------------------------------------

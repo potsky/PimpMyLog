@@ -140,8 +140,8 @@ $csrf = csrf_get();
 					<span class="icon-bar"></span>
 				</button>
 				<div class="navbar-brand">
-					<span class="loader glyphicon glyphicon-download" style="display:none;"></span>
-					<span class="loader glyphicon glyphicon-refresh" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span>
+					<span class="loader glyphicon glyphicon-refresh icon-spin" style="display:none;width:18px;"></span>
+					<span class="loader glyphicon glyphicon-repeat" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span>
 					<a href="?"><?php echo NAV_TITLE;?></a>
 				</div>
 			</div>
