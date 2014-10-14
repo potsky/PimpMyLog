@@ -5,15 +5,14 @@ php:
   - 5.5
   - 5.4
   - 5.3
-  - 5.2
 branches:
   only:
     - dev
 before_install:
   - gem install sass
-before_script:
   - npm install -g bower
   - npm install -g grunt-cli
+before_script:
   - npm install
   - bower install
   - composer install
