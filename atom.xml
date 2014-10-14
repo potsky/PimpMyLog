@@ -4,13 +4,85 @@
  <title>Pimp my Log</title>
  <link href="http://pimpmylog.com/atom.xml" rel="self"/>
  <link href="http://pimpmylog.com"/>
- <updated>2014-10-14T18:00:49+02:00</updated>
+ <updated>2014-10-14T18:23:59+02:00</updated>
  <id>http://pimpmylog.com</id>
  <author>
    <name>Potsky</name>
    <email>potsky@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Version 1.3 released</title>
+   <link href="http://pimpmylog.com/general/2014/10/12/version-1.3"/>
+   <updated>2014-10-12T00:00:00+02:00</updated>
+   <id>http://pimpmylog.com/general/2014/10/12/version-1.3</id>
+   <content type="html">&lt;p&gt;Hi folks!&lt;/p&gt;
+
+&lt;p&gt;This new version gives you the ability to split user configuration in several files.&lt;/p&gt;
+
+&lt;p&gt;In the backstage, I have rewritten a lot of things for the next upcoming version 1.5. A lot of features are on the road...&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;There is a new &lt;code&gt;USER_CONFIGURATION_DIR&lt;/code&gt; global configuration parameter.&lt;/p&gt;
+
+&lt;p&gt;You can split your files configuration file in several parts. &lt;code&gt;config.user.json&lt;/code&gt; is mandatory and you can add files parts in several files in a folder. By default, this folder is named &lt;code&gt;config.user.d&lt;/code&gt;  and is next to &lt;code&gt;config.user.json&lt;/code&gt; file. But you can change the location. Changing this folder is useful if you have several &lt;em&gt;Pimp my Log&lt;/em&gt; instances on the same server and want to share some configurations.&lt;/p&gt;
+
+&lt;p&gt;All files are recursively parsed in this folder and in its all sub-folders.&lt;/p&gt;
+
+&lt;p&gt;Only files with &lt;code&gt;json&lt;/code&gt; extension are parsed.&lt;/p&gt;
+
+&lt;p&gt;Here is &lt;code&gt;config.user.d/httpd.json&lt;/code&gt; for example :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;{
+    &amp;quot;apache1&amp;quot;: {
+        &amp;quot;display&amp;quot; : &amp;quot;Apache Error #1&amp;quot;,
+        &amp;quot;path&amp;quot;    : &amp;quot;\/var\/log\/apache2\/error.log&amp;quot;,
+        &amp;quot;refresh&amp;quot; : 5,
+        &amp;quot;max&amp;quot;     : 10,
+        &amp;quot;notify&amp;quot;  : true,
+        &amp;quot;format&amp;quot;  : {
+            &amp;quot;type&amp;quot; : &amp;quot;HTTPD 2.2&amp;quot;,
+            &amp;quot;regex&amp;quot;: &amp;quot;|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U&amp;quot;,
+            &amp;quot;match&amp;quot;: {
+                &amp;quot;Date&amp;quot;     : 1,
+                &amp;quot;IP&amp;quot;       : 4,
+                &amp;quot;Log&amp;quot;      : 5,
+                &amp;quot;Severity&amp;quot; : 2,
+                &amp;quot;Referer&amp;quot;  : 7
+            },
+            &amp;quot;types&amp;quot;: {
+                &amp;quot;Date&amp;quot;     : &amp;quot;date:H:i:s&amp;quot;,
+                &amp;quot;IP&amp;quot;       : &amp;quot;ip:http&amp;quot;,
+                &amp;quot;Log&amp;quot;      : &amp;quot;pre&amp;quot;,
+                &amp;quot;Severity&amp;quot; : &amp;quot;badge:severity&amp;quot;,
+                &amp;quot;Referer&amp;quot;  : &amp;quot;link&amp;quot;
+            },
+            &amp;quot;exclude&amp;quot;: {
+                &amp;quot;Log&amp;quot;: [&amp;quot;\/PHP Stack trace:\/&amp;quot;, &amp;quot;\/PHP *[0-9]*\\. \/&amp;quot;]
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;  &lt;/p&gt;
+
+&lt;p&gt;This folder, its sub-folders and inner files have to be readable and crossable by the webserver user.&lt;/p&gt;
+
+&lt;p&gt;No warning is thrown if the webserver user cannot have access to a file or a folder.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;!-- --&gt;
+
+&lt;p&gt;Default:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;json language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;USER_CONFIGURATION_DIR&amp;quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;config.user.d&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.3&quot;&gt;&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Version 1.2 released</title>
