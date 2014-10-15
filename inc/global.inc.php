@@ -781,3 +781,5 @@ if ( function_exists( 'bindtextdomain' ) ) {
     }
 
 }
+
+?>
