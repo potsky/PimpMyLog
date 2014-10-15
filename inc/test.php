@@ -403,8 +403,8 @@ echo test( $type , $regex , $match , $types , $log );
 								<div id="collapseFive2" class="panel-collapse collapse">
 									<div class="panel-body">
 										<pre><?php
-											config_load();
-											echo json_encode($files,JSON_PRETTY_PRINT);
+											list( $badges , $files ) = config_load();
+											echo json_encode( $files , JSON_PRETTY_PRINT );
 										?></pre>
 									</div>
 								</div>

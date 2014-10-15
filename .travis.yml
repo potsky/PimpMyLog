@@ -16,4 +16,8 @@ before_script:
   - npm install
   - bower install
   - composer install
-script: grunt test
+script: grunt testprod
+notifications:
+  email:
+    on_success: always
+    on_failure: always

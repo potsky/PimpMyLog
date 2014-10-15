@@ -1,7 +1,6 @@
 <?php
 include_once 'global.inc.php';
-config_load();
-
+list( $badges , $files ) = config_load();
 
 /////////////
 //  Check  //
@@ -93,7 +92,7 @@ if ( ! file_exists( $file_path ) ) {
 	die();
 }
 
-$errors = config_check();
+$errors = config_check( $files );
 if ( is_array( $errors ) ) {
 	$logs['error'] = __( 'Configuration file has changed and is buggy now. Please refresh the page.' );
 	echo json_encode( $logs );

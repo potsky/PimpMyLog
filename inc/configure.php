@@ -3,15 +3,21 @@ include_once 'global.inc.php';
 load_default_constants();
 
 
-/////////////////////////////////
-// softwares                   //
-/////////////////////////////////
+/*
+|--------------------------------------------------------------------------
+| Prepare
+|--------------------------------------------------------------------------
+|
+*/
 include_once '../cfg/softwares.inc.php';
 
 
-/////////////////////////////////
-// Ajax tasks required by body //
-/////////////////////////////////
+/*
+|--------------------------------------------------------------------------
+| Ajax tasks required by body
+|--------------------------------------------------------------------------
+|
+*/
 if ( isset( $_POST['s'] ) ) {
 
 	$return = array(
@@ -19,27 +25,125 @@ if ( isset( $_POST['s'] ) ) {
 		'next'   => false,
 	);
 
+	$config_file      = '../' . CONFIG_FILE_NAME;
+	$config_file_temp = '../' . CONFIG_FILE_TEMP;
+	$auth_file        = '../' . AUTH_CONFIGURATION_FILE;
+
+
 	try {
 
 		switch ( $_POST['s'] ) {
 
-			/**
-			 * Check if CONFIG_FILE already exists
-			 */
+			/*
+			|--------------------------------------------------------------------------
+			| Auth 1. Ask for authentication
+			|--------------------------------------------------------------------------
+			|
+			*/
+			case 'auth':
+				$return[ 'notice' ] =
+					'<h2>' . __( 'Do you want to create an admin account now?') . '</h2>'
+					. '<br/><br/>'
+					. __('You can use <em>Pimp my Log</em> without authentication but you will not be able to add this feature later from the web interface. You will need to do it manually.') . '<br/>'
+					. '<br/><br/>'
+					. '<a href="javascript:process_authentication_yes()" class="btn btn-large btn-success">' . __('Yes, create an admin account now') . '</a>'
+					. '&nbsp;&nbsp;'
+					. '<a href="javascript:process_authentication_no()" class="btn btn-large btn-danger">' . __('No') . '</a>';
+
+				break;
+
+
+			/*
+			|--------------------------------------------------------------------------
+			| Auth 2. Touch auth file
+			|--------------------------------------------------------------------------
+			|
+			*/
+			case 'authtouch':
+
+				// Auth file is touched so return the form to ask yes or no
+				if ( @touch( $auth_file ) ) {
+					$return[ 'authform' ] =
+					'<h2>' . __( 'Admin account creation') . '</h2>'
+					. __( 'Please choose a username and a password for the admin account.')
+					. '<br/><br/>'
+					. '<div class="container">'
+					. 	'<div class="row">'
+					. 		'<div class="input-group col-sm-6 col-md-4">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+								<input type="text" class="form-control" placeholder="' . __('Username') . '">
+							</div>'
+					. 	'<br/>'
+					. 	'</div>'
+					. 	'<div class="row">'
+					. 		'<div class="input-group col-sm-6 col-md-4">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+								<input type="text" class="form-control" placeholder="' . __('Password') . '">
+							</div>'
+					. 	'</div>'
+					. '</div>'
+					. '<br/><br/>'
+					. '<a href="javascript:process_authentication_save()" class="btn btn-large btn-success">' . __('Continue') . '</a>'
+					;
+				}
+
+				// Unable to touch, return an error
+				else {
+					$return[ 'notice' ] =
+						sprintf( __( 'Unable to create file <code>%s</code>') , AUTH_CONFIGURATION_FILE )
+						. '<br/><br/>'
+						. __( 'Please give temporary write access to the root directory:' )
+						. '<div class="row">'
+						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'chmod 777 ' . dirname( dirname( __FILE__ ) ) . '</pre></div>'
+						. '  <div class="col-md-2"><a class="btn btn-success clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
+						. '</div>';
+					$return[ 'reload' ] = true;
+				}
+
+				break;
+
+
+			/*
+			|--------------------------------------------------------------------------
+			| Auth 3. Save data
+			|--------------------------------------------------------------------------
+			|
+			*/
+			case 'authsave':
+				break;
+
+
+			/*
+			|--------------------------------------------------------------------------
+			| Logs 1. Check if $config_file already exists
+			|--------------------------------------------------------------------------
+			|
+			*/
 			case 'exist':
-				if ( file_exists( CONFIG_FILE ) ) {
-					throw new Exception( sprintf( __( 'File <code>%s</code> already exists. Please remove it manually if you want me to create it.') , CONFIG_FILE ) );
+				$config_file_name = get_config_file_name();
+				if ( ! is_null( $config_file_name ) ) {
+					$return[ 'notice' ] =
+						__( 'Please remove it manually if you want me to create it:' )
+						. '<br/><br/>'
+						. '<div class="row">'
+						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'rm \'' . get_config_file_path() . '\'</pre></div>'
+						. '  <div class="col-md-2"><a class="btn btn-success clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
+						. '</div>';
+					throw new Exception( sprintf( __( 'File <code>%s</code> already exists.') , $config_file_name ) );
 				}
 				break;
 
 
-			/**
-			 * Try to touch CONFIG_FILE_TEMP
-			 */
+			/*
+			|--------------------------------------------------------------------------
+			| Logs 2. Try to touch $config_file_temp
+			|--------------------------------------------------------------------------
+			|
+			*/
 			case 'touch':
-				if ( ! @touch( CONFIG_FILE_TEMP ) ) {
+				if ( ! @touch( $config_file_temp ) ) {
 					$return[ 'notice' ] =
-						sprintf( __( 'Unable to create file <code>%s</code>') , CONFIG_FILE_TEMP)
+						sprintf( __( 'Unable to create file <code>%s</code>') , $config_file_temp)
 						. '<br/><br/>'
 						. __( 'Please give temporary write access to the root directory:' )
 						. '<div class="row">'
@@ -51,9 +155,12 @@ if ( isset( $_POST['s'] ) ) {
 				break;
 
 
-			/**
-			 * Return a list of software that the user could install
-			 */
+			/*
+			|--------------------------------------------------------------------------
+			| Logs 3. Return a list of software that the user could install
+			|--------------------------------------------------------------------------
+			|
+			*/
 			case 'soft' :
 				$return[ 'notice' ] = '<h2>' . __( 'Choose softwares to search log files for') . '</h2>';
 				$return[ 'notice' ].= '<div class="table-responsive"><table id="soft"></table></div>';
@@ -63,9 +170,12 @@ if ( isset( $_POST['s'] ) ) {
 				break;
 
 
-			/**
-			 * Check for configuration files
-			 */
+			/*
+			|--------------------------------------------------------------------------
+			| Logs 4. Check for configuration files
+			|--------------------------------------------------------------------------
+			|
+			*/
 			case 'find':
 				$software           = $_POST['so'];
 				$softuser           = array();
@@ -181,9 +291,12 @@ if ( isset( $_POST['s'] ) ) {
 				break;
 
 
-			/**
-			 * Check for user files
-			 */
+			/*
+			|--------------------------------------------------------------------------
+			| Logs 5. Check for user files
+			|--------------------------------------------------------------------------
+			|
+			*/
 			case 'check':
 				$user_files = $_POST['uf'];
 				if ( ! is_array( $user_files ) ) {
@@ -224,9 +337,12 @@ if ( isset( $_POST['s'] ) ) {
 				break;
 
 
-			/**
-			 * Check for user files
-			 */
+			/*
+			|--------------------------------------------------------------------------
+			| Logs 6. Check for user files
+			|--------------------------------------------------------------------------
+			|
+			*/
 			case 'configure':
 				$logs = $_POST['l'];
 
@@ -258,7 +374,7 @@ if ( isset( $_POST['s'] ) ) {
 						include_once $config;
 					}
 					else {
-						@unlink( CONFIG_FILE_TEMP );
+						@unlink( $config_file_temp );
 						throw new Exception( sprintf( __( 'Files <code>%s</code> or <code>%s</code> do not exist. Please review your software configuration.') , $config , $configuser ) ) ;
 					}
 
@@ -266,17 +382,17 @@ if ( isset( $_POST['s'] ) ) {
 						$config_files[] = call_user_func( $get_config , $type , $file , $software , $counter );
 					}
 					else {
-						@unlink( CONFIG_FILE_TEMP );
+						@unlink( $config_file_temp );
 						throw new Exception( sprintf( __( 'File <code>%s</code> does not define function <code>%s</code>. Please review your software configuration.') , $config , $get_config ) ) ;
 					}
 				}
 
 				// Create and install file
 				if ( count( $config_files ) > 0 ) {
-					$base = file_get_contents( '../cfg/pimpmylog.config.json' );
-					file_put_contents( CONFIG_FILE_TEMP , str_replace( '"FILES":"FILES"' , implode( ",\n" , $config_files ) , $base ) );
-					rename( CONFIG_FILE_TEMP , CONFIG_FILE );
-					chmod( CONFIG_FILE , CONFIG_FILE_MODE );
+					$base = file_get_contents( '../cfg/pimpmylog.config.php' );
+					file_put_contents( $config_file_temp , str_replace( '"FILES":"FILES"' , implode( ",\n" , $config_files ) , $base ) );
+					rename( $config_file_temp , $config_file );
+					chmod( $config_file , CONFIG_FILE_MODE );
 					$return[ 'next' ] = true;
 				}
 				else {
@@ -285,6 +401,12 @@ if ( isset( $_POST['s'] ) ) {
 				break;
 
 
+			/*
+			|--------------------------------------------------------------------------
+			| Unknown action
+			|--------------------------------------------------------------------------
+			|
+			*/
 			default:
 				throw new Exception( __( 'Unknown action, abort.' ) );
 				break;
@@ -301,9 +423,12 @@ if ( isset( $_POST['s'] ) ) {
 
 
 
-//////////////////////
-// Javascript Lemma //
-//////////////////////
+/*
+|--------------------------------------------------------------------------
+| Javascript Lemma
+|--------------------------------------------------------------------------
+|
+*/
 $lemma = array(
 	'complete'       => __( '%s% Complete' ),
 	'error'          => __( 'An error occurs!' ),
@@ -323,8 +448,13 @@ $lemma = array(
 );
 
 
-?>
-<!DOCTYPE html>
+/*
+|--------------------------------------------------------------------------
+| HTML
+|--------------------------------------------------------------------------
+|
+*/
+?><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->

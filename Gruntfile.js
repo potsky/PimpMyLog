@@ -163,7 +163,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					cwd: '_tools/',
-					src: [ 'README.md' ],
+					src: [ '**/*' ],
 					dest: master
 				}]
 			},
@@ -179,7 +179,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					cwd: '_tools/',
-					src: [ 'README.md' ],
+					src: [ '**/*' ],
 					dest: beta
 				}]
 			},
@@ -330,38 +330,6 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 
-		/*
-		|--------------------------------------------------------------------------
-		| Deprecated, inject if/else/endif in code
-		|--------------------------------------------------------------------------
-		|
-		*/
-		preprocess : {
-			dev : {
-				src  : [
-					'_site/*.php' ,
-					'_site/inc/*.php'
-				],
-				options : {
-					inline : true,
-					context: {
-						prod:'dev'
-					}
-				}
-			},
-			prod : {
-				src  : [
-					'_build/*.php' ,
-					'_build/inc/*.php'
-				],
-				options : {
-					inline : true,
-					context: {
-						prod:'prod'
-					}
-				}
-			}
-		},
 
 		/*
 		|--------------------------------------------------------------------------
@@ -435,7 +403,7 @@ module.exports = function(grunt) {
 					'git add -A .',
 					'git commit -m "grunt install from branch dev commit $a"',
 					'git pull origin beta',
-					'git push origin beta'
+					'ssh psk "cd /home/PimpMyLog-beta; git pull"'
 				].join(';'),
 				options: {
 					stdout: true,
@@ -470,7 +438,8 @@ module.exports = function(grunt) {
 					'git add -A .',
 					'git commit -m "grunt install from branch dev commit $a"',
 					'git pull origin master',
-					'git push origin master'
+					'git push origin master',
+					'ssh psk "cd /home/PimpMyLog; git pull"'
 				].join(';'),
 				options: {
 					stdout: true,
@@ -568,10 +537,18 @@ module.exports = function(grunt) {
 		phpunit: {
 			dev: {
 			    options: {
-					bin : 'vendor/bin/phpunit'
+					bin       : 'vendor/bin/phpunit',
+					bootstrap : 'tests/php/bootstrap_dev.php'
+			    }
+			},
+			prod: {
+			    options: {
+					bin       : 'vendor/bin/phpunit',
+					bootstrap : 'tests/php/bootstrap_prod.php'
 			    }
 			}
 		},
+
 
 		/*
 		|--------------------------------------------------------------------------
@@ -590,7 +567,7 @@ module.exports = function(grunt) {
 			},
 			html: {
 				files: [ '*.php' , 'inc/*', 'cfg/*' ],
-				tasks: [ 'copy:devphp' , 'preprocess:dev' ]
+				tasks: [ 'copy:devphp' ]
 			},
 			version: {
 				files: [ 'package.json' , 'version.js' ],
@@ -685,8 +662,6 @@ module.exports = function(grunt) {
 
 			'replace:dev',
 
-			'preprocess:dev',
-
 			'copy:devcss',
 			'concat:css',
 			'sass:dev',
@@ -714,7 +689,6 @@ module.exports = function(grunt) {
 			'copy:prodphp',
 			'copy:prodphptmp',
 			'htmlmin',
-			'preprocess:prod',
 
 			'copy:prodcss',
 			'concat:css',
@@ -724,7 +698,7 @@ module.exports = function(grunt) {
 			'uglify:prod',
 			'uglify:prodvendor',
 
-			'phpunit:dev'
+			'phpunit:prod'
 		]);
 	});
 
@@ -749,7 +723,8 @@ module.exports = function(grunt) {
 	|
 	*/
 	grunt.registerTask( 'build'              , function() { grunt.task.run( 'prod' ); });
-	grunt.registerTask( 'test'               , function() { grunt.task.run( 'prod' ); });
+	grunt.registerTask( 'testprod'           , function() { grunt.task.run( 'prod' ); });
+	grunt.registerTask( 'test'               , function() { grunt.task.run( 'phpunit:dev' ); });
 	grunt.registerTask( 'install'            , function() { grunt.task.run( 'installbeta' ); });
 	grunt.registerTask( 'install-production' , function() { grunt.task.run( 'installmaster' ); });
 	grunt.registerTask( 'default' , [ 'dev' ] );

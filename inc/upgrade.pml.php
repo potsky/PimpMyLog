@@ -1,6 +1,6 @@
 <?php
 include_once 'global.inc.php';
-config_load( false );
+list( $badges , $files ) = config_load( false );
 
 header('Content-type: application/json');
 

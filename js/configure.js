@@ -62,15 +62,19 @@ var progressbar_color = function( value ) {
  *
  * @return  {void}
  */
-var fatal_error = function( message ) {
+var fatal_error = function( message , notice ) {
 	"use strict";
 	if (!message) {
 		message = lemma.error;
 	}
+	if (!notice) {
+		$('#user').text('');
+	} else {
+		$('#user').html( notice );
+	}
 	progressbar_color( 'danger' );
 	progressbar_set( 100 );
 	$('<div class="alert alert-danger fade in">' + message + '</div>').appendTo("#error");
-	$('#user').text('');
 	$("#reload").hide();
 	$("#next").hide();
 };
@@ -100,7 +104,7 @@ var pml_action = function ( object , done , options ) {
 	})
 	.done( function ( data ) {
 		if ( data.error ) {
-			fatal_error( data.error );
+			fatal_error( data.error , ( data.notice ) ? data.notice : '' );
 		} else {
 			done( data , options );
 		}
@@ -128,13 +132,13 @@ var pml_action = function ( object , done , options ) {
  *
  * @return  {void}
  */
-var action_configue_now = function( logs_list ) {
+var action_configure_now = function( logs_list ) {
 	"use strict";
 	$( '#error' ).text('');
 	$( '#user' ).text('');
 	$( '.alert' ).remove();
 
-	progressbar_set(80);
+	progressbar_set(90);
 	pml_action( { s : 'configure' , l : logs_list } , function() {
 		progressbar_set(100);
 		progressbar_color('success');
@@ -144,6 +148,8 @@ var action_configue_now = function( logs_list ) {
 		$( '#buttons').hide();
 	});
 };
+
+
 
 
 /**
@@ -163,12 +169,12 @@ var action_select_logs = function( options ) {
 	var softlist   = options.b;
 	var softtotal  = options.c;
 	var pb_min     = 40;
-	var pb_max     = 60;
+	var pb_max     = 80;
 	var pb_crt     = parseInt( pb_min + ( ( softtotal - softlist.length ) / softtotal ) * ( pb_max - pb_min ) , 10 );
 	progressbar_set( pb_crt );
 
 	if ( softlist.length === 0) {
-		action_configue_now( logs_list );
+		action_configure_now( logs_list );
 		return;
 	}
 
@@ -311,6 +317,193 @@ var action_select_logs = function( options ) {
 
 
 /**
+ * Ask user if he wants authentication or not
+ *
+ * @return  {[type]}  [description]
+ */
+var process_authentication = function() {
+	progressbar_set(5);
+	pml_action( { s : 'auth' } , function( data ) {
+		$( '#user' ).html( data.notice );
+	});
+};
+
+
+/**
+ * User does not want authentication
+ *
+ * @return  {[type]}  [description]
+ */
+var process_authentication_no = function() {
+	process_select_logs();
+};
+
+
+/**
+ * User wants authentication
+ *
+ * @return  {[type]}  [description]
+ */
+var process_authentication_yes = function() {
+
+	///////////////////////////////////
+	// Check if we can write at root //
+	///////////////////////////////////
+	progressbar_set(10);
+	pml_action( { s : 'authtouch' } , function( data ) {
+
+		/////////////////////////
+		// Cannot write a root //
+		/////////////////////////
+		if ( data.notice ) {
+			$( '#user' ).html( data.notice );
+			progressbar_color( 'warning' );
+		}
+
+		else {
+			progressbar_set( 15 );
+			$( '#user' ).html( data.authform );
+		}
+	});
+};
+
+
+/**
+ * Save auth credentials
+ *
+ * @return  {[type]}  [description]
+ */
+var process_authentication_save = function() {
+	progressbar_set(25);
+	pml_action( { s : 'authsave' } , function( data ) {
+		process_select_logs();
+	});
+};
+
+
+/**
+ * Process to let user choose which logs he wants to display
+ *
+ * @return  {[type]}  [description]
+ */
+var process_select_logs = function() {
+
+	///////////////////////////////////
+	// Check if we can write at root //
+	///////////////////////////////////
+	progressbar_set( 30 );
+	pml_action( { s : 'touch' } , function( data ) {
+
+		/////////////////////////
+		// Cannot write a root //
+		/////////////////////////
+		if ( data.notice ) {
+			$( '#user' ).html( data.notice );
+			progressbar_color( 'warning' );
+		}
+
+		///////////////////
+		// Find logs now //
+		///////////////////
+		else {
+			$( '#user' ).html( lemma.pleasewait );
+			progressbar_set( 35 );
+			pml_action( { s : 'soft' } , function( data ) {
+
+				if ( data.sofn > 0 ) {
+
+					var softlist = [];
+
+					/////////////////////////////////////////
+					// Let user choose which soft he wants //
+					/////////////////////////////////////////
+					if ( data.sofn > 1 ) {
+
+						$( '#user' ).html( data.notice );
+
+						$( '#soft' )
+							.addClass( 'table table-striped table-bordered table-hover table-condensed' )
+							.append('<thead><tr><th><input type="checkbox" id="all"></th><th>' + lemma.name + '</th><th>' + lemma.description + '</th><th>' + lemma.notes + '</th></tr></thead><tbody></tbody>');
+
+						for ( var softid in data.soft ) {
+							var link = data.soft[ softid ].home;
+							var name = ( ( link === undefined ) || ( link === '' ) ) ? data.soft[ softid ].name : '<a href="' + link + '" target="doc">' + data.soft[ softid ].name + '</a>';
+							$( '<tr>' )
+								.data( 'softid' , softid )
+								.data( 'load' , data.soft[ softid ].load )
+								.html( '<td><input type="checkbox"></td><td>' + name + '</td><td>' + data.soft[ softid ].desc + '</td><td>' + data.soft[ softid ].notes + '</td>' )
+								.appendTo( '#soft tbody' );
+						}
+
+						$( '#soft tbody tr').click( function() {
+							$( this ).find( 'input[type="checkbox"]' ).click();
+						});
+
+						$( '#soft tbody tr input[type="checkbox"]').click( function( event ) {
+							event.stopPropagation();
+							var state = $( this ).prop('checked');
+							if ( state ) {
+								$( this ).parents('tr').addClass( 'success' );
+							} else {
+								$( this ).parents('tr').removeClass( 'success' );
+							}
+						});
+
+						$( '#soft tbody tr input[type="checkbox"]').each( function() {
+							if ( $(this).parents('tr').data( 'load' ) ) {
+								$(this).prop( 'checked' , true );
+								$(this).parents('tr').addClass( 'success' );
+							}
+						});
+
+						$( '#soft #all').click( function() {
+							var state = $( this ).prop('checked');
+							$( '#soft tbody tr').each( function() {
+								var cb = $( this ).find( 'input[type="checkbox"]' );
+								$( cb ).prop( 'checked' , state );
+								if ( state ) {
+									$(this).addClass( 'success' );
+								} else {
+									$(this).removeClass( 'success' );
+								}
+							});
+						});
+
+						$( '#next' ).unbind('click').click( function() {
+							$( '#soft tbody tr input[type="checkbox"]:checked').each( function() {
+								softlist.push( $(this).parents('tr').data( 'softid' ) );
+							});
+							if ( softlist.length > 0 ) {
+								$( '#error' ).text('');
+								action_select_logs( { 'a' : data.soft , 'b' : softlist , 'c' : softlist.length } );
+							} else {
+								$('<div class="alert alert-warning fade in">' + lemma.choosesoftware + '</div>').appendTo("#error");
+							}
+						});
+					}
+
+					//////////////////////////////////////////////
+					// Only 1 software available, directly jump //
+					//////////////////////////////////////////////
+					else {
+						for (var s in data.soft ) {
+							softlist.push( s );
+						}
+						action_select_logs( { 'a' : data.soft , 'b' : softlist , 'c' : softlist.length } );
+					}
+
+				}
+				else {
+					fatal_error();
+				}
+
+			});
+		}
+	});
+}
+
+
+/**
  * Command to enable a copy to clipboard button
  *
  * @param   {string}  btn    the DOM selector of buttons on which to apply the copy to clipboard action when clicked
@@ -352,125 +545,14 @@ $(function() {
 		location.reload();
 	});
 
-	////////////////////////////////////////
+	/////////////////////////////////////////////
 	// Check if config.user.json already exist //
-	////////////////////////////////////////
-	progressbar_set(10);
+	/////////////////////////////////////////////
+	progressbar_set(5);
 	pml_action( { s : 'exist' } , function() {
-
-		///////////////////////////////////
-		// Check if we can write at root //
-		///////////////////////////////////
-		progressbar_set(20);
-		pml_action( { s : 'touch' } , function( data ) {
-
-			/////////////////////////
-			// Cannot write a root //
-			/////////////////////////
-			if ( data.notice ) {
-				$( '#user' ).html( data.notice );
-				progressbar_color( 'warning' );
-			}
-
-			///////////////////
-			// Find logs now //
-			///////////////////
-			else {
-				$( '#user' ).html( lemma.pleasewait );
-				progressbar_set( 30 );
-				pml_action( { s : 'soft' } , function( data ) {
-
-					if ( data.sofn > 0 ) {
-
-						var softlist = [];
-
-						/////////////////////////////////////////
-						// Let user choose which soft he wants //
-						/////////////////////////////////////////
-						if ( data.sofn > 1 ) {
-
-							$( '#user' ).html( data.notice );
-
-							$( '#soft' )
-								.addClass( 'table table-striped table-bordered table-hover table-condensed' )
-								.append('<thead><tr><th><input type="checkbox" id="all"></th><th>' + lemma.name + '</th><th>' + lemma.description + '</th><th>' + lemma.notes + '</th></tr></thead><tbody></tbody>');
-
-							for ( var softid in data.soft ) {
-								var link = data.soft[ softid ].home;
-								var name = ( ( link === undefined ) || ( link === '' ) ) ? data.soft[ softid ].name : '<a href="' + link + '" target="doc">' + data.soft[ softid ].name + '</a>';
-								$( '<tr>' )
-									.data( 'softid' , softid )
-									.data( 'load' , data.soft[ softid ].load )
-									.html( '<td><input type="checkbox"></td><td>' + name + '</td><td>' + data.soft[ softid ].desc + '</td><td>' + data.soft[ softid ].notes + '</td>' )
-									.appendTo( '#soft tbody' );
-							}
-
-							$( '#soft tbody tr').click( function() {
-								$( this ).find( 'input[type="checkbox"]' ).click();
-							});
-
-							$( '#soft tbody tr input[type="checkbox"]').click( function( event ) {
-								event.stopPropagation();
-								var state = $( this ).prop('checked');
-								if ( state ) {
-									$( this ).parents('tr').addClass( 'success' );
-								} else {
-									$( this ).parents('tr').removeClass( 'success' );
-								}
-							});
-
-							$( '#soft tbody tr input[type="checkbox"]').each( function() {
-								if ( $(this).parents('tr').data( 'load' ) ) {
-									$(this).prop( 'checked' , true );
-									$(this).parents('tr').addClass( 'success' );
-								}
-							});
-
-							$( '#soft #all').click( function() {
-								var state = $( this ).prop('checked');
-								$( '#soft tbody tr').each( function() {
-									var cb = $( this ).find( 'input[type="checkbox"]' );
-									$( cb ).prop( 'checked' , state );
-									if ( state ) {
-										$(this).addClass( 'success' );
-									} else {
-										$(this).removeClass( 'success' );
-									}
-								});
-							});
-
-							$( '#next' ).unbind('click').click( function() {
-								$( '#soft tbody tr input[type="checkbox"]:checked').each( function() {
-									softlist.push( $(this).parents('tr').data( 'softid' ) );
-								});
-								if ( softlist.length > 0 ) {
-									$( '#error' ).text('');
-									action_select_logs( { 'a' : data.soft , 'b' : softlist , 'c' : softlist.length } );
-								} else {
-									$('<div class="alert alert-warning fade in">' + lemma.choosesoftware + '</div>').appendTo("#error");
-								}
-							});
-						}
-
-						//////////////////////////////////////////////
-						// Only 1 software available, directly jump //
-						//////////////////////////////////////////////
-						else {
-							for (var s in data.soft ) {
-								softlist.push( s );
-							}
-							action_select_logs( { 'a' : data.soft , 'b' : softlist , 'c' : softlist.length } );
-						}
-
-					}
-					else {
-						fatal_error();
-					}
-
-				});
-			}
-		});
+		process_authentication();
 	});
+
 });
 
 

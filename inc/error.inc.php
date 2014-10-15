@@ -3,6 +3,7 @@ if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
 	header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found');
 	die();
 }
+
 include_once 'inc/global.inc.php';
 load_default_constants();
 ?>

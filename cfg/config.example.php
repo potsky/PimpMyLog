@@ -1,3 +1,4 @@
+<?php if(realpath(__FILE__)===realpath($_SERVER["SCRIPT_FILENAME"])){header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found');die();}?>
 {
 	"globals": {
 		"_remove_me_to_set_LOCALE"                : "fr_FR",

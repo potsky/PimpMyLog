@@ -2,9 +2,12 @@
 include_once 'inc/global.inc.php';
 
 
-///////////////////////////////////
-// Check PHP Version             //
-///////////////////////////////////
+/*
+|--------------------------------------------------------------------------
+| Check PHP Version
+|--------------------------------------------------------------------------
+|
+*/
 if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 	$title    = __( 'Oups!' );
 	$message  = sprintf( __( 'PHP version %s is required but your server run %s.') , PHP_VERSION_REQUIRED , PHP_VERSION );
@@ -15,17 +18,20 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 }
 
 
-
-/////////////////////////
-// Check if configured //
-/////////////////////////
-if ( ! file_exists( 'config.user.json' ) ) {
+/*
+|--------------------------------------------------------------------------
+| Check if configured
+|--------------------------------------------------------------------------
+|
+*/
+$config_file_name = get_config_file_name();
+if ( is_null( $config_file_name ) ) {
 	$title    = __( 'Welcome!' );
 	$message  = '<br/>';
 	$message .= __( 'Pimp my Log is not configured.');
 	$message .= '<br/><br/>';
 	$message .= '<span class="glyphicon glyphicon-cog"></span> ';
-	$message .= __( 'You can manually copy <code>cfg/config.example.json</code> to <code>config.user.json</code> in the root directory and change parameters. Then refresh this page.' );
+	$message .= sprintf( __( 'You can manually copy <code>cfg/config.example.php</code> to %s in the root directory and change parameters. Then refresh this page.' ) , '<code>' . CONFIG_FILE_NAME . '</code>' );
 	$message .= '<br/><br/>';
 	$message .= '<span class="glyphicon glyphicon-heart-empty"></span> ';
 	$message .= __( 'Or let me try to configure it for you!' );
@@ -37,16 +43,15 @@ if ( ! file_exists( 'config.user.json' ) ) {
 }
 
 
-//////////////////////////////
-// Load config and defaults //
-//////////////////////////////
-config_load();
+/*
+|--------------------------------------------------------------------------
+| Load config, constants and check configuration
+|--------------------------------------------------------------------------
+|
+*/
+list( $badges , $files ) = config_load();
+$errors                  = config_check( $files );
 
-
-/////////////////////////
-// Check configuration //
-/////////////////////////
-$errors = config_check();
 if ( is_array( $errors ) ) {
 	$title    = __( 'Oups!' );
 	$message  = '<br/>';
@@ -65,9 +70,12 @@ if ( is_array( $errors ) ) {
 }
 
 
-//////////////////////
-// Javascript Lemma //
-//////////////////////
+/*
+|--------------------------------------------------------------------------
+| Javascript lemma
+|--------------------------------------------------------------------------
+|
+*/
 $lemma = array(
 	'notification_deny' => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
 	'no_log'            => __( 'No log has been found.' ),
@@ -85,12 +93,21 @@ $lemma = array(
 );
 
 
-///////////////////
-// Session tasks //
-///////////////////
+/*
+|--------------------------------------------------------------------------
+| Session
+|--------------------------------------------------------------------------
+|
+*/
 $csrf = csrf_get();
 
 
+/*
+|--------------------------------------------------------------------------
+| HTML
+|--------------------------------------------------------------------------
+|
+*/
 ?><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -193,7 +210,7 @@ foreach ( $files as $file_id=>$file ) {
 						<select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>">
 							<option value="0"><?php _e( 'No refresh' );?></option>
 <?php
-foreach ( get_refresh_options() as $r ) {
+foreach ( get_refresh_options( $files ) as $r ) {
 	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh %ss' ) , $r ) . '</option>';
 }
 ?>
@@ -203,7 +220,7 @@ foreach ( get_refresh_options() as $r ) {
 					<div class="form-group">
 						<select id="max" class="form-control input-sm" title="<?php _e( 'Max count of logs to display' );?>">
 <?php
-foreach ( get_max_options() as $r ) {
+foreach ( get_max_options( $files ) as $r ) {
 	echo '<option value="' . $r . '">' . sprintf( ( (int)$r>1 ) ? __( '%s logs' ) : __( '%s log' ) , $r ) . '</option>';
 }
 ?>
