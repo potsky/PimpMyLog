@@ -294,7 +294,7 @@ function get_config_file($path = false)
 
     if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
         ob_start();
-        @include( $path );
+        require $path;
         $string = ob_get_clean();
     } else {
         $string = @file_get_contents( $path );

@@ -49,30 +49,11 @@ class ConfigPHPTest extends TestCase {
     {
         $source      = realpath( PHPMOCKUP . '/config_3files.user.php' );
         $destination = realpath( PSKBASE . '/' . CONFIG_FILE_NAME );
-
         copy( $source , $destination );
 
         $this->assertStringEndsWith( CONFIG_FILE_NAME , get_config_file_path() );
         $this->assertEquals( CONFIG_FILE_NAME , get_config_file_name() );
-
-//        $config = get_config_file();
-
-$path = get_config_file_path();
-if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
-    ob_start();
-    @include( $path );
-    $string = ob_get_clean();
-} else {
-    $string = @file_get_contents( $path );
-}
-
-$config = json_decode( $string , true );
-
-echo "\n======================================== Include direct sans ob_start \n";
-include( $path );
-echo "\n========================================\n";
-
-
+        $config = get_config_file();
         $this->assertArrayHasKey( 'globals', $config );
         $this->assertArrayHasKey( 'badges', $config );
         $this->assertArrayHasKey( 'files', $config );
@@ -85,7 +66,6 @@ echo "\n========================================\n";
 
     public function test_Json_Config_Empty_Files_With_Userdir_Files()
     {
-        global $files;
         copy( PHPMOCKUP . '/config_nofiles.user.php' , PSKBASE . '/' . CONFIG_FILE_NAME );
         self::unlinkRecursive( PSKBASE . '/' . USER_CONFIGURATION_DIR );
         self::copyDir( PHPMOCKUP . '/config.user.d' , PSKBASE . '/' . USER_CONFIGURATION_DIR );
@@ -104,7 +84,6 @@ echo "\n========================================\n";
 
     public function test_Json_Config_With_Files_With_Userdir_Files()
     {
-        global $files;
         copy( PHPMOCKUP . '/config_3files.user.php' , PSKBASE . '/' . CONFIG_FILE_NAME );
         self::unlinkRecursive( PSKBASE . '/' . USER_CONFIGURATION_DIR );
         self::copyDir( PHPMOCKUP . '/config.user.d' , PSKBASE . '/' . USER_CONFIGURATION_DIR );
