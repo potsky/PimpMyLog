@@ -719,7 +719,7 @@ function is_assoc($arr)
  *
  * @return  string       a random string of $l chars
  */
-function mt_rand_str ($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890') {
+function mt_rand_str ($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890_-ABCDEFGHIJKLMNOPQRSTUVWXYZ') {
     for ($s = '', $cl = strlen($c)-1, $i = 0; $i < $l; $s .= $c[mt_rand(0, $cl)], ++$i);
     return $s;
 }

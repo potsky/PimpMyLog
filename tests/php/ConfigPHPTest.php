@@ -48,18 +48,31 @@ class ConfigPHPTest extends TestCase {
     public function test_Json_Config_With_Files()
     {
         copy( PHPMOCKUP . '/config_3files.user.php' , PSKBASE . '/' . CONFIG_FILE_NAME );
-echo "========================================\n";
-echo file_get_contents( PHPMOCKUP . '/config_3files.user.php' );
-
-echo "========================================\n";
-passthru( 'ls -al _build ' );
 
         $this->assertStringEndsWith( CONFIG_FILE_NAME , get_config_file_path() );
         $this->assertEquals( CONFIG_FILE_NAME , get_config_file_name() );
-        $config = get_config_file();
+
+//        $config = get_config_file();
+
+$path = get_config_file_path();
+if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
+    ob_start();
+    @include( $path );
+    $string = ob_get_clean();
+} else {
+    $string = @file_get_contents( $path );
+}
+
+$config = json_decode( $string , true );
 
 echo "========================================\n";
-print_r($config);
+print_r( $path );
+echo "========================================\n";
+print_r( $string );
+echo "========================================\n";
+print_r( json_decode( $string , true ) );
+echo "========================================\n";
+passthru( 'ls -al _build/ ' . CONFIG_FILE_NAME );
 echo "========================================\n";
 
         $this->assertArrayHasKey( 'globals', $config );
