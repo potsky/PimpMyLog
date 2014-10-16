@@ -68,17 +68,8 @@ if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
 
 $config = json_decode( $string , true );
 
-echo "\n======================================== CAT \n";
-passthru( 'cat ' . $destination );
-echo "\n======================================== FILE GET CONTENT avec path\n";
-echo file_get_contents( $path );
-echo "\n======================================== FILE GET CONTENT avec destination\n";
-echo file_get_contents( $destination );
-echo "\n======================================== FILE GET CONTENT avec destination et OBSTART\n";
-ob_start();
+echo "\n======================================== Include direct sans ob_start \n";
 include( $path );
-$string = ob_get_clean();
-echo $string;
 echo "\n========================================\n";
 
 
