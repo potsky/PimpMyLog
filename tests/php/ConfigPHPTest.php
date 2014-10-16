@@ -52,6 +52,9 @@ class ConfigPHPTest extends TestCase {
         $this->assertStringEndsWith( CONFIG_FILE_NAME , get_config_file_path() );
         $this->assertEquals( CONFIG_FILE_NAME , get_config_file_name() );
         $config = get_config_file();
+
+print_r($config);
+
         $this->assertArrayHasKey( 'globals', $config );
         $this->assertArrayHasKey( 'badges', $config );
         $this->assertArrayHasKey( 'files', $config );
@@ -91,6 +94,9 @@ class ConfigPHPTest extends TestCase {
         $this->assertStringEndsWith( CONFIG_FILE_NAME , get_config_file_path() );
         $this->assertEquals( CONFIG_FILE_NAME , get_config_file_name() );
         $config = get_config_file();
+
+print_r($config);
+
         $this->assertArrayHasKey( 'globals' , $config );
         $this->assertArrayHasKey( 'badges' , $config );
         $this->assertArrayHasKey( 'files' , $config );

@@ -1,5 +1,6 @@
 {
     "require": {
-        "phpunit/phpunit": "~4.3"
+        "phpunit/phpunit": "~4.3",
+        "phpseclib/phpseclib": "~0.3"
     }
 }
