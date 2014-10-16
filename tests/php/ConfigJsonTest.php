@@ -34,6 +34,16 @@ class ConfigJsonTest extends TestCase {
     {
         copy( PHPMOCKUP . '/config_nofiles.user.json' , PSKBASE . '/' . CONFIG_FILE_NAME_BEFORE_1_5_0 );
 
+
+echo "============================\n";
+echo TESTBASE . "\n";
+echo PHPMOCKUP . "\n";
+        echo PHPMOCKUP . '/config_nofiles.user.json' . ' ' . PSKBASE . '/' . CONFIG_FILE_NAME_BEFORE_1_5_0 . "\n";
+passthru('ls -al ' . PHPMOCKUP . '/config_nofiles.user.json' );
+
+die();
+
+
 var_dump(get_config_file_path());
 passthru('pwd');
 passthru('ls -alR _build');

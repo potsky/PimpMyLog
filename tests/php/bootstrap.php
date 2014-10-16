@@ -1,7 +1,7 @@
 <?php
 
-define( 'TESTBASE' , dirname( __FILE__ ) . '/..' );
-define( 'PHPMOCKUP' , TESTBASE . '/phpmockup' );
+define( 'TESTBASE' , realpath( dirname( __FILE__ ) . '/..' ) );
+define( 'PHPMOCKUP' , realpath( TESTBASE . '/phpmockup' ) );
 
 echo '--> Working in ' . PSKBASE . " <--\n";
 
