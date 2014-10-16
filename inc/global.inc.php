@@ -709,6 +709,22 @@ function is_assoc($arr)
     return array_keys( $arr ) !== range( 0 , count( $arr ) - 1 );
 }
 
+
+
+/**
+ * Generate a random string
+ *
+ * @param   integer  $l  the string length
+ * @param   string   $c  a list of char in a string taken to generate the string
+ *
+ * @return  string       a random string of $l chars
+ */
+function mt_rand_str ($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890') {
+    for ($s = '', $cl = strlen($c)-1, $i = 0; $i < $l; $s .= $c[mt_rand(0, $cl)], ++$i);
+    return $s;
+}
+
+
 /*
 |--------------------------------------------------------------------------
 | Timezone

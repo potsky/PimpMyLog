@@ -48,12 +48,19 @@ class ConfigPHPTest extends TestCase {
     public function test_Json_Config_With_Files()
     {
         copy( PHPMOCKUP . '/config_3files.user.php' , PSKBASE . '/' . CONFIG_FILE_NAME );
+echo "========================================\n";
+echo file_get_contents( PHPMOCKUP . '/config_3files.user.php' );
+
+echo "========================================\n";
+passthru( 'ls -al _build ' );
 
         $this->assertStringEndsWith( CONFIG_FILE_NAME , get_config_file_path() );
         $this->assertEquals( CONFIG_FILE_NAME , get_config_file_name() );
         $config = get_config_file();
 
+echo "========================================\n";
 print_r($config);
+echo "========================================\n";
 
         $this->assertArrayHasKey( 'globals', $config );
         $this->assertArrayHasKey( 'badges', $config );
