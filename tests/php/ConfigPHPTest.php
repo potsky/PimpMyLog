@@ -54,6 +54,21 @@ class ConfigPHPTest extends TestCase {
 
 //        $config = get_config_file();
 
+
+echo "\n========================================\n";
+print_r( PHPMOCKUP . '/config_3files.user.php' );
+echo "\n========================================\n";
+passthru( 'ls -al ' . PHPMOCKUP . '/config_3files.user.php' );
+echo "\n========================================\n";
+passthru( 'cat ' . PHPMOCKUP . '/config_3files.user.php' );
+echo "\n========================================\n";
+print_r( PSKBASE . '/' . CONFIG_FILE_NAME );
+echo "\n========================================\n";
+passthru( 'ls -al ' . PSKBASE . '/' . CONFIG_FILE_NAME );
+echo "\n========================================\n";
+passthru( 'cat ' . PSKBASE . '/' . CONFIG_FILE_NAME );
+
+
 $path = get_config_file_path();
 if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
     ob_start();
@@ -65,15 +80,14 @@ if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
 
 $config = json_decode( $string , true );
 
-echo "========================================\n";
+
+echo "\n========================================\n";
 print_r( $path );
-echo "========================================\n";
+echo "\n========================================\n";
 print_r( $string );
-echo "========================================\n";
+echo "\n========================================\n";
 print_r( json_decode( $string , true ) );
-echo "========================================\n";
-passthru( 'ls -al _build/ ' . CONFIG_FILE_NAME );
-echo "========================================\n";
+echo "\n========================================\n";
 
         $this->assertArrayHasKey( 'globals', $config );
         $this->assertArrayHasKey( 'badges', $config );
@@ -114,8 +128,6 @@ echo "========================================\n";
         $this->assertStringEndsWith( CONFIG_FILE_NAME , get_config_file_path() );
         $this->assertEquals( CONFIG_FILE_NAME , get_config_file_name() );
         $config = get_config_file();
-
-print_r($config);
 
         $this->assertArrayHasKey( 'globals' , $config );
         $this->assertArrayHasKey( 'badges' , $config );
