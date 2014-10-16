@@ -34,6 +34,9 @@ class ConfigJsonTest extends TestCase {
     {
         copy( PHPMOCKUP . '/config_nofiles.user.json' , PSKBASE . '/' . CONFIG_FILE_NAME_BEFORE_1_5_0 );
 
+var_dump(get_config_file_path());
+passthru('pwd');
+passthru('ls -alR _build');
         $this->assertStringEndsWith( CONFIG_FILE_NAME_BEFORE_1_5_0 , get_config_file_path() );
         $this->assertEquals( CONFIG_FILE_NAME_BEFORE_1_5_0 , get_config_file_name() );
         $this->assertArrayHasKey( 'globals', get_config_file() );
