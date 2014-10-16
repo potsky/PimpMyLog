@@ -57,21 +57,6 @@ class ConfigPHPTest extends TestCase {
 
 //        $config = get_config_file();
 
-
-echo "\n========================================\n";
-print_r( $source );
-echo "\n========================================\n";
-passthru( 'ls -al ' . $source );
-echo "\n========================================\n";
-passthru( 'cat ' . $source );
-echo "\n========================================\n";
-print_r( $destination );
-echo "\n========================================\n";
-passthru( 'ls -al ' . $destination );
-echo "\n========================================\n";
-passthru( 'cat ' . $destination );
-
-
 $path = get_config_file_path();
 if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
     ob_start();
@@ -83,14 +68,19 @@ if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
 
 $config = json_decode( $string , true );
 
+echo "\n======================================== CAT \n";
+passthru( 'cat ' . $destination );
+echo "\n======================================== FILE GET CONTENT avec path\n";
+echo file_get_contents( $path );
+echo "\n======================================== FILE GET CONTENT avec destination\n";
+echo file_get_contents( $destination );
+echo "\n======================================== FILE GET CONTENT avec destination et OBSTART\n";
+ob_start();
+include( $path );
+$string = ob_get_clean();
+echo $string;
+echo "\n========================================\n";
 
-echo "\n========================================\n";
-print_r( $path );
-echo "\n========================================\n";
-print_r( $string );
-echo "\n========================================\n";
-print_r( json_decode( $string , true ) );
-echo "\n========================================\n";
 
         $this->assertArrayHasKey( 'globals', $config );
         $this->assertArrayHasKey( 'badges', $config );
