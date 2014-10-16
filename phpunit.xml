@@ -8,6 +8,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
+         verbose="false"
 >
     <testsuites>
         <testsuite name="Application Test Suite">

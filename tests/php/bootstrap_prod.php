@@ -1,3 +1,3 @@
 <?php
-define( 'PSKBASE' , '_build' );
-include_once( __DIR__ . '/bootstrap.php' );
+define( 'PSKBASE' , '_prod' );
+include_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bootstrap.php' );

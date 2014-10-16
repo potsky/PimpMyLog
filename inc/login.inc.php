@@ -1,0 +1,92 @@
+<?php
+if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
+	header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found');
+	die();
+}
+
+include_once 'inc/global.inc.php';
+load_default_constants();
+?>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<title><?php echo TITLE;?></title>
+	<?php include_once 'inc/favicon.inc.php'; ?>
+	<link rel="stylesheet" href="css/pml.min.css">
+</head>
+<body>
+	<!--[if lt IE 7]>
+	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+	<![endif]-->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="logo"></div>
+	</div>
+
+	<div class="jumbotron"><center>
+		<div class="container">
+
+			<div class="container">
+				<div class="row">
+					<div class="input-group col-sm-6 col-md-4">
+					<?php
+					if ( (int)@$error === 1 ) {
+						echo '<div class="alert alert-danger">';
+						echo __('Your username or password is not correct');
+						echo '</div>';
+					}
+					else if ( (int)@$error === 2 ) {
+						echo '<div class="alert alert-warning">';
+						echo __('Please try again...');
+						echo '</div>';
+					}
+					else if ( (int)@$error === 3 ) {
+						echo '<div class="alert alert-info">';
+						echo __('You have been logged out');
+						echo '</div>';
+					}
+					?>
+					</div>
+				</div>
+			</div>
+
+			<h2><?php echo __("Please sign in");?></h2>
+
+			<form method="POST" action="?">
+				<div class="container">
+					<div class="row">
+						<div class="input-group col-sm-6 col-md-4">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+							<input type="text" name="username" value="<?php echo ( strlen( "" . @$_POST['username'] ) > 0 ) ? htmlentities( $_POST['username'] ) : ''; ?>" class="form-control" placeholder="<?php echo  __('Username') ; ?>" <?php if ( strlen( "" . @$_POST['username'] ) === 0 ) echo 'autofocus="autofocus"'; ?>/>
+						</div>
+						<br/>
+					</div>
+					<div class="row">
+						<div class="input-group col-sm-6 col-md-4">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+							<input type="password" name="password" class="form-control" placeholder="<?php echo  __('Password'); ?>" <?php if ( strlen( "". @$_POST['username'] ) > 0 ) echo 'autofocus="autofocus"'; ?>/>
+						</div>
+					</div>
+				</div>
+				<br/><br/>
+				<input type="submit" class="btn btn-large btn-success" value="<?php echo __('Continue'); ?>"/>
+				<input type="hidden" name="csrf_token" value="<?php echo csrf_get(); ?>" />
+				<input type="hidden" name="attempt" value="<?php echo htmlentities( $attempt ); ?>" />
+			</form>
+
+		</div>
+	</center></div>
+
+	<div class="container">
+		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>
+	</div>
+
+	<script src="js/pml.min.js"></script>
+</body>
+</html>

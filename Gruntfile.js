@@ -88,11 +88,10 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					src: [
-						'cfg/**',
-						'img/**',
-						'inc/**',
-						'lang/**',
-						'*.json',
+						'cfg/**/*',
+						'img/**/*',
+						'inc/**/*',
+						'lang/**/*',
 						'*.txt',
 						'*.php'
 					],
@@ -109,7 +108,7 @@ module.exports = function(grunt) {
 			devphp: {
 				files: [{
 					expand: true,
-					src: [ '*.php' , 'inc/*', 'cfg/*' , 'lang/*' ],
+					src: [ '*.php' , 'inc/**/*', 'cfg/**/*' , 'lang/**/*' ],
 					dest: '_site/'
 				}]
 			},
@@ -147,7 +146,7 @@ module.exports = function(grunt) {
 					expand: true,
 					flatten: true,
 					filter: 'isFile',
-					src: [ 'js/**.js' ],
+					src: [ 'js/**/*.js' ],
 					dest: '_site/js/'
 				}]
 			},
@@ -155,14 +154,14 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					cwd: '_build/',
-					src: [ '**' ],
+					src: [ '**/*' ],
 					dest: master
 				}]
 			},
 			installmasterREADME: {
 				files: [{
 					expand: true,
-					cwd: '_tools/',
+					cwd: 'tools/',
 					src: [ '**/*' ],
 					dest: master
 				}]
@@ -171,14 +170,14 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					cwd: '_build/',
-					src: [ '**' ],
+					src: [ '**/*' ],
 					dest: beta
 				}]
 			},
 			installbetaREADME: {
 				files: [{
 					expand: true,
-					cwd: '_tools/',
+					cwd: 'tools/',
 					src: [ '**/*' ],
 					dest: beta
 				}]
@@ -187,11 +186,10 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					src: [
-						'cfg/**',
-						'img/**',
-						'inc/**',
-						'lang/**',
-						'config.user.json',
+						'cfg/**/*',
+						'img/**/*',
+						'inc/**/*',
+						'lang/**/*',
 						'*.txt'
 					],
 					dest: '_build/'
@@ -566,7 +564,7 @@ module.exports = function(grunt) {
 				tasks: [ 'concat:css' , 'sass:dev' ]
 			},
 			html: {
-				files: [ '*.php' , 'inc/*', 'cfg/*' ],
+				files: [ '*.php' , 'inc/**/*.php', 'cfg/**/*.php' ],
 				tasks: [ 'copy:devphp' ]
 			},
 			version: {

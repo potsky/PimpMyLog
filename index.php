@@ -45,6 +45,15 @@ if ( is_null( $config_file_name ) ) {
 
 /*
 |--------------------------------------------------------------------------
+| Login
+|--------------------------------------------------------------------------
+|
+*/
+$current_user = Sentinel::attempt();
+
+
+/*
+|--------------------------------------------------------------------------
 | Load config, constants and check configuration
 |--------------------------------------------------------------------------
 |
@@ -174,7 +183,7 @@ if ( FILE_SELECTOR == 'bs' ) {
 foreach ( $files as $file_id => $file ) {
 	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
 	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
-	echo ( isset( $file['included_from'] ) ) ? htmlentities( 'Log file #' . $file_id . ' defined in ' . $file['included_from'] ) : htmlentities( 'Log file #' . $file_id . ' defined in main configuration file' );
+	echo ( isset( $file['included_from'] ) ) ? htmlentities( sprintf( __('Log file #%s defined in %s' ) , $file_id , $file['included_from'] ) ,ENT_QUOTES,'UTF-8') : htmlentities( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) ,ENT_QUOTES,'UTF-8');
 	echo '">' . $file['display'] . '</a></li>';
 }
 ?>
@@ -203,7 +212,7 @@ foreach ( $files as $file_id=>$file ) {
 				<form class="navbar-form navbar-right">
 
 					<div class="form-group" id="searchctn">
-						<input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlspecialchars(@$_GET['s'],ENT_COMPAT,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>">
+						<input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlentities(@$_GET['s'],ENT_QUOTES,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>">
 					</div>&nbsp;
 
 					<div class="form-group">
@@ -230,12 +239,13 @@ foreach ( get_max_options( $files ) as $r ) {
 					<button style="display:none;" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>">
 					  <span class="glyphicon glyphicon-bell"></span>
 					</button>
+
 				</form>
 
 				<ul class="nav navbar-nav navbar-right">
 
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="thmenuicon glyphicon glyphicon-th-list"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="thmenuicon glyphicon glyphicon-th"></span></a>
 						<ul class="dropdown-menu thmenu" style="padding: 15px;">
 							<li>
 								<a href="#" class="" title="<?php _e('Displayed columns');?>"><?php _e('Displayed columns');?></a>
@@ -287,6 +297,18 @@ foreach ( get_max_options( $files ) as $r ) {
 
 						</ul>
 					</li>
+
+<?php if ( ! is_null( $current_user ) ) { ?>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
+						<ul class="dropdown-menu">
+
+							<li><a href="1" title="<?php _h('Click here to manager users'); ?>"><span class="glyphicon glyphicon-lock"></span> <?php echo __('Manage users'); ?></a></li>
+							<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span> <?php echo __('Sign out'); ?></a></li>
+						</ul>
+					</li>
+<?php } ?>
+
 				</ul>
 			</div>
 		</div>

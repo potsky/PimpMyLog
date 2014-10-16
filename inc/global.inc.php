@@ -12,6 +12,16 @@ if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
     die();
 }
 
+
+/*
+|--------------------------------------------------------------------------
+| Define root directory
+|--------------------------------------------------------------------------
+|
+*/
+if ( ! defined( 'PML_BASE' ) ) define( 'PML_BASE' , realpath( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '..' ) );
+
+
 /*
 |--------------------------------------------------------------------------
 | Disable XDebug
@@ -21,6 +31,7 @@ if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
 |
 */
 if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
+
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +84,6 @@ define( 'DEFAULT_AUTH_LOG_FILE_COUNT'        , 100 );
 define( 'DEFAULT_SORT_LOG_FILES'             , 'default' );
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Lang parameters
@@ -95,6 +105,40 @@ $locale_numeraljs = array(
     'fr_FR' => 'fr',
     'pt_BR' => 'pt-br',
 );
+
+
+/*
+|--------------------------------------------------------------------------
+| Class autoloader
+|--------------------------------------------------------------------------
+|
+*/
+function my_autoloader( $ClassName ) {
+    @include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . $ClassName . ".php");
+}
+spl_autoload_register('my_autoloader');
+
+
+/*
+|--------------------------------------------------------------------------
+| Functions declarations
+|--------------------------------------------------------------------------
+|
+| Will be removed in PML v2.0, all functions will be grouped in classes
+|
+*/
+
+/**
+ * htmlentities
+ *
+ * @param string  $text the text key
+ *
+ * @return   string     the translation
+ */
+function _h($text)
+{
+    _e( htmlentities( $text ,ENT_QUOTES,'UTF-8') );
+}
 
 /**
  * Simply return a localized text or empty string if the key is empty
@@ -209,38 +253,38 @@ function parser($regex , $match , $log , $types , $tz = NULL)
  */
 function load_default_constants()
 {
-	$defaults = array(
-		'LOCALE',
-		'TITLE',
-		'TITLE_FILE',
-		'NAV_TITLE',
-		'FOOTER',
-		'LOGS_MAX',
-		'LOGS_REFRESH',
-		'NOTIFICATION',
-		'PULL_TO_REFRESH',
-		'NOTIFICATION_TITLE',
-		'GOOGLE_ANALYTICS',
-		'GEOIP_URL',
-		'CHECK_UPGRADE',
-		'PIMPMYLOG_VERSION_URL',
-		'PIMPMYLOG_ISSUE_LINK',
-		'MAX_SEARCH_LOG_TIME',
-		'FILE_SELECTOR',
-		'USER_CONFIGURATION_DIR',
-		'AUTH_LOG_FILE',
-		'SORT_LOG_FILES',
-		'AUTH_LOG_FILE_COUNT',
-	);
-	foreach ( $defaults as $d ) {
-		if ( ! defined( $d ) ) {
-			if ( defined( 'DEFAULT_' . $d ) ) {
-				define( $d , constant( 'DEFAULT_' . $d ) );
-			} else {
-				die( "Constant 'DEFAULT_$d' is not defined!" );
-			}
-		}
-	}
+    $defaults = array(
+        'LOCALE',
+        'TITLE',
+        'TITLE_FILE',
+        'NAV_TITLE',
+        'FOOTER',
+        'LOGS_MAX',
+        'LOGS_REFRESH',
+        'NOTIFICATION',
+        'PULL_TO_REFRESH',
+        'NOTIFICATION_TITLE',
+        'GOOGLE_ANALYTICS',
+        'GEOIP_URL',
+        'CHECK_UPGRADE',
+        'PIMPMYLOG_VERSION_URL',
+        'PIMPMYLOG_ISSUE_LINK',
+        'MAX_SEARCH_LOG_TIME',
+        'FILE_SELECTOR',
+        'USER_CONFIGURATION_DIR',
+        'AUTH_LOG_FILE',
+        'SORT_LOG_FILES',
+        'AUTH_LOG_FILE_COUNT',
+    );
+    foreach ($defaults as $d) {
+        if ( ! defined( $d ) ) {
+            if ( defined( 'DEFAULT_' . $d ) ) {
+                define( $d , constant( 'DEFAULT_' . $d ) );
+            } else {
+                die( "Constant 'DEFAULT_$d' is not defined!" );
+            }
+        }
+    }
 }
 
 /**
@@ -415,29 +459,29 @@ function config_load($load_user_configuration_dir = true)
     }
 
     // Finaly sort files
-	if ( ! function_exists( 'display_asc' ) )              { function display_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
-	if ( ! function_exists( 'display_desc' ) )             { function display_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
-	if ( ! function_exists( 'display_insensitive_asc' ) )  { function display_insensitive_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
-	if ( ! function_exists( 'display_insensitive_desc' ) ) { function display_insensitive_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
-	switch ( trim( str_replace( array( '-' , '_' , ' ' , 'nsensitive' ) , '' , SORT_LOG_FILES ) ) ) {
-		case 'display':
-		case 'displayasc':
-			usort( $files , 'display_asc' );
-			break;
-		case 'displayi':
-		case 'displayiasc':
-			usort( $files , 'display_insensitive_asc' );
-			break;
-		case 'displaydesc':
-			usort( $files , 'display_desc' );
-			break;
-		case 'displayidesc':
-			usort( $files , 'display_insensitive_desc' );
-			break;
-		default:
-			# do not sort
-			break;
-	}
+    if ( ! function_exists( 'display_asc' ) )              { function display_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
+    if ( ! function_exists( 'display_desc' ) )             { function display_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
+    if ( ! function_exists( 'display_insensitive_asc' ) )  { function display_insensitive_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
+    if ( ! function_exists( 'display_insensitive_desc' ) ) { function display_insensitive_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
+    switch ( trim( str_replace( array( '-' , '_' , ' ' , 'nsensitive' ) , '' , SORT_LOG_FILES ) ) ) {
+        case 'display':
+        case 'displayasc':
+            usort( $files , 'display_asc' );
+            break;
+        case 'displayi':
+        case 'displayiasc':
+            usort( $files , 'display_insensitive_asc' );
+            break;
+        case 'displaydesc':
+            usort( $files , 'display_desc' );
+            break;
+        case 'displayidesc':
+            usort( $files , 'display_insensitive_desc' );
+            break;
+        default:
+            # do not sort
+            break;
+    }
 
     return array( $badges , $files );
 }
@@ -451,7 +495,7 @@ function config_load($load_user_configuration_dir = true)
  *
  * @return  mixed  true if ok, otherwise an array of errors
  */
-function config_check( $files )
+function config_check($files)
 {
     $errors = array();
 
@@ -582,7 +626,7 @@ function human_filesize($bytes, $decimals = 0)
  */
 function csrf_get()
 {
-    session_start();
+    @session_start();
     if ( ! isset( $_SESSION[ 'csrf_token' ] ) ) {
         $_SESSION[ 'csrf_token' ] = md5( uniqid( '' , true ) );
     }
@@ -598,7 +642,7 @@ function csrf_get()
  */
 function csrf_verify()
 {
-    session_start();
+    @session_start();
     $s = @$_SESSION[ 'csrf_token' ];
     session_write_close();
     if ( ! isset( $_POST[ 'csrf_token' ] ) )
@@ -709,8 +753,6 @@ function is_assoc($arr)
     return array_keys( $arr ) !== range( 0 , count( $arr ) - 1 );
 }
 
-
-
 /**
  * Generate a random string
  *
@@ -719,11 +761,12 @@ function is_assoc($arr)
  *
  * @return  string       a random string of $l chars
  */
-function mt_rand_str ($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890_-ABCDEFGHIJKLMNOPQRSTUVWXYZ') {
+function mt_rand_str($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890_-ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+{
     for ($s = '', $cl = strlen($c)-1, $i = 0; $i < $l; $s .= $c[mt_rand(0, $cl)], ++$i);
+
     return $s;
 }
-
 
 /*
 |--------------------------------------------------------------------------

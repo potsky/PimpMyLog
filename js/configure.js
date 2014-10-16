@@ -363,6 +363,25 @@ var process_authentication_yes = function() {
 		else {
 			progressbar_set( 15 );
 			$( '#user' ).html( data.authform );
+			$( '#authsave' ).submit(function( event ) {
+				var username = $('#username').val();
+				var password = $('#password').val();
+				var go       = true;
+				$('#usernamegroup').removeClass('has-error').removeClass('has-success').tooltip('hide');
+				$('#passwordgroup').removeClass('has-error').removeClass('has-success').tooltip('hide');
+				if ( username.length === 0 ) {
+					$('#usernamegroup').addClass('has-error').tooltip('show');
+					go = false;
+				}
+				if ( password.length < 6 ) {
+					$('#passwordgroup').addClass('has-error').tooltip('show');
+					go = false;
+				}
+				if ( go === true ) {
+					process_authentication_save( username , password );
+				}
+  				event.preventDefault();
+			});
 		}
 	});
 };
@@ -373,10 +392,16 @@ var process_authentication_yes = function() {
  *
  * @return  {[type]}  [description]
  */
-var process_authentication_save = function() {
+var process_authentication_save = function( username , password ) {
 	progressbar_set(25);
-	pml_action( { s : 'authsave' } , function( data ) {
-		process_select_logs();
+	pml_action( { s : 'authsave' , u : username , p : password } , function( data ) {
+
+		if ( data.notice === true ) {
+			process_select_logs();
+		} else {
+			fatal_error();
+		}
+
 	});
 };
 

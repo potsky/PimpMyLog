@@ -27,8 +27,6 @@ if ( isset( $_POST['s'] ) ) {
 
 	$config_file      = '../' . CONFIG_FILE_NAME;
 	$config_file_temp = '../' . CONFIG_FILE_TEMP;
-	$auth_file        = '../' . AUTH_CONFIGURATION_FILE;
-
 
 	try {
 
@@ -42,10 +40,13 @@ if ( isset( $_POST['s'] ) ) {
 			*/
 			case 'auth':
 				$return[ 'notice' ] =
-					'<h2>' . __( 'Do you want to create an admin account now?') . '</h2>'
-					. '<br/><br/>'
+					'<h2>' . __( 'Setup admin account') . '</h2>'
 					. __('You can use <em>Pimp my Log</em> without authentication but you will not be able to add this feature later from the web interface. You will need to do it manually.') . '<br/>'
-					. '<br/><br/>'
+					. '<br/>'
+					. __('Setup an admin account will let you create other users later and give them access to certain log files only.') . '<br/>'
+					. '<br/>'
+					. __( 'Do you want to create an admin account now?') . '<br/>'
+					. '<br/>'
 					. '<a href="javascript:process_authentication_yes()" class="btn btn-large btn-success">' . __('Yes, create an admin account now') . '</a>'
 					. '&nbsp;&nbsp;'
 					. '<a href="javascript:process_authentication_no()" class="btn btn-large btn-danger">' . __('No') . '</a>';
@@ -61,29 +62,44 @@ if ( isset( $_POST['s'] ) ) {
 			*/
 			case 'authtouch':
 
+				if ( Sentinel::isAuthSet() === true ) {
+					$path = Sentinel::getAuthFilePath();
+					$return[ 'notice' ] =
+						sprintf( __( 'File <code>%s</code> already exists!') , AUTH_CONFIGURATION_FILE )
+						. '<br/><br/>'
+						. __( 'Please remove it from the root directory:' )
+						. '<div class="row">'
+						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'mv \'' . $path . '\' \'' . $path . '.bck\'</pre></div>'
+						. '  <div class="col-md-2"><a class="btn btn-success clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
+						. '</div>';
+					$return[ 'reload' ] = true;
+				}
+
 				// Auth file is touched so return the form to ask yes or no
-				if ( @touch( $auth_file ) ) {
+				else if ( Sentinel::create() === true ) {
 					$return[ 'authform' ] =
-					'<h2>' . __( 'Admin account creation') . '</h2>'
+					'<h2>' . __( 'Setup admin account') . '</h2>'
 					. __( 'Please choose a username and a password for the admin account.')
 					. '<br/><br/>'
+					. '<form id="authsave">'
 					. '<div class="container">'
 					. 	'<div class="row">'
-					. 		'<div class="input-group col-sm-6 col-md-4">
+					. 		'<div class="input-group col-sm-6 col-md-4" id="usernamegroup" data-toggle="tooltip" data-placement="top" title="' . htmlentities( __( 'Username is required' ) ) . '">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-								<input type="text" class="form-control" placeholder="' . __('Username') . '">
+								<input type="text" id="username" class="form-control" placeholder="' . __('Username') . '" autofocus="autofocus">
 							</div>'
 					. 	'<br/>'
 					. 	'</div>'
 					. 	'<div class="row">'
-					. 		'<div class="input-group col-sm-6 col-md-4">
+					. 		'<div class="input-group col-sm-6 col-md-4" id="passwordgroup" data-toggle="tooltip" data-placement="bottom" title="' . htmlentities( __( 'Password must contain at least 6 chars' ) ) . '">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-								<input type="text" class="form-control" placeholder="' . __('Password') . '">
+								<input type="password" id="password" class="form-control" placeholder="' . __('Password') . '">
 							</div>'
 					. 	'</div>'
 					. '</div>'
 					. '<br/><br/>'
-					. '<a href="javascript:process_authentication_save()" class="btn btn-large btn-success">' . __('Continue') . '</a>'
+					. '<input type="submit" class="btn btn-large btn-success" value="' . __('Continue') . '"/>'
+					. '</form>'
 					;
 				}
 
@@ -110,6 +126,8 @@ if ( isset( $_POST['s'] ) ) {
 			|
 			*/
 			case 'authsave':
+				Sentinel::setAdmin( $_POST['u'] , $_POST['p'] );
+				$return[ 'notice' ] = Sentinel::save();
 				break;
 
 
