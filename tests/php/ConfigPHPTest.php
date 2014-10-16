@@ -47,7 +47,10 @@ class ConfigPHPTest extends TestCase {
 
     public function test_Json_Config_With_Files()
     {
-        copy( PHPMOCKUP . '/config_3files.user.php' , PSKBASE . '/' . CONFIG_FILE_NAME );
+        $source      = realpath( PHPMOCKUP . '/config_3files.user.php' );
+        $destination = realpath( PSKBASE . '/' . CONFIG_FILE_NAME );
+
+        copy( $source , $destination );
 
         $this->assertStringEndsWith( CONFIG_FILE_NAME , get_config_file_path() );
         $this->assertEquals( CONFIG_FILE_NAME , get_config_file_name() );
@@ -56,17 +59,17 @@ class ConfigPHPTest extends TestCase {
 
 
 echo "\n========================================\n";
-print_r( PHPMOCKUP . '/config_3files.user.php' );
+print_r( $source );
 echo "\n========================================\n";
-passthru( 'ls -al ' . PHPMOCKUP . '/config_3files.user.php' );
+passthru( 'ls -al ' . $source );
 echo "\n========================================\n";
-passthru( 'cat ' . PHPMOCKUP . '/config_3files.user.php' );
+passthru( 'cat ' . $source );
 echo "\n========================================\n";
-print_r( PSKBASE . '/' . CONFIG_FILE_NAME );
+print_r( $destination );
 echo "\n========================================\n";
-passthru( 'ls -al ' . PSKBASE . '/' . CONFIG_FILE_NAME );
+passthru( 'ls -al ' . $destination );
 echo "\n========================================\n";
-passthru( 'cat ' . PSKBASE . '/' . CONFIG_FILE_NAME );
+passthru( 'cat ' . $destination );
 
 
 $path = get_config_file_path();
