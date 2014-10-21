@@ -299,11 +299,14 @@ foreach ( get_max_options( $files ) as $r ) {
 					</li>
 
 <?php if ( ! is_null( $current_user ) ) { ?>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
-						<ul class="dropdown-menu">
 
-							<li><a href="1" title="<?php _h('Click here to manager users'); ?>"><span class="glyphicon glyphicon-lock"></span> <?php echo __('Manage users'); ?></a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo sprintf( __('Logged in as %s') , $current_user ); ?>">
+							<span class="glyphicon glyphicon-user"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="1" title="<?php _h('Click here to manager users'); ?>"><span class="glyphicon glyphicon-flash"></span> <?php echo __('Manage users'); ?></a></li>
+							<li><a href="1" title="<?php _h('Click here to change your password'); ?>"><span class="glyphicon glyphicon-lock"></span> <?php echo __('Change password'); ?></a></li>
 							<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span> <?php echo __('Sign out'); ?></a></li>
 						</ul>
 					</li>
@@ -358,16 +361,13 @@ foreach ( get_max_options( $files ) as $r ) {
 	numeral.language('<?php echo $localejs;?>');
 	</script>
 
-<?php
-if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
+<?php if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
 	<script>
 		var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];
 		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 			g.src='//www.google-analytics.com/ga.js';
 			s.parentNode.insertBefore(g,s)}(document,'script'));
 	</script>
-<?php
-}
-?>
+<?php } ?>
 </body>
 </html>

@@ -306,7 +306,7 @@ class Sentinel
                 'roles' => array('user'),
                 'pwd'   => '',
                 'logs'  => array()
-                );
+            );
         }
 
         if ( ! is_null( $password ) ) $user['pwd']   = self::getPasswordHash( $username , $password );
@@ -564,14 +564,13 @@ class Sentinel
      */
     public static function destroy()
     {
-        if ( self::isAuthSet() ) {
-            self::sessionDestroy();
+        self::sessionDestroy();
 
+        if ( self::isAuthSet() ) {
             return unlink( self::$authFile );
         }
 
         return true;
-
     }
 }
 

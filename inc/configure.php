@@ -39,6 +39,10 @@ if ( isset( $_POST['s'] ) ) {
 			|
 			*/
 			case 'auth':
+
+				// Destroy a previous session
+				Sentinel::destroy();
+
 				$return[ 'notice' ] =
 					'<h2>' . __( 'Setup admin account') . '</h2>'
 					. __('You can use <em>Pimp my Log</em> without authentication but you will not be able to add this feature later from the web interface. You will need to do it manually.') . '<br/>'
@@ -81,7 +85,7 @@ if ( isset( $_POST['s'] ) ) {
 					'<h2>' . __( 'Setup admin account') . '</h2>'
 					. __( 'Please choose a username and a password for the admin account.')
 					. '<br/><br/>'
-					. '<form id="authsave">'
+					. '<form id="authsave" autocomplete="off">'
 					. '<div class="container">'
 					. 	'<div class="row">'
 					. 		'<div class="input-group col-sm-6 col-md-4" id="usernamegroup" data-toggle="tooltip" data-placement="top" title="' . htmlentities( __( 'Username is required' ) ) . '">
@@ -94,6 +98,13 @@ if ( isset( $_POST['s'] ) ) {
 					. 		'<div class="input-group col-sm-6 col-md-4" id="passwordgroup" data-toggle="tooltip" data-placement="bottom" title="' . htmlentities( __( 'Password must contain at least 6 chars' ) ) . '">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 								<input type="password" id="password" class="form-control" placeholder="' . __('Password') . '">
+							</div>'
+					. 	'<br/>'
+					. 	'</div>'
+					. 	'<div class="row">'
+					. 		'<div class="input-group col-sm-6 col-md-4" id="password2group" data-toggle="tooltip" data-placement="bottom" title="' . htmlentities( __( 'Password is not the same' ) ) . '">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+								<input type="password" id="password2" class="form-control" placeholder="' . __('Password Confirmation') . '">
 							</div>'
 					. 	'</div>'
 					. '</div>'

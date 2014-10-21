@@ -140,7 +140,9 @@ $lemma = array(
 		<br/>
 
 <?php
-if ( ! file_exists( 'test.REMOVE_UPPERCASE.php') ) {
+$access_file = 'test.PLEASE_REMOVE_ME.access_from_' . get_client_ip() . '_only.php';
+
+if ( ! file_exists( $access_file ) ) {
 	echo '<div class="row">';
 	echo 	'<div class="col-xs-12"><div class="alert alert-danger">';
 	echo 			__( 'This page is protected for security reasons.');
@@ -148,7 +150,7 @@ if ( ! file_exists( 'test.REMOVE_UPPERCASE.php') ) {
 	echo 		__('To grant access, please create this temporary file on your server:');
 	echo 		'<br/><br/>';
 	echo 	'</div>';
-	echo 	'<div class="col-md-8"><pre class="clipboard2content">' . 'touch \'' . dirname( __FILE__ ) . '/test.REMOVE_UPPERCASE.php\'</pre></div>';
+	echo 	'<div class="col-md-8"><pre class="clipboard2content">' . 'touch \'' . dirname( __FILE__ ) . '/' . $access_file . '\'</pre></div>';
 	echo 	'<div class="col-md-4"><a class="btn btn-success clipboard2">' . __('Copy to clipboard') . '</a></div>';
 	echo 	'<div class="col-xs-12">';
 	echo 		'<br/>';
@@ -161,100 +163,107 @@ if ( ! file_exists( 'test.REMOVE_UPPERCASE.php') ) {
 }
 else {
 ?>
-		<div class="panel-group" id="accordion">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-							<?php _e('Regex tester');?>
-						</a>
-					</h4>
-				</div>
-				<div id="collapseTwo" class="panel-collapse collapse in">
-					<div class="panel-body">
-						<form class="form-horizontal" role="form" id="regextest">
-							<div class="form-group" id="GPinputLog">
-								<label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label>
-								<div class="col-sm-10">
-									<textarea class="form-control test" id="inputLog" placeholder="Log"><?php
-									echo '[27-11-2013:23:20:40 +0100] This is an error
+
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+		  <li class="active"><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li>
+		  <li><a href="#resamplestab" role="tab" data-toggle="tab"><?php _e('Regex samples');?></a></li>
+		  <li><a href="#configurationtab" role="tab" data-toggle="tab"><?php _e('Configuration');?></a></li>
+		  <li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Change account password');?></a></li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+
+			<!--========================================================================
+			|
+			|
+			|
+			======================================================================== -->
+			<div class="tab-pane active" id="retestertab">
+
+				<div class="panel-body">
+					<form class="form-horizontal" role="form" id="regextest">
+						<div class="form-group" id="GPinputLog">
+							<label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label>
+							<div class="col-sm-10">
+								<textarea class="form-control test" id="inputLog" placeholder="Log"><?php
+								echo '[27-11-2013:23:20:40 +0100] This is an error
 on several lines
 [27-11-2013:23:20:41 +0100] Single line is cool too';
-									?></textarea>
-								</div>
+								?></textarea>
 							</div>
-							<div class="form-group" id="GPinputRegEx">
-								<label for="inputRegEx" class="col-sm-2 control-label"><?php _e('RegEx');?></label>
-								<div class="col-sm-10">
-									<textarea class="form-control test" id="inputRegEx" placeholder="RegEx"><?php
-										echo '|^\[(.*)-(.*)-(.*):(.*):(.*):(.*) .*\] (.*)$|U';
-									?></textarea>
-								</div>
+						</div>
+						<div class="form-group" id="GPinputRegEx">
+							<label for="inputRegEx" class="col-sm-2 control-label"><?php _e('RegEx');?></label>
+							<div class="col-sm-10">
+								<textarea class="form-control test" id="inputRegEx" placeholder="RegEx"><?php
+									echo '|^\[(.*)-(.*)-(.*):(.*):(.*):(.*) .*\] (.*)$|U';
+								?></textarea>
 							</div>
-							<div class="form-group" id="GPinputMatch">
-								<label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?><br/><small><?php _e('must be json encoded');?></small></label>
-								<div class="col-sm-10">
-									<textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
-									$match = array(
-										'Date'  => array(
-											'Y' => 3,
-											'm' => 2,
-											'd' => 1,
-											'H' => 4,
-											'i' => 5,
-											's' => 6,
-										 ),
-										'Error' => 7,
-									);
-									$match = array(
-										'Date'  => array( 3 , '/' , 2 , '/' , 1 , ' ' , 4 , ':' , 5, ':' , 6 ),
-										'Error' => 7,
-									);
-									echo json_indent( json_encode($match))
-									?></textarea>
-								</div>
+						</div>
+						<div class="form-group" id="GPinputMatch">
+							<label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?><br/><small><?php _e('must be json encoded');?></small></label>
+							<div class="col-sm-10">
+								<textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
+								$match = array(
+									'Date'  => array(
+										'Y' => 3,
+										'm' => 2,
+										'd' => 1,
+										'H' => 4,
+										'i' => 5,
+										's' => 6,
+									 ),
+									'Error' => 7,
+								);
+								$match = array(
+									'Date'  => array( 3 , '/' , 2 , '/' , 1 , ' ' , 4 , ':' , 5, ':' , 6 ),
+									'Error' => 7,
+								);
+								echo json_indent( json_encode($match))
+								?></textarea>
 							</div>
-							<div class="form-group" id="GPinputTypes">
-								<label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?><br/><small><?php _e('must be json encoded');?></small></label>
-								<div class="col-sm-10">
-									<textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
-									$types = array(
-										'Date'  => 'date:d/m/Y H:i:s /100',
-										'Error' => 'txt',
-									);
-									echo json_indent( json_encode($types))
-									?></textarea>
-								</div>
+						</div>
+						<div class="form-group" id="GPinputTypes">
+							<label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?><br/><small><?php _e('must be json encoded');?></small></label>
+							<div class="col-sm-10">
+								<textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
+								$types = array(
+									'Date'  => 'date:d/m/Y H:i:s /100',
+									'Error' => 'txt',
+								);
+								echo json_indent( json_encode($types))
+								?></textarea>
 							</div>
-							<div class="form-group" id="GPinputMultiline">
-								<label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label>
-								<div class="col-sm-10">
-									<input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"/>
-								</div>
+						</div>
+						<div class="form-group" id="GPinputMultiline">
+							<label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label>
+							<div class="col-sm-10">
+								<input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"/>
 							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<button type="submit" class="btn btn-primary"><?php _e('Test');?></button>
-									&nbsp;
-									<a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a>
-								</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-primary"><?php _e('Test');?></button>
+								&nbsp;
+								<a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a>
 							</div>
-							<div id="regexresult"></div>
-						</form>
-					</div>
+						</div>
+						<div id="regexresult"></div>
+					</form>
 				</div>
+
 			</div>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-							<?php _e('Regex samples');?>
-						</a>
-					</h4>
-				</div>
-				<div id="collapseThree" class="panel-collapse collapse">
-					<div class="panel-body">
+			<!--========================================================================
+			|
+			|
+			|
+			======================================================================== -->
+			<div class="tab-pane" id="resamplestab">
+
+				<div class="panel-body">
 <?php
 $type  = 'Error Apache 2.2 with referer';
 $log   = '[Wed Nov 27 09:30:11 2013] [error] [client 127.0.0.1] PHP   1. {main}() /Users/potsky/Private/Work/GitHub/PHPApacheLogViewer/inc/get_logs.php:0, referer: http://localhost/~potsky/PHPApacheLogViewer/';
@@ -346,153 +355,201 @@ $type  = 'Access Apache 2.2 dummy SSL connection';
 $log   = '::1 - - [27/Nov/2013:12:02:08 +0100] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.2.25 (Unix) mod_ssl/2.2.26 OpenSSL/1.0.1e DAV/2 PHP/5.3.27 (internal dummy connection)"';
 echo test( $type , $regex , $match , $types , $log );
 ?>
-					</div>
 				</div>
 			</div>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-							Configuration
-						</a>
-					</h4>
-				</div>
+			<!--========================================================================
+			|
+			|
+			|
+			======================================================================== -->
+			<div class="tab-pane" id="configurationtab">
 
-				<div id="collapseOne" class="panel-collapse collapse">
-					<div class="panel-body">
+				<div class="panel-body">
 
-						<div class="panel-group" id="accordion2">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">
-											Code <code>config.user.json</code>
-										</a>
-									</h4>
-								</div>
-								<div id="collapseOne2" class="panel-collapse collapse">
-									<div class="panel-body">
-										<pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre>
-									</div>
+					<div class="panel-group" id="accordion2">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">
+										Code <code>config.user.json</code>
+									</a>
+								</h4>
+							</div>
+							<div id="collapseOne2" class="panel-collapse collapse">
+								<div class="panel-body">
+									<pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre>
 								</div>
 							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">
-											Stat <code>config.user.json</code>
-										</a>
-									</h4>
-								</div>
-								<div id="collapseTwo2" class="panel-collapse collapse">
-									<div class="panel-body">
-										<pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre>
-									</div>
-								</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">
+										Stat <code>config.user.json</code>
+									</a>
+								</h4>
 							</div>
-
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2">
-											Generated files with includes
-										</a>
-									</h4>
-								</div>
-								<div id="collapseFive2" class="panel-collapse collapse">
-									<div class="panel-body">
-										<pre><?php
-											list( $badges , $files ) = config_load();
-											echo json_encode( $files , JSON_PRETTY_PRINT );
-										?></pre>
-									</div>
-								</div>
-							</div>
-
-
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2">
-											<?php _e('Rights');?>
-										</a>
-									</h4>
-								</div>
-								<div id="collapseFour2" class="panel-collapse collapse">
-									<div class="panel-body">
-										<pre><?php
-										if (function_exists('posix_getpwuid')) {
-											var_dump( @posix_getpwuid(posix_geteuid()) );
-										} else {
-											_e('No POSIX functions...');
-										}
-										?></pre>
-										<?php
-											$paths = array(
-												'config' => '../config.user.json',
-											);
-											if ( is_array( @$files ) ) {
-												foreach ( $files as $fileid => $file ) {
-													$paths[ '--> ' . $fileid ] = @$file['path'];
-													$dir_name = realpath( $file['path'] );
-													if ( file_exists( $dir_name ) ) {
-														while ( $dir_name != dirname( $dir_name ) ) {
- 															$dir_name = dirname( $dir_name );
-															$paths[ $dir_name ] = $dir_name;
-														}
-													}
-												}
-											}
-
-											echo '<div class="table-responsive"><table>';
-											echo '<thead><tr><th>'.__('Read').'</th><th>'.__('Write').'</th><th>ID</th><th>'.__('Path').'</th><th>'.__('Real path').'</th></tr></thead>';
-											echo '<tbody>';
-											foreach ( $paths as $id => $file ) {
-												echo '<tr>
-												<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
-												<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
-												<td>'.$id.'</td>
-												<td><code>'.$file.'</code></td>
-												<td><code>'.realpath($file).'</code></td>
-												</tr>';
-											}
-											echo '</tbody>';
-											echo '</table></div>';
-
-										?>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2">
-											PHPInfo
-										</a>
-									</h4>
-								</div>
-								<div id="collapseThree2" class="panel-collapse collapse">
-									<div class="panel-body">
-										<?php
-										ob_start();
-										phpinfo();
-										preg_match ('%<style type="text/css">(.*?)</style>.*?(<body>.*</body>)%s', ob_get_clean(), $matches);
-										echo $matches[2];
-										?>
-									</div>
+							<div id="collapseTwo2" class="panel-collapse collapse">
+								<div class="panel-body">
+									<pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre>
 								</div>
 							</div>
 						</div>
 
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2">
+										Generated files with includes
+									</a>
+								</h4>
+							</div>
+							<div id="collapseFive2" class="panel-collapse collapse">
+								<div class="panel-body">
+									<pre><?php
+										list( $badges , $files ) = config_load();
+										echo json_encode( $files , JSON_PRETTY_PRINT );
+									?></pre>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2">
+										<?php _e('Rights');?>
+									</a>
+								</h4>
+							</div>
+							<div id="collapseFour2" class="panel-collapse collapse">
+								<div class="panel-body">
+									<pre><?php
+									if (function_exists('posix_getpwuid')) {
+										var_dump( @posix_getpwuid(posix_geteuid()) );
+									} else {
+										_e('No POSIX functions...');
+									}
+									?></pre>
+									<?php
+										$paths = array(
+											'config' => '../config.user.json',
+										);
+										if ( is_array( @$files ) ) {
+											foreach ( $files as $fileid => $file ) {
+												$paths[ '--> ' . $fileid ] = @$file['path'];
+												$dir_name = realpath( $file['path'] );
+												if ( file_exists( $dir_name ) ) {
+													while ( $dir_name != dirname( $dir_name ) ) {
+															$dir_name = dirname( $dir_name );
+														$paths[ $dir_name ] = $dir_name;
+													}
+												}
+											}
+										}
+
+										echo '<div class="table-responsive"><table>';
+										echo '<thead><tr><th>'.__('Read').'</th><th>'.__('Write').'</th><th>ID</th><th>'.__('Path').'</th><th>'.__('Real path').'</th></tr></thead>';
+										echo '<tbody>';
+										foreach ( $paths as $id => $file ) {
+											echo '<tr>
+											<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
+											<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
+											<td>'.$id.'</td>
+											<td><code>'.$file.'</code></td>
+											<td><code>'.realpath($file).'</code></td>
+											</tr>';
+										}
+										echo '</tbody>';
+										echo '</table></div>';
+
+									?>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2">
+										PHPInfo
+									</a>
+								</h4>
+							</div>
+							<div id="collapseThree2" class="panel-collapse collapse">
+								<div class="panel-body">
+									<?php
+									ob_start();
+									phpinfo();
+									preg_match ('%<style type="text/css">(.*?)</style>.*?(<body>.*</body>)%s', ob_get_clean(), $matches);
+									echo $matches[2];
+									?>
+								</div>
+							</div>
+						</div>
 					</div>
+
 				</div>
+
 			</div>
+
+			<!--========================================================================
+			|
+			|
+			|
+			======================================================================== -->
+			<div class="tab-pane" id="passwordtab">
+				<?php if ( Sentinel::isAuthSet() ) { ?>
+
+					<h2><?php _e( 'Please fill an existing username and a new password') ?></h2>
+	 				<br/><br/>
+	 				<?php
+						if ( isset( $_POST['username'] ) ) {
+							if ( Sentinel::userExists( $_POST['username'] ) ) {
+								Sentinel::setUser( $_POST['username'] , $_POST['password'] );
+								Sentinel::save();
+
+								echo '<div class="alert alert-success" role="alert">' . sprintf( __('Password has been updated for user %s!') , '<code>' . $_POST['username'] . '</code>' ) . '</div>';
+							} else {
+								echo '<div class="alert alert-danger" role="alert">' . sprintf( __('User %s does not exist!') , '<code>' . $_POST['username'] . '</code>' ) . '</div>';
+							}
+						}
+	 				?>
+					<form id="authsave" autocomplete="off" method="POST" action="?#passwordtab">
+						<div class="container">
+		 					<div class="row">
+		 						<div class="input-group col-sm-6 col-md-4" id="usernamegroup" data-toggle="tooltip" data-placement="top" title="<?php _h( 'Username is required' ); ?>">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+									<input type="text" id="username" name="username" class="form-control" placeholder="<?php _h('Username') ?>" autofocus="autofocus"/>
+								</div>
+		 					<br/>
+		 					</div>
+		 					<div class="row">
+		 						<div class="input-group col-sm-6 col-md-4" id="passwordgroup" data-toggle="tooltip" data-placement="bottom" title="<?php _h( 'Password must contain at least 6 chars' ); ?>">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+									<input type="password" id="password" name="password" class="form-control" placeholder="<?php _h('Password') ?>"/>
+								</div>
+		 					<br/>
+		 					</div>
+		 					<div class="row">
+		 						<div class="input-group col-sm-6 col-md-4" id="password2group" data-toggle="tooltip" data-placement="bottom" title="<?php _h( 'Password is not the same' ); ?>">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+									<input type="password" id="password2" name="password2" class="form-control" placeholder="<?php _h('Password Confirmation') ?>"/>
+								</div>
+		 					</div>
+		 				</div>
+		 				<br/><br/>
+		 				<input type="submit" class="btn btn-large btn-success" value="<?php _h('Continue') ?>"/>
+	 				</form>
+	 			<?php } else { ?>
+					<div class="alert alert-info" role="alert"><?php _e('This feature is only available when authentication is enabled.'); ?></div>
+	 			<?php } ?>
+			</div>
+
 		</div>
 
-<?php
-}
-?>
+<?php } ?>
 
 		<hr>
 		<footer class="text-muted"><small><?php echo FOOTER;?></small></footer>

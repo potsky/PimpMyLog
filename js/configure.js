@@ -364,11 +364,13 @@ var process_authentication_yes = function() {
 			progressbar_set( 15 );
 			$( '#user' ).html( data.authform );
 			$( '#authsave' ).submit(function( event ) {
-				var username = $('#username').val();
-				var password = $('#password').val();
-				var go       = true;
+				var username  = $('#username').val();
+				var password  = $('#password').val();
+				var password2 = $('#password2').val();
+				var go        = true;
 				$('#usernamegroup').removeClass('has-error').removeClass('has-success').tooltip('hide');
 				$('#passwordgroup').removeClass('has-error').removeClass('has-success').tooltip('hide');
+				$('#password2group').removeClass('has-error').removeClass('has-success').tooltip('hide');
 				if ( username.length === 0 ) {
 					$('#usernamegroup').addClass('has-error').tooltip('show');
 					go = false;
@@ -377,10 +379,15 @@ var process_authentication_yes = function() {
 					$('#passwordgroup').addClass('has-error').tooltip('show');
 					go = false;
 				}
+				if ( password2 !== password ) {
+					$('#password2group').addClass('has-error').tooltip('show');
+					go = false;
+				}
 				if ( go === true ) {
 					process_authentication_save( username , password );
 				}
   				event.preventDefault();
+  				return false;
 			});
 		}
 	});

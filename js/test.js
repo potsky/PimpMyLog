@@ -92,6 +92,39 @@ $(function() {
 				});
 			}
 		});
-	});
+
+		$( '#authsave' ).submit(function( event ) {
+			var username  = $('#username').val();
+			var password  = $('#password').val();
+			var password2 = $('#password2').val();
+			var go        = true;
+
+			$('#usernamegroup').removeClass('has-error').removeClass('has-success').tooltip('hide');
+			$('#passwordgroup').removeClass('has-error').removeClass('has-success').tooltip('hide');
+			$('#password2group').removeClass('has-error').removeClass('has-success').tooltip('hide');
+
+			if ( username.length === 0 ) {
+				$('#usernamegroup').addClass('has-error').tooltip('show');
+				go = false;
+			}
+			if ( password.length < 6 ) {
+				$('#passwordgroup').addClass('has-error').tooltip('show');
+				go = false;
+			}
+			if ( password2 !== password ) {
+				$('#password2group').addClass('has-error').tooltip('show');
+				go = false;
+			}
+			if ( go === true ) {
+				return;
+			}
+			event.preventDefault();
+			return false;
+		});
+
+		$(function () {
+			var activeTab = $('[href=' + location.hash + ']');
+			activeTab && activeTab.tab('show');});
+		});
 
 });

@@ -57,29 +57,43 @@ load_default_constants();
 			</div>
 
 			<h2><?php echo __("Please sign in");?></h2>
-
+			<br/>
 			<form method="POST" action="?">
 				<div class="container">
 					<div class="row">
 						<div class="input-group col-sm-6 col-md-4">
 							<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-							<input type="text" name="username" value="<?php echo ( strlen( "" . @$_POST['username'] ) > 0 ) ? htmlentities( $_POST['username'] ) : ''; ?>" class="form-control" placeholder="<?php echo  __('Username') ; ?>" <?php if ( strlen( "" . @$_POST['username'] ) === 0 ) echo 'autofocus="autofocus"'; ?>/>
+							<?php
+								$u  = ( strlen( "" . @$_POST['username'] ) > 0 ) ? htmlentities( $_POST['username'] , ENT_QUOTES , 'UTF-8' ) : '';
+								if ( strlen( "" . @$_POST['username'] ) === 0 ) {
+									echo '<input type="text" name="username" value="' . htmlentities( $u , ENT_QUOTES , 'UTF-8' ) .'" class="form-control" placeholder="' . __('Username') . '" autofocus="autofocus"/>';
+								} else {
+									echo '<input type="text" name="username" value="' . htmlentities( $u , ENT_QUOTES , 'UTF-8' ) .'" class="form-control" placeholder="' . __('Username') . '"/>';
+								}
+							?>
 						</div>
 						<br/>
 					</div>
 					<div class="row">
 						<div class="input-group col-sm-6 col-md-4">
 							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-							<input type="password" name="password" class="form-control" placeholder="<?php echo  __('Password'); ?>" <?php if ( strlen( "". @$_POST['username'] ) > 0 ) echo 'autofocus="autofocus"'; ?>/>
+							<?php
+								if ( strlen( "" . @$_POST['username'] ) === 0 ) {
+									echo '<input type="password" name="password" class="form-control" placeholder="' . __('Password') . '"/>';
+								} else {
+									echo '<input type="password" name="password" class="form-control" placeholder="' . __('Password') . '" autofocus="autofocus"/>';
+								}
+							?>
 						</div>
 					</div>
 				</div>
 				<br/><br/>
-				<input type="submit" class="btn btn-large btn-success" value="<?php echo __('Continue'); ?>"/>
+				<input type="submit" class="btn btn-primary" value="<?php _e('Sign in'); ?>"/>
 				<input type="hidden" name="csrf_token" value="<?php echo csrf_get(); ?>" />
-				<input type="hidden" name="attempt" value="<?php echo htmlentities( $attempt ); ?>" />
+				<input type="hidden" name="attempt" value="<?php echo htmlentities( $attempt , ENT_QUOTES , 'UTF-8' ); ?>" />
 			</form>
-
+			<br/>
+			<a href="<?php echo FORGOTTEN_YOUR_PASSWORD_URL;?>"><?php _e('Forgotten your password?') ?></a>
 		</div>
 	</center></div>
 
@@ -88,5 +102,14 @@ load_default_constants();
 	</div>
 
 	<script src="js/pml.min.js"></script>
+	<script src="js/login.min.js"></script>
+<?php if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
+	<script>
+		var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src='//www.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
+<?php } ?>
 </body>
 </html>

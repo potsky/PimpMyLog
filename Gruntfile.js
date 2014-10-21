@@ -182,6 +182,10 @@ module.exports = function(grunt) {
 					dest: beta
 				}]
 			},
+
+
+
+
 			prod: {
 				files: [{
 					expand: true,
@@ -195,6 +199,37 @@ module.exports = function(grunt) {
 					dest: '_build/'
 				}]
 			},
+			prodphp: {
+				files: [{
+					expand: true,
+					src: [
+						'inc/*.php',
+						'cfg/*.php',
+						'*.php'
+					],
+					dest: '_build/'
+				}],
+				options: {
+					processContent: function ( content , srcpath ) {
+						return "<?php\n" + licence + "\n?>\n" + content;
+					}
+				}
+			},
+			prodphptmp: {
+				expand: true,
+				cwd: '_build/',
+				src: [
+					'index.php',
+					'inc/*.php'
+				],
+				dest: '_tmp/',
+				filter: 'isFile'
+			},
+
+
+
+
+
 			prodcss: {
 				files: [{
 					expand: true,
@@ -217,22 +252,6 @@ module.exports = function(grunt) {
 					dest    : '_build/fonts/'
 				}]
 			},
-			prodphp: {
-				files: [{
-					expand: true,
-					src: [
-						'inc/*.php',
-						'cfg/*.php',
-						'*.php'
-					],
-					dest: '_build/'
-				}],
-				options: {
-					processContent: function ( content , srcpath ) {
-						return "<?php\n" + licence + "\n?>\n" + content;
-					}
-				}
-			},
 			prodhook: {
 				files: [{
 					expand: true,
@@ -253,16 +272,6 @@ module.exports = function(grunt) {
 					src: ['bower_components/jquery-zclip/ZeroClipboard.swf'],
 					dest: '_build/js/'
 				}]
-			},
-			prodphptmp: {
-				expand: true,
-				cwd: '_build/',
-				src: [
-					'index.php',
-					'inc/*.php'
-				],
-				dest: '_tmp/',
-				filter: 'isFile'
 			},
 		},
 
@@ -477,6 +486,7 @@ module.exports = function(grunt) {
 
 			prod: {
 				files: {
+					'_build/js/login.min.js'     : ['js/login.js'],
 					'_build/js/main.min.js'      : ['js/main.js'],
 					'_build/js/test.min.js'      : ['js/test.js'],
 					'_build/js/configure.min.js' : ['js/configure.js'],
@@ -499,12 +509,14 @@ module.exports = function(grunt) {
 
 			dev: {
 				files: {
+					'_site/js/login.min.js'     : ['js/login.js'],
 					'_site/js/main.min.js'      : ['js/main.js'],
 					'_site/js/test.min.js'      : ['js/test.js'],
 					'_site/js/configure.min.js' : ['js/configure.js'],
 				},
 				options : {
 					mangle   : false,
+					compress : false,
 					beautify : true
 				}
 			}
@@ -653,12 +665,13 @@ module.exports = function(grunt) {
 		grunt.task.run([
 			'clean:dev',
 
+			'replace:dev',
+
 			'copy:devfonts',
 			'copy:devswf',
 			'copy:devhook',
-			'copy:dev',
 
-			'replace:dev',
+			'copy:dev',
 
 			'copy:devcss',
 			'concat:css',
@@ -677,13 +690,13 @@ module.exports = function(grunt) {
 		grunt.task.run([
 			'clean:prod',
 
+			'replace:prod',
+
 			'copy:prodfonts',
 			'copy:prodswf',
 			'copy:prodhook',
+
 			'copy:prod',
-
-			'replace:prod',
-
 			'copy:prodphp',
 			'copy:prodphptmp',
 			'htmlmin',

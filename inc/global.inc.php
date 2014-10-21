@@ -44,6 +44,7 @@ if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
 define( 'YEAR'                               , @date( "Y" ) );
 define( 'PHP_VERSION_REQUIRED'               , '5.2' );
 define( 'HELP_URL'                           , 'http://pimpmylog.com' );
+define( 'FORGOTTEN_YOUR_PASSWORD_URL'        , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
 define( 'CONFIG_FILE_MODE'                   , 0444 );
 define( 'AUTH_CONFIGURATION_FILE'            , 'config.auth.user.php' );
 define( 'CONFIG_FILE_NAME'                   , 'config.user.php' );
@@ -766,6 +767,51 @@ function mt_rand_str($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890_-ABCDEFGHIJK
     for ($s = '', $cl = strlen($c)-1, $i = 0; $i < $l; $s .= $c[mt_rand(0, $cl)], ++$i);
 
     return $s;
+}
+
+
+/**
+ * Get the local ip address of the current client according to proxy and more...
+ *
+ * @return  string  an ip address
+ */
+function get_client_ip() {
+    $ip = '';
+    if ( isset( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }
+    else if ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else if ( isset( $_SERVER['HTTP_X_FORWARDED'] ) ) {
+        $ip = $_SERVER['HTTP_X_FORWARDED'];
+    }
+    else if ( isset( $_SERVER['HTTP_FORWARDED_FOR'] ) ) {
+        $ip = $_SERVER['HTTP_FORWARDED_FOR'];
+    }
+    else if ( isset( $_SERVER['HTTP_FORWARDED'] ) ) {
+        $ip = $_SERVER['HTTP_FORWARDED'];
+    }
+    else if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+
+
+/**
+ * Tell if the provided IP address is local or not
+ *
+ * @param   string   $ip  an ipv4 address
+ *
+ * @return  boolean       true if address is local
+ */
+function is_not_local_ip( $ip ) {
+    $ip = trim( $ip );
+    if ( $ip === '127.0.0.1' ) {
+        return false;
+    }
+    return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE);
 }
 
 /*
