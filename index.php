@@ -137,19 +137,19 @@ $csrf = csrf_get();
 	<link rel="stylesheet" href="css/config.inc.css">
 	<?php } ?>
 	<script>
-		var logs_refresh_default       = <?php echo (int)LOGS_REFRESH;?>,
-			logs_max_default           = <?php echo (int)LOGS_MAX;?>,
-			files                      = <?php echo json_encode($files);?>,
-			title_file                 = "<?php echo TITLE_FILE;?>",
-			notification_title         = "<?php echo NOTIFICATION_TITLE;?>",
-			badges                     = <?php echo json_encode($badges);?>,
-			lemma                      = <?php echo json_encode($lemma);?>,
-			geoip_url                  = "<?php echo GEOIP_URL;?>",
-			pull_to_refresh            = <?php echo ( PULL_TO_REFRESH === true ) ? 'true' : 'false';?>,
-			file_selector              = "<?php echo FILE_SELECTOR;?>",
-			csrf_token                 = "<?php echo $csrf;?>",
-			querystring                = "<?php echo $_SERVER['QUERY_STRING'];?>",
-			notification_default       = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;
+		var logs_refresh_default = <?php echo (int)LOGS_REFRESH;?>,
+			logs_max_default     = <?php echo (int)LOGS_MAX;?>,
+			files                = <?php echo json_encode($files);?>,
+			title_file           = "<?php echo TITLE_FILE;?>",
+			notification_title   = "<?php echo NOTIFICATION_TITLE;?>",
+			badges               = <?php echo json_encode($badges);?>,
+			lemma                = <?php echo json_encode($lemma);?>,
+			geoip_url            = "<?php echo GEOIP_URL;?>",
+			pull_to_refresh      = <?php echo ( PULL_TO_REFRESH === true ) ? 'true' : 'false';?>,
+			file_selector        = "<?php echo FILE_SELECTOR;?>",
+			csrf_token           = "<?php echo $csrf;?>",
+			querystring          = "<?php echo $_SERVER['QUERY_STRING'];?>",
+			notification_default = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;
 	</script>
 </head>
 <body>
@@ -171,6 +171,7 @@ $csrf = csrf_get();
 					<a href="?"><?php echo NAV_TITLE;?></a>
 				</div>
 			</div>
+
 			<div class="navbar-collapse collapse">
 <?php
 if ( FILE_SELECTOR == 'bs' ) {
@@ -236,7 +237,7 @@ foreach ( get_max_options( $files ) as $r ) {
 						</select>
 					</div>&nbsp;
 
-					<button style="display:none;" type="button" id="notification" class="btn btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>">
+					<button style="display:none;" type="button" id="notification" class="btn-menu btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>">
 					  <span class="glyphicon glyphicon-bell"></span>
 					</button>
 
@@ -260,13 +261,15 @@ foreach ( get_max_options( $files ) as $r ) {
 							<li>
 								<a href="#" id="cog-wide" class="cog btn btn-default" data-cog="wideview" data-value="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? 'on' : 'off' ; ?>">
 									<span class="glyphicon glyphicon-fullscreen"></span>&nbsp;&nbsp;<?php _e('Wide view');?>&nbsp;
-									<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><?php _e('on')?></span>
-									<span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><?php _e('off')?></span>
+									<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><span class="label label-success"><?php _e('on')?></span></span>
+									<span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><span class="label label-danger"><?php _e('off')?></span></span>
 								</a>
 							</li>
 
 							<li>
-								<a href="#" id="clear-markers" class="btn btn-default" title="<?php _e('Click on a date field to mark a row');?>"><?php _e('Clear markers');?></a>
+								<a href="#" id="clear-markers" class="btn btn-default" title="<?php _e('Click on a date field to mark a row');?>">
+									<span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;<?php _e('Clear markers');?>
+								</a>
 							</li>
 
 							<li>
@@ -299,15 +302,14 @@ foreach ( get_max_options( $files ) as $r ) {
 					</li>
 
 <?php if ( ! is_null( $current_user ) ) { ?>
-
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo sprintf( __('Logged in as %s') , $current_user ); ?>">
 							<span class="glyphicon glyphicon-user"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="1" title="<?php _h('Click here to manager users'); ?>"><span class="glyphicon glyphicon-flash"></span> <?php echo __('Manage users'); ?></a></li>
-							<li><a href="1" title="<?php _h('Click here to change your password'); ?>"><span class="glyphicon glyphicon-lock"></span> <?php echo __('Change password'); ?></a></li>
-							<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span> <?php echo __('Sign out'); ?></a></li>
+							<li><a href="#" title="<?php _h('Click here to manager users'); ?>"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;<?php echo __('Manage users'); ?></a></li>
+							<li><a href="#" title="<?php _h('Click here to change your password'); ?>" data-toggle="modal" data-target="#cpModal"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<?php echo __('Change password'); ?></a></li>
+							<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;<?php echo __('Sign out'); ?></a></li>
 						</ul>
 					</li>
 <?php } ?>
@@ -354,6 +356,52 @@ foreach ( get_max_options( $files ) as $r ) {
 		<hr>
 		<footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer>
 	</div>
+
+<?php if ( ! is_null( $current_user ) ) { ?>
+	<div class="modal fade" id="cpModal" tabindex="-1" role="dialog" aria-labelledby="cpModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form id="changepassword" autocomplete="off">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
+						<h4 class="modal-title" id="cpModalLabel"><?php _e('Change password');?></h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-danger" role="alert" id="cpErr" style="display:none;">
+							<strong><?php _e('Form is invalid:'); ?></strong><ul id="cpErrUl"></ul>
+						</div>
+						<div class="container">
+							<div class="row">
+								<div class="input-group col-sm-6 col-md-4" id="password1group">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+									<input type="password" id="password1" name="password1" class="form-control" placeholder="<?php _h('Current password') ?>"/>
+								</div>
+								<br/>
+							</div>
+							<div class="row">
+								<div class="input-group col-sm-6 col-md-4" id="password2group">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+									<input type="password" id="password2" name="password2" class="form-control" placeholder="<?php _h('New password') ?>"/>
+								</div>
+								<br/>
+							</div>
+							<div class="row">
+								<div class="input-group col-sm-6 col-md-4" id="password3group">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+									<input type="password" id="password3" name="password3" class="form-control" placeholder="<?php _h('New password confirmation') ?>"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
+						<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save');?>" id="cpSave"/>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<?php } ?>
 
 	<script src="js/pml.min.js"></script>
 	<script src="js/main.min.js"></script>

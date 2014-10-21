@@ -88,7 +88,7 @@ load_default_constants();
 					</div>
 				</div>
 				<br/><br/>
-				<input type="submit" class="btn btn-primary" value="<?php _e('Sign in'); ?>"/>
+				<input type="submit" class="btn btn-primary" value="Pimp my Logs"/>
 				<input type="hidden" name="csrf_token" value="<?php echo csrf_get(); ?>" />
 				<input type="hidden" name="attempt" value="<?php echo htmlentities( $attempt , ENT_QUOTES , 'UTF-8' ); ?>" />
 			</form>

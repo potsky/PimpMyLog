@@ -7,6 +7,7 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 .cli_fake_session
+_cli_fake_session
 
 /.sass-cache
 /*.user.php

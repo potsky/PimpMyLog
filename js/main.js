@@ -227,10 +227,10 @@ var set_notification   = function( a ) {
 		a = notification;
 	}
 	if ( a === true ) {
-		$('#notification').removeClass('btn-warning btn-success btn-danger').addClass('active btn-' + notification_class );
+		$('#notification').removeClass('btn-warning btn-success btn-danger btn-default').addClass('active btn-' + notification_class );
 		notification = true;
 	} else {
-		$('#notification').removeClass('btn-warning btn-success btn-danger active');
+		$('#notification').removeClass('btn-warning btn-success btn-danger active').addClass('btn-default' );
 		notification = false;
 	}
 };
@@ -1026,8 +1026,8 @@ $(function() {
 				$( '#search' ).blur();
 				get_logs( false , true );
 			}
-			event.preventDefault();
-			return false;
+//			event.preventDefault();
+//			return false;
 		}
 	});
 

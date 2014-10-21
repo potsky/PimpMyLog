@@ -143,6 +143,7 @@ var action_configure_now = function( logs_list ) {
 		progressbar_set(100);
 		progressbar_color('success');
 		$( '#congratulations').show();
+		$( '#process').hide();
 		$( '#error').hide();
 		$( '#user').hide();
 		$( '#buttons').hide();
@@ -279,7 +280,7 @@ var action_select_logs = function( options ) {
 				pml_action( { s : 'check' , uf : user_files } , function( data ) {
 					// List with user inputs
 					if ( data.notice ) {
-						$( '.alert' ).removeClass( 'alert-success' ).addClass( 'alert-warning' ).html( data.notice );
+						$( '.alert' ).removeClass( 'alert-success' ).addClass( 'alert-danger' ).html( data.notice );
 					} else {
 						$( '#error' ).text('');
 						$( '.alert' ).remove();
@@ -308,7 +309,7 @@ var action_select_logs = function( options ) {
 				action_select_logs( { 'a' : softwares , 'b' : softlist , 'c' : softtotal } );
 			}
 			else {
-				$( '.alert' ).removeClass( 'alert-success' ).addClass( 'alert-warning' ).html( lemma.chooselog );
+				$( '.alert' ).removeClass( 'alert-success' ).addClass( 'alert-danger' ).html( lemma.chooselog );
 			}
 
 		});
@@ -509,7 +510,7 @@ var process_select_logs = function() {
 								$( '#error' ).text('');
 								action_select_logs( { 'a' : data.soft , 'b' : softlist , 'c' : softlist.length } );
 							} else {
-								$('<div class="alert alert-warning fade in">' + lemma.choosesoftware + '</div>').appendTo("#error");
+								$('<div class="alert alert-danger fade in">' + lemma.choosesoftware + '</div>').appendTo("#error");
 							}
 						});
 					}

@@ -487,7 +487,7 @@ module.exports = function(grunt) {
 			prod: {
 				files: {
 					'_build/js/login.min.js'     : ['js/login.js'],
-					'_build/js/main.min.js'      : ['js/main.js'],
+					'_build/js/main.min.js'      : ['js/main.js' , 'js/main_user.js'],
 					'_build/js/test.min.js'      : ['js/test.js'],
 					'_build/js/configure.min.js' : ['js/configure.js'],
 				},
@@ -510,7 +510,7 @@ module.exports = function(grunt) {
 			dev: {
 				files: {
 					'_site/js/login.min.js'     : ['js/login.js'],
-					'_site/js/main.min.js'      : ['js/main.js'],
+					'_site/js/main.min.js'      : ['js/main.js' , 'js/main_user.js'],
 					'_site/js/test.min.js'      : ['js/test.js'],
 					'_site/js/configure.min.js' : ['js/configure.js'],
 				},

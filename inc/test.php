@@ -151,7 +151,7 @@ if ( ! file_exists( $access_file ) ) {
 	echo 		'<br/><br/>';
 	echo 	'</div>';
 	echo 	'<div class="col-md-8"><pre class="clipboard2content">' . 'touch \'' . dirname( __FILE__ ) . '/' . $access_file . '\'</pre></div>';
-	echo 	'<div class="col-md-4"><a class="btn btn-success clipboard2">' . __('Copy to clipboard') . '</a></div>';
+	echo 	'<div class="col-md-4"><a class="btn btn-primary clipboard2">' . __('Copy to clipboard') . '</a></div>';
 	echo 	'<div class="col-xs-12">';
 	echo 		'<br/>';
 	echo 		__("Then reload this page.");
@@ -247,7 +247,7 @@ on several lines
 							<div class="col-sm-offset-2 col-sm-10">
 								<button type="submit" class="btn btn-primary"><?php _e('Test');?></button>
 								&nbsp;
-								<a class="btn btn-success clipboard"><?php _e('Copy to clipboard');?></a>
+								<a class="btn btn-primary clipboard"><?php _e('Copy to clipboard');?></a>
 							</div>
 						</div>
 						<div id="regexresult"></div>
@@ -543,6 +543,7 @@ echo test( $type , $regex , $match , $types , $log );
 		 				<input type="submit" class="btn btn-large btn-success" value="<?php _h('Continue') ?>"/>
 	 				</form>
 	 			<?php } else { ?>
+	 				<br/>
 					<div class="alert alert-info" role="alert"><?php _e('This feature is only available when authentication is enabled.'); ?></div>
 	 			<?php } ?>
 			</div>

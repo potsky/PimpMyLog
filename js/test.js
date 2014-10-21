@@ -123,8 +123,10 @@ $(function() {
 		});
 
 		$(function () {
-			var activeTab = $('[href=' + location.hash + ']');
-			activeTab && activeTab.tab('show');});
+			if ( location.hash ) {
+				var activeTab = $('[href=' + location.hash + ']');
+				activeTab && activeTab.tab('show');
+			}
 		});
-
+	});
 });

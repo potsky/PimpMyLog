@@ -45,15 +45,17 @@ if ( isset( $_POST['s'] ) ) {
 
 				$return[ 'notice' ] =
 					'<h2>' . __( 'Setup admin account') . '</h2>'
+					. '<br/>'
 					. __('You can use <em>Pimp my Log</em> without authentication but you will not be able to add this feature later from the web interface. You will need to do it manually.') . '<br/>'
 					. '<br/>'
 					. __('Setup an admin account will let you create other users later and give them access to certain log files only.') . '<br/>'
 					. '<br/>'
 					. __( 'Do you want to create an admin account now?') . '<br/>'
 					. '<br/>'
-					. '<a href="javascript:process_authentication_yes()" class="btn btn-large btn-success">' . __('Yes, create an admin account now') . '</a>'
+					. '<br/>'
+					. '<a href="javascript:process_authentication_yes()" class="btn btn-primary">' . __('Yes, create an admin account now') . '</a>'
 					. '&nbsp;&nbsp;'
-					. '<a href="javascript:process_authentication_no()" class="btn btn-large btn-danger">' . __('No') . '</a>';
+					. '<a href="javascript:process_authentication_no()" class="btn btn-default">' . __('No') . '</a>';
 
 				break;
 
@@ -74,7 +76,7 @@ if ( isset( $_POST['s'] ) ) {
 						. __( 'Please remove it from the root directory:' )
 						. '<div class="row">'
 						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'mv \'' . $path . '\' \'' . $path . '.bck\'</pre></div>'
-						. '  <div class="col-md-2"><a class="btn btn-success clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
+						. '  <div class="col-md-2"><a class="btn btn-primary clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
 						. '</div>';
 					$return[ 'reload' ] = true;
 				}
@@ -83,6 +85,7 @@ if ( isset( $_POST['s'] ) ) {
 				else if ( Sentinel::create() === true ) {
 					$return[ 'authform' ] =
 					'<h2>' . __( 'Setup admin account') . '</h2>'
+					. '<br/>'
 					. __( 'Please choose a username and a password for the admin account.')
 					. '<br/><br/>'
 					. '<form id="authsave" autocomplete="off">'
@@ -109,7 +112,7 @@ if ( isset( $_POST['s'] ) ) {
 					. 	'</div>'
 					. '</div>'
 					. '<br/><br/>'
-					. '<input type="submit" class="btn btn-large btn-success" value="' . __('Continue') . '"/>'
+					. '<input type="submit" class="btn btn-primary" value="' . __('Continue') . '"/>'
 					. '</form>'
 					;
 				}
@@ -122,7 +125,7 @@ if ( isset( $_POST['s'] ) ) {
 						. __( 'Please give temporary write access to the root directory:' )
 						. '<div class="row">'
 						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'chmod 777 ' . dirname( dirname( __FILE__ ) ) . '</pre></div>'
-						. '  <div class="col-md-2"><a class="btn btn-success clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
+						. '  <div class="col-md-2"><a class="btn btn-primary clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
 						. '</div>';
 					$return[ 'reload' ] = true;
 				}
@@ -155,8 +158,8 @@ if ( isset( $_POST['s'] ) ) {
 						__( 'Please remove it manually if you want me to create it:' )
 						. '<br/><br/>'
 						. '<div class="row">'
-						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'rm \'' . get_config_file_path() . '\'</pre></div>'
-						. '  <div class="col-md-2"><a class="btn btn-success clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
+						. '  <div class="col-md-9"><pre class="clipboardcontent">' . 'rm \'' . get_config_file_path() . '\'</pre></div>'
+						. '  <div class="col-md-3"><a class="btn btn-primary clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
 						. '</div>';
 					throw new Exception( sprintf( __( 'File <code>%s</code> already exists.') , $config_file_name ) );
 				}
@@ -177,7 +180,7 @@ if ( isset( $_POST['s'] ) ) {
 						. __( 'Please give temporary write access to the root directory:' )
 						. '<div class="row">'
 						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'chmod 777 ' . dirname( dirname( __FILE__ ) ) . '</pre></div>'
-						. '  <div class="col-md-2"><a class="btn btn-success clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
+						. '  <div class="col-md-2"><a class="btn btn-primary clipboard">' . __('Copy to clipboard') . '</a><script>clipboard_enable("a.clipboard","pre.clipboardcontent" , "top" , "' . __('Command copied!') . '");</script></div>'
 						. '</div>';
 					$return[ 'reload' ] = true;
 				}
@@ -192,6 +195,7 @@ if ( isset( $_POST['s'] ) ) {
 			*/
 			case 'soft' :
 				$return[ 'notice' ] = '<h2>' . __( 'Choose softwares to search log files for') . '</h2>';
+				$return[ 'notice' ].= '<br/>';
 				$return[ 'notice' ].= '<div class="table-responsive"><table id="soft"></table></div>';
 				$return[ 'next' ]   = true;
 				$return[ 'sofn' ]   = count( $softwares_all );
@@ -294,8 +298,10 @@ if ( isset( $_POST['s'] ) ) {
 					$return[ 'notice' ].= sprintf( __( 'These files have been checked in all paths: %s ' ) , $allfiles );
 				}
 				else {
-					$return[ 'notice' ].= '<div class="alert alert-success">' . __( 'Log files have been found!') . '</div>';
-					$return[ 'notice' ].= __( 'Check in the following list files you want to configure. If files or directories are missing, verify that they are readable by the webserver user' );
+					$return[ 'notice' ].= '<div class="alert alert-info">' . __( 'Log files have been found!') . '</div>';
+					$return[ 'notice' ].= __( 'Check in the following list which files you want to configure.' );
+					$return[ 'notice' ].= '<br/>';
+					$return[ 'notice' ].= __( 'If files or directories are missing, verify that they are readable by the webserver user' );
 				}
 
 				$user = get_server_user();
@@ -514,20 +520,23 @@ $lemma = array(
 		</div>
 	</div>
 
-	<div class="container" id="process">
-		<br/>
+	<div class="jumbotronflat">
 		<div class="progress">
 			<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
 				<span class="sr-only"></span>
 			</div>
 		</div>
+	</div>
+
+	<div class="container" id="process">
+		<br/>
 		<div id="error"></div>
 		<div id="user"></div>
 		<br/>
 		<p id="buttons">
-			<a id="reload" class="btn btn-primary" href="javascript:location.reload();" style="display:none;"><?php _e('Reload');?></a>&nbsp;
+			<a id="next" class="btn btn-primary" href="#" style="display:none;"><?php _e('Continue');?></a>
 			&nbsp;
-			<a id="next" class="btn btn-success" href="#" style="display:none;"><?php _e('Continue');?></a>
+			<a id="reload" class="btn btn-default" href="javascript:location.reload();" style="display:none;"><?php _e('Reload');?></a>&nbsp;
 		</p>
 	</div>
 
@@ -542,10 +551,11 @@ $lemma = array(
 				echo '<br/>';
 				echo sprintf( __( 'You can manually adjust settings in the <code>%s</code> file.' ) , CONFIG_FILE_NAME );
 				echo '<br/>';
+				echo '<br/>';
 				_e( 'Please visit <a href="http://pimpmylog.com">pimpmylog.com</a> for more informations.' );
 				echo '<br/>';
 				echo '<br/>';
-				echo '<a class="btn btn-success" href="../?' . $_SERVER['QUERY_STRING'] . '">' . __('Pimp my Logs now!') . '</a>';
+				echo '<a class="btn btn-lg btn-primary" href="../?' . $_SERVER['QUERY_STRING'] . '">' . __('Pimp my Logs now!') . '</a>';
 			?>
 			</p>
 		</div>

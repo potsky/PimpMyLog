@@ -4,17 +4,60 @@ $gray:                   lighten(#000, 33.5%) !default; // #555
 $gray-light:             lighten(#000, 46.7%) !default; // #777
 $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
 
-$navbar-inverse-color               : $gray-light;
-$navbar-inverse-bg                  : #33333f;
-$navbar-inverse-border              : darken($navbar-inverse-bg, 10%);
-$navbar-inverse-link-color          : $gray-light;
-$navbar-inverse-link-hover-color    : $gray-lighter;
-$navbar-inverse-link-active-color   : $navbar-inverse-link-hover-color;
-$navbar-inverse-link-active-bg      : darken($navbar-inverse-bg, 10%);
-$navbar-inverse-brand-color         : $navbar-inverse-link-color;
+$grid-float-breakpoint            : 992px !default;
+$brand-primary                    : #6C5196;
+$navbar-inverse-color             : $gray-light;
+$navbar-inverse-bg                : #33333f;
+$navbar-inverse-border            : darken($navbar-inverse-bg, 10%);
+$navbar-inverse-link-color        : $gray-light;
+$navbar-inverse-link-hover-color  : $gray-lighter;
+$navbar-inverse-link-active-color : $navbar-inverse-link-hover-color;
+$navbar-inverse-link-active-bg    : darken($navbar-inverse-bg, 10%);
+$navbar-inverse-brand-color       : $navbar-inverse-link-color;
+$font-family-sans-serif           : Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
 @import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
+.btn-menu {
+	display          : inline-block;
+	margin-bottom    : 0;
+	font-weight      : $btn-font-weight;
+	text-align       : center;
+	vertical-align   : middle;
+	cursor           : pointer;
+	background-image : none;
+	border           : 1px solid transparent;
+	white-space      : nowrap;
+	@include button-size($padding-base-vertical , $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);
+	@include user-select(none);
+}
+
+.btn {
+	text-transform : uppercase;
+	line-height    : 2.5em;
+	padding-left   : 2em;
+	padding-right  : 2em;
+	font-family    : Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.dropdown-menu {
+  > li > a {
+    display: block;
+    padding: 5px 20px;
+  }
+}
+
+.jumbotronflat {
+	padding          : 10px;
+	margin           : 0!important;
+	color            : $jumbotron-color;
+	background-color : $jumbotron-bg;
+
+	.progress {
+		margin: 0;
+	}
+}
 
 /*
 Override the success color for input.
