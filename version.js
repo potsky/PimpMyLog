@@ -11,7 +11,11 @@
 			"released" : "2014-10-19",
 			"new"      : [
 				"Authentication feature #61",
-				"New global parameter <code>AUTH_LOG_FILE</code> to set the log file path where are logged authentications attempts",
+				"Authentication logs",
+				"Change password feature",
+				"New debugger available at /inc/test.php",
+				"New debugger security management",
+				"Reset an account password from the debugger",
 				"New global parameter <code>AUTH_LOG_FILE_COUNT</code> to set the maximum number of entries in the auth log file. Set this value to 0 if you want to disable authentication logs",
 				"New global parameter <code>SORT_LOG_FILES</code> to sort your log files in the log selector on top left. Documentation is <a href=\"http://pimpmylog.com/documentation/configuration.html#SORT_LOG_FILES\">here</a>.",
 				"New configuration file with extension <code>.php</code> instead of <code>.json</code> to avoid direct calls in web browser and then people can see where are located your log files. <code>.json</code> files are still supported. Upgrading your configuration files is really straightforward, instructions are <a href=\"http://support.pimpmylog.com/kb/configuration/upgrade-json-configuration-files-to-php-configuration-files\">here</a>."
@@ -19,6 +23,7 @@
 			"fixed" : [
 			],
 			"changed" : [
+				"New pretty (?) design"
 			]
 		},
 		"1.3.0" : {

@@ -79,7 +79,6 @@ define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'        , 'https://github.com/potsky/PimpM
 define( 'DEFAULT_MAX_SEARCH_LOG_TIME'         , 5 );
 define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
 define( 'DEFAULT_USER_CONFIGURATION_DIR'      , 'config.user.d' );
-define( 'DEFAULT_AUTH_LOG_FILE'               , 'log.auth.user.php' );
 define( 'DEFAULT_AUTH_LOG_FILE_COUNT'         , 100 );
 define( 'DEFAULT_SORT_LOG_FILES'              , 'default' );
 define( 'DEFAULT_FORGOTTEN_YOUR_PASSWORD_URL' , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
@@ -255,7 +254,6 @@ function parser($regex , $match , $log , $types , $tz = NULL)
 function load_default_constants()
 {
     $defaults = array(
-        'AUTH_LOG_FILE',
         'AUTH_LOG_FILE_COUNT',
         'CHECK_UPGRADE',
         'DEFAULT_HELP_URL',
