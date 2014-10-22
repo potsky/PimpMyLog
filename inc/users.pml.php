@@ -84,6 +84,13 @@ if 	( ! csrf_verify() ) {
 |
 */
 switch ( @$_POST['action'] ) {
+
+	/*
+	|--------------------------------------------------------------------------
+	| Change password
+	|--------------------------------------------------------------------------
+	|
+	*/
 	case 'change_password':
 		$password1 = $_POST['password1'];
 		$password2 = $_POST['password2'];
@@ -121,7 +128,107 @@ switch ( @$_POST['action'] ) {
 
 		break;
 
+	/*
+	|--------------------------------------------------------------------------
+	| List users
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'users_list':
+		$users = array();
+
+		foreach ( Sentinel::getUsers() as $username => $user ) {
+			unset( $user['pwd'] );
+			if (isset($user[ 'lastlogin' ]['ts'])) $user[ 'lastlogin' ]['ts'] = date( 'Y/m/d H:i:s' , (int)$user[ 'lastlogin' ]['ts'] );
+			$user[ 'cd' ] = date( 'Y/m/d H:i:s' , (int)$user[ 'cd' ] );
+			$user[ 'u' ]  = $username;
+			$users[]      = $user;
+		}
+		$return['b'] = $users;
+		break;
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| View a single user
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'users_view':
+
+		$username = $_POST['u'];
+		$user     = Sentinel::getUser( $username );
+
+		if ( is_null( $user ) ) {
+			$return['e'] = sprintf( __('User %s does not exist') , '<code>' . $username . '</code>' );
+		}
+		else {
+			unset( $user['pwd'] );
+			if (isset( $user[ 'lastlogin' ]['ts'] ) ) $user[ 'lastlogin' ]['ts'] = date( 'Y/m/d H:i:s' , (int)$user[ 'lastlogin' ]['ts'] );
+			$user[ 'cd' ]     = date( 'Y/m/d H:i:s' , (int)$user[ 'cd' ] );
+			$return['b']      = $user;
+			$return['b']['u'] = $username;
+		}
+
+		break;
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Edit a single user
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'users_edit':
+
+		$username = $_POST['u'];
+		$user     = Sentinel::getUser( $username );
+
+		if ( is_null( $user ) ) {
+			$return['e'] = sprintf( __('User %s does not exist') , '<code>' . $username . '</code>' );
+		}
+		else {
+			unset( $user['pwd'] );
+			unset( $user['cb'] );
+			unset( $user['cd'] );
+			unset( $user['lastlogin'] );
+			unset( $user['logincount'] );
+			$user['pwd']  = '';
+			$user['pwd2'] = '';
+			$return['b']      = $user;
+			$return['b']['u'] = $username;
+		}
+
+		break;
+
+
+
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| List auth logs
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'authlog':
+		$logs = array();
+		foreach ( Sentinel::getLogs() as $log ) {
+			$log[ 2 ] = date( 'Y/m/d H:i:s' , (int)$log[ 2 ] );
+			$logs[]   = $log;
+		}
+		$return['b'] = $logs;
+		break;
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Unknown action...
+	|--------------------------------------------------------------------------
+	|
+	*/
 	default:
+		error_log( 'Unknown action ' . @$_POST['action'] );
 		break;
 }
 

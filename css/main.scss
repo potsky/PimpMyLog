@@ -4,7 +4,8 @@ $gray:                   lighten(#000, 33.5%) !default; // #555
 $gray-light:             lighten(#000, 46.7%) !default; // #777
 $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
 
-$grid-float-breakpoint            : 992px !default;
+$grid-float-breakpoint            : 992px;
+$font-size-base                   : 16px;
 $brand-primary                    : #6C5196;
 $navbar-inverse-color             : $gray-light;
 $navbar-inverse-bg                : #33333f;
@@ -14,9 +15,31 @@ $navbar-inverse-link-hover-color  : $gray-lighter;
 $navbar-inverse-link-active-color : $navbar-inverse-link-hover-color;
 $navbar-inverse-link-active-bg    : darken($navbar-inverse-bg, 10%);
 $navbar-inverse-brand-color       : $navbar-inverse-link-color;
-$font-family-sans-serif           : Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif           : PNR, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-monospace            : AP, Menlo, Monaco, Consolas, "Courier New", monospace;
 
-@import url(http://fonts.googleapis.com/css?family=Montserrat);
+@font-face {
+  font-family: 'PNR';
+  src: url('../fonts/PNR.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/PNR.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/PNR.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/PNR.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/PNR.svg#2c1459d58560f08b4b0586fbe80aa4cd') format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  400;
+}
+
+@font-face {
+  font-family: 'AP';
+  src: url('../fonts/AP.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/AP.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/AP.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/AP.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/AP.svg#488ed4a0c3cc470469719192a1f4c813') format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  400;
+}
+
 @import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
 .btn-menu {
@@ -35,10 +58,10 @@ $font-family-sans-serif           : Montserrat, "Helvetica Neue", Helvetica, Ari
 
 .btn {
 	text-transform : uppercase;
-	line-height    : 2.5em;
-	padding-left   : 2em;
-	padding-right  : 2em;
-	font-family    : Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height    : 2em;
+	padding-left   : 1.5em;
+	padding-right  : 1.5em;
+	font-family    : PNR, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .dropdown-menu {

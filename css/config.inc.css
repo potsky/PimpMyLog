@@ -28,7 +28,7 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 }
 
 .pml-pre, .pml-prefake {
-	font-family : monospace, serif;
+	font-family : AP, monospace, serif;
 }
 
 .pml-numeral {

@@ -43,14 +43,6 @@ if ( is_null( $config_file_name ) ) {
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Login
-|--------------------------------------------------------------------------
-|
-*/
-$current_user = Sentinel::attempt();
-
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +73,15 @@ if ( is_array( $errors ) ) {
 
 /*
 |--------------------------------------------------------------------------
+| Login
+|--------------------------------------------------------------------------
+|
+*/
+$current_user = Sentinel::attempt();
+
+
+/*
+|--------------------------------------------------------------------------
 | Javascript lemma
 |--------------------------------------------------------------------------
 |
@@ -99,6 +100,29 @@ $lemma = array(
 	'display_nlogs'     => __( '%s logs displayed,' ),
 	'error'             => __( 'An error occurs!' ),
 	'toggle_column'     => __( 'Toggle column %s' ),
+	'date'              => __( 'Date' ),
+	'action'            => __( 'Action' ),
+	'username'          => __( 'User name' ),
+	'ip'                => __( 'IP' ),
+	'useragent'         => __( 'User agent' ),
+	'signin'            => __( 'Sign in' ),
+	'signout'           => __( 'Sign out' ),
+	'authlogerror'      => __( 'There is no log to display and your are connected... It seems that global parameter <code>AUTH_LOG_FILE_COUNT</code> is set to 0. Change this parameter to a higher value to display logs.' ),
+	'roles'             => __( 'Roles' ),
+	'creationdate'      => __( 'Created at' ),
+	'createdby'         => __( 'Created by' ),
+	'logincount'        => __( 'Logins' ),
+	'lastlogin'         => __( 'Last login' ),
+	'system'            => __( 'System' ),
+	'user'              => __( 'User' ),
+	'adduser'           => __( 'Add user' ),
+	'users'             => __( 'Users' ),
+	'user_roles'        => __( 'Roles' ),
+	'user_logs'         => __( 'Log access' ),
+	'user_cd'           => __( 'Created at' ),
+	'user_cb'           => __( 'Created by' ),
+	'user_logincount'   => __( 'Logins' ),
+	'user_lastlogin'    => __( 'Last login' ),
 );
 
 
@@ -140,15 +164,16 @@ $csrf = csrf_get();
 		var logs_refresh_default = <?php echo (int)LOGS_REFRESH;?>,
 			logs_max_default     = <?php echo (int)LOGS_MAX;?>,
 			files                = <?php echo json_encode($files);?>,
-			title_file           = "<?php echo TITLE_FILE;?>",
-			notification_title   = "<?php echo NOTIFICATION_TITLE;?>",
-			badges               = <?php echo json_encode($badges);?>,
-			lemma                = <?php echo json_encode($lemma);?>,
-			geoip_url            = "<?php echo GEOIP_URL;?>",
+			title_file           = <?php echo json_encode( TITLE_FILE ); ?>,
+			notification_title   = <?php echo json_encode( NOTIFICATION_TITLE ); ?>,
+			badges               = <?php echo json_encode( $badges ); ?>,
+			lemma                = <?php echo json_encode( $lemma ); ?>,
+			geoip_url            = <?php echo json_encode( GEOIP_URL ); ?>,
 			pull_to_refresh      = <?php echo ( PULL_TO_REFRESH === true ) ? 'true' : 'false';?>,
-			file_selector        = "<?php echo FILE_SELECTOR;?>",
-			csrf_token           = "<?php echo $csrf;?>",
-			querystring          = "<?php echo $_SERVER['QUERY_STRING'];?>",
+			file_selector        = <?php echo json_encode( FILE_SELECTOR ); ?>,
+			csrf_token           = <?php echo json_encode( $csrf ); ?>,
+			querystring          = <?php echo json_encode( $_SERVER['QUERY_STRING'] ); ?>,
+			currentuser          = <?php echo json_encode( Sentinel::getCurrentUsername() ); ?>,
 			notification_default = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;
 	</script>
 </head>
@@ -173,42 +198,42 @@ $csrf = csrf_get();
 			</div>
 
 			<div class="navbar-collapse collapse">
-<?php
-if ( FILE_SELECTOR == 'bs' ) {
-?>
-				<ul class="nav navbar-nav">
-					<li class="dropdown" title="<?php _e( 'Select a log file to display' );?>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-<?php
-foreach ( $files as $file_id => $file ) {
-	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
-	echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
-	echo ( isset( $file['included_from'] ) ) ? htmlentities( sprintf( __('Log file #%s defined in %s' ) , $file_id , $file['included_from'] ) ,ENT_QUOTES,'UTF-8') : htmlentities( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) ,ENT_QUOTES,'UTF-8');
-	echo '">' . $file['display'] . '</a></li>';
-}
-?>
-						</ul>
-					</li>
-				</ul>
-<?php
-} else {
-?>
-    			<form class="navbar-form navbar-left">
-					<div class="form-group">
-						<select id="file_selector_big" class="form-control input-sm" title="<?php _e( 'Select a log file to display' );?>">
-<?php
-foreach ( $files as $file_id=>$file ) {
-	$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' selected="selected"' : '';
-	echo '<option value="' . $file_id . '"' . $selected . '>' . $file['display'] . '</option>';
-}
-?>
-						</select>
-					</div>&nbsp;
-			    </form>
-<?php
-}
-?>
+				<?php
+				if ( FILE_SELECTOR == 'bs' ) {
+				?>
+					<ul class="nav navbar-nav">
+						<li class="dropdown" title="<?php _e( 'Select a log file to display' );?>">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<?php
+								foreach ( $files as $file_id => $file ) {
+									$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
+									echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
+									echo ( isset( $file['included_from'] ) ) ? htmlentities( sprintf( __('Log file #%s defined in %s' ) , $file_id , $file['included_from'] ) ,ENT_QUOTES,'UTF-8') : htmlentities( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) ,ENT_QUOTES,'UTF-8');
+									echo '">' . $file['display'] . '</a></li>';
+								}
+								?>
+							</ul>
+						</li>
+					</ul>
+				<?php
+				} else {
+				?>
+	    			<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<select id="file_selector_big" class="form-control input-sm" title="<?php _e( 'Select a log file to display' );?>">
+								<?php
+								foreach ( $files as $file_id=>$file ) {
+									$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' selected="selected"' : '';
+									echo '<option value="' . $file_id . '"' . $selected . '>' . $file['display'] . '</option>';
+								}
+								?>
+							</select>
+						</div>&nbsp;
+				    </form>
+				<?php
+				}
+				?>
 
 				<form class="navbar-form navbar-right">
 
@@ -219,21 +244,21 @@ foreach ( $files as $file_id=>$file ) {
 					<div class="form-group">
 						<select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>">
 							<option value="0"><?php _e( 'No refresh' );?></option>
-<?php
-foreach ( get_refresh_options( $files ) as $r ) {
-	echo '<option value="' . $r . '">' . sprintf( __( 'Refresh %ss' ) , $r ) . '</option>';
-}
-?>
+							<?php
+							foreach ( get_refresh_options( $files ) as $r ) {
+								echo '<option value="' . $r . '">' . sprintf( __( 'Refresh %ss' ) , $r ) . '</option>';
+							}
+							?>
 						</select>
 					</div>&nbsp;
 
 					<div class="form-group">
 						<select id="max" class="form-control input-sm" title="<?php _e( 'Max count of logs to display' );?>">
-<?php
-foreach ( get_max_options( $files ) as $r ) {
-	echo '<option value="' . $r . '">' . sprintf( ( (int)$r>1 ) ? __( '%s logs' ) : __( '%s log' ) , $r ) . '</option>';
-}
-?>
+							<?php
+							foreach ( get_max_options( $files ) as $r ) {
+								echo '<option value="' . $r . '">' . sprintf( ( (int)$r>1 ) ? __( '%s logs' ) : __( '%s log' ) , $r ) . '</option>';
+							}
+							?>
 						</select>
 					</div>&nbsp;
 
@@ -261,8 +286,8 @@ foreach ( get_max_options( $files ) as $r ) {
 							<li>
 								<a href="#" id="cog-wide" class="cog btn btn-default" data-cog="wideview" data-value="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? 'on' : 'off' ; ?>">
 									<span class="glyphicon glyphicon-fullscreen"></span>&nbsp;&nbsp;<?php _e('Wide view');?>&nbsp;
-									<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><span class="label label-success"><?php _e('on')?></span></span>
-									<span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><span class="label label-danger"><?php _e('off')?></span></span>
+									<span class="cogon" style="<?php echo (in_array(@$_GET['w'], array('true','on','1',''))) ? '' : 'display:none' ; ?>"><?php _e('on')?></span>
+									<span class="cogoff" style="<?php echo (in_array(@$_GET['w'], array('false','off','0'))) ? '' : 'display:none' ; ?>"><?php _e('off')?></span>
 								</a>
 							</li>
 
@@ -275,25 +300,32 @@ foreach ( get_max_options( $files ) as $r ) {
 							<li>
 								<select id="cog-lang" class="form-control input-sm" title="<?php _e( 'Language' );?>">
 									<option value=""><?php _e( 'Change language...' );?></option>
+
 									<?php
+
 									foreach ( $locale_available as $l => $n ) {
 										echo '<option value="' . $l . '"';
 										if ( $l == $locale ) echo ' selected="selected"';
 										echo '>' . $n . '</option>';
 									}
+
 									?>
+
 								</select>
 							</li>
 
 							<li>
 								<select id="cog-tz" class="form-control input-sm" title="<?php _e( 'Timezone' );?>">
 									<option value=""><?php _e( 'Change timezone...' );?></option>
+
 									<?php
+
 									foreach ( $tz_available as $n ) {
 										echo '<option value="' . $n . '"';
 										if ( $n == $tz ) echo ' selected="selected"';
 										echo '>' . $n . '</option>';
 									}
+
 									?>
 								</select>
 							</li>
@@ -301,32 +333,36 @@ foreach ( get_max_options( $files ) as $r ) {
 						</ul>
 					</li>
 
-<?php if ( ! is_null( $current_user ) ) { ?>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo sprintf( __('Logged in as %s') , $current_user ); ?>">
-							<span class="glyphicon glyphicon-user"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="#" title="<?php _h('Click here to manager users'); ?>"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;<?php echo __('Manage users'); ?></a></li>
-							<li><a href="#" title="<?php _h('Click here to change your password'); ?>" data-toggle="modal" data-target="#cpModal"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<?php echo __('Change password'); ?></a></li>
-							<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;<?php echo __('Sign out'); ?></a></li>
-						</ul>
-					</li>
-<?php } ?>
+					<?php if ( ! is_null( $current_user ) ) { ?>
+
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo sprintf( __('Logged in as %s') , $current_user ); ?>">
+								<span class="glyphicon glyphicon-user"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#" title="<?php _h('Click here to manager users'); ?>" data-toggle="modal" data-target="#umModal"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;<?php echo __('Manage users'); ?></a></li>
+								<li><a href="#" title="<?php _h('Click here to change your password'); ?>" data-toggle="modal" data-target="#cpModal"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<?php echo __('Change password'); ?></a></li>
+								<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;<?php echo __('Sign out'); ?></a></li>
+							</ul>
+						</li>
+
+					<?php } ?>
 
 				</ul>
 			</div>
 		</div>
 	</div>
 
-<?php if ( PULL_TO_REFRESH === true ) { ?>
-	<div id="hook" class="hook">
-		<div id="loader" class="hook-loader">
-			<div class="hook-spinner"></div>
+	<?php if ( PULL_TO_REFRESH === true ) { ?>
+
+		<div id="hook" class="hook">
+			<div id="loader" class="hook-loader">
+				<div class="hook-spinner"></div>
+			</div>
+			<span id="hook-text"></span>
 		</div>
-		<span id="hook-text"></span>
-	</div>
-<?php } ?>
+
+	<?php } ?>
 
 	<div class="container">
 		<div id="error" style="display:none;"><br/><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
@@ -357,51 +393,195 @@ foreach ( get_max_options( $files ) as $r ) {
 		<footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer>
 	</div>
 
-<?php if ( ! is_null( $current_user ) ) { ?>
-	<div class="modal fade" id="cpModal" tabindex="-1" role="dialog" aria-labelledby="cpModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<form id="changepassword" autocomplete="off">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
-						<h4 class="modal-title" id="cpModalLabel"><?php _e('Change password');?></h4>
-					</div>
-					<div class="modal-body">
-						<div class="alert alert-danger" role="alert" id="cpErr" style="display:none;">
-							<strong><?php _e('Form is invalid:'); ?></strong><ul id="cpErrUl"></ul>
+	<?php if ( ! is_null( $current_user ) ) { ?>
+
+		<div class="modal fade" id="cpModal" tabindex="-1" role="dialog" aria-labelledby="cpModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<form id="changepassword" autocomplete="off">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
+							<h4 class="modal-title" id="cpModalLabel"><?php _e('Change password');?></h4>
 						</div>
-						<div class="container">
-							<div class="row">
-								<div class="input-group col-sm-6 col-md-4" id="password1group">
-									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-									<input type="password" id="password1" name="password1" class="form-control" placeholder="<?php _h('Current password') ?>"/>
-								</div>
-								<br/>
+						<div class="modal-body">
+							<div class="alert alert-danger" role="alert" id="cpErr" style="display:none;">
+								<strong><?php _e('Form is invalid:'); ?></strong><ul id="cpErrUl"></ul>
 							</div>
-							<div class="row">
-								<div class="input-group col-sm-6 col-md-4" id="password2group">
-									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-									<input type="password" id="password2" name="password2" class="form-control" placeholder="<?php _h('New password') ?>"/>
+							<div class="container">
+								<div class="row">
+									<div class="input-group col-sm-6 col-md-4" id="password1group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+										<input type="password" id="password1" name="password1" class="form-control" placeholder="<?php _h('Current password') ?>"/>
+									</div>
+									<br/>
 								</div>
-								<br/>
-							</div>
-							<div class="row">
-								<div class="input-group col-sm-6 col-md-4" id="password3group">
-									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-									<input type="password" id="password3" name="password3" class="form-control" placeholder="<?php _h('New password confirmation') ?>"/>
+								<div class="row">
+									<div class="input-group col-sm-6 col-md-4" id="password2group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+										<input type="password" id="password2" name="password2" class="form-control" placeholder="<?php _h('New password') ?>"/>
+									</div>
+									<br/>
+								</div>
+								<div class="row">
+									<div class="input-group col-sm-6 col-md-4" id="password3group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+										<input type="password" id="password3" name="password3" class="form-control" placeholder="<?php _h('New password confirmation') ?>"/>
+									</div>
 								</div>
 							</div>
 						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
+							<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save');?>" id="cpSave"/>
+						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
-						<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save');?>" id="cpSave"/>
-					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
-	</div>
-<?php } ?>
+
+		<div class="modal fade" id="umModal" tabindex="-1" role="dialog" aria-labelledby="umModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<form id="usermanagement" autocomplete="off">
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
+							<ul class="nav nav-pills">
+								<li class="active"><a href="#umUsers" role="tab" data-toggle="pill"><?php _e('Users');?></a></li>
+								<li><a href="#umLogFiles" role="tab" data-toggle="pill"><?php _e('Log files');?></a></li>
+								<li><a href="#umAuthLog" role="tab" data-toggle="pill"><?php _e('History');?></a></li>
+							</ul>
+						</div>
+
+						<div class="tab-content">
+							<div class="tab-pane active" id="umUsers">
+								<div id="umUsersList">
+									<div class="modal-body" id="umUsersListBody"></div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
+									</div>
+								</div>
+								<div id="umUsersView" style="display:none;">
+									<div class="modal-body" id="umUsersViewBody"></div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" onclick="users_list();"><?php _e('Back');?></button>
+										<button type="button" class="btn btn-primary" onclick="users_edit(this);" id="umUserEditBtn"><?php _e('Edit');?></button>
+									</div>
+								</div>
+								<div id="umUsersEdit" style="display:none;">
+									<div class="modal-body" id="umUsersEditBody"></div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" onclick="users_view(this);" id="umUserViewBtn"><?php _e('Back');?></button>
+										<button type="button" class="btn btn-primary" onclick="users_save(this);" id="umUserSaveBtn"><?php _e('Save');?></button>
+									</div>
+								</div>
+								<div id="umUsersAdd" style="display:none;">
+									<div class="modal-body form-horizontal" id="umUsersAddBody">
+										<form autocomplete="off" role="form" action="caca">
+
+											<div class="form-group">
+												<label for="username" class="col-sm-4 control-label"><?php _e('Username'); ?></label>
+												<div class="col-sm-8">
+													<div class="input-group">
+														<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+														<input type="text" id="username" name="username" class="form-control" placeholder="<?php _h('Username') ?>" autofocus="autofocus"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label for="password" class="col-sm-4 control-label"><?php _e('Password'); ?></label>
+												<div class="col-sm-8">
+													<div class="input-group">
+														<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+														<input type="password" id="password" name="password" class="form-control" placeholder="<?php _h('Password') ?>"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label for="password2" class="col-sm-4 control-label"><?php _e('Password Confirmation'); ?></label>
+												<div class="col-sm-8">
+													<div class="input-group">
+														<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+														<input type="password" id="password2" name="password2" class="form-control" placeholder="<?php _h('Password Confirmation') ?>"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label for="roles" class="col-sm-4 control-label"><?php _e('Roles'); ?></label>
+												<div class="col-sm-8">
+													<div class="btn-group" data-toggle="buttons">
+														<label class="btn btn-primary btn-xs active roles-user" id="add-roles-user">
+															<input type="radio" name="roles" checked><?php _e('User'); ?>
+														</label>
+														<label class="btn btn-default btn-xs roles-admin" id="add-roles-admin">
+															<input type="radio" name="roles"><?php _e('Admin'); ?>
+														</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="logs-selector">
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label"></label>
+													<div class="col-sm-8">
+														<hr/>
+														<p class="help-block"><?php _e("Select which log files user can view"); ?></p>
+													</div>
+												</div>
+
+												<?php foreach ( $files as $file_id => $file ) {
+													$fid = htmlentities( $file_id , ENT_QUOTES , 'UTF-8' );
+												?>
+
+													<div class="form-group" data-fileid="<?php echo $fid ?>">
+														<label for="<?php echo $fid ?>" class="col-sm-4 control-label"><?php echo $file['display'] ?></label>
+														<div class="col-sm-8">
+															<div class="btn-group" data-toggle="buttons">
+																<label class="btn btn-success btn-xs active logs-selector-yes">
+																	<input type="radio" name="<?php echo $fid ?>" checked><?php _e('Yes'); ?>
+																</label>
+																<label class="btn btn-default btn-xs logs-selector-no">
+																	<input type="radio" name="<?php echo $fid ?>"><?php _e('No'); ?>
+																</label>
+															</div>
+														</div>
+													</div>
+
+												<?php } ?>
+
+											</div>
+
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" onclick="users_list();"><?php _e('Cancel');?></button>
+										<button type="button" class="btn btn-primary" onclick="users_add_save();"><?php _e('Save');?></button>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane" id="umLogFiles">
+								<div class="modal-body" id="umLogFilesBody"></div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
+									<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save2');?>" id="umSave"/>
+								</div>
+							</div>
+							<div class="tab-pane" id="umAuthLog">
+								<div class="modal-body" id="umAuthLogBody"></div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	<?php } ?>
 
 	<script src="js/pml.min.js"></script>
 	<script src="js/main.min.js"></script>
@@ -409,13 +589,13 @@ foreach ( get_max_options( $files ) as $r ) {
 	numeral.language('<?php echo $localejs;?>');
 	</script>
 
-<?php if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
-	<script>
-		var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];
-		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-			g.src='//www.google-analytics.com/ga.js';
-			s.parentNode.insertBefore(g,s)}(document,'script'));
-	</script>
-<?php } ?>
+	<?php if ( ( 'UA-XXXXX-X' != GOOGLE_ANALYTICS ) && ( '' != GOOGLE_ANALYTICS ) ) { ?>
+		<script>
+			var _gaq=[['_setAccount','<?php echo GOOGLE_ANALYTICS;?>'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+				g.src='//www.google-analytics.com/ga.js';
+				s.parentNode.insertBefore(g,s)}(document,'script'));
+		</script>
+	<?php } ?>
 </body>
 </html>

@@ -43,8 +43,6 @@ if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
 */
 define( 'YEAR'                               , @date( "Y" ) );
 define( 'PHP_VERSION_REQUIRED'               , '5.2' );
-define( 'HELP_URL'                           , 'http://pimpmylog.com' );
-define( 'FORGOTTEN_YOUR_PASSWORD_URL'        , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
 define( 'CONFIG_FILE_MODE'                   , 0444 );
 define( 'AUTH_CONFIGURATION_FILE'            , 'config.auth.user.php' );
 define( 'CONFIG_FILE_NAME'                   , 'config.user.php' );
@@ -62,27 +60,29 @@ define( 'CONFIG_FILE_TEMP'                   , 'config.user.tmp.php' );
 | Overwrite them in your configuration file, not in this code directly !
 |
 */
-define( 'DEFAULT_LOCALE'                     , 'gb_GB' );
-define( 'DEFAULT_TITLE'                      , 'Pimp my Log' );
-define( 'DEFAULT_TITLE_FILE'                 , 'Pimp my Log [%f]' );
-define( 'DEFAULT_NAV_TITLE'                  , '' );
-define( 'DEFAULT_FOOTER'                     , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . YEAR . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
-define( 'DEFAULT_LOGS_MAX'                   , 50 );
-define( 'DEFAULT_LOGS_REFRESH'               , 0 );
-define( 'DEFAULT_NOTIFICATION'               , false );
-define( 'DEFAULT_PULL_TO_REFRESH'            , true );
-define( 'DEFAULT_NOTIFICATION_TITLE'         , 'New logs [%f]' );
-define( 'DEFAULT_GOOGLE_ANALYTICS'           , 'UA-XXXXX-X' );
-define( 'DEFAULT_GEOIP_URL'                  , 'http://www.geoiptool.com/en/?IP=%p' );
-define( 'DEFAULT_CHECK_UPGRADE'              , true );
-define( 'DEFAULT_PIMPMYLOG_VERSION_URL'      , 'http://demo.pimpmylog.com/version.js' );
-define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'       , 'https://github.com/potsky/PimpMyLog/issues/' );
-define( 'DEFAULT_MAX_SEARCH_LOG_TIME'        , 5 );
-define( 'DEFAULT_FILE_SELECTOR'              , 'bs' );
-define( 'DEFAULT_USER_CONFIGURATION_DIR'     , 'config.user.d' );
-define( 'DEFAULT_AUTH_LOG_FILE'              , 'log.auth.user.php' );
-define( 'DEFAULT_AUTH_LOG_FILE_COUNT'        , 100 );
-define( 'DEFAULT_SORT_LOG_FILES'             , 'default' );
+define( 'DEFAULT_LOCALE'                      , 'gb_GB' );
+define( 'DEFAULT_TITLE'                       , 'Pimp my Log' );
+define( 'DEFAULT_TITLE_FILE'                  , 'Pimp my Log [%f]' );
+define( 'DEFAULT_NAV_TITLE'                   , '' );
+define( 'DEFAULT_HELP_URL'                    , 'http://pimpmylog.com' );
+define( 'DEFAULT_FOOTER'                      , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . YEAR . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
+define( 'DEFAULT_LOGS_MAX'                    , 50 );
+define( 'DEFAULT_LOGS_REFRESH'                , 0 );
+define( 'DEFAULT_NOTIFICATION'                , false );
+define( 'DEFAULT_PULL_TO_REFRESH'             , true );
+define( 'DEFAULT_NOTIFICATION_TITLE'          , 'New logs [%f]' );
+define( 'DEFAULT_GOOGLE_ANALYTICS'            , 'UA-XXXXX-X' );
+define( 'DEFAULT_GEOIP_URL'                   , 'http://www.geoiptool.com/en/?IP=%p' );
+define( 'DEFAULT_CHECK_UPGRADE'               , true );
+define( 'DEFAULT_PIMPMYLOG_VERSION_URL'       , 'http://demo.pimpmylog.com/version.js' );
+define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'        , 'https://github.com/potsky/PimpMyLog/issues/' );
+define( 'DEFAULT_MAX_SEARCH_LOG_TIME'         , 5 );
+define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
+define( 'DEFAULT_USER_CONFIGURATION_DIR'      , 'config.user.d' );
+define( 'DEFAULT_AUTH_LOG_FILE'               , 'log.auth.user.php' );
+define( 'DEFAULT_AUTH_LOG_FILE_COUNT'         , 100 );
+define( 'DEFAULT_SORT_LOG_FILES'              , 'default' );
+define( 'DEFAULT_FORGOTTEN_YOUR_PASSWORD_URL' , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
 
 
 /*
@@ -255,27 +255,29 @@ function parser($regex , $match , $log , $types , $tz = NULL)
 function load_default_constants()
 {
     $defaults = array(
-        'LOCALE',
-        'TITLE',
-        'TITLE_FILE',
-        'NAV_TITLE',
+        'AUTH_LOG_FILE',
+        'AUTH_LOG_FILE_COUNT',
+        'CHECK_UPGRADE',
+        'DEFAULT_HELP_URL',
+        'FILE_SELECTOR',
         'FOOTER',
+        'FORGOTTEN_YOUR_PASSWORD_URL',
+        'GEOIP_URL',
+        'GOOGLE_ANALYTICS',
+        'LOCALE',
         'LOGS_MAX',
         'LOGS_REFRESH',
-        'NOTIFICATION',
-        'PULL_TO_REFRESH',
-        'NOTIFICATION_TITLE',
-        'GOOGLE_ANALYTICS',
-        'GEOIP_URL',
-        'CHECK_UPGRADE',
-        'PIMPMYLOG_VERSION_URL',
-        'PIMPMYLOG_ISSUE_LINK',
         'MAX_SEARCH_LOG_TIME',
-        'FILE_SELECTOR',
-        'USER_CONFIGURATION_DIR',
-        'AUTH_LOG_FILE',
+        'NAV_TITLE',
+        'NOTIFICATION',
+        'NOTIFICATION_TITLE',
+        'PIMPMYLOG_ISSUE_LINK',
+        'PIMPMYLOG_VERSION_URL',
+        'PULL_TO_REFRESH',
         'SORT_LOG_FILES',
-        'AUTH_LOG_FILE_COUNT',
+        'TITLE',
+        'TITLE_FILE',
+        'USER_CONFIGURATION_DIR',
     );
     foreach ($defaults as $d) {
         if ( ! defined( $d ) ) {

@@ -219,7 +219,7 @@ class Sentinel
      */
     public static function reload()
     {
-        $content = self::read();
+        $content = preg_replace('/^.+\n/', '', self::read() );
         $array   = json_decode( $content , true );
         if ( is_null( $array ) ) {
             return false;
@@ -305,7 +305,9 @@ class Sentinel
             $user = array(
                 'roles' => array('user'),
                 'pwd'   => '',
-                'logs'  => array()
+                'logs'  => array(),
+                'cd'    => date('U'),
+                'cb'    => self::getCurrentUsername(),
             );
         }
 
@@ -318,9 +320,35 @@ class Sentinel
         return true;
     }
 
-    public static function setUserAccess($username , $logs)
-    {
+
+    /**
+     * Log an action
+     *
+     * @param   string  $action     the action text
+     * @param   string  $username   the username or null for the current logged in user
+     * @param   int     $timestamp  the action timestamp
+     * @param   string  $ip         the IP address
+     * @param   string  $useragent  the user agent
+     *
+     * @return  bool                true
+     */
+    public static function log( $action , $username = null , $timestamp = null , $ip = null , $useragent = null ) {
+        if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
+
+        if ( ! isset( self::$auth['logs'] ) ) {
+            self::$auth['logs'] = array();
+        }
+
+        if ( is_null( $username ) ) $username = self::getCurrentUsername();
+        if ( is_null( $timestamp ) ) $timestamp = data("U");
+        if ( is_null( $ip ) ) $ip = self::getClientIp();
+        if ( is_null( $useragent ) ) $useragent = ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) ? $_SERVER['HTTP_USER_AGENT'] : '';
+
+        self::$auth['logs'] = array_slice( array_merge( array( array( $action , $username , $timestamp , $ip , $useragent ) ) , self::$auth['logs'] ) , 0 , abs( (int)AUTH_LOG_FILE_COUNT ) );
+
+        return true;
     }
+
 
     /**
      * Return the data of a user
@@ -338,6 +366,21 @@ class Sentinel
         }
 
         return null;
+    }
+
+
+    /**
+     * Return the log array
+     *
+     * @return array data
+     */
+    public static function getLogs()
+    {
+        if ( isset( self::$auth['logs'] ) ) {
+            return self::$auth['logs'];
+        }
+
+        return array();
     }
 
     /**
@@ -438,14 +481,18 @@ class Sentinel
             self::sessionWrite( array( 'username' => $username ) );
 
             $user = self::$auth['users'][ $username ];
+            $ip   = self::getClientIp();
+            $ua   = ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) ? $_SERVER['HTTP_USER_AGENT'] : '';
+            $ts   = date("U");
 
             self::reload();
             self::$auth['users'][ $username ]['logincount'] = (int) @self::$auth['users'][ $username ]['logincount'] + 1;
             self::$auth['users'][ $username ]['lastlogin'] = array(
-                'ip' => self::getClientIp(),
-                'ua' => ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) ? $_SERVER['HTTP_USER_AGENT'] : '',
-                'ts' => date("U")
-                );
+                'ip' => $ip,
+                'ua' => $ua,
+                'ts' => $ts
+            );
+            self::log( 'signin' , $username , $ts , $ip , $ua );
             self::save();
 
             return $user;
@@ -473,11 +520,20 @@ class Sentinel
      */
     public static function signOut()
     {
-        $a = self::getCurrentUsername();
+        $username = self::getCurrentUsername();
 
-        self::sessionDestroy();
+        if ( ! is_null( $username ) ) {
+            $ip       = self::getClientIp();
+            $ua       = ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) ? $_SERVER['HTTP_USER_AGENT'] : '';
+            $ts       = date("U");
 
-        return $a;
+            self::log( 'signout' , $username , $ts , $ip , $ua );
+            self::save();
+
+            self::sessionDestroy();
+        }
+
+        return $username;
     }
 
     /**
@@ -552,7 +608,10 @@ class Sentinel
         self::lock();
         if ( is_null( self::$authFileP ) ) throw new Exception( 'No lock has been requested' );
 
-        self::write( json_encode( self::$auth ) );
+        $file = '<?php if(realpath(__FILE__)===realpath($_SERVER["SCRIPT_FILENAME"])){header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");die();}?>' . "\n";
+        $file.= json_encode( self::$auth );
+
+        self::write( $file );
 
         return true;
     }

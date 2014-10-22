@@ -66,9 +66,9 @@ load_default_constants();
 							<?php
 								$u  = ( strlen( "" . @$_POST['username'] ) > 0 ) ? htmlentities( $_POST['username'] , ENT_QUOTES , 'UTF-8' ) : '';
 								if ( strlen( "" . @$_POST['username'] ) === 0 ) {
-									echo '<input type="text" name="username" value="' . htmlentities( $u , ENT_QUOTES , 'UTF-8' ) .'" class="form-control" placeholder="' . __('Username') . '" autofocus="autofocus"/>';
+									echo '<input type="text" name="username" value="' . $u .'" class="form-control" placeholder="' . __('Username') . '" autofocus="autofocus"/>';
 								} else {
-									echo '<input type="text" name="username" value="' . htmlentities( $u , ENT_QUOTES , 'UTF-8' ) .'" class="form-control" placeholder="' . __('Username') . '"/>';
+									echo '<input type="text" name="username" value="' . $u .'" class="form-control" placeholder="' . __('Username') . '"/>';
 								}
 							?>
 						</div>

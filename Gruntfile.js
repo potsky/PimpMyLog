@@ -120,6 +120,14 @@ module.exports = function(grunt) {
 					dest    : '_site/fonts/'
 				}]
 			},
+			devfonts2: {
+				files: [{
+					expand  : true,
+					cwd     : 'fonts/',
+					src     : [ '**/*' ],
+					dest    : '_site/fonts/'
+				}]
+			},
 			devhook: {
 				files: [{
 					expand: true,
@@ -225,11 +233,6 @@ module.exports = function(grunt) {
 				dest: '_tmp/',
 				filter: 'isFile'
 			},
-
-
-
-
-
 			prodcss: {
 				files: [{
 					expand: true,
@@ -248,6 +251,14 @@ module.exports = function(grunt) {
 				files: [{
 					expand  : true,
 					cwd     : 'bower_components/bootstrap-sass-official/assets/fonts/',
+					src     : [ '**/*' ],
+					dest    : '_build/fonts/'
+				}]
+			},
+			prodfonts2: {
+				files: [{
+					expand  : true,
+					cwd     : 'fonts/',
 					src     : [ '**/*' ],
 					dest    : '_build/fonts/'
 				}]
@@ -668,6 +679,7 @@ module.exports = function(grunt) {
 			'replace:dev',
 
 			'copy:devfonts',
+			'copy:devfonts2',
 			'copy:devswf',
 			'copy:devhook',
 
@@ -693,6 +705,7 @@ module.exports = function(grunt) {
 			'replace:prod',
 
 			'copy:prodfonts',
+			'copy:prodfonts2',
 			'copy:prodswf',
 			'copy:prodhook',
 
