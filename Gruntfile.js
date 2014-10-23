@@ -62,6 +62,7 @@ module.exports = function(grunt) {
 					'bower_components/hook/hook.min.js',
 					'bower_components/numeral/numeral.js',
 					'bower_components/numeral/languages/*.js',
+					'bower_components/bootstrap-table/src/bootstrap-table.js',
 				],
 				dest: '_tmp/pml.js',
 				options: {

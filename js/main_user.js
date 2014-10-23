@@ -34,7 +34,7 @@ $(function() {
 	| On submit
 	|
 	*/
-	$('#changepassword').on('submit', function () {
+	$('#changepassword').on('submit', function() {
 
 		$('#password1group').removeClass('has-error');
 		$('#password2group').removeClass('has-error');
@@ -64,7 +64,16 @@ $(function() {
 			$('#cpErr').show();
 		})
 		.done( function ( r ) {
-			if ( r.ok ) {
+			if ( r.singlewarning ) {
+				$('#cpErr').html( get_alert( 'warning' , r.singlewarning , false ) ).show();
+			}
+			else if ( r.singlenotice ) {
+				$('#cpErr').html( get_alert( 'info' , r.singlenotice , false ) ).show();
+			}
+			else if ( r.error ) {
+				$('#cpErr').html( get_alert( 'danger' , r.error , false ) ).show();
+			}
+			else if ( r.ok ) {
 				$('#notice').html( get_alert( 'success' , r.ok , true ) );
 				$('#cpModal').modal( 'hide' );
 			}
@@ -122,6 +131,20 @@ $(function() {
 		$(this).parent().find('label.logs-selector-yes').removeClass('btn-success').addClass('btn-default');
 		$(this).parent().find('label.logs-selector-no').addClass('btn-danger');
 	});
+
+	$('.logs-selector-toggler').click( function() {
+		var first = $(this).parents('.logs-selector').find('label.logs-selector-yes:first').hasClass('active');
+		if ( first === true ) {
+			$(this).parents('.logs-selector').find('label.logs-selector-no').click();
+		} else {
+			$(this).parents('.logs-selector').find('label.logs-selector-yes').click();
+		}
+	});
+
+	$('#umUsersAddForm').on('submit', function() {
+		event.preventDefault();
+		return users_add_save( this );
+	});
 });
 
 
@@ -174,7 +197,14 @@ var users_load = function( type ) {
  *
  * @return  {boolean}  false
  */
-var users_list = function() {
+var users_list = function( severity , message , close ) {
+
+	if ( severity !== undefined ) {
+		$('#umUsersListAlert').html( get_alert( severity , message , close ) );
+	} else {
+		$('#umUsersListAlert').html('');
+	}
+
 	$('#umUsersListBody').html('<img src="img/loader.gif"/>');
 	$('#umUsersList').show();
 	$('#umUsersView').hide();
@@ -196,67 +226,83 @@ var users_list = function() {
 		$('#umUsersListBody').html( get_alert( 'danger' , e.responseText , false ) );
 	})
 	.done( function ( re ) {
-		var r = '';
-		var l = re.b.length;
-
-		r += '<div class="row">';
-		r += 	'<div class="col-sm-6"><p class="lead">' + l + ' ';
-		r += ( l > 1 ) ? lemma.users : lemma.user;
-		r += 	'</p></div>';
-		r += 	'<div class="col-sm-6 text-right">';
-		r +=		'<a href="#" onclick="users_add()" class="btn btn-xs btn-primary">' + lemma.adduser + '</a>';
-		r += 	'</div>';
-		r += '</div>';
-
-		r += '<table class="table table-striped table-hover">';
-		r += 	'<thead>';
-		r += 		'<tr>';
-		r += 			'<th>' + lemma.username + '</th>';
-		r += 			'<th>' + lemma.roles + '</th>';
-		r += 			'<th>' + lemma.creationdate + '</th>';
-		r += 			'<th>' + lemma.lastlogin + '</th>';
-		r += 		'</tr>';
-		r += 	'</thead>';
-		r += 	'<tbody>';
-		for ( var i in re.b ) {
-			var user       = re.b[i];
-			var username   = user['u'];
-			var roles      = user['roles'];
-			var cd         = user['cd'];
-			var logs       = user['logs'];
-			var lastlogin  = user['lastlogin'];
-
-			var rolelist = '';
-			for( var j in roles ) {
-				switch ( roles[j] ) {
-					case 'admin':
-						rolelist += '<span class="label label-danger">' + roles[j] + '</span>'
-						break;
-					case 'user':
-						rolelist += '<span class="label label-primary">' + roles[j] + '</span>'
-						break;
-					default:
-						rolelist += '<span class="label label-default">' + roles[j] + '</span>'
-						break;
-				}
-			}
-
-			if ( lastlogin ) {
-				lastlogin = lastlogin['ts'];
-			}
-
-			r += '<tr>';
-			r += 	'<td><a href="#" onclick="users_view(this)">' + username + '</a></td>';
-			r += 	'<td>' + rolelist + '</td>';
-			r += 	'<td>' + cd + '</td>';
-			r += 	'<td>' + lastlogin + '</td>';
-			r += '</tr>';
-
+		if ( re.singlewarning ) {
+			$('#umUsersListBody').html( get_alert( 'warning' , re.singlewarning , false ) );
 		}
-		r += 	'</tbody>';
-		r += '</table>';
+		else if ( re.singlenotice ) {
+			$('#umUsersListBody').html( get_alert( 'info' , re.singlenotice , false ) );
+		}
+		else if ( re.error ) {
+			$('#umUsersListBody').html( get_alert( 'danger' , re.error , false ) );
+		}
+		else {
+			var r = '';
+			var l = re.b.length;
 
-		$('#umUsersListBody').html( r );
+			r += '<div class="row">';
+			r += 	'<div class="col-sm-6"><p class="lead">' + l + ' ';
+			r += ( l > 1 ) ? lemma.users : lemma.user;
+			r += 	'</p></div>';
+			r += 	'<div class="col-sm-6 text-right">';
+			r +=		'<a href="#" onclick="users_add()" class="btn btn-xs btn-primary">' + lemma.adduser + '</a>';
+			r += 	'</div>';
+			r += '</div>';
+
+			r += '<div class="table-responsive">';
+			r += '<table class="table table-striped table-hover" data-sort-name="username" data-sort-order="asc" id="userlisttable">';
+			r += 	'<thead>';
+			r += 		'<tr>';
+			r += 			'<th data-field="username" data-sortable="true">' + lemma.username + '</th>';
+			r += 			'<th data-field="roles" data-sortable="true">' + lemma.roles + '</th>';
+			r += 			'<th data-field="creationdate" data-sortable="true">' + lemma.creationdate + '</th>';
+			r += 			'<th data-field="lastlogin" data-sortable="true">' + lemma.lastlogin + '</th>';
+			r += 		'</tr>';
+			r += 	'</thead>';
+			r += 	'<tbody>';
+			for ( var i in re.b ) {
+				var user       = re.b[i];
+				var username   = user['u'];
+				var roles      = user['roles'];
+				var cd         = user['cd'];
+				var logs       = user['logs'];
+				var lastlogin  = user['lastlogin'];
+
+				var rolelist = '';
+				for( var j in roles ) {
+					switch ( roles[j] ) {
+						case 'admin':
+							rolelist += '<span class="label label-danger">' + roles[j] + '</span>'
+							break;
+						case 'user':
+							rolelist += '<span class="label label-primary">' + roles[j] + '</span>'
+							break;
+						default:
+							rolelist += '<span class="label label-default">' + roles[j] + '</span>'
+							break;
+					}
+				}
+
+				if ( lastlogin !== undefined ) {
+					lastlogin = lastlogin['ts'];
+				} else {
+					lastlogin = '';
+				}
+
+				r += '<tr>';
+				r += 	'<td><a href="#" onclick="users_view(this)">' + username + '</a></td>';
+				r += 	'<td>' + rolelist + '</td>';
+				r += 	'<td>' + cd + '</td>';
+				r += 	'<td>' + lastlogin + '</td>';
+				r += '</tr>';
+
+			}
+			r += 	'</tbody>';
+			r += '</table>';
+			r += '</div>';
+
+			$('#umUsersListBody').html( r );
+			$('#userlisttable').bootstrapTable().bootstrapTable('hideLoading');
+		}
 	});
 
 	return false;
@@ -270,6 +316,7 @@ var users_list = function() {
  */
 var users_view = function( obj ) {
 	$('#umUsersViewBody').html('<img src="img/loader.gif"/>');
+	$('#umUsersViewAlert').html('');
 	$('#umUsersList').hide();
 	$('#umUsersView').show();
 	$('#umUsersEdit').hide();
@@ -302,15 +349,41 @@ var users_view = function( obj ) {
 	})
 	.done( function ( re ) {
 
-		if ( re.e ) {
+		if ( re.singlewarning ) {
+			$('#umUsersViewBody').html( get_alert( 'warning' , re.singlewarning , false ) );
+			return false;
+		}
+		else if ( re.singlenotice ) {
+			$('#umUsersViewBody').html( get_alert( 'info' , re.singlenotice , false ) );
+			return false;
+		}
+		else if ( re.error ) {
+			$('#umUsersViewBody').html( get_alert( 'danger' , re.error , false ) );
+			return false;
+		}
+		else if ( re.e ) {
 			$('#umUsersViewBody').html( get_alert( 'danger' , re.e , false ) );
 			return false;
 		}
 
 		var r        = '';
 		var uaparser = new UAParser();
+		var is_admin = ($.inArray( 'admin' , re.b.roles ) > -1);
 
-		r += '<p class="lead">' + re.b['u'] + '</p>';
+		r += '<div class="row del_base">';
+		r += 	'<div class="col-sm-6"><p class="lead">' + re.b['u'] + '</p></div>';
+		r += 	'<div class="col-sm-6 text-right">';
+		if ( currentuser !== username ) {
+			r += '<div class="btn-group">';
+			r += '	<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">' + lemma.deleteuser + '...</button>';
+			r += '  <ul class="dropdown-menu" role="menu">';
+			r += '    <li><a href="#" onclick="users_delete(this);">' + lemma.reallydeleteuser + '</a></li>';
+			r += '  </ul>';
+			r += '</div>';
+		}
+		r += 	'</div>';
+		r += '</div>';
+
 		r += '<table class="table table-striped table-hover">';
 		r += 	'<tbody>';
 		for ( var i in re.b ) {
@@ -325,18 +398,34 @@ var users_view = function( obj ) {
 			else if ( i === 'u' ) {
 				continue;
 			}
+			else if ( i === 'logs' ) {
+				if ( is_admin === true ) {
+					val = lemma.all_access;
+				}
+				else {
+					var logslist = '';
+					for( var j in val ) {
+						if ( val[j].r === true ) {
+							logslist += '<span class="label label-success">' + files[ j ].display + '</span> ';
+						} else {
+							logslist += '<span class="label label-danger">' + files[ j ].display + '</span> ';
+						}
+					}
+					val = logslist;
+				}
+			}
 			else if ( i === 'roles' ) {
 				var rolelist = '';
 				for( var j in val ) {
 					switch ( val[j] ) {
 						case 'admin':
-							rolelist += '<span class="label label-danger">' + val[j] + '</span>'
+							rolelist += '<span class="label label-danger">' + val[j] + '</span>';
 							break;
 						case 'user':
-							rolelist += '<span class="label label-primary">' + val[j] + '</span>'
+							rolelist += '<span class="label label-primary">' + val[j] + '</span>';
 							break;
 						default:
-							rolelist += '<span class="label label-default">' + val[j] + '</span>'
+							rolelist += '<span class="label label-default">' + val[j] + '</span>';
 							break;
 					}
 				}
@@ -367,9 +456,91 @@ var users_add = function() {
 	$('#umUsersView').hide();
 	$('#umUsersEdit').hide();
 	$('#umUsersAdd').show();
+	$('#umUsersAddLoader').hide();
+	$('#umUsersAddBody').show();
+	$('#umUsersAddPwdHelp').hide();
+
+	// Reinit all fields
+	$('#umUsersAdd').find('label.logs-selector-yes').click();
+	$('#add-roles-user').click();
+	$('#add-username').val('').removeAttr('readonly');
+	$('#add-password').val('');
+	$('#add-password2').val('');
+	$('#umUsersAddAlert').html('');
+	$.each( $('#umUsersAddForm').serializeArray(), function(i, field) {
+		$( '#add-' + field.name + '-group' ).removeClass('has-error');
+	});
+
+	$('#add-type').val('add');
+	$('#umUsersAddBtn').show();
+	$('#umUsersViewBtn').hide();
+
 	return false;
 };
 
+
+/**
+ * Save user
+ *
+ * @return  {boolean}  false
+ */
+var users_add_save = function() {
+
+	$('#umUsersAddSave').button('loading');
+
+	var prefix = 'add-';
+	var values = {
+		'csrf_token' : csrf_token,
+		'action'     : 'users_add'
+	};
+	$.each( $('#umUsersAddForm').serializeArray(), function(i, field) {
+		$( '#add-' + field.name + '-group' ).removeClass('has-error');
+		values[ field.name ] = field.value;
+	});
+
+	$.ajax( {
+		url      : 'inc/users.pml.php?' + (new Date()).getTime() + '&' + querystring,
+		type     : 'POST',
+		dataType : 'json',
+		data     : values
+	} )
+	.always( function() {
+		$('#umUsersAddSave').button('reset');
+	})
+	.fail( function ( e ) {
+		$('#umUsersAddAlert').html( get_alert( 'danger' , e.responseText , false ) );
+	})
+	.done( function ( re ) {
+
+		if ( re.singlewarning ) {
+			$('#umUsersAddAlert').html( get_alert( 'warning' , re.singlewarning , false ) );
+			return false;
+		}
+		else if ( re.singlenotice ) {
+			$('#umUsersAddAlert').html( get_alert( 'info' , re.singlenotice , false ) );
+			return false;
+		}
+		else if ( re.error ) {
+			$('#umUsersAddAlert').html( get_alert( 'danger' , re.error , false ) );
+			return false;
+		}
+		else if ( re.c > 0 ) {
+			var t = '<strong>' + lemma.form_invalid + '</strong><ul>';
+			for ( var field in re.e ) {
+				t += '<li>' + re.e[field] + '</li>';
+				$( '#add-' + field + '-group' ).addClass('has-error');
+			}
+			t += '</ul>';
+
+			$('#umUsersAddAlert').html( get_alert( 'danger' , t , false ) );
+			return false;
+		}
+
+		users_list( 'success' , lemma.user_add_ok , true );
+	});
+
+	return false;
+};
 
 
 /**
@@ -378,21 +549,33 @@ var users_add = function() {
  * @return  {boolean}  false
  */
 var users_edit = function( obj ) {
-	$('#umUsersEditBody').html('<img src="img/loader.gif"/>');
-	$('#umUsersList').hide();
-	$('#umUsersView').hide();
-	$('#umUsersEdit').show();
-	$('#umUsersAdd').hide();
 
 	var username = $(obj).data('user');
-	$('#umUserViewBtn').data( 'user' , username );
-	$('#umUserSaveBtn').data( 'user' , username );
 
-console.log(username);
+	$('#umUsersList').hide();
+	$('#umUsersView').hide();
+	$('#umUsersEdit').hide();
+	$('#umUsersAdd').show();
+	$('#umUsersAddLoader').show();
+	$('#umUsersAddBody').hide();
+	$('#umUsersAddPwdHelp').show();
 
-	$('#umUsersEditBody').html(username);
+	// Reinit all fields
+	$('#umUsersAdd').find('label.logs-selector-no').click();
+	$('#add-roles-user').click();
+	$('#add-username').val( username ).attr('readonly','readonly');
+	$('#add-password').val('');
+	$('#add-password2').val('');
+	$('#umUsersAddAlert').html('');
+	$.each( $('#umUsersAddForm').serializeArray(), function(i, field) {
+		$( '#add-' + field.name + '-group' ).removeClass('has-error');
+	});
 
-return false;
+	$('#add-type').val('edit');
+	$('#umUsersAddBtn').hide();
+	$('#umUsersViewBtn').show().data( 'user' , username );
+
+	$('#umUsersAddSave').button('loading');
 
 	$.ajax( {
 		url      : 'inc/users.pml.php?' + (new Date()).getTime() + '&' + querystring,
@@ -405,22 +588,78 @@ return false;
 		}
 	} )
 	.always( function() {
+		$('#umUsersAddSave').button('reset');
+		$('#umUsersAddLoader').hide();
+		$('#umUsersAddBody').show();
 	})
 	.fail( function ( e ) {
-		$('#umUsersEditBody').html( get_alert( 'danger' , e.responseText , false ) );
+		$('#umUsersAddBody').html( get_alert( 'danger' , e.responseText , false ) );
 	})
 	.done( function ( re ) {
-
-		if ( re.e ) {
-			$('#umUsersEditBody').html( get_alert( 'danger' , re.e , false ) );
-			return false;
+		if ( re.b.roles ) {
+			for ( var i in re.b.roles ) {
+				$( '#add-roles-' + re.b.roles[i] ).click();
+			}
 		}
-
-		$('#umUsersEditBody').html( r );
+		if ( re.b.logs ) {
+			for ( var i in re.b.logs ) {
+				$( '#add-logs-f-' + i + '-' + re.b.logs[i].r ).click();
+			}
+		}
 	});
 
 	return false;
 };
+
+
+/**
+ * Delete a user
+ *
+ * @param   {object}  obj  HTML fragment
+ *
+ * @return  {boolean}       false
+ */
+var users_delete = function( obj ) {
+	var username = $(obj).parents('.del_base').find('p.lead').text();
+
+	$.ajax( {
+		url      : 'inc/users.pml.php?' + (new Date()).getTime() + '&' + querystring,
+		type     : 'POST',
+		dataType : 'json',
+		data     : {
+			'csrf_token' : csrf_token,
+			'action'     : 'users_delete',
+			'u'          : username,
+		}
+	} )
+	.always( function() {
+	})
+	.fail( function ( e ) {
+		$('#umUsersViewAlert').html( get_alert( 'danger' , e.responseText , false ) );
+	})
+	.done( function ( re ) {
+
+		if ( re.singlewarning ) {
+			$('#umUsersViewAlert').html( get_alert( 'warning' , re.singlewarning , false ) );
+			return false;
+		}
+		else if ( re.singlenotice ) {
+			$('#umUsersViewAlert').html( get_alert( 'info' , re.singlenotice , false ) );
+			return false;
+		}
+		else if ( re.error ) {
+			$('#umUsersViewAlert').html( get_alert( 'danger' , re.error , false ) );
+			return false;
+		}
+		else {
+			users_list( 'success' , lemma.user_delete_ok , true );
+			return false;
+		}
+	});
+
+	return false;
+};
+
 
 
 var users_logfiles = function() {
@@ -450,18 +689,32 @@ var users_authlog = function() {
 		$('#umAuthLogBody').html( get_alert( 'danger' , e.responseText , false ) );
 	})
 	.done( function ( re ) {
+		if ( re.singlewarning ) {
+			$('#umAuthLogBody').html( get_alert( 'warning' , re.singlewarning , false ) );
+			return false;
+		}
+		else if ( re.singlenotice ) {
+			$('#umAuthLogBody').html( get_alert( 'info' , re.singlenotice , false ) );
+			return false;
+		}
+		else if ( re.error ) {
+			$('#umAuthLogBody').html( get_alert( 'danger' , re.error , false ) );
+			return false;
+		}
+
 		var l = re.b.length;
 		var r = '';
 		if ( l > 0 ) {
 			var uaparser = new UAParser();
-			r  = '<table class="table table-striped table-hover">';
+			r += '<div class="table-responsive">';
+			r += '<table class="table table-striped table-hover" data-sort-name="date" data-sort-order="desc" id="authlogtable">';
 			r += 	'<thead>';
 			r += 		'<tr>';
-			r += 			'<th>' + lemma.date + '</th>';
-			r += 			'<th>' + lemma.action + '</th>';
-			r += 			'<th>' + lemma.username + '</th>';
-			r += 			'<th>' + lemma.ip + '</th>';
-			r += 			'<th>' + lemma.useragent + '</th>';
+			r += 			'<th data-field="date" data-sortable="true">' + lemma.date + '</th>';
+			r += 			'<th data-field="action" data-sortable="true">' + lemma.action + '</th>';
+			r += 			'<th data-field="username" data-sortable="true">' + lemma.username + '</th>';
+			r += 			'<th data-field="ip" data-sortable="true">' + lemma.ip + '</th>';
+			r += 			'<th data-field="useragent" data-sortable="true">' + lemma.useragent + '</th>';
 			r += 		'</tr>';
 			r += 	'</thead>';
 			r += 	'<tbody>';
@@ -477,10 +730,19 @@ var users_authlog = function() {
 					case 'signin' :
 						action = '<span class="label label-success">' + lemma.signin + '</span>';
 						break;
+					case 'signinerr' :
+						action = '<span class="label label-danger">' + lemma.signinerr + '</span>';
+						break;
 					case 'signout' :
-						action = '<span class="label label-default">' + lemma.signout + '</span>';
+						action = '<span class="label label-warning">' + lemma.signout + '</span>';
+						break;
+					case 'changepwd' :
+						action = '<span class="label label-info">' + lemma.changepwd + '</span>';
 						break;
 				}
+				action = action.replace(/^addadmin/,'<span class="label label-info">' + lemma.addadmin + '</span>');
+				action = action.replace(/^adduser/,'<span class="label label-info">' + lemma.adduser + '</span>');
+				action = action.replace(/^deleteuser/,'<span class="label label-info">' + lemma.deleteuser + '</span>');
 
 				r += '<tr>';
 				r += 	'<td>' + date + '</td>';
@@ -493,11 +755,13 @@ var users_authlog = function() {
 			}
 			r += 	'</tbody>';
 			r += '</table>';
+			r += '</div>';
 		}
 		else {
 			r = get_alert( 'info' , lemma.authlogerror , false );
 		}
 		$('#umAuthLogBody').html( r );
+		$('#authlogtable').bootstrapTable().bootstrapTable('hideLoading');
 	});
 	return false;
 };

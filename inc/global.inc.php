@@ -459,6 +459,19 @@ function config_load($load_user_configuration_dir = true)
         }
     }
 
+    // Remove forbidden files
+    $username = Sentinel::getCurrentUsername();
+    if ( ! is_null( $username ) ) {
+        $final = array();
+        foreach ( $files as $fileid => $file ) {
+            if ( Sentinel::userCanOnLogs( $fileid , 'r' , true , $username ) ) {
+                $final[ $fileid ] = $file;
+            }
+        }
+        $files = $final;
+    }
+
+
     // Finaly sort files
     if ( ! function_exists( 'display_asc' ) )              { function display_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
     if ( ! function_exists( 'display_desc' ) )             { function display_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
@@ -501,12 +514,16 @@ function config_check($files)
     $errors = array();
 
     if ( ! is_array( $files ) ) {
+        if ( Sentinel::isAuthSet() ) return false;
+
         $errors[] = __( 'No file is defined in <code>files</code> array' );
 
         return $errors;
     }
 
     if ( count( $files ) === 0 ) {
+        if ( Sentinel::isAuthSet() ) return false;
+
         $errors[] = __( 'No file is defined in <code>files</code> array' );
 
         return $errors;

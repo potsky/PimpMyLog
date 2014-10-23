@@ -140,8 +140,10 @@ if ( isset( $_POST['s'] ) ) {
 			|
 			*/
 			case 'authsave':
-				Sentinel::setAdmin( $_POST['u'] , $_POST['p'] );
-				$return[ 'notice' ] = Sentinel::save();
+				if ( ( strlen( $_POST['u'] ) > 0 ) && ( strlen( $_POST['p'] ) >= 6 ) ) {
+					Sentinel::setAdmin( $_POST['u'] , $_POST['p'] );
+					$return[ 'notice' ] = Sentinel::save();
+				}
 				break;
 
 
@@ -310,16 +312,16 @@ if ( isset( $_POST['s'] ) ) {
 					: ' (<em>' . sprintf( __( 'web server user seems to be <code>%s</code>') , $user ) . '</em>):';
 
 				$return[ 'notice' ] .= '<br/><br/>';
-				$return[ 'notice' ] .= '<div class="table-responsive"><table id="find"></table></div><hr/>';
+				$return[ 'notice' ] .= '<div class="table-responsive"><table id="find"></table></div>';
 				$return[ 'notice' ] .= __('You can also type log files path in the text area below separated by coma:');
 				$return[ 'notice' ] .= '<br/><br/>';
-				$return[ 'notice' ] .= '<div class="table-responsive"><table class="table table-striped table-bordered table-hover table-condensed"><thead><tr><th>' . __( 'Type' ) . '</th><th>' . __( 'Custom paths' ) . '</th></tr></thead><tbody>';
+				$return[ 'notice' ] .= '<div class="table-responsive"><table class="table table-striped table-bordered table-hover"><thead><tr><th>' . __( 'Type' ) . '</th><th>' . __( 'Custom paths' ) . '</th></tr></thead><tbody>';
 				foreach( $softuser as $software => $types ) {
 					foreach ( $types as $type => $dumb ) {
-						$return[ 'notice' ] .= '<tr><td>' . $type . ' </td><td><textarea data-soft="' . $software . '" data-type="' . $type . '" class="userpaths form-control" rows="2"></textarea></td></tr>';
+						$return[ 'notice' ] .= '<tr><td>' . $type . ' </td><td><textarea data-soft="' . $software . '" data-type="' . $type . '" class="userpaths form-control" rows="1"></textarea></td></tr>';
 					}
 				}
-				$return[ 'notice' ] .= '</tbody></table></div><hr/>';
+				$return[ 'notice' ] .= '</tbody></table></div>';
 
 				$return[ 'next' ]   = true;
 				$return[ 'reload' ] = true;
@@ -555,7 +557,7 @@ $lemma = array(
 				_e( 'Please visit <a href="http://pimpmylog.com">pimpmylog.com</a> for more informations.' );
 				echo '<br/>';
 				echo '<br/>';
-				echo '<a class="btn btn-lg btn-primary" href="../?' . $_SERVER['QUERY_STRING'] . '">' . __('Pimp my Logs now!') . '</a>';
+				echo '<a class="btn btn-primary" href="../?' . $_SERVER['QUERY_STRING'] . '">' . __('Pimp my Logs now!') . '</a>';
 			?>
 			</p>
 		</div>

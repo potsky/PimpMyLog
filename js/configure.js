@@ -202,7 +202,7 @@ var action_select_logs = function( options ) {
 
 
 		$( '#find' )
-			.addClass( 'table table-striped table-bordered table-hover table-condensed' )
+			.addClass( 'table table-striped table-bordered table-hover' )
 			.append( '<thead><tr><th><input type="checkbox" id="all"></th><th>' + lemma.path + '</th><th>' + lemma.file + '</th><th>' + lemma.type + '</th><th>' + lemma.readable + '</th></tr></thead><tbody></tbody>');
 
 		for ( var software in data.files ) {
@@ -455,7 +455,7 @@ var process_select_logs = function() {
 						$( '#user' ).html( data.notice );
 
 						$( '#soft' )
-							.addClass( 'table table-striped table-bordered table-hover table-condensed' )
+							.addClass( 'table table-striped table-bordered table-hover' )
 							.append('<thead><tr><th><input type="checkbox" id="all"></th><th>' + lemma.name + '</th><th>' + lemma.description + '</th><th>' + lemma.notes + '</th></tr></thead><tbody></tbody>');
 
 						for ( var softid in data.soft ) {

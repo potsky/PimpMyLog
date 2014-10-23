@@ -43,15 +43,44 @@ if ( is_null( $config_file_name ) ) {
 }
 
 
-
 /*
 |--------------------------------------------------------------------------
-| Load config, constants and check configuration
+| Load config and constants
 |--------------------------------------------------------------------------
 |
 */
 list( $badges , $files ) = config_load();
-$errors                  = config_check( $files );
+
+
+/*
+|--------------------------------------------------------------------------
+| Login
+|--------------------------------------------------------------------------
+|
+*/
+$current_user = Sentinel::attempt();
+
+
+/*
+|--------------------------------------------------------------------------
+| Check configuration
+|--------------------------------------------------------------------------
+|
+*/
+$errors = config_check( $files );
+
+if ( $errors === false ) {
+	$title    = __( 'Oups!' );
+	$message  = '<br/>';
+	$message .= __( 'Your access is disabled, you cannot view any log file.' );
+	$message .= '<br/>';
+	$message .= __( 'Please contact your administrator.' );
+	$message .= '<br/><br/>';
+	$link_url = '?signout';
+	$link_msg = __('Sign out');
+	include_once 'inc/error.inc.php';
+	die();
+}
 
 if ( is_array( $errors ) ) {
 	$title    = __( 'Oups!' );
@@ -69,15 +98,6 @@ if ( is_array( $errors ) ) {
 	include_once 'inc/error.inc.php';
 	die();
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Login
-|--------------------------------------------------------------------------
-|
-*/
-$current_user = Sentinel::attempt();
 
 
 /*
@@ -106,7 +126,9 @@ $lemma = array(
 	'ip'                => __( 'IP' ),
 	'useragent'         => __( 'User agent' ),
 	'signin'            => __( 'Sign in' ),
+	'signinerr'         => __( 'Sign in error' ),
 	'signout'           => __( 'Sign out' ),
+	'changepwd'         => __( 'Password changed' ),
 	'authlogerror'      => __( 'There is no log to display and your are connected... It seems that global parameter <code>AUTH_LOG_FILE_COUNT</code> is set to 0. Change this parameter to a higher value to display logs.' ),
 	'roles'             => __( 'Roles' ),
 	'creationdate'      => __( 'Created at' ),
@@ -116,6 +138,8 @@ $lemma = array(
 	'system'            => __( 'System' ),
 	'user'              => __( 'User' ),
 	'adduser'           => __( 'Add user' ),
+	'deleteuser'        => __( 'Delete user' ),
+	'reallydeleteuser'  => __( 'Confirm' ),
 	'users'             => __( 'Users' ),
 	'user_roles'        => __( 'Roles' ),
 	'user_logs'         => __( 'Log access' ),
@@ -123,6 +147,13 @@ $lemma = array(
 	'user_cb'           => __( 'Created by' ),
 	'user_logincount'   => __( 'Logins' ),
 	'user_lastlogin'    => __( 'Last login' ),
+	'user_add_ok'       => __( 'User has been successfully saved!' ),
+	'user_delete_ok'    => __( 'User has been successfully deleted!' ),
+	'form_invalid'      => __( 'Form is invalid:' ),
+	'all_access'        => __( 'All accesses granted' ),
+	'addadmin'          => __( 'Add admin' ),
+	'adduser'           => __( 'Add user' ),
+	'deleteuser'        => __( 'Delete user' ),
 );
 
 
@@ -336,11 +367,13 @@ $csrf = csrf_get();
 					<?php if ( ! is_null( $current_user ) ) { ?>
 
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo sprintf( __('Logged in as %s') , $current_user ); ?>">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo htmlentities(  sprintf( __('You are currently connected as %s') , $current_user ) , ENT_QUOTES , 'UTF-8' ); ?>">
 								<span class="glyphicon glyphicon-user"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#" title="<?php _h('Click here to manager users'); ?>" data-toggle="modal" data-target="#umModal"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;<?php echo __('Manage users'); ?></a></li>
+								<?php if ( Sentinel::isAdmin() ) { ?>
+									<li><a href="#" title="<?php _h('Click here to manager users'); ?>" data-toggle="modal" data-target="#umModal"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;<?php echo __('Manage users'); ?></a></li>
+								<?php } ?>
 								<li><a href="#" title="<?php _h('Click here to change your password'); ?>" data-toggle="modal" data-target="#cpModal"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<?php echo __('Change password'); ?></a></li>
 								<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;<?php echo __('Sign out'); ?></a></li>
 							</ul>
@@ -407,6 +440,9 @@ $csrf = csrf_get();
 							<div class="alert alert-danger" role="alert" id="cpErr" style="display:none;">
 								<strong><?php _e('Form is invalid:'); ?></strong><ul id="cpErrUl"></ul>
 							</div>
+
+							<?php echo sprintf( __('You are currently connected as %s') , '<code>' . $current_user . '</code>' ); ?><br/><br/>
+
 							<div class="container">
 								<div class="row">
 									<div class="input-group col-sm-6 col-md-4" id="password1group">
@@ -439,16 +475,17 @@ $csrf = csrf_get();
 			</div>
 		</div>
 
-		<div class="modal fade" id="umModal" tabindex="-1" role="dialog" aria-labelledby="umModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<form id="usermanagement" autocomplete="off">
-					<div class="modal-content">
+		<?php if ( Sentinel::isAdmin() ) { ?>
+
+			<div class="modal fade" id="umModal" tabindex="-1" role="dialog" aria-labelledby="umModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content" id="usermanagement">
 
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
 							<ul class="nav nav-pills">
 								<li class="active"><a href="#umUsers" role="tab" data-toggle="pill"><?php _e('Users');?></a></li>
-								<li><a href="#umLogFiles" role="tab" data-toggle="pill"><?php _e('Log files');?></a></li>
+								<!--<li><a href="#umLogFiles" role="tab" data-toggle="pill"><?php _e('Log files');?></a></li>-->
 								<li><a href="#umAuthLog" role="tab" data-toggle="pill"><?php _e('History');?></a></li>
 							</ul>
 						</div>
@@ -456,118 +493,114 @@ $csrf = csrf_get();
 						<div class="tab-content">
 							<div class="tab-pane active" id="umUsers">
 								<div id="umUsersList">
-									<div class="modal-body" id="umUsersListBody"></div>
+									<div class="modal-body">
+										<div id="umUsersListAlert"></div>
+										<div id="umUsersListBody"></div>
+									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
 									</div>
 								</div>
 								<div id="umUsersView" style="display:none;">
-									<div class="modal-body" id="umUsersViewBody"></div>
+									<div class="modal-body">
+										<div id="umUsersViewAlert"></div>
+										<div id="umUsersViewBody"></div>
+									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" onclick="users_list();"><?php _e('Back');?></button>
 										<button type="button" class="btn btn-primary" onclick="users_edit(this);" id="umUserEditBtn"><?php _e('Edit');?></button>
 									</div>
 								</div>
-								<div id="umUsersEdit" style="display:none;">
-									<div class="modal-body" id="umUsersEditBody"></div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" onclick="users_view(this);" id="umUserViewBtn"><?php _e('Back');?></button>
-										<button type="button" class="btn btn-primary" onclick="users_save(this);" id="umUserSaveBtn"><?php _e('Save');?></button>
-									</div>
-								</div>
 								<div id="umUsersAdd" style="display:none;">
-									<div class="modal-body form-horizontal" id="umUsersAddBody">
-										<form autocomplete="off" role="form" action="caca">
-
-											<div class="form-group">
+									<form id="umUsersAddForm" autocomplete="off" role="form">
+										<div id='umUsersAddLoader'><img src="img/loader.gif"/></div>
+										<div class="modal-body form-horizontal" id="umUsersAddBody">
+											<div id='umUsersAddAlert'></div>
+											<div class="form-group" id="add-username-group">
 												<label for="username" class="col-sm-4 control-label"><?php _e('Username'); ?></label>
 												<div class="col-sm-8">
 													<div class="input-group">
 														<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-														<input type="text" id="username" name="username" class="form-control" placeholder="<?php _h('Username') ?>" autofocus="autofocus"/>
+														<input type="text" id="add-username" name="username" class="form-control" placeholder="<?php _h('Username') ?>"/>
 													</div>
 												</div>
 											</div>
-
-											<div class="form-group">
+											<div class="form-group" id="add-password-group">
 												<label for="password" class="col-sm-4 control-label"><?php _e('Password'); ?></label>
 												<div class="col-sm-8">
 													<div class="input-group">
 														<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-														<input type="password" id="password" name="password" class="form-control" placeholder="<?php _h('Password') ?>"/>
+														<input type="password" id="add-password" name="password" class="form-control" placeholder="<?php _h('Password') ?>"/>
 													</div>
 												</div>
 											</div>
-
-											<div class="form-group">
+											<div class="form-group" id="add-password2-group">
 												<label for="password2" class="col-sm-4 control-label"><?php _e('Password Confirmation'); ?></label>
 												<div class="col-sm-8">
 													<div class="input-group">
 														<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-														<input type="password" id="password2" name="password2" class="form-control" placeholder="<?php _h('Password Confirmation') ?>"/>
+														<input type="password" id="add-password2" name="password2" class="form-control" placeholder="<?php _h('Password Confirmation') ?>"/>
 													</div>
+													<span class="help-block" id="umUsersAddPwdHelp"><?php _e('Leave password fields blank if you don\'t want to change it'); ?></span>
 												</div>
 											</div>
-
 											<div class="form-group">
 												<label for="roles" class="col-sm-4 control-label"><?php _e('Roles'); ?></label>
 												<div class="col-sm-8">
 													<div class="btn-group" data-toggle="buttons">
 														<label class="btn btn-primary btn-xs active roles-user" id="add-roles-user">
-															<input type="radio" name="roles" checked><?php _e('User'); ?>
+															<input type="radio" name="roles" value="user" checked="checked" /> <?php _e('User'); ?>
 														</label>
 														<label class="btn btn-default btn-xs roles-admin" id="add-roles-admin">
-															<input type="radio" name="roles"><?php _e('Admin'); ?>
+															<input type="radio" name="roles" value="admin" /> <?php _e('Admin'); ?>
 														</label>
 													</div>
 												</div>
 											</div>
-
 											<div class="logs-selector">
-
 												<div class="form-group">
 													<label class="col-sm-4 control-label"></label>
 													<div class="col-sm-8">
-														<hr/>
-														<p class="help-block"><?php _e("Select which log files user can view"); ?></p>
+														<?php _e("Select which log files user can view"); ?>
+														(<a href="#" class="logs-selector-toggler"><?php _e('Toggle all log files');?></a>)
 													</div>
 												</div>
-
 												<?php foreach ( $files as $file_id => $file ) {
 													$fid = htmlentities( $file_id , ENT_QUOTES , 'UTF-8' );
 												?>
-
 													<div class="form-group" data-fileid="<?php echo $fid ?>">
 														<label for="<?php echo $fid ?>" class="col-sm-4 control-label"><?php echo $file['display'] ?></label>
 														<div class="col-sm-8">
 															<div class="btn-group" data-toggle="buttons">
 																<label class="btn btn-success btn-xs active logs-selector-yes">
-																	<input type="radio" name="<?php echo $fid ?>" checked><?php _e('Yes'); ?>
+																	<input type="radio" name="f-<?php echo $fid ?>" id="add-logs-f-<?php echo $fid ?>-true" value="1" checked="checked"/> <?php _e('Yes'); ?>
 																</label>
 																<label class="btn btn-default btn-xs logs-selector-no">
-																	<input type="radio" name="<?php echo $fid ?>"><?php _e('No'); ?>
+																	<input type="radio" name="f-<?php echo $fid ?>" id="add-logs-f-<?php echo $fid ?>-false" value="0" /> <?php _e('No'); ?>
 																</label>
 															</div>
 														</div>
 													</div>
-
 												<?php } ?>
 
 											</div>
 
-										</form>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" onclick="users_list();"><?php _e('Cancel');?></button>
-										<button type="button" class="btn btn-primary" onclick="users_add_save();"><?php _e('Save');?></button>
-									</div>
+										</div>
+
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" onclick="users_view(this);" id="umUsersViewBtn" ><?php _e('Back');?></button>
+											<button type="button" class="btn btn-default" onclick="users_list();"     id="umUsersAddBtn" ><?php _e('Cancel');?></button>
+											<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save');?>" id="umUsersAddSave" />
+										</div>
+										<input type="hidden" name="add-type" id="add-type" value="add"/>
+									</form>
 								</div>
 							</div>
 							<div class="tab-pane" id="umLogFiles">
 								<div class="modal-body" id="umLogFilesBody"></div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
-									<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save2');?>" id="umSave"/>
+									<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save2');?>" id="umLogFilesSave"/>
 								</div>
 							</div>
 							<div class="tab-pane" id="umAuthLog">
@@ -578,9 +611,9 @@ $csrf = csrf_get();
 							</div>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
-		</div>
+		<?php } ?>
 	<?php } ?>
 
 	<script src="js/pml.min.js"></script>

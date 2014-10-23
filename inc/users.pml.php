@@ -118,7 +118,7 @@ switch ( @$_POST['action'] ) {
 
 		if ( $doit === true ) {
 			$return['ok'] = __( 'Password has been successfully changed!' );
-			Sentinel::setUser( $username , $password2 );
+			Sentinel::changePassword( $username , $password2 );
 			Sentinel::save();
 		}
 		else {
@@ -135,6 +135,12 @@ switch ( @$_POST['action'] ) {
 	|
 	*/
 	case 'users_list':
+
+		if ( ! Sentinel::isAdmin() ) {
+			$return['error'] = 'vaffanculo';
+			break;
+		}
+
 		$users = array();
 
 		foreach ( Sentinel::getUsers() as $username => $user ) {
@@ -155,6 +161,11 @@ switch ( @$_POST['action'] ) {
 	|
 	*/
 	case 'users_view':
+
+		if ( ! Sentinel::isAdmin() ) {
+			$return['error'] = 'vaffanculo';
+			break;
+		}
 
 		$username = $_POST['u'];
 		$user     = Sentinel::getUser( $username );
@@ -181,8 +192,13 @@ switch ( @$_POST['action'] ) {
 	*/
 	case 'users_edit':
 
+		if ( ! Sentinel::isAdmin() ) {
+			$return['error'] = 'vaffanculo';
+			break;
+		}
+
 		$username = $_POST['u'];
-		$user     = Sentinel::getUser( $username );
+		$user     = Sentinel::getUser( $_POST['u'] );
 
 		if ( is_null( $user ) ) {
 			$return['e'] = sprintf( __('User %s does not exist') , '<code>' . $username . '</code>' );
@@ -195,14 +211,113 @@ switch ( @$_POST['action'] ) {
 			unset( $user['logincount'] );
 			$user['pwd']  = '';
 			$user['pwd2'] = '';
-			$return['b']      = $user;
-			$return['b']['u'] = $username;
+			$return['b']  = $user;
 		}
 
 		break;
 
 
+	/*
+	|--------------------------------------------------------------------------
+	| Save a user
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'users_add':
 
+		if ( ! Sentinel::isAdmin() ) {
+			$return['error'] = 'vaffanculo';
+			break;
+		}
+
+		$username  = trim($_POST['username']);
+		$password  = $_POST['password'];
+		$password2 = $_POST['password2'];
+		$roles     = $_POST['roles'];
+		$type      = $_POST['add-type'];
+
+		unset( $_POST['csrf_token'] );
+		unset( $_POST['action'] );
+		unset( $_POST['username'] );
+		unset( $_POST['password'] );
+		unset( $_POST['password2'] );
+		unset( $_POST['roles'] );
+		unset( $_POST['add-type'] );
+
+		$logfiles = $_POST;
+
+		$errors = array();
+
+		if ( empty( $username ) ) {
+			$errors[ 'username' ] = __( 'Username is required' );
+		}
+		else if ( ( $type === 'add' ) && ( Sentinel::userExists( $username ) ) ) {
+			$errors[ 'username' ] = sprintf( __('User %s already exists') , '<code>' . $username . '</code>' );
+		}
+
+		if ( ( ( $type === 'edit' ) && ( ! empty( $password ) ) ) || ( $type === 'add' ) ) {
+			if ( strlen( $password ) < 6 ) {
+				$errors[ 'password' ] = __( 'Password must contain at least 6 chars' );
+			}
+			if ( $password !== $password2 ) {
+				$errors[ 'password2' ] = __( 'Password confirmation is not the same' );
+			}
+		}
+
+		if ( count( $errors ) === 0 ) {
+			if ( empty( $password ) ) $password = null;
+
+			if ( $roles === 'admin' ) {
+				Sentinel::setAdmin( $username , $password );
+				if ( $type === 'add' ) Sentinel::log( 'addadmin ' . $username , $current_user );
+			}
+			else {
+				$logs = array();
+				foreach( $logfiles as $fileid => $access ) {
+					if ( substr( $fileid , 0 , 2 ) === 'f-' ) {
+						if ( (int)$access === 1 ) {
+							$logs[ substr( $fileid , 2 ) ] = array( 'r' => true );
+						}
+					}
+				}
+    			Sentinel::setUser( $username , $password , array('user') , $logs );
+				if ( $type === 'add' ) Sentinel::log( 'adduser ' . $username , $current_user );
+			}
+			Sentinel::save();
+
+		}
+
+		$return['c'] = count( $errors );
+		$return['e'] = $errors;
+
+		break;
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Delete a single user
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'users_delete':
+
+		if ( ! Sentinel::isAdmin() ) {
+			$return['error'] = 'vaffanculo';
+			break;
+		}
+
+		$username = $_POST['u'];
+
+		if ( $username === $current_user ) {
+			$return['error'] = __('Please do not shoot yourself in the foot!');
+		}
+		else {
+			Sentinel::deleteUser( $username );
+	        Sentinel::log( 'deleteuser ' . $username , $current_user );
+			Sentinel::save();
+		}
+
+		break;
 
 
 	/*
@@ -212,6 +327,12 @@ switch ( @$_POST['action'] ) {
 	|
 	*/
 	case 'authlog':
+
+		if ( ! Sentinel::isAdmin() ) {
+			$return['error'] = 'vaffanculo';
+			break;
+		}
+
 		$logs = array();
 		foreach ( Sentinel::getLogs() as $log ) {
 			$log[ 2 ] = date( 'Y/m/d H:i:s' , (int)$log[ 2 ] );
