@@ -15,29 +15,31 @@ $navbar-inverse-link-hover-color  : $gray-lighter;
 $navbar-inverse-link-active-color : $navbar-inverse-link-hover-color;
 $navbar-inverse-link-active-bg    : darken($navbar-inverse-bg, 10%);
 $navbar-inverse-brand-color       : $navbar-inverse-link-color;
-$font-family-sans-serif           : PNR, "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-monospace            : AP, Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-sans-serif           : 'ubuntulight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-monospace            : 'ubuntu_monoregular', Menlo, Monaco, Consolas, "Courier New", monospace;
 
 @font-face {
-  font-family: 'PNR';
-  src: url('../fonts/PNR.eot'); /* IE9 Compat Modes */
-  src: url('../fonts/PNR.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/PNR.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/PNR.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/PNR.svg#2c1459d58560f08b4b0586fbe80aa4cd') format('svg'); /* Legacy iOS */
-  font-style:   normal;
-  font-weight:  400;
+    font-family: 'ubuntu_monoregular';
+    src: url('../fonts/ubuntumono-r-webfont.eot');
+    src: url('../fonts/ubuntumono-r-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ubuntumono-r-webfont.woff2') format('woff2'),
+         url('../fonts/ubuntumono-r-webfont.woff') format('woff'),
+         url('../fonts/ubuntumono-r-webfont.ttf') format('truetype'),
+         url('../fonts/ubuntumono-r-webfont.svg#ubuntu_monoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'AP';
-  src: url('../fonts/AP.eot'); /* IE9 Compat Modes */
-  src: url('../fonts/AP.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/AP.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/AP.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/AP.svg#488ed4a0c3cc470469719192a1f4c813') format('svg'); /* Legacy iOS */
-  font-style:   normal;
-  font-weight:  400;
+    font-family: 'ubuntulight';
+    src: url('../fonts/ubuntu-l-webfont.eot');
+    src: url('../fonts/ubuntu-l-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ubuntu-l-webfont.woff2') format('woff2'),
+         url('../fonts/ubuntu-l-webfont.woff') format('woff'),
+         url('../fonts/ubuntu-l-webfont.ttf') format('truetype'),
+         url('../fonts/ubuntu-l-webfont.svg#ubuntulight') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
@@ -61,7 +63,6 @@ $font-family-monospace            : AP, Menlo, Monaco, Consolas, "Courier New", 
 	line-height    : 2em;
 	padding-left   : 1.5em;
 	padding-right  : 1.5em;
-	font-family    : PNR, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .dropdown-menu {
@@ -109,6 +110,7 @@ body {
 /* Refresh button */
 .loader {
 	margin-left : 40px;
+	width       : 20px;
 	@media (max-width : 767px) {
 		margin-left : 130px;
 	}
@@ -190,8 +192,8 @@ textarea.test {
 
 /* Spinning class from awesome fonts */
 .icon-spin {
-  -webkit-animation: kf-spin 2s infinite linear;
-          animation: kf-spin 2s infinite linear;
+	-webkit-animation: kf-spin 2s infinite linear;
+			animation: kf-spin 2s infinite linear;
 }
 @-webkit-keyframes kf-spin {
   0% {

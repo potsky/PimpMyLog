@@ -1,0 +1,24 @@
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using potskymac.local. Set the 'ServerName' directive globally to suppress this message
+[Sat Nov 01 00:18:28.964113 2014] [mpm_prefork:notice] [pid 61] AH00163: Apache/2.4.9 (Unix) configured -- resuming normal operations
+[Sat Nov 01 00:18:28.964337 2014] [core:notice] [pid 61] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+[Sat Nov 01 08:24:06.718902 2014] [mpm_prefork:notice] [pid 61] AH00169: caught SIGTERM, shutting down
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using potskymac.local. Set the 'ServerName' directive globally to suppress this message
+[Sat Nov 01 08:24:27.768939 2014] [mpm_prefork:notice] [pid 57] AH00163: Apache/2.4.9 (Unix) configured -- resuming normal operations
+[Sat Nov 01 08:24:27.769205 2014] [core:notice] [pid 57] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+[Sat Nov 01 11:21:21.627789 2014] [mpm_prefork:notice] [pid 57] AH00169: caught SIGTERM, shutting down
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using potskymac.local. Set the 'ServerName' directive globally to suppress this message
+[Sat Nov 01 11:22:22.621847 2014] [mpm_prefork:notice] [pid 57] AH00163: Apache/2.4.9 (Unix) configured -- resuming normal operations
+[Sat Nov 01 11:22:22.622081 2014] [core:notice] [pid 57] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+[Sat Nov 01 12:00:24.489321 2014] [mpm_prefork:notice] [pid 57] AH00173: SIGHUP received.  Attempting to restart
+[Sat Nov 01 12:00:24.521295 2014] [ssl:warn] [pid 57] AH01909: nr.dev.local:443:0 server certificate does NOT include an ID which matches the server name
+[Sat Nov 01 12:00:24.521518 2014] [ssl:warn] [pid 57] AH01909: www.example.com:443:0 server certificate does NOT include an ID which matches the server name
+[Sat Nov 01 12:00:24.521568 2014] [ssl:warn] [pid 57] AH02292: Init: Name-based SSL virtual hosts only work for clients with TLS server name indication support (RFC 4366)
+[Sat Nov 01 12:00:24.522251 2014] [mpm_prefork:notice] [pid 57] AH00163: Apache/2.4.9 (Unix) OpenSSL/0.9.8za configured -- resuming normal operations
+[Sat Nov 01 12:00:24.522265 2014] [core:notice] [pid 57] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+[Sat Nov 01 12:07:42.138303 2014] [mpm_prefork:notice] [pid 57] AH00173: SIGHUP received.  Attempting to restart
+[Sat Nov 01 12:07:42.418509 2014] [ssl:warn] [pid 57] AH01909: nr.dev.local:443:0 server certificate does NOT include an ID which matches the server name
+[Sat Nov 01 12:07:42.418739 2014] [ssl:warn] [pid 57] AH01909: www.example.com:443:0 server certificate does NOT include an ID which matches the server name
+[Sat Nov 01 12:07:42.418778 2014] [ssl:warn] [pid 57] AH02292: Init: Name-based SSL virtual hosts only work for clients with TLS server name indication support (RFC 4366)
+[Sat Nov 01 12:07:42.419565 2014] [mpm_prefork:notice] [pid 57] AH00163: Apache/2.4.9 (Unix) PHP/5.5.12 OpenSSL/0.9.8za configured -- resuming normal operations
+[Sat Nov 01 12:07:42.419579 2014] [core:notice] [pid 57] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+[Sat Nov 01 12:51:10.301783 2014] [:error] [pid 1177] [client 127.0.0.1:50736] , referer: http://localhost/~potsky/GitHub/PimpMyLog-dev/_site/?tz=Europe%2FParis&l=en_GB&w=on&o=&p=-1&i=apache1&m=10&r=5&s=&n=true

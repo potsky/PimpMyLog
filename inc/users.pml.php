@@ -119,7 +119,6 @@ switch ( @$_POST['action'] ) {
 		if ( $doit === true ) {
 			$return['ok'] = __( 'Password has been successfully changed!' );
 			Sentinel::changePassword( $username , $password2 );
-			Sentinel::save();
 		}
 		else {
 			$return['errors'] = $errors;

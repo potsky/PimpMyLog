@@ -26,33 +26,25 @@ function apache_get_config( $type , $file , $software , $counter ) {
 	/////////////////////////////////////////////////////////
 	if ( $type == 'error' ) {
 
-
-		// Get the first 10 lines and try to guess
-		// This is not really
-		$firstline = '';
-		$handle    = @fopen( $file , 'r' );
-		$remain    = 10;
-		$test      = 0;
-		if ( $handle ) {
-			while ( ( $buffer = fgets( $handle , 4096 ) ) !== false ) {
-				$test = @preg_match('|^\[(.*) (.*) (.*) (.*):(.*):(.*)\.(.*) (.*)\] \[(.*):(.*)\] \[pid (.*)\] .*\[client (.*):(.*)\] (.*)(, referer: (.*))*$|U', $buffer );
-				if ( $test === 1 ) {
-					break;
-				}
-				$remain--;
-				if ($remain<=0) {
-					break;
-				}
+		// Write a line of log and try to guess the format
+		$remain = 10;
+		$test   = 0;
+		error_log( __( 'Pimp my Log has been successfully configured with Apache' ) );
+		foreach ( Parser::getLinesFromBottom( $file , 10 ) as $line ) {
+			$test = @preg_match('|^\[(.*) (.*) (.*) (.*):(.*):(.*)\.(.*) (.*)\] \[(.*):(.*)\] \[pid (.*)\] .*\[client (.*):(.*)\] (.*)(, referer: (.*))*$|U', $line );
+			if ( $test === 1 ) {
+				break;
 			}
-			fclose($handle);
+			$remain--;
+			if ($remain<=0) {
+				break;
+			}
 		}
-
 
 		/////////////////////
 		// Error 2.4 style //
 		/////////////////////
 		if ( $test === 1 ) {
-
 			return<<<EOF
 		"$software$counter": {
 			"display" : "Apache Error #$counter",

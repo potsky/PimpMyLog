@@ -13,6 +13,7 @@ var file,
 	reset,
 	sort,
 	sorto,
+	has_loaded_more        = false,
 	notification_displayed = false;
 
 
@@ -435,18 +436,32 @@ function s( field , direction ) {
 
 
 /**
+ * Return the offset in bytes in the log file of the oldest displayed log line
+ *
+ * @return  {integer}  the offset in bytes
+ */
+function get_top_offset() {
+	return parseInt( $('#logsbody').find( 'tr:last-child' ).data('offset') , 10);
+}
+
+
+/**
  * Ajax call to get logs
  *
  * @param   {boolean}  load_default_values  If set to true, the ajax will use default values for the selected file if there are available
  * @param   {boolean}  load_full_file       If set to true, the log file will be parsed without keeping history. It is a slow process but mandatory when search of file have changed.
  * @param   {boolean}  load_from_get        If set to true, the GET parameters will override default values. This is used for the first launch for example.
+ * @param   {boolean}  load_more            If set to true, we will load more logs append to the bottom of the table
  *
  * @return  {void}
  */
-var get_logs     = function( load_default_values , load_full_file , load_from_get ) {
+var get_logs     = function( load_default_values , load_full_file , load_from_get , load_more ) {
 	"use strict";
 
 	var wanted_lines;
+
+	// Disable load more button
+	$('#loadmore').button('loading');
 
 	// Auto refresh stop
 	if ( auto_refresh_timer !== null ) {
@@ -531,9 +546,11 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 
 	// Load full logs and not increment
 	if ( load_full_file === true ) {
-		reset     = 1;
-		file_size = 0;
-		last_line = '';
+		reset           = 1;
+		file_size       = 0;
+		load_more       = false;
+		last_line       = '';
+		has_loaded_more = false;
 	}
 	else {
 		reset     = 0;
@@ -543,9 +560,8 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 	$('.loader').toggle();
 	loading      = true;
 	wanted_lines = $('#max').val();
-	$.ajax( {
-		url     : 'inc/getlog.pml.php?' + (new Date()).getTime() + '&' + querystring,
-		data    : {
+
+	var post_values = {
 			'ldv'         : load_default_values,
 			'file'        : file,
 			'filesize'    : file_size,
@@ -554,21 +570,42 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			'csrf_token'  : csrf_token,
 			'lastline'    : last_line,
 			'reset'       : reset,
-		} ,
-		type: 'POST',
-		dataType: 'json'
+	};
+
+	// We must read more logs
+	if ( load_more === true ) {
+
+		// set the offset to the last parsed byte to tell ajax where to begin
+		post_values['sp'] = get_top_offset();
+
+		// We will never clear logs again and we will display all logs on page until a full reset
+		has_loaded_more   = true;
+	}
+
+	// Go for ajaxing
+	$.ajax( {
+		url      : 'inc/getlog.pml.php?' + (new Date()).getTime() + '&' + querystring,
+		data     : post_values,
+		type     : 'POST',
+		dataType : 'json'
 	} )
 	.fail( function ( logs ) {
 		// Layout
 		$('.loader').toggle();
 		loading = false;
 
+		if ( logs.responseText.indexOf( 'Pimp My Log Login Match' ) > -1 ) {
+			notify( "Pimp my Logs [" + files[file].display + "]" , lemma.youhavebeendisconnected );
+			document.location.reload();
+			return;
+		}
+
 		// Error
 		if ( logs.error ) {
 			$(".result").hide();
 			$("#error").show();
 			$('#errortxt').html( logs.responseText );
-			notify( notification_title.replace( '%i' , file ).replace( '%f' , files[file].display ) , lemma.error );
+			notify( "Pimp my Logs [" + files[file].display + "]" , lemma.error );
 			return;
 		}
 
@@ -578,8 +615,13 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 		// Layout
 		$('.loader').toggle();
 		loading   = false;
-		file_size = logs.newfilesize;
-		last_line = logs.lastline;
+
+		// The last line is not sent when we load more logs
+		// It is only sent when we are on the bottom of the log file
+		if ( logs.lastline ) {
+			last_line = logs.lastline;
+			file_size = logs.newfilesize;
+		}
 
 		// Error
 		if ( logs.error ) {
@@ -704,11 +746,14 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 
 		for ( var log in logs.logs ) {
 
-			var tr = $('<tr>').addClass( file ).data( 'log' , logs.logs[ log ].pml );
+			var tr = $('<tr>')
+						.addClass( file )
+						.data( 'log' , logs.logs[ log ].pml )
+						.data( 'offset' , logs.logs[ log ].pmlo );
 
 			for ( var c in logs.logs[ log ] ) {
 
-				if ( 'pml' === c ) {
+				if ( ( 'pml' === c ) || ( 'pmlo' === c ) ) {
 					continue;
 				}
 
@@ -807,18 +852,31 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 		}
 
 		// display all logs so append to bottom
-		if ( logs.full ) {
+		if ( ( logs.full ) || ( load_more === true ) ) {
 			$('#logsbody').append( rows );
 		}
 
 		// display only new logs, so append to top
 		else {
 			$('#logsbody').prepend( rows );
-			var rowd = $('#logsbody tr').length;
-			if ( rowd > wanted_lines ) {
-				rowd = rowd - wanted_lines;
-				$('#logsbody').find( 'tr:nth-last-child(-n+' + rowd + ')' ).remove();
+
+			// Do not remove lines if user has clicked on Load More button at least one time
+			if ( has_loaded_more !== true ) {
+				var rowd = $('#logsbody tr').length;
+				if ( rowd > wanted_lines ) {
+					rowd = rowd - wanted_lines;
+					$('#logsbody').find( 'tr:nth-last-child(-n+' + rowd + ')' ).remove();
+				}
 			}
+		}
+
+		// Load more button
+		// We can call get_top_offset() now because rows have not been sorted and the older log line is the last one
+		var older_line_offset = get_top_offset();
+		if ( ( older_line_offset <= 1 ) || ( ( logs.search !== '' ) && ( parseInt( logs.lpo , 10 ) <= 1) ) ) {
+			$('#loadmore').text( $('#loadmore').data('nomore-text') ).addClass('disabled').prop('disabled','disabled').attr('title','');
+		} else {
+			$('#loadmore').button('reset').attr( 'title' , sprintf( lemma.loadmore , numeral( older_line_offset ).format('0 b') ) );
 		}
 
 		// Sort table
@@ -1089,6 +1147,10 @@ $(function() {
 		});
 	}
 
+	// Load more
+	$('#loadmore').click(function() {
+		get_logs( false , false , false , true );
+	});
 
 	// Here we go
 	get_logs( true , true , true );

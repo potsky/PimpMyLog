@@ -13,13 +13,14 @@ load_default_constants();
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="description" content=""/>
+	<meta name="pmltrick" content="Pimp My Log Login Match"/>
+	<meta name="viewport" content="width=device-width"/>
 	<title><?php echo TITLE;?></title>
 	<?php include_once 'inc/favicon.inc.php'; ?>
-	<link rel="stylesheet" href="css/pml.min.css">
+	<link rel="stylesheet" href="css/pml.min.css"/>
 </head>
 <body>
 	<!--[if lt IE 7]>

@@ -8,7 +8,7 @@
 	},
 	"changelog"   : {
 		"1.5.0" : {
-			"released" : "2014-10-19",
+			"released" : "2014-11-01",
 			"new"      : [
 				"Authentication feature #61",
 				"Authentication logs",
@@ -18,12 +18,15 @@
 				"Reset an account password from the debugger",
 				"New global parameter <code>AUTH_LOG_FILE_COUNT</code> to set the maximum number of entries in the auth log file. Set this value to 0 if you want to disable authentication logs",
 				"New global parameter <code>SORT_LOG_FILES</code> to sort your log files in the log selector on top left. Documentation is <a href=\"http://pimpmylog.com/documentation/configuration.html#SORT_LOG_FILES\">here</a>.",
-				"New configuration file with extension <code>.php</code> instead of <code>.json</code> to avoid direct calls in web browser and then people can see where are located your log files. <code>.json</code> files are still supported. Upgrading your configuration files is really straightforward, instructions are <a href=\"http://support.pimpmylog.com/kb/configuration/upgrade-json-configuration-files-to-php-configuration-files\">here</a>."
+				"New configuration file with extension <code>.php</code> instead of <code>.json</code> to avoid direct calls in web browser and then people can see where are located your log files. <code>.json</code> files are still supported. Upgrading your configuration files is really straightforward, instructions are <a href=\"http://support.pimpmylog.com/kb/configuration/upgrade-json-configuration-files-to-php-configuration-files\">here</a>.",
+				"More logs feature #64"
 			],
 			"fixed" : [
+				"Apache 2.4 configurator could have problems to find logs format in some case"
 			],
 			"changed" : [
-				"New pretty (?) design"
+				"New pretty design with new Ubuntu font",
+				"Start refactoring for version 2.0 with unit tests"
 			]
 		},
 		"1.3.0" : {

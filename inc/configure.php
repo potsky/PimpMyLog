@@ -46,14 +46,14 @@ if ( isset( $_POST['s'] ) ) {
 				$return[ 'notice' ] =
 					'<h2>' . __( 'Setup admin account') . '</h2>'
 					. '<br/>'
-					. __('You can use <em>Pimp my Log</em> without authentication but you will not be able to add this feature later from the web interface. You will need to do it manually.') . '<br/>'
+					. __('You can use <em>Pimp my Log</em> without authentication. You will be able to add this feature later from the debugger web interface.') . '<br/>'
 					. '<br/>'
 					. __('Setup an admin account will let you create other users later and give them access to certain log files only.') . '<br/>'
 					. '<br/>'
 					. __( 'Do you want to create an admin account now?') . '<br/>'
 					. '<br/>'
 					. '<br/>'
-					. '<a href="javascript:process_authentication_yes()" class="btn btn-primary">' . __('Yes, create an admin account now') . '</a>'
+					. '<a href="javascript:process_authentication_yes()" class="btn btn-primary">' . __('Create an admin account') . '</a>'
 					. '&nbsp;&nbsp;'
 					. '<a href="javascript:process_authentication_no()" class="btn btn-default">' . __('No') . '</a>';
 

@@ -14,12 +14,12 @@ $(function() {
 			url  : 'test.php' ,
 			type : 'POST',
 			data : {
-				'r' : $( '#inputRegEx' ).val(),
-				'l' : $( '#inputLog' ).val(),
-				'm' : $( '#inputMatch' ).val(),
-				't' : $( '#inputTypes' ).val(),
-				'u' : $( '#inputMultiline' ).val(),
-				's' : '1',
+				'r'      : $( '#inputRegEx' ).val(),
+				'l'      : $( '#inputLog' ).val(),
+				'm'      : $( '#inputMatch' ).val(),
+				't'      : $( '#inputTypes' ).val(),
+				'u'      : $( '#inputMultiline' ).val(),
+				'action' : 'regextest'
 			} ,
 			dataType: 'json'
 		} )
@@ -39,57 +39,72 @@ $(function() {
 		event.preventDefault();
 	});
 
+
 	$(document).ready(function(){
 
-		$('a.clipboard2').zclip({
-			path:'../js/ZeroClipboard.swf',
-			copy:function(){
-				return $("pre.clipboard2content").text();
-			},
-			afterCopy:function() {
-				$( 'a.clipboard2' ).popover( {
-					html      : true ,
-					animation : true ,
-					placement : 'right',
-					container : 'body',
-					delay     : { show: 100, hide: 5000 },
-					content   : lemma.command_copied
-				} ).popover( 'show' );
-				$('a.clipboard2').on('hidden.bs.popover', function () {
-					$( 'a.clipboard2' ).show();
+		$('.clipboard').on( 'mouseover', function() {
+
+	        var self = $(this);
+
+	        //turn off this listening event for the element that triggered this
+	        $(this).off('mouseover');
+
+			//initialize zclip
+			if ( $(this).data('source') ) {
+
+				$(this).zclip({
+					path:'../js/ZeroClipboard.swf',
+					copy:function(){
+						return $( $(this).data('source') ).text();
+					},
+					afterCopy:function() {
+						$( self ).popover( {
+							html      : true ,
+							animation : true ,
+							placement : $(this).data('placement'),
+							delay     : { show: 100, hide: 5000 },
+							content   : $(this).data('text'),
+						} ).popover( 'show' );
+						$( self ).on('hidden.bs.popover', function () {
+							$( self ).show();
+						});
+					}
 				});
 			}
-		});
 
-		$('a.clipboard').zclip({
-			path:'../js/ZeroClipboard.swf',
-			copy:function(){
-				var t = '{\n';
-				t += '  "SOFTWARE_ID": {\n';
-				t += '    "display"   : "SOFTWARE NAME",\n';
-				t += '    "path"      : "SOFTWARE PATH",\n';
-				t += '    "format"    : {\n';
-				t += '      "multiline": ' + JSON.stringify($( '#inputMultiline' ).val()) + ',\n';
-				t += '      "regex"    : ' + JSON.stringify($( '#inputRegEx' ).val()) + ',\n';
-				t += '      "match"    : ' + $( '#inputMatch' ).val() + ',\n';
-				t += '      "types"    : ' + $( '#inputTypes' ).val() + '\n';
-				t += '    }\n';
-				t += '  }\n';
-				t += '}\n';
-				return t;
-			},
-			afterCopy:function() {
-				$( 'a.clipboard' ).popover( {
-					html      : true ,
-					animation : true ,
-					placement : 'right',
-					container : 'body',
-					delay     : { show: 100, hide: 5000 },
-					content   : lemma.configuration_copied
-				} ).popover( 'show' );
-				$('a.clipboard').on('hidden.bs.popover', function () {
-					$( 'a.clipboard' ).show();
+			else {
+
+				$(this).zclip({
+					path:'../js/ZeroClipboard.swf',
+					copy:function(){
+						var t = '{\n';
+						t += '  "SOFTWARE_ID": {\n';
+						t += '    "display"   : "SOFTWARE NAME",\n';
+						t += '    "path"      : "SOFTWARE PATH",\n';
+						t += '    "format"    : {\n';
+						t += '      "multiline": ' + JSON.stringify($( '#inputMultiline' ).val()) + ',\n';
+						t += '      "regex"    : ' + JSON.stringify($( '#inputRegEx' ).val()) + ',\n';
+						t += '      "match"    : ' + $( '#inputMatch' ).val() + ',\n';
+						t += '      "types"    : ' + $( '#inputTypes' ).val() + '\n';
+						t += '    }\n';
+						t += '  }\n';
+						t += '}\n';
+						return t;
+					},
+					afterCopy:function() {
+						$( self ).popover( {
+							html      : true ,
+							animation : true ,
+							placement : 'right',
+							delay     : { show: 100, hide: 5000 },
+							content   : lemma.configuration_copied
+						} ).popover( 'show' );
+						$( self ).on('hidden.bs.popover', function () {
+							$( self ).show();
+						});
+					}
 				});
+
 			}
 		});
 
@@ -127,6 +142,13 @@ $(function() {
 				var activeTab = $('[href=' + location.hash + ']');
 				activeTab && activeTab.tab('show');
 			}
+		});
+
+		$('.nav-tabs a').click(function (e) {
+		    $(this).tab('show');
+		    var scrollmem = $('body').scrollTop();
+		    window.location.hash = this.hash;
+		    $('html,body').scrollTop(scrollmem);
 		});
 	});
 });

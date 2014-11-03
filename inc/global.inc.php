@@ -135,6 +135,18 @@ spl_autoload_register('my_autoloader');
  *
  * @return   string     the translation
  */
+function h($text)
+{
+    return htmlentities( $text ,ENT_QUOTES,'UTF-8');
+}
+
+/**
+ * htmlentities for echo
+ *
+ * @param string  $text the text key
+ *
+ * @return   string     the translation
+ */
 function _h($text)
 {
     _e( htmlentities( $text ,ENT_QUOTES,'UTF-8') );

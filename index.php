@@ -107,53 +107,55 @@ if ( is_array( $errors ) ) {
 |
 */
 $lemma = array(
-	'notification_deny' => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
-	'no_log'            => __( 'No log has been found.' ),
-	'regex_valid'       => __( 'Search was done with RegEx engine' ),
-	'regex_invalid'     => __( 'Search was done with regular engine' ),
-	'search_no_regular' => __( 'No log has been found with regular search %s' ),
-	'search_no_regex'   => __( 'No log has been found with Reg Ex search %s' ),
-	'new_logs'          => __( 'New logs are available' ),
-	'new_log'           => __( '1 new log is available' ),
-	'new_nlogs'         => __( '%s new logs are available' ),
-	'display_log'       => __( '1 log displayed,' ),
-	'display_nlogs'     => __( '%s logs displayed,' ),
-	'error'             => __( 'An error occurs!' ),
-	'toggle_column'     => __( 'Toggle column %s' ),
-	'date'              => __( 'Date' ),
-	'action'            => __( 'Action' ),
-	'username'          => __( 'User name' ),
-	'ip'                => __( 'IP' ),
-	'useragent'         => __( 'User agent' ),
-	'signin'            => __( 'Sign in' ),
-	'signinerr'         => __( 'Sign in error' ),
-	'signout'           => __( 'Sign out' ),
-	'changepwd'         => __( 'Password changed' ),
-	'authlogerror'      => __( 'There is no log to display and your are connected... It seems that global parameter <code>AUTH_LOG_FILE_COUNT</code> is set to 0. Change this parameter to a higher value to display logs.' ),
-	'roles'             => __( 'Roles' ),
-	'creationdate'      => __( 'Created at' ),
-	'createdby'         => __( 'Created by' ),
-	'logincount'        => __( 'Logins' ),
-	'lastlogin'         => __( 'Last login' ),
-	'system'            => __( 'System' ),
-	'user'              => __( 'User' ),
-	'adduser'           => __( 'Add user' ),
-	'deleteuser'        => __( 'Delete user' ),
-	'reallydeleteuser'  => __( 'Confirm' ),
-	'users'             => __( 'Users' ),
-	'user_roles'        => __( 'Roles' ),
-	'user_logs'         => __( 'Log access' ),
-	'user_cd'           => __( 'Created at' ),
-	'user_cb'           => __( 'Created by' ),
-	'user_logincount'   => __( 'Logins' ),
-	'user_lastlogin'    => __( 'Last login' ),
-	'user_add_ok'       => __( 'User has been successfully saved!' ),
-	'user_delete_ok'    => __( 'User has been successfully deleted!' ),
-	'form_invalid'      => __( 'Form is invalid:' ),
-	'all_access'        => __( 'All accesses granted' ),
-	'addadmin'          => __( 'Add admin' ),
-	'adduser'           => __( 'Add user' ),
-	'deleteuser'        => __( 'Delete user' ),
+	'notification_deny'       => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
+	'no_log'                  => __( 'No log has been found.' ),
+	'regex_valid'             => __( 'Search was done with RegEx engine' ),
+	'regex_invalid'           => __( 'Search was done with regular engine' ),
+	'search_no_regular'       => __( 'No log has been found with regular search %s' ),
+	'search_no_regex'         => __( 'No log has been found with Reg Ex search %s' ),
+	'new_logs'                => __( 'New logs are available' ),
+	'new_log'                 => __( '1 new log is available' ),
+	'new_nlogs'               => __( '%s new logs are available' ),
+	'display_log'             => __( '1 log displayed,' ),
+	'display_nlogs'           => __( '%s logs displayed,' ),
+	'error'                   => __( 'An error occurs!' ),
+	'toggle_column'           => __( 'Toggle column %s' ),
+	'date'                    => __( 'Date' ),
+	'action'                  => __( 'Action' ),
+	'username'                => __( 'User name' ),
+	'ip'                      => __( 'IP' ),
+	'useragent'               => __( 'User agent' ),
+	'signin'                  => __( 'Sign in' ),
+	'signinerr'               => __( 'Sign in error' ),
+	'signout'                 => __( 'Sign out' ),
+	'changepwd'               => __( 'Password changed' ),
+	'authlogerror'            => __( 'There is no log to display and your are connected... It seems that global parameter <code>AUTH_LOG_FILE_COUNT</code> is set to 0. Change this parameter to a higher value to display logs.' ),
+	'roles'                   => __( 'Roles' ),
+	'creationdate'            => __( 'Created at' ),
+	'createdby'               => __( 'Created by' ),
+	'logincount'              => __( 'Logins' ),
+	'lastlogin'               => __( 'Last login' ),
+	'system'                  => __( 'System' ),
+	'user'                    => __( 'User' ),
+	'adduser'                 => __( 'Add user' ),
+	'deleteuser'              => __( 'Delete user' ),
+	'reallydeleteuser'        => __( 'Confirm' ),
+	'users'                   => __( 'Users' ),
+	'user_roles'              => __( 'Roles' ),
+	'user_logs'               => __( 'Log access' ),
+	'user_cd'                 => __( 'Created at' ),
+	'user_cb'                 => __( 'Created by' ),
+	'user_logincount'         => __( 'Logins' ),
+	'user_lastlogin'          => __( 'Last login' ),
+	'user_add_ok'             => __( 'User has been successfully saved!' ),
+	'user_delete_ok'          => __( 'User has been successfully deleted!' ),
+	'form_invalid'            => __( 'Form is invalid:' ),
+	'all_access'              => __( 'All accesses granted' ),
+	'addadmin'                => __( 'Add admin' ),
+	'adduser'                 => __( 'Add user' ),
+	'deleteuser'              => __( 'Delete user' ),
+	'loadmore'                => __( 'Still %s to load'),
+	'youhavebeendisconnected' => __( 'You need to sign in' ),
 );
 
 
@@ -222,7 +224,7 @@ $csrf = csrf_get();
 					<span class="icon-bar"></span>
 				</button>
 				<div class="navbar-brand">
-					<span class="loader glyphicon glyphicon-refresh icon-spin" style="display:none;width:18px;"></span>
+					<span class="loader glyphicon glyphicon-refresh icon-spin" style="display:none;"></span>
 					<span class="loader glyphicon glyphicon-repeat" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span>
 					<a href="?"><?php echo NAV_TITLE;?></a>
 				</div>
@@ -416,13 +418,19 @@ $csrf = csrf_get();
 				<tbody id="logsbody"></tbody>
 			</table>
 		</div>
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
+				<button style="width:100%" id="loadmore" type="button" class="btn btn-xs btn-primary" data-loading-text="<?php _h('Loading...');?>" data-nomore-text="<?php _h('No more data');?>"><?php _h('Load more');?></button>
+			</div>
+		</div>
 	</div>
 
 	<div class="container">
+		<br/>
 		<div class="result">
 			<small id="footer"></small>
 		</div>
-		<hr>
+		<hr/>
 		<footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer>
 	</div>
 

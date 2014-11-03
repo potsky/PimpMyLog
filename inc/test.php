@@ -3,6 +3,21 @@ include_once 'global.inc.php';
 
 load_default_constants();
 
+$access_file = 'test.PLEASE_REMOVE_ME.access_from_' . get_client_ip() . '_only.php';
+
+/**
+ * Regex Tester
+ *
+ * @param   string   $type       type
+ * @param   string   $regex      regex
+ * @param   array    $match      matchers
+ * @param   array    $types      typers
+ * @param   array    $logs       logs
+ * @param   boolean  $headers    display header
+ * @param   string   $multiline  multiline field
+ *
+ * @return  string               html
+ */
 function test( $type , $regex , $match , $types , $logs , $headers = true , $multiline = '' ) {
 	$r  = '<h4>' . $type . '</h4>';
 	$r .= '<pre>';
@@ -59,7 +74,10 @@ function test( $type , $regex , $match , $types , $logs , $headers = true , $mul
 }
 
 
-if ( ( isset( $_POST['s'] ) ) && ( file_exists( 'test.REMOVE_UPPERCASE.php') ) ) {
+/**
+ * Ajax return for regexp tester
+ */
+if ( ( @$_POST['action'] === 'regextest' ) && ( file_exists( $access_file ) ) ) {
 
 	$return    = array();
 	$match     = @json_decode( $_POST['m'] , true );
@@ -96,11 +114,11 @@ if ( ( isset( $_POST['s'] ) ) && ( file_exists( 'test.REMOVE_UPPERCASE.php') ) )
 	die();
 }
 
+
 //////////////////////
 // Javascript Lemma //
 //////////////////////
 $lemma = array(
-	"command_copied"       => __( "Command has been copied to your clipboard!" ),
 	"configuration_copied" => __( "Configuration array has been copied to your clipboard!" ),
 );
 
@@ -140,8 +158,6 @@ $lemma = array(
 		<br/>
 
 <?php
-$access_file = 'test.PLEASE_REMOVE_ME.access_from_' . get_client_ip() . '_only.php';
-
 if ( ! file_exists( $access_file ) ) {
 	echo '<div class="row">';
 	echo 	'<div class="col-xs-12"><div class="alert alert-danger">';
@@ -150,37 +166,63 @@ if ( ! file_exists( $access_file ) ) {
 	echo 		__('To grant access, please create this temporary file on your server:');
 	echo 		'<br/><br/>';
 	echo 	'</div>';
-	echo 	'<div class="col-md-8"><pre class="clipboard2content">' . 'touch \'' . dirname( __FILE__ ) . '/' . $access_file . '\'</pre></div>';
-	echo 	'<div class="col-md-4"><a class="btn btn-primary clipboard2">' . __('Copy to clipboard') . '</a></div>';
+	echo 	'<div class="col-md-8"><pre class="clipboard2content">touch \'' . dirname( __FILE__ ) . '/' . $access_file . '\'</pre></div>';
+	echo 	'<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard2content" data-placement="right" data-text="' . h("Command has been copied to your clipboard!") . '">' . __('Copy to clipboard') . '</a></div>';
 	echo 	'<div class="col-xs-12">';
-	echo 		'<br/>';
-	echo 		__("Then reload this page.");
-	echo 		'<br/><br/><div class="alert alert-info">';
-	echo 			__("Don't forget to remove this temporary file when you have finished...");
-	echo 		'</div>';
+	echo 		'<br/>' . __("Then reload this page.") . '<br/><br/>';
+	echo 		'<button onclick="document.location.reload();" class="btn btn-primary">' . __("Reload") . '</button>';
 	echo 	'</div>';
 	echo '</div>';
 }
 else {
 ?>
 
-		<!-- Nav tabs -->
+		<!--========================================================================
+		|
+		| Nav tabs
+		|
+		======================================================================== -->
 		<ul class="nav nav-tabs" role="tablist">
-		  <li class="active"><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li>
+		  <li class="active"><a href="#quittab" role="tab" data-toggle="tab"><?php _e('Quit');?></a></li>
+		  <li><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li>
 		  <li><a href="#resamplestab" role="tab" data-toggle="tab"><?php _e('Regex samples');?></a></li>
 		  <li><a href="#configurationtab" role="tab" data-toggle="tab"><?php _e('Configuration');?></a></li>
-		  <li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Change account password');?></a></li>
+		  <li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Password recovery');?></a></li>
+		  <li><a href="#authactivation" role="tab" data-toggle="tab"><?php _e('Authentication');?></a></li>
 		</ul>
 
-		<!-- Tab panes -->
+
+		<!--========================================================================
+		|
+		| Tab panes
+		|
+		======================================================================== -->
 		<div class="tab-content">
 
 			<!--========================================================================
 			|
-			|
+			| Quit
 			|
 			======================================================================== -->
-			<div class="tab-pane active" id="retestertab">
+			<div class="tab-pane active" id="quittab">
+				<br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="alert alert-danger"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div>
+					</div>
+					<br/><br/>
+					<div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . '/' . $access_file . '\''; ?></pre></div>
+					<?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard3content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?>
+				</div>
+			</div>
+
+
+			<!--========================================================================
+			|
+			| 1 - Regex Tester
+			|
+			======================================================================== -->
+			<div class="tab-pane" id="retestertab">
 
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" id="regextest">
@@ -245,7 +287,7 @@ on several lines
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-primary"><?php _e('Test');?></button>
+								<button type="submit" class="btn btn-success"><?php _e('Test');?></button>
 								&nbsp;
 								<a class="btn btn-primary clipboard"><?php _e('Copy to clipboard');?></a>
 							</div>
@@ -258,7 +300,7 @@ on several lines
 
 			<!--========================================================================
 			|
-			|
+			| 2 - Regex Samples
 			|
 			======================================================================== -->
 			<div class="tab-pane" id="resamplestab">
@@ -360,7 +402,7 @@ echo test( $type , $regex , $match , $types , $log );
 
 			<!--========================================================================
 			|
-			|
+			| 3 - Configuration
 			|
 			======================================================================== -->
 			<div class="tab-pane" id="configurationtab">
@@ -379,6 +421,7 @@ echo test( $type , $regex , $match , $types , $log );
 							<div id="collapseOne2" class="panel-collapse collapse">
 								<div class="panel-body">
 									<pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre>
+									<pre><?php if (file_exists('../config.user.php')) show_source('../config.user.php'); else echo 'file ../config.user.php does not exist'; ?></pre>
 								</div>
 							</div>
 						</div>
@@ -393,6 +436,7 @@ echo test( $type , $regex , $match , $types , $log );
 							<div id="collapseTwo2" class="panel-collapse collapse">
 								<div class="panel-body">
 									<pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre>
+									<pre><?php if (file_exists('../config.user.php')) var_export( @stat('../config.user.php') ); else echo 'file ../config.user.php does not exist'; ?></pre>
 								</div>
 							</div>
 						</div>
@@ -496,51 +540,153 @@ echo test( $type , $regex , $match , $types , $log );
 
 			<!--========================================================================
 			|
-			|
+			| 5 - Authentication
+			| This block must be displayed before next one because of the creation of authentication
 			|
 			======================================================================== -->
-			<div class="tab-pane" id="passwordtab">
-				<?php if ( Sentinel::isAuthSet() ) { ?>
+			<div class="tab-pane" id="authactivation">
 
-					<h2><?php _e( 'Please fill an existing username and a new password') ?></h2>
-	 				<br/><br/>
-	 				<?php
-						if ( isset( $_POST['username'] ) ) {
-							if ( Sentinel::userExists( $_POST['username'] ) ) {
-								Sentinel::setUser( $_POST['username'] , $_POST['password'] );
-								Sentinel::save();
+ 				<?php
+ 					$return = '';
 
-								echo '<div class="alert alert-success" role="alert">' . sprintf( __('Password has been updated for user %s!') , '<code>' . $_POST['username'] . '</code>' ) . '</div>';
-							} else {
-								echo '<div class="alert alert-danger" role="alert">' . sprintf( __('User %s does not exist!') , '<code>' . $_POST['username'] . '</code>' ) . '</div>';
-							}
+					if ( @$_POST['action'] === 'authactivation' ) {
+						Sentinel::init();
+						Sentinel::create();
+
+						if ( Sentinel::userExists( $_POST['username'] ) ) {
+							$return = '<br/><div class="alert alert-danger" role="alert">' . sprintf( __('User %s already exists!') , '<code>' . $_POST['username'] . '</code>' ) . '</div>';
 						}
-	 				?>
-					<form id="authsave" autocomplete="off" method="POST" action="?#passwordtab">
+						else if ( $_POST['password'] !== $_POST['password2'] ) {
+							$return = '<br/><div class="alert alert-danger" role="alert">' . __( 'Password confirmation is not the same' ) . '</div>';
+						}
+						else if ( mb_strlen( $_POST['password'] ) < 6 ) {
+							$return = '<br/><div class="alert alert-danger" role="alert">' . __( 'Password must contain at least 6 chars' ) . '</div>';
+						}
+						else {
+							Sentinel::setAdmin( $_POST['username'] , $_POST['password'] );
+							Sentinel::save();
+							$return = '<br/><div class="alert alert-success" role="alert">' . __('Authentication has been enabled and admin account has been created!') . '</div>';
+						}
+					}
+ 				?>
+
+				<?php if ( Sentinel::isAuthSet() ) { ?>
+					<?php echo $return; ?>
+	 				<br/>
+					<div class="alert alert-info" role="alert"><?php _e('Authentication is currently enabled'); ?></div>
+					<br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="alert alert-danger"><?php _e('Please remove this file on your server to disable authentication'); ?></div>
+						</div>
+						<br/><br/>
+						<div class="col-md-8"><pre class="clipboard4content">rm '<?php echo Sentinel::getAuthFilePath(); ?>'</pre></div>
+						<?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard4content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?>
+					</div>
+
+	 			<?php } else { ?>
+
+					<?php echo $return; ?>
+	 				<br/>
+					<div class="alert alert-warning" role="alert"><?php _e('Authentication is currently disabled'); ?></div>
+					<h4><?php _e( 'Setup admin account') ?></h4>
+					<form id="authsave" autocomplete="off" method="POST" action="?#authactivation">
+						<input type="hidden" name="action" value="authactivation"/>
 						<div class="container">
 		 					<div class="row">
 		 						<div class="input-group col-sm-6 col-md-4" id="usernamegroup" data-toggle="tooltip" data-placement="top" title="<?php _h( 'Username is required' ); ?>">
 									<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-									<input type="text" id="username" name="username" class="form-control" placeholder="<?php _h('Username') ?>" autofocus="autofocus"/>
+									<!-- htmlmin:ignore -->
+									<input type="text" id="username" name="username" class="form-control" value="<?php echo h( @$_POST['username'] ); ?>" placeholder="<?php _h('Username') ?>" autofocus="autofocus"/>
+									<!-- htmlmin:ignore -->
 								</div>
 		 					<br/>
 		 					</div>
 		 					<div class="row">
 		 						<div class="input-group col-sm-6 col-md-4" id="passwordgroup" data-toggle="tooltip" data-placement="bottom" title="<?php _h( 'Password must contain at least 6 chars' ); ?>">
 									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-									<input type="password" id="password" name="password" class="form-control" placeholder="<?php _h('Password') ?>"/>
+									<!-- htmlmin:ignore -->
+									<input type="password" id="password" name="password" class="form-control" value="<?php echo h( @$_POST['password'] ); ?>" placeholder="<?php _h('Password') ?>"/>
+									<!-- htmlmin:ignore -->
 								</div>
 		 					<br/>
 		 					</div>
 		 					<div class="row">
 		 						<div class="input-group col-sm-6 col-md-4" id="password2group" data-toggle="tooltip" data-placement="bottom" title="<?php _h( 'Password is not the same' ); ?>">
 									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-									<input type="password" id="password2" name="password2" class="form-control" placeholder="<?php _h('Password Confirmation') ?>"/>
+									<!-- htmlmin:ignore -->
+									<input type="password" id="password2" name="password2" class="form-control" value="<?php echo h( @$_POST['password2'] ); ?>" placeholder="<?php _h('Password Confirmation') ?>"/>
+									<!-- htmlmin:ignore -->
 								</div>
 		 					</div>
 		 				</div>
 		 				<br/><br/>
-		 				<input type="submit" class="btn btn-large btn-success" value="<?php _h('Continue') ?>"/>
+		 				<input type="submit" class="btn btn-large btn-success" value="<?php _h('Enable authentication') ?>"/>
+	 				</form>
+
+	 			<?php } ?>
+
+			</div>
+
+			<!--========================================================================
+			|
+			| 4 - Change account password
+			|
+			======================================================================== -->
+			<div class="tab-pane" id="passwordtab">
+				<?php if ( Sentinel::isAuthSet() ) { ?>
+					<br/>
+					<h4><?php _e( 'Please fill an existing username and a new password') ?></h4>
+	 				<?php
+						if ( @$_POST['action'] === 'passwordtab' ) {
+							if ( ! Sentinel::userExists( $_POST['username'] ) ) {
+								echo '<div class="alert alert-danger" role="alert">' . sprintf( __('User %s does not exist!') , '<code>' . $_POST['username'] . '</code>' ) . '</div>';
+							}
+							else if ( $_POST['password'] !== $_POST['password2'] ) {
+								echo '<div class="alert alert-danger" role="alert">' . __( 'Password confirmation is not the same' ) . '</div>';
+							}
+							else if ( mb_strlen( $_POST['password'] < 6 ) ) {
+								echo '<div class="alert alert-danger" role="alert">' . __( 'Password must contain at least 6 chars' ) . '</div>';
+							}
+							else {
+								Sentinel::setUser( $_POST['username'] , $_POST['password'] );
+								Sentinel::save();
+								echo '<div class="alert alert-success" role="alert">' . sprintf( __('Password has been updated for user %s!') , '<code>' . $_POST['username'] . '</code>' ) . '</div>';
+							}
+						}
+	 				?>
+					<form id="authsave" autocomplete="off" method="POST" action="?#passwordtab">
+						<input type="hidden" name="action" value="passwordtab"/>
+						<div class="container">
+		 					<div class="row">
+		 						<div class="input-group col-sm-6 col-md-4" id="usernamegroup" data-toggle="tooltip" data-placement="top" title="<?php _h( 'Username is required' ); ?>">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+									<!-- htmlmin:ignore -->
+									<input type="text" id="username" name="username" class="form-control" value="<?php echo h( @$_POST['username'] ); ?>" placeholder="<?php _h('Username') ?>" autofocus="autofocus"/>
+									<!-- htmlmin:ignore -->
+								</div>
+		 					<br/>
+		 					</div>
+		 					<div class="row">
+		 						<div class="input-group col-sm-6 col-md-4" id="passwordgroup" data-toggle="tooltip" data-placement="bottom" title="<?php _h( 'Password must contain at least 6 chars' ); ?>">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+									<!-- htmlmin:ignore -->
+									<input type="password" id="password" name="password" class="form-control" value="<?php echo h( @$_POST['password'] ); ?>" placeholder="<?php _h('Password') ?>"/>
+									<!-- htmlmin:ignore -->
+								</div>
+		 					<br/>
+		 					</div>
+		 					<div class="row">
+		 						<div class="input-group col-sm-6 col-md-4" id="password2group" data-toggle="tooltip" data-placement="bottom" title="<?php _h( 'Password is not the same' ); ?>">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+									<!-- htmlmin:ignore -->
+									<input type="password" id="password2" name="password2" class="form-control" value="<?php echo h( @$_POST['password2'] ); ?>" placeholder="<?php _h('Password Confirmation') ?>"/>
+									<!-- htmlmin:ignore -->
+								</div>
+		 					</div>
+		 				</div>
+		 				<br/><br/>
+		 				<input type="submit" class="btn btn-large btn-success" value="<?php _h('Reset') ?>"/>
 	 				</form>
 	 			<?php } else { ?>
 	 				<br/>

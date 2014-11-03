@@ -63,6 +63,7 @@ module.exports = function(grunt) {
 					'bower_components/numeral/numeral.js',
 					'bower_components/numeral/languages/*.js',
 					'bower_components/bootstrap-table/src/bootstrap-table.js',
+					'bower_components/sprintf.js/src/sprintf.js'
 				],
 				dest: '_tmp/pml.js',
 				options: {
