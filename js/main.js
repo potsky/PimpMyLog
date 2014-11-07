@@ -32,6 +32,47 @@ var query_parameters = function () {
 
 
 /**
+ * Command to enable a copy to clipboard button
+ *
+ * @param   {string}  btn    the DOM selector of buttons on which to apply the copy to clipboard action when clicked
+ * @param   {string}  ctn    the DOM selector of the content retrieved by the jQuery text() method
+ * @param   {string}  where  where to display the tooltip on successfull copy (left, right, bottom, top)
+ * @param   {string}  text   the text to display in the tooltip
+ *
+ * @return  {void}
+ */
+var clipboard_enable = function( btn , ctn , where , text ) {
+
+	$(btn).on( 'mouseover', function() {
+
+		//turn off this listening event for the element that triggered this
+	    $(btn).off('mouseover');
+
+		$(btn).zclip({
+			path:'js/ZeroClipboard.swf',
+			copy:function(){
+				return ( $(ctn).val() ) ? $(ctn).val() : $(ctn).text();
+			},
+			afterCopy:function() {
+
+				$( btn ).popover( {
+					html      : true ,
+					animation : true ,
+					placement : where,
+					delay     : { show: 100, hide: 5000 },
+					content   : text,
+				} ).popover( 'show' );
+
+				setTimeout( function() { $( btn ).popover('hide') } , 2000 );
+				$(btn).on('hidden.bs.popover', function () {
+					$( btn ).show();
+				});
+			}
+		});
+	});
+};
+
+/**
  * Reload the page with query string context
  *
  * @param   {boolean}  urlonly  if set to false or undefined, the page will be reloaded. If set to something else, only the brower url will be updated.

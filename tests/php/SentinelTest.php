@@ -97,8 +97,21 @@ class SentinelTest extends TestCase {
         $this->assertInternalType( 'array' , $potsky['lastlogin'] );
     }
 
-    public function test_Anonymous() {
+    public function test_AccessToken() {
+        $users = Sentinel::getUsers();
+        foreach ( $users as $username => $user ) break;
+        $accesstoken = $user['at'];
 
+        $this->assertEquals( $username , Sentinel::getUsernameFromAccessToken( $accesstoken ) );
+        $this->assertNull( Sentinel::getUsernameFromAccessToken( 'Ashley' ) );
+
+        $this->assertNull( Sentinel::getCurrentUsername() );
+
+        Sentinel::signInWithAccessToken( $accesstoken );
+        $this->assertEquals( $username , Sentinel::getCurrentUsername() );
+    }
+
+    public function test_Anonymous() {
         $this->assertFalse( Sentinel::isLogAnonymous( 'rick' ) );
         $this->assertFalse( Sentinel::isAnonymousEnabled() );
 

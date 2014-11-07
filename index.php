@@ -111,6 +111,7 @@ $lemma = array(
 	'addadmin'                => __( 'Add admin' ),
 	'adduser'                 => __( 'Add user' ),
 	'all_access'              => __( 'All accesses granted' ),
+	'anonymous_ok'            => __( 'Anonymous access has been successfully saved!' ),
 	'authlogerror'            => __( 'There is no log to display and your are connected... It seems that global parameter <code>AUTH_LOG_FILE_COUNT</code> is set to 0. Change this parameter to a higher value to display logs.' ),
 	'changepwd'               => __( 'Password changed' ),
 	'createdby'               => __( 'Created by' ),
@@ -130,7 +131,9 @@ $lemma = array(
 	'new_nlogs'               => __( '%s new logs are available' ),
 	'no_log'                  => __( 'No log has been found.' ),
 	'notification_deny'       => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
+	'profile_ok'              => __( 'Your profile has baeen successfully saved!' ),
 	'reallydeleteuser'        => __( 'Confirm' ),
+	'reallysigninuser'        => __('Confirm'),
 	'regex_invalid'           => __( 'Search was done with regular engine' ),
 	'regex_valid'             => __( 'Search was done with RegEx engine' ),
 	'roles'                   => __( 'Roles' ),
@@ -139,15 +142,19 @@ $lemma = array(
 	'signin'                  => __( 'Sign in' ),
 	'signinas'                => __( 'Sign in as' ),
 	'signinerr'               => __( 'Sign in error' ),
+	'signinuser'              => __('Sign in as'),
 	'signout'                 => __( 'Sign out' ),
 	'system'                  => __( 'System' ),
 	'toggle_column'           => __( 'Toggle column %s' ),
 	'user'                    => __( 'User' ),
-	'anonymous_ok'            => __( 'Anonymous access has successfully saved!' ),
 	'user_add_ok'             => __( 'User has been successfully saved!' ),
+	'user_api_lastlogin'      => __( 'Last API call' ),
+	'user_api_logincount'     => __( 'API calls' ),
+	'user_at'                 => __( 'Access token' ),
 	'user_cb'                 => __( 'Created by' ),
 	'user_cd'                 => __( 'Created at' ),
 	'user_delete_ok'          => __( 'User has been successfully deleted!' ),
+	'user_hp'                 => __( 'Presalt key' ),
 	'user_lastlogin'          => __( 'Last login' ),
 	'user_logincount'         => __( 'Logins' ),
 	'user_logs'               => __( 'Log access' ),
@@ -156,8 +163,6 @@ $lemma = array(
 	'username'                => __( 'User name' ),
 	'users'                   => __( 'Users' ),
 	'youhavebeendisconnected' => __( 'You need to sign in' ),
-	'reallysigninuser'        => __('Confirm'),
-	'signinuser'              => __('Sign in as'),
 );
 
 
@@ -513,6 +518,27 @@ $csrf = csrf_get();
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
 							<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save');?>" id="cpSave"/>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="modal fade" id="prModal" tabindex="-1" role="dialog" aria-labelledby="prModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<form id="prForm" autocomplete="off">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
+							<h4 class="modal-title" id="prModalLabel"><?php _e('Profile');?></h4>
+						</div>
+						<div class="modal-body form-horizontal">
+							<div id="prAlert"></div>
+							<div id="prBody"></div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
+							<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save');?>" id="prSave"/>
 						</div>
 					</div>
 				</form>

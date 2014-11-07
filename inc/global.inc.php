@@ -60,28 +60,29 @@ define( 'CONFIG_FILE_TEMP'                   , 'config.user.tmp.php' );
 | Overwrite them in your configuration file, not in this code directly !
 |
 */
-define( 'DEFAULT_LOCALE'                      , 'gb_GB' );
-define( 'DEFAULT_TITLE'                       , 'Pimp my Log' );
-define( 'DEFAULT_TITLE_FILE'                  , 'Pimp my Log [%f]' );
-define( 'DEFAULT_NAV_TITLE'                   , '' );
-define( 'DEFAULT_HELP_URL'                    , 'http://pimpmylog.com' );
+define( 'DEFAULT_AUTH_LOG_FILE_COUNT'         , 100 );
+define( 'DEFAULT_CHECK_UPGRADE'               , true );
+define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
 define( 'DEFAULT_FOOTER'                      , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . YEAR . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
+define( 'DEFAULT_FORGOTTEN_YOUR_PASSWORD_URL' , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
+define( 'DEFAULT_GEOIP_URL'                   , 'http://www.geoiptool.com/en/?IP=%p' );
+define( 'DEFAULT_GOOGLE_ANALYTICS'            , 'UA-XXXXX-X' );
+define( 'DEFAULT_HELP_URL'                    , 'http://pimpmylog.com' );
+define( 'DEFAULT_LOCALE'                      , 'gb_GB' );
 define( 'DEFAULT_LOGS_MAX'                    , 50 );
 define( 'DEFAULT_LOGS_REFRESH'                , 0 );
-define( 'DEFAULT_NOTIFICATION'                , false );
-define( 'DEFAULT_PULL_TO_REFRESH'             , true );
-define( 'DEFAULT_NOTIFICATION_TITLE'          , 'New logs [%f]' );
-define( 'DEFAULT_GOOGLE_ANALYTICS'            , 'UA-XXXXX-X' );
-define( 'DEFAULT_GEOIP_URL'                   , 'http://www.geoiptool.com/en/?IP=%p' );
-define( 'DEFAULT_CHECK_UPGRADE'               , true );
-define( 'DEFAULT_PIMPMYLOG_VERSION_URL'       , 'http://demo.pimpmylog.com/version.js' );
-define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'        , 'https://github.com/potsky/PimpMyLog/issues/' );
 define( 'DEFAULT_MAX_SEARCH_LOG_TIME'         , 5 );
-define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
-define( 'DEFAULT_USER_CONFIGURATION_DIR'      , 'config.user.d' );
-define( 'DEFAULT_AUTH_LOG_FILE_COUNT'         , 100 );
+define( 'DEFAULT_NAV_TITLE'                   , '' );
+define( 'DEFAULT_NOTIFICATION'                , false );
+define( 'DEFAULT_NOTIFICATION_TITLE'          , 'New logs [%f]' );
+define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'        , 'https://github.com/potsky/PimpMyLog/issues/' );
+define( 'DEFAULT_PIMPMYLOG_VERSION_URL'       , 'http://demo.pimpmylog.com/version.js' );
+define( 'DEFAULT_PULL_TO_REFRESH'             , true );
+define( 'DEFAULT_RSS'                         , true );
 define( 'DEFAULT_SORT_LOG_FILES'              , 'default' );
-define( 'DEFAULT_FORGOTTEN_YOUR_PASSWORD_URL' , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
+define( 'DEFAULT_TITLE'                       , 'Pimp my Log' );
+define( 'DEFAULT_TITLE_FILE'                  , 'Pimp my Log [%f]' );
+define( 'DEFAULT_USER_CONFIGURATION_DIR'      , 'config.user.d' );
 
 
 /*
@@ -284,6 +285,7 @@ function load_default_constants()
         'PIMPMYLOG_ISSUE_LINK',
         'PIMPMYLOG_VERSION_URL',
         'PULL_TO_REFRESH',
+        'RSS',
         'SORT_LOG_FILES',
         'TITLE',
         'TITLE_FILE',
@@ -842,6 +844,28 @@ function get_client_ip() {
     return $ip;
 }
 
+/**
+ * Get the current url
+ *
+ * @return  string  current url
+ */
+function get_current_url() {
+    if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
+        $s        = &$_SERVER;
+        $ssl      = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on') ? true:false;
+        $sp       = strtolower(@$s['SERVER_PROTOCOL']);
+        $protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
+        $port     = @$s['SERVER_PORT'];
+        $port     = ((!$ssl && $port=='80') || ($ssl && $port=='443')) ? '' : ':'.$port;
+        $host     = isset( $s['HTTP_X_FORWARDED_HOST'] ) ? $s['HTTP_X_FORWARDED_HOST'] : ( isset( $s['HTTP_HOST'] ) ? $s['HTTP_HOST'] : null );
+        $host     = isset($host) ? $host : @$s['SERVER_NAME'] . $port;
+        $uri      = $protocol . '://' . $host . @$s['REQUEST_URI'];
+        $segments = explode('?', $uri, 2);
+        $url      = $segments[0];
+        return $url;
+    }
+    return null;
+}
 
 /**
  * Tell if the provided IP address is local or not
@@ -868,13 +892,14 @@ function is_not_local_ip( $ip ) {
 | keep it
 |
 */
-if ( ! isset( $_COOKIE['u'] ) ) {
-    $uuid = sha1( json_encode( $_SERVER ) . uniqid( '' , true ) );
-    setcookie( 'u' ,  $uuid , time()+60*60*24*3000 );
-} else {
-    $uuid = $_COOKIE['u'];
+if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
+    if ( ! isset( $_COOKIE['u'] ) ) {
+        $uuid = sha1( json_encode( $_SERVER ) . uniqid( '' , true ) );
+        setcookie( 'u' ,  $uuid , time()+60*60*24*3000 );
+    } else {
+        $uuid = $_COOKIE['u'];
+    }
 }
-global $uuid;
 
 /*
 |--------------------------------------------------------------------------

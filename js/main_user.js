@@ -6,8 +6,132 @@
 $(function() {
 	"use strict";
 
+	/*
+	|--------------------------------------------------------------------------
+	| Profile
+	|--------------------------------------------------------------------------
+	|
+	| Reset modal between two launches
+	|
+	*/
+	$('#prModal').on('show.bs.modal', function (e) {
+		profile_get();
+	});
 
-$('#umModal').modal('show');
+	/**
+	 * Get user profile
+	 *
+	 * @return  {boolean}  false
+	 */
+	var profile_get = function( severity , message , close ) {
+
+		if ( severity !== undefined ) {
+			$('#prAlert').html( get_alert( severity , message , close ) );
+		} else {
+			$('#prAlert').html('');
+		}
+
+		$('#prBody').html('<img src="img/loader.gif"/>');
+
+		$.ajax( {
+			url      : 'inc/users.pml.php?' + (new Date()).getTime() + '&' + querystring,
+			type     : 'POST',
+			dataType : 'json',
+			data     : {
+				'csrf_token' : csrf_token,
+				'action'     : 'profile_get',
+			}
+		} )
+		.always( function() {
+		})
+		.fail( function ( e ) {
+			$('#prBody').html( get_alert( 'danger' , e.responseText , false ) );
+		})
+		.done( function ( re ) {
+			if ( re.singlewarning ) {
+				$('#prBody').html( get_alert( 'warning' , re.singlewarning , false ) );
+			}
+			else if ( re.singlenotice ) {
+				$('#prBody').html( get_alert( 'info' , re.singlenotice , false ) );
+			}
+			else if ( re.error ) {
+				$('#prBody').html( get_alert( 'danger' , re.error , false ) );
+			}
+			else {
+				$('#prBody').html( re.b );
+			}
+		});
+
+		return false;
+	};
+
+	/*
+	|--------------------------------------------------------------------------
+	| Profile Save
+	|--------------------------------------------------------------------------
+	|
+	| On submit
+	|
+	*/
+	$('#prForm').on('submit', function() {
+		profile_save();
+		event.preventDefault();
+		return false;
+	});
+
+	/**
+	 * Save user profile
+	 *
+	 * @return  {boolean}  false
+	 */
+	var profile_save = function() {
+
+		$('#prSave').button('loading');
+
+		var values = {
+			'csrf_token' : csrf_token,
+			'action'     : 'profile_save'
+		};
+		$.each( $('#prForm').serializeArray(), function(i, field) {
+			values[ field.name ] = field.value;
+		});
+
+		$.ajax( {
+			url      : 'inc/users.pml.php?' + (new Date()).getTime() + '&' + querystring,
+			type     : 'POST',
+			dataType : 'json',
+			data     : values
+		} )
+		.always( function() {
+			$('#prSave').button('reset');
+		})
+		.fail( function ( e ) {
+			$('#prAlert').html( get_alert( 'danger' , e.responseText , false ) );
+		})
+		.done( function ( re ) {
+
+			if ( re.singlewarning ) {
+				$('#prBody').html( get_alert( 'warning' , re.singlewarning , false ) );
+				return false;
+			}
+			else if ( re.singlenotice ) {
+				$('#prBody').html( get_alert( 'info' , re.singlenotice , false ) );
+				return false;
+			}
+			else if ( re.error ) {
+				$('#prBody').html( get_alert( 'danger' , re.error , false ) );
+				return false;
+			}
+			else  {
+				profile_get( 'success' , lemma.profile_ok , true );
+				return false;
+			}
+		});
+
+		return false;
+	};
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| Change Password
@@ -427,6 +551,12 @@ var users_view = function( obj ) {
 			else if ( i === 'u' ) {
 				continue;
 			}
+			else if ( i === 'at' ) {
+				continue;
+			}
+			else if ( i === 'hp' ) {
+				continue;
+			}
 			else if ( i === 'logs' ) {
 				if ( is_admin === true ) {
 					val = lemma.all_access;
@@ -476,7 +606,7 @@ var users_view = function( obj ) {
 
 
 /**
- * Edit a user
+ * Add a user
  *
  * @return  {boolean}  false
  */
@@ -877,15 +1007,15 @@ var anonymous_save = function() {
 	.done( function ( re ) {
 
 		if ( re.singlewarning ) {
-			$('#umUsersAddAlert').html( get_alert( 'warning' , re.singlewarning , false ) );
+			$('#umAnonymousBody').html( get_alert( 'warning' , re.singlewarning , false ) );
 			return false;
 		}
 		else if ( re.singlenotice ) {
-			$('#umUsersAddAlert').html( get_alert( 'info' , re.singlenotice , false ) );
+			$('#umAnonymousBody').html( get_alert( 'info' , re.singlenotice , false ) );
 			return false;
 		}
 		else if ( re.error ) {
-			$('#umUsersAddAlert').html( get_alert( 'danger' , re.error , false ) );
+			$('#umAnonymousBody').html( get_alert( 'danger' , re.error , false ) );
 			return false;
 		}
 		else  {

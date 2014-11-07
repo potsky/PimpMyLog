@@ -2,104 +2,191 @@
 
 class Sentinel
 {
+
 	private static $auth;
 	private static $authFile;
 	private static $authFileP;
+	private static $api_session;
 	private static $currentlylocked = false;
 
 	/**
-	 * Lock the database file
+	 * Sign values
 	 *
-	 * @return boolean
+	 * @param string $username the user to sign in
+	 * @param string $password its password
+	 *
+	 * @return array the user informations or false if failed
 	 */
-	private static function lock()
+
+	/**
+	 * Manage login
+	 *
+	 * @return [type] [description]
+	 */
+	public static function attempt()
 	{
-		if (self::$currentlylocked === false) {
-			self::$authFileP = fopen( self::$authFile , "a+" );
-			if ( flock( self::$authFileP , LOCK_EX ) ) { // acquière un verrou exclusif
-				self::$currentlylocked = true;
-			} else {
-				throw new Exception( 'Unable to lock file' );
+
+		if ( self::isAuthSet() ) { // authentication is enabled on this instance
+
+			$user = self::getCurrentUsername();
+
+			if ( is_null( $user ) ) { // no logged in user
+
+				if ( isset( $_POST['attempt'] ) ) { // form is posted
+
+					if ( ! csrf_verify() ) {
+						$attempt = $_POST['attempt'];
+						$error   = 2;
+						include_once PML_BASE . '/inc/login.inc.php';
+						self::release();
+						die();
+					}
+
+					$loggedin = self::signIn( $_POST['username'] , $_POST['password'] );
+
+					if ( is_array( $loggedin ) ) { // signed in
+						header( "Location: " . $_POST['attempt'] );
+						die();
+					}
+
+					else { // error while signing in
+						$attempt = $_POST['attempt'];
+						$error   = 1;
+						include_once PML_BASE . '/inc/login.inc.php';
+						self::release();
+						die();
+					}
+				}
+
+				else if ( isset( $_GET['signin'] ) ) { // sign in page when anonymous access is enabled
+
+					$attempt = $_SERVER['REQUEST_URI'] . '?' . $_SERVER['QUERY_STRING'];
+					$error   = 0;
+					include_once PML_BASE . '/inc/login.inc.php';
+					self::release();
+					die();
+				}
+
+				else if ( self::isAnonymousEnabled() ) { // Anonymous access is enabled, simply return to let anonymosu users to parse logs
+					return null;
+				}
+
+				else { // send form
+					$attempt = $_SERVER['REQUEST_URI'] . '?' . $_SERVER['QUERY_STRING'];
+					$error   = 0;
+					include_once PML_BASE . '/inc/login.inc.php';
+					self::release();
+					die();
+				}
+
 			}
+
+			else {
+
+				if ( isset( $_GET['signout'] ) ) {
+					self::signOut();
+					self::release();
+
+					if ( self::isAnonymousEnabled() ) { // Anonymosu access, redirect to normal page
+						header( 'Location: ' . $_SERVER['PHP_SELF'] );
+					}
+					else { // No anonymous access, redirect to login page
+						$error   = 3;
+						$attempt = '?';
+						include_once PML_BASE . '/inc/login.inc.php';
+					}
+
+					die();
+				}
+
+				return $user;
+			}
+		}
+
+		return null;
+
+	}
+
+	/**
+	 * Change the password with logging
+	 *
+	 * @param string $username     the username
+	 * @param string $new_password the new password
+	 *
+	 * @return boolean true
+	 */
+	public static function changePassword($username , $new_password)
+	{
+		self::setUser( $username , $new_password );
+		self::log( 'changepwd' , $username );
+		self::save();
+
+		return true;
+	}
+
+	/**
+	 * Create a new authentication file
+	 *
+	 * @return boolean true if ok or false if error or if already exists
+	 */
+	public static function create()
+	{
+		if ( file_exists( self::$authFile ) ) return false;
+		if ( touch( self::$authFile ) === false ) return false;
+
+		self::$auth = array(
+			'generated' => date('U'),
+			'security'  => self::generateSecurityToken(),
+			'anonymous' => array(),
+			'users'     => array(),
+		);
+
+		self::save();
+
+		return true;
+	}
+
+	/**
+	 * Delete a user
+	 *
+	 * @param string $username the username to delete
+	 *
+	 * @return array the deleted user or false if not exists
+	 */
+	public static function deleteUser($username)
+	{
+		if ( ! self::userExists( $username ) ) return false;
+
+		$deleted_user = self::$auth['users'][ $username ];
+		unset( self::$auth['users'][ $username ] );
+
+		return $deleted_user;
+	}
+
+	/**
+	 * Destroy the authentication file
+	 *
+	 * @return boolean success or not
+	 */
+	public static function destroy()
+	{
+		self::sessionDestroy();
+
+		if ( self::isAuthSet() ) {
+			return unlink( self::$authFile );
 		}
 
 		return true;
 	}
 
 	/**
-	 * Read the database
+	 * Get the path of the authentication file
 	 *
-	 * @return string the database content
+	 * @return string the fila path
 	 */
-	private static function read()
+	public static function getAuthFilePath()
 	{
-		self::lock();
-		if ( is_null( self::$authFileP ) ) throw new Exception( 'No lock has been requested' );
-		return stream_get_contents( self::$authFileP , -1 , 0 );
-	}
-
-	/**
-	 * Write the database
-	 *
-	 * @param string $content the database content
-	 *
-	 * @return boolean
-	 */
-	private static function write($content)
-	{
-		self::lock();
-		if ( is_null( self::$authFileP ) ) throw new Exception( 'No lock has been requested' );
-		ftruncate( self::$authFileP , 0 );
-		fwrite( self::$authFileP , $content );
-
-		return fflush( self::$authFileP );
-	}
-
-	private static function sessionRead()
-	{
-		// Web
-		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			@session_start();
-
-			return ( isset( $_SESSION['auth'] ) ) ? $_SESSION['auth'] : array();
-		}
-		// CLI
-		else {
-			$json = @file_get_contents( '_cli_fake_session' );
-			$value = json_decode( $json , true );
-
-			return ( is_array( $value ) ) ? $value : array();
-		}
-	}
-
-	private static function sessionWrite($value)
-	{
-		// Web
-		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			@session_start();
-			$_SESSION[ 'auth' ] = $value;
-			session_write_close();
-		}
-		// CLI
-		else {
-			file_put_contents( '_cli_fake_session' , json_encode( $value ) );
-		}
-	}
-
-	private static function sessionDestroy()
-	{
-		// Web
-		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			@session_start();
-			unset( $_SESSION['auth'] );
-			$_SESSION['auth'] = array();
-			session_write_close();
-		}
-		// CLI
-		else {
-			$value = array();
-			file_put_contents( '_cli_fake_session' , json_encode( $value ) );
-		}
+		return PML_BASE . DIRECTORY_SEPARATOR . AUTH_CONFIGURATION_FILE;
 	}
 
 	/**
@@ -128,105 +215,94 @@ class Sentinel
 	}
 
 	/**
-	 * Generate a security token
+	 * Get the current logged in user or null
 	 *
-	 * @return string the security token
+	 * @return string the current username or null
 	 */
-	private static function generateSecurityToken()
+	public static function getCurrentUsername()
 	{
-		return mt_rand_str( 64 );
+		if ( is_array( self::$api_session ) ) {
+			$auth = self::$api_session;
+		} else {
+			$auth = self::sessionRead();
+		}
+
+		return ( isset( $auth['username'] ) ) ? $auth['username'] : null;
 	}
 
 	/**
-	 * Get the security token
+	 * Return the log array
 	 *
-	 * @return string the security token
+	 * @return array data
 	 */
-	private static function getSecurityToken()
+	public static function getLogs()
 	{
-		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
-		return self::$auth['security'];
+		if ( isset( self::$auth['logs'] ) ) {
+			return self::$auth['logs'];
+		}
+
+		return array();
 	}
 
 	/**
-	 * Get the date when authentication file has been ganarated
-	 *
-	 * @return integer the generated date
-	 */
-	private static function getGenerated()
-	{
-		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
-		return self::$auth['generated'];
-	}
-
-	/**
-	 * Generate a hash from a username and a password
-	 *
-	 * @param string $username username
-	 * @param string $password password
-	 *
-	 * @return string the hash
-	 */
-	private static function getPasswordHash($username , $password)
-	{
-		return sha1( self::getSecurityToken() . $username . self::getGenerated() . $password );
-	}
-
-	/**
-	 * Release the database file
-	 *
-	 * @return boolean
-	 */
-	public static function release()
-	{
-		if ( is_null( self::$authFileP ) ) return;
-		$a = @flock( self::$authFileP , LOCK_UN );
-		@fclose( self::$authFileP );
-		self::$authFileP       = null;
-		self::$currentlylocked = false;
-	}
-
-	/**
-	 * Tell whether a password is valid or not
+	 * Return the data of a user
 	 *
 	 * @param string $username the username
-	 * @param string $password the password
 	 *
-	 * @return boolean
+	 * @return array data or null if not exists
 	 */
-	public static function isValidPassword($username , $password)
+	public static function getUser($username = null)
 	{
-		if ( ! self::userExists( $username ) ) return false;
-		$compute = self::getPasswordHash($username , $password);
+		if ( is_null( $username ) ) $username = self::getCurrentUsername();
 
-		return ( $compute === self::$auth['users'][$username]['pwd'] );
-	}
-
-	/**
-	 * Get the path of the authentication file
-	 *
-	 * @return string the fila path
-	 */
-	public static function getAuthFilePath()
-	{
-		return PML_BASE . DIRECTORY_SEPARATOR . AUTH_CONFIGURATION_FILE;
-	}
-
-	/**
-	 * Just get the auth file and load it in the $auth variable
-	 *
-	 * @return boolean success or not
-	 */
-	public static function reload()
-	{
-		$content = preg_replace('/^.+\n/', '', self::read() );
-		$array   = json_decode( $content , true );
-		if ( is_null( $array ) ) {
-			return false;
+		if ( self::userExists( $username ) ) {
+			return self::$auth['users'][ $username ];
 		}
-		self::$auth = $array;
 
-		return true;
+		return null;
+	}
+
+	/**
+	 * Find a user from its access token
+	 *
+	 * @param   string  $accesstoken  the access token
+	 *
+	 * @return  string                username or null
+	 */
+	public static function getUsernameFromAccessToken( $accesstoken ) {
+		$users = self::getUsers();
+		foreach( $users as $username => $user ) {
+			if ( $user['at'] === $accesstoken ) {
+				return $username;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return the array of users
+	 *
+	 * @return array the users
+	 */
+	public static function getUsers()
+	{
+		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
+
+		if ( isset( self::$auth['users'] ) ) {
+			return self::$auth['users'];
+		} else {
+			return array();
+		}
+	}
+
+	/**
+	 * Return the users count
+	 *
+	 * @return integer the user count
+	 */
+	public static function getUsersCount()
+	{
+		return count( self::getUsers() );
 	}
 
 	/**
@@ -245,25 +321,25 @@ class Sentinel
 	}
 
 	/**
-	 * Create a new authentication file
+	 * Tell if a user is admin or not. Being admin is having role "admin"
 	 *
-	 * @return boolean true if ok or false if error or if already exists
+	 * @param string $username a username or current logged in user if not set
+	 *
+	 * @return boolean
 	 */
-	public static function create()
+	public static function isAdmin($username = null)
 	{
-		if ( file_exists( self::$authFile ) ) return false;
-		if ( touch( self::$authFile ) === false ) return false;
+		return self::userHasRole( 'admin' , $username );
+	}
 
-		self::$auth = array(
-			'generated' => date('U'),
-			'security'  => self::generateSecurityToken(),
-			'anonymous' => array(),
-			'users'     => array(),
-		);
-
-		self::save();
-
-		return true;
+	/**
+	 * Tell if at least one log file is accessible anonymously
+	 *
+	 * @return  boolean
+	 */
+	public static function isAnonymousEnabled()
+	{
+		return ( count( self::$auth['anonymous'] ) > 0 );
 	}
 
 	/**
@@ -277,71 +353,45 @@ class Sentinel
 	}
 
 	/**
-	 * Set an admin
+	 * Tell if a log file is accessible anonymously
 	 *
-	 * @param string $username username
-	 * @param string $password password
-	 * @param array  $logs     an array of credentials for log files
+	 * @param   string  $log       the fileid
 	 *
-	 * @return boolean true
+	 * @return  boolean
 	 */
-	public static function setAdmin($username , $password = null , $logs = null)
+	public static function isLogAnonymous( $log )
 	{
-		return self::setUser( $username , $password , $roles = array('admin') , $logs );
+		return ( in_array( $log , self::$auth['anonymous'] ) );
 	}
 
 	/**
-	 * Set a user
+	 * Tell whether a signature is valid for given values or not
 	 *
-	 * @param string $username username
-	 * @param string $password password
-	 * @param array  $roles    an array of global roles
-	 * @param array  $logs     an array of credentials for log files
+	 * @param   string   $given_sign  the provided signature
+	 * @param   array    $values      an array of values to certify
+	 * @param   string   $username    the user who has signed values or null for an instance signature
 	 *
-	 * @return boolean true
+	 * @return  boolean               ok or not
 	 */
-	public static function setUser($username , $password = null , $roles = null , $logs = null)
-	{
-		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
-
-		if ( isset( self::$auth['users'][ $username ] ) ) {
-			$user = self::$auth['users'][ $username ];
-		} else {
-			$user = array(
-				'roles' => array('user'),
-				'pwd'   => '',
-				'logs'  => array(),
-				'cd'    => date('U'),
-				'cb'    => self::getCurrentUsername(),
-			);
-		}
-
-		if ( ! is_null( $password ) ) $user['pwd']   = self::getPasswordHash( $username , $password );
-		if ( is_array( $logs ) )      $user['logs']  = $logs;
-		if ( is_array( $roles ) )     $user['roles'] = $roles;
-
-		self::$auth['users'][ $username ] = $user;
-
-		return true;
+	public static function isSignValid( $given_sign , $values , $username = null ) {
+		return ( self::sign( $values , $username ) === $given_sign );
 	}
 
 	/**
-	 * Change the password with logging
+	 * Tell whether a password is valid or not
 	 *
-	 * @param string $username     the username
-	 * @param string $new_password the new password
+	 * @param string $username the username
+	 * @param string $password the password
 	 *
-	 * @return boolean true
+	 * @return boolean
 	 */
-	public static function changePassword($username , $new_password)
+	public static function isValidPassword($username , $password)
 	{
-		self::setUser( $username , $new_password );
-		self::log( 'changepwd' , $username );
-		self::save();
+		if ( ! self::userExists( $username ) ) return false;
+		$compute = self::getPasswordHash($username , $password);
 
-		return true;
+		return ( $compute === self::$auth['users'][$username]['pwd'] );
 	}
-
 
 	/**
 	 * Log an action
@@ -373,133 +423,66 @@ class Sentinel
 	}
 
 	/**
-	 * Return the data of a user
-	 *
-	 * @param string $username the username
-	 *
-	 * @return array data or null if not exists
-	 */
-	public static function getUser($username = null)
-	{
-		if ( is_null( $username ) ) $username = self::getCurrentUsername();
-
-		if ( self::userExists( $username ) ) {
-			return self::$auth['users'][ $username ];
-		}
-
-		return null;
-	}
-
-	/**
-	 * Return the log array
-	 *
-	 * @return array data
-	 */
-	public static function getLogs()
-	{
-		if ( isset( self::$auth['logs'] ) ) {
-			return self::$auth['logs'];
-		}
-
-		return array();
-	}
-
-	/**
-	 * Tell whether user exists or not
-	 *
-	 * @param string $username the username
+	 * Release the database file
 	 *
 	 * @return boolean
 	 */
-	public static function userExists($username)
+	public static function release()
 	{
-		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
-		return ( isset( self::$auth['users'][ $username ] ) );
+		if ( is_null( self::$authFileP ) ) return;
+		$a = @flock( self::$authFileP , LOCK_UN );
+		@fclose( self::$authFileP );
+		self::$authFileP       = null;
+		self::$currentlylocked = false;
 	}
 
 	/**
-	 * Return the array of users
+	 * Just get the auth file and load it in the $auth variable
 	 *
-	 * @return array the users
+	 * @return boolean success or not
 	 */
-	public static function getUsers()
+	public static function reload()
 	{
-		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
-
-		if ( isset( self::$auth['users'] ) ) {
-			return self::$auth['users'];
-		} else {
-			return array();
+		$content = preg_replace('/^.+\n/', '', self::read() );
+		$array   = json_decode( $content , true );
+		if ( is_null( $array ) ) {
+			return false;
 		}
+		self::$auth = $array;
+
+		return true;
 	}
 
 	/**
-	 * Return the users count
+	 * Save modifications on disk
 	 *
-	 * @return integer the user count
+	 * @return boolean
 	 */
-	public static function getUsersCount()
+	public static function save()
 	{
-		return count( self::getUsers() );
+		self::lock();
+		if ( is_null( self::$authFileP ) ) throw new Exception( 'No lock has been requested' );
+
+		$file = '<?php if (realpath(__FILE__)===realpath($_SERVER["SCRIPT_FILENAME"])) {header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");die();}?>' . "\n";
+		$file.= json_encode( self::$auth );
+
+		self::write( $file );
+
+		return true;
 	}
 
 	/**
-	 * Delete a user
+	 * Set an admin
 	 *
-	 * @param string $username the username to delete
+	 * @param string $username username
+	 * @param string $password password
+	 * @param array  $logs     an array of credentials for log files
 	 *
-	 * @return array the deleted user or false if not exists
+	 * @return boolean true
 	 */
-	public static function deleteUser($username)
+	public static function setAdmin($username , $password = null , $logs = null)
 	{
-		if ( ! self::userExists( $username ) ) return false;
-
-		$deleted_user = self::$auth['users'][ $username ];
-		unset( self::$auth['users'][ $username ] );
-
-		return $deleted_user;
-	}
-
-	/**
-	 * Tell if a user has an access on a log file
-	 *
-	 * @param   string  $log       the fileid
-	 * @param   string  $action    the name of the action
-	 * @param   string  $value     the value for this action
-	 * @param   string  $username  the username
-	 *
-	 * @return  boolean
-	 */
-	public static function userCanOnLogs( $log , $action , $value , $username = null)
-	{
-		if ( is_null( $username ) ) $username = self::getCurrentUsername();
-		if ( is_null( $username ) ) return false;
-		if ( ! self::userExists( $username ) ) return false;
-		if ( in_array( 'admin' , self::$auth['users'][ $username ]['roles'] ) ) return true;
-		if ( ! isset( self::$auth['users'][ $username ]['logs'][ $log ][ $action ] ) ) return false;
-		return ( self::$auth['users'][ $username ]['logs'][ $log ][ $action ] === $value );
-	}
-
-	/**
-	 * Tell if at least one log file is accessible anonymously
-	 *
-	 * @return  boolean
-	 */
-	public static function isAnonymousEnabled()
-	{
-		return ( count( self::$auth['anonymous'] ) > 0 );
-	}
-
-	/**
-	 * Tell if a log file is accessible anonymously
-	 *
-	 * @param   string  $log       the fileid
-	 *
-	 * @return  boolean
-	 */
-	public static function isLogAnonymous( $log )
-	{
-		return ( in_array( $log , self::$auth['anonymous'] ) );
+		return self::setUser( $username , $password , $roles = array('admin') , $logs );
 	}
 
 	/**
@@ -534,31 +517,68 @@ class Sentinel
 	}
 
 	/**
-	 * Tell if a user has a role or not
+	 * Set a user
 	 *
-	 * @param string $username a username or current logged in user if not set
+	 * @param string  $username          username
+	 * @param string  $password          password
+	 * @param array   $roles             an array of global roles
+	 * @param array   $logs              an array of credentials for log files
+	 * @param boolean $regeneratetokens  whether access tokens should be regenerated or not
 	 *
-	 * @return boolean
+	 * @return boolean true
 	 */
-	public static function userHasRole($role , $username = null)
+	public static function setUser($username , $password = null , $roles = null , $logs = null , $regeneratetokens = false )
 	{
-		if ( is_null( $username ) ) $username = self::getCurrentUsername();
-		if ( is_null( $username ) ) return false;
-		if ( ! self::userExists( $username ) ) return false;
-		if ( in_array( 'admin' , self::$auth['users'][ $username ]['roles'] ) ) return true;
-		return ( in_array( $role , self::$auth['users'][ $username ]['roles'] ) );
+		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
+
+		if ( isset( self::$auth['users'][ $username ] ) ) {
+			$user = self::$auth['users'][ $username ];
+		} else {
+			$user = array(
+				'roles' => array('user'),
+				'pwd'   => '',
+				'logs'  => array(),
+				'cd'    => date('U'),
+				'cb'    => self::getCurrentUsername(),
+				'at'    => self::generateSecurityToken(32), // Access token
+				'hp'    => self::generateSecurityToken(16), // Presalt for this user, postsalt is the instance security token
+			);
+		}
+		if ( $regeneratetokens === true ) {
+			$user['at'] = self::generateSecurityToken(32);
+			$user['hp'] = self::generateSecurityToken(16);
+		}
+		if ( ! is_null( $password ) ) $user['pwd']   = self::getPasswordHash( $username , $password );
+		if ( is_array( $logs ) )      $user['logs']  = $logs;
+		if ( is_array( $roles ) )     $user['roles'] = $roles;
+
+		self::$auth['users'][ $username ] = $user;
+
+		return true;
 	}
 
 	/**
-	 * Tell if a user is admin or not. Being admin is having role "admin"
+	 * Sign values
 	 *
-	 * @param string $username a username or current logged in user if not set
+	 * @param   array   $values    an array of key values to sign
+	 * @param   string  $username  the user who signs values or null for an instance signature
 	 *
-	 * @return boolean
+	 * @return  string             the signature of false if a problem occurs
 	 */
-	public static function isAdmin($username = null)
+	public static function sign( $values , $username = null )
 	{
-		return self::userHasRole( 'admin' , $username );
+		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
+
+		$presalt  = self::$auth['security'];
+		$values   = json_encode( $values );
+		$postsalt = '';
+
+		if ( ! is_null( $username ) ) {
+			$user     = self::getUser( $username );
+			$postsalt = $user['hp'];
+		}
+
+		return sha1( $presalt . $values . $postsalt );
 	}
 
 	/**
@@ -596,6 +616,7 @@ class Sentinel
 
 		return false;
 	}
+
 	/**
 	 * Sign in as a user
 	 *
@@ -612,12 +633,7 @@ class Sentinel
 
 		self::sessionWrite( array( 'username' => $username ) );
 		self::reload();
-		self::$auth['users'][ $username ]['logincount'] = (int) @self::$auth['users'][ $username ]['logincount'] + 1;
-		self::$auth['users'][ $username ]['lastlogin'] = array(
-			'ip' => $ip,
-			'ua' => $ua,
-			'ts' => $ts
-		);
+
 		self::log( 'signinas ' . $username , $cu, $ts , $ip , $ua );
 		self::save();
 
@@ -625,15 +641,36 @@ class Sentinel
 	}
 
 	/**
-	 * Get the current logged in user or null
+	 * Sign in user with its access token
+	 * The signin is only available for this call, no session
 	 *
-	 * @return string the current username or null
+	 * @param string $accesstoken
+	 *
+	 * @return array the user informations or false if failed
 	 */
-	public static function getCurrentUsername()
+	public static function signInWithAccessToken( $accesstoken )
 	{
-		$auth = self::sessionRead();
+		$username = self::getUsernameFromAccessToken( $accesstoken );
 
-		return ( isset( $auth['username'] ) ) ? $auth['username'] : null;
+		if ( is_null( $username ) ) return false;
+
+		$ip = self::getClientIp();
+		$ua = ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) ? $_SERVER['HTTP_USER_AGENT'] : '';
+		$ts = date("U");
+		$cu = get_current_url();
+
+		self::$api_session = array( 'username' => $username );
+
+		self::$auth['users'][ $username ]['api_logincount'] = (int) @self::$auth['users'][ $username ]['api_logincount'] + 1;
+		self::$auth['users'][ $username ]['api_lastlogin'] = array(
+			'ip' => $ip,
+			'ua' => $ua,
+			'ts' => $ts,
+		);
+		if ( ! is_null( $cu ) ) self::$auth['users'][ $username ]['api_lastlogin']['ur'] = $cu;
+		self::save();
+
+		return self::$auth['users'][ $username ];
 	}
 
 	/**
@@ -660,127 +697,194 @@ class Sentinel
 	}
 
 	/**
-	 * Manage login
+	 * Tell if a user has an access on a log file
 	 *
-	 * @return [type] [description]
+	 * @param   string  $log       the fileid
+	 * @param   string  $action    the name of the action
+	 * @param   string  $value     the value for this action
+	 * @param   string  $username  the username
+	 *
+	 * @return  boolean
 	 */
-	public static function attempt()
+	public static function userCanOnLogs( $log , $action , $value , $username = null)
 	{
-
-		if ( Sentinel::isAuthSet() ) { // authentication is enabled on this instance
-
-			$user = Sentinel::getCurrentUsername();
-
-			if ( is_null( $user ) ) { // no logged in user
-
-				if ( isset( $_POST['attempt'] ) ) { // form is posted
-
-					if ( ! csrf_verify() ) {
-						$attempt = $_POST['attempt'];
-						$error   = 2;
-						include_once PML_BASE . '/inc/login.inc.php';
-						self::release();
-						die();
-					}
-
-					$loggedin = Sentinel::signIn( $_POST['username'] , $_POST['password'] );
-
-					if ( is_array( $loggedin ) ) { // signed in
-						header( "Location: " . $_POST['attempt'] );
-						die();
-					}
-
-					else { // error while signing in
-						$attempt = $_POST['attempt'];
-						$error   = 1;
-						include_once PML_BASE . '/inc/login.inc.php';
-						self::release();
-						die();
-					}
-				}
-
-				else if ( isset( $_GET['signin'] ) ) { // sign in page when anonymous access is enabled
-
-					$attempt = $_SERVER['REQUEST_URI'] . '?' . $_SERVER['QUERY_STRING'];
-					$error   = 0;
-					include_once PML_BASE . '/inc/login.inc.php';
-					self::release();
-					die();
-				}
-
-				else if ( Sentinel::isAnonymousEnabled() ) { // Anonymous access is enabled, simply return to let anonymosu users to parse logs
-					return null;
-				}
-
-				else { // send form
-					$attempt = $_SERVER['REQUEST_URI'] . '?' . $_SERVER['QUERY_STRING'];
-					$error   = 0;
-					include_once PML_BASE . '/inc/login.inc.php';
-					self::release();
-					die();
-				}
-
-			}
-
-			else {
-
-				if ( isset( $_GET['signout'] ) ) {
-					self::signOut();
-					self::release();
-
-					if ( Sentinel::isAnonymousEnabled() ) { // Anonymosu access, redirect to normal page
-						header( 'Location: ' . $_SERVER['PHP_SELF'] );
-					}
-					else { // No anonymous access, redirect to login page
-						$error   = 3;
-						$attempt = '?';
-						include_once PML_BASE . '/inc/login.inc.php';
-					}
-
-					die();
-				}
-
-				return $user;
-			}
-		}
-
-		return null;
-
+		if ( is_null( $username ) ) $username = self::getCurrentUsername();
+		if ( is_null( $username ) ) return false;
+		if ( ! self::userExists( $username ) ) return false;
+		if ( in_array( 'admin' , self::$auth['users'][ $username ]['roles'] ) ) return true;
+		if ( ! isset( self::$auth['users'][ $username ]['logs'][ $log ][ $action ] ) ) return false;
+		return ( self::$auth['users'][ $username ]['logs'][ $log ][ $action ] === $value );
 	}
 
 	/**
-	 * Save modifications on disk
+	 * Tell whether user exists or not
+	 *
+	 * @param string $username the username
 	 *
 	 * @return boolean
 	 */
-	public static function save()
+	public static function userExists($username)
 	{
-		self::lock();
-		if ( is_null( self::$authFileP ) ) throw new Exception( 'No lock has been requested' );
+		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
+		return ( isset( self::$auth['users'][ $username ] ) );
+	}
 
-		$file = '<?php if (realpath(__FILE__)===realpath($_SERVER["SCRIPT_FILENAME"])) {header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");die();}?>' . "\n";
-		$file.= json_encode( self::$auth );
+	/**
+	 * Tell if a user has a role or not
+	 *
+	 * @param string $username a username or current logged in user if not set
+	 *
+	 * @return boolean
+	 */
+	public static function userHasRole($role , $username = null)
+	{
+		if ( is_null( $username ) ) $username = self::getCurrentUsername();
+		if ( is_null( $username ) ) return false;
+		if ( ! self::userExists( $username ) ) return false;
+		if ( in_array( 'admin' , self::$auth['users'][ $username ]['roles'] ) ) return true;
+		return ( in_array( $role , self::$auth['users'][ $username ]['roles'] ) );
+	}
 
-		self::write( $file );
+	/**
+	 * Generate a security token
+	 *
+	 * @return string the security token
+	 */
+	private static function generateSecurityToken( $len = 64 )
+	{
+		return mt_rand_str( $len );
+	}
+
+	/**
+	 * Get the date when authentication file has been ganarated
+	 *
+	 * @return integer the generated date
+	 */
+	private static function getGenerated()
+	{
+		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
+		return self::$auth['generated'];
+	}
+
+	/**
+	 * Generate a hash from a username and a password
+	 *
+	 * @param string $username username
+	 * @param string $password password
+	 *
+	 * @return string the hash
+	 */
+	private static function getPasswordHash($username , $password)
+	{
+		return sha1( self::getSecurityToken() . $username . self::getGenerated() . $password );
+	}
+
+	/**
+	 * Get the security token
+	 *
+	 * @return string the security token
+	 */
+	private static function getSecurityToken()
+	{
+		if ( ! is_array( self::$auth ) ) throw new Exception( 'Authentication not initialized' );
+		return self::$auth['security'];
+	}
+
+	/**
+	 * Lock the database file
+	 *
+	 * @return boolean
+	 */
+	private static function lock()
+	{
+		if (self::$currentlylocked === false) {
+			self::$authFileP = fopen( self::$authFile , "a+" );
+			if ( flock( self::$authFileP , LOCK_EX ) ) { // acquière un verrou exclusif
+				self::$currentlylocked = true;
+			} else {
+				throw new Exception( 'Unable to lock file' );
+			}
+		}
 
 		return true;
 	}
 
 	/**
-	 * Destroy the authentication file
+	 * Read the database
 	 *
-	 * @return boolean success or not
+	 * @return string the database content
 	 */
-	public static function destroy()
+	private static function read()
 	{
-		self::sessionDestroy();
-
-		if ( self::isAuthSet() ) {
-			return unlink( self::$authFile );
-		}
-
-		return true;
+		self::lock();
+		if ( is_null( self::$authFileP ) ) throw new Exception( 'No lock has been requested' );
+		return stream_get_contents( self::$authFileP , -1 , 0 );
 	}
+
+	private static function sessionDestroy()
+	{
+		// Web
+		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
+			@session_start();
+			unset( $_SESSION['auth'] );
+			$_SESSION['auth'] = array();
+			session_write_close();
+		}
+		// CLI
+		else {
+			$value = array();
+			file_put_contents( '_cli_fake_session' , json_encode( $value ) );
+		}
+	}
+
+	private static function sessionRead()
+	{
+		// Web
+		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
+			@session_start();
+
+			return ( isset( $_SESSION['auth'] ) ) ? $_SESSION['auth'] : array();
+		}
+		// CLI
+		else {
+			$json = @file_get_contents( '_cli_fake_session' );
+			$value = json_decode( $json , true );
+
+			return ( is_array( $value ) ) ? $value : array();
+		}
+	}
+
+	private static function sessionWrite($value)
+	{
+		// Web
+		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
+			@session_start();
+			$_SESSION[ 'auth' ] = $value;
+			session_write_close();
+		}
+		// CLI
+		else {
+			file_put_contents( '_cli_fake_session' , json_encode( $value ) );
+		}
+	}
+
+	/**
+	 * Write the database
+	 *
+	 * @param string $content the database content
+	 *
+	 * @return boolean
+	 */
+	private static function write($content)
+	{
+		self::lock();
+		if ( is_null( self::$authFileP ) ) throw new Exception( 'No lock has been requested' );
+		ftruncate( self::$authFileP , 0 );
+		fwrite( self::$authFileP , $content );
+
+		return fflush( self::$authFileP );
+	}
+
 }
 
 /**

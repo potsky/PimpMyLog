@@ -368,7 +368,7 @@ switch ( @$_POST['action'] ) {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Anonymous
+	| Anonymous list files
 	|--------------------------------------------------------------------------
 	|
 	*/
@@ -429,7 +429,7 @@ switch ( @$_POST['action'] ) {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Anonymous
+	| Anonymous save
 	|--------------------------------------------------------------------------
 	|
 	*/
@@ -452,6 +452,72 @@ switch ( @$_POST['action'] ) {
 		}
 
 		Sentinel::save();
+
+		break;
+
+	/*
+	|--------------------------------------------------------------------------
+	| Profile get
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'profile_get':
+		$user        = Sentinel::getUser( $current_user );
+		$accesstoken = $user['at'];
+		$hashpresalt = $user['hp'];
+		$r           = '';
+
+		$r .= '<div class="form-group">';
+		$r .= 	'<label for="" class="col-sm-3 control-label">' . __('Access token') . '</label>';
+		$r .= 	'<div class="col-sm-5">';
+		$r .= 		'<div class="input-group">';
+		$r .= 			'<span class="input-group-addon"><span class="glyphicon glyphicon-certificate"></span></span>';
+		$r .= 			'<input type="text" id="prat" class="form-control" value="' . h( $accesstoken ) . '" disabled="disabled"/>';
+		$r .= 		'</div>';
+		$r .= 	'</div>';
+		$r .= 	'<div class="col-sm-4">';
+		$r .=     '<a class="btn btn-xs btn-primary clipboardat">' . __('Copy to clipboard') . '</a>';
+		$r .= 	'</div>';
+		$r .= '</div>';
+		$r .= '<script>clipboard_enable( "a.clipboardat", "#prat" , "top" , "' . h( __('Access token copied!') ) . '" );</script>';
+
+		$r .= '<div class="form-group">';
+		$r .= 	'<label for="" class="col-sm-3 control-label">' . __('Presalt key') . '</label>';
+		$r .= 	'<div class="col-sm-5">';
+		$r .= 		'<div class="input-group">';
+		$r .= 			'<span class="input-group-addon"><span class="glyphicon glyphicon-flash"></span></span>';
+		$r .= 			'<input type="text" id="prhp" class="form-control" value="' . h( $hashpresalt ) . '" disabled="disabled"/>';
+		$r .= 		'</div>';
+		$r .= 	'</div>';
+		$r .= 	'<div class="col-sm-4">';
+		$r .=     '<a class="btn btn-xs btn-primary clipboardhp">' . __('Copy to clipboard') . '</a>';
+		$r .= 	'</div>';
+		$r .= '</div>';
+		$r .= '<script>clipboard_enable( "a.clipboardhp" , "#prhp" , "top" , "' . h( __('Presalt key copied!') ) . '" );</script>';
+
+		$r .= '<div class="form-group">';
+		$r .= 	'<label for="" class="col-sm-3 control-label"></label>';
+		$r .= 	'<div class="col-sm-9">';
+        $r .=   '<input type="checkbox" name="regenerate" value="1"/> ' . __('Check to generate both new Access token and new Presalt key');
+   		$r .= 	'</div>';
+		$r .= '</div>';
+
+		$return['b'] = $r;
+
+		break;
+
+	/*
+	|--------------------------------------------------------------------------
+	| Profile save
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'profile_save':
+
+		if ( @$_POST['regenerate'] === '1' ) {
+			Sentinel::setUser( $current_user , null , null , null , true );
+			Sentinel::save();
+		}
 
 		break;
 
