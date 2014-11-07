@@ -1,12 +1,13 @@
-$gray-darker:            lighten(#000, 13.5%) !default; // #222
-$gray-dark:              lighten(#000, 20%) !default;   // #333
-$gray:                   lighten(#000, 33.5%) !default; // #555
-$gray-light:             lighten(#000, 46.7%) !default; // #777
-$gray-lighter:           lighten(#000, 93.5%) !default; // #eee
-
+$gray-darker                      : lighten(#000, 13.5%); // #222
+$gray-dark                        : lighten(#000, 20%);   // #333
+$gray                             : lighten(#000, 33.5%); // #555
+$gray-light                       : lighten(#000, 46.7%); // #777
+$gray-lighter                     : lighten(#000, 93.5%); // #eee
 $grid-float-breakpoint            : 992px;
-$font-size-base                   : 16px;
+$font-size-base                   : 14px;
 $brand-primary                    : #6C5196;
+$link-color                       : #428bca;
+$link-hover-color                 : $brand-primary;
 $navbar-inverse-color             : $gray-light;
 $navbar-inverse-bg                : #33333f;
 $navbar-inverse-border            : darken($navbar-inverse-bg, 10%);
@@ -54,15 +55,38 @@ $font-family-monospace            : 'ubuntu_monoregular', Menlo, Monaco, Consola
 	background-image : none;
 	border           : 1px solid transparent;
 	white-space      : nowrap;
+	text-transform   : uppercase;
+	padding          : 5px 10px;
 	@include button-size($padding-base-vertical , $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);
 	@include user-select(none);
+
+	&:hover {
+		text-decoration: none;
+	}
 }
 
 .btn {
 	text-transform : uppercase;
+	font-size      : 1em;
+	font-size      : 1em;
 	line-height    : 2em;
 	padding-left   : 1.5em;
 	padding-right  : 1.5em;
+}
+
+// Pull to refresh under header and mobile menu
+.hook {
+	z-index: 999!important;
+}
+
+// Sort table jquery plugin
+div.th-inner.sortable {
+	color : $link-color;
+}
+
+th a:hover, div.th-inner.sortable:hover {
+	text-decoration : none;
+	color           : $brand-primary;
 }
 
 .dropdown-menu {

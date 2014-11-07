@@ -107,55 +107,57 @@ if ( is_array( $errors ) ) {
 |
 */
 $lemma = array(
-	'notification_deny'       => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
-	'no_log'                  => __( 'No log has been found.' ),
-	'regex_valid'             => __( 'Search was done with RegEx engine' ),
-	'regex_invalid'           => __( 'Search was done with regular engine' ),
-	'search_no_regular'       => __( 'No log has been found with regular search %s' ),
-	'search_no_regex'         => __( 'No log has been found with Reg Ex search %s' ),
-	'new_logs'                => __( 'New logs are available' ),
-	'new_log'                 => __( '1 new log is available' ),
-	'new_nlogs'               => __( '%s new logs are available' ),
+	'action'                  => __( 'Action' ),
+	'addadmin'                => __( 'Add admin' ),
+	'adduser'                 => __( 'Add user' ),
+	'all_access'              => __( 'All accesses granted' ),
+	'authlogerror'            => __( 'There is no log to display and your are connected... It seems that global parameter <code>AUTH_LOG_FILE_COUNT</code> is set to 0. Change this parameter to a higher value to display logs.' ),
+	'changepwd'               => __( 'Password changed' ),
+	'createdby'               => __( 'Created by' ),
+	'creationdate'            => __( 'Created at' ),
+	'date'                    => __( 'Date' ),
+	'deleteuser'              => __( 'Delete user' ),
 	'display_log'             => __( '1 log displayed,' ),
 	'display_nlogs'           => __( '%s logs displayed,' ),
 	'error'                   => __( 'An error occurs!' ),
-	'toggle_column'           => __( 'Toggle column %s' ),
-	'date'                    => __( 'Date' ),
-	'action'                  => __( 'Action' ),
-	'username'                => __( 'User name' ),
+	'form_invalid'            => __( 'Form is invalid:' ),
 	'ip'                      => __( 'IP' ),
-	'useragent'               => __( 'User agent' ),
+	'lastlogin'               => __( 'Last login' ),
+	'loadmore'                => __( 'Still %s to load'),
+	'logincount'              => __( 'Logins' ),
+	'new_log'                 => __( '1 new log is available' ),
+	'new_logs'                => __( 'New logs are available' ),
+	'new_nlogs'               => __( '%s new logs are available' ),
+	'no_log'                  => __( 'No log has been found.' ),
+	'notification_deny'       => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
+	'reallydeleteuser'        => __( 'Confirm' ),
+	'regex_invalid'           => __( 'Search was done with regular engine' ),
+	'regex_valid'             => __( 'Search was done with RegEx engine' ),
+	'roles'                   => __( 'Roles' ),
+	'search_no_regex'         => __( 'No log has been found with Reg Ex search %s' ),
+	'search_no_regular'       => __( 'No log has been found with regular search %s' ),
 	'signin'                  => __( 'Sign in' ),
+	'signinas'                => __( 'Sign in as' ),
 	'signinerr'               => __( 'Sign in error' ),
 	'signout'                 => __( 'Sign out' ),
-	'changepwd'               => __( 'Password changed' ),
-	'authlogerror'            => __( 'There is no log to display and your are connected... It seems that global parameter <code>AUTH_LOG_FILE_COUNT</code> is set to 0. Change this parameter to a higher value to display logs.' ),
-	'roles'                   => __( 'Roles' ),
-	'creationdate'            => __( 'Created at' ),
-	'createdby'               => __( 'Created by' ),
-	'logincount'              => __( 'Logins' ),
-	'lastlogin'               => __( 'Last login' ),
 	'system'                  => __( 'System' ),
+	'toggle_column'           => __( 'Toggle column %s' ),
 	'user'                    => __( 'User' ),
-	'adduser'                 => __( 'Add user' ),
-	'deleteuser'              => __( 'Delete user' ),
-	'reallydeleteuser'        => __( 'Confirm' ),
-	'users'                   => __( 'Users' ),
-	'user_roles'              => __( 'Roles' ),
-	'user_logs'               => __( 'Log access' ),
-	'user_cd'                 => __( 'Created at' ),
-	'user_cb'                 => __( 'Created by' ),
-	'user_logincount'         => __( 'Logins' ),
-	'user_lastlogin'          => __( 'Last login' ),
+	'anonymous_ok'            => __( 'Anonymous access has successfully saved!' ),
 	'user_add_ok'             => __( 'User has been successfully saved!' ),
+	'user_cb'                 => __( 'Created by' ),
+	'user_cd'                 => __( 'Created at' ),
 	'user_delete_ok'          => __( 'User has been successfully deleted!' ),
-	'form_invalid'            => __( 'Form is invalid:' ),
-	'all_access'              => __( 'All accesses granted' ),
-	'addadmin'                => __( 'Add admin' ),
-	'adduser'                 => __( 'Add user' ),
-	'deleteuser'              => __( 'Delete user' ),
-	'loadmore'                => __( 'Still %s to load'),
+	'user_lastlogin'          => __( 'Last login' ),
+	'user_logincount'         => __( 'Logins' ),
+	'user_logs'               => __( 'Log access' ),
+	'user_roles'              => __( 'Roles' ),
+	'useragent'               => __( 'User agent' ),
+	'username'                => __( 'User name' ),
+	'users'                   => __( 'Users' ),
 	'youhavebeendisconnected' => __( 'You need to sign in' ),
+	'reallysigninuser'        => __('Confirm'),
+	'signinuser'              => __('Sign in as'),
 );
 
 
@@ -225,57 +227,75 @@ $csrf = csrf_get();
 				</button>
 				<div class="navbar-brand">
 					<span class="loader glyphicon glyphicon-refresh icon-spin" style="display:none;"></span>
-					<span class="loader glyphicon glyphicon-repeat" title="<?php _e( 'Click to refresh or press the R key' );?>" id="refresh"></span>
+					<span class="loader glyphicon glyphicon-repeat" title="<?php _h( 'Click to refresh or press the R key' );?>" id="refresh"></span>
 					<a href="?"><?php echo NAV_TITLE;?></a>
 				</div>
 			</div>
 
 			<div class="navbar-collapse collapse">
-				<?php
-				if ( FILE_SELECTOR == 'bs' ) {
-				?>
-					<ul class="nav navbar-nav">
-						<li class="dropdown" title="<?php _e( 'Select a log file to display' );?>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<?php
-								foreach ( $files as $file_id => $file ) {
-									$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
-									echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
-									echo ( isset( $file['included_from'] ) ) ? htmlentities( sprintf( __('Log file #%s defined in %s' ) , $file_id , $file['included_from'] ) ,ENT_QUOTES,'UTF-8') : htmlentities( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) ,ENT_QUOTES,'UTF-8');
-									echo '">' . $file['display'] . '</a></li>';
-								}
-								?>
-							</ul>
-						</li>
-					</ul>
+
+				<?php if ( count($files) > 1 ) { ?>
+
+					<?php if ( FILE_SELECTOR == 'bs' ) { ?>
+
+						<ul class="nav navbar-nav">
+
+							<li class="dropdown" title="<?php _h( 'Select a log file to display' );?>">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<?php
+									foreach ( $files as $file_id => $file ) {
+										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
+										echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
+										echo ( isset( $file['included_from'] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $file['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
+										echo '">' . $file['display'] . '</a></li>';
+									}
+									?>
+								</ul>
+							</li>
+
+						</ul>
+
+					<?php } else { ?>
+
+		    			<form class="navbar-form navbar-left">
+							<div class="form-group">
+								<select id="file_selector_big" class="form-control input-sm" title="<?php _h( 'Select a log file to display' );?>">
+									<?php
+									foreach ( $files as $file_id=>$file ) {
+										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' selected="selected"' : '';
+										echo '<option value="' . $file_id . '"' . $selected . '>' . $file['display'] . '</option>';
+									}
+									?>
+								</select>
+							</div>&nbsp;
+					    </form>
+
+					<?php } ?>
+
 				<?php
 				} else {
+					foreach ( $files as $file_id => $file ) {
+						$d = $file['display'];
+						$i = h( $file_id );
+						break;
+					}
 				?>
-	    			<form class="navbar-form navbar-left">
-						<div class="form-group">
-							<select id="file_selector_big" class="form-control input-sm" title="<?php _e( 'Select a log file to display' );?>">
-								<?php
-								foreach ( $files as $file_id=>$file ) {
-									$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' selected="selected"' : '';
-									echo '<option value="' . $file_id . '"' . $selected . '>' . $file['display'] . '</option>';
-								}
-								?>
-							</select>
-						</div>&nbsp;
-				    </form>
-				<?php
-				}
-				?>
+					<ul class="nav navbar-nav">
+						<li id="singlelog" data-file="<?php echo $i; ?>">
+							<a href="#"><?php echo $d; ?></a>
+						</li>
+					</ul>
+				<?php } ?>
 
 				<form class="navbar-form navbar-right">
 
 					<div class="form-group" id="searchctn">
-						<input type="text" class="form-control input-sm clearable" id="search" value="<?php echo htmlentities(@$_GET['s'],ENT_QUOTES,'UTF-8');?>" placeholder="<?php _e( 'Search in logs' );?>">
+						<input type="text" class="form-control input-sm clearable" id="search" value="<?php echo h( @$_GET['s'] );?>" placeholder="<?php _h( 'Search in logs' );?>">
 					</div>&nbsp;
 
 					<div class="form-group">
-						<select id="autorefresh" class="form-control input-sm" title="<?php _e( 'Select a duration to check for new logs automatically' );?>">
+						<select id="autorefresh" class="form-control input-sm" title="<?php _h( 'Select a duration to check for new logs automatically' );?>">
 							<option value="0"><?php _e( 'No refresh' );?></option>
 							<?php
 							foreach ( get_refresh_options( $files ) as $r ) {
@@ -286,7 +306,7 @@ $csrf = csrf_get();
 					</div>&nbsp;
 
 					<div class="form-group">
-						<select id="max" class="form-control input-sm" title="<?php _e( 'Max count of logs to display' );?>">
+						<select id="max" class="form-control input-sm" title="<?php _h( 'Max count of logs to display' );?>">
 							<?php
 							foreach ( get_max_options( $files ) as $r ) {
 								echo '<option value="' . $r . '">' . sprintf( ( (int)$r>1 ) ? __( '%s logs' ) : __( '%s log' ) , $r ) . '</option>';
@@ -295,25 +315,40 @@ $csrf = csrf_get();
 						</select>
 					</div>&nbsp;
 
-					<button style="display:none;" type="button" id="notification" class="btn-menu btn-sm" title="<?php _e( 'Desktop notifications on supported modern browsers' );?>">
-					  <span class="glyphicon glyphicon-bell"></span>
-					</button>
+					<div class="form-group">
+						<button style="display:none;" type="button" id="notification" class="btn-menu btn-sm" title="<?php _h( 'Desktop notifications on supported modern browsers' );?>">
+							<span class="glyphicon glyphicon-bell"></span>
+							<span class="visible-xs-* visible-sm-* hidden-md hidden-lg"> <?php _e( 'Notifications' ); ?></span>
+						</button>
+					</div>
+
+					<?php if ( ( is_null( $current_user ) ) && ( Sentinel::isAnonymousEnabled() ) ) { ?>
+						<div class="form-group">
+							<a href="?signin" class="btn-menu btn-primary btn-sm" title="<?php _h( 'Sign in' );?>"><?php _e('Sign in');?></a>
+						</div>
+					<?php } ?>
 
 				</form>
 
 				<ul class="nav navbar-nav navbar-right">
 
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="thmenuicon glyphicon glyphicon-th"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="thmenuicon glyphicon glyphicon-th"></span>
+							<span class="visible-xs-* visible-sm-* hidden-md hidden-lg"> <?php _h('Displayed columns');?></span>
+						</a>
 						<ul class="dropdown-menu thmenu" style="padding: 15px;">
 							<li>
-								<a href="#" class="" title="<?php _e('Displayed columns');?>"><?php _e('Displayed columns');?></a>
+								<a href="#" class="visible-lg-* visible-md-* hidden-sm hidden-xs" title="<?php _h('Displayed columns');?>"><?php _h('Displayed columns');?></a>
 							</li>
 						</ul>
 					</li>
 
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-cog"></span>
+							<span class="visible-xs-* visible-sm-* hidden-md hidden-lg"> <?php _h('Settings');?></span>
+						</a>
 						<ul class="dropdown-menu cogmenu" style="padding: 15px;">
 
 							<li>
@@ -325,13 +360,13 @@ $csrf = csrf_get();
 							</li>
 
 							<li>
-								<a href="#" id="clear-markers" class="btn btn-default" title="<?php _e('Click on a date field to mark a row');?>">
+								<a href="#" id="clear-markers" class="btn btn-default" title="<?php _h('Click on a date field to mark a row');?>">
 									<span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;<?php _e('Clear markers');?>
 								</a>
 							</li>
 
 							<li>
-								<select id="cog-lang" class="form-control input-sm" title="<?php _e( 'Language' );?>">
+								<select id="cog-lang" class="form-control input-sm" title="<?php _h( 'Language' );?>">
 									<option value=""><?php _e( 'Change language...' );?></option>
 
 									<?php
@@ -348,7 +383,7 @@ $csrf = csrf_get();
 							</li>
 
 							<li>
-								<select id="cog-tz" class="form-control input-sm" title="<?php _e( 'Timezone' );?>">
+								<select id="cog-tz" class="form-control input-sm" title="<?php _h( 'Timezone' );?>">
 									<option value=""><?php _e( 'Change timezone...' );?></option>
 
 									<?php
@@ -369,15 +404,16 @@ $csrf = csrf_get();
 					<?php if ( ! is_null( $current_user ) ) { ?>
 
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo htmlentities(  sprintf( __('You are currently connected as %s') , $current_user ) , ENT_QUOTES , 'UTF-8' ); ?>">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo h(  sprintf( __('You are currently connected as %s') , $current_user ) ); ?>">
 								<span class="glyphicon glyphicon-user"></span>
 							</a>
 							<ul class="dropdown-menu">
 								<?php if ( Sentinel::isAdmin() ) { ?>
-									<li><a href="#" title="<?php _h('Click here to manager users'); ?>" data-toggle="modal" data-target="#umModal"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;<?php echo __('Manage users'); ?></a></li>
+									<li><a href="#" title="<?php _h('Click here to manager users'); ?>" data-toggle="modal" data-target="#umModal"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;<?php _e('Manage users'); ?></a></li>
 								<?php } ?>
-								<li><a href="#" title="<?php _h('Click here to change your password'); ?>" data-toggle="modal" data-target="#cpModal"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<?php echo __('Change password'); ?></a></li>
-								<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;<?php echo __('Sign out'); ?></a></li>
+								<li><a href="#" title="<?php _h('Click here to view your profile'); ?>" data-toggle="modal" data-target="#prModal"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<?php _e('Profile'); ?></a></li>
+								<li><a href="#" title="<?php _h('Click here to change your password'); ?>" data-toggle="modal" data-target="#cpModal"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<?php _e('Change password'); ?></a></li>
+								<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;<?php _e('Sign out'); ?></a></li>
 							</ul>
 						</li>
 
@@ -420,7 +456,7 @@ $csrf = csrf_get();
 		</div>
 		<div class="row">
 			<div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
-				<button style="width:100%" id="loadmore" type="button" class="btn btn-xs btn-primary" data-loading-text="<?php _h('Loading...');?>" data-nomore-text="<?php _h('No more data');?>"><?php _h('Load more');?></button>
+				<button style="width:100%" id="loadmore" type="button" class="btn btn-xs btn-primary" data-loading-text="<?php _h('Loading...');?>" data-nomore-text="<?php _h('No more data');?>"><?php _e('Load more');?></button>
 			</div>
 		</div>
 	</div>
@@ -493,7 +529,7 @@ $csrf = csrf_get();
 							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
 							<ul class="nav nav-pills">
 								<li class="active"><a href="#umUsers" role="tab" data-toggle="pill"><?php _e('Users');?></a></li>
-								<!--<li><a href="#umLogFiles" role="tab" data-toggle="pill"><?php _e('Log files');?></a></li>-->
+								<li><a href="#umAnonymous" role="tab" data-toggle="pill"><?php _e('Anonymous access');?></a></li>
 								<li><a href="#umAuthLog" role="tab" data-toggle="pill"><?php _e('History');?></a></li>
 							</ul>
 						</div>
@@ -574,7 +610,7 @@ $csrf = csrf_get();
 													</div>
 												</div>
 												<?php foreach ( $files as $file_id => $file ) {
-													$fid = htmlentities( $file_id , ENT_QUOTES , 'UTF-8' );
+													$fid = h( $file_id );
 												?>
 													<div class="form-group" data-fileid="<?php echo $fid ?>">
 														<label for="<?php echo $fid ?>" class="col-sm-4 control-label"><?php echo $file['display'] ?></label>
@@ -590,7 +626,6 @@ $csrf = csrf_get();
 														</div>
 													</div>
 												<?php } ?>
-
 											</div>
 
 										</div>
@@ -604,13 +639,23 @@ $csrf = csrf_get();
 									</form>
 								</div>
 							</div>
-							<div class="tab-pane" id="umLogFiles">
-								<div class="modal-body" id="umLogFilesBody"></div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
-									<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save2');?>" id="umLogFilesSave"/>
-								</div>
+
+							<div class="tab-pane" id="umAnonymous">
+								<form id="umAnonymousForm" autocomplete="off" role="form">
+									<div class="modal-body">
+										<div class="modal-body form-horizontal">
+											<div id='umAnonymousAlert'></div>
+											<div id="umAnonymousBody" class="logs-selector"></div>
+										</div>
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
+										<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save');?>" id="umAnonymousSave"/>
+									</div>
+								</form>
 							</div>
+
 							<div class="tab-pane" id="umAuthLog">
 								<div class="modal-body" id="umAuthLogBody"></div>
 								<div class="modal-footer">

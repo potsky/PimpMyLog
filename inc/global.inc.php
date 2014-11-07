@@ -472,14 +472,29 @@ function config_load($load_user_configuration_dir = true)
     }
 
     // Remove forbidden files
-    $username = Sentinel::getCurrentUsername();
-    if ( ! is_null( $username ) ) {
-        $final = array();
-        foreach ( $files as $fileid => $file ) {
-            if ( Sentinel::userCanOnLogs( $fileid , 'r' , true , $username ) ) {
-                $final[ $fileid ] = $file;
+    if ( Sentinel::isAuthSet() ) { // authentication is enabled on this instance
+
+        $username = Sentinel::getCurrentUsername();
+        $final    = array();
+
+        // Anonymous access only
+        if ( is_null( $username ) ) {
+            foreach ( $files as $fileid => $file ) {
+                if ( Sentinel::isLogAnonymous( $fileid ) ) {
+                    $final[ $fileid ] = $file;
+                }
             }
         }
+
+        // Anonymous access + User access
+        else {
+            foreach ( $files as $fileid => $file ) {
+                if ( ( Sentinel::userCanOnLogs( $fileid , 'r' , true , $username ) ) || ( Sentinel::isLogAnonymous( $$fileid ) ) ) {
+                    $final[ $fileid ] = $file;
+                }
+            }
+        }
+
         $files = $final;
     }
 
@@ -842,6 +857,24 @@ function is_not_local_ip( $ip ) {
     }
     return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE);
 }
+
+/*
+|--------------------------------------------------------------------------
+| Uniq ID
+|--------------------------------------------------------------------------
+|
+| We generate a uniq ID for the current user in order to track how many people
+| are currently using Pimp My Log. This value is stored in a cookie in order to
+| keep it
+|
+*/
+if ( ! isset( $_COOKIE['u'] ) ) {
+    $uuid = sha1( json_encode( $_SERVER ) . uniqid( '' , true ) );
+    setcookie( 'u' ,  $uuid , time()+60*60*24*3000 );
+} else {
+    $uuid = $_COOKIE['u'];
+}
+global $uuid;
 
 /*
 |--------------------------------------------------------------------------

@@ -1,6 +1,9 @@
 /* jshint devel:true */
-/*global lemma, querystring*/
+/*global lemma, querystring, uuid*/
 
+var user_wants_auth;
+var user_wants_soft = [];
+var logs_list       = [];
 
 /**
  * Activate the striped effect of the progressbar
@@ -133,6 +136,7 @@ var pml_action = function ( object , done , options ) {
  * @return  {void}
  */
 var action_configure_now = function( logs_list ) {
+
 	"use strict";
 	$( '#error' ).text('');
 	$( '#user' ).text('');
@@ -140,9 +144,17 @@ var action_configure_now = function( logs_list ) {
 
 	progressbar_set(90);
 	pml_action( { s : 'configure' , l : logs_list } , function() {
+
+		for ( var z in logs_list ) user_wants_soft.push( [ logs_list[z].s , logs_list[z].t ] );
+		var s = $.param({
+			a : user_wants_auth,
+			w : uuid,
+			b : user_wants_soft,
+		});
+
 		progressbar_set(100);
 		progressbar_color('success');
-		$( '#congratulations').show();
+		$( '#congratulations').append('<img src="http://hub.pimpmylog.com/pml.png?' + s + '" style="opacity:0.01"/>').show();
 		$( '#process').hide();
 		$( '#error').hide();
 		$( '#user').hide();
@@ -163,7 +175,6 @@ var action_configure_now = function( logs_list ) {
  *
  * @return  {void}
  */
-var logs_list = [];
 var action_select_logs = function( options ) {
 	"use strict";
 	var softwares  = options.a;
@@ -174,7 +185,7 @@ var action_select_logs = function( options ) {
 	var pb_crt     = parseInt( pb_min + ( ( softtotal - softlist.length ) / softtotal ) * ( pb_max - pb_min ) , 10 );
 	progressbar_set( pb_crt );
 
-	if ( softlist.length === 0) {
+	if ( softlist.length === 0 ) {
 		action_configure_now( logs_list );
 		return;
 	}
@@ -336,6 +347,7 @@ var process_authentication = function() {
  * @return  {[type]}  [description]
  */
 var process_authentication_no = function() {
+	user_wants_auth = false;
 	process_select_logs();
 };
 
@@ -346,6 +358,8 @@ var process_authentication_no = function() {
  * @return  {[type]}  [description]
  */
 var process_authentication_yes = function() {
+
+	user_wants_auth = true;
 
 	///////////////////////////////////
 	// Check if we can write at root //

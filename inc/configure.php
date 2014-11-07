@@ -2,7 +2,6 @@
 include_once 'global.inc.php';
 load_default_constants();
 
-
 /*
 |--------------------------------------------------------------------------
 | Prepare
@@ -10,7 +9,6 @@ load_default_constants();
 |
 */
 include_once '../cfg/softwares.inc.php';
-
 
 /*
 |--------------------------------------------------------------------------
@@ -506,6 +504,7 @@ $lemma = array(
 	<link rel="stylesheet" href="../css/pml.min.css">
 	<script>
 		var lemma       = <?php echo json_encode($lemma);?>,
+			uuid        = <?php echo json_encode($uuid);?>,
 			querystring = "<?php echo $_SERVER['QUERY_STRING'];?>";
 	</script>
 	</head>

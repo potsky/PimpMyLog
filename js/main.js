@@ -951,41 +951,52 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 $(function() {
 	"use strict";
 
-	// File selector bootstrap
-	if ( file_selector === 'bs' ) {
+	// Display a log selector for several log files
+	if ( ! $('#singlelog').length )  {
 
-		if ( ! $('.file_menup.active').length ) {
-			$('.file_menup:first').addClass('active');
+		// File selector bootstrap
+		if ( file_selector === 'bs' ) {
+
+			if ( ! $('.file_menup.active').length ) {
+				$('.file_menup:first').addClass('active');
+			}
+
+			// File menu > init
+			$('#file_selector').text( $('.file_menup.active a').text() );
+			file = $('.file_menup.active').data('file');
+			set_title();
+
+			// File Menu > handler
+			$('.file_menu').click( function() {
+				$('#file_selector').text( $(this).text() );
+				$('.file_menup').removeClass('active');
+				$(this).parent().addClass('active');
+				file = $(this).parent().data('file');
+				set_title();
+				get_logs( true );
+			});
 		}
 
-		// File menu > init
-		$('#file_selector').text( $('.file_menup.active a').text() );
-		file = $('.file_menup.active').data('file');
-		set_title();
+		// File selector select html
+		else {
 
-		// File Menu > handler
-		$('.file_menu').click( function() {
-			$('#file_selector').text( $(this).text() );
-			$('.file_menup').removeClass('active');
-			$(this).parent().addClass('active');
-			file = $(this).parent().data('file');
-			set_title();
-			get_logs( true );
-		});
-	}
-
-	// File selector select html
-	else {
-
-		// File menu > init
-		file = $('#file_selector_big').val();
-		set_title();
-		// File Menu > handler
-		$('#file_selector_big').change( function() {
+			// File menu > init
 			file = $('#file_selector_big').val();
 			set_title();
-			get_logs( true );
-		});
+			// File Menu > handler
+			$('#file_selector_big').change( function() {
+				file = $('#file_selector_big').val();
+				set_title();
+				get_logs( true );
+			});
+		}
+	}
+
+	// Only one log displayed
+	else {
+		file = $('#singlelog').data('file');
+		set_title();
+		get_logs( true );
 	}
 
 	// Logo click

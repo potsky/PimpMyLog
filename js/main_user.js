@@ -6,6 +6,8 @@
 $(function() {
 	"use strict";
 
+
+$('#umModal').modal('show');
 	/*
 	|--------------------------------------------------------------------------
 	| Change Password
@@ -122,6 +124,31 @@ $(function() {
 		$(this).parent().parent().parent().parent().find('.logs-selector').hide();
 	});
 
+	$('#umUsersAddForm').on('submit', function() {
+		event.preventDefault();
+		return users_add_save( this );
+	});
+
+	log_selector_init();
+
+	/*
+	|--------------------------------------------------------------------------
+	| Anonymous
+	|--------------------------------------------------------------------------
+	|
+	| Initialize form
+	|
+	*/
+	$('#umAnonymousForm').on('submit', function() {
+		event.preventDefault();
+		return anonymous_save( this );
+	});
+
+
+});
+
+
+function log_selector_init() {
 	$('.logs-selector-yes').click(function() {
 		$(this).parent().find('label.logs-selector-no').removeClass('btn-danger').addClass('btn-default');
 		$(this).parent().find('label.logs-selector-yes').addClass('btn-success');
@@ -140,13 +167,7 @@ $(function() {
 			$(this).parents('.logs-selector').find('label.logs-selector-yes').click();
 		}
 	});
-
-	$('#umUsersAddForm').on('submit', function() {
-		event.preventDefault();
-		return users_add_save( this );
-	});
-});
-
+}
 
 
 /**
@@ -179,8 +200,8 @@ var users_load = function( type ) {
 		case 'umUsers':
 			users_list();
 			break;
-		case 'umLogFiles':
-			users_logfiles();
+		case 'umAnonymous':
+			anonymous_list();
 			break;
 		case 'umAuthLog':
 			users_authlog();
@@ -375,11 +396,19 @@ var users_view = function( obj ) {
 		r += 	'<div class="col-sm-6 text-right">';
 		if ( currentuser !== username ) {
 			r += '<div class="btn-group">';
-			r += '	<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">' + lemma.deleteuser + '...</button>';
+			r += '	<button type="button" class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown">' + lemma.deleteuser + '...</button>';
 			r += '  <ul class="dropdown-menu" role="menu">';
 			r += '    <li><a href="#" onclick="users_delete(this);">' + lemma.reallydeleteuser + '</a></li>';
 			r += '  </ul>';
 			r += '</div>';
+			r += '&nbsp;';
+			r += '<div class="btn-group">';
+			r += '	<button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">' + lemma.signinuser + '...</button>';
+			r += '  <ul class="dropdown-menu" role="menu">';
+			r += '    <li><a href="#" onclick="users_signinas(this);">' + lemma.reallysigninuser + '</a></li>';
+			r += '  </ul>';
+			r += '</div>';
+
 		}
 		r += 	'</div>';
 		r += '</div>';
@@ -660,6 +689,54 @@ var users_delete = function( obj ) {
 	return false;
 };
 
+/**
+ * Sign in as a user
+ *
+ * @param   {object}  obj  HTML fragment
+ *
+ * @return  {boolean}       false
+ */
+var users_signinas = function( obj ) {
+	var username = $(obj).parents('.del_base').find('p.lead').text();
+
+	$.ajax( {
+		url      : 'inc/users.pml.php?' + (new Date()).getTime() + '&' + querystring,
+		type     : 'POST',
+		dataType : 'json',
+		data     : {
+			'csrf_token' : csrf_token,
+			'action'     : 'users_signinas',
+			'u'          : username,
+		}
+	} )
+	.always( function() {
+	})
+	.fail( function ( e ) {
+		$('#umUsersViewAlert').html( get_alert( 'danger' , e.responseText , false ) );
+	})
+	.done( function ( re ) {
+
+		if ( re.singlewarning ) {
+			$('#umUsersViewAlert').html( get_alert( 'warning' , re.singlewarning , false ) );
+			return false;
+		}
+		else if ( re.singlenotice ) {
+			$('#umUsersViewAlert').html( get_alert( 'info' , re.singlenotice , false ) );
+			return false;
+		}
+		else if ( re.error ) {
+			$('#umUsersViewAlert').html( get_alert( 'danger' , re.error , false ) );
+			return false;
+		}
+		else {
+			document.location.reload();
+			return false;
+		}
+	});
+
+	return false;
+};
+
 
 
 var users_logfiles = function() {
@@ -711,8 +788,8 @@ var users_authlog = function() {
 			r += 	'<thead>';
 			r += 		'<tr>';
 			r += 			'<th data-field="date" data-sortable="true">' + lemma.date + '</th>';
-			r += 			'<th data-field="action" data-sortable="true">' + lemma.action + '</th>';
 			r += 			'<th data-field="username" data-sortable="true">' + lemma.username + '</th>';
+			r += 			'<th data-field="action" data-sortable="true">' + lemma.action + '</th>';
 			r += 			'<th data-field="ip" data-sortable="true">' + lemma.ip + '</th>';
 			r += 			'<th data-field="useragent" data-sortable="true">' + lemma.useragent + '</th>';
 			r += 		'</tr>';
@@ -742,12 +819,13 @@ var users_authlog = function() {
 				}
 				action = action.replace(/^addadmin/,'<span class="label label-info">' + lemma.addadmin + '</span>');
 				action = action.replace(/^adduser/,'<span class="label label-info">' + lemma.adduser + '</span>');
+				action = action.replace(/^signinas/,'<span class="label label-success">' + lemma.signinas + '</span>');
 				action = action.replace(/^deleteuser/,'<span class="label label-info">' + lemma.deleteuser + '</span>');
 
 				r += '<tr>';
 				r += 	'<td>' + date + '</td>';
-				r += 	'<td>' + action + '</td>';
 				r += 	'<td>' + username + '</td>';
+				r += 	'<td>' + action + '</td>';
 				r += 	'<td>' + ip + '</td>';
 				r += 	'<td title="' + $('<div/>').text(re.b[i][4]).html() + '">' + ua + '</td>';
 				r += '</tr>';
@@ -767,6 +845,103 @@ var users_authlog = function() {
 };
 
 
+/**
+ * Save anonymous logs
+ *
+ * @return  {boolean}  false
+ */
+var anonymous_save = function() {
+
+	$('#umAnonymousSave').button('loading');
+
+	var values = {
+		'csrf_token' : csrf_token,
+		'action'     : 'anonymous_save'
+	};
+	$.each( $('#umAnonymousForm').serializeArray(), function(i, field) {
+		values[ field.name ] = field.value;
+	});
+
+	$.ajax( {
+		url      : 'inc/users.pml.php?' + (new Date()).getTime() + '&' + querystring,
+		type     : 'POST',
+		dataType : 'json',
+		data     : values
+	} )
+	.always( function() {
+		$('#umAnonymousSave').button('reset');
+	})
+	.fail( function ( e ) {
+		$('#umAnonymousAlert').html( get_alert( 'danger' , e.responseText , false ) );
+	})
+	.done( function ( re ) {
+
+		if ( re.singlewarning ) {
+			$('#umUsersAddAlert').html( get_alert( 'warning' , re.singlewarning , false ) );
+			return false;
+		}
+		else if ( re.singlenotice ) {
+			$('#umUsersAddAlert').html( get_alert( 'info' , re.singlenotice , false ) );
+			return false;
+		}
+		else if ( re.error ) {
+			$('#umUsersAddAlert').html( get_alert( 'danger' , re.error , false ) );
+			return false;
+		}
+		else  {
+			anonymous_list( 'success' , lemma.anonymous_ok , true );
+			return false;
+		}
+	});
+
+	return false;
+};
 
 
+/**
+ * List anonymous logs
+ *
+ * @return  {boolean}  false
+ */
+var anonymous_list = function( severity , message , close ) {
 
+	if ( severity !== undefined ) {
+		$('#umAnonymousAlert').html( get_alert( severity , message , close ) );
+	} else {
+		$('#umAnonymousAlert').html('');
+	}
+
+	$('#umAnonymousBody').html('<img src="img/loader.gif"/>');
+
+	$.ajax( {
+		url      : 'inc/users.pml.php?' + (new Date()).getTime() + '&' + querystring,
+		type     : 'POST',
+		dataType : 'json',
+		data     : {
+			'csrf_token' : csrf_token,
+			'action'     : 'anonymous_list',
+		}
+	} )
+	.always( function() {
+	})
+	.fail( function ( e ) {
+		$('#umAnonymousBody').html( get_alert( 'danger' , e.responseText , false ) );
+	})
+	.done( function ( re ) {
+		if ( re.singlewarning ) {
+			$('#umAnonymousBody').html( get_alert( 'warning' , re.singlewarning , false ) );
+		}
+		else if ( re.singlenotice ) {
+			$('#umAnonymousBody').html( get_alert( 'info' , re.singlenotice , false ) );
+		}
+		else if ( re.error ) {
+			$('#umAnonymousBody').html( get_alert( 'danger' , re.error , false ) );
+		}
+		else {
+			$('#umAnonymousBody').html( re.b );
+			log_selector_init();
+		}
+	});
+
+	return false;
+};

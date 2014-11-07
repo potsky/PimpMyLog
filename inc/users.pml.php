@@ -321,6 +321,31 @@ switch ( @$_POST['action'] ) {
 
 	/*
 	|--------------------------------------------------------------------------
+	| Sign in as a user
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'users_signinas':
+
+		if ( ! Sentinel::isAdmin() ) {
+			$return['error'] = 'vaffanculo';
+			break;
+		}
+
+		$username = $_POST['u'];
+
+		if ( $username === $current_user ) {
+			$return['error'] = 'You are a recursive guy, right?!';
+		}
+		else {
+			Sentinel::signInAs( $username );
+		}
+
+		break;
+
+
+	/*
+	|--------------------------------------------------------------------------
 	| List auth logs
 	|--------------------------------------------------------------------------
 	|
@@ -340,6 +365,95 @@ switch ( @$_POST['action'] ) {
 		$return['b'] = $logs;
 		break;
 
+
+	/*
+	|--------------------------------------------------------------------------
+	| Anonymous
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'anonymous_list':
+
+		if ( ! Sentinel::isAdmin() ) {
+			$return['error'] = 'vaffanculo';
+			break;
+		}
+
+		if ( Sentinel::isAnonymousEnabled() ) {
+			$r = '<div class="alert alert-info">' . __('<strong>Anonymous access is enabled</strong>. Genuine users have to click on the user menu to sign in and access more logs.') . '</div>';
+		} else {
+			$r = '<div class="alert alert-info">' . __('<strong>Anonymous access is disabled</strong>. All users have to sign in from the sign in screen.') . '</div>';
+		}
+
+		$r .= '<div class="form-group">';
+		$r .= '	<label class="col-sm-4 control-label"></label>';
+		$r .= '	<div class="col-sm-8">';
+		$r .= __("Select which log files can be viewed without being logged.");
+		$r .= '		(<a href="#" class="logs-selector-toggler">'. __('Toggle all log files') . '</a>)';
+		$r .= '	</div>';
+		$r .= '</div>';
+
+		foreach( $files as $file_id => $file ) {
+
+			$fid = h( $file_id );
+			if ( Sentinel::isLogAnonymous( $file_id ) ) {
+				$e  = 'active btn-success';
+				$d  = 'btn-default';
+				$ec = ' checked="checked"';
+				$dc = '';
+			} else {
+				$e  = 'btn-default';
+				$d  = 'active btn-danger';
+				$ec = '';
+				$dc = ' checked="checked"';
+			}
+
+			$r .= '<div class="form-group" data-fileid="' . $fid . '">';
+			$r .= '	<label for="' . $fid . '" class="col-sm-4 control-label">' . $file['display'] . '</label>';
+			$r .= '	<div class="col-sm-8">';
+			$r .= '		<div class="btn-group" data-toggle="buttons">';
+			$r .= '			<label class="btn btn-xs logs-selector-yes ' . $e . '">';
+			$r .= '				<input type="radio" name="f-' . $fid . '" id="anonymous-f-' . $fid . '-true" value="1"' . $ec . '/> '.__('Yes');
+			$r .= '			</label>';
+			$r .= '			<label class="btn btn-xs logs-selector-no ' . $d . '">';
+			$r .= '				<input type="radio" name="f-' . $fid . '" id="anonymous-f-' . $fid . '-false" value="0"' . $dc . '/> '.__('No');
+			$r .= '			</label>';
+			$r .= '		</div>';
+			$r .= '	</div>';
+			$r .= '</div>';
+		}
+
+		$return['b'] = $r;
+
+		break;
+
+	/*
+	|--------------------------------------------------------------------------
+	| Anonymous
+	|--------------------------------------------------------------------------
+	|
+	*/
+	case 'anonymous_save':
+
+		if ( ! Sentinel::isAdmin() ) {
+			$return['error'] = 'vaffanculo';
+			break;
+		}
+
+		unset( $_POST['csrf_token'] );
+		unset( $_POST['action'] );
+
+		$logfiles = $_POST;
+
+		foreach( $logfiles as $fileid => $access ) {
+			if ( substr( $fileid , 0 , 2 ) === 'f-' ) {
+				Sentinel::setLogAnonymous( substr( $fileid , 2 ) , ( (int)$access === 1 ) );
+			}
+		}
+
+		Sentinel::save();
+
+		break;
 
 	/*
 	|--------------------------------------------------------------------------
