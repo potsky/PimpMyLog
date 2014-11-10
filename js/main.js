@@ -73,6 +73,47 @@ var clipboard_enable = function( btn , ctn , where , text ) {
 };
 
 /**
+ * Download the EXPORT feed
+ *
+ * @return  {boolean}  false
+ */
+var get_rss = function() {
+	$.ajax( {
+		url      : 'inc/rss.pml.php?' + (new Date()).getTime() + '&' + querystring,
+		type     : 'POST',
+		dataType : 'json',
+		data     : {
+			'csrf_token' : csrf_token,
+			'action'     : 'get_rss_link',
+			'file'       : file,
+			'search'     : $('#search').val(),
+			'tz'         : $('select#cog-tz').val(),
+		}
+	} )
+	.always( function() {
+	})
+	.fail( function ( e ) {
+		$('#prBody').html( get_alert( 'danger' , e.responseText , false ) );
+	})
+	.done( function ( re ) {
+		if ( re.singlewarning ) {
+			pml_singlealert( re.singlewarning , 'warning' );
+		}
+		else if ( re.singlenotice ) {
+			pml_singlealert( re.singlenotice , 'info' );
+		}
+		else if ( re.error ) {
+			pml_singlealert( re.error , 'danger' );
+		}
+		else {
+  			document.body.innerHTML += "<iframe src='" + re.url + "' style='display: none;' ></iframe>";
+		}
+	});
+	return false;
+};
+
+
+/**
  * Reload the page with query string context
  *
  * @param   {boolean}  urlonly  if set to false or undefined, the page will be reloaded. If set to something else, only the brower url will be updated.
@@ -502,7 +543,7 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 	var wanted_lines;
 
 	// Disable load more button
-	$('#loadmore').button('loading');
+	$('.loadmore').button('loading');
 
 	// Auto refresh stop
 	if ( auto_refresh_timer !== null ) {
@@ -576,6 +617,20 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 			set_columns( files[file].thinit );
 			sort = files[file].sort;
 		}
+		// Manage the export button
+		if ( files[file].export === false ) {
+			$('#export').hide();
+			$('#noexport').show();
+		}
+		else if ( ( export_default === false ) && ( ! files[file].export ) ) {
+			$('#export').hide();
+			$('#noexport').show();
+		}
+		else {
+			$('#noexport').hide();
+			$('#export').show();
+		}
+
 		load_full_file = true;
 	}
 	else {
@@ -915,9 +970,9 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 		// We can call get_top_offset() now because rows have not been sorted and the older log line is the last one
 		var older_line_offset = get_top_offset();
 		if ( ( older_line_offset <= 1 ) || ( ( logs.search !== '' ) && ( parseInt( logs.lpo , 10 ) <= 1) ) ) {
-			$('#loadmore').text( $('#loadmore').data('nomore-text') ).addClass('disabled').prop('disabled','disabled').attr('title','');
+			$('.loadmore').text( $('.loadmore').data('nomore-text') ).addClass('disabled').prop('disabled','disabled').attr('title','');
 		} else {
-			$('#loadmore').button('reset').attr( 'title' , sprintf( lemma.loadmore , numeral( older_line_offset ).format('0 b') ) );
+			$('.loadmore').button('reset').attr( 'title' , sprintf( lemma.loadmore , numeral( older_line_offset ).format('0 b') ) );
 		}
 
 		// Sort table
@@ -1200,7 +1255,7 @@ $(function() {
 	}
 
 	// Load more
-	$('#loadmore').click(function() {
+	$('.loadmore').click(function() {
 		get_logs( false , false , false , true );
 	});
 

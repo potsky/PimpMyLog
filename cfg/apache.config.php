@@ -30,7 +30,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 		$remain = 10;
 		$test   = 0;
 		error_log( __( 'Pimp my Log has been successfully configured with Apache' ) );
-		foreach ( Parser::getLinesFromBottom( $file , 10 ) as $line ) {
+		foreach ( LogParser::getLinesFromBottom( $file , 10 ) as $line ) {
 			$test = @preg_match('|^\[(.*) (.*) (.*) (.*):(.*):(.*)\.(.*) (.*)\] \[(.*):(.*)\] \[pid (.*)\] .*\[client (.*):(.*)\] (.*)(, referer: (.*))*$|U', $line );
 			if ( $test === 1 ) {
 				break;
@@ -163,7 +163,7 @@ EOF;
 					"\u03bcs" : "numeral:0,0"
 				},
 				"exclude": {
-					"URL": ["\/favicon.ico\/", "\/\\\\.pml\\\\.php\\\\.*\$\/"],
+					"URL": ["\/favicon.ico\/", "\/\\\\.pml\\\\.php.*\$\/"],
 					"CMD": ["\/OPTIONS\/"]
 				}
 			}

@@ -78,7 +78,7 @@ define( 'DEFAULT_NOTIFICATION_TITLE'          , 'New logs [%f]' );
 define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'        , 'https://github.com/potsky/PimpMyLog/issues/' );
 define( 'DEFAULT_PIMPMYLOG_VERSION_URL'       , 'http://demo.pimpmylog.com/version.js' );
 define( 'DEFAULT_PULL_TO_REFRESH'             , true );
-define( 'DEFAULT_RSS'                         , true );
+define( 'DEFAULT_EXPORT'                      , true );
 define( 'DEFAULT_SORT_LOG_FILES'              , 'default' );
 define( 'DEFAULT_TITLE'                       , 'Pimp my Log' );
 define( 'DEFAULT_TITLE_FILE'                  , 'Pimp my Log [%f]' );
@@ -182,84 +182,6 @@ function _e($text)
 }
 
 /**
- * The log parser
- *
- * @param string  $regex      The regex which describes the user log format
- * @param array   $match      An array which links internal tokens to regex matches
- * @param string  $log        The text log
- * @param string  $types      A array of types for fields
- *
- * @return  mixed             An array where keys are internal tokens and values the corresponding values extracted from the log file. Or false if line is not matchable.
- */
-function parser($regex , $match , $log , $types , $tz = NULL)
-{
-    $result = array();
-    preg_match_all( $regex , $log , $out, PREG_PATTERN_ORDER );
-    if ( @count( $out[0] )==0 ) {
-        return false;
-    }
-    foreach ($match as $token => $key) {
-
-        $type = ( isset ( $types[ $token ] ) ) ? $types[ $token ] : 'txt';
-
-        if ( substr( $type , 0 , 4 ) === 'date' ) {
-
-            // Date is an array description with keys ( 'Y' : 5 , 'M' : 2 , ... )
-            if ( is_array( $key ) && ( is_assoc( $key ) ) ) {
-                $newdate = array();
-                foreach ($key as $k => $v) {
-                    $newdate[ $k ] = @$out[ $v ][ 0 ];
-                }
-                if ( isset( $newdate['M'] ) ) {
-                    $str = $newdate['M'] . ' ' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . $newdate['Y'];
-                } elseif ( isset( $newdate['m'] ) ) {
-                    $str = $newdate['Y'] . '/' . $newdate['m'] . '/' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'];
-                }
-            }
-            // Date is an array description without keys ( 2 , ':' , 3 , '-' , ... )
-            else if ( is_array( $key ) ) {
-                $str = '';
-                foreach ($key as $v) {
-                    $str .= ( is_string( $v ) ) ? $v : @$out[ $v ][0];
-                }
-            } else {
-                $str = @$out[ $key ][0];
-            }
-
-            // remove part next to the last /
-            $dateformat = ( substr( $type , 0 , 5 ) === 'date:' ) ? substr( $type , 5 ) : 'Y/m/d H:i:s';
-            if ( ( $p = strrpos(	$dateformat , '/' ) ) !== false ) {
-                $dateformat = substr( $dateformat , 0 , $p );
-            }
-            if ( ( $timestamp = strtotime( $str ) ) === false ) {
-                $date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
-            } else {
-                $date = new DateTime( );
-                $date->setTimestamp( $timestamp );
-                if ( ! is_null( $tz ) ) {
-                    $date->setTimezone( new DateTimeZone( $tz ) );
-                }
-                $date = $date->format( $dateformat );
-            }
-
-            $result[ $token ] = $date;
-        }
-        // Array description without keys ( 2 , ':' , 3 , '-' , ... )
-        else if ( is_array( $key ) ) {
-            $r = '';
-            foreach ($key as $v) {
-                $r .= ( is_string( $v ) ) ? $v : @$out[ $v ][0];
-            }
-            $result[ $token ] = $r;
-        } else {
-            $result[ $token ] = @$out[ $key ][0];
-        }
-    }
-
-    return $result;
-}
-
-/**
  * Load all unset constants
  *
  * @return
@@ -285,7 +207,7 @@ function load_default_constants()
         'PIMPMYLOG_ISSUE_LINK',
         'PIMPMYLOG_VERSION_URL',
         'PULL_TO_REFRESH',
-        'RSS',
+        'EXPORT',
         'SORT_LOG_FILES',
         'TITLE',
         'TITLE_FILE',
@@ -491,7 +413,7 @@ function config_load($load_user_configuration_dir = true)
         // Anonymous access + User access
         else {
             foreach ( $files as $fileid => $file ) {
-                if ( ( Sentinel::userCanOnLogs( $fileid , 'r' , true , $username ) ) || ( Sentinel::isLogAnonymous( $$fileid ) ) ) {
+                if ( ( Sentinel::userCanOnLogs( $fileid , 'r' , true , $username ) ) || ( Sentinel::isLogAnonymous( $fileid ) ) ) {
                     $final[ $fileid ] = $file;
                 }
             }
@@ -658,12 +580,12 @@ function get_max_options($files)
  *
  * @return  string              the human size
  */
-function human_filesize($bytes, $decimals = 0)
+function human_filesize( $bytes , $decimals = 0 )
 {
     $sz = __( 'B KBMBGBTBPB' );
     $factor = floor( ( strlen( $bytes ) - 1 ) / 3 );
 
-    return sprintf( "%.{$decimals}f", $bytes / pow( 1024, $factor ) ) . @$sz[$factor*2];
+    return sprintf( "%.{$decimals}f" , $bytes / pow( 1024, $factor ) ) . @$sz[ (int)$factor * 2 ];
 }
 
 /**
@@ -771,7 +693,7 @@ function json_indent($json)
  */
 function clean_json_version($data)
 {
-    return str_replace(	array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/);/*PSK*/' , '/*PSK*/)/*PSK*/' ) , array( '' , '' , '' ) , $data );
+    return str_replace( array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/);/*PSK*/' , '/*PSK*/)/*PSK*/' ) , array( '' , '' , '' ) , $data );
 }
 
 /**
@@ -880,6 +802,35 @@ function is_not_local_ip( $ip ) {
         return false;
     }
     return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE);
+}
+
+/**
+ * Return a 404 error
+ *
+ * @return  void
+ */
+function http404() {
+    header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found');
+    die();
+}
+
+/**
+ * Return a 403 error
+ *
+ * @return  void
+ */
+function http403() {
+    header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 403 Forbidden');
+    die();
+}
+/**
+ * Return a 500 error
+ *
+ * @return  void
+ */
+function http500() {
+    header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 500 Internal Server Error');
+    die();
 }
 
 /*

@@ -33,7 +33,7 @@ function test( $type , $regex , $match , $types , $logs , $headers = true , $mul
 
 	foreach( $logs as $log ) {
 
-		$tokens = parser( $regex , $match , $log , $types );
+		$tokens = LogParser::parseLine( $regex , $match , $log , $types );
 
 		if ( is_array( $tokens ) ) {
 			$rank++;
@@ -208,7 +208,7 @@ else {
 				<br/>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="alert alert-danger"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div>
+						<div class="alert alert-warning"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div>
 					</div>
 					<br/><br/>
 					<div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . '/' . $access_file . '\''; ?></pre></div>

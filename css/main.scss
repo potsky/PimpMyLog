@@ -56,9 +56,10 @@ $font-family-monospace            : 'ubuntu_monoregular', Menlo, Monaco, Consola
 	border           : 1px solid transparent;
 	white-space      : nowrap;
 	text-transform   : uppercase;
-	padding          : 5px 10px;
-	@include button-size($padding-base-vertical , $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);
+	@include button-size( 5px , 10px , $font-size-base, $line-height-base, 3px);
 	@include user-select(none);
+	padding-top    : 4px!important;
+	padding-bottom : 5px!important;
 
 	&:hover {
 		text-decoration: none;
@@ -87,6 +88,10 @@ div.th-inner.sortable {
 th a:hover, div.th-inner.sortable:hover {
 	text-decoration : none;
 	color           : $brand-primary;
+}
+
+code {
+	font-size: 100%;
 }
 
 .dropdown-menu {

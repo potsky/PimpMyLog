@@ -15,7 +15,7 @@
 		"_remove_me_to_set_NOTIFICATION_TITLE"     : "New logs [%f]",
 		"_remove_me_to_set_PIMPMYLOG_VERSION_URL"  : "http:\/\/demo.pimpmylog.com\/version.js",
 		"_remove_me_to_set_PULL_TO_REFRESH"        : true,
-		"_remove_me_to_set_RSS"                    : true,
+		"_remove_me_to_set_EXPORT"                    : true,
 		"_remove_me_to_set_SORT_LOG_FILES"         : "default | display-asc | display-insensitive | display-desc | display-insensitive-desc",
 		"_remove_me_to_set_TITLE"                  : "Pimp my Log",
 		"_remove_me_to_set_TITLE_FILE"             : "Pimp my Log [%f]",

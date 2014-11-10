@@ -214,6 +214,7 @@ $csrf = csrf_get();
 			csrf_token           = <?php echo json_encode( $csrf ); ?>,
 			querystring          = <?php echo json_encode( $_SERVER['QUERY_STRING'] ); ?>,
 			currentuser          = <?php echo json_encode( Sentinel::getCurrentUsername() ); ?>,
+			export_default       = <?php echo ( EXPORT === true ) ? 'true' : 'false';?>;
 			notification_default = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;
 	</script>
 </head>
@@ -295,6 +296,12 @@ $csrf = csrf_get();
 
 				<form class="navbar-form navbar-right">
 
+					<?php if ( ( is_null( $current_user ) ) && ( Sentinel::isAnonymousEnabled() ) ) { ?>
+						<div class="form-group">
+							<a href="?signin" class="btn-menu btn-primary btn-sm" title="<?php _h( 'Sign in' );?>"><?php _e('Sign in');?></a>
+						</div>&nbsp;
+					<?php } ?>
+
 					<div class="form-group" id="searchctn">
 						<input type="text" class="form-control input-sm clearable" id="search" value="<?php echo h( @$_GET['s'] );?>" placeholder="<?php _h( 'Search in logs' );?>">
 					</div>&nbsp;
@@ -326,12 +333,6 @@ $csrf = csrf_get();
 							<span class="visible-xs-* visible-sm-* hidden-md hidden-lg"> <?php _e( 'Notifications' ); ?></span>
 						</button>
 					</div>
-
-					<?php if ( ( is_null( $current_user ) ) && ( Sentinel::isAnonymousEnabled() ) ) { ?>
-						<div class="form-group">
-							<a href="?signin" class="btn-menu btn-primary btn-sm" title="<?php _h( 'Sign in' );?>"><?php _e('Sign in');?></a>
-						</div>
-					<?php } ?>
 
 				</form>
 
@@ -459,10 +460,24 @@ $csrf = csrf_get();
 				<tbody id="logsbody"></tbody>
 			</table>
 		</div>
-		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
-				<button style="width:100%" id="loadmore" type="button" class="btn btn-xs btn-primary" data-loading-text="<?php _h('Loading...');?>" data-nomore-text="<?php _h('No more data');?>"><?php _e('Load more');?></button>
-			</div>
+		<div class="row" id="export" style="display:none;">
+				<div class="col-xs-8 col-xs-offset-2 col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-2 col-lg-2 col-lg-offset-4">
+					<button style="width:100%; margin-bottom:1em;" type="button" class="loadmore btn btn-xs btn-primary" data-loading-text="<?php _h('Loading...');?>" data-nomore-text="<?php _h('No more data');?>"><?php _e('Load more');?></button>
+				</div>
+
+				<div class="col-xs-8 col-xs-offset-2 col-sm-5 col-sm-offset-0 col-md-4 col-md-offset-0 col-lg-2 col-lg-offset-0">
+					<div class="btn-group" style="width:100%;">
+						<button style="width:100%;" type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown"><?php _e('Export');?> <span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" onclick="get_rss()"><?php _e('RSS');?></a></li>
+						</ul>
+					</div>
+				</div>
+		</div>
+		<div class="row" id="noexport" style="display:none;">
+				<div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
+					<button style="width:100%; margin-bottom:1em;" type="button" class="loadmore btn btn-xs btn-primary" data-loading-text="<?php _h('Loading...');?>" data-nomore-text="<?php _h('No more data');?>"><?php _e('Load more');?></button>
+				</div>
 		</div>
 	</div>
 
