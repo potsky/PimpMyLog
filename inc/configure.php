@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.0 - 33b5ef4ebfc714c71068b3b6d97d3aa39cd589b1*/
+/*! pimpmylog - 1.5.0 - 680b0bcad4480ceddc724ec8767d08157dbfbfa3*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -506,7 +506,6 @@ $lemma = array(
 				echo '<br/>';
 				echo '<br/>';
 				echo sprintf( __( 'You can manually adjust settings in the <code>%s</code> file.' ) , CONFIG_FILE_NAME );
-				echo '<br/>';
 				echo '<br/>';
 				_e( 'Please visit <a href="http://pimpmylog.com">pimpmylog.com</a> for more informations.' );
 				echo '<br/>';
