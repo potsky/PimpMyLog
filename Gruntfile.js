@@ -423,6 +423,7 @@ module.exports = function(grunt) {
 					'git add -A .',
 					'git commit -m "grunt install from branch dev commit $a"',
 					'git pull origin beta',
+					'git push origin beta',
 					'ssh psk "cd /home/PimpMyLog-beta; git pull"'
 				].join(';'),
 				options: {
