@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.0 - a2a0ba9f0f3701666a8d04efd933e0c3d4b13e0b*/
+/*! pimpmylog - 1.5.0 - fd2149ba07b7e8dad4bdfaa4733d2c7f907ad236*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -127,8 +127,8 @@ switch ( @$_POST['action'] ) {
 			$url
 		)
 		. '?f=' . urlencode( $file_id )
-		. '&l=' . urlencode( ( isset( $_GET['l'] ) ) ? $_GET['l'] : $lang );
-		. '&tz=' . urlencode( ( isset( $_GET['tz'] ) ) ? $_GET['tz'] : USER_TIME_ZONE );
+		. '&l=' . urlencode( ( isset( $_GET['l'] ) ) ? $_GET['l'] : $lang )
+		. '&tz=' . urlencode( ( isset( $_GET['tz'] ) ) ? $_GET['tz'] : USER_TIME_ZONE )
 		. '&format=' . urlencode( $format )
 		. '&count=' . ( ( isset( $files[ $file_id ][ 'max' ] ) ) ? urlencode( $files[ $file_id ][ 'max' ] ) : urlencode( LOGS_MAX ) )
 		. '&timeout=' . urlencode( MAX_SEARCH_LOG_TIME )
