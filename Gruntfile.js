@@ -398,6 +398,7 @@ module.exports = function(grunt) {
 			betagitclone: {
 				command: [
 					'cd "' + beta_dir + '"',
+					'rm -rf ' + beta_name,
 					'git clone git@github.com:potsky/PimpMyLog.git -b beta "' + beta_name + '"'
 				].join('&&'),
 				options: {
