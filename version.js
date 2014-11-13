@@ -11,7 +11,7 @@
 			"released" : "2014-11-01",
 			"new"      : [
 				"Feature #64 : More logs",
-				"Feature #61 : Authentication",
+				"Feature #61 : Authentication (Take a look <a href=\"http://support.pimpmylog.com/kb/configuration/enable-authentication-on-already-installed-instances\">here to enable authentication</a> on an existing instance)",
 				"Feature #76 : Anonymous access to let guest view some logs and protect other logs for genuine users",
 				"Feature #72 : Access token to secure exports and for API coming in v2.0",
 				"Feature #71 : Admins can sign in as other users to check their accounts",
