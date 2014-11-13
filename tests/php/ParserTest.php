@@ -11,8 +11,8 @@ class ParserTest extends TestCase {
 	public function test_Apache22_Error()
     {
 		$regex         = "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*\$|U";
-		$match         = ["Date"=>1,"IP"=>4,"Log"=>5,"Severity"=>2,"Referer"=>7];
-		$types         = ["Date"=>"date:H:i:s","IP"=>"ip:http","Log"=>"pre","Severity"=>"badge:severity","Referer"=>"link"];
+		$match         = array( "Date"=>1,"IP"=>4,"Log"=>5,"Severity"=>2,"Referer"=>7 );
+		$types         = array( "Date"=>"date:H:i:s","IP"=>"ip:http","Log"=>"pre","Severity"=>"badge:severity","Referer"=>"link" );
 		$multiline     = '';
 		$exclude       = '';
 		$file_path     = PHPMOCKUP . '/apache2.2_error.log';
@@ -41,8 +41,8 @@ class ParserTest extends TestCase {
 	public function test_Apache22_Access()
     {
 		$regex         = "|^((\\S*) )*(\\S*) (\\S*) (\\S*) \\[(.*)\\] \"(\\S*) (.*) (\\S*)\" ([0-9]*) (.*)( \"(.*)\" \"(.*)\"( [0-9]*/([0-9]*))*)*\$|U";
-		$match         = ["Date"    => 6, "IP"      => 3, "CMD"     => 7, "URL"     => 8, "Code"    => 10, "Size"    => 11, "Referer" => 13, "UA"      => 14, "User"    => 5, "\u03bcs" => 16];
-		$types         = ["Date"    => "date:H:i:s", "IP"      => "ip:geo", "URL"     => "txt", "Code"    => "badge:http", "Size"    => "numeral:0b", "Referer" => "link", "UA"      => "ua:{os.name} {os.version} | {browser.name} {browser.version}\/100", "\u03bcs" => "numeral:0,0"];
+		$match         = array( "Date"    => 6, "IP"      => 3, "CMD"     => 7, "URL"     => 8, "Code"    => 10, "Size"    => 11, "Referer" => 13, "UA"      => 14, "User"    => 5, "\u03bcs" => 16 );
+		$types         = array( "Date"    => "date:H:i:s", "IP"      => "ip:geo", "URL"     => "txt", "Code"    => "badge:http", "Size"    => "numeral:0b", "Referer" => "link", "UA"      => "ua:{os.name} {os.version} | {browser.name} {browser.version}\/100", "\u03bcs" => "numeral:0,0" );
 		$multiline     = '';
 		$exclude       = '';
 		$file_path     = PHPMOCKUP . '/apache2.2_access.log';
@@ -72,8 +72,8 @@ class ParserTest extends TestCase {
 	public function test_Apache24_Error()
     {
 		$regex         = "|^\\[(.*) (.*) (.*) (.*):(.*):(.*)\\.(.*) (.*)\\] \\[(.*):(.*)\\] \\[pid (.*)\\] .*\\[client (.*):(.*)\\] (.*)(, referer: (.*))*\$|U";
-		$match         = ["Date"=>1,"IP"=>4,"Log"=>5,"Severity"=>2,"Referer"=>7];
-		$types         = ["Date"=>"date:H:i:s","IP"=>"ip:http","Log"=>"pre","Severity"=>"badge:severity","Referer"=>"link"];
+		$match         = array( "Date"=>1,"IP"=>4,"Log"=>5,"Severity"=>2,"Referer"=>7 );
+		$types         = array( "Date"=>"date:H:i:s","IP"=>"ip:http","Log"=>"pre","Severity"=>"badge:severity","Referer"=>"link" );
 		$multiline     = '';
 		$exclude       = '';
 		$file_path     = PHPMOCKUP . '/apache2.4_error.log';
@@ -102,8 +102,8 @@ class ParserTest extends TestCase {
 	public function test_Apache24_Access()
     {
 		$regex         = "|^((\\S*) )*(\\S*) (\\S*) (\\S*) \\[(.*)\\] \"(\\S*) (.*) (\\S*)\" ([0-9]*) (.*)( \"(.*)\" \"(.*)\"( [0-9]*/([0-9]*))*)*\$|U";
-		$match         = ["Date"    => 6, "IP"      => 3, "CMD"     => 7, "URL"     => 8, "Code"    => 10, "Size"    => 11, "Referer" => 13, "UA"      => 14, "User"    => 5, "\u03bcs" => 16];
-		$types         = ["Date"    => "date:H:i:s", "IP"      => "ip:geo", "URL"     => "txt", "Code"    => "badge:http", "Size"    => "numeral:0b", "Referer" => "link", "UA"      => "ua:{os.name} {os.version} | {browser.name} {browser.version}\/100", "\u03bcs" => "numeral:0,0"];
+		$match         = array( "Date"    => 6, "IP"      => 3, "CMD"     => 7, "URL"     => 8, "Code"    => 10, "Size"    => 11, "Referer" => 13, "UA"      => 14, "User"    => 5, "\u03bcs" => 16 );
+		$types         = array( "Date"    => "date:H:i:s", "IP"      => "ip:geo", "URL"     => "txt", "Code"    => "badge:http", "Size"    => "numeral:0b", "Referer" => "link", "UA"      => "ua:{os.name} {os.version} | {browser.name} {browser.version}\/100", "\u03bcs" => "numeral:0,0" );
 		$multiline     = '';
 		$exclude       = '';
 		$file_path     = PHPMOCKUP . '/apache2.4_access.log';

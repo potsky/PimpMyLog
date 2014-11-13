@@ -131,7 +131,7 @@ $lemma = array(
 	'new_nlogs'               => __( '%s new logs are available' ),
 	'no_log'                  => __( 'No log has been found.' ),
 	'notification_deny'       => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
-	'profile_ok'              => __( 'Your profile has baeen successfully saved!' ),
+	'profile_ok'              => __( 'Your profile has been successfully saved!' ),
 	'reallydeleteuser'        => __( 'Confirm' ),
 	'reallysigninuser'        => __('Confirm'),
 	'regex_invalid'           => __( 'Search was done with regular engine' ),
@@ -469,7 +469,7 @@ $csrf = csrf_get();
 
 				<div class="col-xs-8 col-xs-offset-2 col-sm-5 col-sm-offset-0 col-md-4 col-md-offset-0 col-lg-2 col-lg-offset-0">
 					<div class="btn-group" style="width:100%;">
-						<button style="width:100%;" type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown"><?php _e('Export');?> <span class="caret"></span></button>
+						<button style="width:100%;" type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown"><?php _e('Export');?>&nbsp;<span class="caret"></span></button>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#" onclick="get_rss('ATOM')"><?php _e('ATOM');?></a></li>
 							<li><a href="#" onclick="get_rss('CSV')"><?php _e('CSV');?></a></li>
@@ -508,7 +508,7 @@ $csrf = csrf_get();
 					<h4 class="modal-title" id="exModalLabel"><?php _e('Export');?></h4>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-info" id="exModalWar"><span class="glyphicon glyphicon-warning-sign"></span> <?php _e('Your URL seems to be local so it won\'t be reachable by external browsers and services' );?></div>
+					<div class="alert alert-info" id="exModalWar"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;<?php _e('Your URL seems to be local so it won\'t be reachable by external browsers and services' );?></div>
 					<p><?php _e('You can call the following URL:'); ?></p>
 					<pre><code id="exModalUrl"></code></pre>
 					<a class="btn btn-xs btn-primary clipboardex"><?php _e('Copy to clipboard'); ?></a>
