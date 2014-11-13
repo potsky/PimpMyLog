@@ -552,7 +552,6 @@ $lemma = array(
 				echo '<br/>';
 				echo sprintf( __( 'You can manually adjust settings in the <code>%s</code> file.' ) , CONFIG_FILE_NAME );
 				echo '<br/>';
-				echo '<br/>';
 				_e( 'Please visit <a href="http://pimpmylog.com">pimpmylog.com</a> for more informations.' );
 				echo '<br/>';
 				echo '<br/>';
