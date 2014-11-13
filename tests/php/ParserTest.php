@@ -124,7 +124,7 @@ class ParserTest extends TestCase {
 		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'favicon.ico' , $data_to_parse , $full , $timeout );
 		$this->assertEquals( 2 , $logs['count'] );
 
-		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , [ "URL" => [ "/favicon.ico/" ] ] , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'favicon.ico' , $data_to_parse , $full , $timeout );
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , array( "URL" => array(  "/favicon.ico/" ) ) , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'favicon.ico' , $data_to_parse , $full , $timeout );
 		$this->assertEquals( 0 , $logs['count'] );
 
 		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '|^::1|' , $data_to_parse , $full , $timeout );

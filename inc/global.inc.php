@@ -63,6 +63,7 @@ define( 'CONFIG_FILE_TEMP'                   , 'config.user.tmp.php' );
 define( 'DEFAULT_AUTH_LOG_FILE_COUNT'         , 100 );
 define( 'DEFAULT_CHECK_UPGRADE'               , true );
 define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
+define( 'DEFAULT_EXPORT'                      , true );
 define( 'DEFAULT_FOOTER'                      , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . YEAR . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
 define( 'DEFAULT_FORGOTTEN_YOUR_PASSWORD_URL' , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
 define( 'DEFAULT_GEOIP_URL'                   , 'http://www.geoiptool.com/en/?IP=%p' );
@@ -78,7 +79,6 @@ define( 'DEFAULT_NOTIFICATION_TITLE'          , 'New logs [%f]' );
 define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'        , 'https://github.com/potsky/PimpMyLog/issues/' );
 define( 'DEFAULT_PIMPMYLOG_VERSION_URL'       , 'http://demo.pimpmylog.com/version.js' );
 define( 'DEFAULT_PULL_TO_REFRESH'             , true );
-define( 'DEFAULT_EXPORT'                      , true );
 define( 'DEFAULT_SORT_LOG_FILES'              , 'default' );
 define( 'DEFAULT_TITLE'                       , 'Pimp my Log' );
 define( 'DEFAULT_TITLE_FILE'                  , 'Pimp my Log [%f]' );
@@ -926,6 +926,7 @@ function array2csv( $array ) {
     return ob_get_clean();
 }
 
+
 /*
 |--------------------------------------------------------------------------
 | Uniq ID
@@ -945,6 +946,7 @@ if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
     }
 }
 
+
 /*
 |--------------------------------------------------------------------------
 | Timezone
@@ -962,6 +964,7 @@ if ( isset( $_POST['tz'] ) ) {
 if ( ! in_array( $tz , $tz_available ) ) {
     $tz = date('e');
 }
+
 
 /*
 |--------------------------------------------------------------------------
