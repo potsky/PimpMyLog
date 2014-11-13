@@ -657,7 +657,7 @@ class Sentinel
 		$ip = self::getClientIp();
 		$ua = ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) ? $_SERVER['HTTP_USER_AGENT'] : '';
 		$ts = date("U");
-		$cu = get_current_url();
+		$cu = get_current_url( true );
 
 		self::$api_session = array( 'username' => $username );
 
@@ -665,7 +665,7 @@ class Sentinel
 		self::$auth['users'][ $username ]['api_lastlogin'] = array(
 			'ip' => $ip,
 			'ua' => $ua,
-			'ts' => $ts,
+			'ts' => $ts
 		);
 		if ( ! is_null( $cu ) ) self::$auth['users'][ $username ]['api_lastlogin']['ur'] = $cu;
 		self::save();

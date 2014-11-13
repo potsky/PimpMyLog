@@ -1,0 +1,47 @@
+[Sun Nov 09 03:45:04 2014] [notice] Digest: generating secret for digest authentication ...
+[Sun Nov 09 03:45:04 2014] [notice] Digest: done
+[Sun Nov 09 03:45:05 2014] [warn] RSA server certificate wildcard CommonName (CN) `*.potsky.com' does NOT match server name!?
+[Sun Nov 09 03:45:05 2014] [warn] RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun Nov 09 03:45:05 2014] [warn] RSA server certificate CommonName (CN) `v129' does NOT match server name!?
+[Sun Nov 09 03:45:05 2014] [warn] RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Mon Nov 10 16:50:12 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/admin
+[Mon Nov 10 16:50:12 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/db
+[Mon Nov 10 16:50:12 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/dbadmin
+[Mon Nov 10 16:50:13 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/myadmin
+[Mon Nov 10 16:50:13 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/mysql
+[Mon Nov 10 16:50:13 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/mysqladmin
+[Mon Nov 10 16:50:14 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/typo3
+[Mon Nov 10 16:50:15 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpadmin
+[Mon Nov 10 16:50:15 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin
+[Mon Nov 10 16:50:15 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpmyadmin
+[Mon Nov 10 16:50:15 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpmyadmin1
+[Mon Nov 10 16:50:15 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpmyadmin2
+[Mon Nov 10 16:50:15 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/pma
+[Mon Nov 10 16:50:15 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/web
+[Mon Nov 10 16:50:15 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/xampp
+[Mon Nov 10 16:50:16 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/web
+[Mon Nov 10 16:50:16 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/php-my-admin
+[Mon Nov 10 16:50:16 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/websql
+[Mon Nov 10 16:50:17 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpmyadmin
+[Mon Nov 10 16:50:17 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/php-my-admin
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.2.3
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.2.6
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.1
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.4
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.5-rc1
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.5-rc2
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.5
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.5-pl1
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.6-rc1
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.6-rc2
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.6
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.7
+[Mon Nov 10 16:50:18 2014] [error] [client 85.214.34.168] File does not exist: /var/www/html/phpMyAdmin-2.5.7-pl1
+[Mon Nov 10 16:50:19 2014] [error] [client 85.214.34.168] Invalid URI in request GET  HTTP/1.1
+[Mon Nov 10 17:19:37 2014] [notice] child pid 32066 exit signal Segmentation fault (11)
+[Wed Nov 12 14:43:08 2014] [error] [client 199.15.233.170] Re-negotiation request failed, referer: http://www.potsky.com/xbmc-configuration-for-jailbroken-apple-tv-2/
+[Wed Nov 12 14:43:08 2014] [error] SSL Library Error: 336068946 error:14080152:SSL routines:SSL3_ACCEPT:unsafe legacy renegotiation disabled
+[Wed Nov 12 14:43:09 2014] [error] [client 199.15.233.170] Re-negotiation request failed, referer: http://www.potsky.com/
+[Wed Nov 12 14:43:09 2014] [error] SSL Library Error: 336068946 error:14080152:SSL routines:SSL3_ACCEPT:unsafe legacy renegotiation disabled

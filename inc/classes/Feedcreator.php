@@ -177,17 +177,12 @@ $rss->outputFeed("RSS1.0");
 **************************************************************************/
 
 // your local timezone, set to "" to disable or for GMT
-define("TIME_ZONE","+01:00");
-
-
-
+//define("TIME_ZONE","+01:00");
 
 /**
  * Version string.
  **/
-
-define("FEEDCREATOR_VERSION", "FeedCreator 1.7.2-ppt (info@mypapit.net)");
-
+//define("FEEDCREATOR_VERSION", "FeedCreator 1.7.2-ppt (info@mypapit.net)");
 
 
 /**
@@ -717,8 +712,8 @@ class FeedCreator extends HtmlDescribable {
 
 	function _createStylesheetReferences() {
 		$xml = "";
-		if ($this->cssStyleSheet) $xml .= "<?xml-stylesheet href=\"".$this->cssStyleSheet."\" type=\"text/css\"?>\n";
-		if ($this->xslStyleSheet) $xml .= "<?xml-stylesheet href=\"".$this->xslStyleSheet."\" type=\"text/xsl\"?>\n";
+		if ( isset( $this->cssStyleSheet ) ) $xml .= "<?xml-stylesheet href=\"".$this->cssStyleSheet."\" type=\"text/css\"?>\n";
+		if ( isset( $this->xslStyleSheet ) ) $xml .= "<?xml-stylesheet href=\"".$this->xslStyleSheet."\" type=\"text/xsl\"?>\n";
 		return $xml;
 	}
 
@@ -831,7 +826,6 @@ class FeedCreator extends HtmlDescribable {
 	function outputFeed() {
 		echo $this->createFeed();
 	}
-
 
 }
 
@@ -960,7 +954,7 @@ class RSSCreator10 extends FeedCreator {
 		$feed.= "    <channel rdf:about=\"".$this->syndicationURL."\">\n";
 		$feed.= "        <title>".htmlspecialchars($this->title)."</title>\n";
 		$feed.= "        <description>".htmlspecialchars($this->description)."</description>\n";
-		$feed.= "        <link>".$this->link."</link>\n";
+		$feed.= "        <link>".htmlspecialchars($this->link)."</link>\n";
 		if ($this->image!=null) {
 			$feed.= "        <image rdf:resource=\"".$this->image->url."\" />\n";
 		}
@@ -977,8 +971,8 @@ class RSSCreator10 extends FeedCreator {
 		if ($this->image!=null) {
 			$feed.= "    <image rdf:about=\"".$this->image->url."\">\n";
 			$feed.= "        <title>".$this->image->title."</title>\n";
-			$feed.= "        <link>".$this->image->link."</link>\n";
-			$feed.= "        <url>".$this->image->url."</url>\n";
+			$feed.= "        <link>".htmlspecialchars($this->image->link)."</link>\n";
+			$feed.= "        <url>".htmlspecialchars($this->image->url)."</url>\n";
 			$feed.= "    </image>\n";
 		}
 		$feed.= $this->_createAdditionalElements($this->additionalElements, "    ");
@@ -1052,7 +1046,7 @@ class RSSCreator091 extends FeedCreator {
 		$feed.= "        <title>".FeedCreator::iTrunc(htmlspecialchars($this->title),100)."</title>\n";
 		$this->descriptionTruncSize = 500;
 		$feed.= "        <description>".$this->getDescription()."</description>\n";
-		$feed.= "        <link>".$this->link."</link>\n";
+		$feed.= "        <link>".htmlspecialchars($this->link)."</link>\n";
 		$now = new FeedDate();
 		$feed.= "        <lastBuildDate>".htmlspecialchars($now->rfc822())."</lastBuildDate>\n";
 		$feed.= "        <generator>".FEEDCREATOR_VERSION."</generator>\n";
@@ -1061,7 +1055,7 @@ class RSSCreator091 extends FeedCreator {
 			$feed.= "        <image>\n";
 			$feed.= "            <url>".$this->image->url."</url>\n";
 			$feed.= "            <title>".FeedCreator::iTrunc(htmlspecialchars($this->image->title),100)."</title>\n";
-			$feed.= "            <link>".$this->image->link."</link>\n";
+			$feed.= "            <link>".htmlspecialchars($this->image->link)."</link>\n";
 			if ($this->image->width!="") {
 				$feed.= "            <width>".$this->image->width."</width>\n";
 			}
@@ -1162,7 +1156,6 @@ class RSSCreator091 extends FeedCreator {
 }
 
 
-
 /**
  * RSSCreator20 is a FeedCreator that implements RDF Site Summary (RSS) 2.0.
  *
@@ -1200,7 +1193,7 @@ class PIECreator01 extends FeedCreator {
 		$feed.= "    <title>".FeedCreator::iTrunc(htmlspecialchars($this->title),100)."</title>\n";
 		$this->truncSize = 500;
 		$feed.= "    <subtitle>".$this->getDescription()."</subtitle>\n";
-		$feed.= "    <link>".$this->link."</link>\n";
+		$feed.= "    <link>".htmlspecialchars($this->link)."</link>\n";
 		for ($i=0;$i<count($this->items);$i++) {
 			$feed.= "    <entry>\n";
 			$feed.= "        <title>".FeedCreator::iTrunc(htmlspecialchars(strip_tags($this->items[$i]->title)),100)."</title>\n";
@@ -1275,7 +1268,7 @@ class PIECreator01 extends FeedCreator {
 			$feed.= "    </author>\n";
 		}
 		$feed.= "    <generator>".FEEDCREATOR_VERSION."</generator>\n";
-		$feed.= "<link rel=\"self\" type=\"application/atom+xml\" href=\"". $this->syndicationURL . "\" />\n";
+		$feed.= "<link rel=\"self\" type=\"application/atom+xml\" href=\"". htmlspecialchars($this->syndicationURL) . "\" />\n";
 		$feed.= $this->_createAdditionalElements($this->additionalElements, "    ");
 		for ($i=0;$i<count($this->items);$i++) {
 			$feed.= "    <entry>\n";

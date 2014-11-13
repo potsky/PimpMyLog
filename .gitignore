@@ -21,7 +21,6 @@ _cli_fake_session
 /_site
 /_tmp
 /dist
-/fonts
 
 # Application specific files
 /node_modules

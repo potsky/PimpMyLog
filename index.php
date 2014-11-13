@@ -136,6 +136,7 @@ $lemma = array(
 	'reallysigninuser'        => __('Confirm'),
 	'regex_invalid'           => __( 'Search was done with regular engine' ),
 	'regex_valid'             => __( 'Search was done with RegEx engine' ),
+	'resultcopied'            => __( 'Result copied!' ),
 	'roles'                   => __( 'Roles' ),
 	'search_no_regex'         => __( 'No log has been found with Reg Ex search %s' ),
 	'search_no_regular'       => __( 'No log has been found with regular search %s' ),
@@ -146,6 +147,7 @@ $lemma = array(
 	'signout'                 => __( 'Sign out' ),
 	'system'                  => __( 'System' ),
 	'toggle_column'           => __( 'Toggle column %s' ),
+	'urlcopied'               => __( 'URL copied!' ),
 	'user'                    => __( 'User' ),
 	'user_add_ok'             => __( 'User has been successfully saved!' ),
 	'user_api_lastlogin'      => __( 'Last API call' ),
@@ -469,7 +471,15 @@ $csrf = csrf_get();
 					<div class="btn-group" style="width:100%;">
 						<button style="width:100%;" type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown"><?php _e('Export');?> <span class="caret"></span></button>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#" onclick="get_rss()"><?php _e('RSS');?></a></li>
+							<li><a href="#" onclick="get_rss('ATOM')"><?php _e('ATOM');?></a></li>
+							<li><a href="#" onclick="get_rss('CSV')"><?php _e('CSV');?></a></li>
+							<li><a href="#" onclick="get_rss('JSON')"><?php _e('JSON');?></a></li>
+							<li><a href="#" onclick="get_rss('JSONP')"><?php _e('JSONP (with callback)');?></a></li>
+							<?php if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) { ?>
+								<li><a href="#" onclick="get_rss('JSONPR')"><?php _e('JSON Pretty Print');?></a></li>
+							<?php } ?>
+							<li><a href="#" onclick="get_rss('RSS')"><?php _e('RSS');?></a></li>
+							<li><a href="#" onclick="get_rss('XML')"><?php _e('XML');?></a></li>
 						</ul>
 					</div>
 				</div>
@@ -488,6 +498,41 @@ $csrf = csrf_get();
 		</div>
 		<hr/>
 		<footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer>
+	</div>
+
+	<div class="modal fade" id="exModal" tabindex="-1" role="dialog" aria-labelledby="exModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
+					<h4 class="modal-title" id="exModalLabel"><?php _e('Export');?></h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-info" id="exModalWar"><span class="glyphicon glyphicon-warning-sign"></span> <?php _e('Your URL seems to be local so it won\'t be reachable by external browsers and services' );?></div>
+					<p><?php _e('You can call the following URL:'); ?></p>
+					<pre><code id="exModalUrl"></code></pre>
+					<a class="btn btn-xs btn-primary clipboardex"><?php _e('Copy to clipboard'); ?></a>
+					<hr/>
+					<p><?php _e('Feel free to change these parameters in the URL:'); ?></p>
+					<ul>
+						<li><code>l</code>       : <?php _e('language');?></li>
+						<li><code>tz</code>      : <?php _e('timezone to convert dates');?></li>
+						<li><code>format</code>  : <?php _e('available formats are CSV, JSON, JSONPR and XML');?></li>
+						<li><code>count</code>   : <?php _e('the maximum count of returned log lines');?></li>
+						<li><code>timeout</code> : <?php _e('the timeout in seconds to return log lines. Increase this value for bug counts or when using search');?></li>
+						<li><code>search</code>  : <?php _e('search this value in log lines. It can be a regular expression or a regex one');?></li>
+						<li><code>callback</code>: <?php _e('this field is optional and is used to specify a callback function when format is JSONP');?></li>
+					</ul>
+					<hr/>
+					<p><?php _e('Here is the current result:'); ?></p>
+					<pre><code id="exModalCtn"></code></pre>
+					<a class="btn btn-xs btn-primary clipboardexr"><?php _e('Copy to clipboard'); ?></a>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<?php if ( ! is_null( $current_user ) ) { ?>

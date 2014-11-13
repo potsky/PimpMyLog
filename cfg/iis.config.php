@@ -34,18 +34,18 @@ function iis_get_config( $type , $file , $software , $counter ) {
 		$regex = array();
 		$types = array();
 		$match = array(
-			'Date'         => false,
-			'IP'           => false,
-			'Site'         => false,
-			'CMD'          => false,
-			'URL'          => false,
-			'QS'           => false,
-			'Code'         => false,
-			'Size'         => false,
-			'Referer'      => false,
-			'UA'           => false,
-			'User'         => false,
-			'ms'         => false,
+			'Date'    => false,
+			'IP'      => false,
+			'Site'    => false,
+			'CMD'     => false,
+			'URL'     => false,
+			'QS'      => false,
+			'Code'    => false,
+			'Size'    => false,
+			'Referer' => false,
+			'UA'      => false,
+			'User'    => false,
+			'ms'      => false,
 		);
 		$types = array(
 			'Date'         => "date:H:i:s",
@@ -124,11 +124,12 @@ function iis_get_config( $type , $file , $software , $counter ) {
 			"max"     : 10,
 			"notify"  : false,
 			"format"  : {
-				"type"    : "W3C Extended",
-				"regex"   : $regex_json_encoded,
-				"match"   : $match_json_encoded,
-				"types"   : $types_json_encoded,
-				"exclude" : {
+				"type"         : "W3C Extended",
+				"regex"        : $regex_json_encoded,
+				"export_title" : "URL",
+				"match"        : $match_json_encoded,
+				"types"        : $types_json_encoded,
+				"exclude"      : {
 					"URL": ["\/favicon.ico\/", "\/\\\\.pml\\\\.php\\\\.*\$\/"],
 					"CMD": ["\/OPTIONS\/"]
 				}
@@ -165,9 +166,10 @@ EOF;
 			"max"     : 10,
 			"notify"  : false,
 			"format"  : {
-				"type"  : "IIS",
-				"regex" : "|^(.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*),(.*)\$|U",
-				"match" : {
+				"type"         : "IIS",
+				"regex"        : "|^(.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*),(.*)\$|U",
+				"export_title" : "URL",
+				"match"        : {
 					"Date"    : [3," ",4],
 					"IP"      : 1,
 					"Site"    : 5,
@@ -205,9 +207,10 @@ EOF;
 		"max"     : 10,
 		"notify"  : false,
 		"format"  : {
-			"type"  : "NCSA Common",
-			"regex" : "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
-			"match" : {
+			"type"         : "NCSA Common",
+			"regex"        : "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
+			"export_title" : "URL",
+			"match"        : {
 				"Date"    : 6,
 				"IP"      : 3,
 				"CMD"     : 7,

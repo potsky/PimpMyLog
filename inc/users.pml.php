@@ -144,7 +144,8 @@ switch ( @$_POST['action'] ) {
 
 		foreach ( Sentinel::getUsers() as $username => $user ) {
 			unset( $user['pwd'] );
-			if (isset($user[ 'lastlogin' ]['ts'])) $user[ 'lastlogin' ]['ts'] = date( 'Y/m/d H:i:s' , (int)$user[ 'lastlogin' ]['ts'] );
+			if (isset($user[ 'lastlogin' ]['ts']))     $user[ 'lastlogin' ]['ts']     = date( 'Y/m/d H:i:s' , (int)$user[ 'lastlogin' ]['ts'] );
+			if (isset($user[ 'api_lastlogin' ]['ts'])) $user[ 'api_lastlogin' ]['ts'] = date( 'Y/m/d H:i:s' , (int)$user[ 'api_lastlogin' ]['ts'] );
 			$user[ 'cd' ] = date( 'Y/m/d H:i:s' , (int)$user[ 'cd' ] );
 			$user[ 'u' ]  = $username;
 			$users[]      = $user;
@@ -174,7 +175,8 @@ switch ( @$_POST['action'] ) {
 		}
 		else {
 			unset( $user['pwd'] );
-			if (isset( $user[ 'lastlogin' ]['ts'] ) ) $user[ 'lastlogin' ]['ts'] = date( 'Y/m/d H:i:s' , (int)$user[ 'lastlogin' ]['ts'] );
+			if (isset($user[ 'lastlogin' ]['ts']))     $user[ 'lastlogin' ]['ts']     = date( 'Y/m/d H:i:s' , (int)$user[ 'lastlogin' ]['ts'] );
+			if (isset($user[ 'api_lastlogin' ]['ts'])) $user[ 'api_lastlogin' ]['ts'] = date( 'Y/m/d H:i:s' , (int)$user[ 'api_lastlogin' ]['ts'] );
 			$user[ 'cd' ]     = date( 'Y/m/d H:i:s' , (int)$user[ 'cd' ] );
 			$return['b']      = $user;
 			$return['b']['u'] = $username;
@@ -501,6 +503,28 @@ switch ( @$_POST['action'] ) {
         $r .=   '<input type="checkbox" name="regenerate" value="1"/> ' . __('Check to generate both new Access token and new Presalt key');
    		$r .= 	'</div>';
 		$r .= '</div>';
+
+		$r .= '<hr/>';
+
+		if ( ( ! isset( $user['api_logincount'] ) ) || ( (int)$user['api_logincount'] === 0 ) ) {
+			$r .= __('Your credentials have not been used');
+		}
+		else {
+			$r .= '<p>';
+			if ( (int)$user['api_logincount'] === 1 ) {
+				$r .= __('API has been called 1 time');
+			} else {
+				$r .= sprintf( __('API has been called %s times') , (int)$user['api_logincount'] );
+			}
+			$r .= '</p>';
+
+			$r .= sprintf( __('Last API call has been done at %s by IP address %s with user agent %s on URL %s')
+				, '<code>' . date( 'Y/m/d H:i:s' , (int)$user[ 'api_lastlogin' ]['ts'] ) . '</code>'
+				, '<code>' . $user[ 'api_lastlogin' ]['ip'] . '</code>'
+				, '<code>' . $user[ 'api_lastlogin' ]['ua'] . '</code>'
+				, '<a href="' . h( $user[ 'api_lastlogin' ]['ur'] ) . '" target="_blank">' . $user[ 'api_lastlogin' ]['ur'] . '</a>'
+			);
+		}
 
 		$return['b'] = $r;
 

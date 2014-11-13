@@ -2,6 +2,7 @@
 {
 	"globals": {
 		"_remove_me_to_set_CHECK_UPGRADE"          : true,
+		"_remove_me_to_set_EXPORT"                 : true,
 		"_remove_me_to_set_FILE_SELECTOR"          : "bs | html",
 		"_remove_me_to_set_FOOTER"                 : "&copy; <a href=\"http:\/\/www.potsky.com\" target=\"doc\">Potsky<\/a> 2013 - <a href=\"http:\/\/pimpmylog.com\" target=\"doc\">Pimp my Log<\/a>",
 		"_remove_me_to_set_GEOIP_URL"              : "http:\/\/www.geoiptool.com\/en\/?IP=%p",
@@ -15,7 +16,6 @@
 		"_remove_me_to_set_NOTIFICATION_TITLE"     : "New logs [%f]",
 		"_remove_me_to_set_PIMPMYLOG_VERSION_URL"  : "http:\/\/demo.pimpmylog.com\/version.js",
 		"_remove_me_to_set_PULL_TO_REFRESH"        : true,
-		"_remove_me_to_set_EXPORT"                    : true,
 		"_remove_me_to_set_SORT_LOG_FILES"         : "default | display-asc | display-insensitive | display-desc | display-insensitive-desc",
 		"_remove_me_to_set_TITLE"                  : "Pimp my Log",
 		"_remove_me_to_set_TITLE_FILE"             : "Pimp my Log [%f]",
@@ -57,8 +57,9 @@
 			"notify"    : true,
 			"multiline" : "",
 			"format"    : {
-				"regex": "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U",
-				"match": {
+				"regex"        : "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U",
+				"export_title" : "Log",
+				"match"        : {
 					"Date"     : 1,
 					"IP"       : 4,
 					"Log"      : 5,
@@ -85,8 +86,9 @@
 			"notify"    : false,
 			"multiline" : "",
 			"format"    : {
-				"regex": " |^(.*) (.*) (.*) \\[(.*)\\] \"(.*) (.*) (.*)\" ([0-9]*) (.*) \"(.*)\" \"(.*)\"( [0-9]*\/([0-9]*))*$|U",
-				"match": {
+				"regex"        : " |^(.*) (.*) (.*) \\[(.*)\\] \"(.*) (.*) (.*)\" ([0-9]*) (.*) \"(.*)\" \"(.*)\"( [0-9]*\/([0-9]*))*$|U",
+				"export_title" : "URL",
+				"match"        : {
 					"Date"    : 4,
 					"IP"      : 1,
 					"CMD"     : 5,

@@ -77,7 +77,7 @@ var clipboard_enable = function( btn , ctn , where , text ) {
  *
  * @return  {boolean}  false
  */
-var get_rss = function() {
+var get_rss = function( format ) {
 	$.ajax( {
 		url      : 'inc/rss.pml.php?' + (new Date()).getTime() + '&' + querystring,
 		type     : 'POST',
@@ -87,7 +87,7 @@ var get_rss = function() {
 			'action'     : 'get_rss_link',
 			'file'       : file,
 			'search'     : $('#search').val(),
-			'tz'         : $('select#cog-tz').val(),
+			'format'     : format
 		}
 	} )
 	.always( function() {
@@ -106,7 +106,28 @@ var get_rss = function() {
 			pml_singlealert( re.error , 'danger' );
 		}
 		else {
-  			document.body.innerHTML += "<iframe src='" + re.url + "' style='display: none;' ></iframe>";
+			// Force the file download
+			if ( re.met === 'if' ) {
+	  			document.body.innerHTML += "<iframe src='" + re.url + "' style='display: none;' ></iframe>";
+			}
+			// Open in a new window
+			else {
+				$.ajax({
+					url      : re.url,
+					dataType : 'text',
+					success  : function( a ) {
+						$("#exModalCtn").text( a );
+					}
+				});
+				$("#exModalUrl").text( re.url );
+				if ( re.war === false ) {
+					$("#exModalWar").hide();
+				} else {
+					$("#exModalWar").show();
+				}
+				$("#exModal").modal('show');
+			}
+
 		}
 	});
 	return false;
@@ -849,7 +870,7 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 
 			for ( var c in logs.logs[ log ] ) {
 
-				if ( ( 'pml' === c ) || ( 'pmlo' === c ) ) {
+				if ( ( 'pml' === c ) || ( 'pmlo' === c ) || ( 'pmld' === c ) ) {
 					continue;
 				}
 
@@ -1258,6 +1279,10 @@ $(function() {
 	$('.loadmore').click(function() {
 		get_logs( false , false , false , true );
 	});
+
+	// Copy to clipboard for export
+	clipboard_enable( "a.clipboardex", "#exModalUrl" , "right" , lemma.urlcopied );
+	clipboard_enable( "a.clipboardexr", "#exModalCtn" , "right" , lemma.resultcopied );
 
 	// Here we go
 	get_logs( true , true , true );

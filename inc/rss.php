@@ -12,8 +12,7 @@ if ( ! isset( $_GET['f'] ) ) {
 	http404();
 }
 $file_id = $_GET['f'];
-$search = @$_GET['s'];
-$tz     = @$_GET['tz'];
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,12 +75,17 @@ if ( ( EXPORT === false ) && ( ! isset( $files[ $file_id ]['export'] ) ) ) {
 |--------------------------------------------------------------------------
 |
 */
+$search        = ( isset( $_GET['search'] ) ) ? $_GET['search'] : '';
+$format        = ( isset( $_GET['format'] ) ) ? $_GET['format'] : 'JSON';
+$count         = ( isset( $_GET['count'] ) ) ? $_GET['count'] : ( ( isset( $files[ $file_id ][ 'max' ] ) ) ? $files[ $file_id ][ 'max' ] : LOGS_MAX );
+$timeout       = ( isset( $_GET['timeout'] ) ) ? $_GET['timeout'] : MAX_SEARCH_LOG_TIME;
+
 $regex         = $files[ $file_id ][ 'format' ][ 'regex' ];
 $match         = $files[ $file_id ][ 'format' ][ 'match' ];
 $types         = $files[ $file_id ][ 'format' ][ 'types' ];
 $multiline     = ( isset( $files[ $file_id ][ 'format' ][ 'multiline' ] ) ) ? $files[ $file_id ][ 'format' ][ 'multiline' ] : '';
 $exclude       = ( isset( $files[ $file_id ][ 'format' ][ 'exclude' ]   ) ) ? $files[ $file_id ][ 'format' ][ 'exclude' ] : array();
-$wanted_lines  = 50;
+$title         = ( isset( $files[ $file_id ][ 'format' ][ 'export_title' ] ) ) ? $files[ $file_id ][ 'format' ][ 'export_title' ] : '';
 $file_path     = $files[$file_id]['path'];
 $start_offset  = 0;
 $start_from    = SEEK_END;
@@ -89,8 +93,7 @@ $load_more     = false;
 $old_lastline  = '';
 $data_to_parse = filesize( $file_path );
 $full          = true;
-$timeout       = 2;
-$logs          = LogParser::getLines( $regex , $match , $types , $tz , $wanted_lines , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline ,  $search , $data_to_parse , $full , $timeout );
+$logs          = LogParser::getNewLines( $regex , $match , $types , $tz , $count , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline ,  $search , $data_to_parse , $full , $timeout );
 
 /*
 |--------------------------------------------------------------------------
@@ -102,26 +105,101 @@ if ( ! is_array( $logs ) ) {
 	http500();
 }
 
-
 /*
 |--------------------------------------------------------------------------
-| File Modification
+| Return
 |--------------------------------------------------------------------------
 |
 */
-$filem = new DateTime( );
-$filem->setTimestamp( filemtime( $file_path ) );
-if ( ! is_null( $tz ) ) {
-    $filem->setTimezone( new DateTimeZone( $tz ) );
+$link = str_replace( 'inc/rss.php' , '' , get_current_url( true ) );
+
+header( "Pragma: public" );
+header( "Expires: 0" );
+header( "Cache-Control: must-revalidate, post-check=0, pre-check=0" );
+
+switch ( $format ) {
+
+	case 'ATOM':
+	case 'RSS':
+		require( 'classes/Feedcreator.php' );
+		define( 'TIME_ZONE' , $tz );
+		define( 'FEEDCREATOR_VERSION', 'Pimp My Log v' . get_current_pml_version() );
+		$rss                              = new UniversalFeedCreator();
+		$rss->title                       = sprintf( __( "Pimp My Log : %s" ) , $files[ $file_id ][ 'display' ] );
+		$rss->description                 = sprintf( __( "Pimp logs for file %s with search %s" ), '<code>' . $files[ $file_id ][ 'path' ] . '</code>' , '<code>' . $search . '</code>' );
+		$rss->descriptionTruncSize        = 500;
+		$rss->descriptionHtmlSyndicated   = true;
+		$rss->link                        = $link;
+		$rss->syndicationURL              = get_current_url( true );
+		$image                            = new FeedImage();
+		$image->title                     = "Pimp My Log";
+		$image->url                       = str_replace( 'inc/rss.php' , 'img/icon72.png' , get_current_url() );
+		$image->link                      = $link;
+		$image->description               = __( "Feed provided by Pimp My Log" );
+		$image->descriptionTruncSize      = 500;
+		$image->descriptionHtmlSyndicated = true;
+		$rss->image                       = $image;
+		if ( ( isset( $logs['logs'] ) ) && ( is_array( $logs['logs'] ) ) ) {
+			foreach( array_reverse( $logs['logs'] ) as $log ) {
+				$item        = new FeedItem();
+				$description = '';
+				foreach( $log as $key => $value ) {
+					if ( substr( $key , 0 , 3) !== 'pml' ) {
+						$description .= '<strong>' . h( $key ) . '</strong> : ' . h( $value ) . '<br/>';
+					}
+				}
+				$item->description = $description;
+				if ( isset( $log['pmld'] ) ) {
+					$item->date = $log['pmld'];
+				}
+				if ( isset( $log[ $title ] ) ) {
+					$item->title = $log[ $title ];
+				} else {
+					$item->title = current( $log ) . ' - ' . sha1( serialize( $log ) );
+				}
+				$item->link                      = $link;
+				$item->descriptionTruncSize      = 500;
+				$item->descriptionHtmlSyndicated = true;
+			    $rss->addItem($item);
+			}
+		}
+		$rss->outputFeed( $format );
+		break;
+
+	case 'CSV':
+		header( "Content-Transfer-Encoding: binary" );
+		header( "Content-Disposition: attachment;filename=PimpMyLog_" . get_slug( $file_id) . "_" . date( "Y-m-d-His" ) . '.csv' );
+		header( "Content-type: application/vnd.ms-excel; charset=UTF-16LE" );
+		echo chr( 255 ) . chr( 254 ) . mb_convert_encoding( array2csv( $logs['logs'] ) , 'UTF-16LE' , 'UTF-8' );
+		break;
+
+	case 'XML':
+		header('Content-type: application/xml', true);
+		$xml = '<?xml version="1.0" encoding="UTF-8" ?>';
+		$xml .= '<pml>';
+		$xml .= generate_xml_from_array( $logs , 'log' );
+		$xml .= '</pml>';
+		echo $xml;
+		break;
+
+	case 'JSONPR':
+		header('Content-type: application/json', true);
+		echo json_encode( $logs , JSON_PRETTY_PRINT );
+		break;
+
+	case 'JSONP':
+		header('Content-type: application/javascript', true);
+		echo ( isset( $_GET['callback'] ) ) ? $_GET['callback'] : '?';
+		echo '(';
+		echo json_encode( $logs , JSON_PRETTY_PRINT );
+		echo ')';
+		break;
+
+	case 'JSON':
+	default:
+		header('Content-type: application/json', true);
+		echo json_encode( $logs );
+		break;
 }
-$filem = $filem->format( 'Y/m/d H:i:s' );
-
-/*
-|--------------------------------------------------------------------------
-| RSS
-|--------------------------------------------------------------------------
-|
-*/
-var_dump($logs);
 
 ?>

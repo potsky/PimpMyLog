@@ -2,6 +2,7 @@
 include_once 'global.inc.php';
 list( $badges , $files ) = config_load();
 
+
 /*
 |--------------------------------------------------------------------------
 | Error handling
@@ -67,6 +68,14 @@ if 	( ! csrf_verify() ) {
 }
 
 
+if ( ! isset( $files[ $_POST['file'] ] ) ) {
+	$return['error'] = __( 'This log file does not exist.' );
+	echo json_encode( $return );
+	die();
+}
+$file_id = $_POST['file'];
+$format  = $_POST['format'];
+
 /*
 |--------------------------------------------------------------------------
 | Actions
@@ -77,21 +86,45 @@ switch ( @$_POST['action'] ) {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Change password
+	| Generate the RSS Link
 	|--------------------------------------------------------------------------
 	|
 	*/
 	case 'get_rss_link':
 
-		$url = str_replace(
-			array( 'http://' , 'https://' , 'rss.pml.php' ),
-			array( 'feed://' , 'feed://' , 'rss.php' ),
-			get_current_url()
-		) . '?f=' . urlencode( $_POST['file'] );
+		$url = get_current_url();
 
-		if ( ! empty( $_POST['search'] ) ) {
-			$url = $url . '&s=' . urlencode( $_POST['search'] );
+		switch ( $format ) {
+			case 'ATOM':
+			case 'RSS':
+				$url = str_replace(
+					array( 'http://' , 'https://' ),
+					array( 'feed://' , 'feed://'  ),
+					$url
+				);
+				$method = 'if';
+				break;
+			case 'CSV':
+				$method = 'if';
+				break;
+			default:
+				$method = 'nw';
+				break;
 		}
+
+		$url = str_replace(
+			array( 'rss.pml.php' ),
+			array( 'rss.php' ),
+			$url
+		)
+		. '?f=' . urlencode( $file_id )
+		. '&l=' . urlencode( $_GET['l'] )
+		. '&tz=' . urlencode( $_GET['tz'] )
+		. '&format=' . urlencode( $format )
+		. '&count=' . ( ( isset( $files[ $file_id ][ 'max' ] ) ) ? urlencode( $files[ $file_id ][ 'max' ] ) : urlencode( LOGS_MAX ) )
+		. '&timeout=' . urlencode( MAX_SEARCH_LOG_TIME )
+		. '&search=' . urlencode( @$_POST['search'] )
+		;
 
 		$current_user = Sentinel::attempt();
 
@@ -108,7 +141,19 @@ switch ( @$_POST['action'] ) {
 			$url = $url . '&t=' . urlencode( $token ) . '&h=' . urlencode( $hash );
 		}
 
+		$u  = parse_url($url);
+		$ip = $u['host'];
+
+		if ( filter_var( $ip , FILTER_VALIDATE_IP ) ) {
+    		$return['war'] = ( ! is_not_local_ip( $ip ) );
+		} else if ( $ip === 'localhost' ) {
+    		$return['war'] = true;
+		} else {
+    		$return['war'] = false;
+		}
+
 		$return['url'] = $url;
+		$return['met'] = $method;
 
 		break;
 

@@ -30,6 +30,7 @@ if (( ! isset( $_POST['file'] ) ) ||
 |--------------------------------------------------------------------------
 |
 */
+/*
 function myErrorHandler($errno, $errstr, $errfile, $errline)
 {
     global $return;
@@ -80,7 +81,7 @@ function shutdown()
         );
     }
 }
-
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -193,7 +194,7 @@ else {
 |--------------------------------------------------------------------------
 |
 */
-$logs = LogParser::getLines( $regex , $match , $types , $tz , $max , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline ,  $search , $data_to_parse , $full , MAX_SEARCH_LOG_TIME );
+$logs = LogParser::getNewLines( $regex , $match , $types , $tz , $max , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline ,  $search , $data_to_parse , $full , MAX_SEARCH_LOG_TIME );
 
 /*
 |--------------------------------------------------------------------------
@@ -223,6 +224,12 @@ else {
 
     $return = array_merge( $return , $logs );
     $ln     = $return['count'];
+    $filem  = $return['filemodif'];
+
+    if ( @$logs['notice'] === 1 ) {
+        $return[ 'notice' ] = '<strong>'. $now . '</strong> &gt; ' . __('Log file has been rotated');
+    }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -247,19 +254,6 @@ else {
     } else {
         $return['newfilesize'] = $new_file_size;
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | File Modification
-    |--------------------------------------------------------------------------
-    |
-    */
-    $filem = new DateTime( );
-    $filem->setTimestamp( filemtime( $file_path ) );
-    if ( ! is_null( $tz ) ) {
-        $filem->setTimezone( new DateTimeZone( $tz ) );
-    }
-    $filem = $filem->format( 'Y/m/d H:i:s' );
 
     /*
     |--------------------------------------------------------------------------

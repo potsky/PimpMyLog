@@ -19,7 +19,7 @@ class LogParser
      *
      * @return  [type]                        [description]
      */
-    public static function getLines( $regex , $match , $types , $tz , $wanted_lines , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline ,  $search , $data_to_parse , $full , $max_search_log_time ) {
+    public static function getNewLines( $regex , $match , $types , $tz , $wanted_lines , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline ,  $search , $data_to_parse , $full , $max_search_log_time ) {
 
         $fl = fopen( $file_path , "r" );
         if ($fl === false) {
@@ -37,6 +37,22 @@ class LogParser
         $file_lastline   = '';
         $search_lastline = true;
         $buffer          = array();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Last modification time and size for this log file
+        |--------------------------------------------------------------------------
+        |
+        */
+        $filem = new DateTime( );
+        $filem->setTimestamp( filemtime( $file_path ) );
+        if ( ! is_null( $tz ) ) {
+            $filem->setTimezone( new DateTimeZone( $tz ) );
+        }
+        $filemu = $filem->format( 'U' );
+        $filem  = $filem->format( 'Y/m/d H:i:s' );
+
+        $filesize = filesize( $file_path );
 
         /*
         |--------------------------------------------------------------------------
@@ -101,8 +117,8 @@ class LogParser
 
                                 // This is not the case, so the file has been rotated and the new log file is bigger than the previous time
                                 // So we have to continue computing to find the user wanted count of lines (and alert user about the file change)
-                                $logs['notice'] = '<strong>'. $now . '</strong> &gt; ' . __('Log file has been rotated');
-                                $full = true;
+                                $logs['notice'] = 1;
+                                $full           = true;
                             }
 
                             // Ok lines are the same so just stop and return new found lines
@@ -156,7 +172,7 @@ class LogParser
                         // Filter now this line by search
                         else {
 
-                            if ($search !== '') {
+                            if ( ! empty( $search ) ) {
 
                                 // Regex
                                 if ($regsearch) {
@@ -230,19 +246,22 @@ class LogParser
         |--------------------------------------------------------------------------
         |
         */
-        $logs['found']              = $found;
-        $logs['abort']              = $abort;
-        $logs['regsearch']          = $regsearch;
-        $logs['search']             = $search;
-        $logs['full']               = $full;
-        $logs['lpo']                = $last_parsed_offset;
-        $logs['count']              = $ln;
-        $logs['bytes']              = $bytes;
-        $logs['skiplines']          = $skip;
-        $logs['errorlines']         = $error;
-        $logs['fingerprint']        = md5( serialize( @$logs['logs'] ) ); // Used to avoid notification on full refresh when nothing has finally changed
-        $logs['lastline']           = $file_lastline;
-        $logs['duration']           = (int) ( ( microtime( true ) - $start ) * 1000 );
+        $logs['found']       = $found;
+        $logs['abort']       = $abort;
+        $logs['regsearch']   = $regsearch;
+        $logs['search']      = $search;
+        $logs['full']        = $full;
+        $logs['lpo']         = $last_parsed_offset;
+        $logs['count']       = $ln;
+        $logs['bytes']       = $bytes;
+        $logs['skiplines']   = $skip;
+        $logs['errorlines']  = $error;
+        $logs['fingerprint'] = md5( serialize( @$logs['logs'] ) ); // Used to avoid notification on full refresh when nothing has finally changed
+        $logs['lastline']    = $file_lastline;
+        $logs['duration']    = (int) ( ( microtime( true ) - $start ) * 1000 );
+        $logs['filesize']    = $filesize;
+        $logs['filemodif']   = $filem;
+        $logs['filemodifu']  = $filemu;
 
         return $logs;
     }
@@ -316,11 +335,15 @@ class LogParser
      */
     public static function parseLine( $regex , $match , $log , $types , $tz = NULL )
     {
-        $result = array();
+        // If line is non matchable, return
         preg_match_all( $regex , $log , $out, PREG_PATTERN_ORDER );
-        if ( @count( $out[0] )==0 ) {
+        if ( @count( $out[0] ) === 0 ) {
             return false;
         }
+
+        $result    = array();
+        $timestamp = 0;
+
         foreach ($match as $token => $key) {
 
             $type = ( isset ( $types[ $token ] ) ) ? $types[ $token ] : 'txt';
@@ -362,10 +385,11 @@ class LogParser
                     if ( ! is_null( $tz ) ) {
                         $date->setTimezone( new DateTimeZone( $tz ) );
                     }
-                    $date = $date->format( $dateformat );
+                    $formatted_date = $date->format( $dateformat );
                 }
 
-                $result[ $token ] = $date;
+                $result[ $token ] = $formatted_date;
+                $timestamp        = (int)$date->format('U');
             }
             // Array description without keys ( 2 , ':' , 3 , '-' , ... )
             else if ( is_array( $key ) ) {
@@ -377,6 +401,10 @@ class LogParser
             } else {
                 $result[ $token ] = @$out[ $key ][0];
             }
+        }
+
+        if ( $timestamp > 0 ) {
+            $result[ 'pmld' ] = $timestamp;
         }
 
         return $result;

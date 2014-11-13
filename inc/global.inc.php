@@ -317,6 +317,9 @@ function config_load($load_user_configuration_dir = true)
     // Set unset constants
     load_default_constants();
 
+    // Set time limit
+    @set_time_limit( MAX_SEARCH_LOG_TIME + 2 );
+
     // Append files from the USER_CONFIGURATION_DIR
     if ($load_user_configuration_dir === true) {
         $dir  = null;
@@ -769,9 +772,11 @@ function get_client_ip() {
 /**
  * Get the current url
  *
+ * @param   boolean  $q  include the query string
+ *
  * @return  string  current url
  */
-function get_current_url() {
+function get_current_url( $q = false ) {
     if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
         $s        = &$_SERVER;
         $ssl      = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on') ? true:false;
@@ -784,6 +789,11 @@ function get_current_url() {
         $uri      = $protocol . '://' . $host . @$s['REQUEST_URI'];
         $segments = explode('?', $uri, 2);
         $url      = $segments[0];
+        if ( $q === true ) {
+            if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+                $url .= '?' . $_SERVER['QUERY_STRING'];
+            }
+        }
         return $url;
     }
     return null;
@@ -833,6 +843,89 @@ function http500() {
     die();
 }
 
+
+/**
+ * Clean an array recursivly
+ *
+ * @param   array  $input  the array to clean up
+ *
+ * @return  array          the cleaned array
+ */
+function array_filter_recursive($input)  {
+    foreach ($input as &$value) {
+        if (is_array($value)) {
+            $value = array_filter_recursive($value);
+        }
+        else if (is_object($value)) {
+            $value = array_filter_recursive((array)$value);
+        }
+    }
+
+    return array_filter($input);
+}
+
+/**
+ * Return the current Pimp My Log Version
+ *
+ * @return  string  the version string or empty if not available
+ */
+function get_current_pml_version() {
+    $v = '';
+    $file    = dirname( __FILE__ ) . '/../version.js';
+    if ( file_exists( $file ) ) {
+        $j = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
+        $v = $j[ 'version' ];
+    }
+    return $v;
+}
+
+/**
+ * Generate a xml string of the provided array
+ *
+ * @param   array   $array      the array to convert in XML
+ * @param   string  $node_name  the node name for numerical arrays
+ *
+ * @return  string              the xml string
+ */
+function generate_xml_from_array( $array, $node_name ) {
+    $xml = '';
+    if (is_array($array) || is_object($array)) {
+        foreach ($array as $key=>$value) {
+            if (is_numeric($key)) {
+                $key = $node_name;
+            }
+
+            $xml .= '<' . $key . '>' . generate_xml_from_array( $value, $node_name) . '</' . $key . '>';
+        }
+    } else {
+        $xml = htmlspecialchars($array, ENT_QUOTES);
+    }
+
+    return $xml;
+}
+
+
+/**
+ * Return a csv file from an array
+ *
+ * @param array $array
+ *
+ * @return null|string
+ */
+function array2csv( $array ) {
+    if ( count( $array ) == 0 ) {
+        return null;
+    }
+    ob_start();
+    $df = fopen( "php://output" , 'w' );
+    fputcsv( $df , array_keys( reset( $array ) ) , "\t" );
+    foreach ( $array as $row ) {
+        fputcsv( $df , $row , "\t" );
+    }
+    fclose( $df );
+    return ob_get_clean();
+}
+
 /*
 |--------------------------------------------------------------------------
 | Uniq ID
@@ -859,7 +952,9 @@ if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
 |
 */
 $tz = '';
-if ( isset( $_GET['tz'] ) ) {
+if ( isset( $_POST['tz'] ) ) {
+    $tz = $_POST['tz'];
+} elseif ( isset( $_GET['tz'] ) ) {
     $tz = $_GET['tz'];
 } elseif ( defined( 'USER_TIME_ZONE' ) ) {
     $tz = USER_TIME_ZONE;
