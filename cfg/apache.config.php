@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.3.0 - c496baf2d62bbeba24050b260b08d6f31cb9f41b*/
+/*! pimpmylog - 1.5.0 - 9ea30b3f70002c5f550a742c37caa37aaa4cf57b*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -36,33 +36,25 @@ function apache_get_config( $type , $file , $software , $counter ) {
 	/////////////////////////////////////////////////////////
 	if ( $type == 'error' ) {
 
-
-		// Get the first 10 lines and try to guess
-		// This is not really
-		$firstline = '';
-		$handle    = @fopen( $file , 'r' );
-		$remain    = 10;
-		$test      = 0;
-		if ( $handle ) {
-			while ( ( $buffer = fgets( $handle , 4096 ) ) !== false ) {
-				$test = @preg_match('|^\[(.*) (.*) (.*) (.*):(.*):(.*)\.(.*) (.*)\] \[(.*):(.*)\] \[pid (.*)\] .*\[client (.*):(.*)\] (.*)(, referer: (.*))*$|U', $buffer );
-				if ( $test === 1 ) {
-					break;
-				}
-				$remain--;
-				if ($remain<=0) {
-					break;
-				}
+		// Write a line of log and try to guess the format
+		$remain = 10;
+		$test   = 0;
+		error_log( __( 'Pimp my Log has been successfully configured with Apache' ) );
+		foreach ( LogParser::getLinesFromBottom( $file , 10 ) as $line ) {
+			$test = @preg_match('|^\[(.*) (.*) (.*) (.*):(.*):(.*)\.(.*) (.*)\] \[(.*):(.*)\] \[pid (.*)\] .*\[client (.*):(.*)\] (.*)(, referer: (.*))*$|U', $line );
+			if ( $test === 1 ) {
+				break;
 			}
-			fclose($handle);
+			$remain--;
+			if ($remain<=0) {
+				break;
+			}
 		}
-
 
 		/////////////////////
 		// Error 2.4 style //
 		/////////////////////
 		if ( $test === 1 ) {
-
 			return<<<EOF
 		"$software$counter": {
 			"display" : "Apache Error #$counter",
@@ -71,9 +63,10 @@ function apache_get_config( $type , $file , $software , $counter ) {
 			"max"     : 10,
 			"notify"  : true,
 			"format"  : {
-				"type" : "HTTPD 2.4",
-				"regex": "|^\\\\[(.*) (.*) (.*) (.*):(.*):(.*)\\\\.(.*) (.*)\\\\] \\\\[(.*):(.*)\\\\] \\\\[pid (.*)\\\\] .*\\\\[client (.*):(.*)\\\\] (.*)(, referer: (.*))*\$|U",
-				"match": {
+				"type"         : "HTTPD 2.4",
+				"regex"        : "|^\\\\[(.*) (.*) (.*) (.*):(.*):(.*)\\\\.(.*) (.*)\\\\] \\\\[(.*):(.*)\\\\] \\\\[pid (.*)\\\\] .*\\\\[client (.*):(.*)\\\\] (.*)(, referer: (.*))*\$|U",
+				"export_title" : "Log",
+				"match"        : {
 					"Date"    : {
 						"M" : 2,
 						"d" : 3,
@@ -117,9 +110,10 @@ EOF;
 			"max"     : 10,
 			"notify"  : true,
 			"format"  : {
-				"type" : "HTTPD 2.2",
-				"regex": "|^\\\\[(.*)\\\\] \\\\[(.*)\\\\] (\\\\[client (.*)\\\\] )*((?!\\\\[client ).*)(, referer: (.*))*\$|U",
-				"match": {
+				"type"         : "HTTPD 2.2",
+				"regex"        : "|^\\\\[(.*)\\\\] \\\\[(.*)\\\\] (\\\\[client (.*)\\\\] )*((?!\\\\[client ).*)(, referer: (.*))*\$|U",
+				"export_title" : "Log",
+				"match"        : {
 					"Date"     : 1,
 					"IP"       : 4,
 					"Log"      : 5,
@@ -156,9 +150,10 @@ EOF;
 			"max"     : 10,
 			"notify"  : false,
 			"format"  : {
-				"type" : "NCSA",
-				"regex": "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
-				"match": {
+				"type"         : "NCSA",
+				"regex"        : "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
+				"export_title" : "URL",
+				"match"        : {
 					"Date"    : 6,
 					"IP"      : 3,
 					"CMD"     : 7,
@@ -181,7 +176,7 @@ EOF;
 					"\u03bcs" : "numeral:0,0"
 				},
 				"exclude": {
-					"URL": ["\/favicon.ico\/", "\/\\\\.pml\\\\.php\\\\.*\$\/"],
+					"URL": ["\/favicon.ico\/", "\/\\\\.pml\\\\.php.*\$\/"],
 					"CMD": ["\/OPTIONS\/"]
 				}
 			}

@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.3.0 - c496baf2d62bbeba24050b260b08d6f31cb9f41b*/
+/*! pimpmylog - 1.5.0 - 9ea30b3f70002c5f550a742c37caa37aaa4cf57b*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -45,9 +45,10 @@ function php_get_config( $type , $file , $software , $counter ) {
 		"max"     : 10,
 		"notify"  : true,
 		"format"    : {
-			"type"     : "PHP",
-			"regex"    : "@^\\\\[(.*)-(.*)-(.*) (.*):(.*):(.*) .*\\\\] ((PHP (.*):  (.*) in (.*) on line (.*))|(.*))\$@U",
-			"match"    : {
+			"type"         : "PHP",
+			"regex"        : "@^\\\\[(.*)-(.*)-(.*) (.*):(.*):(.*) .*\\\\] ((PHP (.*):  (.*) in (.*) on line (.*))|(.*))\$@U",
+			"export_title" : "Error",
+			"match"        : {
 				"Date"     : [ 2 , " " , 1 , " " , 4 , ":" , 5 , ":" , 6 , " " , 3 ],
 				"Severity" : 9,
 				"Error"    : [ 10 , 13 ],

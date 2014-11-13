@@ -1,12 +1,34 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.3.0",
-	"versiondevh" : "c496baf2d62bbeba24050b260b08d6f31cb9f41b",
+	"version"     : "1.5.0",
+	"versiondevh" : "9ea30b3f70002c5f550a742c37caa37aaa4cf57b",
 	"messages"    : {
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.5.0" : {
+			"released" : "2014-11-01",
+			"new"      : [
+				"Authentication feature #61",
+				"Authentication logs",
+				"Change password feature",
+				"New debugger available at /inc/test.php",
+				"New debugger security management",
+				"Reset an account password from the debugger",
+				"New global parameter <code>AUTH_LOG_FILE_COUNT</code> to set the maximum number of entries in the auth log file. Set this value to 0 if you want to disable authentication logs",
+				"New global parameter <code>SORT_LOG_FILES</code> to sort your log files in the log selector on top left. Documentation is <a href=\"http://pimpmylog.com/documentation/configuration.html#SORT_LOG_FILES\">here</a>.",
+				"New configuration file with extension <code>.php</code> instead of <code>.json</code> to avoid direct calls in web browser and then people can see where are located your log files. <code>.json</code> files are still supported. Upgrading your configuration files is really straightforward, instructions are <a href=\"http://support.pimpmylog.com/kb/configuration/upgrade-json-configuration-files-to-php-configuration-files\">here</a>.",
+				"More logs feature #64"
+			],
+			"fixed" : [
+				"Apache 2.4 configurator could have problems to find logs format in some case"
+			],
+			"changed" : [
+				"New pretty design with new Ubuntu font",
+				"Start refactoring for version 2.0 with unit tests"
+			]
+		},
 		"1.3.0" : {
 			"released" : "2014-10-12",
 			"new"      : [
