@@ -378,18 +378,19 @@ class LogParser
                     $dateformat = substr( $dateformat , 0 , $p );
                 }
                 if ( ( $timestamp = strtotime( $str ) ) === false ) {
-                    $date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
+                    $formatted_date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
+                    $timestamp      = 0;
                 } else {
-                    $date = new DateTime( );
+                    $date = new DateTime();
                     $date->setTimestamp( $timestamp );
                     if ( ! is_null( $tz ) ) {
                         $date->setTimezone( new DateTimeZone( $tz ) );
                     }
                     $formatted_date = $date->format( $dateformat );
+                    $timestamp      = (int)$date->format('U');
                 }
 
                 $result[ $token ] = $formatted_date;
-                $timestamp        = (int)$date->format('U');
             }
             // Array description without keys ( 2 , ':' , 3 , '-' , ... )
             else if ( is_array( $key ) ) {
