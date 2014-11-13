@@ -211,12 +211,18 @@ You can use this variable:
 
 <a name="pimpmylog_version_url"></a>
 
-This is the url of the current version file in production. If you have installed the *beta* branch instead of the *master* one, install this constant and replace word *master* by *beta* in the url. *Pimp my Log* will then check for beta upgrades instead of production upgrades.
+This is the url of the current version file in production. If you have installed the *beta* branch instead of the *master* one, install this constant and replace word *demo* by *beta* in the url. *Pimp my Log* will then check for beta upgrades instead of production upgrades.
 
 Default:
 
 ```json
-"PIMPMYLOG_VERSION_URL" : "http:\/\/raw.github.com\/potsky\/PimpMyLog\/master\/version.js"
+"PIMPMYLOG_VERSION_URL" : "http:\/\/demo.pimpmylog.com\/version.js"
+```
+
+To track beta versions:
+
+```json
+"PIMPMYLOG_VERSION_URL" : "http:\/\/beta.pimpmylog.com\/version.js"
 ```
 
 ---

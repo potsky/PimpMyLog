@@ -185,11 +185,13 @@ module.exports = function(grunt) {
 				options: {
 					serve: true,
 					drafts: true,
+					bundleExec: true,
 					watch: true
 				}
 			},
 			build: {
 				options: {
+					bundleExec: true,
 					serve: false
 				}
 			}
