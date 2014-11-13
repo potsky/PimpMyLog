@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.5.0",
-	"versiondevh" : "659a061e8e9948384d322ddb8c1bf80ff5bb761b",
+	"versiondevh" : "40177bd8ea13dab194ac1ca7b988de795d1505d9",
 	"messages"    : {
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
@@ -11,7 +11,7 @@
 			"released" : "2014-11-01",
 			"new"      : [
 				"Feature #64 : More logs",
-				"Feature #61 : Authentication",
+				"Feature #61 : Authentication (Take a look <a href=\"http://support.pimpmylog.com/kb/configuration/enable-authentication-on-already-installed-instances\">here to enable authentication</a> on an existing instance)",
 				"Feature #76 : Anonymous access to let guest view some logs and protect other logs for genuine users",
 				"Feature #72 : Access token to secure exports and for API coming in v2.0",
 				"Feature #71 : Admins can sign in as other users to check their accounts",
