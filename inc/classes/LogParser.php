@@ -2,10 +2,15 @@
 
 class LogParser
 {
-
     /**
      * Read a log file and return an array of logs with metadata
      *
+     * @param   string   $regex                A regex to match each line
+     * @param   array    $match                An array of matchers
+     * @param   array    $types                An array of matchers types
+     * @param   string   $tz                   The wanted timezone to translate matchers with a date type
+     * @param   integer  $wanted_lines         the count of wanted lines to be returned
+     * @param   array    $exclude              An array of exclusion matchers tokens
      * @param   string   $file_path            the file path
      * @param   integer  $start_offset         the offset where to begin to parse file
      * @param   integer  $start_from           the position from where the offset is taken
@@ -16,6 +21,7 @@ class LogParser
      * @param   integer  $data_to_parse        The maximum count of bytes to read a new line (basically the difference between the previous scanned file size and the current one)
      * @param   boolean  $full                 Whether the log file should be loaded from scratch
      * @param   [type]   $max_search_log_time  The maximum duration in s to parse lines
+
      *
      * @return  [type]                        [description]
      */
