@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.0 - 680b0bcad4480ceddc724ec8767d08157dbfbfa3*/
+/*! pimpmylog - 1.5.0 - ef1cb2d03be039b9d09972531533a10db20f8996*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -531,7 +531,7 @@ switch ( @$_POST['action'] ) {
 				, '<code>' . date( 'Y/m/d H:i:s' , (int)$user[ 'api_lastlogin' ]['ts'] ) . '</code>'
 				, '<code>' . $user[ 'api_lastlogin' ]['ip'] . '</code>'
 				, '<code>' . $user[ 'api_lastlogin' ]['ua'] . '</code>'
-				, '<a href="' . h( $user[ 'api_lastlogin' ]['ur'] ) . '" target="_blank">' . $user[ 'api_lastlogin' ]['ur'] . '</a>'
+				, '<a href="' . h( $user[ 'api_lastlogin' ]['ur'] ) . '" class="hyphen" target="_blank">' . $user[ 'api_lastlogin' ]['ur'] . '</a>'
 			);
 		}
 

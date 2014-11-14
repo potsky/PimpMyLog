@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.0 - 680b0bcad4480ceddc724ec8767d08157dbfbfa3*/
+/*! pimpmylog - 1.5.0 - ef1cb2d03be039b9d09972531533a10db20f8996*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -41,8 +41,10 @@ if ( ( isset( $_GET['t'] ) ) && ( isset( $_GET['h'] ) ) ) {
 			http404();
 		}
 
+		// Sign in user
 		$user = Sentinel::signInWithAccessToken( $accesstoken );
 
+		// Check the security hash
 		if ( ! Sentinel::isSignValid( $_GET['h'] , array( 'f' => $file_id ) , $username ) ) {
 			http403();
 		}
@@ -135,7 +137,9 @@ switch ( $format ) {
 		define( 'FEEDCREATOR_VERSION', 'Pimp My Log v' . get_current_pml_version() );
 		$rss                              = new UniversalFeedCreator();
 		$rss->title                       = sprintf( __( "Pimp My Log : %s" ) , $files[ $file_id ][ 'display' ] );
-		$rss->description                 = sprintf( __( "Pimp logs for file %s with search %s" ), '<code>' . $files[ $file_id ][ 'path' ] . '</code>' , '<code>' . $search . '</code>' );
+		$rss->description                 = ( empty( $search ) )
+											? sprintf( __( "Pimp logs for file %s" ), '<code>' . $files[ $file_id ][ 'path' ] . '</code>' )
+											: sprintf( __( "Pimp logs for file %s with search %s" ), '<code>' . $files[ $file_id ][ 'path' ] . '</code>' , '<code>' . $search . '</code>' );
 		$rss->descriptionTruncSize        = 500;
 		$rss->descriptionHtmlSyndicated   = true;
 		$rss->link                        = $link;

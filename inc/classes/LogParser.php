@@ -91,7 +91,7 @@ class LogParser
             if ( $char === "\n" ) {
 
                 // Copy the log line as an utf8 line
-                $deal = utf8_encode( $line );
+                $deal = ( mb_check_encoding( $line , 'UTF-8' ) === false ) ? utf8_encode( $line ) : $line;
 
                 // Reset the line for future reads
                 $line = '';

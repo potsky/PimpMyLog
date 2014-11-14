@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.5.0",
-	"versiondevh" : "680b0bcad4480ceddc724ec8767d08157dbfbfa3",
+	"versiondevh" : "ef1cb2d03be039b9d09972531533a10db20f8996",
 	"messages"    : {
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
@@ -35,6 +35,7 @@
 			],
 			"changed" : [
 				"New pretty design with new Ubuntu font, I hope you like it",
+				"Increase menu accessibility on mobile devices",
 				"Start refactoring for version 2.0 with unit tests"
 			]
 		},
