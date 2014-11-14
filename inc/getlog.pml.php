@@ -105,6 +105,10 @@ if ( ! csrf_verify() ) {
     die();
 }
 
+file_put_contents('toto',print_r( $files , true ) );
+
+
+
 if ( ! isset( $files[$file_id] ) ) {
     $return['error'] = sprintf( __( 'File ID <code>%s</code> does not exist, please review your configuration file and stop playing!' ) , $file_id );
     echo json_encode( $return );

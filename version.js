@@ -7,6 +7,12 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.5.1" : {
+			"released" : "2014-11-14",
+			"fixed" : [
+				"Configuration file split fixed"
+			]
+		},
 		"1.5.0" : {
 			"released" : "2014-11-13",
 			"new"      : [

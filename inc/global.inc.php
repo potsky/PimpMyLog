@@ -226,7 +226,7 @@ function load_default_constants()
 
 /**
  * Try to find the main configuration file path
- * Configuration file can be a PHP file sinc 1.5.0 or a json file below
+ * Configuration file can be a PHP file since 1.5.0 or a json file below
  * Both files contains a JSON configuration array but the PHP version is not callable by a guest on web
  *
  * @return  string  the path in a string or null if not found
@@ -322,8 +322,9 @@ function config_load($load_user_configuration_dir = true)
 
     // Append files from the USER_CONFIGURATION_DIR
     if ($load_user_configuration_dir === true) {
-        $dir  = null;
-        $base = dirname( __FILE__ ) . '/../';
+        $dir      = null;
+        $base     = dirname( __FILE__ ) . '/../';
+        $realbase = realpath( dirname( __FILE__ ) . '/../' );
 
         // Can be an absolute path or a request by index.php for example
         if ( is_dir( USER_CONFIGURATION_DIR ) ) {
@@ -345,12 +346,13 @@ function config_load($load_user_configuration_dir = true)
                 \RecursiveRegexIterator::GET_MATCH
             );
             foreach ($userfiles as $userfile) {
-                $c = get_config_file( $userfile[0] );
+                $filepath = realpath( $userfile[0] );
+                $c = get_config_file( $filepath );
                 if ( ! is_null( $c ) ) {
                     foreach ($c as $k => $v) {
-                        $fileid = get_slug( $userfile[0] . '/' . $k );
+                        $fileid                                        = get_slug( str_replace( $realbase , '' , $filepath ) . '/' . $k );
                         $config[ 'files' ][ $fileid ]                  = $v;
-                        $config[ 'files' ][ $fileid ]['included_from'] = $userfile[0];
+                        $config[ 'files' ][ $fileid ]['included_from'] = $filepath;
                     }
                 }
             }
