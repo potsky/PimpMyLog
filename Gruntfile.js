@@ -649,17 +649,9 @@ module.exports = function(grunt) {
 				'shell:betagitremove',
 				'copy:installbeta',
 				'copy:installbetaREADME',
-				'shell:betagitaddcommitpush',
-				'shell:opensafari'
+				'shell:betagitaddcommitpush'
 			]);
 		}
-
-		grunt.log.ok('-----------------------------------------------------------------------');
-		grunt.log.ok('| CREATE A NEW RELEASE ON GITHUB TO LET PEOPLE DOWNLOAD THE ZIP FILE! |');
-		grunt.log.ok('|                                                                     |');
-		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
-		grunt.log.ok('|                                                                     |');
-		grunt.log.ok('-----------------------------------------------------------------------');
 	});
 
 	// Installation task which install the _build folder in master , commit and push
@@ -676,7 +668,8 @@ module.exports = function(grunt) {
 				'shell:mastergitremove',
 				'copy:installmaster',
 				'copy:installmasterREADME',
-				'shell:mastergitaddcommitpush'
+				'shell:mastergitaddcommitpush',
+				'shell:opensafari'
 			]);
 		}
 		else {
@@ -686,9 +679,16 @@ module.exports = function(grunt) {
 				'shell:mastergitremove',
 				'copy:installmaster',
 				'copy:installmasterREADME',
-				'shell:mastergitaddcommitpush'
+				'shell:mastergitaddcommitpush',
+				'shell:opensafari'
 			]);
 		}
+		grunt.log.ok('-----------------------------------------------------------------------');
+		grunt.log.ok('| CREATE A NEW RELEASE ON GITHUB TO LET PEOPLE DOWNLOAD THE ZIP FILE! |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('-----------------------------------------------------------------------');
 	});
 
 	// Development task, build and watch for file modification
