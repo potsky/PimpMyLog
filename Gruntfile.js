@@ -643,6 +643,12 @@ module.exports = function(grunt) {
 				'shell:betagitaddcommitpush'
 			]);
 		}
+		grunt.log.ok('-----------------------------------------------------------------------');
+		grunt.log.ok('| CREATE A NEW RELEASE ON GITHUB TO LET PEOPLE DOWNLOAD THE ZIP FILE! |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('-----------------------------------------------------------------------');
 	});
 
 	// Installation task which install the _build folder in master , commit and push
