@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.3.0 - 08bba8d8ea1927a5cc5e68f95839426c5da058be*/
+/*! pimpmylog - 1.5.0 - 072cd6f78353bf62b33fccb2b9c3dd79eeedebf1*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -38,9 +38,10 @@ function nginx_get_config( $type , $file , $software , $counter ) {
 			"max"     : 10,
 			"notify"  : true,
 			"format"    : {
-				"type"     : "NGINX",
-				"regex"    : "@^(.*)/(.*)/(.*) (.*):(.*):(.*) \\\\[(.*)\\\\] [0-9#]*: \\\\*[0-9]+ (((.*), client: (.*), server: (.*), request: \"(.*) (.*) HTTP.*\", host: \"(.*)\"(, referrer: \"(.*)\")*)|(.*))\$@U",
-				"match"    : {
+				"type"         : "NGINX",
+				"regex"        : "@^(.*)/(.*)/(.*) (.*):(.*):(.*) \\\\[(.*)\\\\] [0-9#]*: \\\\*[0-9]+ (((.*), client: (.*), server: (.*), request: \"(.*) (.*) HTTP.*\", host: \"(.*)\"(, referrer: \"(.*)\")*)|(.*))\$@U",
+				"export_title" : "Error",
+				"match"        : {
 					"Date"     : [1,"\/",2,"\/",3," ",4,":",5,":",6],
 					"Severity" : 7,
 					"Error"    : [10,18],
@@ -82,9 +83,10 @@ EOF;
 			"max"     : 10,
 			"notify"  : false,
 			"format"  : {
-				"type" : "NCSA Extended",
-				"regex": "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
-				"match": {
+				"type"         : "NCSA Extended",
+				"regex"        : "|^((\\\\S*) )*(\\\\S*) (\\\\S*) (\\\\S*) \\\\[(.*)\\\\] \"(\\\\S*) (.*) (\\\\S*)\" ([0-9]*) (.*)( \\"(.*)\\" \\"(.*)\\"( [0-9]*/([0-9]*))*)*\$|U",
+				"export_title" : "URL",
+				"match"        : {
 					"Date"    : 6,
 					"IP"      : 3,
 					"CMD"     : 7,

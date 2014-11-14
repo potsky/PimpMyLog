@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.3.0 - 08bba8d8ea1927a5cc5e68f95839426c5da058be*/
+/*! pimpmylog - 1.5.0 - 072cd6f78353bf62b33fccb2b9c3dd79eeedebf1*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -9,7 +9,7 @@
  */
 ?><?php
 include_once 'global.inc.php';
-config_load( false );
+list( $badges , $files ) = config_load( false );
 
 header('Content-type: application/json');
 
@@ -41,12 +41,6 @@ else {
 	die();
 }
 
-if ( false === CHECK_UPGRADE ) {
-	echo json_encode( $upgrade );
-	die();
-}
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -55,11 +49,28 @@ if ( false === CHECK_UPGRADE ) {
 |
 */
 try {
-	$ctx         = stream_context_create( array( 'http' => array( 'timeout' => 5 ) ) );
-	$JSr_version = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?v=' . $upgrade['current'] . '&' . date("U") , false , $ctx ) ), true );
+	$args                   = array( 'http' => array( 'timeout' => 5 ) );
+	$args['http']['header'] = "User-Agent: " . $_SERVER[ 'HTTP_USER_AGENT' ] . "\r\n";
+	$args['http']['header'] .= "Referer: " . $_SERVER['HTTP_REFERER'] . "\r\n";
+	$ctx                    = stream_context_create( $args );
+	$JSr_version            = json_decode( clean_json_version( @file_get_contents( PIMPMYLOG_VERSION_URL . '?v=' . $upgrade['current'] . '&w=' . $uuid . '&' . date("U") , false , $ctx ) ), true );
 	if ( is_null( $JSr_version ) ) {
 		throw new Exception( 'Unable to fetch remote version' , 1);
 	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Update disabled
+	|--------------------------------------------------------------------------
+	|
+	| If admin does not want to check for update, quit now
+	|
+	*/
+	if ( false === CHECK_UPGRADE ) {
+		echo json_encode( $upgrade );
+		die();
+	}
+
 
 	/*
 	|--------------------------------------------------------------------------

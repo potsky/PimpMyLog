@@ -1,11 +1,44 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.3.0",
-	"versiondevh" : "08bba8d8ea1927a5cc5e68f95839426c5da058be",
+	"version"     : "1.5.0",
+	"versiondevh" : "072cd6f78353bf62b33fccb2b9c3dd79eeedebf1",
 	"messages"    : {
+		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.5.0" : {
+			"released" : "2014-11-13",
+			"new"      : [
+				"Feature #64 : More logs",
+				"Feature #61 : Authentication (Take a look <a href=\"http://support.pimpmylog.com/kb/configuration/enable-authentication-on-already-installed-instances\">here to enable authentication</a> on an existing instance)",
+				"Feature #76 : Anonymous access to let guest view some logs and protect other logs for genuine users",
+				"Feature #72 : Access token to secure exports and for API coming in v2.0",
+				"Feature #71 : Admins can sign in as other users to check their accounts",
+				"Feature #70 : Export logs in Atom, CSV, JSON, JSONP, Pretty JSON, RSS and XML",
+				"Authentication : admin can view logs to check who sign in, sign out, ...",
+				"Authentication : change password feature",
+				"Authentication : reset access token in the profile menu",
+				"Debugger : new debugger available at /inc/test.php",
+				"Debugger : enable/disable authentication for the instance",
+				"Debugger : reset a user password",
+				"Debugger : new security management",
+				"New global parameter <code>AUTH_LOG_FILE_COUNT</code> to set the maximum number of entries in the auth log file. Set this value to 0 if you want to disable authentication logs",
+				"New global parameter <code>SORT_LOG_FILES</code> to sort your log files in the log selector on top left. Documentation is <a href=\"http://pimpmylog.com/documentation/configuration.html#SORT_LOG_FILES\">here</a>.",
+				"New global parameter <code>EXPORT</code> to disable export feature globally",
+				"New global parameter <code>FORGOTTEN_YOUR_PASSWORD_URL</code> to set the Password Forgotten link on the login page",
+				"New configuration file with extension <code>.php</code> instead of <code>.json</code> to avoid direct calls in web browser and then people can see where are located your log files. <code>.json</code> files are still supported. Upgrading your configuration files is really straightforward, instructions are <a href=\"http://support.pimpmylog.com/kb/configuration/upgrade-json-configuration-files-to-php-configuration-files\">here</a>.",
+				"New configuration parameter <code>export_title</code> to set the RSS title field per log file"
+			],
+			"fixed" : [
+				"Apache 2.4 configurator could have problems to find logs format in some case, now Pimp My Log write a log and read it to parse its format"
+			],
+			"changed" : [
+				"New pretty design with new Ubuntu font, I hope you like it",
+				"Increase menu accessibility on mobile devices",
+				"Start refactoring for version 2.0 with unit tests"
+			]
+		},
 		"1.3.0" : {
 			"released" : "2014-10-12",
 			"new"      : [
