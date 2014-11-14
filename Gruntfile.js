@@ -617,7 +617,7 @@ module.exports = function(grunt) {
 	|
 	*/
 	// Installation task which install the _build folder in beta , commit and push
-	grunt.registerTask( 'installbeta' , function() {
+	grunt.registerTask( 'install-beta' , function() {
 		if ( grunt.file.exists( '_build/index.php' ) === false ) {
 			grunt.verbose.or.error().error( 'File "_build/index.php" does not exist. Please build before installing with "grunt build"' );
 			grunt.fail.warn('Unable to continue');
@@ -646,7 +646,7 @@ module.exports = function(grunt) {
 	});
 
 	// Installation task which install the _build folder in master , commit and push
-	grunt.registerTask( 'installmaster' , function() {
+	grunt.registerTask( 'install-production' , function() {
 		if ( grunt.file.exists( '_build/index.php' ) === false ) {
 			grunt.verbose.or.error().error( 'File "_build/index.php" does not exist. Please build before installing with "grunt build"' );
 			grunt.fail.warn('Unable to continue');
@@ -701,7 +701,7 @@ module.exports = function(grunt) {
 	});
 
 	// Build task for production
-	grunt.registerTask( 'prod' , function() {
+	grunt.registerTask( 'build' , function() {
 		grunt.task.run('checkversion');
 		grunt.task.run([
 			'clean:prod',
@@ -735,8 +735,15 @@ module.exports = function(grunt) {
 		try {
 			a = JSON.parse( grunt.file.read('./version.js').replace('/*PSK*/pml_version_cb(/*PSK*/','').replace('/*PSK*/);/*PSK*/','') );
 			if ( ! a.changelog[ npmpkg.version ] ) {
-				grunt.verbose.or.error().error( 'Version ' + npmpkg.version + ' is not in the changelog in file version.js!' );
+				grunt.verbose.or.error().error( 'Version ' + npmpkg.version + ' is not in the changelog in file version.js !' );
 				grunt.fail.warn('Unable to continue');
+			}
+			for ( var i in a.changelog ) {
+				if ( i !== npmpkg.version ) {
+					grunt.verbose.or.error().error( 'Version ' + i + ' is in the change log but not in package.js !' );
+					grunt.fail.warn('Unable to continue');
+				}
+				break;
 			}
 		} catch (e) {
 			grunt.verbose.or.error().error( 'version.js is invalid!' );
@@ -750,10 +757,6 @@ module.exports = function(grunt) {
 	|--------------------------------------------------------------------------
 	|
 	*/
-	grunt.registerTask( 'build'              , function() { grunt.task.run( 'prod' ); });
-	grunt.registerTask( 'testprod'           , function() { grunt.task.run( 'prod' ); });
 	grunt.registerTask( 'test'               , function() { grunt.task.run( 'phpunit:dev' ); });
-	grunt.registerTask( 'install'            , function() { grunt.task.run( 'installbeta' ); });
-	grunt.registerTask( 'install-production' , function() { grunt.task.run( 'installmaster' ); });
 	grunt.registerTask( 'default' , [ 'dev' ] );
 };
