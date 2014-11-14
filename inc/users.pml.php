@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.0 - 51ad8489a03600e9ff0fe6d2b7f254a789f2bacb*/
+/*! pimpmylog - 1.5.0 - 531d66179111632e3c44421f46bb7c7c7aa08f7a*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -126,8 +126,12 @@ switch ( @$_POST['action'] ) {
 		}
 
 		if ( $doit === true ) {
-			$return['ok'] = __( 'Password has been successfully changed!' );
-			Sentinel::changePassword( $username , $password2 );
+			if ( $_SERVER['SERVER_NAME'] === 'demo.pimpmylog.com' ) {
+				$return['ok'] = __( 'Password has been fakely changed on the demo!' );
+			} else {
+				$return['ok'] = __( 'Password has been successfully changed!' );
+				Sentinel::changePassword( $username , $password2 );
+			}
 		}
 		else {
 			$return['errors'] = $errors;

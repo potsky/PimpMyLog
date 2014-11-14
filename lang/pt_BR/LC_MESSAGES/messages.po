@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-11-14 10:33+0100\n"
-"PO-Revision-Date: 2014-11-14 10:33+0100\n"
+"POT-Creation-Date: 2014-11-14 11:53+0100\n"
+"PO-Revision-Date: 2014-11-14 11:53+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: Português <>\n"
 "Language: pt\n"
@@ -39,12 +39,6 @@ msgstr "http://httpd.apache.org"
 #: cfg/apache.config.php:8
 msgid "All versions 2.x are supported."
 msgstr "Todas as versões 2.x são suportadas."
-
-#: _build/cfg/apache.config.php:42 _site/cfg/apache.config.php:32
-#: cfg/apache.config.php:32
-#, fuzzy
-msgid "Pimp my Log has been successfully configured with Apache"
-msgstr "Pimp my Log não está configurado."
 
 #: _build/cfg/iis.config.php:14 _site/cfg/iis.config.php:4
 #: cfg/iis.config.php:4
@@ -173,7 +167,7 @@ msgstr ""
 #: _site/index.php:709 _tmp/inc/configure.php:66 _tmp/inc/configure.php:486
 #: _tmp/inc/test.php:512 _tmp/inc/test.php:513 _tmp/inc/users.pml.php:431
 #: _tmp/index.php:719 inc/configure.php:56 inc/configure.php:476
-#: inc/test.php:502 inc/test.php:503 inc/users.pml.php:421 index.php:709
+#: inc/test.php:502 inc/test.php:503 inc/users.pml.php:425 index.php:709
 msgid "No"
 msgstr "Não"
 
@@ -207,8 +201,8 @@ msgstr "Favor fornecer permissão de escrita temporária ao diretório raiz:"
 #: _tmp/inc/users.pml.php:491 _tmp/inc/users.pml.php:505 _tmp/index.php:524
 #: _tmp/index.php:539 inc/configure.php:77 inc/configure.php:126
 #: inc/configure.php:162 inc/configure.php:183 inc/test.php:170
-#: inc/test.php:215 inc/test.php:292 inc/test.php:584 inc/users.pml.php:481
-#: inc/users.pml.php:495 index.php:514 index.php:529
+#: inc/test.php:215 inc/test.php:292 inc/test.php:584 inc/users.pml.php:485
+#: inc/users.pml.php:499 index.php:514 index.php:529
 msgid "Copy to clipboard"
 msgstr "Copiar para a área de trabalho"
 
@@ -233,18 +227,18 @@ msgstr ""
 #: _site/inc/users.pml.php:253 _tmp/inc/configure.php:102
 #: _tmp/inc/test.php:607 _tmp/inc/test.php:672 _tmp/inc/users.pml.php:263
 #: inc/configure.php:92 inc/test.php:597 inc/test.php:662
-#: inc/users.pml.php:253
+#: inc/users.pml.php:257
 msgid "Username is required"
 msgstr ""
 
-#: _build/inc/configure.php:103 _build/inc/login.inc.php:37
-#: _build/inc/login.inc.php:39 _build/inc/test.php:340 _build/inc/test.php:357
+#: _build/inc/configure.php:103 _build/inc/login.inc.php:44
+#: _build/inc/login.inc.php:46 _build/inc/test.php:340 _build/inc/test.php:357
 #: _build/index.php:252 _site/inc/configure.php:94 _site/inc/login.inc.php:70
 #: _site/inc/login.inc.php:72 _site/inc/test.php:600 _site/inc/test.php:665
 #: _site/index.php:650 _site/index.php:654 _tmp/inc/configure.php:104
-#: _tmp/inc/login.inc.php:80 _tmp/inc/login.inc.php:82 _tmp/inc/test.php:610
+#: _tmp/inc/login.inc.php:86 _tmp/inc/login.inc.php:88 _tmp/inc/test.php:610
 #: _tmp/inc/test.php:675 _tmp/index.php:660 _tmp/index.php:664
-#: inc/configure.php:94 inc/login.inc.php:70 inc/login.inc.php:72
+#: inc/configure.php:94 inc/login.inc.php:76 inc/login.inc.php:78
 #: inc/test.php:600 inc/test.php:665 index.php:650 index.php:654
 msgid "Username"
 msgstr ""
@@ -258,18 +252,18 @@ msgstr ""
 #: _tmp/inc/test.php:573 _tmp/inc/test.php:616 _tmp/inc/test.php:659
 #: _tmp/inc/test.php:681 _tmp/inc/users.pml.php:119 _tmp/inc/users.pml.php:271
 #: inc/configure.php:99 inc/test.php:563 inc/test.php:606 inc/test.php:649
-#: inc/test.php:671 inc/users.pml.php:109 inc/users.pml.php:261
+#: inc/test.php:671 inc/users.pml.php:109 inc/users.pml.php:265
 msgid "Password must contain at least 6 chars"
 msgstr ""
 
-#: _build/inc/configure.php:110 _build/inc/login.inc.php:43
-#: _build/inc/login.inc.php:45 _build/inc/test.php:340 _build/inc/test.php:357
+#: _build/inc/configure.php:110 _build/inc/login.inc.php:50
+#: _build/inc/login.inc.php:52 _build/inc/test.php:340 _build/inc/test.php:357
 #: _build/index.php:252 _site/inc/configure.php:101 _site/inc/login.inc.php:83
 #: _site/inc/login.inc.php:85 _site/inc/test.php:609 _site/inc/test.php:674
 #: _site/index.php:659 _site/index.php:663 _tmp/inc/configure.php:111
-#: _tmp/inc/login.inc.php:93 _tmp/inc/login.inc.php:95 _tmp/inc/test.php:619
+#: _tmp/inc/login.inc.php:99 _tmp/inc/login.inc.php:101 _tmp/inc/test.php:619
 #: _tmp/inc/test.php:684 _tmp/index.php:669 _tmp/index.php:673
-#: inc/configure.php:101 inc/login.inc.php:83 inc/login.inc.php:85
+#: inc/configure.php:101 inc/login.inc.php:89 inc/login.inc.php:91
 #: inc/test.php:609 inc/test.php:674 index.php:659 index.php:663
 msgid "Password"
 msgstr ""
@@ -537,7 +531,7 @@ msgstr "Com permissão de leitura"
 #: _site/inc/users.pml.php:418 _site/index.php:706 _tmp/inc/configure.php:487
 #: _tmp/inc/test.php:512 _tmp/inc/test.php:513 _tmp/inc/users.pml.php:428
 #: _tmp/index.php:716 inc/configure.php:477 inc/test.php:502 inc/test.php:503
-#: inc/users.pml.php:418 index.php:706
+#: inc/users.pml.php:422 index.php:706
 msgid "Yes"
 msgstr "Sim"
 
@@ -612,19 +606,19 @@ msgstr ""
 msgid "Pimp my Logs now!"
 msgstr "Pimp my Logs agora!"
 
-#: _build/inc/getlog.pml.php:113 _build/inc/rss.pml.php:74
+#: _build/inc/getlog.pml.php:112 _build/inc/rss.pml.php:74
 #: _build/inc/upgrade.pml.php:17 _build/inc/users.pml.php:83
-#: _site/inc/getlog.pml.php:104 _site/inc/rss.pml.php:65
+#: _site/inc/getlog.pml.php:103 _site/inc/rss.pml.php:65
 #: _site/inc/upgrade.pml.php:8 _site/inc/users.pml.php:74
-#: _tmp/inc/getlog.pml.php:114 _tmp/inc/rss.pml.php:75
+#: _tmp/inc/getlog.pml.php:113 _tmp/inc/rss.pml.php:75
 #: _tmp/inc/upgrade.pml.php:18 _tmp/inc/users.pml.php:84
-#: inc/getlog.pml.php:104 inc/rss.pml.php:65 inc/upgrade.pml.php:8
+#: inc/getlog.pml.php:103 inc/rss.pml.php:65 inc/upgrade.pml.php:8
 #: inc/users.pml.php:74
 msgid "Please refresh the page."
 msgstr "Favor atualizar a página."
 
-#: _build/inc/getlog.pml.php:119 _site/inc/getlog.pml.php:110
-#: _tmp/inc/getlog.pml.php:120 inc/getlog.pml.php:110
+#: _build/inc/getlog.pml.php:118 _site/inc/getlog.pml.php:109
+#: _tmp/inc/getlog.pml.php:119 inc/getlog.pml.php:109
 #, php-format
 msgid ""
 "File ID <code>%s</code> does not exist, please review your configuration "
@@ -633,8 +627,8 @@ msgstr ""
 "O arquivo de ID <code>%s</code> não existe. Favor reveja o seu arquivo de "
 "configuração e pare de brincar!"
 
-#: _build/inc/getlog.pml.php:126 _site/inc/getlog.pml.php:117
-#: _tmp/inc/getlog.pml.php:127 inc/getlog.pml.php:117
+#: _build/inc/getlog.pml.php:125 _site/inc/getlog.pml.php:116
+#: _tmp/inc/getlog.pml.php:126 inc/getlog.pml.php:116
 #, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist, please "
@@ -643,23 +637,23 @@ msgstr ""
 "O arquivo <code>%s</code> para o arquivo de ID <code>%s</code> não exite. "
 "Favor reveja o seu arquivo de configuração."
 
-#: _build/inc/getlog.pml.php:133 _site/inc/getlog.pml.php:124
-#: _tmp/inc/getlog.pml.php:134 inc/getlog.pml.php:124
+#: _build/inc/getlog.pml.php:132 _site/inc/getlog.pml.php:123
+#: _tmp/inc/getlog.pml.php:133 inc/getlog.pml.php:123
 msgid ""
 "Configuration file has changed and is buggy now. Please refresh the page."
 msgstr ""
 "O arquivo de configuração foi modificado e agora está bugado. Favor "
 "recarregar a página."
 
-#: _build/inc/getlog.pml.php:193 _site/inc/getlog.pml.php:184
-#: _tmp/inc/getlog.pml.php:194 inc/getlog.pml.php:184
+#: _build/inc/getlog.pml.php:192 _site/inc/getlog.pml.php:183
+#: _tmp/inc/getlog.pml.php:193 inc/getlog.pml.php:183
 #, php-format
 msgid "Log file has been rotated (previous size was %s and new one is %s)"
 msgstr ""
 "O arquivo de log foi rotacionado (o tamanho anterior era %s e o novo é %s)"
 
-#: _build/inc/getlog.pml.php:217 _site/inc/getlog.pml.php:208
-#: _tmp/inc/getlog.pml.php:218 inc/getlog.pml.php:208
+#: _build/inc/getlog.pml.php:216 _site/inc/getlog.pml.php:207
+#: _tmp/inc/getlog.pml.php:217 inc/getlog.pml.php:207
 #, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist anymore..."
@@ -667,19 +661,19 @@ msgstr ""
 "O arquivo <code>%s</code> para o arquivo de ID <code>%s</code> não existe "
 "mais..."
 
-#: _build/inc/getlog.pml.php:221 _site/inc/getlog.pml.php:212
-#: _tmp/inc/getlog.pml.php:222 inc/getlog.pml.php:212
+#: _build/inc/getlog.pml.php:220 _site/inc/getlog.pml.php:211
+#: _tmp/inc/getlog.pml.php:221 inc/getlog.pml.php:211
 #, fuzzy, php-format
 msgid "Unknown error %s"
 msgstr "<strong>PHP Unknown error</strong> [%s] %s"
 
-#: _build/inc/getlog.pml.php:239 _site/inc/getlog.pml.php:230
-#: _tmp/inc/getlog.pml.php:240 inc/getlog.pml.php:230
+#: _build/inc/getlog.pml.php:238 _site/inc/getlog.pml.php:229
+#: _tmp/inc/getlog.pml.php:239 inc/getlog.pml.php:229
 msgid "Log file has been rotated"
 msgstr "O arquivo de logs foi rotacionado"
 
-#: _build/inc/getlog.pml.php:273 _site/inc/getlog.pml.php:264
-#: _tmp/inc/getlog.pml.php:274 inc/getlog.pml.php:264
+#: _build/inc/getlog.pml.php:272 _site/inc/getlog.pml.php:263
+#: _tmp/inc/getlog.pml.php:273 inc/getlog.pml.php:263
 #, php-format
 msgid ""
 "%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "
@@ -692,42 +686,42 @@ msgstr ""
 "<code>%s</code> foi modificado pela última vez em <code>%s</code> no fuso "
 "horário <code>%s</code>, o tamanho é <code>%s</code>%s"
 
-#: _build/inc/getlog.pml.php:277 _site/inc/getlog.pml.php:268
-#: _tmp/inc/getlog.pml.php:278 inc/getlog.pml.php:268
+#: _build/inc/getlog.pml.php:276 _site/inc/getlog.pml.php:267
+#: _tmp/inc/getlog.pml.php:277 inc/getlog.pml.php:267
 #, php-format
 msgid "%s new logs found"
 msgstr "%s novos logs encontrados"
 
-#: _build/inc/getlog.pml.php:280 _site/inc/getlog.pml.php:271
-#: _tmp/inc/getlog.pml.php:281 inc/getlog.pml.php:271
+#: _build/inc/getlog.pml.php:279 _site/inc/getlog.pml.php:270
+#: _tmp/inc/getlog.pml.php:280 inc/getlog.pml.php:270
 msgid "no new log found"
 msgstr "nenhum novo log encontrado"
 
-#: _build/inc/getlog.pml.php:281 _site/inc/getlog.pml.php:272
-#: _tmp/inc/getlog.pml.php:282 inc/getlog.pml.php:272
+#: _build/inc/getlog.pml.php:280 _site/inc/getlog.pml.php:271
+#: _tmp/inc/getlog.pml.php:281 inc/getlog.pml.php:271
 msgid "1 new log found"
 msgstr "1 novo log encontrado"
 
-#: _build/inc/getlog.pml.php:286 _site/inc/getlog.pml.php:277
-#: _tmp/inc/getlog.pml.php:287 inc/getlog.pml.php:277
+#: _build/inc/getlog.pml.php:285 _site/inc/getlog.pml.php:276
+#: _tmp/inc/getlog.pml.php:286 inc/getlog.pml.php:276
 #, fuzzy, php-format
 msgid "%s old logs found"
 msgstr "%s novos logs encontrados"
 
-#: _build/inc/getlog.pml.php:289 _site/inc/getlog.pml.php:280
-#: _tmp/inc/getlog.pml.php:290 inc/getlog.pml.php:280
+#: _build/inc/getlog.pml.php:288 _site/inc/getlog.pml.php:279
+#: _tmp/inc/getlog.pml.php:289 inc/getlog.pml.php:279
 #, fuzzy
 msgid "no old log found"
 msgstr "nenhum novo log encontrado"
 
-#: _build/inc/getlog.pml.php:290 _site/inc/getlog.pml.php:281
-#: _tmp/inc/getlog.pml.php:291 inc/getlog.pml.php:281
+#: _build/inc/getlog.pml.php:289 _site/inc/getlog.pml.php:280
+#: _tmp/inc/getlog.pml.php:290 inc/getlog.pml.php:280
 #, fuzzy
 msgid "1 olg log found"
 msgstr "1 novo log encontrado"
 
-#: _build/inc/getlog.pml.php:302 _site/inc/getlog.pml.php:293
-#: _tmp/inc/getlog.pml.php:303 inc/getlog.pml.php:293
+#: _build/inc/getlog.pml.php:301 _site/inc/getlog.pml.php:292
+#: _tmp/inc/getlog.pml.php:302 inc/getlog.pml.php:292
 #, php-format
 msgid "log type is <code>%s</code>"
 msgstr "o tipo do log é <code>%s</code>"
@@ -766,14 +760,21 @@ msgstr "Não me incomode novamente com esta atualização!"
 msgid "You have been logged out"
 msgstr ""
 
-#: _build/inc/login.inc.php:34 _site/inc/login.inc.php:60
-#: _tmp/inc/login.inc.php:70 inc/login.inc.php:60
+#: _build/inc/login.inc.php:37 _tmp/inc/login.inc.php:68 inc/login.inc.php:58
+#, php-format
+msgid ""
+"You can use %s as the username and %s as the password to test the demo "
+"account"
+msgstr ""
+
+#: _build/inc/login.inc.php:41 _site/inc/login.inc.php:60
+#: _tmp/inc/login.inc.php:76 inc/login.inc.php:66
 #, fuzzy
 msgid "Please sign in"
 msgstr "Aguarde..."
 
-#: _build/inc/login.inc.php:47 _site/inc/login.inc.php:97
-#: _tmp/inc/login.inc.php:107 inc/login.inc.php:97
+#: _build/inc/login.inc.php:54 _site/inc/login.inc.php:97
+#: _tmp/inc/login.inc.php:113 inc/login.inc.php:103
 #, fuzzy
 msgid "Forgotten your password?"
 msgstr "Não é possível verificar sua versão atual!"
@@ -992,7 +993,7 @@ msgstr ""
 #: _site/inc/test.php:560 _site/inc/test.php:646 _site/inc/users.pml.php:114
 #: _site/inc/users.pml.php:264 _tmp/inc/test.php:570 _tmp/inc/test.php:656
 #: _tmp/inc/users.pml.php:124 _tmp/inc/users.pml.php:274 inc/test.php:560
-#: inc/test.php:646 inc/users.pml.php:114 inc/users.pml.php:264
+#: inc/test.php:646 inc/users.pml.php:114 inc/users.pml.php:268
 msgid "Password confirmation is not the same"
 msgstr ""
 
@@ -1170,101 +1171,101 @@ msgid "Current password is not valid"
 msgstr "Versão atual %s"
 
 #: _build/inc/users.pml.php:129 _site/inc/users.pml.php:120
-#: _tmp/inc/users.pml.php:130 inc/users.pml.php:120
+#: _tmp/inc/users.pml.php:130 inc/users.pml.php:123
 msgid "Password has been successfully changed!"
 msgstr ""
 
 #: _build/inc/users.pml.php:183 _build/inc/users.pml.php:214
 #: _site/inc/users.pml.php:174 _site/inc/users.pml.php:205
-#: _tmp/inc/users.pml.php:184 _tmp/inc/users.pml.php:215 inc/users.pml.php:174
-#: inc/users.pml.php:205
+#: _tmp/inc/users.pml.php:184 _tmp/inc/users.pml.php:215 inc/users.pml.php:178
+#: inc/users.pml.php:209
 #, php-format
 msgid "User %s does not exist"
 msgstr ""
 
 #: _build/inc/users.pml.php:265 _site/inc/users.pml.php:256
-#: _tmp/inc/users.pml.php:266 inc/users.pml.php:256
+#: _tmp/inc/users.pml.php:266 inc/users.pml.php:260
 #, php-format
 msgid "User %s already exists"
 msgstr ""
 
 #: _build/inc/users.pml.php:322 _site/inc/users.pml.php:313
-#: _tmp/inc/users.pml.php:323 inc/users.pml.php:313
+#: _tmp/inc/users.pml.php:323 inc/users.pml.php:317
 msgid "Please do not shoot yourself in the foot!"
 msgstr ""
 
 #: _build/inc/users.pml.php:394 _site/inc/users.pml.php:385
-#: _tmp/inc/users.pml.php:395 inc/users.pml.php:385
+#: _tmp/inc/users.pml.php:395 inc/users.pml.php:389
 msgid ""
 "<strong>Anonymous access is enabled</strong>. Genuine users have to click on "
 "the user menu to sign in and access more logs."
 msgstr ""
 
 #: _build/inc/users.pml.php:396 _site/inc/users.pml.php:387
-#: _tmp/inc/users.pml.php:397 inc/users.pml.php:387
+#: _tmp/inc/users.pml.php:397 inc/users.pml.php:391
 msgid ""
 "<strong>Anonymous access is disabled</strong>. All users have to sign in "
 "from the sign in screen."
 msgstr ""
 
 #: _build/inc/users.pml.php:402 _site/inc/users.pml.php:393
-#: _tmp/inc/users.pml.php:403 inc/users.pml.php:393
+#: _tmp/inc/users.pml.php:403 inc/users.pml.php:397
 msgid "Select which log files can be viewed without being logged."
 msgstr ""
 
 #: _build/inc/users.pml.php:403 _build/index.php:252
 #: _site/inc/users.pml.php:394 _site/index.php:695 _tmp/inc/users.pml.php:404
-#: _tmp/index.php:705 inc/users.pml.php:394 index.php:695
+#: _tmp/index.php:705 inc/users.pml.php:398 index.php:695
 msgid "Toggle all log files"
 msgstr ""
 
 #: _build/inc/users.pml.php:482 _build/index.php:164
 #: _site/inc/users.pml.php:473 _site/index.php:155 _tmp/inc/users.pml.php:483
-#: _tmp/index.php:165 inc/users.pml.php:473 index.php:155
+#: _tmp/index.php:165 inc/users.pml.php:477 index.php:155
 msgid "Access token"
 msgstr ""
 
 #: _build/inc/users.pml.php:493 _site/inc/users.pml.php:484
-#: _tmp/inc/users.pml.php:494 inc/users.pml.php:484
+#: _tmp/inc/users.pml.php:494 inc/users.pml.php:488
 #, fuzzy
 msgid "Access token copied!"
 msgstr "Comando copiado!"
 
 #: _build/inc/users.pml.php:496 _build/index.php:168
 #: _site/inc/users.pml.php:487 _site/index.php:159 _tmp/inc/users.pml.php:497
-#: _tmp/index.php:169 inc/users.pml.php:487 index.php:159
+#: _tmp/index.php:169 inc/users.pml.php:491 index.php:159
 msgid "Presalt key"
 msgstr ""
 
 #: _build/inc/users.pml.php:507 _site/inc/users.pml.php:498
-#: _tmp/inc/users.pml.php:508 inc/users.pml.php:498
+#: _tmp/inc/users.pml.php:508 inc/users.pml.php:502
 #, fuzzy
 msgid "Presalt key copied!"
 msgstr "Comando copiado!"
 
 #: _build/inc/users.pml.php:512 _site/inc/users.pml.php:503
-#: _tmp/inc/users.pml.php:513 inc/users.pml.php:503
+#: _tmp/inc/users.pml.php:513 inc/users.pml.php:507
 msgid "Check to generate both new Access token and new Presalt key"
 msgstr ""
 
 #: _build/inc/users.pml.php:519 _site/inc/users.pml.php:510
-#: _tmp/inc/users.pml.php:520 inc/users.pml.php:510
+#: _tmp/inc/users.pml.php:520 inc/users.pml.php:514
 msgid "Your credentials have not been used"
 msgstr ""
 
 #: _build/inc/users.pml.php:524 _site/inc/users.pml.php:515
-#: _tmp/inc/users.pml.php:525 inc/users.pml.php:515
+#: _tmp/inc/users.pml.php:525 inc/users.pml.php:519
 msgid "API has been called 1 time"
 msgstr ""
 
 #: _build/inc/users.pml.php:526 _site/inc/users.pml.php:517
-#: _tmp/inc/users.pml.php:527 inc/users.pml.php:517
+#: _tmp/inc/users.pml.php:527 inc/users.pml.php:521
 #, php-format
 msgid "API has been called %s times"
 msgstr ""
 
 #: _build/inc/users.pml.php:530 _site/inc/users.pml.php:521
-#: _tmp/inc/users.pml.php:531 inc/users.pml.php:521
+#: _tmp/inc/users.pml.php:531 inc/users.pml.php:525
 #, php-format
 msgid ""
 "Last API call has been done at %s by IP address %s with user agent %s on URL "
@@ -1391,7 +1392,7 @@ msgstr ""
 #: _build/index.php:128 _site/index.php:119 _tmp/index.php:129 index.php:119
 #, fuzzy
 msgid "Date"
-msgstr "Clique em um campo de data para marcar uma linha"
+msgstr "Sua versão %s está desatualizada"
 
 #: _build/index.php:129 _site/index.php:120 _tmp/index.php:130 index.php:120
 msgid "Delete user"
@@ -1912,6 +1913,14 @@ msgstr ""
 #: _build/index.php:254 _site/index.php:721 _tmp/index.php:731 index.php:721
 msgid "Cancel"
 msgstr ""
+
+#: inc/users.pml.php:121
+msgid "Password has been fakely changed on the demo!"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Pimp my Log has been successfully configured with Apache"
+#~ msgstr "Pimp my Log não está configurado."
 
 #~ msgid ""
 #~ "Please touch file <code>inc/test.REMOVE_UPPERCASE.php</code> and reload "

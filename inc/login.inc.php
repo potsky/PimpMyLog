@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.0 - 51ad8489a03600e9ff0fe6d2b7f254a789f2bacb*/
+/*! pimpmylog - 1.5.0 - 531d66179111632e3c44421f46bb7c7c7aa08f7a*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -34,7 +34,7 @@ load_default_constants();
 					else if ( $_SERVER['SERVER_NAME'] === 'demo.pimpmylog.com' ) {
 						echo '<br/>';
 						echo '<div class="alert alert-info">';
-						echo sprintf( __('You can use %s as the username and %s as the password to test the demo account') , 'demo' , 'pimpmylog' );
+						echo sprintf( __('You can use %s as the username and %s as the password to test the demo account') , '<code>demo</code>' , '<code>pimpmylog</code>' );
 						echo '</div>';
 						echo '<br/>';
 					}
