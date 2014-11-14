@@ -543,7 +543,7 @@ var users_view = function( obj ) {
 			var val = re.b[i];
 			if ( i === 'api_lastlogin' ) {
 				var ua = uaparser.setUA( val['ua'] ).getResult();
-				val    = '<a href="' + $('<div/>').text(val['ur']).html() + '" target="_blank">' + val['ur'] + '</a><br/>' + val['ts'] + '<br/>' + val['ip'] + '<br/>' + ua.browser.name + ' ' + ua.browser.version + ' - ' + ua.os.name + ' ' + ua.os.version;
+				val    = '<a href="' + $('<div/>').text(val['ur']).html() + '" target="_blank" class="hyphen">' + val['ur'] + '</a><br/>' + val['ts'] + '<br/>' + val['ip'] + '<br/>' + ua.browser.name + ' ' + ua.browser.version + ' - ' + ua.os.name + ' ' + ua.os.version;
 			}
 			else if ( i === 'lastlogin' ) {
 				var ua = uaparser.setUA( val['ua'] ).getResult();

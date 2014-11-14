@@ -76,7 +76,7 @@ if ( $errors === false ) {
 	$message .= '<br/>';
 	$message .= __( 'Please contact your administrator.' );
 	$message .= '<br/><br/>';
-	$link_url = '?signout';
+	$link_url = '?signout&l=' . $locale;
 	$link_msg = __('Sign out');
 	include_once 'inc/error.inc.php';
 	die();
@@ -421,7 +421,7 @@ $csrf = csrf_get();
 								<?php } ?>
 								<li><a href="#" title="<?php _h('Click here to view your profile'); ?>" data-toggle="modal" data-target="#prModal"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<?php _e('Profile'); ?></a></li>
 								<li><a href="#" title="<?php _h('Click here to change your password'); ?>" data-toggle="modal" data-target="#cpModal"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<?php _e('Change password'); ?></a></li>
-								<li><a href="?signout" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;<?php _e('Sign out'); ?></a></li>
+								<li><a href="?signout&l=<?php echo $locale;?>" title="<?php _h('Click here to sign out'); ?>"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;<?php _e('Sign out'); ?></a></li>
 							</ul>
 						</li>
 
@@ -519,7 +519,7 @@ $csrf = csrf_get();
 						<li><code>tz</code>      : <?php _e('timezone to convert dates');?></li>
 						<li><code>format</code>  : <?php _e('available formats are CSV, JSON, JSONPR and XML');?></li>
 						<li><code>count</code>   : <?php _e('the maximum count of returned log lines');?></li>
-						<li><code>timeout</code> : <?php _e('the timeout in seconds to return log lines. Increase this value for bug counts or when using search');?></li>
+						<li><code>timeout</code> : <?php _e('the timeout in seconds to return log lines. Increase this value for big counts or when using search');?></li>
 						<li><code>search</code>  : <?php _e('search this value in log lines. It can be a regular expression or a regex one');?></li>
 						<li><code>callback</code>: <?php _e('this field is optional and is used to specify a callback function when format is JSONP');?></li>
 					</ul>
@@ -637,7 +637,7 @@ $csrf = csrf_get();
 										<div id="umUsersViewBody"></div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-default" onclick="users_list();"><?php _e('Back');?></button>
+										<button type="button" class="btn btn-default" onclick="users_list();"><?php _e('« Back');?></button>
 										<button type="button" class="btn btn-primary" onclick="users_edit(this);" id="umUserEditBtn"><?php _e('Edit');?></button>
 									</div>
 								</div>
@@ -717,7 +717,7 @@ $csrf = csrf_get();
 										</div>
 
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default" onclick="users_view(this);" id="umUsersViewBtn" ><?php _e('Back');?></button>
+											<button type="button" class="btn btn-default" onclick="users_view(this);" id="umUsersViewBtn" ><?php _e('« Back');?></button>
 											<button type="button" class="btn btn-default" onclick="users_list();"     id="umUsersAddBtn" ><?php _e('Cancel');?></button>
 											<input type="submit" class="btn btn-primary" data-loading-text="<?php _h('Saving...');?>" value="<?php _h('Save');?>" id="umUsersAddSave" />
 										</div>

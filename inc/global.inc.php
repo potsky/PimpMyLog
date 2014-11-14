@@ -980,6 +980,8 @@ if ( function_exists( 'bindtextdomain' ) ) {
 
     if ( isset( $_GET['l'] ) ) {
         $locale = $_GET['l'];
+    } elseif ( isset( $_COOKIE['pmllocale'] ) ) {
+        $locale = $_COOKIE['pmllocale'];
     } elseif ( defined( 'LOCALE' ) ) {
         $locale = LOCALE;
     } elseif ( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
@@ -996,6 +998,10 @@ if ( function_exists( 'bindtextdomain' ) ) {
 
     putenv( 'LC_ALL=' . $locale );
     putenv( 'LANGUAGE=' . $locale );
+
+    if ( ( ! isset( $_COOKIE['pmllocale'] ) ) || (  $_COOKIE['pmllocale'] !== $locale ) ) {
+        setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 , '/' );
+    }
 
     if ($lang == 'fr') {
         setlocale( LC_ALL , $locale , $locale . '.utf8' , 'fra' );

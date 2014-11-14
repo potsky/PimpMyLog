@@ -522,7 +522,7 @@ switch ( @$_POST['action'] ) {
 				, '<code>' . date( 'Y/m/d H:i:s' , (int)$user[ 'api_lastlogin' ]['ts'] ) . '</code>'
 				, '<code>' . $user[ 'api_lastlogin' ]['ip'] . '</code>'
 				, '<code>' . $user[ 'api_lastlogin' ]['ua'] . '</code>'
-				, '<a href="' . h( $user[ 'api_lastlogin' ]['ur'] ) . '" target="_blank">' . $user[ 'api_lastlogin' ]['ur'] . '</a>'
+				, '<a href="' . h( $user[ 'api_lastlogin' ]['ur'] ) . '" class="hyphen" target="_blank">' . $user[ 'api_lastlogin' ]['ur'] . '</a>'
 			);
 		}
 

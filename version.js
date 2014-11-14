@@ -35,6 +35,7 @@
 			],
 			"changed" : [
 				"New pretty design with new Ubuntu font, I hope you like it",
+				"Increase menu accessibility on mobile devices",
 				"Start refactoring for version 2.0 with unit tests"
 			]
 		},

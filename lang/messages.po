@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-11-13 16:32+0100\n"
-"PO-Revision-Date: 2014-11-13 16:32+0100\n"
+"POT-Creation-Date: 2014-11-14 10:33+0100\n"
+"PO-Revision-Date: 2014-11-14 10:33+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: potsky <potsky@me.com>\n"
 "Language: en_GB\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.10\n"
 "X-Poedit-KeywordsList: gettext;gettext_noop;_x;_e;__;esc_attr__;esc_attr_e;"
-"esc_html__;esc_html_e;_ex;esc_attr_x;esc_html_x;_n;_nx;_n_noop;_nx_noop\n"
+"esc_html__;esc_html_e;_ex;esc_attr_x;esc_html_x;_n;_nx;_n_noop;_nx_noop;_h\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -214,51 +214,68 @@ msgstr ""
 msgid "Please choose a username and a password for the admin account."
 msgstr ""
 
-#: _build/inc/configure.php:101 _build/inc/users.pml.php:262
-#: _site/inc/configure.php:92 _site/inc/users.pml.php:253
-#: _tmp/inc/configure.php:102 _tmp/inc/users.pml.php:263 inc/configure.php:92
+#: _build/inc/configure.php:101 _build/inc/test.php:340
+#: _build/inc/test.php:357 _build/inc/users.pml.php:262
+#: _site/inc/configure.php:92 _site/inc/test.php:597 _site/inc/test.php:662
+#: _site/inc/users.pml.php:253 _tmp/inc/configure.php:102
+#: _tmp/inc/test.php:607 _tmp/inc/test.php:672 _tmp/inc/users.pml.php:263
+#: inc/configure.php:92 inc/test.php:597 inc/test.php:662
 #: inc/users.pml.php:253
 msgid "Username is required"
 msgstr ""
 
 #: _build/inc/configure.php:103 _build/inc/login.inc.php:37
-#: _build/inc/login.inc.php:39 _build/index.php:252 _site/inc/configure.php:94
-#: _site/inc/login.inc.php:70 _site/inc/login.inc.php:72 _site/index.php:650
-#: _tmp/inc/configure.php:104 _tmp/inc/login.inc.php:80
-#: _tmp/inc/login.inc.php:82 _tmp/index.php:660 inc/configure.php:94
-#: inc/login.inc.php:70 inc/login.inc.php:72 index.php:650
+#: _build/inc/login.inc.php:39 _build/inc/test.php:340 _build/inc/test.php:357
+#: _build/index.php:252 _site/inc/configure.php:94 _site/inc/login.inc.php:70
+#: _site/inc/login.inc.php:72 _site/inc/test.php:600 _site/inc/test.php:665
+#: _site/index.php:650 _site/index.php:654 _tmp/inc/configure.php:104
+#: _tmp/inc/login.inc.php:80 _tmp/inc/login.inc.php:82 _tmp/inc/test.php:610
+#: _tmp/inc/test.php:675 _tmp/index.php:660 _tmp/index.php:664
+#: inc/configure.php:94 inc/login.inc.php:70 inc/login.inc.php:72
+#: inc/test.php:600 inc/test.php:665 index.php:650 index.php:654
 msgid "Username"
 msgstr ""
 
 #: _build/inc/configure.php:108 _build/inc/test.php:332
-#: _build/inc/test.php:349 _build/inc/users.pml.php:118
-#: _build/inc/users.pml.php:270 _site/inc/configure.php:99
-#: _site/inc/test.php:563 _site/inc/test.php:649 _site/inc/users.pml.php:109
+#: _build/inc/test.php:340 _build/inc/test.php:349 _build/inc/test.php:357
+#: _build/inc/users.pml.php:118 _build/inc/users.pml.php:270
+#: _site/inc/configure.php:99 _site/inc/test.php:563 _site/inc/test.php:606
+#: _site/inc/test.php:649 _site/inc/test.php:671 _site/inc/users.pml.php:109
 #: _site/inc/users.pml.php:261 _tmp/inc/configure.php:109
-#: _tmp/inc/test.php:573 _tmp/inc/test.php:659 _tmp/inc/users.pml.php:119
-#: _tmp/inc/users.pml.php:271 inc/configure.php:99 inc/test.php:563
-#: inc/test.php:649 inc/users.pml.php:109 inc/users.pml.php:261
+#: _tmp/inc/test.php:573 _tmp/inc/test.php:616 _tmp/inc/test.php:659
+#: _tmp/inc/test.php:681 _tmp/inc/users.pml.php:119 _tmp/inc/users.pml.php:271
+#: inc/configure.php:99 inc/test.php:563 inc/test.php:606 inc/test.php:649
+#: inc/test.php:671 inc/users.pml.php:109 inc/users.pml.php:261
 msgid "Password must contain at least 6 chars"
 msgstr ""
 
 #: _build/inc/configure.php:110 _build/inc/login.inc.php:43
-#: _build/inc/login.inc.php:45 _build/index.php:252
-#: _site/inc/configure.php:101 _site/inc/login.inc.php:83
-#: _site/inc/login.inc.php:85 _site/index.php:659 _tmp/inc/configure.php:111
-#: _tmp/inc/login.inc.php:93 _tmp/inc/login.inc.php:95 _tmp/index.php:669
+#: _build/inc/login.inc.php:45 _build/inc/test.php:340 _build/inc/test.php:357
+#: _build/index.php:252 _site/inc/configure.php:101 _site/inc/login.inc.php:83
+#: _site/inc/login.inc.php:85 _site/inc/test.php:609 _site/inc/test.php:674
+#: _site/index.php:659 _site/index.php:663 _tmp/inc/configure.php:111
+#: _tmp/inc/login.inc.php:93 _tmp/inc/login.inc.php:95 _tmp/inc/test.php:619
+#: _tmp/inc/test.php:684 _tmp/index.php:669 _tmp/index.php:673
 #: inc/configure.php:101 inc/login.inc.php:83 inc/login.inc.php:85
-#: index.php:659
+#: inc/test.php:609 inc/test.php:674 index.php:659 index.php:663
 msgid "Password"
 msgstr ""
 
-#: _build/inc/configure.php:115 _site/inc/configure.php:106
-#: _tmp/inc/configure.php:116 inc/configure.php:106
+#: _build/inc/configure.php:115 _build/inc/test.php:340
+#: _build/inc/test.php:357 _site/inc/configure.php:106 _site/inc/test.php:615
+#: _site/inc/test.php:680 _tmp/inc/configure.php:116 _tmp/inc/test.php:625
+#: _tmp/inc/test.php:690 inc/configure.php:106 inc/test.php:615
+#: inc/test.php:680
 msgid "Password is not the same"
 msgstr ""
 
-#: _build/inc/configure.php:117 _build/index.php:252
-#: _site/inc/configure.php:108 _site/index.php:668 _tmp/inc/configure.php:118
-#: _tmp/index.php:678 inc/configure.php:108 index.php:668
+#: _build/inc/configure.php:117 _build/inc/test.php:340
+#: _build/inc/test.php:357 _build/index.php:252 _site/inc/configure.php:108
+#: _site/inc/test.php:618 _site/inc/test.php:683 _site/index.php:668
+#: _site/index.php:672 _tmp/inc/configure.php:118 _tmp/inc/test.php:628
+#: _tmp/inc/test.php:693 _tmp/index.php:678 _tmp/index.php:682
+#: inc/configure.php:108 inc/test.php:618 inc/test.php:683 index.php:668
+#: index.php:672
 msgid "Password Confirmation"
 msgstr ""
 
@@ -539,15 +556,15 @@ msgstr ""
 msgid "You can manually adjust settings in the <code>%s</code> file."
 msgstr ""
 
-#: _build/inc/configure.php:511 _site/inc/configure.php:556
-#: _tmp/inc/configure.php:566 inc/configure.php:556
+#: _build/inc/configure.php:510 _site/inc/configure.php:555
+#: _tmp/inc/configure.php:565 inc/configure.php:555
 msgid ""
 "Please visit <a href=\"http://pimpmylog.com\">pimpmylog.com</a> for more "
 "informations."
 msgstr ""
 
-#: _build/inc/configure.php:514 _site/inc/configure.php:559
-#: _tmp/inc/configure.php:569 inc/configure.php:559
+#: _build/inc/configure.php:513 _site/inc/configure.php:558
+#: _tmp/inc/configure.php:568 inc/configure.php:558
 msgid "Pimp my Logs now!"
 msgstr ""
 
@@ -699,20 +716,26 @@ msgstr ""
 msgid "Forgotten your password?"
 msgstr ""
 
-#: _build/inc/rss.php:137 _site/inc/rss.php:128 _tmp/inc/rss.php:138
-#: inc/rss.php:128
+#: _build/inc/rss.php:139 _site/inc/rss.php:130 _tmp/inc/rss.php:140
+#: inc/rss.php:130
 #, php-format
 msgid "Pimp My Log : %s"
 msgstr ""
 
-#: _build/inc/rss.php:138 _site/inc/rss.php:129 _tmp/inc/rss.php:139
-#: inc/rss.php:129
+#: _build/inc/rss.php:141 _site/inc/rss.php:132 _tmp/inc/rss.php:142
+#: inc/rss.php:132
+#, php-format
+msgid "Pimp logs for file %s"
+msgstr ""
+
+#: _build/inc/rss.php:142 _site/inc/rss.php:133 _tmp/inc/rss.php:143
+#: inc/rss.php:133
 #, php-format
 msgid "Pimp logs for file %s with search %s"
 msgstr ""
 
-#: _build/inc/rss.php:147 _site/inc/rss.php:138 _tmp/inc/rss.php:148
-#: inc/rss.php:138
+#: _build/inc/rss.php:151 _site/inc/rss.php:142 _tmp/inc/rss.php:152
+#: inc/rss.php:142
 msgid "Feed provided by Pimp My Log"
 msgstr ""
 
@@ -928,6 +951,11 @@ msgstr ""
 msgid "Authentication is currently disabled"
 msgstr ""
 
+#: _build/inc/test.php:340 _site/inc/test.php:624 _tmp/inc/test.php:634
+#: inc/test.php:624
+msgid "Enable authentication"
+msgstr ""
+
 #: _build/inc/test.php:340 _site/inc/test.php:639 _tmp/inc/test.php:649
 #: inc/test.php:639
 msgid "Please fill an existing username and a new password"
@@ -943,6 +971,11 @@ msgstr ""
 #: inc/test.php:654
 #, php-format
 msgid "Password has been updated for user %s!"
+msgstr ""
+
+#: _build/inc/test.php:357 _site/inc/test.php:689 _tmp/inc/test.php:699
+#: inc/test.php:689
+msgid "Reset"
 msgstr ""
 
 #: _build/inc/test.php:357 _site/inc/test.php:693 _tmp/inc/test.php:703
@@ -1454,6 +1487,16 @@ msgstr ""
 msgid "Reload the page with default parameters"
 msgstr ""
 
+#: _build/index.php:209 _site/index.php:238 _tmp/index.php:248 index.php:238
+msgid "Click to refresh or press the R key"
+msgstr ""
+
+#: _build/index.php:209 _build/index.php:216 _site/index.php:251
+#: _site/index.php:271 _tmp/index.php:261 _tmp/index.php:281 index.php:251
+#: index.php:271
+msgid "Select a log file to display"
+msgstr ""
+
 #: _build/index.php:213 _site/index.php:258 _tmp/index.php:268 index.php:258
 #, php-format
 msgid "Log file #%s defined in %s"
@@ -1464,6 +1507,14 @@ msgstr ""
 msgid "Log file #%s defined in main configuration file"
 msgstr ""
 
+#: _build/index.php:228 _site/index.php:308 _tmp/index.php:318 index.php:308
+msgid "Search in logs"
+msgstr ""
+
+#: _build/index.php:228 _site/index.php:312 _tmp/index.php:322 index.php:312
+msgid "Select a duration to check for new logs automatically"
+msgstr ""
+
 #: _build/index.php:228 _site/index.php:313 _tmp/index.php:323 index.php:313
 msgid "No refresh"
 msgstr ""
@@ -1471,6 +1522,10 @@ msgstr ""
 #: _build/index.php:230 _site/index.php:316 _tmp/index.php:326 index.php:316
 #, php-format
 msgid "Refresh %ss"
+msgstr ""
+
+#: _build/index.php:232 _site/index.php:323 _tmp/index.php:333 index.php:323
+msgid "Max count of logs to display"
 msgstr ""
 
 #: _build/index.php:234 _site/index.php:326 _tmp/index.php:336 index.php:326
@@ -1483,8 +1538,21 @@ msgstr ""
 msgid "%s log"
 msgstr ""
 
+#: _build/index.php:236 _site/index.php:333 _tmp/index.php:343 index.php:333
+msgid "Desktop notifications on supported modern browsers"
+msgstr ""
+
 #: _build/index.php:236 _site/index.php:335 _tmp/index.php:345 index.php:335
 msgid "Notifications"
+msgstr ""
+
+#: _build/index.php:236 _site/index.php:346 _site/index.php:350
+#: _tmp/index.php:356 _tmp/index.php:360 index.php:346 index.php:350
+msgid "Displayed columns"
+msgstr ""
+
+#: _build/index.php:236 _site/index.php:358 _tmp/index.php:368 index.php:358
+msgid "Settings"
 msgstr ""
 
 #: _build/index.php:236 _site/index.php:364 _tmp/index.php:374 index.php:364
@@ -1499,12 +1567,24 @@ msgstr ""
 msgid "off"
 msgstr ""
 
+#: _build/index.php:236 _site/index.php:371 _tmp/index.php:381 index.php:371
+msgid "Click on a date field to mark a row"
+msgstr ""
+
 #: _build/index.php:236 _site/index.php:372 _tmp/index.php:382 index.php:372
 msgid "Clear markers"
 msgstr ""
 
+#: _build/index.php:236 _site/index.php:377 _tmp/index.php:387 index.php:377
+msgid "Language"
+msgstr ""
+
 #: _build/index.php:236 _site/index.php:378 _tmp/index.php:388 index.php:378
 msgid "Change language..."
+msgstr ""
+
+#: _build/index.php:244 _site/index.php:394 _tmp/index.php:404 index.php:394
+msgid "Timezone"
 msgstr ""
 
 #: _build/index.php:244 _site/index.php:395 _tmp/index.php:405 index.php:395
@@ -1518,7 +1598,15 @@ msgid "You are currently connected as %s"
 msgstr ""
 
 #: _build/index.php:252 _site/index.php:420 _tmp/index.php:430 index.php:420
+msgid "Click here to manager users"
+msgstr ""
+
+#: _build/index.php:252 _site/index.php:420 _tmp/index.php:430 index.php:420
 msgid "Manage users"
+msgstr ""
+
+#: _build/index.php:252 _site/index.php:422 _tmp/index.php:432 index.php:422
+msgid "Click here to view your profile"
 msgstr ""
 
 #: _build/index.php:252 _site/index.php:422 _site/index.php:593
@@ -1526,9 +1614,27 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
+#: _build/index.php:252 _site/index.php:423 _tmp/index.php:433 index.php:423
+msgid "Click here to change your password"
+msgstr ""
+
 #: _build/index.php:252 _site/index.php:423 _site/index.php:546
 #: _tmp/index.php:433 _tmp/index.php:556 index.php:423 index.php:546
 msgid "Change password"
+msgstr ""
+
+#: _build/index.php:252 _site/index.php:424 _tmp/index.php:434 index.php:424
+msgid "Click here to sign out"
+msgstr ""
+
+#: _build/index.php:252 _site/index.php:467 _site/index.php:489
+#: _tmp/index.php:477 _tmp/index.php:499 index.php:467 index.php:489
+msgid "Loading..."
+msgstr ""
+
+#: _build/index.php:252 _site/index.php:467 _site/index.php:489
+#: _tmp/index.php:477 _tmp/index.php:499 index.php:467 index.php:489
+msgid "No more data"
 msgstr ""
 
 #: _build/index.php:252 _site/index.php:467 _site/index.php:489
@@ -1613,7 +1719,7 @@ msgstr ""
 
 #: _build/index.php:252 _site/index.php:522 _tmp/index.php:532 index.php:522
 msgid ""
-"the timeout in seconds to return log lines. Increase this value for bug "
+"the timeout in seconds to return log lines. Increase this value for big "
 "counts or when using search"
 msgstr ""
 
@@ -1632,6 +1738,32 @@ msgstr ""
 msgid "Here is the current result:"
 msgstr ""
 
+#: _build/index.php:252 _site/index.php:559 _tmp/index.php:569 index.php:559
+msgid "Current password"
+msgstr ""
+
+#: _build/index.php:252 _site/index.php:566 _tmp/index.php:576 index.php:566
+msgid "New password"
+msgstr ""
+
+#: _build/index.php:252 _site/index.php:573 _tmp/index.php:583 index.php:573
+msgid "New password confirmation"
+msgstr ""
+
+#: _build/index.php:252 _build/index.php:254 _site/index.php:580
+#: _site/index.php:601 _site/index.php:722 _site/index.php:740
+#: _tmp/index.php:590 _tmp/index.php:611 _tmp/index.php:732 _tmp/index.php:750
+#: index.php:580 index.php:601 index.php:722 index.php:740
+msgid "Saving..."
+msgstr ""
+
+#: _build/index.php:252 _build/index.php:254 _site/index.php:580
+#: _site/index.php:601 _site/index.php:722 _site/index.php:740
+#: _tmp/index.php:590 _tmp/index.php:611 _tmp/index.php:732 _tmp/index.php:750
+#: index.php:580 index.php:601 index.php:722 index.php:740
+msgid "Save"
+msgstr ""
+
 #: _build/index.php:252 _site/index.php:618 _tmp/index.php:628 index.php:618
 msgid "Anonymous access"
 msgstr ""
@@ -1643,7 +1775,7 @@ msgstr ""
 #: _build/index.php:252 _build/index.php:254 _site/index.php:640
 #: _site/index.php:720 _tmp/index.php:650 _tmp/index.php:730 index.php:640
 #: index.php:720
-msgid "Back"
+msgid "« Back"
 msgstr ""
 
 #: _build/index.php:252 _site/index.php:641 _tmp/index.php:651 index.php:641
