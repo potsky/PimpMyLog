@@ -2,7 +2,6 @@
 include_once 'global.inc.php';
 list( $badges , $files ) = config_load();
 
-sleep(2);
 /*
 |--------------------------------------------------------------------------
 | Login

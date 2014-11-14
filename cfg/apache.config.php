@@ -29,7 +29,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 		// Write a line of log and try to guess the format
 		$remain = 10;
 		$test   = 0;
-		error_log( __( 'Pimp my Log has been successfully configured with Apache' ) );
+		error_log( 'Pimp my Log has been successfully configured with Apache' );
 		foreach ( LogParser::getLinesFromBottom( $file , 10 ) as $line ) {
 			$test = @preg_match('|^\[(.*) (.*) (.*) (.*):(.*):(.*)\.(.*) (.*)\] \[(.*):(.*)\] \[pid (.*)\] .*\[client (.*):(.*)\] (.*)(, referer: (.*))*$|U', $line );
 			if ( $test === 1 ) {
