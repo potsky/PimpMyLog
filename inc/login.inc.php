@@ -52,11 +52,17 @@ load_default_constants();
 						echo __('You have been logged out');
 						echo '</div>';
 					}
+					else if ( $_SERVER['SERVER_NAME'] === 'demo.pimpmylog.com' ) {
+						echo '<br/>';
+						echo '<div class="alert alert-info">';
+						echo __('You can use %s as the username and %s as the password to test the demo account');
+						echo '</div>';
+						echo '<br/>';
+					}
 					?>
 					</div>
 				</div>
 			</div>
-
 			<h2><?php echo __("Please sign in");?></h2>
 			<br/>
 			<form method="POST" action="?">
