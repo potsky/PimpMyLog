@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.0 - ef1cb2d03be039b9d09972531533a10db20f8996*/
+/*! pimpmylog - 1.5.0 - 072cd6f78353bf62b33fccb2b9c3dd79eeedebf1*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -39,7 +39,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 		// Write a line of log and try to guess the format
 		$remain = 10;
 		$test   = 0;
-		error_log( __( 'Pimp my Log has been successfully configured with Apache' ) );
+		error_log( 'Pimp my Log has been successfully configured with Apache' );
 		foreach ( LogParser::getLinesFromBottom( $file , 10 ) as $line ) {
 			$test = @preg_match('|^\[(.*) (.*) (.*) (.*):(.*):(.*)\.(.*) (.*)\] \[(.*):(.*)\] \[pid (.*)\] .*\[client (.*):(.*)\] (.*)(, referer: (.*))*$|U', $line );
 			if ( $test === 1 ) {
