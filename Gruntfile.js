@@ -479,6 +479,15 @@ module.exports = function(grunt) {
 					stdout: true,
 					stderr: true
 				}
+			},
+			opensafari : {
+				command: [
+					'open "https://github.com/potsky/PimpMyLog/releases/new"'
+				].join(';'),
+				options: {
+					stdout: true,
+					stderr: true
+				}
 			}
 		},
 
@@ -640,9 +649,17 @@ module.exports = function(grunt) {
 				'shell:betagitremove',
 				'copy:installbeta',
 				'copy:installbetaREADME',
-				'shell:betagitaddcommitpush'
+				'shell:betagitaddcommitpush',
+				'shell:opensafari'
 			]);
 		}
+
+		grunt.log.ok('-----------------------------------------------------------------------');
+		grunt.log.ok('| CREATE A NEW RELEASE ON GITHUB TO LET PEOPLE DOWNLOAD THE ZIP FILE! |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('-----------------------------------------------------------------------');
 	});
 
 	// Installation task which install the _build folder in master , commit and push
@@ -660,15 +677,7 @@ module.exports = function(grunt) {
 				'copy:installmaster',
 				'copy:installmasterREADME',
 				'shell:mastergitaddcommitpush'
-			], function() {
-						grunt.log.ok('-----------------------------------------------------------------------');
-		grunt.log.ok('| CREATE A NEW RELEASE ON GITHUB TO LET PEOPLE DOWNLOAD THE ZIP FILE! |');
-		grunt.log.ok('|                                                                     |');
-		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
-		grunt.log.ok('|                                                                     |');
-		grunt.log.ok('-----------------------------------------------------------------------');
-
-			});
+			]);
 		}
 		else {
 			grunt.log.writeln('Installing in ' + master );
@@ -678,15 +687,7 @@ module.exports = function(grunt) {
 				'copy:installmaster',
 				'copy:installmasterREADME',
 				'shell:mastergitaddcommitpush'
-			], function() {
-						grunt.log.ok('-----------------------------------------------------------------------');
-		grunt.log.ok('| CREATE A NEW RELEASE ON GITHUB TO LET PEOPLE DOWNLOAD THE ZIP FILE! |');
-		grunt.log.ok('|                                                                     |');
-		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
-		grunt.log.ok('|                                                                     |');
-		grunt.log.ok('-----------------------------------------------------------------------');
-
-			});
+			]);
 		}
 	});
 
