@@ -55,7 +55,7 @@ load_default_constants();
 					else if ( $_SERVER['SERVER_NAME'] === 'demo.pimpmylog.com' ) {
 						echo '<br/>';
 						echo '<div class="alert alert-info">';
-						echo sprintf( __('You can use %s as the username and %s as the password to test the demo account') , 'demo' , 'pimpmylog' );
+						echo sprintf( __('You can use %s as the username and %s as the password to test the demo account') , '<code>demo</code>' , '<code>pimpmylog</code>' );
 						echo '</div>';
 						echo '<br/>';
 					}

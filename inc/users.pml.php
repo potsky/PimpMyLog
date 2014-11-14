@@ -117,8 +117,12 @@ switch ( @$_POST['action'] ) {
 		}
 
 		if ( $doit === true ) {
-			$return['ok'] = __( 'Password has been successfully changed!' );
-			Sentinel::changePassword( $username , $password2 );
+			if ( $_SERVER['SERVER_NAME'] === 'demo.pimpmylog.com' ) {
+				$return['ok'] = __( 'Password has been fakely changed on the demo!' );
+			} else {
+				$return['ok'] = __( 'Password has been successfully changed!' );
+				Sentinel::changePassword( $username , $password2 );
+			}
 		}
 		else {
 			$return['errors'] = $errors;
