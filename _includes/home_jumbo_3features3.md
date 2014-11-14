@@ -4,5 +4,6 @@
 - [:globe:] Translations ready (English, French and Portuges available now)
 - [:apple:] Runs on Linux, Mac OSX and Window servers with PHP 5.2+
 - [:code:] Open-source code
-- [:magic:] Lightweight code (full webapp weight is 800kb)
+- [:magic:] Lightweight code (full webapp weight is 700kb)
+- [:github:] Use as a webservice to provide remote secure log access
 

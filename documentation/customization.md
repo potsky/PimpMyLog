@@ -123,7 +123,7 @@ The current parsed log file ID is defined as a CSS classname so you can customiz
 
 When new logs are available, a thin left border is applied on their rows. The default color is *violet*:
 
-{% image /assets/ss/getting-started_screenshot_2.png class="img-responsive" alink="" atarget="" %}
+{% image /assets/ss/getstarted_desktopnotifications1.png class="img-responsive" alink="" atarget="" %}
 
 <a name="newlogs"></a>
 

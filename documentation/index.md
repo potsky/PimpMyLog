@@ -9,7 +9,7 @@ title: Usage
 
 Here is the main window of *Pimp My Log* :
 
-{% image /assets/ss/interface.png class="img-responsive" alink="" atarget="" %}
+{% image /assets/ss/getstarted_desktopnotifications2.png class="img-responsive" alink="" atarget="" %}
 
 We are going to take a tour of all features in the menu bar from left to right.
 

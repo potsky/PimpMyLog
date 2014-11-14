@@ -29,6 +29,8 @@ Do you want to contribute to add some amazing features and especially add new so
 
 Read how to contribute easily [here](/developer/).
 
+If you want to contribute to translations, go [here](https://poeditor.com/join/project?hash=b767ddcd3dcd545253717a12d3fabfa1).
+
 ---
 
 #### Licensing & Terms of use

@@ -61,8 +61,8 @@ You **must** backup your configuration files before updating:
 $ destination="/tmp/PimpMyLog-backup"
 $ mkdir -p $destination/{css,cfg}
 $ cd /var/www/html/PimpMyLog
-$ for file in config.user.json css/*.user.css cfg/*.user.php; do
-    cp $file $destination/$file
+$ for file in config.user.d config.user.json config.user.php css/*.user.css cfg/*.user.php; do
+    cp -rf $file $destination/$file
 done;
 ```
 
@@ -73,9 +73,13 @@ done;
 
 # 3 - First configuration
 
-At the first launch, if you have not configured manually *Pimp My Log*, the configurator will be displayed. In most of case, you will just have to click on *Ok* or *Next* buttons.
+At the first launch, if you have not configured manually *Pimp My Log*, the configurator will be displayed. In most of case, you will just have to click on *Ok* or *Continue* buttons.
 
-{% image /assets/ss/getting-started_autocfg_1.png class="img-responsive" alink="" atarget="" %}
+{% image /assets/ss/getstarted_install1.png class="img-responsive" alink="" atarget="" %}
+
+{% image /assets/ss/getstarted_install2.png class="img-responsive" alink="" atarget="" %}
+
+{% image /assets/ss/getstarted_install3.png class="img-responsive" alink="" atarget="" %}
 
 Click on the *Configure now* button.
 
@@ -100,7 +104,9 @@ Click on the *Configure now* button.
 
 <!-- -->
 
-{% image /assets/ss/getting-started_autocfg_2.png class="img-responsive" alink="" atarget="" %}
+{% image /assets/ss/getstarted_install4.png class="img-responsive" alink="" atarget="" %}
+
+{% image /assets/ss/getstarted_install5.png class="img-responsive" alink="" atarget="" %}
 
 The configurator will look for log files in common locations and will show you all log files found. They are all selected by default but you can select which files you want. If *Pimp My Log* cannot find log files while your are sure that there are in a common location:
 
@@ -115,9 +121,9 @@ You can also specify custom paths in textareas below for:
 - error logs
 - access logs
 
-Click on the *Next* button.
+Click on the *Continue* button.
 
-{% image /assets/ss/getting-started_autocfg_3.png class="img-responsive" alink="" atarget="" %}
+{% image /assets/ss/getstarted_install6.png class="img-responsive" alink="" atarget="" %}
 
 Got it! Your *Pimp My Log* instance is configured and ready to use. Click on the *Pimp my Logs now!* button.
 

@@ -17,9 +17,10 @@ The file is composed by these 3 objects:
 
 # 1 - Globals
 
-#### CHECK\_UPGRADE
-
+<a name="CHECK_UPGRADE"></a>
 <a name="checkupgrade"></a>
+
+#### CHECK\_UPGRADE
 
 Whether *Pimp My Log* should check for a new available version on launch or not. You should let this value to `true` given that the check is done in background and only downloads a few bytes.
 
@@ -38,9 +39,51 @@ Default:
 ---
 
 
-#### FILE\_SELECTOR
+<a name="AUTH_LOG_FILE_COUNT"></a>
 
+#### AUTH\_LOG\_FILE\_COUNT
+
+How many logs do an administrator want to display in the `Manage users > History` menu.
+
+> **Note**
+>  
+> Set this to `0` to stop logging user actions
+
+<!-- -->
+
+Default:
+
+```json
+"AUTH_LOG_FILE_COUNT" : 100
+```
+
+---
+
+<a name="EXPORT"></a>
+
+#### EXPORT
+
+Does the `EXPORT` button be displayed in the interface and are feeds (RSS, ATOM, XML, JSON, ...) be available ?
+
+Set `"EXPORT" : false` to disable export for all logs by default. If you want to enable the export feature for only one log, set the `export` (lowercase) parameter to true `"export" : true` in the **wanted file settings**.
+
+Set `"EXPORT" : true` to enable export for all logs by default. If you want to disable the export feature for only one log, set the `export` (lowercase) parameter to false `"export" : false` in the **wanted file settings**.
+
+Basically, the log file parameter `export` takes precedence on the global parameter `EXPORT`.
+
+Default:
+
+```json
+"EXPORT" : true
+```
+
+---
+
+
+<a name="FILE_SELECTOR"></a>
 <a name="fileselector"></a>
+
+#### FILE\_SELECTOR
 
 Tell how *Pimp My Log* must display the log file selector.
 
@@ -58,6 +101,8 @@ Default:
 ---
 
 
+<a name="FOOTER"></a>
+
 #### FOOTER
 
 This constant is the footer text in *HTML*.
@@ -70,6 +115,23 @@ Default:
 
 ---
 
+
+<a name="FORGOTTEN_YOUR_PASSWORD_URL"></a>
+
+#### FORGOTTEN\_YOUR\_PASSWORD\_URL
+
+You can set your own URL to provide a *lost password* page to users who have forgotten their password.
+
+Default:
+
+```json
+'FORGOTTEN_YOUR_PASSWORD_URL' : 'http:\/\/support.pimpmylog.com\/kb\/misc\/forgotten-your-password'
+```
+
+---
+
+<a name="GEOIP_URL"></a>
+
 #### GEOIP\_URL
 
 This constant is used to generate links for fields with type *ip* (see below). The url is used and the IP address will replace all `%p` instance.
@@ -81,6 +143,8 @@ Default:
 ```
 
 ---
+
+<a name="GOOGLE_ANALYTICS"></a>
 
 #### GOOGLE\_ANALYTICS
 
@@ -100,6 +164,8 @@ Default:
 
 ---
 
+<a name="LOCALE"></a>
+
 #### LOCALE
 
 You can set a default locale for all users. By default, this value is not set and the displayed language is the user browser one. 
@@ -109,6 +175,8 @@ If you set `"LOCALE" : "fr_FR"` for example, *Pimp My Log* will be in French by 
 Users can personally overwrite this value with a GET parameter when launching *Pimp My Log*. More informations are available [here](/documentation/index.html#languageselector).
 
 ---
+
+<a name="LOGS_MAX"></a>
 
 #### LOGS\_MAX
 
@@ -122,6 +190,8 @@ Default:
 
 --- 
 
+<a name="LOGS_REFRESH"></a>
+
 #### LOGS_REFRESH
 
 This is the frequency in seconds to refresh the logs for all log files. This value is overwritten by the `refresh` value of the `files` object. If set to `0`, auto-refresh is disabled and users will have to pull to refresh, click on the refresh button or stroke the key `R`.
@@ -134,9 +204,10 @@ Default:
 
 ---
 
-#### MAX\_SEARCH\_LOG\_TIME
-
+<a name="MAX_SEARCH_LOG_TIME"></a>
 <a name="max_search_log_time"></a>
+
+#### MAX\_SEARCH\_LOG\_TIME
 
 This is the maximum duration in seconds to search for logs in log files. *Pimp My Log* parses logs from the end to the beginning of log files and stop parsing log files when :
 
@@ -156,6 +227,8 @@ Default:
 
 ---
 
+<a name="NAV_TITLE"></a>
+
 #### NAV\_TITLE
 
 This is the text displayed in the navigation bar on top left. This text is hidden on devices which have a less than 768 pixels width.
@@ -167,6 +240,8 @@ Default:
 ```
 
 ---
+
+<a name="NOTIFICATION"></a>
 
 #### NOTIFICATION
 
@@ -189,6 +264,8 @@ Default:
 
 --- 
 
+<a name="NOTIFICATION_TITLE"></a>
+
 #### NOTIFICATION_TITLE
 
 The title of the desktop notification if enabled.
@@ -207,9 +284,10 @@ You can use this variable:
 
 ---
 
-#### PIMPMYLOG\_VERSION\_URL
-
+<a name="PIMPMYLOG_VERSION_URL"></a>
 <a name="pimpmylog_version_url"></a>
+
+#### PIMPMYLOG\_VERSION\_URL
 
 This is the url of the current version file in production. If you have installed the *beta* branch instead of the *master* one, install this constant and replace word *demo* by *beta* in the url. *Pimp my Log* will then check for beta upgrades instead of production upgrades.
 
@@ -227,6 +305,8 @@ To track beta versions:
 
 ---
 
+<a name="PULL_TO_REFRESH"></a>
+
 #### PULL\_TO\_REFRESH
 
 Whether a *pull to refresh* system is loaded or not to refresh logs. You can disable this feature if your browser always refresh logs as soon as you scroll in the window.
@@ -239,6 +319,30 @@ Default:
 
 ---
 
+<a name="SORT_LOG_FILES"></a>
+
+#### SORT\_LOG\_FILES
+
+How do you want to sort log files in the file selector on top keft ?
+
+Possible values are :
+
+- `default` : sort files as they are defined in the configuration file
+- `display-asc` : sort files ascendant by name (parameter `display` in configuration file)
+- `display-insensitive` : sort files ascendant by case insensitive name (parameter `display` in configuration file)
+- `display-asc` : sort files descendant by name (parameter `display` in configuration file)
+- `display-insensitive` : sort files descendant by case insensitive name (parameter `display` in configuration file)
+
+Default:
+
+```json
+"SORT_LOG_FILES" : "default"
+```
+
+---
+
+<a name="TITLE"></a>
+
 #### TITLE
 
 The HTML title of the *Pimp My Log* page when no file is loaded.
@@ -250,6 +354,8 @@ Default:
 ```
 
 ---
+
+<a name="TITLE_FILE"></a>
 
 #### TITLE\_FILE
 
@@ -282,30 +388,33 @@ Here is `config.user.d/httpd.json` for example :
 
 ```
 {
-    "apache1": {
-        "display" : "Apache Error #1",
-        "path"    : "\/var\/log\/apache2\/error.log",
-        "refresh" : 5,
-        "max"     : 10,
-        "notify"  : true,
-        "format"  : {
-            "type" : "HTTPD 2.2",
-            "regex": "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U",
-            "match": {
+    "apache1" : {
+        "display"   : "Apache Error #1",
+        "path"      : "\/var\/log\/apache2\/error.log",
+        "refresh"   : 5,
+        "max"       : 10,
+        "export"    : true,
+        "notify"    : true,
+        "multiline" : "",
+        "format"    : {
+            "export_title" : "Log",
+            "type"         : "HTTPD 2.2",
+            "regex"        : "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U",
+            "match"        : {
                 "Date"     : 1,
                 "IP"       : 4,
                 "Log"      : 5,
                 "Severity" : 2,
                 "Referer"  : 7
             },
-            "types": {
+            "types" : {
                 "Date"     : "date:H:i:s",
                 "IP"       : "ip:http",
                 "Log"      : "pre",
                 "Severity" : "badge:severity",
                 "Referer"  : "link"
             },
-            "exclude": {
+            "exclude" : {
                 "Log": ["\/PHP Stack trace:\/", "\/PHP *[0-9]*\\. \/"]
             }
         }
@@ -329,6 +438,8 @@ Default:
 ```
 
 ---
+
+<a name="USER_TIME_ZONE"></a>
 
 #### USER\_TIME\_ZONE
 
@@ -411,30 +522,36 @@ The `files` object is a dictionary of files (a `file` object). The key `fileid` 
 The `file` object structure is something like this:
 
 ```json
-"display" : "Apache Error #1",
-"path" : "\/opt\/local\/apache2\/logs\/error_log",
-"refresh" : 5,
-"max" : 10,
-"notify" : true,
-"format" : {
-    "multiline": "Log",
-    "regex": "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U",
-    "match": {
-        "Date" : 1,
-        "IP" : 4,
-        "Log" : 5,
+"display"   : "Apache Error #1",
+"path"      : "\/opt\/local\/apache2\/logs\/error_log",
+"refresh"   : 5,
+"max"       : 10,
+"notify"    : true,
+"export"    : true,
+"multiline" : "",
+"order"     : -1,
+"sort"      : "Log",
+"thinit"    : [ "IP" , "Log" , "Severity" ],
+"format"    : {
+    "multiline"    : "Log",
+    "export_title" : "Log",
+    "regex"        : "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U",
+    "match"        : {
+        "Date"     : 1,
+        "IP"       : 4,
+        "Log"      : 5,
         "Severity" : 2,
-        "Referer" : 7
+        "Referer"  : 7
     },
-    "types": {
-        "Date" : "date:H:i:s",
-        "IP" : "ip:http",
-        "Log" : "pre",
+    "types" : {
+        "Date"     : "date:H:i:s",
+        "IP"       : "ip:http",
+        "Log"      : "pre",
         "Severity" : "badge:severity",
-        "Referer" : "link"
+        "Referer"  : "link"
     },
-    "exclude": {
-            "Log": ["\/PHP Stack trace:\/", "\/PHP *[0-9]*\\. \/"]
+    "exclude" : {
+            "Log" : ["\/PHP Stack trace:\/", "\/PHP *[0-9]*\\. \/"]
     }
 }
 ```
@@ -455,6 +572,16 @@ Example:
 
 ```json
 "display" : "Apache Error #1"
+```
+
+#### export
+
+This boolean let you choose to enable the export for this log file only or not. This parameter takes precedence on the global parameter `EXPORT`.
+
+Example:
+
+```json
+"export" : true
 ```
 
 #### path
@@ -754,6 +881,17 @@ This is an error
 on several lines
 ```
 
+### 3.2.6 export_title
+
+Which field should be taken as a title when exporting to RSS and ATOM ?
+
+Example:
+
+```json
+"export_title": "Log"
+```
+
+In this example, the `Log` field will be used as the RSS and ATOM title in your feeds.
 
 ## 3.3 Types format
 

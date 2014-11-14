@@ -9,3 +9,4 @@
 - [:th-list:] Show/hide columns during runtime to improve readability
 - [:tag:] Mark lines during runtime to improve readability
 - [:chevron-down:] Sort lines and view new logs lines directly in list
+- [:save:] Export logs in various formats ( JSON, XML, CSV, RSS, ATOM, ...) and expose them as webservices
