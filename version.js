@@ -1,12 +1,18 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.5.0",
-	"versiondevh" : "531d66179111632e3c44421f46bb7c7c7aa08f7a",
+	"versiondevh" : "aa5ffcb4220fa31207f485c25f05af73a550cd1c",
 	"messages"    : {
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.5.1" : {
+			"released" : "2014-11-14",
+			"fixed" : [
+				"Configuration file split fixed"
+			]
+		},
 		"1.5.0" : {
 			"released" : "2014-11-13",
 			"new"      : [
