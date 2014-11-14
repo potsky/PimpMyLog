@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.0 - 072cd6f78353bf62b33fccb2b9c3dd79eeedebf1*/
+/*! pimpmylog - 1.5.0 - 531d66179111632e3c44421f46bb7c7c7aa08f7a*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -30,6 +30,13 @@ load_default_constants();
 						echo '<div class="alert alert-info">';
 						echo __('You have been logged out');
 						echo '</div>';
+					}
+					else if ( $_SERVER['SERVER_NAME'] === 'demo.pimpmylog.com' ) {
+						echo '<br/>';
+						echo '<div class="alert alert-info">';
+						echo sprintf( __('You can use %s as the username and %s as the password to test the demo account') , '<code>demo</code>' , '<code>pimpmylog</code>' );
+						echo '</div>';
+						echo '<br/>';
 					}
 					?></div></div></div><h2><?php echo __("Please sign in");?></h2><br><form method="POST" action="?"><div class="container"><div class="row"><div class="input-group col-sm-6 col-md-4"><span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span> <?php
 								$u  = ( strlen( "" . @$_POST['username'] ) > 0 ) ? htmlentities( $_POST['username'] , ENT_QUOTES , 'UTF-8' ) : '';
