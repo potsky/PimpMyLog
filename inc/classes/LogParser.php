@@ -390,8 +390,13 @@ class LogParser
                     $formatted_date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
                     $timestamp      = 0;
                 } else {
-                    $date = new DateTime();
-                    $date->setTimestamp( $timestamp );
+
+                    if ( version_compare( PHP_VERSION , '5.3.0' ) >= 0 ) {
+                        $date = new DateTime();
+                        $date->setTimestamp( $timestamp );
+                    } else {
+                        $date = new DateTime( "@" . $timestamp );
+                    }
                     if ( ! is_null( $tz ) ) {
                         $date->setTimezone( new DateTimeZone( $tz ) );
                     }

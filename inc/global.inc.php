@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.2 - e1adeefb3e037035916e83ef6691d24b47e1c284*/
+/*! pimpmylog - 1.5.2 - b97972ece5068196a49d5829a1c8d7c950c4fc21*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -40,6 +40,31 @@ if ( ! defined( 'PML_BASE' ) ) define( 'PML_BASE' , realpath( dirname( __FILE__ 
 |
 */
 if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
+
+
+/*
+|--------------------------------------------------------------------------
+| Disable magic quotes
+|--------------------------------------------------------------------------
+|
+| PHP 5.2 and 5.3 can have magic quotes enabled on the whole PHP install.
+|
+*/
+if (get_magic_quotes_gpc()) {
+    $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
+    while (list($key, $val) = each($process)) {
+        foreach ($val as $k => $v) {
+            unset($process[$key][$k]);
+            if (is_array($v)) {
+                $process[$key][stripslashes($k)] = $v;
+                $process[] = &$process[$key][stripslashes($k)];
+            } else {
+                $process[$key][stripslashes($k)] = stripslashes($v);
+            }
+        }
+    }
+    unset($process);
+}
 
 
 /*
@@ -103,7 +128,7 @@ define( 'DEFAULT_USER_CONFIGURATION_DIR'      , 'config.user.d' );
 | javascript locale used by numeralJS
 |
 */
-$tz_available     = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+$tz_available     = DateTimeZone::listIdentifiers();
 $locale_default   = 'en_GB';
 $locale_available = array(
     'en_GB' => 'English',
