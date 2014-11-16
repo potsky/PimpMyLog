@@ -414,6 +414,7 @@ $csrf = csrf_get();
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo h(  sprintf( __('You are currently connected as %s') , $current_user ) ); ?>">
 								<span class="glyphicon glyphicon-user"></span>
+								<span class="visible-xs-* visible-sm-* hidden-md hidden-lg"> <?php _h('User settings');?></span>
 							</a>
 							<ul class="dropdown-menu">
 								<?php if ( Sentinel::isAdmin() ) { ?>

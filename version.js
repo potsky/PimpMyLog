@@ -7,6 +7,15 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.5.2" : {
+			"released" : "2014-11-14",
+			"fixed" : [
+				"Add a text for the user menu when displayed on a mobile"
+			],
+			"changed" : [
+				"Display the export popup for ATOM and RSS to let users copy the link instead of opening it directly"
+			]
+		},
 		"1.5.1" : {
 			"released" : "2014-11-14",
 			"fixed" : [

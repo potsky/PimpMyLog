@@ -195,7 +195,7 @@ switch ( $format ) {
 		header('Content-type: application/javascript', true);
 		echo ( isset( $_GET['callback'] ) ) ? $_GET['callback'] : '?';
 		echo '(';
-		echo json_encode( $logs , JSON_PRETTY_PRINT );
+		echo json_encode( $logs );
 		echo ')';
 		break;
 

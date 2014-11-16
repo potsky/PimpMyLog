@@ -336,14 +336,14 @@ function config_load($load_user_configuration_dir = true)
         }
 
         if ( ! is_null( $dir ) ) {
-            $userfiles = new \RegexIterator(
-                new \RecursiveIteratorIterator(
-                    new \RecursiveDirectoryIterator( $dir , \RecursiveDirectoryIterator::SKIP_DOTS ),
-                    \RecursiveIteratorIterator::SELF_FIRST,
-                    \RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
+            $userfiles = new RegexIterator(
+                new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator( $dir , RecursiveDirectoryIterator::SKIP_DOTS ),
+                    RecursiveIteratorIterator::SELF_FIRST,
+                    RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
                     ),
                 '/^.+\.(json|php)$/i',
-                \RecursiveRegexIterator::GET_MATCH
+                RecursiveRegexIterator::GET_MATCH
             );
             foreach ($userfiles as $userfile) {
                 $filepath = realpath( $userfile[0] );

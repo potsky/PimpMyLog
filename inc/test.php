@@ -453,7 +453,11 @@ echo test( $type , $regex , $match , $types , $log );
 								<div class="panel-body">
 									<pre><?php
 										list( $badges , $files ) = config_load();
-										echo json_encode( $files , JSON_PRETTY_PRINT );
+										if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+											echo json_encode( $files , JSON_PRETTY_PRINT );
+										} else {
+											echo json_encode( $files );
+										}
 									?></pre>
 								</div>
 							</div>
