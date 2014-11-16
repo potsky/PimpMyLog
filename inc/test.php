@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.1 - d67c80b0be6898a9fe41ef332423ffb7298fc51a*/
+/*! pimpmylog - 1.5.2 - e1adeefb3e037035916e83ef6691d24b47e1c284*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -271,7 +271,11 @@ $log   = '::1 - - [27/Nov/2013:12:02:08 +0100] "OPTIONS * HTTP/1.0" 200 - "-" "A
 echo test( $type , $regex , $match , $types , $log );
 ?></div></div><div class="tab-pane" id="configurationtab"><div class="panel-body"><div class="panel-group" id="accordion2"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Code <code>config.user.json</code></a></h4></div><div id="collapseOne2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre><pre><?php if (file_exists('../config.user.php')) show_source('../config.user.php'); else echo 'file ../config.user.php does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">Stat <code>config.user.json</code></a></h4></div><div id="collapseTwo2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre><pre><?php if (file_exists('../config.user.php')) var_export( @stat('../config.user.php') ); else echo 'file ../config.user.php does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2">Generated files with includes</a></h4></div><div id="collapseFive2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
 										list( $badges , $files ) = config_load();
-										echo json_encode( $files , JSON_PRETTY_PRINT );
+										if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+											echo json_encode( $files , JSON_PRETTY_PRINT );
+										} else {
+											echo json_encode( $files );
+										}
 									?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2"><?php _e('Rights');?></a></h4></div><div id="collapseFour2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
 									if (function_exists('posix_getpwuid')) {
 										var_dump( @posix_getpwuid(posix_geteuid()) );

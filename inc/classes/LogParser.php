@@ -50,14 +50,17 @@ class LogParser
         |--------------------------------------------------------------------------
         |
         */
-        $filem = new DateTime( );
-        $filem->setTimestamp( filemtime( $file_path ) );
+        if ( version_compare( PHP_VERSION , '5.3.0' ) >= 0 ) {
+            $filem = new DateTime( );
+            $filem->setTimestamp( filemtime( $file_path ) );
+        } else {
+            $filem = new DateTime( "@" . filemtime( $file_path ) );
+        }
         if ( ! is_null( $tz ) ) {
             $filem->setTimezone( new DateTimeZone( $tz ) );
         }
-        $filemu = $filem->format( 'U' );
-        $filem  = $filem->format( 'Y/m/d H:i:s' );
-
+        $filemu   = $filem->format( 'U' );
+        $filem    = $filem->format( 'Y/m/d H:i:s' );
         $filesize = filesize( $file_path );
 
         /*
