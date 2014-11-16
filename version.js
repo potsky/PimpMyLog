@@ -10,7 +10,8 @@
 		"1.5.2" : {
 			"released" : "2014-11-14",
 			"fixed" : [
-				"Add a text for the user menu when displayed on a mobile"
+				"Add a text for the user menu when displayed on a mobile",
+				"Fix PHP 5.2 bugs"
 			],
 			"changed" : [
 				"Display the export popup for ATOM and RSS to let users copy the link instead of opening it directly"
