@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.2 - 283079d5c2afe2f4329b5721ffe6b7209a465e93*/
+/*! pimpmylog - 1.5.2 - 23e019f04db418dbcbf02116b46cee6e83dfcca1*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -9,10 +9,6 @@
  */
 ?><?php
 include_once 'inc/global.inc.php';
-
-ini_set('error_log', 'php.log');
-$a = 0/0;
-$b = file_get_contents();
 
 /*
 |--------------------------------------------------------------------------
