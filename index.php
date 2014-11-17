@@ -1,10 +1,6 @@
 <?php
 include_once 'inc/global.inc.php';
 
-ini_set('error_log', 'php.log');
-$a = 0/0;
-$b = file_get_contents();
-
 /*
 |--------------------------------------------------------------------------
 | Check PHP Version
