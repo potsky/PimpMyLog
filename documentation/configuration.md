@@ -756,7 +756,7 @@ You can deal with odd date format as in the following example by capturing :
 - `H` : 24-hour format of an hour with leading zeros *eg*:`00` through `23`
 - `i` : Minutes with leading zeros *eg*:`00` through `59`
 - `s` : Seconds with leading zeros *eg*:`00` through `59`
-- `z` : Time zone offset *eg*:`+0300`
+- `z` : Time zone offset *eg*:`+0300` or `Europe/Paris`
 
 > **Warning**  
 > 
