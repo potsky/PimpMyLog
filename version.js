@@ -16,7 +16,9 @@
 			"changed" : [
 				"Display the export popup for all formats to let users copy the link instead of opening it directly",
 				"Add an open button for all export formats",
-				"Display JSON pretty print also for PHP 5.3 and PHP 5.2",
+				"Display JSON pretty print also for PHP 5.2 and 5.3",
+				"Add a shortcut CTRL-R in the regex editor in the debugger to launch the test instead of clicking on the TEST button",
+				"Add loaders for possible long operations",
 				"Add log timezone support by default (<a href=\"http://support.pimpmylog.com/discussions/questions/33-date-with-timezone\" target=\"_blank\">more info</a>)"
 			]
 		},
