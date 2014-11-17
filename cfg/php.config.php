@@ -36,14 +36,14 @@ function php_get_config( $type , $file , $software , $counter ) {
 		"notify"  : true,
 		"format"    : {
 			"type"         : "PHP",
-			"regex"        : "@^\\\\[(.*)-(.*)-(.*) (.*):(.*):(.*) .*\\\\] ((PHP (.*):  (.*) in (.*) on line (.*))|(.*))\$@U",
+			"regex"        : "@^\\\\[(.*)-(.*)-(.*) (.*):(.*):(.*) (.*)\\\\] ((PHP (.*):  (.*) in (.*) on line (.*))|(.*))\$@U",
 			"export_title" : "Error",
 			"match"        : {
-				"Date"     : [ 2 , " " , 1 , " " , 4 , ":" , 5 , ":" , 6 , " " , 3 ],
-				"Severity" : 9,
-				"Error"    : [ 10 , 13 ],
-				"File"     : 11,
-				"Line"     : 12
+				"Date"     : [ 2 , " " , 1 , " " , 4 , ":" , 5 , ":" , 6 , " " , 3 , " " , 7 ],
+				"Severity" : 10,
+				"Error"    : [ 11 , 14 ],
+				"File"     : 12,
+				"Line"     : 13
 			},
 			"types"    : {
 				"Date"     : "date:H:i:s",

@@ -366,9 +366,9 @@ class LogParser
                         $newdate[ $k ] = @$out[ $v ][ 0 ];
                     }
                     if ( isset( $newdate['M'] ) ) {
-                        $str = $newdate['M'] . ' ' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . $newdate['Y'];
+                        $str = trim( $newdate['M'] . ' ' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . $newdate['Y'] . ' ' . @$newdate['z'] );
                     } elseif ( isset( $newdate['m'] ) ) {
-                        $str = $newdate['Y'] . '/' . $newdate['m'] . '/' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'];
+                        $str = trim( $newdate['Y'] . '/' . $newdate['m'] . '/' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . @$newdate['z'] );
                     }
                 }
                 // Date is an array description without keys ( 2 , ':' , 3 , '-' , ... )

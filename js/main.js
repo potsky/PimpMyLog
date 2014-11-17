@@ -72,12 +72,28 @@ var clipboard_enable = function( btn , ctn , where , text ) {
 	});
 };
 
+var refresh_rss = function() {
+	$('#exModalRefresh').button('loading');
+	$.ajax({
+		url      : $("#exModalUrl").text(),
+		dataType : 'text',
+		success  : function( a ) {
+			$('#exModalRefresh').button('reset');
+			$("#exModalCtn").text( a );
+		}
+	});
+};
+
 /**
  * Download the EXPORT feed
  *
  * @return  {boolean}  false
  */
 var get_rss = function( format ) {
+	$('#exModalResultLoading').show();
+	$('#exModalResult').hide();
+	$('#exModalRefresh').button('loading');
+
 	$.ajax( {
 		url      : 'inc/rss.pml.php?' + (new Date()).getTime() + '&' + querystring,
 		type     : 'POST',
@@ -112,20 +128,48 @@ var get_rss = function( format ) {
 			}
 			// Open in a new window
 			else {
-				$.ajax({
-					url      : re.url,
-					dataType : 'text',
-					success  : function( a ) {
-						$("#exModalCtn").text( a );
-					}
-				});
+
+				// No result preview
+				if ( re.met === 'nd' ) {
+					$('#exModalResultLoading').hide();
+					$('#exModalResult').hide();
+					$('#exModalRefresh').button('reset');
+				}
+				else {
+					// Load the preview
+					$.ajax({
+						url      : re.url,
+						dataType : 'text',
+						success  : function( a ) {
+							$("#exModalCtn").text( a );
+
+							$('#exModalResultLoading').hide();
+							$('#exModalResult').show();
+							$('#exModalRefresh').button('reset');
+
+						}
+					});
+				}
+
+				// Title name
+				$("#exModalFormat").text( format );
+
+				// Display the URL
 				$("#exModalUrl").text( re.url );
+
+				// Local address warning
 				if ( re.war === false ) {
 					$("#exModalWar").hide();
 				} else {
 					$("#exModalWar").show();
 				}
+
+				// Active the link
+				$("#exModalOpen").attr('href',re.url);
+
+				// Show the modal
 				$("#exModal").modal('show');
+
 			}
 
 		}

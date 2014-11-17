@@ -1,0 +1,3 @@
+[17-Nov-2014 12:50:56 Europe/Paris] PHP Warning:  Division by zero in /Users/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php on line 5
+[17-Nov-2014 12:51:18 Europe/Paris] PHP Warning:  Division by zero in /Users/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php on line 5
+[17-Nov-2014 12:51:18 Europe/Paris] PHP Warning:  file_get_contents() expects at least 1 parameter, 0 given in /Users/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php on line 16

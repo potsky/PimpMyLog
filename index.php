@@ -1,6 +1,9 @@
 <?php
 include_once 'inc/global.inc.php';
 
+ini_set('error_log', 'php.log');
+$a = 0/0;
+$b = file_get_contents();
 
 /*
 |--------------------------------------------------------------------------
@@ -476,9 +479,7 @@ $csrf = csrf_get();
 							<li><a href="#" onclick="get_rss('CSV')"><?php _e('CSV');?></a></li>
 							<li><a href="#" onclick="get_rss('JSON')"><?php _e('JSON');?></a></li>
 							<li><a href="#" onclick="get_rss('JSONP')"><?php _e('JSONP (with callback)');?></a></li>
-							<?php if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) { ?>
-								<li><a href="#" onclick="get_rss('JSONPR')"><?php _e('JSON Pretty Print');?></a></li>
-							<?php } ?>
+							<li><a href="#" onclick="get_rss('JSONPR')"><?php _e('JSON Pretty Print');?></a></li>
 							<li><a href="#" onclick="get_rss('RSS')"><?php _e('RSS');?></a></li>
 							<li><a href="#" onclick="get_rss('XML')"><?php _e('XML');?></a></li>
 						</ul>
@@ -506,13 +507,16 @@ $csrf = csrf_get();
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
-					<h4 class="modal-title" id="exModalLabel"><?php _e('Export');?></h4>
+					<h4 class="modal-title" id="exModalLabel"><?php _e('Export');?>&nbsp;<code id="exModalFormat"></code></h4>
 				</div>
 				<div class="modal-body">
 					<div class="alert alert-info" id="exModalWar"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;<?php _e('Your URL seems to be local so it won\'t be reachable by external browsers and services' );?></div>
-					<p><?php _e('You can call the following URL:'); ?></p>
+					<h3><?php _e('You can call the following URL:'); ?></h3>
 					<pre><code id="exModalUrl"></code></pre>
-					<a class="btn btn-xs btn-primary clipboardex"><?php _e('Copy to clipboard'); ?></a>
+					<div class="row">
+						<div class="col-xs-8"><a class="btn btn-xs btn-primary clipboardex"><?php _e('Copy to clipboard'); ?></a></div>
+						<div class="col-xs-4 text-right"><a class="btn btn-xs btn-primary" id="exModalOpen" target="_blank"><?php _e('Open'); ?></a></div>
+					</div>
 					<hr/>
 					<p><?php _e('Feel free to change these parameters in the URL:'); ?></p>
 					<ul>
@@ -524,10 +528,17 @@ $csrf = csrf_get();
 						<li><code>search</code>  : <?php _e('search this value in log lines. It can be a regular expression or a regex one');?></li>
 						<li><code>callback</code>: <?php _e('this field is optional and is used to specify a callback function when format is JSONP');?></li>
 					</ul>
-					<hr/>
-					<p><?php _e('Here is the current result:'); ?></p>
-					<pre><code id="exModalCtn"></code></pre>
-					<a class="btn btn-xs btn-primary clipboardexr"><?php _e('Copy to clipboard'); ?></a>
+
+					<div id="exModalResultLoading" style="display:none;"><img src="img/loader.gif"/></div>
+					<div id="exModalResult" style="display:none;">
+						<hr/>
+						<h3><?php _e('Current result'); ?></h3>
+						<pre style="height: auto; max-height: 200px; overflow: auto;"><code id="exModalCtn"></code></pre>
+						<div class="row">
+							<div class="col-xs-8" style="margin-top:0;"><a class="btn btn-xs btn-primary clipboardexr"><?php _e('Copy to clipboard'); ?></a></div>
+							<div class="col-xs-4 text-right"><button class="btn btn-xs btn-primary" id="exModalRefresh" data-loading-text="<?php _h('Refreshing...');?>" onClick="refresh_rss()"><?php _e('Refresh'); ?></button></div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>

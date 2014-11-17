@@ -11,10 +11,13 @@
 			"released" : "2014-11-14",
 			"fixed" : [
 				"Add a text for the user menu when displayed on a mobile",
-				"Fix PHP 5.2 bugs"
+				"Restore PHP 5.2 support (<a href=\"http://support.pimpmylog.com/discussions/problems/52-php-fatal-error-undefined-class-constant-all-in-incglobalincphp-on-line-106\" target=\"_blank\">more info</a> and <a href=\"http://support.pimpmylog.com/discussions/problems/54-php-warning-unexpected-character-in-input-ascii92-state1-in-incglobalincphp-on-line-3xx\" target=\"_blank\">here</a>)"
 			],
 			"changed" : [
-				"Display the export popup for ATOM and RSS to let users copy the link instead of opening it directly"
+				"Display the export popup for all formats to let users copy the link instead of opening it directly",
+				"Add an open button for all export formats",
+				"Display JSON pretty print also for PHP 5.3 and PHP 5.2",
+				"Add log timezone support by default (<a href=\"http://support.pimpmylog.com/discussions/questions/33-date-with-timezone\" target=\"_blank\">more info</a>)"
 			]
 		},
 		"1.5.1" : {

@@ -45,6 +45,8 @@ function test( $type , $regex , $match , $types , $logs , $headers = true , $mul
 			$r .= ( $headers ) ? '' : '<strong>' . $disp . $log . "</strong>\n";
 
 			foreach ( $tokens as $token => $value ) {
+				if ( substr( $token , 0 , 3 ) === 'pml' ) continue;
+
 				$r .= $blan . '<strong>' . str_pad( $token , $maxlength ) . '</strong>: ' . $value;
 
 				if ( $token === $multiline ) {
@@ -230,8 +232,8 @@ else {
 							<label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label>
 							<div class="col-sm-10">
 								<textarea class="form-control test" id="inputLog" placeholder="Log"><?php
-								echo '[27-11-2013:23:20:40 +0100] This is an error
-on several lines
+								echo '[27-11-2013:23:20:40 +0300] This is an error
+on several lines with timezone UTC+3
 [27-11-2013:23:20:41 +0100] Single line is cool too';
 								?></textarea>
 							</div>
@@ -240,7 +242,7 @@ on several lines
 							<label for="inputRegEx" class="col-sm-2 control-label"><?php _e('RegEx');?></label>
 							<div class="col-sm-10">
 								<textarea class="form-control test" id="inputRegEx" placeholder="RegEx"><?php
-									echo '|^\[(.*)-(.*)-(.*):(.*):(.*):(.*) .*\] (.*)$|U';
+									echo '|^\[(.*)-(.*)-(.*):(.*):(.*):(.*) (.*)\] (.*)$|U';
 								?></textarea>
 							</div>
 						</div>
@@ -256,12 +258,13 @@ on several lines
 										'H' => 4,
 										'i' => 5,
 										's' => 6,
+										'z' => 7,
 									 ),
-									'Error' => 7,
+									'Error' => 8,
 								);
 								$match = array(
-									'Date'  => array( 3 , '/' , 2 , '/' , 1 , ' ' , 4 , ':' , 5, ':' , 6 ),
-									'Error' => 7,
+									'Date'  => array( 3 , '/' , 2 , '/' , 1 , ' ' , 4 , ':' , 5, ':' , 6 , ' ' , 7 ),
+									'Error' => 8,
 								);
 								echo json_indent( json_encode($match))
 								?></textarea>
@@ -287,7 +290,7 @@ on several lines
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-success"><?php _e('Test');?></button>
+								<button type="submit" class="btn btn-success" title="<?php _h('Use CTRL-R shortcut instead of clicking on this button');?>" data-loading-text="<?php _h('Loading...');?>" id="regexTestertestBtn"><?php _e('Test');?></button>
 								&nbsp;
 								<a class="btn btn-primary clipboard"><?php _e('Copy to clipboard');?></a>
 							</div>
@@ -456,7 +459,7 @@ echo test( $type , $regex , $match , $types , $log );
 										if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
 											echo json_encode( $files , JSON_PRETTY_PRINT );
 										} else {
-											echo json_encode( $files );
+											echo json_indent( json_encode( $logs ) );
 										}
 									?></pre>
 								</div>

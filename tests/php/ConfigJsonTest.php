@@ -46,6 +46,9 @@ class ConfigJsonTest extends TestCase {
 
     public function test_Json_Config_With_Files()
     {
+        // HHVM include bug https://github.com/facebook/hhvm/issues/1447
+        if (defined('HHVM_VERSION')) return;
+
         copy( PHPMOCKUP . '/config_3files.user.json' , PSKBASE . '/' . CONFIG_FILE_NAME_BEFORE_1_5_0 );
 
         $this->assertStringEndsWith( CONFIG_FILE_NAME_BEFORE_1_5_0 , get_config_file_path() );
@@ -63,6 +66,9 @@ class ConfigJsonTest extends TestCase {
 
     public function test_Json_Config_Empty_Files_With_Userdir_Files()
     {
+        // HHVM include bug https://github.com/facebook/hhvm/issues/1447
+        if (defined('HHVM_VERSION')) return;
+
         copy( PHPMOCKUP . '/config_nofiles.user.json' , PSKBASE . '/' . CONFIG_FILE_NAME_BEFORE_1_5_0 );
         self::unlinkRecursive( PSKBASE . '/' . USER_CONFIGURATION_DIR );
         self::copyDir( PHPMOCKUP . '/config.user.d' , PSKBASE . '/' . USER_CONFIGURATION_DIR );
@@ -81,6 +87,9 @@ class ConfigJsonTest extends TestCase {
 
     public function test_Json_Config_With_Files_With_Userdir_Files()
     {
+        // HHVM include bug https://github.com/facebook/hhvm/issues/1447
+        if (defined('HHVM_VERSION')) return;
+
         copy( PHPMOCKUP . '/config_3files.user.json' , PSKBASE . '/' . CONFIG_FILE_NAME_BEFORE_1_5_0 );
         self::unlinkRecursive( PSKBASE . '/' . USER_CONFIGURATION_DIR );
         self::copyDir( PHPMOCKUP . '/config.user.d' , PSKBASE . '/' . USER_CONFIGURATION_DIR );

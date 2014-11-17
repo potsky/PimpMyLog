@@ -39,6 +39,7 @@ if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
 |--------------------------------------------------------------------------
 |
 | PHP 5.2 and 5.3 can have magic quotes enabled on the whole PHP install.
+| http://support.pimpmylog.com/discussions/problems/56-regex-tester-match-is-not-a-valid-associative-array
 |
 */
 if (get_magic_quotes_gpc()) {
@@ -1027,7 +1028,9 @@ if ( function_exists( 'bindtextdomain' ) ) {
     putenv( 'LANGUAGE=' . $locale );
 
     if ( ( ! isset( $_COOKIE['pmllocale'] ) ) || (  $_COOKIE['pmllocale'] !== $locale ) ) {
-        setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 , '/' );
+        if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
+            setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 , '/' );
+        }
     }
 
     if ($lang == 'fr') {

@@ -102,10 +102,10 @@ switch ( @$_POST['action'] ) {
 					array( 'feed://' , 'feed://'  ),
 					$url
 				);
-				$method = 'if';
+				$method = 'nd';
 				break;
 			case 'CSV':
-				$method = 'if';
+				$method = 'nd';
 				break;
 			default:
 				$method = 'nw';

@@ -50,6 +50,7 @@ else if ( ( isset( $_GET['t'] ) ) && ( ! isset( $_GET['h'] ) ) ) {
 }
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Load config
@@ -188,7 +189,11 @@ switch ( $format ) {
 
 	case 'JSONPR':
 		header('Content-type: application/json', true);
-		echo json_encode( $logs , JSON_PRETTY_PRINT );
+		if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+			echo json_encode( $logs , JSON_PRETTY_PRINT );
+		} else {
+			echo json_indent( json_encode( $logs ) );
+		}
 		break;
 
 	case 'JSONP':

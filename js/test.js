@@ -1,15 +1,26 @@
 $(function() {
 	"use strict";
 
+	// Ctrl-R to Test a regex
+	$(document).keypress( function(e) {
+		if ( ( e.which == 114 ) || ( e.which == 18 ) ) {
+			if ( e.ctrlKey ) {
+				if ( document.location.hash === '#retestertab' ) {
+					$('#regextest').submit();
+				}
+			}
+		}
+	});
+
 	// Logo click
 	$('.logo').click(function() {
-		location.reload();
+		document.location.href = '..';
 	});
 
 	$('table').addClass('table table-striped table-bordered table-hover table-condensed');
 
 	$('#regextest').submit( function( event ) {
-
+		$('#regexTestertestBtn').button('loading');
 		$.ajax( {
 			url  : 'test.php' ,
 			type : 'POST',
@@ -24,10 +35,11 @@ $(function() {
 			dataType: 'json'
 		} )
 		.fail( function ( d , e , f ) {
+			$('#regexTestertestBtn').button('reset');
 			$( "#regexresult" ).html( f.message );
 		})
 		.done( function ( d ) {
-
+			$('#regexTestertestBtn').button('reset');
 			$( "#regexresult" ).html( d.msg );
 			$( '.form-group' ).removeClass( 'has-error' );
 			if ( d.err ) {
