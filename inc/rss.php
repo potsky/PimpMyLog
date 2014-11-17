@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.2 - b97972ece5068196a49d5829a1c8d7c950c4fc21*/
+/*! pimpmylog - 1.5.2 - 283079d5c2afe2f4329b5721ffe6b7209a465e93*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -57,6 +57,7 @@ else if ( ( ! isset( $_GET['t'] ) ) && ( isset( $_GET['h'] ) ) ) {
 else if ( ( isset( $_GET['t'] ) ) && ( ! isset( $_GET['h'] ) ) ) {
 	http404();
 }
+
 
 
 /*
@@ -188,4 +189,4 @@ switch ( $format ) {
 
 	case 'XML':
 		header('Content-type: application/xml', true);
-		$xml = '<?xml version="1.0" encoding="UTF-8" ?>'; $xml .= '<pml>'; $xml .= generate_xml_from_array( $logs , 'log' ); $xml .= '</pml>'; echo $xml; break; case 'JSONPR': header('Content-type: application/json', true); echo json_encode( $logs , JSON_PRETTY_PRINT ); break; case 'JSONP': header('Content-type: application/javascript', true); echo ( isset( $_GET['callback'] ) ) ? $_GET['callback'] : '?'; echo '('; echo json_encode( $logs ); echo ')'; break; case 'JSON': default: header('Content-type: application/json', true); echo json_encode( $logs ); break; } ?>
+		$xml = '<?xml version="1.0" encoding="UTF-8" ?>'; $xml .= '<pml>'; $xml .= generate_xml_from_array( $logs , 'log' ); $xml .= '</pml>'; echo $xml; break; case 'JSONPR': header('Content-type: application/json', true); if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) { echo json_encode( $logs , JSON_PRETTY_PRINT ); } else { echo json_indent( json_encode( $logs ) ); } break; case 'JSONP': header('Content-type: application/javascript', true); echo ( isset( $_GET['callback'] ) ) ? $_GET['callback'] : '?'; echo '('; echo json_encode( $logs ); echo ')'; break; case 'JSON': default: header('Content-type: application/json', true); echo json_encode( $logs ); break; } ?>

@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.2 - b97972ece5068196a49d5829a1c8d7c950c4fc21*/
+/*! pimpmylog - 1.5.2 - 283079d5c2afe2f4329b5721ffe6b7209a465e93*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -48,6 +48,7 @@ if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
 |--------------------------------------------------------------------------
 |
 | PHP 5.2 and 5.3 can have magic quotes enabled on the whole PHP install.
+| http://support.pimpmylog.com/discussions/problems/56-regex-tester-match-is-not-a-valid-associative-array
 |
 */
 if (get_magic_quotes_gpc()) {
@@ -1036,7 +1037,9 @@ if ( function_exists( 'bindtextdomain' ) ) {
     putenv( 'LANGUAGE=' . $locale );
 
     if ( ( ! isset( $_COOKIE['pmllocale'] ) ) || (  $_COOKIE['pmllocale'] !== $locale ) ) {
-        setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 , '/' );
+        if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
+            setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 , '/' );
+        }
     }
 
     if ($lang == 'fr') {
