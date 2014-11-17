@@ -50,14 +50,17 @@ class LogParser
         |--------------------------------------------------------------------------
         |
         */
-        $filem = new DateTime( );
-        $filem->setTimestamp( filemtime( $file_path ) );
+        if ( version_compare( PHP_VERSION , '5.3.0' ) >= 0 ) {
+            $filem = new DateTime( );
+            $filem->setTimestamp( filemtime( $file_path ) );
+        } else {
+            $filem = new DateTime( "@" . filemtime( $file_path ) );
+        }
         if ( ! is_null( $tz ) ) {
             $filem->setTimezone( new DateTimeZone( $tz ) );
         }
-        $filemu = $filem->format( 'U' );
-        $filem  = $filem->format( 'Y/m/d H:i:s' );
-
+        $filemu   = $filem->format( 'U' );
+        $filem    = $filem->format( 'Y/m/d H:i:s' );
         $filesize = filesize( $file_path );
 
         /*
@@ -363,9 +366,9 @@ class LogParser
                         $newdate[ $k ] = @$out[ $v ][ 0 ];
                     }
                     if ( isset( $newdate['M'] ) ) {
-                        $str = $newdate['M'] . ' ' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . $newdate['Y'];
+                        $str = trim( $newdate['M'] . ' ' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . $newdate['Y'] . ' ' . @$newdate['z'] );
                     } elseif ( isset( $newdate['m'] ) ) {
-                        $str = $newdate['Y'] . '/' . $newdate['m'] . '/' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'];
+                        $str = trim( $newdate['Y'] . '/' . $newdate['m'] . '/' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . @$newdate['z'] );
                     }
                 }
                 // Date is an array description without keys ( 2 , ':' , 3 , '-' , ... )
@@ -387,8 +390,13 @@ class LogParser
                     $formatted_date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
                     $timestamp      = 0;
                 } else {
-                    $date = new DateTime();
-                    $date->setTimestamp( $timestamp );
+
+                    if ( version_compare( PHP_VERSION , '5.3.0' ) >= 0 ) {
+                        $date = new DateTime();
+                        $date->setTimestamp( $timestamp );
+                    } else {
+                        $date = new DateTime( "@" . $timestamp );
+                    }
                     if ( ! is_null( $tz ) ) {
                         $date->setTimezone( new DateTimeZone( $tz ) );
                     }

@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.1 - d67c80b0be6898a9fe41ef332423ffb7298fc51a*/
+/*! pimpmylog - 1.5.2 - 1dfb21c461d8d5cee99d4655ff7d07d9a18316d8*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -40,6 +40,32 @@ if ( ! defined( 'PML_BASE' ) ) define( 'PML_BASE' , realpath( dirname( __FILE__ 
 |
 */
 if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
+
+
+/*
+|--------------------------------------------------------------------------
+| Disable magic quotes
+|--------------------------------------------------------------------------
+|
+| PHP 5.2 and 5.3 can have magic quotes enabled on the whole PHP install.
+| http://support.pimpmylog.com/discussions/problems/56-regex-tester-match-is-not-a-valid-associative-array
+|
+*/
+if (get_magic_quotes_gpc()) {
+    $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
+    while (list($key, $val) = each($process)) {
+        foreach ($val as $k => $v) {
+            unset($process[$key][$k]);
+            if (is_array($v)) {
+                $process[$key][stripslashes($k)] = $v;
+                $process[] = &$process[$key][stripslashes($k)];
+            } else {
+                $process[$key][stripslashes($k)] = stripslashes($v);
+            }
+        }
+    }
+    unset($process);
+}
 
 
 /*
@@ -103,7 +129,7 @@ define( 'DEFAULT_USER_CONFIGURATION_DIR'      , 'config.user.d' );
 | javascript locale used by numeralJS
 |
 */
-$tz_available     = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+$tz_available     = DateTimeZone::listIdentifiers();
 $locale_default   = 'en_GB';
 $locale_available = array(
     'en_GB' => 'English',
@@ -345,14 +371,14 @@ function config_load($load_user_configuration_dir = true)
         }
 
         if ( ! is_null( $dir ) ) {
-            $userfiles = new \RegexIterator(
-                new \RecursiveIteratorIterator(
-                    new \RecursiveDirectoryIterator( $dir , \RecursiveDirectoryIterator::SKIP_DOTS ),
-                    \RecursiveIteratorIterator::SELF_FIRST,
-                    \RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
+            $userfiles = new RegexIterator(
+                new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator( $dir , RecursiveDirectoryIterator::SKIP_DOTS ),
+                    RecursiveIteratorIterator::SELF_FIRST,
+                    RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
                     ),
                 '/^.+\.(json|php)$/i',
-                \RecursiveRegexIterator::GET_MATCH
+                RecursiveRegexIterator::GET_MATCH
             );
             foreach ($userfiles as $userfile) {
                 $filepath = realpath( $userfile[0] );
@@ -1011,7 +1037,9 @@ if ( function_exists( 'bindtextdomain' ) ) {
     putenv( 'LANGUAGE=' . $locale );
 
     if ( ( ! isset( $_COOKIE['pmllocale'] ) ) || (  $_COOKIE['pmllocale'] !== $locale ) ) {
-        setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 , '/' );
+        if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
+            setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 , '/' );
+        }
     }
 
     if ($lang == 'fr') {

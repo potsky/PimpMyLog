@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.1 - d67c80b0be6898a9fe41ef332423ffb7298fc51a*/
+/*! pimpmylog - 1.5.2 - 1dfb21c461d8d5cee99d4655ff7d07d9a18316d8*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -54,6 +54,8 @@ function test( $type , $regex , $match , $types , $logs , $headers = true , $mul
 			$r .= ( $headers ) ? '' : '<strong>' . $disp . $log . "</strong>\n";
 
 			foreach ( $tokens as $token => $value ) {
+				if ( substr( $token , 0 , 3 ) === 'pml' ) continue;
+
 				$r .= $blan . '<strong>' . str_pad( $token , $maxlength ) . '</strong>: ' . $value;
 
 				if ( $token === $multiline ) {
@@ -151,11 +153,11 @@ if ( ! file_exists( $access_file ) ) {
 }
 else {
 ?><ul class="nav nav-tabs" role="tablist"><li class="active"><a href="#quittab" role="tab" data-toggle="tab"><?php _e('Quit');?></a></li><li><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li><li><a href="#resamplestab" role="tab" data-toggle="tab"><?php _e('Regex samples');?></a></li><li><a href="#configurationtab" role="tab" data-toggle="tab"><?php _e('Configuration');?></a></li><li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Password recovery');?></a></li><li><a href="#authactivation" role="tab" data-toggle="tab"><?php _e('Authentication');?></a></li></ul><div class="tab-content"><div class="tab-pane active" id="quittab"><br><div class="row"><div class="col-xs-12"><div class="alert alert-warning"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div></div><br><br><div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . '/' . $access_file . '\''; ?></pre></div><?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard3content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?></div></div><div class="tab-pane" id="retestertab"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
-								echo '[27-11-2013:23:20:40 +0100] This is an error
-on several lines
+								echo '[27-11-2013:23:20:40 +0300] This is an error
+on several lines with timezone UTC+3
 [27-11-2013:23:20:41 +0100] Single line is cool too';
 								?></textarea></div></div><div class="form-group" id="GPinputRegEx"><label for="inputRegEx" class="col-sm-2 control-label"><?php _e('RegEx');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputRegEx" placeholder="RegEx"><?php
-									echo '|^\[(.*)-(.*)-(.*):(.*):(.*):(.*) .*\] (.*)$|U';
+									echo '|^\[(.*)-(.*)-(.*):(.*):(.*):(.*) (.*)\] (.*)$|U';
 								?></textarea></div></div><div class="form-group" id="GPinputMatch"><label for="inputMatch" class="col-sm-2 control-label"><?php _e('Match');?><br><small><?php _e('must be json encoded');?></small></label><div class="col-sm-10"><textarea class="form-control test" id="inputMatch" placeholder="Match" rows="5"><?php
 								$match = array(
 									'Date'  => array(
@@ -165,12 +167,13 @@ on several lines
 										'H' => 4,
 										'i' => 5,
 										's' => 6,
+										'z' => 7,
 									 ),
-									'Error' => 7,
+									'Error' => 8,
 								);
 								$match = array(
-									'Date'  => array( 3 , '/' , 2 , '/' , 1 , ' ' , 4 , ':' , 5, ':' , 6 ),
-									'Error' => 7,
+									'Date'  => array( 3 , '/' , 2 , '/' , 1 , ' ' , 4 , ':' , 5, ':' , 6 , ' ' , 7 ),
+									'Error' => 8,
 								);
 								echo json_indent( json_encode($match))
 								?></textarea></div></div><div class="form-group" id="GPinputTypes"><label for="inputTypes" class="col-sm-2 control-label"><?php _e('Types');?><br><small><?php _e('must be json encoded');?></small></label><div class="col-sm-10"><textarea class="form-control test" id="inputTypes" placeholder="Types" rows="5"><?php
@@ -179,7 +182,7 @@ on several lines
 									'Error' => 'txt',
 								);
 								echo json_indent( json_encode($types))
-								?></textarea></div></div><div class="form-group" id="GPinputMultiline"><label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label><div class="col-sm-10"><input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-success"><?php _e('Test');?></button> &nbsp; <a class="btn btn-primary clipboard"><?php _e('Copy to clipboard');?></a></div></div><div id="regexresult"></div></form></div></div><div class="tab-pane" id="resamplestab"><div class="panel-body"><?php
+								?></textarea></div></div><div class="form-group" id="GPinputMultiline"><label for="inputMultiline" class="col-sm-2 control-label"><?php _e('Multiline');?></label><div class="col-sm-10"><input class="form-control test" id="inputMultiline" placeholder="Multiline" value="Error"></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-success" title="<?php _h('Use CTRL-R shortcut instead of clicking on this button');?>" data-loading-text="<?php _h('Loading...');?>" id="regexTestertestBtn"><?php _e('Test');?></button> &nbsp; <a class="btn btn-primary clipboard"><?php _e('Copy to clipboard');?></a></div></div><div id="regexresult"></div></form></div></div><div class="tab-pane" id="resamplestab"><div class="panel-body"><?php
 $type  = 'Error Apache 2.2 with referer';
 $log   = '[Wed Nov 27 09:30:11 2013] [error] [client 127.0.0.1] PHP   1. {main}() /Users/potsky/Private/Work/GitHub/PHPApacheLogViewer/inc/get_logs.php:0, referer: http://localhost/~potsky/PHPApacheLogViewer/';
 $regex = '|^\[(.*)\] \[(.*)\] (\[client (.*)\] )*((?!\[client ).*)(, referer: (.*))*$|U';
@@ -271,7 +274,11 @@ $log   = '::1 - - [27/Nov/2013:12:02:08 +0100] "OPTIONS * HTTP/1.0" 200 - "-" "A
 echo test( $type , $regex , $match , $types , $log );
 ?></div></div><div class="tab-pane" id="configurationtab"><div class="panel-body"><div class="panel-group" id="accordion2"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Code <code>config.user.json</code></a></h4></div><div id="collapseOne2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre><pre><?php if (file_exists('../config.user.php')) show_source('../config.user.php'); else echo 'file ../config.user.php does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">Stat <code>config.user.json</code></a></h4></div><div id="collapseTwo2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre><pre><?php if (file_exists('../config.user.php')) var_export( @stat('../config.user.php') ); else echo 'file ../config.user.php does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2">Generated files with includes</a></h4></div><div id="collapseFive2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
 										list( $badges , $files ) = config_load();
-										echo json_encode( $files , JSON_PRETTY_PRINT );
+										if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+											echo json_encode( $files , JSON_PRETTY_PRINT );
+										} else {
+											echo json_indent( json_encode( $logs ) );
+										}
 									?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2"><?php _e('Rights');?></a></h4></div><div id="collapseFour2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
 									if (function_exists('posix_getpwuid')) {
 										var_dump( @posix_getpwuid(posix_geteuid()) );

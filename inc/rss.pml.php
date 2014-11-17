@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.1 - d67c80b0be6898a9fe41ef332423ffb7298fc51a*/
+/*! pimpmylog - 1.5.2 - 1dfb21c461d8d5cee99d4655ff7d07d9a18316d8*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -111,10 +111,10 @@ switch ( @$_POST['action'] ) {
 					array( 'feed://' , 'feed://'  ),
 					$url
 				);
-				$method = 'if';
+				$method = 'nd';
 				break;
 			case 'CSV':
-				$method = 'if';
+				$method = 'nd';
 				break;
 			default:
 				$method = 'nw';
