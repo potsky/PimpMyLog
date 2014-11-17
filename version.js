@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
 	"version"     : "1.5.2",
-	"versiondevh" : "1799741f2b99a3c6723acc0499d03d5aa063b87d",
+	"versiondevh" : "38c9e1d5bd699ae0b29dd9294e68d3f5542b17b1",
 	"messages"    : {
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
@@ -16,7 +16,9 @@
 			"changed" : [
 				"Display the export popup for all formats to let users copy the link instead of opening it directly",
 				"Add an open button for all export formats",
-				"Display JSON pretty print also for PHP 5.3 and PHP 5.2",
+				"Display JSON pretty print also for PHP 5.2 and 5.3",
+				"Add a shortcut CTRL-R in the regex editor in the debugger to launch the test instead of clicking on the TEST button",
+				"Add loaders for possible long operations",
 				"Add log timezone support by default (<a href=\"http://support.pimpmylog.com/discussions/questions/33-date-with-timezone\" target=\"_blank\">more info</a>)"
 			]
 		},
