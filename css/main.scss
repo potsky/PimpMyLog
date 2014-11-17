@@ -18,6 +18,7 @@ $navbar-inverse-link-active-bg    : darken($navbar-inverse-bg, 10%);
 $navbar-inverse-brand-color       : $navbar-inverse-link-color;
 $font-family-sans-serif           : 'ubuntulight', "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-monospace            : 'ubuntu_monoregular', Menlo, Monaco, Consolas, "Courier New", monospace;
+$blockquote-font-size             : $font-size-base;
 
 @font-face {
     font-family: 'ubuntu_monoregular';

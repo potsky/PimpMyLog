@@ -506,25 +506,26 @@ $csrf = csrf_get();
 					<h4 class="modal-title" id="exModalLabel"><?php _e('Export');?>&nbsp;<code id="exModalFormat"></code></h4>
 				</div>
 				<div class="modal-body">
+					<h3><?php _e('Webservice URL'); ?></h3>
 					<div class="alert alert-info" id="exModalWar"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;<?php _e('Your URL seems to be local so it won\'t be reachable by external browsers and services' );?></div>
-					<h3><?php _e('You can call the following URL:'); ?></h3>
 					<pre><code id="exModalUrl"></code></pre>
 					<div class="row">
 						<div class="col-xs-8"><a class="btn btn-xs btn-primary clipboardex"><?php _e('Copy to clipboard'); ?></a></div>
 						<div class="col-xs-4 text-right"><a class="btn btn-xs btn-primary" id="exModalOpen" target="_blank"><?php _e('Open'); ?></a></div>
 					</div>
-					<hr/>
-					<p><?php _e('Feel free to change these parameters in the URL:'); ?></p>
-					<ul>
-						<li><code>l</code>       : <?php _e('language');?></li>
-						<li><code>tz</code>      : <?php _e('timezone to convert dates');?></li>
-						<li><code>format</code>  : <?php _e('available formats are CSV, JSON, JSONPR and XML');?></li>
-						<li><code>count</code>   : <?php _e('the maximum count of returned log lines');?></li>
-						<li><code>timeout</code> : <?php _e('the timeout in seconds to return log lines. Increase this value for big counts or when using search');?></li>
-						<li><code>search</code>  : <?php _e('search this value in log lines. It can be a regular expression or a regex one');?></li>
-						<li><code>callback</code>: <?php _e('this field is optional and is used to specify a callback function when format is JSONP');?></li>
-					</ul>
-
+					<br/>
+					<blockquote>
+						<p><?php _e('Feel free to change these parameters in the URL:'); ?></p>
+						<ul>
+							<li><code>l</code>       : <?php _e('language');?></li>
+							<li><code>tz</code>      : <?php _e('timezone to convert dates');?></li>
+							<li><code>format</code>  : <?php _e('available formats are CSV, JSON, JSONPR and XML');?></li>
+							<li><code>count</code>   : <?php _e('the maximum count of returned log lines');?></li>
+							<li><code>timeout</code> : <?php _e('the timeout in seconds to return log lines. Increase this value for big counts or when using search');?></li>
+							<li><code>search</code>  : <?php _e('search this value in log lines. It can be a regular expression or a regex one');?></li>
+							<li><code>callback</code>: <?php _e('this field is optional and is used to specify a callback function when format is JSONP');?></li>
+						</ul>
+					</blockquote>
 					<div id="exModalResultLoading" style="display:none;"><img src="img/loader.gif"/></div>
 					<div id="exModalResult" style="display:none;">
 						<hr/>
@@ -532,7 +533,7 @@ $csrf = csrf_get();
 						<pre style="height: auto; max-height: 200px; overflow: auto;"><code id="exModalCtn"></code></pre>
 						<div class="row">
 							<div class="col-xs-8" style="margin-top:0;"><a class="btn btn-xs btn-primary clipboardexr"><?php _e('Copy to clipboard'); ?></a></div>
-							<div class="col-xs-4 text-right"><button class="btn btn-xs btn-primary" id="exModalRefresh" data-loading-text="<?php _h('Refreshing...');?>" onClick="refresh_rss()"><?php _e('Refresh'); ?></button></div>
+							<div class="col-xs-4 text-right"><button class="btn btn-xs btn-primary" id="exModalRefresh" data-loading-text="<?php _h('Loading...');?>" onClick="refresh_rss()"><?php _e('Refresh'); ?></button></div>
 						</div>
 					</div>
 				</div>
