@@ -34,12 +34,15 @@ if ( isset( $_POST['action'] ) ) {
 			die();
 			break;
 	}
-
-
 }
 
 
-
+/*
+|--------------------------------------------------------------------------
+| Let's go
+|--------------------------------------------------------------------------
+|
+*/
 $upgrade = array(
 	'footer'     => '',
 	'alert'      => '',
@@ -255,7 +258,7 @@ try {
 				$upgrade['alert'] .= 	'<br/>';
 				$upgrade['alert'] .= 	'<div class="row">';
 				$upgrade['alert'] .= 		'<div class="col-xs-6 text-left">';
-				$upgrade['alert'] .= 			'<button id="upgradegitpull" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;' . __("Upgrade now") . '</button>';
+				$upgrade['alert'] .= 			'<button id="upgradegitpull" data-loading-text="' . h( __('Upgrading...') ) . '" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;' . __("Upgrade now") . '</button>';
 				$upgrade['alert'] .= 		'</div>';
 				$upgrade['alert'] .= 		'<div class="col-xs-6 text-right">';
 				$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
