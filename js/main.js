@@ -1331,7 +1331,6 @@ $(function() {
 	// Here we go
 	get_logs( true , true , true );
 
-
 	// Finally check for upgrade
 	$.ajax( {
 		url      : 'inc/upgrade.pml.php?' + (new Date()).getTime() + '&' + querystring,

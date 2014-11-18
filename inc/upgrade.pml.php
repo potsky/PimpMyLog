@@ -262,10 +262,12 @@ try {
 
 		$upgrade['alert'] .= 	'<br/>';
 
+		// .git exists so an upgrade via git pull is perhaps possible
 		if ( upgrade_is_git() ) {
 
 			$can_pull = upgrade_can_git_pull();
 
+			// .git exists and all tests have passed, so we can upgrade
 			if ( ! is_array( $can_pull ) ) {
 				$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
 				$upgrade['alert'] .= 	'<br/>';
@@ -278,11 +280,17 @@ try {
 				$upgrade['alert'] .= 		'</div>';
 				$upgrade['alert'] .= 	'</div>';
 			}
+
+			// .git exists but there is a problem
 			else {
+
 				$upgrade['alert'] .= 	sprintf( __('Your git installation cannot be upgraded automatically because of %sthese problems%s.') , '<a href="#" class="alert-link" data-toggle="collapse" data-target="#gitpb">' , '</a>' );
 				$upgrade['alert'] .= 	'<div id="gitpb" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">';
+
 				switch ( strval( $can_pull[0] ) ) {
+
 					case '2706':
+
 						$upgrade['alert'] .= __('These files are not writable by the web server user:');
 						$upgrade['alert'] .= '<ul>';
 						foreach ( $can_pull[1] as $file ) {
@@ -290,10 +298,14 @@ try {
 						}
 						$upgrade['alert'] .= '</ul>';
 						break;
+
 					case '127':
+
 						$upgrade['alert'] .= __('The <code>git</code> command is not in the webserver path');
 						break;
+
 					case '0':
+
 						$upgrade['alert'] .= __('You have modified these files:');
 						$upgrade['alert'] .= '<ul>';
 						foreach ( $can_pull[1] as $file ) {
@@ -303,6 +315,7 @@ try {
 						break;
 
 					default:
+
 						$upgrade['alert'] .= __('Unknown error, here is the problem output:');
 						$upgrade['alert'] .= '<ul>';
 						foreach ( $can_pull[1] as $file ) {
@@ -324,6 +337,7 @@ try {
 			}
 		}
 
+		// Standalone version from a tarball file, cannot upgrade now
 		else {
 			$upgrade['alert'] .= 	__('<a href="http://pimpmylog.com/getting-started/#update" target="doc" class="alert-link">Follow upgrade instructions here</a>');
 			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
@@ -333,6 +347,7 @@ try {
 			$upgrade['alert'] .= 		'</div>';
 			$upgrade['alert'] .= 	'</div>';
 		}
+
 
 		if ( count( $notices ) > 0 ) {
 
