@@ -1362,8 +1362,16 @@ $(function() {
 		}
 
 		$('#upgradegitpull').unbind().on('click', function() {
-			document.location.reload();
-		});
+			$.ajax( {
+				url      : 'inc/upgrade.pml.php?' + (new Date()).getTime() + '&' + querystring,
+				dataType : 'json',
+				data     : { 'csrf_token' : csrf_token , 'action' : 'upgradegitpull' } ,
+				type     : 'POST',
+			} ).done( function ( upgrade ) {
+				document.location.reload();
+			} );
+		} );
+
 	} );
 });
 
