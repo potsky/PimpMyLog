@@ -1367,6 +1367,8 @@ $(function() {
 				dataType : 'json',
 				data     : { 'csrf_token' : csrf_token , 'action' : 'upgradegitpull' } ,
 				type     : 'POST',
+			} ).fail( function ( ) {
+				alert('error');
 			} ).done( function ( upgrade ) {
 				document.location.reload();
 			} );
