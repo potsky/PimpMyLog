@@ -25,6 +25,7 @@ if ( isset( $_POST['action'] ) ) {
 				$can_pull = upgrade_can_git_pull();
 				if ( ! is_array( $can_pull ) ) {
 					exec( 'git pull' , $lines );
+					$_SESSION['upgradegitpullok'] = $lines;
 					echo json_encode( array( 'logs' => $lines ) );
 					die();
 				}
@@ -42,6 +43,7 @@ if ( isset( $_POST['action'] ) ) {
 			break;
 	}
 }
+
 
 
 /*
