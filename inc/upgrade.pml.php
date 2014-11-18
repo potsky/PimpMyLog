@@ -10,6 +10,36 @@ if ( ! csrf_verify() ) {
 	die();
 }
 
+
+/*
+|--------------------------------------------------------------------------
+| Special AJAX functions
+|--------------------------------------------------------------------------
+|
+*/
+if ( isset( $_POST['action'] ) ) {
+
+	switch ( $_POST['action'] ) {
+		case 'upgradegitpull':
+			if ( upgrade_is_git() ) {
+				$can_pull = upgrade_can_git_pull();
+				if ( ! is_array( $can_pull ) ) {
+					exec( 'git pull' , $lines );
+					echo json_encode( array( 'logs' => $lines ) );
+					die();
+				}
+			}
+
+		default:
+			die();
+			break;
+	}
+
+
+}
+
+
+
 $upgrade = array(
 	'footer'     => '',
 	'alert'      => '',

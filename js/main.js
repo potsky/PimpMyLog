@@ -1370,6 +1370,7 @@ $(function() {
 			} ).fail( function ( ) {
 				alert('error');
 			} ).done( function ( upgrade ) {
+console.log( upgrade.logs );
 				document.location.reload();
 			} );
 		} );
