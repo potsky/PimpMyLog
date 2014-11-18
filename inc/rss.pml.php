@@ -97,12 +97,17 @@ switch ( @$_POST['action'] ) {
 		switch ( $format ) {
 			case 'ATOM':
 			case 'RSS':
+				// http://en.wikipedia.org/wiki/Feed_URI_scheme
+				/*
 				$url = str_replace(
 					array( 'http://' , 'https://' ),
 					array( 'feed://' , 'feed://'  ),
 					$url
 				);
+				*/
 				$method = 'nd';
+// TODO: enlever le 1er
+				$method = 'nw';
 				break;
 			case 'CSV':
 				$method = 'nd';

@@ -249,7 +249,7 @@ $csrf = csrf_get();
 
 							<li class="dropdown" title="<?php _h( 'Select a log file to display' );?>">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a>
-								<ul class="dropdown-menu">
+								<ul class="dropdown-menu scrollable-menu">
 									<?php
 									foreach ( $files as $file_id => $file ) {
 										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
@@ -530,7 +530,7 @@ $csrf = csrf_get();
 					<div id="exModalResult" style="display:none;">
 						<hr/>
 						<h3><?php _e('Current result'); ?></h3>
-						<pre style="height: auto; max-height: 200px; overflow: auto;"><code id="exModalCtn"></code></pre>
+						<pre class="exportresult"><code id="exModalCtn"></code></pre>
 						<div class="row">
 							<div class="col-xs-8" style="margin-top:0;"><a class="btn btn-xs btn-primary clipboardexr"><?php _e('Copy to clipboard'); ?></a></div>
 							<div class="col-xs-4 text-right"><button class="btn btn-xs btn-primary" id="exModalRefresh" data-loading-text="<?php _h('Loading...');?>" onClick="refresh_rss()"><?php _e('Refresh'); ?></button></div>

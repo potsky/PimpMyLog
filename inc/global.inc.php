@@ -955,6 +955,85 @@ function array2csv( $array ) {
 }
 
 
+/**
+ * Return a UTC timestamp from a timestamp computed in a specific timezone
+ *
+ * @param   integer  $timestamp  the epoch timestamp
+ * @param   string   $tzfrom     the timezone where the timesamp has been computed
+ *
+ * @return  integer              the epoch in UTC
+ */
+function get_non_UTC_timstamp( $timestamp = null , $tzfrom = null )
+{
+    if ( is_null( $tzfrom ) ) {
+        $tzfrom = date_default_timezone_get();
+    }
+    if ( is_null( $timestamp ) ) {
+        $timestamp = time();
+    }
+
+    $d = new DateTime( "@" . $timestamp );
+    $d->setTimezone( new DateTimeZone( $tzfrom ) );
+
+    return $timestamp - $d->getOffset();
+}
+
+
+function upgrade_is_git() {
+    // check if git exists
+
+// TODO: niania
+//    if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '.git' ) ) return false;
+    if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '../.git' ) ) return false;
+
+    return true;
+}
+
+function upgrade_can_git_pull() {
+
+    $base = realpath( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR );
+
+    // Check if git is callable and if all files are not changed
+    $a = @exec('cd ' . escapeshellarg( $base ) . '; git status -s' , $lines , $code );
+
+    // Error while executing this comand
+    if ( $code !== 0 ) return array( $code , $lines);
+
+    // Error, files have been modified
+    if ( count( $lines ) !== 0 ) return array( $code , $lines);
+
+    // can write all files with this webserver user ?
+    $canwrite = true;
+    $lines    = array();
+    $git      = mb_strlen( realpath( $base ) ) + 1;
+    $pmlfiles = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator( $base ),
+        RecursiveIteratorIterator::SELF_FIRST
+    );
+
+    foreach ($pmlfiles as $f) {
+
+        // Ignore all .git/* files
+        if ( ( mb_substr( $f->getPathname() , $git , 4 ) ) === '.git' ) continue;
+
+        // check if this file is writable
+        if ( ! $f->isWritable() ) {
+
+            // check if it ignored or not
+            $b = @exec( "git ls-files " . escapeshellarg( $f->getPathname() ) );
+            if ( ! empty( $b ) ) {
+                $canwrite = false;
+                $lines[]  = $f->getPathname();
+            }
+        }
+    }
+
+    if ( $canwrite === false ) return array( 2706 , $lines );
+
+    return true;
+}
+
+
 /*
 |--------------------------------------------------------------------------
 | Uniq ID

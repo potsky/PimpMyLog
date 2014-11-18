@@ -44,8 +44,16 @@ $blockquote-font-size             : $font-size-base;
     font-style: normal;
 }
 
+// Bootstrap
 @import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
+// Add padding to body to move the main content on bottom of header bar
+body {
+	padding-top    : 50px;
+	padding-bottom : 20px;
+}
+
+// Buttons in the header bar
 .btn-menu {
 	display          : inline-block;
 	margin-bottom    : 0;
@@ -67,6 +75,7 @@ $blockquote-font-size             : $font-size-base;
 	}
 }
 
+// Buttons
 .btn {
 	text-transform : uppercase;
 	font-size      : 1em;
@@ -85,16 +94,15 @@ $blockquote-font-size             : $font-size-base;
 div.th-inner.sortable {
 	color : $link-color;
 }
-
 th a:hover, div.th-inner.sortable:hover {
 	text-decoration : none;
 	color           : $brand-primary;
 }
-
 code {
 	font-size: 100%;
 }
 
+// Dropdown menus
 .dropdown-menu {
   > li > a {
     display: block;
@@ -102,6 +110,25 @@ code {
   }
 }
 
+// Bootstrap dropdown log files menu
+// You can overwrite the max-height css parameter to change the visible height
+.scrollable-menu {
+	height     : auto;
+	max-height : 400px;
+	overflow-x : hidden;
+	overflow-y : auto;
+}
+
+// Result window when exporting
+// You can overwrite the max-height css parameter to change the visible height
+.exportresult {
+	height     : auto;
+	max-height : 200px;
+	overflow-x : hidden;
+	overflow-y : auto;
+}
+
+// Big design for configuration part
 .jumbotronflat {
 	padding          : 10px;
 	margin           : 0!important;
@@ -130,13 +157,6 @@ This class is used in the search input field when a regular expression is detect
 	        box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
 }
 
-
-body {
-	padding-top    : 50px;
-	padding-bottom : 20px;
-}
-
-
 /* Refresh button */
 .loader {
 	margin-left : 40px;
@@ -145,7 +165,6 @@ body {
 		margin-left : 130px;
 	}
 }
-
 
 /* Retina logo */
 .logo {
@@ -198,7 +217,6 @@ body {
 textarea.test {
 	font-family : monospace, serif;
 }
-
 
 /* Reset button in search */
 .clearable {

@@ -15,6 +15,7 @@ _cli_fake_session
 /*.user.json
 /*.user.json.tmp
 /inc/test.REMOVE_UPPERCASE.php
+/inc/test.PLEASE_REMOVE_ME.*
 /config.user.d/*
 /_build
 /_build

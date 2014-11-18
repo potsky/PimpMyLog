@@ -130,14 +130,14 @@ switch ( $format ) {
 		$rss                              = new UniversalFeedCreator();
 		$rss->title                       = sprintf( __( "Pimp My Log : %s" ) , $files[ $file_id ][ 'display' ] );
 		$rss->description                 = ( empty( $search ) )
-											? sprintf( __( "Pimp logs for file %s" ), '<code>' . $files[ $file_id ][ 'path' ] . '</code>' )
-											: sprintf( __( "Pimp logs for file %s with search %s" ), '<code>' . $files[ $file_id ][ 'path' ] . '</code>' , '<code>' . $search . '</code>' );
+											? sprintf( __( "Pimp logs for file %s" ), $files[ $file_id ][ 'path' ] )
+											: sprintf( __( "Pimp logs for file %s with search %s" ), $files[ $file_id ][ 'path' ] , $search );
 		$rss->descriptionTruncSize        = 500;
 		$rss->descriptionHtmlSyndicated   = true;
 		$rss->link                        = $link;
 		$rss->syndicationURL              = get_current_url( true );
 		$image                            = new FeedImage();
-		$image->title                     = "Pimp My Log";
+		$image->title                     = $rss->title;
 		$image->url                       = str_replace( 'inc/rss.php' , 'img/icon72.png' , get_current_url() );
 		$image->link                      = $link;
 		$image->description               = __( "Feed provided by Pimp My Log" );
@@ -162,13 +162,17 @@ switch ( $format ) {
 				} else {
 					$item->title = current( $log ) . ' - ' . sha1( serialize( $log ) );
 				}
-				$item->link                      = $link;
+				if ( $format === 'ATOM' ) {
+					$item->author = 'PmL';
+				}
+				$item->link                      = $link . '&' . $log['pmlo'];
+				$item->guid                      = $link . '&' . $log['pmlo'];
 				$item->descriptionTruncSize      = 500;
 				$item->descriptionHtmlSyndicated = true;
 			    $rss->addItem($item);
 			}
 		}
-		$rss->outputFeed( $format );
+		$rss->outputFeed( $tz , $format );
 		break;
 
 	case 'CSV':

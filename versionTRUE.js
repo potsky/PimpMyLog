@@ -7,6 +7,34 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.6" : {
+			"released" : "2014-11-18",
+			"new" : [
+				"Auto-upgrade fr GIT installs (#81)"
+			],
+			"fixed" : [
+				"Remove a debug trace (#83)",
+				"Cannot scroll anymore in the log list (#82)",
+				"Fix RSS and ATOM exports (#84)"
+			],
+			"changed" : [
+			]
+		},
+		"1.5.2" : {
+			"released" : "2014-11-14",
+			"fixed" : [
+				"Add a text for the user menu when displayed on a mobile",
+				"Restore PHP 5.2 support (<a href=\"http://support.pimpmylog.com/discussions/problems/52-php-fatal-error-undefined-class-constant-all-in-incglobalincphp-on-line-106\" target=\"_blank\">more info</a> and <a href=\"http://support.pimpmylog.com/discussions/problems/54-php-warning-unexpected-character-in-input-ascii92-state1-in-incglobalincphp-on-line-3xx\" target=\"_blank\">here</a>)"
+			],
+			"changed" : [
+				"Display the export popup for all formats to let users copy the link instead of opening it directly",
+				"Add an open button for all export formats",
+				"Display JSON pretty print also for PHP 5.2 and 5.3",
+				"Add a shortcut CTRL-R in the regex editor in the debugger to launch the test instead of clicking on the TEST button",
+				"Add loaders for possible long operations",
+				"Add log timezone support by default (<a href=\"http://support.pimpmylog.com/discussions/questions/33-date-with-timezone\" target=\"_blank\">more info</a>)"
+			]
+		},
 		"1.5.1" : {
 			"released" : "2014-11-14",
 			"fixed" : [
