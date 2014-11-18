@@ -1,12 +1,23 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.5.2",
-	"versiondevh" : "1dfb21c461d8d5cee99d4655ff7d07d9a18316d8",
+	"version"     : "1.6",
+	"versiondevh" : "05cba1eedc758785c24d4b3d505122b3f26c770b",
 	"messages"    : {
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.6" : {
+			"released" : "2014-11-18",
+			"new" : [
+				"Auto-upgrade fr GIT installs (#81)"
+			],
+			"fixed" : [
+				"Remove a debug trace (#83)",
+				"Cannot scroll anymore in the log list (#82)",
+				"Fix RSS and ATOM exports (#84)"
+			]
+		},
 		"1.5.2" : {
 			"released" : "2014-11-14",
 			"fixed" : [

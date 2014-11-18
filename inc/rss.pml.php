@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.2 - 1dfb21c461d8d5cee99d4655ff7d07d9a18316d8*/
+/*! pimpmylog - 1.6 - 05cba1eedc758785c24d4b3d505122b3f26c770b*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -106,12 +106,17 @@ switch ( @$_POST['action'] ) {
 		switch ( $format ) {
 			case 'ATOM':
 			case 'RSS':
+				// http://en.wikipedia.org/wiki/Feed_URI_scheme
+				/*
 				$url = str_replace(
 					array( 'http://' , 'https://' ),
 					array( 'feed://' , 'feed://'  ),
 					$url
 				);
+				*/
 				$method = 'nd';
+// TODO: enlever le 1er
+				$method = 'nw';
 				break;
 			case 'CSV':
 				$method = 'nd';
