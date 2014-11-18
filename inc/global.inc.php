@@ -902,9 +902,26 @@ function get_current_pml_version() {
     $file    = dirname( __FILE__ ) . '/../version.js';
     if ( file_exists( $file ) ) {
         $j = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
-        $v = $j[ 'version' ];
+        $v = @$j[ 'version' ];
     }
     return $v;
+}
+
+/**
+ * Return the current Pimp My Log Version
+ *
+ * @return  string  the version string or empty if not available
+ */
+function get_current_pml_version_infos() {
+    $i = array();
+    $file    = dirname( __FILE__ ) . '/../version.js';
+    if ( file_exists( $file ) ) {
+        $j      = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
+        $v      = @$j[ 'version' ];
+        $i      = @$j[ 'changelog' ][ $v ];
+        $i['v'] = $s;
+    }
+    return $i;
 }
 
 /**

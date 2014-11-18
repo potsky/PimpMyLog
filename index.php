@@ -444,9 +444,17 @@ $csrf = csrf_get();
 	<?php } ?>
 
 	<div class="container">
-		<?php if ( isset( $_SESSION['upgradegitpullok'] ) ) : ?>
-			<div><br/><div class="alert alert-success">
-				Welcome !
+		<?php if ( isset( $_SESSION['upgradegitpullok'] ) ) :
+			unset( $_SESSION['upgradegitpullok'] );
+			$infos = get_current_pml_version_infos();
+			$print = '<strong>' . sprintf( __('Welcome in version %s') , $infos['v'] ) . '</strong>';
+			if ( isset( $infos['welcome'] ) ) {
+				$print .= '<br/>' . $infos['welcome'];
+			}
+		?>
+			<div><br/><div class="alert alert-success alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<?php echo $print; ?>
 			</div></div>
 		<?php endif; ?>
 

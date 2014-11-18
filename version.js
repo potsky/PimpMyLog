@@ -9,6 +9,7 @@
 	"changelog"   : {
 		"1.5.1" : {
 			"released" : "2014-11-14",
+			"welcome"  : "Coucou les gars !",
 			"fixed" : [
 				"Configuration file split fixed"
 			]
