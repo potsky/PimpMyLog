@@ -919,7 +919,7 @@ function get_current_pml_version_infos() {
         $j      = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
         $v      = @$j[ 'version' ];
         $i      = @$j[ 'changelog' ][ $v ];
-        $i['v'] = $s;
+        $i['v'] = $v;
     }
     return $i;
 }
