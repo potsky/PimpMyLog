@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.2 - 1dfb21c461d8d5cee99d4655ff7d07d9a18316d8*/
+/*! pimpmylog - 1.6 - 05cba1eedc758785c24d4b3d505122b3f26c770b*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -911,9 +911,26 @@ function get_current_pml_version() {
     $file    = dirname( __FILE__ ) . '/../version.js';
     if ( file_exists( $file ) ) {
         $j = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
-        $v = $j[ 'version' ];
+        $v = @$j[ 'version' ];
     }
     return $v;
+}
+
+/**
+ * Return the current Pimp My Log Version
+ *
+ * @return  string  the version string or empty if not available
+ */
+function get_current_pml_version_infos() {
+    $i = array();
+    $file    = dirname( __FILE__ ) . '/../version.js';
+    if ( file_exists( $file ) ) {
+        $j      = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
+        $v      = @$j[ 'version' ];
+        $i      = @$j[ 'changelog' ][ $v ];
+        $i['v'] = $v;
+    }
+    return $i;
 }
 
 /**
@@ -961,6 +978,85 @@ function array2csv( $array ) {
     }
     fclose( $df );
     return ob_get_clean();
+}
+
+
+/**
+ * Return a UTC timestamp from a timestamp computed in a specific timezone
+ *
+ * @param   integer  $timestamp  the epoch timestamp
+ * @param   string   $tzfrom     the timezone where the timesamp has been computed
+ *
+ * @return  integer              the epoch in UTC
+ */
+function get_non_UTC_timstamp( $timestamp = null , $tzfrom = null )
+{
+    if ( is_null( $tzfrom ) ) {
+        $tzfrom = date_default_timezone_get();
+    }
+    if ( is_null( $timestamp ) ) {
+        $timestamp = time();
+    }
+
+    $d = new DateTime( "@" . $timestamp );
+    $d->setTimezone( new DateTimeZone( $tzfrom ) );
+
+    return $timestamp - $d->getOffset();
+}
+
+
+function upgrade_is_git() {
+    // check if git exists
+
+// TODO: niania
+//    if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '.git' ) ) return false;
+    if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '../.git' ) ) return false;
+
+    return true;
+}
+
+function upgrade_can_git_pull() {
+
+    $base = realpath( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR );
+
+    // Check if git is callable and if all files are not changed
+    $a = @exec('cd ' . escapeshellarg( $base ) . '; git status -s' , $lines , $code );
+
+    // Error while executing this comand
+    if ( $code !== 0 ) return array( $code , $lines);
+
+    // Error, files have been modified
+    if ( count( $lines ) !== 0 ) return array( $code , $lines);
+
+    // can write all files with this webserver user ?
+    $canwrite = true;
+    $lines    = array();
+    $git      = mb_strlen( realpath( $base ) ) + 1;
+    $pmlfiles = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator( $base ),
+        RecursiveIteratorIterator::SELF_FIRST
+    );
+
+    foreach ($pmlfiles as $f) {
+
+        // Ignore all .git/* files
+        if ( ( mb_substr( $f->getPathname() , $git , 4 ) ) === '.git' ) continue;
+
+        // check if this file is writable
+        if ( ! $f->isWritable() ) {
+
+            // check if it ignored or not
+            $b = @exec( "git ls-files " . escapeshellarg( $f->getPathname() ) );
+            if ( ! empty( $b ) ) {
+                $canwrite = false;
+                $lines[]  = $f->getPathname();
+            }
+        }
+    }
+
+    if ( $canwrite === false ) return array( 2706 , $lines );
+
+    return true;
 }
 
 
