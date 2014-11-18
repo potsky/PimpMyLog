@@ -444,6 +444,7 @@ $csrf = csrf_get();
 	<?php } ?>
 
 	<div class="container">
+		<div id="upgradeerror" style="display:none;"></div>
 		<div id="error" style="display:none;"><br/><div class="alert alert-danger fade in"><h4>Oups!</h4><p id="errortxt"></p></div></div>
 		<div class="result">
 			<br/>

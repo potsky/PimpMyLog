@@ -28,8 +28,15 @@ if ( isset( $_POST['action'] ) ) {
 					echo json_encode( array( 'logs' => $lines ) );
 					die();
 				}
+				else {
+					echo json_encode( array( 'error' => __('git is no more availble') ) );
+					die();
+				}
 			}
-
+			else {
+				echo json_encode( array( 'error' => __('git is no more availble') ) );
+				die();
+			}
 		default:
 			die();
 			break;

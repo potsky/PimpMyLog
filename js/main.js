@@ -1362,16 +1362,21 @@ $(function() {
 		}
 
 		$('#upgradegitpull').unbind().on('click', function() {
+			$('#upgradegitpull').button('loading');
 			$.ajax( {
 				url      : 'inc/upgrade.pml.php?' + (new Date()).getTime() + '&' + querystring,
 				dataType : 'json',
 				data     : { 'csrf_token' : csrf_token , 'action' : 'upgradegitpull' } ,
 				type     : 'POST',
-			} ).fail( function ( ) {
-				alert('error');
+			} ).fail( function ( a , b , c ) {
+				$('#upgradegitpull').button('reset');
+				$('#upgradeerror').html( c ).show();
 			} ).done( function ( upgrade ) {
-console.log( upgrade.logs );
-				document.location.reload();
+				if ( upgrade.logs ) {
+					document.location.reload();
+				} else {
+					$('#upgradeerror').html( upgrade.error ).show();
+				}
 			} );
 		} );
 
