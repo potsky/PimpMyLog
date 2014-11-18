@@ -1371,11 +1371,13 @@ $(function() {
 			} ).fail( function ( a , b , c ) {
 				$('#upgradegitpull').button('reset');
 				$('#upgradeerror').html( c ).show();
+				$('#upgradealert').hide();
 			} ).done( function ( upgrade ) {
 				if ( upgrade.logs ) {
 					document.location.reload();
 				} else {
 					$('#upgradeerror').html( upgrade.error ).show();
+					$('#upgradealert').hide();
 				}
 			} );
 		} );

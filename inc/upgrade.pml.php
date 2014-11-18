@@ -29,12 +29,12 @@ if ( isset( $_POST['action'] ) ) {
 					die();
 				}
 				else {
-					echo json_encode( array( 'error' => __('git is no more availble') ) );
+					echo json_encode( array( 'error' => __('GIT is no more availble, please refresh the page') ) );
 					die();
 				}
 			}
 			else {
-				echo json_encode( array( 'error' => __('git is no more availble') ) );
+				echo json_encode( array( 'error' => __('GIT is no more availble, please refresh the page') ) );
 				die();
 			}
 		default:
@@ -42,6 +42,7 @@ if ( isset( $_POST['action'] ) ) {
 			break;
 	}
 }
+
 
 
 /*
