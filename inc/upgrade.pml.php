@@ -262,8 +262,19 @@ try {
 
 		$upgrade['alert'] .= 	'<br/>';
 
+		// Auto Update is forbidden when AUTO_UPDATE is false or when auth is enabled but user is not an admin
+		if ( ( AUTO_UPGRADE === false ) || ( ( Sentinel::isAuthSet() ) && ( ! Sentinel::isAdmin( Sentinel::getCurrentUsername() ) ) ) ) {
+			$upgrade['alert'] .= 	__('Simply <code>git pull</code> in your directory or <a href=\"http://pimpmylog.com/getting-started/#update\" target=\"doc\" class=\"alert-link\">follow instructions here</a>');
+			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+			$upgrade['alert'] .= 	'<div class="row">';
+			$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';
+			$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
+			$upgrade['alert'] .= 		'</div>';
+			$upgrade['alert'] .= 	'</div>';
+		}
+
 		// .git exists so an upgrade via git pull is perhaps possible
-		if ( upgrade_is_git() ) {
+		else if ( upgrade_is_git() ) {
 
 			$can_pull = upgrade_can_git_pull();
 

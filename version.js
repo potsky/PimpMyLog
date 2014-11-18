@@ -7,7 +7,7 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
-		"1.6" : {
+		"1.5.9" : {
 			"released" : "2014-11-18",
 			"new" : [
 				"Auto-upgrade fr GIT installs (#81)"

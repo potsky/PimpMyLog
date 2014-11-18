@@ -87,6 +87,7 @@ define( 'CONFIG_FILE_TEMP'                   , 'config.user.tmp.php' );
 |
 */
 define( 'DEFAULT_AUTH_LOG_FILE_COUNT'         , 100 );
+define( 'DEFAULT_AUTO_UPGRADE'                , false );
 define( 'DEFAULT_CHECK_UPGRADE'               , true );
 define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
 define( 'DEFAULT_EXPORT'                      , true );
@@ -215,6 +216,7 @@ function _e($text)
 function load_default_constants()
 {
     $defaults = array(
+        'AUTO_UPGRADE',
         'AUTH_LOG_FILE_COUNT',
         'CHECK_UPGRADE',
         'DEFAULT_HELP_URL',
@@ -999,16 +1001,18 @@ function get_non_UTC_timstamp( $timestamp = null , $tzfrom = null )
 function upgrade_is_git() {
     // check if git exists
 
-// TODO: niania
+//TODO::niania
+if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '../.git' ) ) return false;
 //    if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '.git' ) ) return false;
-    if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '../.git' ) ) return false;
 
     return true;
 }
 
 function upgrade_can_git_pull() {
 
+//TODO::niania
     $base = realpath( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR );
+//    $base = PML_BASE;
 
     // Check if git is callable and if all files are not changed
     $a = @exec('cd ' . escapeshellarg( $base ) . '; git status -s' , $lines , $code );
