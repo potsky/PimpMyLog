@@ -1361,6 +1361,9 @@ $(function() {
 			});
 		}
 
+		$('#upgradegitpull').unbind().on('click', function() {
+			document.location.reload();
+		});
 	} );
 });
 
