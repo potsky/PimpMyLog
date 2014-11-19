@@ -7,6 +7,12 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.6.1" : {
+			"released" : "2014-11-19",
+			"fixed" : [
+				"Tag sorting on PHP 5.2 and PHP 5.3"
+			]
+		},
 		"1.6.0" : {
 			"released" : "2014-11-18",
 			"new" : [
