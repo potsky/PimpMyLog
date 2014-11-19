@@ -482,7 +482,8 @@ module.exports = function(grunt) {
 			},
 			opensafari : {
 				command: [
-					'open "https://github.com/potsky/PimpMyLog/releases/new"'
+					'open "https://github.com/potsky/PimpMyLog/releases/new"',
+					'open "https://poeditor.com/github/projects"',
 				].join(';'),
 				options: {
 					stdout: true,
@@ -586,6 +587,25 @@ module.exports = function(grunt) {
 
 		/*
 		|--------------------------------------------------------------------------
+		| Todos
+		|--------------------------------------------------------------------------
+		|
+		*/
+		todos: {
+			options: {
+				verbose    : false,
+				priorities : {
+					med  : /(TODO|FIXME|FIX|NOTE)/,
+					high : /POTSKY/
+				},
+				reporter : "default"
+      		},
+			"todo.php.txt" : ['**/*.php', '!vendor/**/*', '!_tmp/**/*', '!_site/**/*', '!_build/**/*' ]
+		},
+
+
+		/*
+		|--------------------------------------------------------------------------
 		| Watch
 		|--------------------------------------------------------------------------
 		|
@@ -625,6 +645,21 @@ module.exports = function(grunt) {
 	|--------------------------------------------------------------------------
 	|
 	*/
+	grunt.registerTask( 'todosresult' , function() {
+		grunt.log.ok('-----------------------------------------------------------------------');
+		grunt.log.ok( grunt.file.read('todo.php.txt') );
+		grunt.log.ok('-----------------------------------------------------------------------');
+	});
+
+	grunt.registerTask( 'warningend' , function() {
+		grunt.log.ok('-----------------------------------------------------------------------');
+		grunt.log.ok('| CREATE A NEW RELEASE ON GITHUB TO LET PEOPLE DOWNLOAD THE ZIP FILE! |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('-----------------------------------------------------------------------');
+	});
+
 	// Installation task which install the _build folder in beta , commit and push
 	grunt.registerTask( 'install-beta' , function() {
 		if ( grunt.file.exists( '_build/index.php' ) === false ) {
@@ -669,7 +704,8 @@ module.exports = function(grunt) {
 				'copy:installmaster',
 				'copy:installmasterREADME',
 				'shell:mastergitaddcommitpush',
-				'shell:opensafari'
+				'shell:opensafari',
+				'warningend'
 			]);
 		}
 		else {
@@ -680,15 +716,11 @@ module.exports = function(grunt) {
 				'copy:installmaster',
 				'copy:installmasterREADME',
 				'shell:mastergitaddcommitpush',
-				'shell:opensafari'
+				'shell:opensafari',
+				'warningend'
 			]);
 		}
-		grunt.log.ok('-----------------------------------------------------------------------');
-		grunt.log.ok('| CREATE A NEW RELEASE ON GITHUB TO LET PEOPLE DOWNLOAD THE ZIP FILE! |');
-		grunt.log.ok('|                                                                     |');
-		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
-		grunt.log.ok('|                                                                     |');
-		grunt.log.ok('-----------------------------------------------------------------------');
+
 	});
 
 	// Development task, build and watch for file modification
@@ -743,19 +775,30 @@ module.exports = function(grunt) {
 			'uglify:prod',
 			'uglify:prodvendor',
 
-			'phpunit:prod'
+			'phpunit:prod',
+			'todos',
+			'todosresult'
 		]);
+
 	});
 
 	grunt.registerTask('checkversion', function() {
 		var a;
 		try {
 			a = JSON.parse( grunt.file.read('./version.js').replace('/*PSK*/pml_version_cb(/*PSK*/','').replace('/*PSK*/);/*PSK*/','') );
+			if ( /^[0-9]\.[0-9]\.[0-9]$/.test( npmpkg.version ) === false ) {
+				grunt.verbose.or.error().error( 'Package version ' + npmpkg.version + ' is not A.B.C' );
+				grunt.fail.warn('Unable to continue');
+			}
 			if ( ! a.changelog[ npmpkg.version ] ) {
 				grunt.verbose.or.error().error( 'Version ' + npmpkg.version + ' is not in the changelog in file version.js !' );
 				grunt.fail.warn('Unable to continue');
 			}
 			for ( var i in a.changelog ) {
+				if ( /^[0-9]\.[0-9]\.[0-9]$/.test( i ) === false ) {
+					grunt.verbose.or.error().error( 'version.js version ' + i + ' is not A.B.C' );
+					grunt.fail.warn('Unable to continue');
+				}
 				if ( i !== npmpkg.version ) {
 					grunt.verbose.or.error().error( 'Version ' + i + ' is in the change log but not in package.js !' );
 					grunt.fail.warn('Unable to continue');

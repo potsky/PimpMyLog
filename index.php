@@ -252,7 +252,7 @@ $csrf = csrf_get();
 								<ul class="dropdown-menu scrollable-menu">
 									<?php
 									foreach ( $files as $file_id => $file ) {
-										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
+										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active' : '';
 										echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
 										echo ( isset( $file['included_from'] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $file['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
 										echo '">' . $file['display'] . '</a></li>';

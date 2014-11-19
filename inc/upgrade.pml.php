@@ -264,7 +264,7 @@ try {
 
 		// Auto Update is forbidden when AUTO_UPDATE is false or when auth is enabled but user is not an admin
 		if ( ( AUTO_UPGRADE === false ) || ( ( Sentinel::isAuthSet() ) && ( ! Sentinel::isAdmin( Sentinel::getCurrentUsername() ) ) ) ) {
-			$upgrade['alert'] .= 	__('Simply <code>git pull</code> in your directory or <a href=\"http://pimpmylog.com/getting-started/#update\" target=\"doc\" class=\"alert-link\">follow instructions here</a>');
+			$upgrade['alert'] .= 	sprintf( __('Simply <code>git pull</code> in your directory or follow instructions %shere%s') , '<a href="' . UPGRADE_MANUALLY_URL . '" target="doc" class="alert-link">' , '</a>');
 			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
 			$upgrade['alert'] .= 	'<div class="row">';
 			$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';
@@ -295,7 +295,7 @@ try {
 			// .git exists but there is a problem
 			else {
 
-				$upgrade['alert'] .= 	sprintf( __('Your git installation cannot be upgraded automatically because of %sthese problems%s.') , '<a href="#" class="alert-link" data-toggle="collapse" data-target="#gitpb">' , '</a>' );
+				$upgrade['alert'] .= 	sprintf( __('Your GIT installation cannot be upgraded automatically because of %sthese problems%s.') , '<a href="#" class="alert-link" data-toggle="collapse" data-target="#gitpb">' , '</a>' );
 				$upgrade['alert'] .= 	'<div id="gitpb" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">';
 
 				switch ( strval( $can_pull[0] ) ) {
@@ -350,7 +350,7 @@ try {
 
 		// Standalone version from a tarball file, cannot upgrade now
 		else {
-			$upgrade['alert'] .= 	__('<a href="http://pimpmylog.com/getting-started/#update" target="doc" class="alert-link">Follow upgrade instructions here</a>');
+			$upgrade['alert'] .= 	sprintf( __('Follow instructions %shere%s') , '<a href="' . UPGRADE_MANUALLY_URL . '" target="doc" class="alert-link">' , '</a>' );
 			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
 			$upgrade['alert'] .= 	'<div class="row">';
 			$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';
