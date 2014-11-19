@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.2 - 1dfb21c461d8d5cee99d4655ff7d07d9a18316d8*/
+/*! pimpmylog - 1.6.0 - d2f6bfe7deb7aa89fe4381ab8180286042aa6127*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -96,9 +96,10 @@ define( 'CONFIG_FILE_TEMP'                   , 'config.user.tmp.php' );
 |
 */
 define( 'DEFAULT_AUTH_LOG_FILE_COUNT'         , 100 );
+define( 'DEFAULT_AUTO_UPGRADE'                , false );
 define( 'DEFAULT_CHECK_UPGRADE'               , true );
-define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
 define( 'DEFAULT_EXPORT'                      , true );
+define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
 define( 'DEFAULT_FOOTER'                      , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . YEAR . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
 define( 'DEFAULT_FORGOTTEN_YOUR_PASSWORD_URL' , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
 define( 'DEFAULT_GEOIP_URL'                   , 'http://www.geoiptool.com/en/?IP=%p' );
@@ -109,14 +110,18 @@ define( 'DEFAULT_LOGS_MAX'                    , 50 );
 define( 'DEFAULT_LOGS_REFRESH'                , 0 );
 define( 'DEFAULT_MAX_SEARCH_LOG_TIME'         , 5 );
 define( 'DEFAULT_NAV_TITLE'                   , '' );
-define( 'DEFAULT_NOTIFICATION'                , false );
+define( 'DEFAULT_NOTIFICATION'                , true );
 define( 'DEFAULT_NOTIFICATION_TITLE'          , 'New logs [%f]' );
 define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'        , 'https://github.com/potsky/PimpMyLog/issues/' );
 define( 'DEFAULT_PIMPMYLOG_VERSION_URL'       , 'http://demo.pimpmylog.com/version.js' );
 define( 'DEFAULT_PULL_TO_REFRESH'             , true );
 define( 'DEFAULT_SORT_LOG_FILES'              , 'default' );
+define( 'DEFAULT_TAG_DISPLAY_LOG_FILES_COUNT' , true );
+define( 'DEFAULT_TAG_NOT_TAGGED_FILES_ON_TOP' , true );
+define( 'DEFAULT_TAG_SORT_TAG'                , 'displayiasc' );
 define( 'DEFAULT_TITLE'                       , 'Pimp my Log' );
 define( 'DEFAULT_TITLE_FILE'                  , 'Pimp my Log [%f]' );
+define( 'DEFAULT_UPGRADE_MANUALLY_URL'        , 'http://pimpmylog.com/getting-started/#update' );
 define( 'DEFAULT_USER_CONFIGURATION_DIR'      , 'config.user.d' );
 
 
@@ -225,8 +230,10 @@ function load_default_constants()
 {
     $defaults = array(
         'AUTH_LOG_FILE_COUNT',
+        'AUTO_UPGRADE',
         'CHECK_UPGRADE',
         'DEFAULT_HELP_URL',
+        'EXPORT',
         'FILE_SELECTOR',
         'FOOTER',
         'FORGOTTEN_YOUR_PASSWORD_URL',
@@ -242,10 +249,13 @@ function load_default_constants()
         'PIMPMYLOG_ISSUE_LINK',
         'PIMPMYLOG_VERSION_URL',
         'PULL_TO_REFRESH',
-        'EXPORT',
         'SORT_LOG_FILES',
+        'TAG_SORT_TAG',
+        'TAG_NOT_TAGGED_FILES_ON_TOP',
+        'TAG_DISPLAY_LOG_FILES_COUNT',
         'TITLE',
         'TITLE_FILE',
+        'UPGRADE_MANUALLY_URL',
         'USER_CONFIGURATION_DIR',
     );
     foreach ($defaults as $d) {
@@ -462,8 +472,7 @@ function config_load($load_user_configuration_dir = true)
         $files = $final;
     }
 
-
-    // Finaly sort files
+    // Finally sort files
     if ( ! function_exists( 'display_asc' ) )              { function display_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
     if ( ! function_exists( 'display_desc' ) )             { function display_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
     if ( ! function_exists( 'display_insensitive_asc' ) )  { function display_insensitive_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
@@ -545,6 +554,57 @@ function config_check($files)
         return $errors;
     }
 }
+
+/**
+ * Extract tags from the confiuration files
+ *
+ * @param   array  $files  the files configuration array
+ *
+ * @return  array          an array of tags with fileids
+ */
+function config_extract_tags( $files ) {
+    $tags = array( '_' => array() );
+
+    foreach ( $files as $fileid => $file ) {
+        // Tag found
+        if ( isset( $file['tags'] ) ) {
+            if ( is_array( $file['tags'] ) ) {
+                foreach ( $file['tags'] as $tag ) {
+                    $tags[ strval( $tag ) ][] = $fileid;
+                }
+            } else {
+                $tags[ strval( $file['tags'] ) ][] = $fileid;
+            }
+        }
+        // No tag
+        else {
+            $tags[ '_' ][] = $fileid;
+        }
+    }
+
+    switch ( trim( str_replace( array( '-' , '_' , ' ' , 'nsensitive' ) , '' , TAG_SORT_TAG ) ) ) {
+        case 'display':
+        case 'displayasc':
+            ksort( $tags , SORT_NATURAL );
+            break;
+        case 'displayi':
+        case 'displayiasc':
+            ksort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+            break;
+        case 'displaydesc':
+            krsort( $tags , SORT_NATURAL );
+            break;
+        case 'displayidesc':
+            krsort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+            break;
+        default:
+            # do not sort
+            break;
+    }
+
+    return $tags;
+}
+
 
 /**
  * Get the list of refresh duration
@@ -911,9 +971,26 @@ function get_current_pml_version() {
     $file    = dirname( __FILE__ ) . '/../version.js';
     if ( file_exists( $file ) ) {
         $j = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
-        $v = $j[ 'version' ];
+        $v = @$j[ 'version' ];
     }
     return $v;
+}
+
+/**
+ * Return the current Pimp My Log Version
+ *
+ * @return  string  the version string or empty if not available
+ */
+function get_current_pml_version_infos() {
+    $i = array();
+    $file    = dirname( __FILE__ ) . '/../version.js';
+    if ( file_exists( $file ) ) {
+        $j      = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
+        $v      = @$j[ 'version' ];
+        $i      = @$j[ 'changelog' ][ $v ];
+        $i['v'] = $v;
+    }
+    return $i;
 }
 
 /**
@@ -961,6 +1038,81 @@ function array2csv( $array ) {
     }
     fclose( $df );
     return ob_get_clean();
+}
+
+
+/**
+ * Return a UTC timestamp from a timestamp computed in a specific timezone
+ *
+ * @param   integer  $timestamp  the epoch timestamp
+ * @param   string   $tzfrom     the timezone where the timesamp has been computed
+ *
+ * @return  integer              the epoch in UTC
+ */
+function get_non_UTC_timstamp( $timestamp = null , $tzfrom = null )
+{
+    if ( is_null( $tzfrom ) ) {
+        $tzfrom = date_default_timezone_get();
+    }
+    if ( is_null( $timestamp ) ) {
+        $timestamp = time();
+    }
+
+    $d = new DateTime( "@" . $timestamp );
+    $d->setTimezone( new DateTimeZone( $tzfrom ) );
+
+    return $timestamp - $d->getOffset();
+}
+
+
+function upgrade_is_git() {
+    // check if git exists
+    if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '.git' ) ) return false;
+
+    return true;
+}
+
+function upgrade_can_git_pull() {
+    $base = PML_BASE;
+
+    // Check if git is callable and if all files are not changed
+    $a = @exec('cd ' . escapeshellarg( $base ) . '; git status -s' , $lines , $code );
+
+    // Error while executing this comand
+    if ( $code !== 0 ) return array( $code , $lines);
+
+    // Error, files have been modified
+    if ( count( $lines ) !== 0 ) return array( $code , $lines);
+
+    // can write all files with this webserver user ?
+    $canwrite = true;
+    $lines    = array();
+    $git      = mb_strlen( realpath( $base ) ) + 1;
+    $pmlfiles = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator( $base ),
+        RecursiveIteratorIterator::SELF_FIRST
+    );
+
+    foreach ($pmlfiles as $f) {
+
+        // Ignore all .git/* files
+        if ( ( mb_substr( $f->getPathname() , $git , 4 ) ) === '.git' ) continue;
+
+        // check if this file is writable
+        if ( ! $f->isWritable() ) {
+
+            // check if it ignored or not
+            $b = @exec( "git ls-files " . escapeshellarg( $f->getPathname() ) );
+            if ( ! empty( $b ) ) {
+                $canwrite = false;
+                $lines[]  = $f->getPathname();
+            }
+        }
+    }
+
+    if ( $canwrite === false ) return array( 2706 , $lines );
+
+    return true;
 }
 
 

@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.2 - 1dfb21c461d8d5cee99d4655ff7d07d9a18316d8*/
+/*! pimpmylog - 1.6.0 - d2f6bfe7deb7aa89fe4381ab8180286042aa6127*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -113,10 +113,6 @@ if ( ! csrf_verify() ) {
     echo json_encode( $return );
     die();
 }
-
-file_put_contents('toto',print_r( $files , true ) );
-
-
 
 if ( ! isset( $files[$file_id] ) ) {
     $return['error'] = sprintf( __( 'File ID <code>%s</code> does not exist, please review your configuration file and stop playing!' ) , $file_id );

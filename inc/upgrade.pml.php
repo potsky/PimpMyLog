@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.2 - 1dfb21c461d8d5cee99d4655ff7d07d9a18316d8*/
+/*! pimpmylog - 1.6.0 - d2f6bfe7deb7aa89fe4381ab8180286042aa6127*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -19,6 +19,52 @@ if ( ! csrf_verify() ) {
 	die();
 }
 
+
+/*
+|--------------------------------------------------------------------------
+| Special AJAX functions
+|--------------------------------------------------------------------------
+|
+*/
+if ( isset( $_POST['action'] ) ) {
+
+	switch ( $_POST['action'] ) {
+		case 'upgradegitpull':
+			if ( upgrade_is_git() ) {
+				$can_pull = upgrade_can_git_pull();
+				if ( ! is_array( $can_pull ) ) {
+					exec( 'git pull' , $lines );
+
+					session_start();
+					$_SESSION['upgradegitpullok'] = $lines;
+					session_write_close();
+
+					echo json_encode( array( 'logs' => $lines ) );
+					die();
+				}
+				else {
+					echo json_encode( array( 'error' => __('GIT is no more availble, please refresh the page') ) );
+					die();
+				}
+			}
+			else {
+				echo json_encode( array( 'error' => __('GIT is no more availble, please refresh the page') ) );
+				die();
+			}
+		default:
+			die();
+			break;
+	}
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Let's go
+|--------------------------------------------------------------------------
+|
+*/
 $upgrade = array(
 	'footer'     => '',
 	'alert'      => '',
@@ -218,19 +264,109 @@ try {
 		$severity = ( count( $notices ) > 0 ) ? 'danger' : 'info';
 
 		$upgrade['alert'] .= '<div id="upgradealert" class="alert alert-' . $severity . ' alert-dismissable">';
-		$upgrade['alert'] .= '  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-		$upgrade['alert'] .= '<strong>' . __( 'An upgrade is available !') . '</strong> ';
-		$upgrade['alert'] .= sprintf( __( 'You have version %s and version %s is available' ) , '<em>' . $upgrade['current'] . '</em>' , '<em>' . $upgrade['to'] . '</em>');
-		$upgrade['alert'] .= ' (<a href="#" class="alert-link" data-toggle="collapse" data-target="#changelog">' . __( 'release notes') . '</a>)';
-		$upgrade['alert'] .= '<br/>';
-		$upgrade['alert'] .= __('Simply <code>git pull</code> in your directory or <a href="http://pimpmylog.com/getting-started/#update" target="doc" class="alert-link">follow instructions here</a>');
-		$upgrade['alert'] .= '<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
-		$upgrade['alert'] .= '<div class="row">';
-		$upgrade['alert'] .= '<div class="col-xs-12 text-right">';
-		$upgrade['alert'] .= '<a href="#" id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> ' . __("Skip this upgrade") . '</a>';
-		$upgrade['alert'] .= '</div>';
-		$upgrade['alert'] .= '</div>';
+		$upgrade['alert'] .= 	'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+		$upgrade['alert'] .= 	'<strong>' . __( 'An upgrade is available !') . '</strong> ';
+		$upgrade['alert'] .= 	sprintf( __( 'You have version %s and version %s is available' ) , '<em>' . $upgrade['current'] . '</em>' , '<em>' . $upgrade['to'] . '</em>');
+		$upgrade['alert'] .= 	'&nbsp;(<a href="#" class="alert-link" data-toggle="collapse" data-target="#changelog">' . __( 'release notes') . '</a>)';
 
+		$upgrade['alert'] .= 	'<br/>';
+
+		// Auto Update is forbidden when AUTO_UPDATE is false or when auth is enabled but user is not an admin
+		if ( ( AUTO_UPGRADE === false ) || ( ( Sentinel::isAuthSet() ) && ( ! Sentinel::isAdmin( Sentinel::getCurrentUsername() ) ) ) ) {
+			$upgrade['alert'] .= 	sprintf( __('Simply <code>git pull</code> in your directory or follow instructions %shere%s') , '<a href="' . UPGRADE_MANUALLY_URL . '" target="doc" class="alert-link">' , '</a>');
+			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+			$upgrade['alert'] .= 	'<div class="row">';
+			$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';
+			$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
+			$upgrade['alert'] .= 		'</div>';
+			$upgrade['alert'] .= 	'</div>';
+		}
+
+		// .git exists so an upgrade via git pull is perhaps possible
+		else if ( upgrade_is_git() ) {
+
+			$can_pull = upgrade_can_git_pull();
+
+			// .git exists and all tests have passed, so we can upgrade
+			if ( ! is_array( $can_pull ) ) {
+				$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+				$upgrade['alert'] .= 	'<br/>';
+				$upgrade['alert'] .= 	'<div class="row">';
+				$upgrade['alert'] .= 		'<div class="col-xs-6 text-left">';
+				$upgrade['alert'] .= 			'<button id="upgradegitpull" data-loading-text="' . h( __('Upgrading...') ) . '" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;' . __("Upgrade now") . '</button>';
+				$upgrade['alert'] .= 		'</div>';
+				$upgrade['alert'] .= 		'<div class="col-xs-6 text-right">';
+				$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
+				$upgrade['alert'] .= 		'</div>';
+				$upgrade['alert'] .= 	'</div>';
+			}
+
+			// .git exists but there is a problem
+			else {
+
+				$upgrade['alert'] .= 	sprintf( __('Your GIT installation cannot be upgraded automatically because of %sthese problems%s.') , '<a href="#" class="alert-link" data-toggle="collapse" data-target="#gitpb">' , '</a>' );
+				$upgrade['alert'] .= 	'<div id="gitpb" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">';
+
+				switch ( strval( $can_pull[0] ) ) {
+
+					case '2706':
+
+						$upgrade['alert'] .= __('These files are not writable by the web server user:');
+						$upgrade['alert'] .= '<ul>';
+						foreach ( $can_pull[1] as $file ) {
+							$upgrade['alert'] .= '<li><code>' . $file . '</code></li>';
+						}
+						$upgrade['alert'] .= '</ul>';
+						break;
+
+					case '127':
+
+						$upgrade['alert'] .= __('The <code>git</code> command is not in the webserver path');
+						break;
+
+					case '0':
+
+						$upgrade['alert'] .= __('You have modified these files:');
+						$upgrade['alert'] .= '<ul>';
+						foreach ( $can_pull[1] as $file ) {
+							$upgrade['alert'] .= '<li><code>' . $file . '</code></li>';
+						}
+						$upgrade['alert'] .= '</ul>';
+						break;
+
+					default:
+
+						$upgrade['alert'] .= __('Unknown error, here is the problem output:');
+						$upgrade['alert'] .= '<ul>';
+						foreach ( $can_pull[1] as $file ) {
+							$upgrade['alert'] .= '<li><code>' . $file . '</code></li>';
+						}
+						$upgrade['alert'] .= '</ul>';
+						break;
+				}
+
+				$upgrade['alert'] .= 	'</div></div>';
+				$upgrade['alert'] .= 	'<br/>';
+				$upgrade['alert'] .= 	__('Simply <code>git pull</code> in your installation directory.');
+				$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+				$upgrade['alert'] .= 	'<div class="row">';
+				$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';
+				$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
+				$upgrade['alert'] .= 		'</div>';
+				$upgrade['alert'] .= 	'</div>';
+			}
+		}
+
+		// Standalone version from a tarball file, cannot upgrade now
+		else {
+			$upgrade['alert'] .= 	sprintf( __('Follow instructions %shere%s') , '<a href="' . UPGRADE_MANUALLY_URL . '" target="doc" class="alert-link">' , '</a>' );
+			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+			$upgrade['alert'] .= 	'<div class="row">';
+			$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';
+			$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
+			$upgrade['alert'] .= 		'</div>';
+			$upgrade['alert'] .= 	'</div>';
+		}
 
 
 		if ( count( $notices ) > 0 ) {
