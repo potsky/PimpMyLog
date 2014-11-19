@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6 - 05cba1eedc758785c24d4b3d505122b3f26c770b*/
+/*! pimpmylog - 1.5.9 - bd60bfd7a536e1fb4e467a4aa5cc99357abae973*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -271,8 +271,19 @@ try {
 
 		$upgrade['alert'] .= 	'<br/>';
 
+		// Auto Update is forbidden when AUTO_UPDATE is false or when auth is enabled but user is not an admin
+		if ( ( AUTO_UPGRADE === false ) || ( ( Sentinel::isAuthSet() ) && ( ! Sentinel::isAdmin( Sentinel::getCurrentUsername() ) ) ) ) {
+			$upgrade['alert'] .= 	sprintf( __('Simply <code>git pull</code> in your directory or follow instructions %shere%s') , '<a href="' . UPGRADE_MANUALLY_URL . '" target="doc" class="alert-link">' , '</a>');
+			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+			$upgrade['alert'] .= 	'<div class="row">';
+			$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';
+			$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
+			$upgrade['alert'] .= 		'</div>';
+			$upgrade['alert'] .= 	'</div>';
+		}
+
 		// .git exists so an upgrade via git pull is perhaps possible
-		if ( upgrade_is_git() ) {
+		else if ( upgrade_is_git() ) {
 
 			$can_pull = upgrade_can_git_pull();
 
@@ -293,7 +304,7 @@ try {
 			// .git exists but there is a problem
 			else {
 
-				$upgrade['alert'] .= 	sprintf( __('Your git installation cannot be upgraded automatically because of %sthese problems%s.') , '<a href="#" class="alert-link" data-toggle="collapse" data-target="#gitpb">' , '</a>' );
+				$upgrade['alert'] .= 	sprintf( __('Your GIT installation cannot be upgraded automatically because of %sthese problems%s.') , '<a href="#" class="alert-link" data-toggle="collapse" data-target="#gitpb">' , '</a>' );
 				$upgrade['alert'] .= 	'<div id="gitpb" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">';
 
 				switch ( strval( $can_pull[0] ) ) {
@@ -348,7 +359,7 @@ try {
 
 		// Standalone version from a tarball file, cannot upgrade now
 		else {
-			$upgrade['alert'] .= 	__('<a href="http://pimpmylog.com/getting-started/#update" target="doc" class="alert-link">Follow upgrade instructions here</a>');
+			$upgrade['alert'] .= 	sprintf( __('Follow instructions %shere%s') , '<a href="' . UPGRADE_MANUALLY_URL . '" target="doc" class="alert-link">' , '</a>' );
 			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
 			$upgrade['alert'] .= 	'<div class="row">';
 			$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';

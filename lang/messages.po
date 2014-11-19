@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-11-17 13:54+0100\n"
-"PO-Revision-Date: 2014-11-17 13:54+0100\n"
+"POT-Creation-Date: 2014-11-19 09:19+0100\n"
+"PO-Revision-Date: 2014-11-19 09:19+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: potsky <potsky@me.com>\n"
 "Language: en_GB\n"
@@ -121,7 +121,7 @@ msgid "Create an admin account"
 msgstr ""
 
 #: inc/configure.php:56 inc/configure.php:476 inc/test.php:509
-#: inc/test.php:510 inc/users.pml.php:425 index.php:718
+#: inc/test.php:510 inc/users.pml.php:425 index.php:733
 msgid "No"
 msgstr ""
 
@@ -136,8 +136,8 @@ msgstr ""
 
 #: inc/configure.php:77 inc/configure.php:126 inc/configure.php:162
 #: inc/configure.php:183 inc/test.php:172 inc/test.php:217 inc/test.php:295
-#: inc/test.php:591 inc/users.pml.php:485 inc/users.pml.php:499 index.php:513
-#: index.php:535
+#: inc/test.php:591 inc/users.pml.php:485 inc/users.pml.php:499 index.php:528
+#: index.php:550
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -156,7 +156,7 @@ msgid "Username is required"
 msgstr ""
 
 #: inc/configure.php:94 inc/login.inc.php:76 inc/login.inc.php:78
-#: inc/test.php:607 inc/test.php:672 index.php:659 index.php:663
+#: inc/test.php:607 inc/test.php:672 index.php:674 index.php:678
 msgid "Username"
 msgstr ""
 
@@ -166,7 +166,7 @@ msgid "Password must contain at least 6 chars"
 msgstr ""
 
 #: inc/configure.php:101 inc/login.inc.php:89 inc/login.inc.php:91
-#: inc/test.php:616 inc/test.php:681 index.php:668 index.php:672
+#: inc/test.php:616 inc/test.php:681 index.php:683 index.php:687
 msgid "Password"
 msgstr ""
 
@@ -174,8 +174,8 @@ msgstr ""
 msgid "Password is not the same"
 msgstr ""
 
-#: inc/configure.php:108 inc/test.php:625 inc/test.php:690 index.php:677
-#: index.php:681
+#: inc/configure.php:108 inc/test.php:625 inc/test.php:690 index.php:692
+#: index.php:696
 msgid "Password Confirmation"
 msgstr ""
 
@@ -338,7 +338,7 @@ msgid "Readable"
 msgstr ""
 
 #: inc/configure.php:477 inc/test.php:509 inc/test.php:510
-#: inc/users.pml.php:422 index.php:715
+#: inc/users.pml.php:422 index.php:730
 msgid "Yes"
 msgstr ""
 
@@ -399,46 +399,46 @@ msgstr ""
 msgid "Please refresh the page."
 msgstr ""
 
-#: inc/getlog.pml.php:113
+#: inc/getlog.pml.php:109
 #, php-format
 msgid ""
 "File ID <code>%s</code> does not exist, please review your configuration "
 "file and stop playing!"
 msgstr ""
 
-#: inc/getlog.pml.php:120
+#: inc/getlog.pml.php:116
 #, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist, please "
 "review your configuration file."
 msgstr ""
 
-#: inc/getlog.pml.php:127
+#: inc/getlog.pml.php:123
 msgid ""
 "Configuration file has changed and is buggy now. Please refresh the page."
 msgstr ""
 
-#: inc/getlog.pml.php:187
+#: inc/getlog.pml.php:183
 #, php-format
 msgid "Log file has been rotated (previous size was %s and new one is %s)"
 msgstr ""
 
-#: inc/getlog.pml.php:211
+#: inc/getlog.pml.php:207
 #, php-format
 msgid ""
 "File <code>%s</code> for file ID <code>%s</code> does not exist anymore..."
 msgstr ""
 
-#: inc/getlog.pml.php:215
+#: inc/getlog.pml.php:211
 #, php-format
 msgid "Unknown error %s"
 msgstr ""
 
-#: inc/getlog.pml.php:233
+#: inc/getlog.pml.php:229
 msgid "Log file has been rotated"
 msgstr ""
 
-#: inc/getlog.pml.php:267
+#: inc/getlog.pml.php:263
 #, php-format
 msgid ""
 "%s in <code>%sms</code> with <code>%s</code> of logs, <code>%s</code> "
@@ -447,47 +447,47 @@ msgid ""
 "%s</code>%s"
 msgstr ""
 
-#: inc/getlog.pml.php:271
+#: inc/getlog.pml.php:267
 #, php-format
 msgid "%s new logs found"
 msgstr ""
 
-#: inc/getlog.pml.php:274
+#: inc/getlog.pml.php:270
 msgid "no new log found"
 msgstr ""
 
-#: inc/getlog.pml.php:275
+#: inc/getlog.pml.php:271
 msgid "1 new log found"
 msgstr ""
 
-#: inc/getlog.pml.php:280
+#: inc/getlog.pml.php:276
 #, php-format
 msgid "%s old logs found"
 msgstr ""
 
-#: inc/getlog.pml.php:283
+#: inc/getlog.pml.php:279
 msgid "no old log found"
 msgstr ""
 
-#: inc/getlog.pml.php:284
+#: inc/getlog.pml.php:280
 msgid "1 olg log found"
 msgstr ""
 
-#: inc/getlog.pml.php:296
+#: inc/getlog.pml.php:292
 #, php-format
 msgid "log type is <code>%s</code>"
 msgstr ""
 
-#: inc/global.inc.php:501 inc/global.inc.php:509
+#: inc/global.inc.php:505 inc/global.inc.php:513
 msgid "No file is defined in <code>files</code> array"
 msgstr ""
 
-#: inc/global.inc.php:518
+#: inc/global.inc.php:522
 #, php-format
 msgid "<code>%s</code> is mandatory for file ID <code>%s</code>"
 msgstr ""
 
-#: inc/global.inc.php:616
+#: inc/global.inc.php:620
 msgid "B KBMBGBTBPB"
 msgstr ""
 
@@ -654,7 +654,7 @@ msgstr ""
 msgid "Use CTRL-R shortcut instead of clicking on this button"
 msgstr ""
 
-#: inc/test.php:293 index.php:467 index.php:487 index.php:536
+#: inc/test.php:293 index.php:482 index.php:502 index.php:551
 msgid "Loading..."
 msgstr ""
 
@@ -734,89 +734,134 @@ msgstr ""
 msgid "This feature is only available when authentication is enabled."
 msgstr ""
 
-#: inc/upgrade.pml.php:25
+#: inc/upgrade.pml.php:37 inc/upgrade.pml.php:42
+msgid "GIT is no more availble, please refresh the page"
+msgstr ""
+
+#: inc/upgrade.pml.php:71
 #, php-format
 msgid "Current version %s"
 msgstr ""
 
-#: inc/upgrade.pml.php:30
+#: inc/upgrade.pml.php:76
 msgid "Unable to check your current version!"
 msgstr ""
 
-#: inc/upgrade.pml.php:110
+#: inc/upgrade.pml.php:156
 msgid "Messages from the development team"
 msgstr ""
 
-#: inc/upgrade.pml.php:124
+#: inc/upgrade.pml.php:170
 msgid "Mark as read"
 msgstr ""
 
-#: inc/upgrade.pml.php:149 inc/upgrade.pml.php:155
+#: inc/upgrade.pml.php:195 inc/upgrade.pml.php:201
 #, php-format
 msgid ""
 "Error while fetching URL %s from the server hosting this Pimp my Log "
 "instance."
 msgstr ""
 
-#: inc/upgrade.pml.php:149 inc/upgrade.pml.php:155
+#: inc/upgrade.pml.php:195 inc/upgrade.pml.php:201
 msgid "Remote version broken!"
 msgstr ""
 
-#: inc/upgrade.pml.php:176
+#: inc/upgrade.pml.php:222
 #, php-format
 msgid "Version %s released on %s"
 msgstr ""
 
-#: inc/upgrade.pml.php:177
+#: inc/upgrade.pml.php:223
 #, php-format
 msgid "Version %s"
 msgstr ""
 
-#: inc/upgrade.pml.php:213
+#: inc/upgrade.pml.php:259
 msgid "An upgrade is available !"
 msgstr ""
 
-#: inc/upgrade.pml.php:214
+#: inc/upgrade.pml.php:260
 #, php-format
 msgid "You have version %s and version %s is available"
 msgstr ""
 
-#: inc/upgrade.pml.php:215
+#: inc/upgrade.pml.php:261
 msgid "release notes"
 msgstr ""
 
-#: inc/upgrade.pml.php:217
+#: inc/upgrade.pml.php:267
+#, php-format
 msgid ""
-"Simply <code>git pull</code> in your directory or <a href=\"http://pimpmylog."
-"com/getting-started/#update\" target=\"doc\" class=\"alert-link\">follow "
-"instructions here</a>"
+"Simply <code>git pull</code> in your directory or follow instructions %shere"
+"%s"
 msgstr ""
 
-#: inc/upgrade.pml.php:221
+#: inc/upgrade.pml.php:271 inc/upgrade.pml.php:290 inc/upgrade.pml.php:345
+#: inc/upgrade.pml.php:357
 msgid "Skip this upgrade"
 msgstr ""
 
-#: inc/upgrade.pml.php:230
+#: inc/upgrade.pml.php:287
+msgid "Upgrading..."
+msgstr ""
+
+#: inc/upgrade.pml.php:287
+msgid "Upgrade now"
+msgstr ""
+
+#: inc/upgrade.pml.php:298
+#, php-format
+msgid ""
+"Your GIT installation cannot be upgraded automatically because of %sthese "
+"problems%s."
+msgstr ""
+
+#: inc/upgrade.pml.php:305
+msgid "These files are not writable by the web server user:"
+msgstr ""
+
+#: inc/upgrade.pml.php:315
+msgid "The <code>git</code> command is not in the webserver path"
+msgstr ""
+
+#: inc/upgrade.pml.php:320
+msgid "You have modified these files:"
+msgstr ""
+
+#: inc/upgrade.pml.php:330
+msgid "Unknown error, here is the problem output:"
+msgstr ""
+
+#: inc/upgrade.pml.php:341
+msgid "Simply <code>git pull</code> in your installation directory."
+msgstr ""
+
+#: inc/upgrade.pml.php:353
+#, php-format
+msgid "Follow instructions %shere%s"
+msgstr ""
+
+#: inc/upgrade.pml.php:366
 msgid "You should upgrade right now:"
 msgstr ""
 
-#: inc/upgrade.pml.php:241
+#: inc/upgrade.pml.php:377
 #, php-format
 msgid "Your version %s is out of date"
 msgstr ""
 
-#: inc/upgrade.pml.php:246
+#: inc/upgrade.pml.php:382
 #, php-format
 msgid "Your version %s is up to date"
 msgstr ""
 
-#: inc/upgrade.pml.php:252
+#: inc/upgrade.pml.php:388
 #, php-format
 msgid ""
 "Unable to fetch URL %s from the server hosting this Pimp my Log instance."
 msgstr ""
 
-#: inc/upgrade.pml.php:252
+#: inc/upgrade.pml.php:388
 msgid "Unable to check remote version!"
 msgstr ""
 
@@ -862,7 +907,7 @@ msgstr ""
 msgid "Select which log files can be viewed without being logged."
 msgstr ""
 
-#: inc/users.pml.php:398 index.php:704
+#: inc/users.pml.php:398 index.php:719
 msgid "Toggle all log files"
 msgstr ""
 
@@ -1020,7 +1065,7 @@ msgstr ""
 msgid "%s logs displayed,"
 msgstr ""
 
-#: index.php:123 index.php:559
+#: index.php:123 index.php:574
 msgid "Form is invalid:"
 msgstr ""
 
@@ -1084,7 +1129,7 @@ msgstr ""
 msgid "Result copied!"
 msgstr ""
 
-#: index.php:139 index.php:162 index.php:687
+#: index.php:139 index.php:162 index.php:702
 msgid "Roles"
 msgstr ""
 
@@ -1123,7 +1168,7 @@ msgstr ""
 msgid "URL copied!"
 msgstr ""
 
-#: index.php:150 index.php:691
+#: index.php:150 index.php:706
 msgid "User"
 msgstr ""
 
@@ -1155,7 +1200,7 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-#: index.php:165 index.php:626
+#: index.php:165 index.php:641
 msgid "Users"
 msgstr ""
 
@@ -1268,7 +1313,7 @@ msgstr ""
 msgid "Change timezone..."
 msgstr ""
 
-#: index.php:414 index.php:562
+#: index.php:414 index.php:577
 #, php-format
 msgid "You are currently connected as %s"
 msgstr ""
@@ -1289,7 +1334,7 @@ msgstr ""
 msgid "Click here to view your profile"
 msgstr ""
 
-#: index.php:422 index.php:602
+#: index.php:422 index.php:617
 msgid "Profile"
 msgstr ""
 
@@ -1297,7 +1342,7 @@ msgstr ""
 msgid "Click here to change your password"
 msgstr ""
 
-#: index.php:423 index.php:555
+#: index.php:423 index.php:570
 msgid "Change password"
 msgstr ""
 
@@ -1305,158 +1350,163 @@ msgstr ""
 msgid "Click here to sign out"
 msgstr ""
 
-#: index.php:467 index.php:487
+#: index.php:450
+#, php-format
+msgid "Welcome in version %s"
+msgstr ""
+
+#: index.php:482 index.php:502
 msgid "No more data"
 msgstr ""
 
-#: index.php:467 index.php:487
+#: index.php:482 index.php:502
 msgid "Load more"
 msgstr ""
 
-#: index.php:472 index.php:506
+#: index.php:487 index.php:521
 msgid "Export"
 msgstr ""
 
-#: index.php:474
+#: index.php:489
 msgid "ATOM"
 msgstr ""
 
-#: index.php:475
+#: index.php:490
 msgid "CSV"
 msgstr ""
 
-#: index.php:476
+#: index.php:491
 msgid "JSON"
 msgstr ""
 
-#: index.php:477
+#: index.php:492
 msgid "JSONP (with callback)"
 msgstr ""
 
-#: index.php:478
+#: index.php:493
 msgid "JSON Pretty Print"
 msgstr ""
 
-#: index.php:479
+#: index.php:494
 msgid "RSS"
 msgstr ""
 
-#: index.php:480
+#: index.php:495
 msgid "XML"
 msgstr ""
 
-#: index.php:505 index.php:541 index.php:554 index.php:588 index.php:601
-#: index.php:609 index.php:624 index.php:640 index.php:748 index.php:757
+#: index.php:520 index.php:556 index.php:569 index.php:603 index.php:616
+#: index.php:624 index.php:639 index.php:655 index.php:763 index.php:772
 msgid "Close"
 msgstr ""
 
-#: index.php:509
+#: index.php:524
 msgid "Webservice URL"
 msgstr ""
 
-#: index.php:510
+#: index.php:525
 msgid ""
 "Your URL seems to be local so it won't be reachable by external browsers and "
 "services"
 msgstr ""
 
-#: index.php:514
+#: index.php:529
 msgid "Open"
 msgstr ""
 
-#: index.php:518
+#: index.php:533
 msgid "Feel free to change these parameters in the URL:"
 msgstr ""
 
-#: index.php:520
+#: index.php:535
 msgid "language"
 msgstr ""
 
-#: index.php:521
+#: index.php:536
 msgid "timezone to convert dates"
 msgstr ""
 
-#: index.php:522
+#: index.php:537
 msgid "available formats are CSV, JSON, JSONPR and XML"
 msgstr ""
 
-#: index.php:523
+#: index.php:538
 msgid "the maximum count of returned log lines"
 msgstr ""
 
-#: index.php:524
+#: index.php:539
 msgid ""
 "the timeout in seconds to return log lines. Increase this value for big "
 "counts or when using search"
 msgstr ""
 
-#: index.php:525
+#: index.php:540
 msgid ""
 "search this value in log lines. It can be a regular expression or a regex one"
 msgstr ""
 
-#: index.php:526
+#: index.php:541
 msgid ""
 "this field is optional and is used to specify a callback function when "
 "format is JSONP"
 msgstr ""
 
-#: index.php:532
+#: index.php:547
 msgid "Current result"
 msgstr ""
 
-#: index.php:536
+#: index.php:551
 msgid "Refresh"
 msgstr ""
 
-#: index.php:568
+#: index.php:583
 msgid "Current password"
 msgstr ""
 
-#: index.php:575
+#: index.php:590
 msgid "New password"
 msgstr ""
 
-#: index.php:582
+#: index.php:597
 msgid "New password confirmation"
 msgstr ""
 
-#: index.php:589 index.php:610 index.php:731 index.php:749
+#: index.php:604 index.php:625 index.php:746 index.php:764
 msgid "Saving..."
 msgstr ""
 
-#: index.php:589 index.php:610 index.php:731 index.php:749
+#: index.php:604 index.php:625 index.php:746 index.php:764
 msgid "Save"
 msgstr ""
 
-#: index.php:627
+#: index.php:642
 msgid "Anonymous access"
 msgstr ""
 
-#: index.php:628
+#: index.php:643
 msgid "History"
 msgstr ""
 
-#: index.php:649 index.php:729
+#: index.php:664 index.php:744
 msgid "« Back"
 msgstr ""
 
-#: index.php:650
+#: index.php:665
 msgid "Edit"
 msgstr ""
 
-#: index.php:683
+#: index.php:698
 msgid "Leave password fields blank if you don't want to change it"
 msgstr ""
 
-#: index.php:694
+#: index.php:709
 msgid "Admin"
 msgstr ""
 
-#: index.php:703
+#: index.php:718
 msgid "Select which log files user can view"
 msgstr ""
 
-#: index.php:730
+#: index.php:745
 msgid "Cancel"
 msgstr ""

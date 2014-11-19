@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6 - 05cba1eedc758785c24d4b3d505122b3f26c770b*/
+/*! pimpmylog - 1.5.9 - bd60bfd7a536e1fb4e467a4aa5cc99357abae973*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -207,7 +207,7 @@ $csrf = csrf_get();
 			export_default       = <?php echo ( EXPORT === true ) ? 'true' : 'false';?>;
 			notification_default = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;</script></head><body><!--[if lt IE 8]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="logo" title="<?php _e('Reload the page with default parameters'); ?>"></div><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button><div class="navbar-brand"><span class="loader glyphicon glyphicon-refresh icon-spin" style="display:none"></span> <span class="loader glyphicon glyphicon-repeat" title="<?php _h( 'Click to refresh or press the R key' );?>" id="refresh"></span> <a href="?"><?php echo NAV_TITLE;?></a></div></div><div class="navbar-collapse collapse"><?php if ( count($files) > 1 ) { ?><?php if ( FILE_SELECTOR == 'bs' ) { ?><ul class="nav navbar-nav"><li class="dropdown" title="<?php _h( 'Select a log file to display' );?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a><ul class="dropdown-menu scrollable-menu"><?php
 									foreach ( $files as $file_id => $file ) {
-										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active"' : '';
+										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active' : '';
 										echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
 										echo ( isset( $file['included_from'] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $file['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
 										echo '">' . $file['display'] . '</a></li>';
