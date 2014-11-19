@@ -17,6 +17,26 @@ The file is composed by these 3 objects:
 
 # 1 - Globals
 
+<a name="AUTO_UPGRADE"></a>
+
+#### AUTO\_UPGRADE
+
+*Pimp My Log* gives you the ability to automatically upgrade via the interface.
+
+> **Note**
+>  
+> it only works for installations done via GIT and if your server is \*nix
+
+<!-- -->
+
+Default:
+
+```json
+"AUTO_UPGRADE" : false
+```
+
+---
+
 <a name="CHECK_UPGRADE"></a>
 <a name="checkupgrade"></a>
 
@@ -341,6 +361,56 @@ Default:
 
 ---
 
+<a name="TAG_DISPLAY_LOG_FILES_COUNT"></a>
+
+#### TAG\_DISPLAY\_LOG\_FILES\_COUNT
+
+Whether a log files count should be display next to each tag name.
+
+Default:
+
+```json
+"TAG_DISPLAY_LOG_FILES_COUNT" : true
+```
+
+---
+
+<a name="TAG_NOT_TAGGED_FILES_ON_TOP"></a>
+
+#### TAG\_NOT\_TAGGED\_FILES\_ON\_TOP
+
+Where are untagged files displayed ? On top of the tag list or on bottom ?
+
+Default:
+
+```json
+"TAG_NOT_TAGGED_FILES_ON_TOP" : true
+```
+
+---
+
+<a name="TAG_SORT_TAG"></a>
+
+#### TAG\_SORT\_TAG
+
+How to sort tags in the tag list?
+
+Possible values are :
+
+- `default` : sort tags as they are defined in the configuration file
+- `display-asc` : sort tags ascendant
+- `display-insensitive` : sort tags ascendant by case insensitive
+- `display-asc` : sort tags descendant
+- `display-insensitive` : sort tags descendant by case insensitive
+
+Default:
+
+```json
+"TAG_SORT_TAG" : "display-asc"
+```
+
+---
+
 <a name="TITLE"></a>
 
 #### TITLE
@@ -395,6 +465,7 @@ Here is `config.user.d/httpd.json` for example :
         "max"       : 10,
         "export"    : true,
         "notify"    : true,
+        "tags"    : [ "Apache" , "Error" ],
         "multiline" : "",
         "format"    : {
             "export_title" : "Log",
@@ -527,6 +598,7 @@ The `file` object structure is something like this:
 "refresh"   : 5,
 "max"       : 10,
 "notify"    : true,
+"tags"      : [ "Apache" , "Error" ],
 "export"    : true,
 "multiline" : "",
 "order"     : -1,
@@ -667,6 +739,22 @@ Example:
 "order" : "Log"
 ```
 
+#### tags <small>[optional][since v1.6]</small>
+
+A list of tags or a single tag.
+
+Example:
+
+```json
+"tags" : "Apache"
+```
+
+or 
+
+```json
+"tags" : ["Apache","Several","Tags"]
+```
+
 #### thinit <small>[optional][since v1.1.1]</small>
 
 This value defines the default columns to display when loading the selected file. This is an array of columns defined in the `format` key below.
@@ -756,7 +844,7 @@ You can deal with odd date format as in the following example by capturing :
 - `H` : 24-hour format of an hour with leading zeros *eg*:`00` through `23`
 - `i` : Minutes with leading zeros *eg*:`00` through `59`
 - `s` : Seconds with leading zeros *eg*:`00` through `59`
-- `z` : Time zone offset *eg*:`+0300` or `Europe/Paris`
+- `z` : Time zone offset *eg*:`+0300` or `Europe/Paris` <small>[since v1.6]</small>
 
 > **Warning**  
 > 

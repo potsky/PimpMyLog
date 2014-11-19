@@ -52,15 +52,21 @@ A special thanks goes out to :
 
 *Pimp my Log* uses these tools, so really thank you to :
 
-* [Bootstrap Team](https://github.com/twbs?tab=members) for their front-end framework [Bootstrap](http://getbootstrap.com/) which includes marvelous icons done by [Glyphicons](http://glyphicons.com/)
+* [Bootstrap](https://github.com/twbs?tab=members) for their front-end framework [Bootstrap](http://getbootstrap.com/) which includes marvelous icons done by [Glyphicons](http://glyphicons.com/)
+* [Bootstrap Table](http://wenzhixin.net.cn/p/bootstrap-table/docs/examples.html) by [wenzhixin](http://wenzhixin.net.cn)
 * [hook.js](http://usehook.com/) by [Jordan Singer](https://github.com/jordansinger)
 * [Initializer](http://www.initializr.com/)
-* [jQuery](http://jquery.com/) of course
 * [jQuery Cookie](https://github.com/carhartl/jquery-cookie)
+* [jQuery](http://jquery.com/) of course
 * [Modernizr](http://modernizr.com/)
 * [Numeral.js](http://numeraljs.com/) by [Adam Draper](https://github.com/adamwdraper)
 * [PHP](http://www.php.net) of course
+* [Respond.js](https://github.com/scottjehl/Respond) by [Scott Jehl](http://scottjehl.com)
+* [Smartmenus](http://www.smartmenus.org) by [Vadikom](http://vadikom.com)
+* [sprintf.js](https://github.com/alexei/sprintf.js) by [Alexandru Marasteanu](http://alexei.ro/)
 * [ua-parser.js](http://faisalman.github.io/ua-parser-js/) by [Faisal Salman](https://github.com/faisalman)
+* [zClip](http://www.steamdev.com/zclip/) by [Steamdev](http://www.steamdev.com)
+
 
 ---
 
