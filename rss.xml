@@ -5,9 +5,39 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2014-11-17T13:22:53+01:00</lastBuildDate>
-        <pubDate>2014-11-17T13:22:53+01:00</pubDate>
+        <lastBuildDate>2014-11-19T18:08:09+01:00</lastBuildDate>
+        <pubDate>2014-11-19T18:08:09+01:00</pubDate>
         <ttl>1800</ttl>
+
+        <item>
+                <title>Version 1.6 released</title>
+                <description>&lt;p&gt;Hi folks!&lt;/p&gt;
+
+&lt;p&gt;This new version fixes several bugs and let you tag your log files to display folders instead of a long list of logs.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;To add tags right now, just add &lt;code&gt;tags&lt;/code&gt; configuration parameter like this for example :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;display&amp;quot;   : &amp;quot;Apache Error #1&amp;quot;,
+&amp;quot;path&amp;quot;      : &amp;quot;\/opt\/local\/apache2\/logs\/error_log&amp;quot;,
+&amp;quot;refresh&amp;quot;   : 5,
+&amp;quot;max&amp;quot;       : 10,
+&amp;quot;notify&amp;quot;    : true,
+&amp;quot;tags&amp;quot;      : [ &amp;quot;Apache&amp;quot; , &amp;quot;Error&amp;quot; ],
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or if you only want to add one tag :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;tags&amp;quot;      : &amp;quot;What You Want&amp;quot;,
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.6.0&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.5.2&quot;&gt;&lt;/div&gt;
+</description>
+                <link>http://pimpmylog.com/general/2014/11/18/version-1.6</link>
+                <guid>http://pimpmylog.com/general/2014/11/18/version-1.6</guid>
+                <pubDate>2014-11-18T00:00:00+01:00</pubDate>
+        </item>
 
         <item>
                 <title>Version 1.5.1 released</title>
