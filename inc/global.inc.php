@@ -88,10 +88,9 @@ define( 'CONFIG_FILE_TEMP'                   , 'config.user.tmp.php' );
 */
 define( 'DEFAULT_AUTH_LOG_FILE_COUNT'         , 100 );
 define( 'DEFAULT_AUTO_UPGRADE'                , false );
-define( 'DEFAULT_UPGRADE_MANUALLY_URL'        , 'http://pimpmylog.com/getting-started/#update' );
 define( 'DEFAULT_CHECK_UPGRADE'               , true );
-define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
 define( 'DEFAULT_EXPORT'                      , true );
+define( 'DEFAULT_FILE_SELECTOR'               , 'bs' );
 define( 'DEFAULT_FOOTER'                      , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . YEAR . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>');
 define( 'DEFAULT_FORGOTTEN_YOUR_PASSWORD_URL' , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
 define( 'DEFAULT_GEOIP_URL'                   , 'http://www.geoiptool.com/en/?IP=%p' );
@@ -102,14 +101,18 @@ define( 'DEFAULT_LOGS_MAX'                    , 50 );
 define( 'DEFAULT_LOGS_REFRESH'                , 0 );
 define( 'DEFAULT_MAX_SEARCH_LOG_TIME'         , 5 );
 define( 'DEFAULT_NAV_TITLE'                   , '' );
-define( 'DEFAULT_NOTIFICATION'                , false );
+define( 'DEFAULT_NOTIFICATION'                , true );
 define( 'DEFAULT_NOTIFICATION_TITLE'          , 'New logs [%f]' );
 define( 'DEFAULT_PIMPMYLOG_ISSUE_LINK'        , 'https://github.com/potsky/PimpMyLog/issues/' );
 define( 'DEFAULT_PIMPMYLOG_VERSION_URL'       , 'http://demo.pimpmylog.com/version.js' );
 define( 'DEFAULT_PULL_TO_REFRESH'             , true );
 define( 'DEFAULT_SORT_LOG_FILES'              , 'default' );
+define( 'DEFAULT_TAG_DISPLAY_LOG_FILES_COUNT' , true );
+define( 'DEFAULT_TAG_NOT_TAGGED_FILES_ON_TOP' , true );
+define( 'DEFAULT_TAG_SORT_TAG'                , 'displayiasc' );
 define( 'DEFAULT_TITLE'                       , 'Pimp my Log' );
 define( 'DEFAULT_TITLE_FILE'                  , 'Pimp my Log [%f]' );
+define( 'DEFAULT_UPGRADE_MANUALLY_URL'        , 'http://pimpmylog.com/getting-started/#update' );
 define( 'DEFAULT_USER_CONFIGURATION_DIR'      , 'config.user.d' );
 
 
@@ -238,6 +241,9 @@ function load_default_constants()
         'PIMPMYLOG_VERSION_URL',
         'PULL_TO_REFRESH',
         'SORT_LOG_FILES',
+        'TAG_SORT_TAG',
+        'TAG_NOT_TAGGED_FILES_ON_TOP',
+        'TAG_DISPLAY_LOG_FILES_COUNT',
         'TITLE',
         'TITLE_FILE',
         'UPGRADE_MANUALLY_URL',
@@ -457,8 +463,7 @@ function config_load($load_user_configuration_dir = true)
         $files = $final;
     }
 
-
-    // Finaly sort files
+    // Finally sort files
     if ( ! function_exists( 'display_asc' ) )              { function display_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
     if ( ! function_exists( 'display_desc' ) )             { function display_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
     if ( ! function_exists( 'display_insensitive_asc' ) )  { function display_insensitive_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
@@ -540,6 +545,57 @@ function config_check($files)
         return $errors;
     }
 }
+
+/**
+ * Extract tags from the confiuration files
+ *
+ * @param   array  $files  the files configuration array
+ *
+ * @return  array          an array of tags with fileids
+ */
+function config_extract_tags( $files ) {
+    $tags = array( '_' => array() );
+
+    foreach ( $files as $fileid => $file ) {
+        // Tag found
+        if ( isset( $file['tags'] ) ) {
+            if ( is_array( $file['tags'] ) ) {
+                foreach ( $file['tags'] as $tag ) {
+                    $tags[ strval( $tag ) ][] = $fileid;
+                }
+            } else {
+                $tags[ strval( $file['tags'] ) ][] = $fileid;
+            }
+        }
+        // No tag
+        else {
+            $tags[ '_' ][] = $fileid;
+        }
+    }
+
+    switch ( trim( str_replace( array( '-' , '_' , ' ' , 'nsensitive' ) , '' , TAG_SORT_TAG ) ) ) {
+        case 'display':
+        case 'displayasc':
+            ksort( $tags , SORT_NATURAL );
+            break;
+        case 'displayi':
+        case 'displayiasc':
+            ksort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+            break;
+        case 'displaydesc':
+            krsort( $tags , SORT_NATURAL );
+            break;
+        case 'displayidesc':
+            krsort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+            break;
+        default:
+            # do not sort
+            break;
+    }
+
+    return $tags;
+}
+
 
 /**
  * Get the list of refresh duration

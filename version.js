@@ -7,9 +7,10 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
-		"1.5.9" : {
+		"1.6.0" : {
 			"released" : "2014-11-18",
 			"new" : [
+				"Tag your log files and organize them in folders (#80)",
 				"Auto-upgrade fr GIT installs (#81)"
 			],
 			"fixed" : [

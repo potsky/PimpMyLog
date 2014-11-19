@@ -241,29 +241,60 @@ $csrf = csrf_get();
 
 			<div class="navbar-collapse collapse">
 
-				<?php if ( count($files) > 1 ) { ?>
+				<?php if ( count( $files ) > 1 ) : ?>
 
-					<?php if ( FILE_SELECTOR == 'bs' ) { ?>
+					<?php if ( FILE_SELECTOR == 'bs' ) : ?>
 
 						<ul class="nav navbar-nav">
 
 							<li class="dropdown" title="<?php _h( 'Select a log file to display' );?>">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a>
-								<ul class="dropdown-menu scrollable-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span></a>
+								<ul class="dropdown-menu">
 									<?php
-									foreach ( $files as $file_id => $file ) {
-										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active' : '';
-										echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
-										echo ( isset( $file['included_from'] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $file['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
-										echo '">' . $file['display'] . '</a></li>';
+
+									$notagged = '';
+									$tagged   = '';
+									foreach ( config_extract_tags( $files ) as $tag => $f ) {
+										if ( $tag === '_' ) {
+											foreach ( $f as $file_id ) {
+												$selected  = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] === $file_id ) ) ? ' active' : '';
+												$notagged .= '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
+												$notagged .= ( isset( $files[ $file_id ][ 'included_from' ] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $files[ $file_id ]['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
+												$notagged .= '">' . $files[ $file_id ]['display'] . '</a></li>';
+											}
+										} else {
+											$tagged .= '<li class="tag-' . get_slug( $tag ) . '"><a href="#">' . h( $tag );
+											if ( TAG_DISPLAY_LOG_FILES_COUNT === true ) $tagged .= ' <small class="text-muted">(' . count( $f ) . ')</small>';
+											$tagged .= '</a>';
+											$tagged .= 	'<ul class="dropdown-menu">';
+											foreach ( $f as $file_id ) {
+												$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] === $file_id ) ) ? ' active' : '';
+												$tagged  .= '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
+												$tagged  .= ( isset( $files[ $file_id ]['included_from'] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $files[ $file_id ]['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
+												$tagged  .= '">' . $files[ $file_id ]['display'] . '</a></li>';
+											}
+											$tagged .= 	'</ul>';
+											$tagged .= '</li>';
+										}
 									}
+
+									if ( TAG_NOT_TAGGED_FILES_ON_TOP === true ) {
+										echo $notagged;
+										if ( ( ! empty( $tagged ) ) && ( ! empty( $notagged ) ) ) echo '<li class="divider"></li>';
+										echo $tagged;
+									} else {
+										echo $tagged;
+										if ( ( ! empty( $tagged ) ) && ( ! empty( $notagged ) ) ) echo '<li class="divider"></li>';
+										echo $notagged;
+									}
+
 									?>
 								</ul>
 							</li>
 
 						</ul>
 
-					<?php } else { ?>
+					<?php else : ?>
 
 		    			<form class="navbar-form navbar-left">
 							<div class="form-group">
@@ -278,22 +309,25 @@ $csrf = csrf_get();
 							</div>&nbsp;
 					    </form>
 
-					<?php } ?>
+					<?php endif; ?>
 
-				<?php
-				} else {
+				<?php else : ?>
+
+					<?php
 					foreach ( $files as $file_id => $file ) {
 						$d = $file['display'];
 						$i = h( $file_id );
 						break;
 					}
-				?>
+					?>
+
 					<ul class="nav navbar-nav">
 						<li id="singlelog" data-file="<?php echo $i; ?>">
 							<a href="#"><?php echo $d; ?></a>
 						</li>
 					</ul>
-				<?php } ?>
+
+				<?php endif; ?>
 
 				<form class="navbar-form navbar-right">
 

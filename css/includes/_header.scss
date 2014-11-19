@@ -1,0 +1,103 @@
+// Dropdown menus
+.dropdown-menu {
+	> li > a {
+	    display: block;
+	    padding: 5px 20px;
+	}
+}
+
+/* Refresh button */
+.loader {
+	margin-left : 40px;
+	width       : 20px;
+	@media (max-width : 767px) {
+		margin-left : 130px;
+	}
+}
+
+/* Retina logo */
+.logo {
+	position        : absolute;
+	left            : 7px;
+	top             : 7px;
+	width           : 36px;
+	height          : 36px;
+	cursor          : pointer;
+	z-index         : 10000;
+	background      : url(../img/icon36.png) no-repeat;
+	background-size : 36px 36px;
+
+	@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+			only screen and (-o-min-device-pixel-ratio: 3/2),
+			only screen and (min--moz-device-pixel-ratio: 1.5),
+			only screen and (min-device-pixel-ratio: 1.5) {
+		background      : url(../img/icon72.png) no-repeat;
+		background-size : 36px 36px;
+	}
+}
+
+/* Settings menu items */
+.cogmenu li,
+.thmenu li {
+	padding-bottom : 2px;
+	text-align     : left;
+}
+
+.cogon {
+	color: $brand-success!important;
+}
+
+.cogoff {
+	color: $brand-danger!important;
+}
+
+.thmenuon {
+	color: $brand-success!important;
+}
+
+.thmenuoff {
+	color: $brand-danger!important;
+}
+
+/* Reset button in search */
+.clearable {
+	background-image    : url(../img/inputclear.png);
+	background-repeat   : no-repeat;
+	background-position : right -10px center;
+	transition          : background 0.4s;
+
+	&.x {
+		background-position : right 5px center;
+	}
+	&.onX {
+		cursor : pointer;
+	}
+}
+
+/* Spinning refresh button while loading */
+.icon-spin {
+	-webkit-animation: kf-spin 2s infinite linear;
+			animation: kf-spin 2s infinite linear;
+}
+@-webkit-keyframes kf-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+@keyframes kf-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+

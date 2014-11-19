@@ -106,8 +106,6 @@ switch ( @$_POST['action'] ) {
 				);
 				*/
 				$method = 'nd';
-// TODO: enlever le 1er
-				$method = 'nw';
 				break;
 			case 'CSV':
 				$method = 'nd';

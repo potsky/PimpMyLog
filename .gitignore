@@ -9,7 +9,7 @@ Thumbs.db
 .cli_fake_session
 _cli_fake_session
 
-/todo.*.txt
+/todo.*.todo
 /.sass-cache
 /*.user.php
 /*.user.css

@@ -1,0 +1,40 @@
+// Pull to refresh under header and mobile menu
+.hook {
+	z-index: 999!important;
+}
+
+// Sort table jquery plugin
+div.th-inner.sortable {
+	color : $link-color;
+}
+th a:hover, div.th-inner.sortable:hover {
+	text-decoration : none;
+	color           : $brand-primary;
+}
+
+code {
+	font-size: 100%;
+}
+
+
+/*
+Override the success color for input.
+This class is used in the search input field when a regular expression is detected
+*/
+.has-success .form-control {
+	border-color       : #ff00ff;
+	-webkit-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
+	   -moz-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
+	        box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
+}
+.has-success .form-control:focus {
+	border-color       : #ff00ff;
+	-webkit-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
+	   -moz-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
+	        box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
+}
+
+/* IE8 Compat for menu popover */
+.navbar {
+	filter : none !important;
+}

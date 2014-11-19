@@ -20,32 +20,12 @@ $font-family-sans-serif           : 'ubuntulight', "Helvetica Neue", Helvetica, 
 $font-family-monospace            : 'ubuntu_monoregular', Menlo, Monaco, Consolas, "Courier New", monospace;
 $blockquote-font-size             : $font-size-base;
 
-@font-face {
-    font-family: 'ubuntu_monoregular';
-    src: url('../fonts/ubuntumono-r-webfont.eot');
-    src: url('../fonts/ubuntumono-r-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/ubuntumono-r-webfont.woff2') format('woff2'),
-         url('../fonts/ubuntumono-r-webfont.woff') format('woff'),
-         url('../fonts/ubuntumono-r-webfont.ttf') format('truetype'),
-         url('../fonts/ubuntumono-r-webfont.svg#ubuntu_monoregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
 
-@font-face {
-    font-family: 'ubuntulight';
-    src: url('../fonts/ubuntu-l-webfont.eot');
-    src: url('../fonts/ubuntu-l-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/ubuntu-l-webfont.woff2') format('woff2'),
-         url('../fonts/ubuntu-l-webfont.woff') format('woff'),
-         url('../fonts/ubuntu-l-webfont.ttf') format('truetype'),
-         url('../fonts/ubuntu-l-webfont.svg#ubuntulight') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-// Bootstrap
+@import "../css/includes/fonts";
 @import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "../css/includes/tricks";
+@import "../css/includes/buttons";
+@import "../css/includes/header";
 
 // Add padding to body to move the main content on bottom of header bar
 body {
@@ -53,70 +33,10 @@ body {
 	padding-bottom : 20px;
 }
 
-// Buttons in the header bar
-.btn-menu {
-	display          : inline-block;
-	margin-bottom    : 0;
-	font-weight      : $btn-font-weight;
-	text-align       : center;
-	vertical-align   : middle;
-	cursor           : pointer;
-	background-image : none;
-	border           : 1px solid transparent;
-	white-space      : nowrap;
-	text-transform   : uppercase;
-	@include button-size( 5px , 10px , $font-size-base, $line-height-base, 3px);
-	@include user-select(none);
-	padding-top    : 4px!important;
-	padding-bottom : 5px!important;
-
-	&:hover {
-		text-decoration: none;
-	}
-}
-
-// Buttons
-.btn {
-	text-transform : uppercase;
-	font-size      : 1em;
-	font-size      : 1em;
-	line-height    : 2em;
-	padding-left   : 1.5em;
-	padding-right  : 1.5em;
-}
-
-// Pull to refresh under header and mobile menu
-.hook {
-	z-index: 999!important;
-}
-
-// Sort table jquery plugin
-div.th-inner.sortable {
-	color : $link-color;
-}
-th a:hover, div.th-inner.sortable:hover {
-	text-decoration : none;
-	color           : $brand-primary;
-}
-code {
-	font-size: 100%;
-}
-
-// Dropdown menus
-.dropdown-menu {
-  > li > a {
-    display: block;
-    padding: 5px 20px;
-  }
-}
-
-// Bootstrap dropdown log files menu
-// You can overwrite the max-height css parameter to change the visible height
-.scrollable-menu {
-	height     : auto;
-	max-height : 400px;
-	overflow-x : hidden;
-	overflow-y : auto;
+// Used when user select a wide view
+.containerwide {
+	margin-left : 2%;
+	max-width   : 96%;
 }
 
 // Result window when exporting
@@ -127,6 +47,7 @@ code {
 	overflow-x : hidden;
 	overflow-y : auto;
 }
+
 
 // Big design for configuration part
 .jumbotronflat {
@@ -140,98 +61,12 @@ code {
 	}
 }
 
-/*
-Override the success color for input.
-This class is used in the search input field when a regular expression is detected
-*/
-.has-success .form-control {
-	border-color       : #ff00ff;
-	-webkit-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
-	   -moz-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
-	        box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #8822ff;
-}
-.has-success .form-control:focus {
-	border-color       : #ff00ff;
-	-webkit-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
-	   -moz-box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
-	        box-shadow : inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 20px #8800ff;
-}
-
-/* Refresh button */
-.loader {
-	margin-left : 40px;
-	width       : 20px;
-	@media (max-width : 767px) {
-		margin-left : 130px;
-	}
-}
-
-/* Retina logo */
-.logo {
-	position : absolute;
-	left     : 7px;
-	top      : 7px;
-	width    : 36px;
-	height   : 36px;
-	cursor   : pointer;
-	z-index  : 10000;
-
-	background      : url(../img/icon36.png) no-repeat;
-	background-size : 36px 36px;
-
-	@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-			only screen and (-o-min-device-pixel-ratio: 3/2),
-			only screen and (min--moz-device-pixel-ratio: 1.5),
-			only screen and (min-device-pixel-ratio: 1.5) {
-		background      : url(../img/icon72.png) no-repeat;
-		background-size : 36px 36px;
-	}
-}
-
-.cogmenu li, .thmenu li {
-	padding-bottom: 2px;
-	text-align: left;
-}
-
-.containerwide {
-	margin-left : 2%;
-	max-width   : 96%;
-}
-
-.cogon {
-	color: $brand-success!important;
-}
-
-.cogoff {
-	color: $brand-danger!important;
-}
-
-.thmenuon {
-	color: $brand-success!important;
-}
-
-.thmenuoff {
-	color: $brand-danger!important;
-}
-
+// Debugger test box
 textarea.test {
 	font-family : monospace, serif;
 }
 
-/* Reset button in search */
-.clearable {
-	background-image    : url(../img/inputclear.png);
-	background-repeat   : no-repeat;
-	background-position : right -10px center;
-	transition          : background 0.4s;
-}
-.clearable.x {
-	background-position : right 5px center;
-}
-.clearable.onX {
-	cursor : pointer;
-}
-
+// Used for the export result
 .hyphen {
 	white-space     : pre-wrap;
 	-ms-word-break  : break-all;
@@ -241,36 +76,3 @@ textarea.test {
 	-moz-hyphens    : auto;
 	hyphens         : auto;
 }
-
-/* IE8 Compat for menu popover */
-.navbar {
-	filter : none !important;
-}
-
-/* Spinning class from awesome fonts */
-.icon-spin {
-	-webkit-animation: kf-spin 2s infinite linear;
-			animation: kf-spin 2s infinite linear;
-}
-@-webkit-keyframes kf-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
-  }
-}
-@keyframes kf-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
-  }
-}
-
-

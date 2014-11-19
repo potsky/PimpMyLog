@@ -1,17 +1,17 @@
 {
-  "name"            : "pimpmylog",
-  "version"         : "1.0.0",
-  "devDependencies" : {
-    "respondJs"               : "~1",
-    "modernizr"               : "~2",
-    "numeral"                 : "~1",
-    "hook"                    : "*",
-    "ua-parser-js"            : "~0",
-    "jquery.cookie"           : "~1",
-    "jquery-zclip"            : "~1",
-    "bootstrap-sass-official" : "~3",
-    "bootstrap-table"         : "~1"
+  "name": "pimpmylog",
+  "version": "1.0.0",
+  "devDependencies": {
+    "respondJs": "~1",
+    "modernizr": "~2",
+    "numeral": "~1",
+    "hook": "*",
+    "ua-parser-js": "~0",
+    "jquery.cookie": "~1",
+    "jquery-zclip": "~1",
+    "bootstrap-sass-official": "~3",
+    "bootstrap-table": "~1",
+    "smartmenus": "~0.9.7"
   },
-  "dependencies" : {
-  }
+  "dependencies": {}
 }

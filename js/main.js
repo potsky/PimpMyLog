@@ -72,6 +72,11 @@ var clipboard_enable = function( btn , ctn , where , text ) {
 	});
 };
 
+/**
+ * Refresh button in the RSS exModal
+ *
+ * @return  {void}
+ */
 var refresh_rss = function() {
 	$('#exModalRefresh').button('loading');
 	$.ajax({
@@ -358,7 +363,8 @@ var add_column = function( target ) {
  */
 var set_title = function() {
 	"use strict";
-	document.title = title_file.replace( '%i' , file ).replace( '%f' , files[file].display );
+
+	document.title = title_file.replace( '%i' , file ).replace( '%f' , files[ file ].display );
 };
 
 
@@ -1123,7 +1129,7 @@ $(function() {
 			}
 
 			// File menu > init
-			$('#file_selector').text( $('.file_menup.active a').text() );
+			$('#file_selector').text( $('.file_menup.active:first a').text() );
 			file = $('.file_menup.active').data('file');
 			set_title();
 
@@ -1170,7 +1176,6 @@ $(function() {
 		notify();
 		get_logs();
 	});
-
 
 	// Parameters type cog on/off
 	$('.cog').click( function() {

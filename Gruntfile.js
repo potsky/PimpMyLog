@@ -63,7 +63,9 @@ module.exports = function(grunt) {
 					'bower_components/numeral/numeral.js',
 					'bower_components/numeral/languages/*.js',
 					'bower_components/bootstrap-table/src/bootstrap-table.js',
-					'bower_components/sprintf.js/src/sprintf.js'
+					'bower_components/sprintf.js/src/sprintf.js',
+					'bower_components/smartmenus/src/jquery.smartmenus.js',
+					'bower_components/smartmenus/src/addons/bootstrap/jquery.smartmenus.bootstrap.js',
 				],
 				dest: '_tmp/pml.js',
 				options: {
@@ -74,6 +76,7 @@ module.exports = function(grunt) {
 				src: [
 					'css/main.scss',
 					'bower_components/hook/hook.css',
+					'bower_components/smartmenus/src/addons/bootstrap/jquery.smartmenus.bootstrap.css'
 				],
 				dest: '_tmp/pml.scss'
 			}
@@ -600,7 +603,7 @@ module.exports = function(grunt) {
 				},
 				reporter : "default"
       		},
-			"todo.php.txt" : ['**/*.php', '!vendor/**/*', '!_tmp/**/*', '!_site/**/*', '!_build/**/*' ]
+			"todo.php.todo" : ['**/*.php', '!vendor/**/*', '!_tmp/**/*', '!_site/**/*', '!_build/**/*' ]
 		},
 
 
@@ -647,7 +650,7 @@ module.exports = function(grunt) {
 	*/
 	grunt.registerTask( 'todosresult' , function() {
 		grunt.log.ok('-----------------------------------------------------------------------');
-		grunt.log.ok( grunt.file.read('todo.php.txt') );
+		grunt.log.ok( grunt.file.read('todo.php.todo') );
 		grunt.log.ok('-----------------------------------------------------------------------');
 	});
 
@@ -657,7 +660,21 @@ module.exports = function(grunt) {
 		grunt.log.ok('|                                                                     |');
 		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
 		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('|                 UPDATE TRANSLATIONS ON POEDITOR                     |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('|               https://poeditor.com/github/projects                  |');
+		grunt.log.ok('|                                                                     |');
 		grunt.log.ok('-----------------------------------------------------------------------');
+	});
+
+	// Build task for production
+	grunt.registerTask( 'test' , function() {
+		grunt.task.run([
+			'checkversion',
+			'phpunit:dev',
+			'todos',
+			'todosresult',
+		]);
 	});
 
 	// Installation task which install the _build folder in beta , commit and push
@@ -817,6 +834,5 @@ module.exports = function(grunt) {
 	|--------------------------------------------------------------------------
 	|
 	*/
-	grunt.registerTask( 'test'               , function() { grunt.task.run( 'phpunit:dev' ); });
 	grunt.registerTask( 'default' , [ 'dev' ] );
 };

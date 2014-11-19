@@ -6,9 +6,10 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
+toto
 /config.inc.php
 /config.inc.php.tmp
-
+/todo.*.todo
 /inc/test.REMOVE_UPPERCASE.php
 *.user.php
 *.user.css

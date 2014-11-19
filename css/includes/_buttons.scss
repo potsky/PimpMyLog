@@ -1,0 +1,31 @@
+// Buttons in the header bar
+.btn-menu {
+	display          : inline-block;
+	margin-bottom    : 0;
+	font-weight      : $btn-font-weight;
+	text-align       : center;
+	vertical-align   : middle;
+	cursor           : pointer;
+	background-image : none;
+	border           : 1px solid transparent;
+	white-space      : nowrap;
+	text-transform   : uppercase;
+	@include button-size( 5px , 10px , $font-size-base, $line-height-base, 3px);
+	@include user-select(none);
+	padding-top    : 4px!important;
+	padding-bottom : 5px!important;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+// Buttons
+.btn {
+	text-transform : uppercase;
+	font-size      : 1em;
+	font-size      : 1em;
+	line-height    : 2em;
+	padding-left   : 1.5em;
+	padding-right  : 1.5em;
+}
