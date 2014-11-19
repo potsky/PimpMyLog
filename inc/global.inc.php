@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6.0 - d2f6bfe7deb7aa89fe4381ab8180286042aa6127*/
+/*! pimpmylog - 1.6.1 - 4ddd53af5fd1d5a7d7ad85f36ccf1a661cc5b217*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -585,17 +585,33 @@ function config_extract_tags( $files ) {
     switch ( trim( str_replace( array( '-' , '_' , ' ' , 'nsensitive' ) , '' , TAG_SORT_TAG ) ) ) {
         case 'display':
         case 'displayasc':
-            ksort( $tags , SORT_NATURAL );
+            if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+                ksort( $tags , SORT_NATURAL );
+            } else {
+                ksort( $tags );
+            }
             break;
         case 'displayi':
         case 'displayiasc':
-            ksort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+            if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+                ksort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+            } else {
+                ksort( $tags );
+            }
             break;
         case 'displaydesc':
-            krsort( $tags , SORT_NATURAL );
+            if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+                krsort( $tags , SORT_NATURAL );
+            } else {
+                krsort( $tags );
+            }
             break;
         case 'displayidesc':
-            krsort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+            if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+                krsort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+            } else {
+                krsort( $tags );
+            }
             break;
         default:
             # do not sort
