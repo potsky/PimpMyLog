@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.9 - bd60bfd7a536e1fb4e467a4aa5cc99357abae973*/
+/*! pimpmylog - 1.6.0 - 365e76cd347283fce64fe1c93f9327d40cfc4693*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -115,8 +115,6 @@ switch ( @$_POST['action'] ) {
 				);
 				*/
 				$method = 'nd';
-// TODO: enlever le 1er
-				$method = 'nw';
 				break;
 			case 'CSV':
 				$method = 'nd';

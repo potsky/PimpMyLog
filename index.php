@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.5.9 - bd60bfd7a536e1fb4e467a4aa5cc99357abae973*/
+/*! pimpmylog - 1.6.0 - 365e76cd347283fce64fe1c93f9327d40cfc4693*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -205,26 +205,56 @@ $csrf = csrf_get();
 			querystring          = <?php echo json_encode( $_SERVER['QUERY_STRING'] ); ?>,
 			currentuser          = <?php echo json_encode( Sentinel::getCurrentUsername() ); ?>,
 			export_default       = <?php echo ( EXPORT === true ) ? 'true' : 'false';?>;
-			notification_default = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;</script></head><body><!--[if lt IE 8]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="logo" title="<?php _e('Reload the page with default parameters'); ?>"></div><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button><div class="navbar-brand"><span class="loader glyphicon glyphicon-refresh icon-spin" style="display:none"></span> <span class="loader glyphicon glyphicon-repeat" title="<?php _h( 'Click to refresh or press the R key' );?>" id="refresh"></span> <a href="?"><?php echo NAV_TITLE;?></a></div></div><div class="navbar-collapse collapse"><?php if ( count($files) > 1 ) { ?><?php if ( FILE_SELECTOR == 'bs' ) { ?><ul class="nav navbar-nav"><li class="dropdown" title="<?php _h( 'Select a log file to display' );?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span> <b class="caret"></b></a><ul class="dropdown-menu scrollable-menu"><?php
-									foreach ( $files as $file_id => $file ) {
-										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' active' : '';
-										echo '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
-										echo ( isset( $file['included_from'] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $file['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
-										echo '">' . $file['display'] . '</a></li>';
+			notification_default = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;</script></head><body><!--[if lt IE 8]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="logo" title="<?php _e('Reload the page with default parameters'); ?>"></div><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button><div class="navbar-brand"><span class="loader glyphicon glyphicon-refresh icon-spin" style="display:none"></span> <span class="loader glyphicon glyphicon-repeat" title="<?php _h( 'Click to refresh or press the R key' );?>" id="refresh"></span> <a href="?"><?php echo NAV_TITLE;?></a></div></div><div class="navbar-collapse collapse"><?php if ( count( $files ) > 1 ) : ?><?php if ( FILE_SELECTOR == 'bs' ) : ?><ul class="nav navbar-nav"><li class="dropdown" title="<?php _h( 'Select a log file to display' );?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="file_selector"></span></a><ul class="dropdown-menu"><?php
+
+									$notagged = '';
+									$tagged   = '';
+									foreach ( config_extract_tags( $files ) as $tag => $f ) {
+										if ( $tag === '_' ) {
+											foreach ( $f as $file_id ) {
+												$selected  = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] === $file_id ) ) ? ' active' : '';
+												$notagged .= '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
+												$notagged .= ( isset( $files[ $file_id ][ 'included_from' ] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $files[ $file_id ]['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
+												$notagged .= '">' . $files[ $file_id ]['display'] . '</a></li>';
+											}
+										} else {
+											$tagged .= '<li class="tag-' . get_slug( $tag ) . '"><a href="#">' . h( $tag );
+											if ( TAG_DISPLAY_LOG_FILES_COUNT === true ) $tagged .= ' <small class="text-muted">(' . count( $f ) . ')</small>';
+											$tagged .= '</a>';
+											$tagged .= 	'<ul class="dropdown-menu">';
+											foreach ( $f as $file_id ) {
+												$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] === $file_id ) ) ? ' active' : '';
+												$tagged  .= '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
+												$tagged  .= ( isset( $files[ $file_id ]['included_from'] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $files[ $file_id ]['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
+												$tagged  .= '">' . $files[ $file_id ]['display'] . '</a></li>';
+											}
+											$tagged .= 	'</ul>';
+											$tagged .= '</li>';
+										}
 									}
-									?></ul></li></ul><?php } else { ?><form class="navbar-form navbar-left"><div class="form-group"><select id="file_selector_big" class="form-control input-sm" title="<?php _h( 'Select a log file to display' );?>"><?php
+
+									if ( TAG_NOT_TAGGED_FILES_ON_TOP === true ) {
+										echo $notagged;
+										if ( ( ! empty( $tagged ) ) && ( ! empty( $notagged ) ) ) echo '<li class="divider"></li>';
+										echo $tagged;
+									} else {
+										echo $tagged;
+										if ( ( ! empty( $tagged ) ) && ( ! empty( $notagged ) ) ) echo '<li class="divider"></li>';
+										echo $notagged;
+									}
+
+									?></ul></li></ul><?php else : ?><form class="navbar-form navbar-left"><div class="form-group"><select id="file_selector_big" class="form-control input-sm" title="<?php _h( 'Select a log file to display' );?>"><?php
 									foreach ( $files as $file_id=>$file ) {
 										$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] == $file_id ) ) ? ' selected="selected"' : '';
 										echo '<option value="' . $file_id . '"' . $selected . '>' . $file['display'] . '</option>';
 									}
-									?></select></div>&nbsp;</form><?php } ?><?php
-				} else {
+									?></select></div>&nbsp;</form><?php endif; ?><?php else : ?><?php
 					foreach ( $files as $file_id => $file ) {
 						$d = $file['display'];
 						$i = h( $file_id );
 						break;
 					}
-				?><ul class="nav navbar-nav"><li id="singlelog" data-file="<?php echo $i; ?>"><a href="#"><?php echo $d; ?></a></li></ul><?php } ?><form class="navbar-form navbar-right"><?php if ( ( is_null( $current_user ) ) && ( Sentinel::isAnonymousEnabled() ) ) { ?><div class="form-group"><a href="?signin" class="btn-menu btn-primary btn-sm" title="<?php _h( 'Sign in' );?>"><?php _e('Sign in');?></a></div>&nbsp; <?php } ?><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo h( @$_GET['s'] );?>" placeholder="<?php _h( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _h( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No refresh' );?></option><?php
+					?><ul class="nav navbar-nav"><li id="singlelog" data-file="<?php echo $i; ?>"><a href="#"><?php echo $d; ?></a></li></ul><?php endif; ?><form class="navbar-form navbar-right"><?php if ( ( is_null( $current_user ) ) && ( Sentinel::isAnonymousEnabled() ) ) { ?><div class="form-group"><a href="?signin" class="btn-menu btn-primary btn-sm" title="<?php _h( 'Sign in' );?>"><?php _e('Sign in');?></a></div>&nbsp; <?php } ?><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo h( @$_GET['s'] );?>" placeholder="<?php _h( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _h( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No refresh' );?></option><?php
 							foreach ( get_refresh_options( $files ) as $r ) {
 								echo '<option value="' . $r . '">' . sprintf( __( 'Refresh %ss' ) , $r ) . '</option>';
 							}
