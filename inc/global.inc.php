@@ -1071,6 +1071,11 @@ function get_non_UTC_timstamp( $timestamp = null , $tzfrom = null )
     return $timestamp - $d->getOffset();
 }
 
+/**
+ * Try to guess if Pimp My Log is installed with composer
+ *
+ * @return  boolean
+ */
 function upgrade_is_composer() {
     if ( ! file_exists( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'composer.json' ) ) return false;
     if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' ) ) return false;
@@ -1080,13 +1085,22 @@ function upgrade_is_composer() {
     return true;
 }
 
+/**
+ * Try to guess if Pimp My Log is installed with git
+ *
+ * @return  boolean
+ */
 function upgrade_is_git() {
-    // check if git exists
     if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '.git' ) ) return false;
 
     return true;
 }
 
+/**
+ * Try to guess if Pimp My Log can pull with git
+ *
+ * @return  mixed
+ */
 function upgrade_can_git_pull() {
     $base = PML_BASE;
 
