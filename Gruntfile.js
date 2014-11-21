@@ -467,7 +467,7 @@ module.exports = function(grunt) {
 					'cd "' + master + '"',
 					'rm -f config.user.json',
 					'git tag -d v' + npmpkg.version,
-					'git push --tags origin master',
+					'git push --delete origin v' + npmpkg.version,
 					'git add -A .',
 					'git commit -m "grunt install from branch dev commit $a"',
 					'git pull origin master',
