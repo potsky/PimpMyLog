@@ -1,0 +1,30 @@
+{
+	"name"        : "potsky/PimpMyLog",
+	"description" : "Log viewer for your web server",
+	"version"     : "1.6.2",
+	"license"     : "GPL-3.0+",
+	"type"        : "project",
+	"homepage"    : "http://pimpmylog.com",
+    "support": {
+		"email"  : "support@pimpmylog.com",
+		"issues" : "http://support.pimpmylog.com/discussion/new",
+		"source" : "https://github.com/potsky/PimpMyLog"
+    },
+    "authors" : [
+        {
+            "name"     : "Potsky",
+            "email"    : "potsky@me.com",
+            "homepage" : "http://www.potsky.com",
+            "role"     : "Developer"
+        },
+        {
+            "name"     : "Cassio Santos",
+            "homepage" : "http://www.cassiosantos.com",
+            "role"     : "Translator (pt_BR)"
+        }
+    ],
+    "require" : {
+        "php" : ">=5.2.0"
+    },
+    "minimum-stability" : "stable"
+}
