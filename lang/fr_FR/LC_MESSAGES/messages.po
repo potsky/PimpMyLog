@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-11-21 18:31+0100\n"
-"PO-Revision-Date: 2014-11-21 18:31+0100\n"
+"POT-Creation-Date: 2014-11-21 19:03+0100\n"
+"PO-Revision-Date: 2014-11-21 19:03+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: potsky <potsky@me.com>\n"
 "Language: fr\n"
@@ -200,7 +200,8 @@ msgstr "Supprimez le de la racine :"
 #: _tmp/inc/users.pml.php:495 _tmp/inc/users.pml.php:509 _tmp/index.php:574
 #: _tmp/index.php:596 inc/configure.php:77 inc/configure.php:126
 #: inc/configure.php:162 inc/configure.php:183 inc/test.php:172
-#: inc/test.php:217 inc/test.php:295 inc/test.php:591 inc/users.pml.php:485
+#: inc/test.php:217 inc/test.php:295 inc/test.php:591 inc/upgrade.pml.php:283
+#: inc/upgrade.pml.php:300 inc/upgrade.pml.php:380 inc/users.pml.php:485
 #: inc/users.pml.php:499 index.php:564 index.php:586
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse-papier"
@@ -212,6 +213,7 @@ msgstr "Copier dans le presse-papier"
 #: _tmp/inc/configure.php:87 _tmp/inc/configure.php:136
 #: _tmp/inc/configure.php:172 _tmp/inc/configure.php:193 inc/configure.php:77
 #: inc/configure.php:126 inc/configure.php:162 inc/configure.php:183
+#: inc/upgrade.pml.php:289 inc/upgrade.pml.php:306 inc/upgrade.pml.php:386
 msgid "Command copied!"
 msgstr "Commande copiée !"
 
@@ -606,7 +608,7 @@ msgstr "Pimp my Log maintenant !"
 #: _site/inc/upgrade.pml.php:8 _site/inc/users.pml.php:74
 #: _tmp/inc/getlog.pml.php:113 _tmp/inc/rss.pml.php:75
 #: _tmp/inc/upgrade.pml.php:18 _tmp/inc/users.pml.php:84
-#: inc/getlog.pml.php:103 inc/rss.pml.php:65 inc/upgrade.pml.php:8
+#: inc/getlog.pml.php:103 inc/rss.pml.php:65 inc/upgrade.pml.php:17
 #: inc/users.pml.php:74
 msgid "Please refresh the page."
 msgstr "Merci de rafraichir la page."
@@ -1061,35 +1063,35 @@ msgstr ""
 #: _build/inc/upgrade.pml.php:46 _build/inc/upgrade.pml.php:51
 #: _site/inc/upgrade.pml.php:37 _site/inc/upgrade.pml.php:42
 #: _tmp/inc/upgrade.pml.php:47 _tmp/inc/upgrade.pml.php:52
-#: inc/upgrade.pml.php:37 inc/upgrade.pml.php:42
+#: inc/upgrade.pml.php:46 inc/upgrade.pml.php:51
 msgid "GIT is no more availble, please refresh the page"
 msgstr "GIT n'est plus disponible, merci de rafraichir la page."
 
 #: _build/inc/upgrade.pml.php:80 _site/inc/upgrade.pml.php:71
-#: _tmp/inc/upgrade.pml.php:81 inc/upgrade.pml.php:71
+#: _tmp/inc/upgrade.pml.php:81 inc/upgrade.pml.php:80
 #, php-format
 msgid "Current version %s"
 msgstr "Version actuelle %s"
 
 #: _build/inc/upgrade.pml.php:85 _site/inc/upgrade.pml.php:76
-#: _tmp/inc/upgrade.pml.php:86 inc/upgrade.pml.php:76
+#: _tmp/inc/upgrade.pml.php:86 inc/upgrade.pml.php:85
 msgid "Unable to check your current version!"
 msgstr "Impossible de vérifier votre version actuelle !"
 
 #: _build/inc/upgrade.pml.php:165 _site/inc/upgrade.pml.php:156
-#: _tmp/inc/upgrade.pml.php:166 inc/upgrade.pml.php:156
+#: _tmp/inc/upgrade.pml.php:166 inc/upgrade.pml.php:165
 msgid "Messages from the development team"
 msgstr "Messages de l'équipe de développement"
 
 #: _build/inc/upgrade.pml.php:179 _site/inc/upgrade.pml.php:170
-#: _tmp/inc/upgrade.pml.php:180 inc/upgrade.pml.php:170
+#: _tmp/inc/upgrade.pml.php:180 inc/upgrade.pml.php:179
 msgid "Mark as read"
 msgstr "Marquer comme lu"
 
 #: _build/inc/upgrade.pml.php:204 _build/inc/upgrade.pml.php:210
 #: _site/inc/upgrade.pml.php:195 _site/inc/upgrade.pml.php:201
 #: _tmp/inc/upgrade.pml.php:205 _tmp/inc/upgrade.pml.php:211
-#: inc/upgrade.pml.php:195 inc/upgrade.pml.php:201
+#: inc/upgrade.pml.php:204 inc/upgrade.pml.php:210
 #, php-format
 msgid ""
 "Error while fetching URL %s from the server hosting this Pimp my Log "
@@ -1101,40 +1103,40 @@ msgstr ""
 #: _build/inc/upgrade.pml.php:204 _build/inc/upgrade.pml.php:210
 #: _site/inc/upgrade.pml.php:195 _site/inc/upgrade.pml.php:201
 #: _tmp/inc/upgrade.pml.php:205 _tmp/inc/upgrade.pml.php:211
-#: inc/upgrade.pml.php:195 inc/upgrade.pml.php:201
+#: inc/upgrade.pml.php:204 inc/upgrade.pml.php:210
 msgid "Remote version broken!"
 msgstr "Version distance cassée !"
 
 #: _build/inc/upgrade.pml.php:231 _site/inc/upgrade.pml.php:222
-#: _tmp/inc/upgrade.pml.php:232 inc/upgrade.pml.php:222
+#: _tmp/inc/upgrade.pml.php:232 inc/upgrade.pml.php:231
 #, php-format
 msgid "Version %s released on %s"
 msgstr "Version %s sortie le %s"
 
 #: _build/inc/upgrade.pml.php:232 _site/inc/upgrade.pml.php:223
-#: _tmp/inc/upgrade.pml.php:233 inc/upgrade.pml.php:223
+#: _tmp/inc/upgrade.pml.php:233 inc/upgrade.pml.php:232
 #, php-format
 msgid "Version %s"
 msgstr "Version %s"
 
 #: _build/inc/upgrade.pml.php:268 _site/inc/upgrade.pml.php:259
-#: _tmp/inc/upgrade.pml.php:269 inc/upgrade.pml.php:259
+#: _tmp/inc/upgrade.pml.php:269 inc/upgrade.pml.php:268
 msgid "An upgrade is available !"
 msgstr "Une mise à jour est disponible !"
 
 #: _build/inc/upgrade.pml.php:269 _site/inc/upgrade.pml.php:260
-#: _tmp/inc/upgrade.pml.php:270 inc/upgrade.pml.php:260
+#: _tmp/inc/upgrade.pml.php:270 inc/upgrade.pml.php:269
 #, php-format
 msgid "You have version %s and version %s is available"
 msgstr "Vous avez la version %s et la version %s est disponible"
 
 #: _build/inc/upgrade.pml.php:270 _site/inc/upgrade.pml.php:261
-#: _tmp/inc/upgrade.pml.php:271 inc/upgrade.pml.php:261
+#: _tmp/inc/upgrade.pml.php:271 inc/upgrade.pml.php:270
 msgid "release notes"
 msgstr "Remarques de mise à jour"
 
 #: _build/inc/upgrade.pml.php:276 _site/inc/upgrade.pml.php:267
-#: _tmp/inc/upgrade.pml.php:277 inc/upgrade.pml.php:267
+#: _tmp/inc/upgrade.pml.php:277 inc/upgrade.pml.php:294
 #, php-format
 msgid ""
 "Simply <code>git pull</code> in your directory or follow instructions %shere"
@@ -1149,23 +1151,23 @@ msgstr ""
 #: _site/inc/upgrade.pml.php:345 _site/inc/upgrade.pml.php:357
 #: _tmp/inc/upgrade.pml.php:281 _tmp/inc/upgrade.pml.php:300
 #: _tmp/inc/upgrade.pml.php:355 _tmp/inc/upgrade.pml.php:367
-#: inc/upgrade.pml.php:271 inc/upgrade.pml.php:290 inc/upgrade.pml.php:345
-#: inc/upgrade.pml.php:357
+#: inc/upgrade.pml.php:286 inc/upgrade.pml.php:303 inc/upgrade.pml.php:323
+#: inc/upgrade.pml.php:383 inc/upgrade.pml.php:396
 msgid "Skip this upgrade"
 msgstr "Passer cette mise à jour"
 
 #: _build/inc/upgrade.pml.php:296 _site/inc/upgrade.pml.php:287
-#: _tmp/inc/upgrade.pml.php:297 inc/upgrade.pml.php:287
+#: _tmp/inc/upgrade.pml.php:297 inc/upgrade.pml.php:320
 msgid "Upgrading..."
 msgstr "Mise à jour..."
 
 #: _build/inc/upgrade.pml.php:296 _site/inc/upgrade.pml.php:287
-#: _tmp/inc/upgrade.pml.php:297 inc/upgrade.pml.php:287
+#: _tmp/inc/upgrade.pml.php:297 inc/upgrade.pml.php:320
 msgid "Upgrade now"
 msgstr "Mettre à jour"
 
 #: _build/inc/upgrade.pml.php:307 _site/inc/upgrade.pml.php:298
-#: _tmp/inc/upgrade.pml.php:308 inc/upgrade.pml.php:298
+#: _tmp/inc/upgrade.pml.php:308 inc/upgrade.pml.php:331
 #, php-format
 msgid ""
 "Your GIT installation cannot be upgraded automatically because of %sthese "
@@ -1175,59 +1177,59 @@ msgstr ""
 "de %sces problèmes%s."
 
 #: _build/inc/upgrade.pml.php:314 _site/inc/upgrade.pml.php:305
-#: _tmp/inc/upgrade.pml.php:315 inc/upgrade.pml.php:305
+#: _tmp/inc/upgrade.pml.php:315 inc/upgrade.pml.php:338
 msgid "These files are not writable by the web server user:"
 msgstr ""
 "Ces fichiers ne sont pas accessible en écriture par l'utilisateur sous "
 "lequel tourne le serveur web :"
 
 #: _build/inc/upgrade.pml.php:324 _site/inc/upgrade.pml.php:315
-#: _tmp/inc/upgrade.pml.php:325 inc/upgrade.pml.php:315
+#: _tmp/inc/upgrade.pml.php:325 inc/upgrade.pml.php:348
 msgid "The <code>git</code> command is not in the webserver path"
 msgstr ""
 "La commande <code>git</code> n'est pas disponible pour l'utilisateur sous "
 "lequel tourne le serveur web"
 
 #: _build/inc/upgrade.pml.php:329 _site/inc/upgrade.pml.php:320
-#: _tmp/inc/upgrade.pml.php:330 inc/upgrade.pml.php:320
+#: _tmp/inc/upgrade.pml.php:330 inc/upgrade.pml.php:353
 msgid "You have modified these files:"
 msgstr "Les fichiers suivants ont été modifies :"
 
 #: _build/inc/upgrade.pml.php:339 _site/inc/upgrade.pml.php:330
-#: _tmp/inc/upgrade.pml.php:340 inc/upgrade.pml.php:330
+#: _tmp/inc/upgrade.pml.php:340 inc/upgrade.pml.php:363
 msgid "Unknown error, here is the problem output:"
 msgstr "Erreur inconnue, voici le retour :"
 
 #: _build/inc/upgrade.pml.php:350 _site/inc/upgrade.pml.php:341
-#: _tmp/inc/upgrade.pml.php:351 inc/upgrade.pml.php:341
+#: _tmp/inc/upgrade.pml.php:351 inc/upgrade.pml.php:374
 msgid "Simply <code>git pull</code> in your installation directory."
 msgstr "Faites un <code>git pull</code> dans le répertoire d'installation."
 
 #: _build/inc/upgrade.pml.php:362 _site/inc/upgrade.pml.php:353
-#: _tmp/inc/upgrade.pml.php:363 inc/upgrade.pml.php:353
+#: _tmp/inc/upgrade.pml.php:363 inc/upgrade.pml.php:392
 #, php-format
 msgid "Follow instructions %shere%s"
 msgstr "Suivez les instructions %sici%s"
 
 #: _build/inc/upgrade.pml.php:375 _site/inc/upgrade.pml.php:366
-#: _tmp/inc/upgrade.pml.php:376 inc/upgrade.pml.php:366
+#: _tmp/inc/upgrade.pml.php:376 inc/upgrade.pml.php:405
 msgid "You should upgrade right now:"
 msgstr "Vous devriez mettre à jour dès maintenant :"
 
 #: _build/inc/upgrade.pml.php:386 _site/inc/upgrade.pml.php:377
-#: _tmp/inc/upgrade.pml.php:387 inc/upgrade.pml.php:377
+#: _tmp/inc/upgrade.pml.php:387 inc/upgrade.pml.php:416
 #, php-format
 msgid "Your version %s is out of date"
 msgstr "Votre version %s n'est à jour"
 
 #: _build/inc/upgrade.pml.php:391 _site/inc/upgrade.pml.php:382
-#: _tmp/inc/upgrade.pml.php:392 inc/upgrade.pml.php:382
+#: _tmp/inc/upgrade.pml.php:392 inc/upgrade.pml.php:421
 #, php-format
 msgid "Your version %s is up to date"
 msgstr "Votre version %s est à jour"
 
 #: _build/inc/upgrade.pml.php:397 _site/inc/upgrade.pml.php:388
-#: _tmp/inc/upgrade.pml.php:398 inc/upgrade.pml.php:388
+#: _tmp/inc/upgrade.pml.php:398 inc/upgrade.pml.php:427
 #, php-format
 msgid ""
 "Unable to fetch URL %s from the server hosting this Pimp my Log instance."
@@ -1236,7 +1238,7 @@ msgstr ""
 "héberge cette instance de Pimp my Log."
 
 #: _build/inc/upgrade.pml.php:397 _site/inc/upgrade.pml.php:388
-#: _tmp/inc/upgrade.pml.php:398 inc/upgrade.pml.php:388
+#: _tmp/inc/upgrade.pml.php:398 inc/upgrade.pml.php:427
 msgid "Unable to check remote version!"
 msgstr "Vérification de la version impossible !"
 
@@ -2010,6 +2012,11 @@ msgstr "Sélectionnez les fichiers de logs que l'utilisateur peut voir"
 #: _build/index.php:292 _site/index.php:779 _tmp/index.php:791 index.php:781
 msgid "Cancel"
 msgstr "Annuler"
+
+#: inc/upgrade.pml.php:276
+msgid "Simply <code>composer update</code> in the installation directory"
+msgstr ""
+"Faites un <code>composer update</code> dans le répertoire d'installation."
 
 #~ msgid ""
 #~ "<a href=\"http://pimpmylog.com/getting-started/#update\" target=\"doc\" "
