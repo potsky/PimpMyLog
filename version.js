@@ -8,6 +8,13 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.6.4" : {
+			"released" : "2014-11-21",
+			"changed" : [
+				"Add commands to upgrade via git and via composer",
+				"Add a copy to clipboard buttons for upgrade commands"
+			]
+		},
 		"1.6.3" : {
 			"released" : "2014-11-21",
 			"new" : [

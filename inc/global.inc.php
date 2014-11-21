@@ -1071,6 +1071,14 @@ function get_non_UTC_timstamp( $timestamp = null , $tzfrom = null )
     return $timestamp - $d->getOffset();
 }
 
+function upgrade_is_composer() {
+    if ( ! file_exists( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'composer.json' ) ) return false;
+    if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' ) ) return false;
+    if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'potsky' ) ) return false;
+    if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'pimp-my-log' ) ) return false;
+
+    return true;
+}
 
 function upgrade_is_git() {
     // check if git exists
