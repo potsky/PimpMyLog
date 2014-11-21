@@ -1,5 +1,5 @@
 {
-    "name"        : "potsky/PimpMyLog",
+    "name"        : "potsky/pimp-my-log",
     "description" : "Log viewer for your web server",
     "version"     : "1.6.2",
     "license"     : "GPL-3.0+",
