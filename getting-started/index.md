@@ -47,7 +47,40 @@ $ git pull
 
 User files are defined in the `.gitignore` file and are not overridden.
 
-## 2.2 - From archive
+
+## 2.2 - With composer
+
+Install the latest stable version:
+
+```
+composer require "potsky/pimp-my-log"
+```
+
+Install the latest pseudo stable version (not still released officially):
+
+```
+composer require "potsky/pimp-my-log" "dev-master"
+```
+
+Install a specific version:
+
+```
+composer require "potsky/pimp-my-log" "v1.6.2"
+```
+
+Install a specific major version:
+
+```
+composer require "potsky/pimp-my-log" "~1"
+```
+
+Install the beta unstable version:
+
+```
+composer require "potsky/pimp-my-log" "dev-beta"
+```
+
+## 2.3 - From archive
 
 {% include documentation_install_zip.md %}
 

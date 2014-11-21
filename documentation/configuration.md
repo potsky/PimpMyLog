@@ -29,6 +29,15 @@ The file is composed by these 3 objects:
 
 <!-- -->
 
+
+> **Note**
+>  
+> The button is available for everybody on an unsecured installation
+> 
+> The button is only available for admins on a secured installation
+
+<!-- -->
+
 Default:
 
 ```json
