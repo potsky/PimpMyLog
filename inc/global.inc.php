@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6.4 - c9633e4c9d5a3ee985f5b4faf1cac18bb999d3e1*/
+/*! pimpmylog - 1.6.4 - 642cbec03da43eef30a1caea506bf7a94c0f9c1a*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -24,11 +24,19 @@ if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
 
 /*
 |--------------------------------------------------------------------------
-| Define root directory
+| Define root directories
 |--------------------------------------------------------------------------
 |
 */
 if ( ! defined( 'PML_BASE' ) ) define( 'PML_BASE' , realpath( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '..' ) );
+
+if ( ! defined( 'PML_CONFIG_BASE' ) ) {
+    if ( upgrade_is_composer() ) {
+        define( 'PML_CONFIG_BASE' , realpath( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.' ) );
+    } else {
+        define( 'PML_CONFIG_BASE' , PML_BASE );
+    }
+}
 
 
 /*
@@ -278,14 +286,13 @@ function load_default_constants()
  */
 function get_config_file_path()
 {
-    $root  = dirname( __FILE__ ) . '/../';
     $files = array(
         CONFIG_FILE_NAME,
         CONFIG_FILE_NAME_BEFORE_1_5_0,
     );
     foreach ($files as $f) {
-        if ( file_exists( $root . $f ) ) {
-            return realpath( $root . $f );
+        if ( file_exists( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . $f ) ) {
+            return realpath( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . $f );
         }
     }
 
@@ -366,21 +373,9 @@ function config_load($load_user_configuration_dir = true)
     @set_time_limit( MAX_SEARCH_LOG_TIME + 2 );
 
     // Append files from the USER_CONFIGURATION_DIR
-    if ($load_user_configuration_dir === true) {
-        $dir      = null;
-        $base     = dirname( __FILE__ ) . '/../';
-        $realbase = realpath( dirname( __FILE__ ) . '/../' );
-
-        // Can be an absolute path or a request by index.php for example
-        if ( is_dir( USER_CONFIGURATION_DIR ) ) {
-            $dir  = USER_CONFIGURATION_DIR;
-        }
-        // Relative path from a subfolder or test suite
-        else if ( is_dir( $base . USER_CONFIGURATION_DIR ) ) {
-            $dir  = $base . USER_CONFIGURATION_DIR;
-        }
-
-        if ( ! is_null( $dir ) ) {
+    if ( $load_user_configuration_dir === true ) {
+        if ( is_dir( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR ) ) {
+            $dir       = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR;
             $userfiles = new RegexIterator(
                 new RecursiveIteratorIterator(
                     new RecursiveDirectoryIterator( $dir , RecursiveDirectoryIterator::SKIP_DOTS ),
@@ -395,7 +390,7 @@ function config_load($load_user_configuration_dir = true)
                 $c = get_config_file( $filepath );
                 if ( ! is_null( $c ) ) {
                     foreach ($c as $k => $v) {
-                        $fileid                                        = get_slug( str_replace( $realbase , '' , $filepath ) . '/' . $k );
+                        $fileid                                        = get_slug( str_replace( PML_CONFIG_BASE , '' , $filepath ) . '/' . $k );
                         $config[ 'files' ][ $fileid ]                  = $v;
                         $config[ 'files' ][ $fileid ]['included_from'] = $filepath;
                     }
