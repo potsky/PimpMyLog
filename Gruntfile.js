@@ -196,9 +196,6 @@ module.exports = function(grunt) {
 				}]
 			},
 
-
-
-
 			prod: {
 				files: [{
 					expand: true,
@@ -455,6 +452,15 @@ module.exports = function(grunt) {
 					stderr: true
 				}
 			},
+			release : {
+				command: [
+					'ssh psk "cd /home/PimpMyLog; sudo -u apache git pull"'
+				].join(';'),
+				options: {
+					stdout: true,
+					stderr: true
+				}
+			},
 			mastergitaddcommitpush : {
 				command: [
 					'a=$(git rev-parse --short HEAD)',
@@ -464,7 +470,6 @@ module.exports = function(grunt) {
 					'git commit -m "grunt install from branch dev commit $a"',
 					'git pull origin master',
 					'git push origin master',
-					'ssh psk "cd /home/PimpMyLog; sudo -u apache git pull"'
 				].join(';'),
 				options: {
 					stdout: true,
@@ -660,9 +665,17 @@ module.exports = function(grunt) {
 		grunt.log.ok('|                                                                     |');
 		grunt.log.ok('|        https://github.com/potsky/PimpMyLog/releases/new             |');
 		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('-----------------------------------------------------------------------');
+		grunt.log.ok('|                                                                     |');
 		grunt.log.ok('|                 UPDATE TRANSLATIONS ON POEDITOR                     |');
 		grunt.log.ok('|                                                                     |');
 		grunt.log.ok('|               https://poeditor.com/github/projects                  |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('-----------------------------------------------------------------------');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('|                  PULL ON DEMO TO UPDATE VERSION                     |');
+		grunt.log.ok('|                                                                     |');
+		grunt.log.ok('|                           grunt release                             |');
 		grunt.log.ok('|                                                                     |');
 		grunt.log.ok('-----------------------------------------------------------------------');
 	});
@@ -737,7 +750,6 @@ module.exports = function(grunt) {
 				'warningend'
 			]);
 		}
-
 	});
 
 	// Development task, build and watch for file modification
@@ -822,6 +834,11 @@ module.exports = function(grunt) {
 				}
 				break;
 			}
+			b = JSON.parse( grunt.file.read('./tools/composer.json') );
+			if ( b.version !== npmpkg.version ) {
+				grunt.verbose.or.error().error( 'tools/composer.json version is not updated!' );
+				grunt.fail.warn('Unable to continue');
+			}
 		} catch (e) {
 			grunt.verbose.or.error().error( 'version.js is invalid!' );
 			grunt.fail.warn('Unable to continue');
@@ -835,4 +852,8 @@ module.exports = function(grunt) {
 	|
 	*/
 	grunt.registerTask( 'default' , [ 'dev' ] );
+	grunt.registerTask( 'release' , [ 'shell:release' ] );
+
+
 };
+
