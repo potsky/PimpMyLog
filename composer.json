@@ -1,14 +1,14 @@
 {
-	"name"        : "potsky/PimpMyLog",
-	"description" : "Log viewer for your web server",
-	"version"     : "1.6.2",
-	"license"     : "GPL-3.0+",
-	"type"        : "project",
-	"homepage"    : "http://pimpmylog.com",
+    "name"        : "potsky/pimp-my-log",
+    "description" : "Log viewer for your web server",
+    "version"     : "1.6.2",
+    "license"     : "GPL-3.0+",
+    "type"        : "project",
+    "homepage"    : "http://pimpmylog.com",
     "support": {
-		"email"  : "support@pimpmylog.com",
-		"issues" : "http://support.pimpmylog.com/discussion/new",
-		"source" : "https://github.com/potsky/PimpMyLog"
+        "email"  : "support@pimpmylog.com",
+        "issues" : "http://support.pimpmylog.com/discussion/new",
+        "source" : "https://github.com/potsky/PimpMyLog"
     },
     "authors" : [
         {
@@ -26,5 +26,5 @@
     "require" : {
         "php" : ">=5.2.0"
     },
-    "minimum-stability" : "stable"
+    "minimum-stability": "dev"
 }
