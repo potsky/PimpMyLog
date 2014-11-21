@@ -1,6 +1,6 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.6.2",
+	"version"     : "1.6.3",
 	"versiondevh" : "0e09a3e0b9c484aad1511108d7f86bc34dfbc7ce",
 	"messages"    : {
 		"20141121" : "Thank you to people who have starred the project on GitHub !",
@@ -8,10 +8,16 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
-		"1.6.2" : {
+		"1.6.3" : {
 			"released" : "2014-11-21",
 			"new" : [
 				"Install with composer"
+			]
+		},
+		"1.6.2" : {
+			"released" : "2014-11-21",
+			"new" : [
+				"Change autoupgrade message : add a link to the blog for the change log and more"
 			]
 		},
 		"1.6.1" : {
