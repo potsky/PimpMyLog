@@ -1,17 +1,23 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.6.2",
-	"versiondevh" : "2c17e80a49845fdd8bc080f748c4967b6b8dbef3",
+	"version"     : "1.6.3",
+	"versiondevh" : "05e3b7df57a70d7cfdec019fc0708d915bb55689",
 	"messages"    : {
 		"20141121" : "Thank you to people who have starred the project on GitHub !",
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
-		"1.6.2" : {
+		"1.6.3" : {
 			"released" : "2014-11-21",
 			"new" : [
 				"Install with composer"
+			]
+		},
+		"1.6.2" : {
+			"released" : "2014-11-21",
+			"new" : [
+				"Change autoupgrade message : add a link to the blog for the change log and more"
 			]
 		},
 		"1.6.1" : {
