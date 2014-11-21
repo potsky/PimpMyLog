@@ -417,14 +417,13 @@ echo test( $type , $regex , $match , $types , $log );
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">
-										Code <code>config.user.json</code>
+										Code <code><?php echo get_config_file_path();?></code>
 									</a>
 								</h4>
 							</div>
 							<div id="collapseOne2" class="panel-collapse collapse">
 								<div class="panel-body">
-									<pre><?php if (file_exists('../config.user.json')) show_source('../config.user.json'); else echo 'file ../config.user.json does not exist'; ?></pre>
-									<pre><?php if (file_exists('../config.user.php')) show_source('../config.user.php'); else echo 'file ../config.user.php does not exist'; ?></pre>
+									<pre><?php if (file_exists( get_config_file_path() )) show_source( get_config_file_path() ); else echo 'configuration file does not exist'; ?></pre>
 								</div>
 							</div>
 						</div>
@@ -432,14 +431,13 @@ echo test( $type , $regex , $match , $types , $log );
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">
-										Stat <code>config.user.json</code>
+										Stats <code><?php echo get_config_file_path();?></code>
 									</a>
 								</h4>
 							</div>
 							<div id="collapseTwo2" class="panel-collapse collapse">
 								<div class="panel-body">
-									<pre><?php if (file_exists('../config.user.json')) var_export( @stat('../config.user.json') ); else echo 'file ../config.user.json does not exist'; ?></pre>
-									<pre><?php if (file_exists('../config.user.php')) var_export( @stat('../config.user.php') ); else echo 'file ../config.user.php does not exist'; ?></pre>
+									<pre><?php if (file_exists( get_config_file_path() ) ) var_export( @stat( get_config_file_path() ) ); else echo 'configuration file does not exist'; ?></pre>
 								</div>
 							</div>
 						</div>
@@ -652,7 +650,7 @@ echo test( $type , $regex , $match , $types , $log );
 							else if ( $_POST['password'] !== $_POST['password2'] ) {
 								echo '<div class="alert alert-danger" role="alert">' . __( 'Password confirmation is not the same' ) . '</div>';
 							}
-							else if ( mb_strlen( $_POST['password'] < 6 ) ) {
+							else if ( mb_strlen( $_POST['password'] ) < 6 ) {
 								echo '<div class="alert alert-danger" role="alert">' . __( 'Password must contain at least 6 chars' ) . '</div>';
 							}
 							else {

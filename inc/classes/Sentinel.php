@@ -186,7 +186,7 @@ class Sentinel
 	 */
 	public static function getAuthFilePath()
 	{
-		return PML_BASE . DIRECTORY_SEPARATOR . AUTH_CONFIGURATION_FILE;
+		return PML_CONFIG_BASE . DIRECTORY_SEPARATOR . AUTH_CONFIGURATION_FILE;
 	}
 
 	/**

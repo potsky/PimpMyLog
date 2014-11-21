@@ -23,8 +23,8 @@ if ( isset( $_POST['s'] ) ) {
 		'next'   => false,
 	);
 
-	$config_file      = '../' . CONFIG_FILE_NAME;
-	$config_file_temp = '../' . CONFIG_FILE_TEMP;
+	$config_file      = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . CONFIG_FILE_NAME;
+	$config_file_temp = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . CONFIG_FILE_TEMP;
 
 	try {
 
@@ -138,7 +138,7 @@ if ( isset( $_POST['s'] ) ) {
 			|
 			*/
 			case 'authsave':
-				if ( ( strlen( $_POST['u'] ) > 0 ) && ( strlen( $_POST['p'] ) >= 6 ) ) {
+				if ( ( mb_strlen( $_POST['u'] ) > 0 ) && ( mb_strlen( $_POST['p'] ) >= 6 ) ) {
 					Sentinel::setAdmin( $_POST['u'] , $_POST['p'] );
 					$return[ 'notice' ] = Sentinel::save();
 				}
@@ -399,7 +399,7 @@ if ( isset( $_POST['s'] ) ) {
 					$get_config = $software . '_get_config';
 					$counter    = $counter + 1;
 					$config     = '../cfg/' . $software . '.config.php';
-					$configuser = '../cfg/' . $software . '.config.user.php';
+					$configuser = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . 'cfg' . DIRECTORY_SEPARATOR . $software . '.config.user.php';
 
 					if ( file_exists( $configuser ) ) {
 						include_once $configuser;
