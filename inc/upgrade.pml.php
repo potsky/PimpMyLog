@@ -1,5 +1,14 @@
 <?php
-/*! pimpmylog - 1.6.3 - 47048d733db59613e697efa03ad90cf4ad7caab8*/
+/*! pimpmylog - 1.6.4 - c9633e4c9d5a3ee985f5b4faf1cac18bb999d3e1*/
+/*
+ * pimpmylog
+ * http://pimpmylog.com
+ *
+ * Copyright (c) 2014 Potsky, contributors
+ * Licensed under the GPLv3 license.
+ */
+?><?php
+/*! pimpmylog - 1.6.2 - 0e09a3e0b9c484aad1511108d7f86bc34dfbc7ce*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -271,15 +280,39 @@ try {
 
 		$upgrade['alert'] .= 	'<br/>';
 
-		// Auto Update is forbidden when AUTO_UPDATE is false or when auth is enabled but user is not an admin
-		if ( ( AUTO_UPGRADE === false ) || ( ( Sentinel::isAuthSet() ) && ( ! Sentinel::isAdmin( Sentinel::getCurrentUsername() ) ) ) ) {
-			$upgrade['alert'] .= 	sprintf( __('Simply <code>git pull</code> in your directory or follow instructions %shere%s') , '<a href="' . UPGRADE_MANUALLY_URL . '" target="doc" class="alert-link">' , '</a>');
+		// Installation has been done via composer
+		if ( upgrade_is_composer() ) {
+			$upgrade['alert'] .= 	__('Simply <code>composer update</code> in the installation directory');
+			$upgrade['alert'] .= 	'<br/>';
+			$upgrade['alert'] .= 	'<br/><pre id="composercontent">cd ' . escapeshellarg( realpath( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR ) ) . '; composer update</pre>';
 			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+
 			$upgrade['alert'] .= 	'<div class="row">';
-			$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';
+			$upgrade['alert'] .= 		'<div class="col-xs-6 text-left">';
+			$upgrade['alert'] .= 			'<button id="composercopy" class="btn btn-xs btn-primary clipboard"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;' . __("Copy to clipboard") . '</button>';
+			$upgrade['alert'] .= 		'</div>';
+			$upgrade['alert'] .= 		'<div class="col-xs-6 text-right">';
 			$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
 			$upgrade['alert'] .= 		'</div>';
 			$upgrade['alert'] .= 	'</div>';
+			$upgrade['alert'] .= 	'<script>clipboard_enable("#composercopy","#composercontent" , "right" , "' . __('Command copied!') . '");</script>';
+		}
+
+		// Auto Update is forbidden when AUTO_UPDATE is false or when auth is enabled but user is not an admin
+		else if ( ( AUTO_UPGRADE === false ) || ( ( Sentinel::isAuthSet() ) && ( ! Sentinel::isAdmin( Sentinel::getCurrentUsername() ) ) ) ) {
+			$upgrade['alert'] .= 	sprintf( __('Simply <code>git pull</code> in your directory or follow instructions %shere%s') , '<a href="' . UPGRADE_MANUALLY_URL . '" target="doc" class="alert-link">' , '</a>');
+			$upgrade['alert'] .= 	'<br/>';
+			$upgrade['alert'] .= 	'<br/><pre id="gitcontent">cd ' . PML_BASE . '; git pull</pre>';
+			$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
+			$upgrade['alert'] .= 	'<div class="row">';
+			$upgrade['alert'] .= 		'<div class="col-xs-6 text-left">';
+			$upgrade['alert'] .= 			'<button id="gitcopy" class="btn btn-xs btn-primary clipboard"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;' . __("Copy to clipboard") . '</button>';
+			$upgrade['alert'] .= 		'</div>';
+			$upgrade['alert'] .= 		'<div class="col-xs-6 text-right">';
+			$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
+			$upgrade['alert'] .= 		'</div>';
+			$upgrade['alert'] .= 	'</div>';
+			$upgrade['alert'] .= 	'<script>clipboard_enable("#gitcopy","#gitcontent" , "right" , "' . __('Command copied!') . '");</script>';
 		}
 
 		// .git exists so an upgrade via git pull is perhaps possible
@@ -348,12 +381,18 @@ try {
 				$upgrade['alert'] .= 	'</div></div>';
 				$upgrade['alert'] .= 	'<br/>';
 				$upgrade['alert'] .= 	__('Simply <code>git pull</code> in your installation directory.');
+				$upgrade['alert'] .= 	'<br/>';
+				$upgrade['alert'] .= 	'<br/><pre id="gitcontent">cd ' . PML_BASE . '; git pull</pre>';
 				$upgrade['alert'] .= 	'<div id="changelog" class="panel-collapse collapse"><br/><div class="panel-body panel panel-default">' . $html . '</div></div>';
 				$upgrade['alert'] .= 	'<div class="row">';
-				$upgrade['alert'] .= 		'<div class="col-xs-12 text-right">';
+				$upgrade['alert'] .= 		'<div class="col-xs-6 text-left">';
+				$upgrade['alert'] .= 			'<button id="gitcopy" class="btn btn-xs btn-primary clipboard"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;' . __("Copy to clipboard") . '</button>';
+				$upgrade['alert'] .= 		'</div>';
+				$upgrade['alert'] .= 		'<div class="col-xs-6 text-right">';
 				$upgrade['alert'] .= 			'<button id="upgradestop" data-version="' . $upgrade['to'] . '" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;' . __("Skip this upgrade") . '</button>';
 				$upgrade['alert'] .= 		'</div>';
 				$upgrade['alert'] .= 	'</div>';
+				$upgrade['alert'] .= 	'<script>clipboard_enable("#gitcopy","#gitcontent" , "right" , "' . __('Command copied!') . '");</script>';
 			}
 		}
 
