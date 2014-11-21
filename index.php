@@ -486,7 +486,7 @@ $csrf = csrf_get();
 				$print .= '<br/>' . $infos['welcome'] . '<br/>';
 			}
 			$print .= '<br/>';
-			$print .= sprintf( __('The changelog and all informations about this version are available on the %sblog%s.') , '<a href="http://pimpmylog.com/blog/">' , '</a>' );
+			$print .= sprintf( __('The changelog and all informations about this version are available on the %sblog%s.') , '<a href="http://pimpmylog.com/blog/" target="_blank">' , '</a>' );
 		?>
 			<div><br/><div class="alert alert-success alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

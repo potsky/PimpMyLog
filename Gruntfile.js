@@ -466,10 +466,13 @@ module.exports = function(grunt) {
 					'a=$(git rev-parse --short HEAD)',
 					'cd "' + master + '"',
 					'rm -f config.user.json',
+					'git tag -d v' + npmpkg.version,
+					'git push --tags origin master',
 					'git add -A .',
 					'git commit -m "grunt install from branch dev commit $a"',
 					'git pull origin master',
-					'git push origin master',
+					'git tag -a v' + npmpkg.version + ' -m "Version ' + npmpkg.version + ' Stable"',
+					'git push --tags origin master'
 				].join(';'),
 				options: {
 					stdout: true,
