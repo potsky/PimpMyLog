@@ -493,7 +493,7 @@ module.exports = function(grunt) {
 			},
 			opensafari : {
 				command: [
-					'open "https://github.com/potsky/PimpMyLog/releases/new"',
+					'open "https://github.com/potsky/PimpMyLog/releases/new?tag=v' + npmpkg.version + '"',
 					'open "https://poeditor.com/github/projects"',
 				].join(';'),
 				options: {
