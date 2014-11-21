@@ -483,8 +483,10 @@ $csrf = csrf_get();
 			$infos = get_current_pml_version_infos();
 			$print = '<strong>' . sprintf( __('Welcome in version %s') , $infos['v'] ) . '</strong>';
 			if ( isset( $infos['welcome'] ) ) {
-				$print .= '<br/>' . $infos['welcome'];
+				$print .= '<br/>' . $infos['welcome'] . '<br/>';
 			}
+			echo '<br/>';
+			echo sprintf( __('The changelog and all informations about this version are available on the %sblog%s.') , '<a href="http://pimpmylog.com/blog/">' , '</a>' );
 		?>
 			<div><br/><div class="alert alert-success alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
