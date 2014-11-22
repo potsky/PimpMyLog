@@ -1139,7 +1139,6 @@ function upgrade_can_git_pull() {
     return true;
 }
 
-
 /**
  * Overwrite the original session start to specify a path at root of the installation
  *
