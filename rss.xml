@@ -5,9 +5,66 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2014-11-22T15:05:12+01:00</lastBuildDate>
-        <pubDate>2014-11-22T15:05:12+01:00</pubDate>
+        <lastBuildDate>2014-11-22T19:41:47+01:00</lastBuildDate>
+        <pubDate>2014-11-22T19:41:47+01:00</pubDate>
         <ttl>1800</ttl>
+
+        <item>
+                <title>Version 1.7 released</title>
+                <description>&lt;p&gt;Hi folks!&lt;/p&gt;
+
+&lt;p&gt;you can now install &lt;em&gt;Pimp My Log&lt;/em&gt; with composer. &lt;/p&gt;
+
+&lt;div class=&quot;alert alert-danger&quot;&gt;If you have installed a previous version with composer (&gt;1.6.2), YOU NEED TO BACKUP YOUR CONFIGURATION FILES MANUALLY, they will be lost when you will launch a `composer update`.&lt;/div&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;toc_0&quot;&gt;Customizations&lt;/h3&gt;
+
+&lt;p&gt;When installing with composer, all user custom files are located in the root directory of composer and not in the root directory of &lt;em&gt;Pimp My Log&lt;/em&gt; as it is with other installation ways.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;/composer.json
+/composer.lock
+/config.auth.user.php     &amp;lt;-- Authentication database
+/config.user.d/...        &amp;lt;-- Pimp My Log secondary configuration files
+/config.user.php          &amp;lt;-- Pimp My Log main configuration file
+/css/
+/css/config.inc.user.css  &amp;lt;-- Custom CSS file
+/vendor/
+/vendor/potsky/
+/vendor/potsky/pimp-my-log/
+/vendor/potsky/pimp-my-log/index.php
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;toc_1&quot;&gt;Versions&lt;/h3&gt;
+
+&lt;p&gt;Install the latest stable version:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;composer require &amp;quot;potsky/pimp-my-log&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install the latest pseudo stable version (not still released officially):&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;composer require &amp;quot;potsky/pimp-my-log&amp;quot; &amp;quot;dev-master&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install a specific version:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;composer require &amp;quot;potsky/pimp-my-log&amp;quot; &amp;quot;v1.6.2&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install a specific major version:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;composer require &amp;quot;potsky/pimp-my-log&amp;quot; &amp;quot;~1&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install the beta unstable version:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;composer require &amp;quot;potsky/pimp-my-log&amp;quot; &amp;quot;dev-beta&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.7.0&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.6.4&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.6.3&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.6.2&quot;&gt;&lt;/div&gt;
+</description>
+                <link>http://pimpmylog.com/general/2014/11/22/version-1.7</link>
+                <guid>http://pimpmylog.com/general/2014/11/22/version-1.7</guid>
+                <pubDate>2014-11-22T00:00:00+01:00</pubDate>
+        </item>
 
         <item>
                 <title>Version 1.6 released</title>
