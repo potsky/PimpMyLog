@@ -446,7 +446,14 @@ echo test( $type , $regex , $match , $types , $log );
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2">
-										Generated files with includes
+										<?php
+											$current_user = Sentinel::getCurrentUsername();
+											if ( is_null( $current_user ) ) {
+												_e('Generated files with includes (no user logged in or no auth)');
+											} else {
+												echo sprintf( __( 'Generated files with includes for user %s') , '<code>' . $current_user . '</code>' );
+											}
+										?>
 									</a>
 								</h4>
 							</div>
@@ -484,7 +491,7 @@ echo test( $type , $regex , $match , $types , $log );
 									?></pre>
 									<?php
 										$paths = array(
-											'config' => '../config.user.json',
+											'config' => get_config_file_path(),
 										);
 										if ( is_array( @$files ) ) {
 											foreach ( $files as $fileid => $file ) {

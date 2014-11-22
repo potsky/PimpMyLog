@@ -1,7 +1,7 @@
 Pimp my Log 
 ===========
 
-[![Build Status](https://travis-ci.org/potsky/PimpMyLog.svg)](https://travis-ci.org/potsky/PimpMyLog)
+[![Latest Stable Version](https://poser.pugx.org/potsky/pimp-my-log/v/stable.svg)](https://packagist.org/packages/potsky/pimp-my-log) [![Total Downloads](https://poser.pugx.org/potsky/pimp-my-log/downloads.svg)](https://packagist.org/packages/potsky/pimp-my-log) [![Build Status](https://travis-ci.org/potsky/PimpMyLog.svg)](https://travis-ci.org/potsky/PimpMyLog) <iframe src="http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true" class="ghstar" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="20"></iframe>
 
 All informations are available on [pimpmylog.com](http://pimpmylog.com).
 
@@ -10,4 +10,3 @@ Support, FAQ, knowledge base, ... are on [support.pimpmylog.com](http://support.
 
 Please star this repository to support *Pimp My Log* !
 
-<iframe src="http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true&size=large" class="ghstar" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>

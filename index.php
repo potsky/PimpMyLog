@@ -196,11 +196,17 @@ $csrf = csrf_get();
 	<title><?php echo TITLE;?></title>
 	<?php include_once 'inc/favicon.inc.php'; ?>
 	<link rel="stylesheet" href="css/pml.min.css">
-	<?php if ( file_exists( 'css/config.inc.user.css' ) ) { ?>
-	<link rel="stylesheet" href="css/config.inc.user.css">
-	<?php } else { ?>
-	<link rel="stylesheet" href="css/config.inc.css">
-	<?php } ?>
+	<?php
+		// We inject the custom css file instead of loading it because of composer installations
+		// In composer installations, the css file is out of the public server scope
+		if ( file_exists( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'config.inc.user.css' ) ) {
+			echo '<style>';
+			echo file_get_contents( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'config.inc.user.css' );
+			echo '</style>';
+		} else {
+			echo '<link rel="stylesheet" href="css/config.inc.css">';
+		}
+	?>
 	<script>
 		var logs_refresh_default = <?php echo (int)LOGS_REFRESH;?>,
 			logs_max_default     = <?php echo (int)LOGS_MAX;?>,

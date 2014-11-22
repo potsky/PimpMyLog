@@ -8,6 +8,15 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.0" : {
+			"released" : "2014-11-22",
+			"new" : [
+				"Install with composer is now operational, you can update without losing your configuration files (#85)"
+			],
+			"fixed" : [
+				"Password recovery check on password length was buggy"
+			]
+		},
 		"1.6.4" : {
 			"released" : "2014-11-21",
 			"changed" : [
