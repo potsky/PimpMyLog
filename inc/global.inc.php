@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6.4 - 642cbec03da43eef30a1caea506bf7a94c0f9c1a*/
+/*! pimpmylog - 1.7.0 - 26520c2ed3a70f555aab3a7e2a3ef37aa4ace6dc*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -706,7 +706,7 @@ function human_filesize( $bytes , $decimals = 0 )
  */
 function csrf_get()
 {
-    @session_start();
+    start_session();
     if ( ! isset( $_SESSION[ 'csrf_token' ] ) ) {
         $_SESSION[ 'csrf_token' ] = md5( uniqid( '' , true ) );
     }
@@ -722,7 +722,7 @@ function csrf_get()
  */
 function csrf_verify()
 {
-    @session_start();
+    start_session();
     $s = @$_SESSION[ 'csrf_token' ];
     session_write_close();
     if ( ! isset( $_POST[ 'csrf_token' ] ) )
@@ -1149,6 +1149,38 @@ function upgrade_can_git_pull() {
 }
 
 
+/**
+ * Overwrite the original session start to specify a path at root of the installation
+ *
+ * If you have several instances of PML on the same server with different paths,
+ * authentication has to be managed distinctly
+ *
+ * @param   string   $path      the path of the cookie
+ * @param   integer  $lifetime  the lifetime of the cookie
+ *
+ * @return  [type]              [description]
+ */
+function start_session( $path = '' , $lifetime = 0 ) {
+    if ( empty( $path ) ) {
+        $sub  = array( 'inc' );
+        $url  = parse_url( get_current_url() );
+        // we add a string on bottom to manage urls like these
+        // - http://niania/blahblah/pimpmylog/
+        // - http://niania/blahblah/pimpmylog/index.php
+        // So they become
+        // - http://niania/blahblah/pimpmylog/fake
+        // - http://niania/blahblah/pimpmylog/index.phpfake
+        $path = dirname( $url[ 'path' ] . 'fake' );
+        // Now remove all identified subfolders
+        if ( in_array( basename( $path ) , $sub ) ) {
+            $path = dirname( $path );
+        }
+    }
+    session_set_cookie_params ( $lifetime , $path );
+    return @session_start();
+}
+
+
 /*
 |--------------------------------------------------------------------------
 | Uniq ID
@@ -1162,7 +1194,7 @@ function upgrade_can_git_pull() {
 if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
     if ( ! isset( $_COOKIE['u'] ) ) {
         $uuid = sha1( json_encode( $_SERVER ) . uniqid( '' , true ) );
-        setcookie( 'u' ,  $uuid , time()+60*60*24*3000 );
+        setcookie( 'u' ,  $uuid , time()+60*60*24*3000 , '/' );
     } else {
         $uuid = $_COOKIE['u'];
     }
@@ -1223,7 +1255,7 @@ if ( function_exists( 'bindtextdomain' ) ) {
 
     if ( ( ! isset( $_COOKIE['pmllocale'] ) ) || (  $_COOKIE['pmllocale'] !== $locale ) ) {
         if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
-            setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 , '/' );
+            setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 );
         }
     }
 

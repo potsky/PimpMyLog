@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6.4 - 642cbec03da43eef30a1caea506bf7a94c0f9c1a*/
+/*! pimpmylog - 1.7.0 - 26520c2ed3a70f555aab3a7e2a3ef37aa4ace6dc*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -272,7 +272,14 @@ echo test( $type , $regex , $match , $types , $log );
 $type  = 'Access Apache 2.2 dummy SSL connection';
 $log   = '::1 - - [27/Nov/2013:12:02:08 +0100] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.2.25 (Unix) mod_ssl/2.2.26 OpenSSL/1.0.1e DAV/2 PHP/5.3.27 (internal dummy connection)"';
 echo test( $type , $regex , $match , $types , $log );
-?></div></div><div class="tab-pane" id="configurationtab"><div class="panel-body"><div class="panel-group" id="accordion2"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Code <code><?php echo get_config_file_path();?></code></a></h4></div><div id="collapseOne2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists( get_config_file_path() )) show_source( get_config_file_path() ); else echo 'configuration file does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">Stats <code><?php echo get_config_file_path();?></code></a></h4></div><div id="collapseTwo2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists( get_config_file_path() ) ) var_export( @stat( get_config_file_path() ) ); else echo 'configuration file does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2">Generated files with includes</a></h4></div><div id="collapseFive2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
+?></div></div><div class="tab-pane" id="configurationtab"><div class="panel-body"><div class="panel-group" id="accordion2"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Code <code><?php echo get_config_file_path();?></code></a></h4></div><div id="collapseOne2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists( get_config_file_path() )) show_source( get_config_file_path() ); else echo 'configuration file does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2">Stats <code><?php echo get_config_file_path();?></code></a></h4></div><div id="collapseTwo2" class="panel-collapse collapse"><div class="panel-body"><pre><?php if (file_exists( get_config_file_path() ) ) var_export( @stat( get_config_file_path() ) ); else echo 'configuration file does not exist'; ?></pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2"><?php
+											$current_user = Sentinel::getCurrentUsername();
+											if ( is_null( $current_user ) ) {
+												_e('Generated files with includes (no user logged in or no auth)');
+											} else {
+												echo sprintf( __( 'Generated files with includes for user %s') , '<code>' . $current_user . '</code>' );
+											}
+										?></a></h4></div><div id="collapseFive2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
 										list( $badges , $files ) = config_load();
 										if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
 											echo json_encode( $files , JSON_PRETTY_PRINT );
@@ -287,7 +294,7 @@ echo test( $type , $regex , $match , $types , $log );
 									}
 									?></pre><?php
 										$paths = array(
-											'config' => '../config.user.json',
+											'config' => get_config_file_path(),
 										);
 										if ( is_array( @$files ) ) {
 											foreach ( $files as $fileid => $file ) {

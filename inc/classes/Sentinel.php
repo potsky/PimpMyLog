@@ -825,7 +825,7 @@ class Sentinel
 	{
 		// Web
 		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			@session_start();
+			start_session();
 			unset( $_SESSION['auth'] );
 			$_SESSION['auth'] = array();
 			session_write_close();
@@ -841,7 +841,7 @@ class Sentinel
 	{
 		// Web
 		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			@session_start();
+			start_session();
 
 			return ( isset( $_SESSION['auth'] ) ) ? $_SESSION['auth'] : array();
 		}
@@ -858,7 +858,7 @@ class Sentinel
 	{
 		// Web
 		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			@session_start();
+			start_session();
 			$_SESSION[ 'auth' ] = $value;
 			session_write_close();
 		}
