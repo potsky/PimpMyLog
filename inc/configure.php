@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6.4 - c9633e4c9d5a3ee985f5b4faf1cac18bb999d3e1*/
+/*! pimpmylog - 1.7.0 - a49933da56c3bf3b7dfc88cc6b81407468d39bdb*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -32,8 +32,8 @@ if ( isset( $_POST['s'] ) ) {
 		'next'   => false,
 	);
 
-	$config_file      = '../' . CONFIG_FILE_NAME;
-	$config_file_temp = '../' . CONFIG_FILE_TEMP;
+	$config_file      = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . CONFIG_FILE_NAME;
+	$config_file_temp = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . CONFIG_FILE_TEMP;
 
 	try {
 
@@ -147,7 +147,7 @@ if ( isset( $_POST['s'] ) ) {
 			|
 			*/
 			case 'authsave':
-				if ( ( strlen( $_POST['u'] ) > 0 ) && ( strlen( $_POST['p'] ) >= 6 ) ) {
+				if ( ( mb_strlen( $_POST['u'] ) > 0 ) && ( mb_strlen( $_POST['p'] ) >= 6 ) ) {
 					Sentinel::setAdmin( $_POST['u'] , $_POST['p'] );
 					$return[ 'notice' ] = Sentinel::save();
 				}
@@ -408,7 +408,7 @@ if ( isset( $_POST['s'] ) ) {
 					$get_config = $software . '_get_config';
 					$counter    = $counter + 1;
 					$config     = '../cfg/' . $software . '.config.php';
-					$configuser = '../cfg/' . $software . '.config.user.php';
+					$configuser = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . 'cfg' . DIRECTORY_SEPARATOR . $software . '.config.user.php';
 
 					if ( file_exists( $configuser ) ) {
 						include_once $configuser;

@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6.4 - c9633e4c9d5a3ee985f5b4faf1cac18bb999d3e1*/
+/*! pimpmylog - 1.7.0 - a49933da56c3bf3b7dfc88cc6b81407468d39bdb*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -114,7 +114,7 @@ switch ( @$_POST['action'] ) {
 			$fields[] = 'password1';
 			$doit    = false;
 		}
-		if ( strlen( $password2 ) < 6  ) {
+		if ( mb_strlen( $password2 ) < 6  ) {
 			$errors[] = __( 'Password must contain at least 6 chars' );
 			$fields[] = 'password2';
 			$doit    = false;
@@ -270,7 +270,7 @@ switch ( @$_POST['action'] ) {
 		}
 
 		if ( ( ( $type === 'edit' ) && ( ! empty( $password ) ) ) || ( $type === 'add' ) ) {
-			if ( strlen( $password ) < 6 ) {
+			if ( mb_strlen( $password ) < 6 ) {
 				$errors[ 'password' ] = __( 'Password must contain at least 6 chars' );
 			}
 			if ( $password !== $password2 ) {

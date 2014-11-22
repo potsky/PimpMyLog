@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6.4 - c9633e4c9d5a3ee985f5b4faf1cac18bb999d3e1*/
+/*! pimpmylog - 1.7.0 - a49933da56c3bf3b7dfc88cc6b81407468d39bdb*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -24,11 +24,19 @@ if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
 
 /*
 |--------------------------------------------------------------------------
-| Define root directory
+| Define root directories
 |--------------------------------------------------------------------------
 |
 */
 if ( ! defined( 'PML_BASE' ) ) define( 'PML_BASE' , realpath( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '..' ) );
+
+if ( ! defined( 'PML_CONFIG_BASE' ) ) {
+    if ( upgrade_is_composer() ) {
+        define( 'PML_CONFIG_BASE' , realpath( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.' ) );
+    } else {
+        define( 'PML_CONFIG_BASE' , PML_BASE );
+    }
+}
 
 
 /*
@@ -278,14 +286,13 @@ function load_default_constants()
  */
 function get_config_file_path()
 {
-    $root  = dirname( __FILE__ ) . '/../';
     $files = array(
         CONFIG_FILE_NAME,
         CONFIG_FILE_NAME_BEFORE_1_5_0,
     );
     foreach ($files as $f) {
-        if ( file_exists( $root . $f ) ) {
-            return realpath( $root . $f );
+        if ( file_exists( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . $f ) ) {
+            return realpath( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . $f );
         }
     }
 
@@ -366,21 +373,9 @@ function config_load($load_user_configuration_dir = true)
     @set_time_limit( MAX_SEARCH_LOG_TIME + 2 );
 
     // Append files from the USER_CONFIGURATION_DIR
-    if ($load_user_configuration_dir === true) {
-        $dir      = null;
-        $base     = dirname( __FILE__ ) . '/../';
-        $realbase = realpath( dirname( __FILE__ ) . '/../' );
-
-        // Can be an absolute path or a request by index.php for example
-        if ( is_dir( USER_CONFIGURATION_DIR ) ) {
-            $dir  = USER_CONFIGURATION_DIR;
-        }
-        // Relative path from a subfolder or test suite
-        else if ( is_dir( $base . USER_CONFIGURATION_DIR ) ) {
-            $dir  = $base . USER_CONFIGURATION_DIR;
-        }
-
-        if ( ! is_null( $dir ) ) {
+    if ( $load_user_configuration_dir === true ) {
+        if ( is_dir( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR ) ) {
+            $dir       = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR;
             $userfiles = new RegexIterator(
                 new RecursiveIteratorIterator(
                     new RecursiveDirectoryIterator( $dir , RecursiveDirectoryIterator::SKIP_DOTS ),
@@ -395,7 +390,7 @@ function config_load($load_user_configuration_dir = true)
                 $c = get_config_file( $filepath );
                 if ( ! is_null( $c ) ) {
                     foreach ($c as $k => $v) {
-                        $fileid                                        = get_slug( str_replace( $realbase , '' , $filepath ) . '/' . $k );
+                        $fileid                                        = get_slug( str_replace( PML_CONFIG_BASE , '' , $filepath ) . '/' . $k );
                         $config[ 'files' ][ $fileid ]                  = $v;
                         $config[ 'files' ][ $fileid ]['included_from'] = $filepath;
                     }
@@ -711,7 +706,7 @@ function human_filesize( $bytes , $decimals = 0 )
  */
 function csrf_get()
 {
-    @session_start();
+    start_session();
     if ( ! isset( $_SESSION[ 'csrf_token' ] ) ) {
         $_SESSION[ 'csrf_token' ] = md5( uniqid( '' , true ) );
     }
@@ -727,7 +722,7 @@ function csrf_get()
  */
 function csrf_verify()
 {
-    @session_start();
+    start_session();
     $s = @$_SESSION[ 'csrf_token' ];
     session_write_close();
     if ( ! isset( $_POST[ 'csrf_token' ] ) )
@@ -1153,6 +1148,37 @@ function upgrade_can_git_pull() {
     return true;
 }
 
+/**
+ * Overwrite the original session start to specify a path at root of the installation
+ *
+ * If you have several instances of PML on the same server with different paths,
+ * authentication has to be managed distinctly
+ *
+ * @param   string   $path      the path of the cookie
+ * @param   integer  $lifetime  the lifetime of the cookie
+ *
+ * @return  [type]              [description]
+ */
+function start_session( $path = '' , $lifetime = 0 ) {
+    if ( empty( $path ) ) {
+        $sub  = array( 'inc' );
+        $url  = parse_url( get_current_url() );
+        // we add a string on bottom to manage urls like these
+        // - http://niania/blahblah/pimpmylog/
+        // - http://niania/blahblah/pimpmylog/index.php
+        // So they become
+        // - http://niania/blahblah/pimpmylog/fake
+        // - http://niania/blahblah/pimpmylog/index.phpfake
+        $path = dirname( $url[ 'path' ] . 'fake' );
+        // Now remove all identified subfolders
+        if ( in_array( basename( $path ) , $sub ) ) {
+            $path = dirname( $path );
+        }
+    }
+    session_set_cookie_params ( $lifetime , $path );
+    return @session_start();
+}
+
 
 /*
 |--------------------------------------------------------------------------
@@ -1167,7 +1193,7 @@ function upgrade_can_git_pull() {
 if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
     if ( ! isset( $_COOKIE['u'] ) ) {
         $uuid = sha1( json_encode( $_SERVER ) . uniqid( '' , true ) );
-        setcookie( 'u' ,  $uuid , time()+60*60*24*3000 );
+        setcookie( 'u' ,  $uuid , time()+60*60*24*3000 , '/' );
     } else {
         $uuid = $_COOKIE['u'];
     }
@@ -1228,7 +1254,7 @@ if ( function_exists( 'bindtextdomain' ) ) {
 
     if ( ( ! isset( $_COOKIE['pmllocale'] ) ) || (  $_COOKIE['pmllocale'] !== $locale ) ) {
         if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
-            setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 , '/' );
+            setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 );
         }
     }
 

@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.6.4 - c9633e4c9d5a3ee985f5b4faf1cac18bb999d3e1*/
+/*! pimpmylog - 1.7.0 - a49933da56c3bf3b7dfc88cc6b81407468d39bdb*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -44,7 +44,7 @@ if ( isset( $_POST['action'] ) ) {
 				if ( ! is_array( $can_pull ) ) {
 					exec( 'git pull' , $lines );
 
-					session_start();
+					start_session();
 					$_SESSION['upgradegitpullok'] = $lines;
 					session_write_close();
 
