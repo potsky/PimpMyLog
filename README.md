@@ -22,3 +22,4 @@ Change version in `package.json`, it will be automatically added in the `version
 ## Production
 
 - `grunt build install-production` to publish on the branch *master*
+
