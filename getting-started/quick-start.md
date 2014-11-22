@@ -9,7 +9,11 @@ title: Quick start
 
 {% include documentation_install_git.md %}
 
-## 1.2 - From archive
+## 1.2 - With composer
+
+{% include documentation_install_composer.md %}
+
+## 1.3 - From archive
 
 {% include documentation_install_zip.md %}
 

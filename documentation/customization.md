@@ -9,6 +9,9 @@ The default stylesheet is located at `css/config.inc.css`. **Do not modify** thi
 
 You can create your own stylesheet which will be loaded **instead of** the default one. Your custom stylesheet has to be located at `css/config.inc.user.css`.
 
+If you have installed *Pimp my Log* with composer, install the custom css file in the root of composer at `css/config.inc.user.css` ! If you install the `css/config.inc.user.css` at the root of *Pimp my Log* in `/vendor/potsky/pimp-my-log/ss/config.inc.user.css`, it will be deleted while the next composer update !!!
+
+
 > **Note**  
 > 
 > If you only want to override some default values (and want to have future style updates), you can include the original CSS file in your file and add some style.

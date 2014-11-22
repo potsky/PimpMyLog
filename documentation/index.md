@@ -107,7 +107,6 @@ I use these settings when I develop a website:
 
 <!-- -->
 
-
 ## Displayed lines
 
 You can change the number of lines you want to display. Just select in the list the number or log lines you want. Displaying a lot of lines has performance consequences on:

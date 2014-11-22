@@ -50,6 +50,28 @@ User files are defined in the `.gitignore` file and are not overridden.
 
 ## 2.2 - With composer
 
+{% include documentation_install_composer.md %}
+
+### Customizations
+
+When installing with composer, all user custom files are located in the root directory of composer and not in the root directory of *Pimp My Log* as it is with other installation ways.
+
+```
+/composer.json
+/composer.lock
+/config.auth.user.php     <-- Authentication database
+/config.user.d/...        <-- Pimp My Log secondary configuration files
+/config.user.php          <-- Pimp My Log main configuration file
+/css/
+/css/config.inc.user.css  <-- Custom CSS file
+/vendor/
+/vendor/potsky/
+/vendor/potsky/pimp-my-log/
+/vendor/potsky/pimp-my-log/index.php
+```
+
+### Versions
+
 Install the latest stable version:
 
 ```
@@ -78,6 +100,14 @@ Install the beta unstable version:
 
 ```
 composer require "potsky/pimp-my-log" "dev-beta"
+```
+
+### Update
+
+Just do it:
+
+```
+composer update
 ```
 
 ## 2.3 - From archive
