@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pimp my Log\n"
-"POT-Creation-Date: 2014-11-22 15:03+0100\n"
-"PO-Revision-Date: 2014-11-22 15:04+0100\n"
+"POT-Creation-Date: 2014-11-24 11:55+0100\n"
+"PO-Revision-Date: 2014-11-24 11:55+0100\n"
 "Last-Translator: Potsky <potsky@me.com>\n"
 "Language-Team: potsky <potsky@me.com>\n"
 "Language: fr\n"
@@ -102,7 +102,7 @@ msgstr ""
 "Activez ce logiciel que si vous utilisez <code>ini_set('error_log')</code> "
 "directement dans le code de vos scripts."
 
-#: inc/configure.php:45 inc/configure.php:85 inc/test.php:604
+#: inc/configure.php:45 inc/configure.php:85 inc/test.php:643
 msgid "Setup admin account"
 msgstr "Configurer un compte administrateur"
 
@@ -131,8 +131,9 @@ msgstr "Voulez-vous créer un compte admin maintenant ?"
 msgid "Create an admin account"
 msgstr "Créer un compte administrateur"
 
-#: inc/configure.php:56 inc/configure.php:476 inc/test.php:514
-#: inc/test.php:515 inc/users.pml.php:425 index.php:775
+#: inc/configure.php:56 inc/configure.php:478 inc/test.php:514
+#: inc/test.php:515 inc/test.php:547 inc/test.php:556 inc/users.pml.php:425
+#: index.php:772
 msgid "No"
 msgstr "Non"
 
@@ -145,16 +146,16 @@ msgstr "Le fichier <code>%s</code> existe déjà."
 msgid "Please remove it from the root directory:"
 msgstr "Supprimez le de la racine :"
 
-#: inc/configure.php:77 inc/configure.php:126 inc/configure.php:162
-#: inc/configure.php:183 inc/test.php:172 inc/test.php:217 inc/test.php:295
-#: inc/test.php:596 inc/upgrade.pml.php:283 inc/upgrade.pml.php:300
-#: inc/upgrade.pml.php:380 inc/users.pml.php:485 inc/users.pml.php:499
-#: index.php:570 index.php:592
+#: inc/configure.php:77 inc/configure.php:127 inc/configure.php:163
+#: inc/configure.php:185 inc/test.php:172 inc/test.php:217 inc/test.php:295
+#: inc/test.php:635 inc/upgrade.pml.php:283 inc/upgrade.pml.php:300
+#: inc/upgrade.pml.php:380 inc/users.pml.php:488 inc/users.pml.php:502
+#: index.php:567 index.php:589
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse-papier"
 
-#: inc/configure.php:77 inc/configure.php:126 inc/configure.php:162
-#: inc/configure.php:183 inc/upgrade.pml.php:289 inc/upgrade.pml.php:306
+#: inc/configure.php:77 inc/configure.php:127 inc/configure.php:163
+#: inc/configure.php:185 inc/upgrade.pml.php:289 inc/upgrade.pml.php:306
 #: inc/upgrade.pml.php:386
 msgid "Command copied!"
 msgstr "Commande copiée !"
@@ -164,68 +165,68 @@ msgid "Please choose a username and a password for the admin account."
 msgstr ""
 "Choisissez un nom d'utilisateur et un mot de passe pour le compte admin."
 
-#: inc/configure.php:92 inc/test.php:609 inc/test.php:674
+#: inc/configure.php:92 inc/test.php:648 inc/test.php:713
 #: inc/users.pml.php:257
 msgid "Username is required"
 msgstr "Le nom d'utilisateur est obligatoire"
 
 #: inc/configure.php:94 inc/login.inc.php:76 inc/login.inc.php:78
-#: inc/test.php:612 inc/test.php:677 index.php:716 index.php:720
+#: inc/test.php:651 inc/test.php:716 index.php:713 index.php:717
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: inc/configure.php:99 inc/test.php:575 inc/test.php:618 inc/test.php:661
-#: inc/test.php:683 inc/users.pml.php:109 inc/users.pml.php:265
+#: inc/configure.php:99 inc/test.php:614 inc/test.php:657 inc/test.php:700
+#: inc/test.php:722 inc/users.pml.php:109 inc/users.pml.php:265
 msgid "Password must contain at least 6 chars"
 msgstr "Le mot de passe doit contenir au moins 6 caractères"
 
 #: inc/configure.php:101 inc/login.inc.php:89 inc/login.inc.php:91
-#: inc/test.php:621 inc/test.php:686 index.php:725 index.php:729
+#: inc/test.php:660 inc/test.php:725 index.php:722 index.php:726
 msgid "Password"
 msgstr "Mot de passe"
 
-#: inc/configure.php:106 inc/test.php:627 inc/test.php:692
+#: inc/configure.php:106 inc/test.php:666 inc/test.php:731
 msgid "Password is not the same"
 msgstr "Les mots de passe ne correspondent pas"
 
-#: inc/configure.php:108 inc/test.php:630 inc/test.php:695 index.php:734
-#: index.php:738
+#: inc/configure.php:108 inc/test.php:669 inc/test.php:734 index.php:731
+#: index.php:735
 msgid "Password Confirmation"
 msgstr "Confirmation du mot de passe"
 
-#: inc/configure.php:113 inc/configure.php:538
+#: inc/configure.php:113 inc/configure.php:540
 msgid "Continue"
 msgstr "Continuer"
 
-#: inc/configure.php:121 inc/configure.php:178
+#: inc/configure.php:122 inc/configure.php:180
 #, php-format
 msgid "Unable to create file <code>%s</code>"
 msgstr "Impossible de créer le fichier <code>%s</code>"
 
-#: inc/configure.php:123 inc/configure.php:180
+#: inc/configure.php:124 inc/configure.php:182
 msgid "Please give temporary write access to the root directory:"
 msgstr ""
 "Merci de donner temporairement l'accès en écriture au répertoire racine :"
 
-#: inc/configure.php:158
+#: inc/configure.php:159
 msgid "Please remove it manually if you want me to create it:"
 msgstr "Supprimez le manuellement si vous souhaitez que je le crée :"
 
-#: inc/configure.php:164
+#: inc/configure.php:165
 #, php-format
 msgid "File <code>%s</code> already exists."
 msgstr "Le fichier <code>%s</code> existe déjà."
 
-#: inc/configure.php:197
+#: inc/configure.php:199
 msgid "Choose softwares to search log files for"
 msgstr "Choisir les logiciels pour lesquels chercher des logs"
 
-#: inc/configure.php:219
+#: inc/configure.php:221
 #, php-format
 msgid "Software <em>%s</em>"
 msgstr "Logiciel <em>%s</em>"
 
-#: inc/configure.php:229 inc/configure.php:413
+#: inc/configure.php:231 inc/configure.php:415
 #, php-format
 msgid ""
 "Files <code>%s</code> or <code>%s</code> do not exist. Please review your "
@@ -234,11 +235,11 @@ msgstr ""
 "Les fichiers <code>%s</code> ou <code>%s</code> n'existent pas. Revoyez "
 "votre configuration de logiciels."
 
-#: inc/configure.php:282
+#: inc/configure.php:284
 msgid "Unable to find any directory."
 msgstr "Impossible de trouver un seul répertoire."
 
-#: inc/configure.php:283
+#: inc/configure.php:285
 msgid ""
 "Check in the following list if these directories are readable by the "
 "webserver user and refresh this page"
@@ -246,13 +247,13 @@ msgstr ""
 "Vérifiez dans la liste suivante si les répertoires sont lisibles par "
 "l'utilisateur qui a lancé le serveur web et rafraichissez la page"
 
-#: inc/configure.php:286
+#: inc/configure.php:288
 msgid "Directories are available but unable to find files inside."
 msgstr ""
 "Les répertoires sont disponibles mais impossible de trouver des fichiers de "
 "logs dedans."
 
-#: inc/configure.php:287
+#: inc/configure.php:289
 msgid ""
 "Check in the following list if these directories contain readable files by "
 "the webserver user and refresh this page."
@@ -261,7 +262,7 @@ msgstr ""
 "de logs lisibles par l'utilisateur qui a lancé le serveur web et "
 "rafraichissez la page."
 
-#: inc/configure.php:288
+#: inc/configure.php:290
 msgid ""
 "Don't forget that to read a file, ALL parent directories have to be "
 "accessible too!"
@@ -269,20 +270,20 @@ msgstr ""
 "N'oubliez pas que pour lire un fichier, TOUS les répertoires parents doivent "
 "être traversables !"
 
-#: inc/configure.php:298
+#: inc/configure.php:300
 #, php-format
 msgid "These files have been checked in all paths: %s "
 msgstr "Ces fichiers ont été testés dans tous les répertoires : %s"
 
-#: inc/configure.php:301
+#: inc/configure.php:303
 msgid "Log files have been found!"
 msgstr "Des fichiers de log ont été trouvés !"
 
-#: inc/configure.php:302
+#: inc/configure.php:304
 msgid "Check in the following list which files you want to configure."
 msgstr "Choisissez dans la liste les fichiers que vous souhaitez configurer."
 
-#: inc/configure.php:304
+#: inc/configure.php:306
 msgid ""
 "If files or directories are missing, verify that they are readable by the "
 "webserver user"
@@ -290,36 +291,36 @@ msgstr ""
 "Si des fichiers ou répertoires sont manquants, vérifiez qu'ils sont bien "
 "lisibles par l'utilisateur sous lequel tourne le serveur web."
 
-#: inc/configure.php:309 inc/configure.php:360
+#: inc/configure.php:311 inc/configure.php:362
 msgid "unable to detect web server user"
 msgstr "impossible de trouver l'utilisateur sous lequel tourne le serveur web"
 
-#: inc/configure.php:310 inc/configure.php:361
+#: inc/configure.php:312 inc/configure.php:363
 #, php-format
 msgid "web server user seems to be <code>%s</code>"
 msgstr ""
 "L'utilisateur sous lequel tourne le serveur web semble être <code>%s</code>"
 
-#: inc/configure.php:314
+#: inc/configure.php:316
 msgid ""
 "You can also type log files path in the text area below separated by coma:"
 msgstr ""
 "Vous pouvez aussi renseigner le chemin de fichiers de log dans les zones de "
 "texte si dessous en les séparant par des virgules :"
 
-#: inc/configure.php:316 inc/configure.php:475
+#: inc/configure.php:318 inc/configure.php:477
 msgid "Type"
 msgstr "Type"
 
-#: inc/configure.php:316
+#: inc/configure.php:318
 msgid "Custom paths"
 msgstr "Chemins personnalisés"
 
-#: inc/configure.php:338 inc/configure.php:385 inc/configure.php:389
+#: inc/configure.php:340 inc/configure.php:387 inc/configure.php:391
 msgid "Unknown error"
 msgstr "Erreur inconnue"
 
-#: inc/configure.php:357
+#: inc/configure.php:359
 msgid ""
 "Custom files below are not readable, please remove them or verify that they "
 "are readable by the webserver user"
@@ -327,7 +328,7 @@ msgstr ""
 "Les fichiers ci-dessous ne sont pas lisibles. Retirez-les ou vérifiez qu'ils "
 "sont bien lisibles par l'utilisateur sous lequel tourne le serveur web"
 
-#: inc/configure.php:421
+#: inc/configure.php:423
 #, php-format
 msgid ""
 "File <code>%s</code> does not define function <code>%s</code>. Please review "
@@ -336,92 +337,92 @@ msgstr ""
 "Le fichier <code>%s</code> ne définit pas la fonction <code>%s</code>. "
 "Revoyez votre configuration de logiciels."
 
-#: inc/configure.php:434
+#: inc/configure.php:436
 msgid "No configuration found for softwares!"
 msgstr "Pas de configuration trouvée pour les logiciels !"
 
-#: inc/configure.php:446
+#: inc/configure.php:448
 msgid "Unknown action, abort."
 msgstr "Action inconnue, stop."
 
-#: inc/configure.php:468
+#: inc/configure.php:470
 msgid "%s% Complete"
 msgstr "%s% complété"
 
-#: inc/configure.php:469 index.php:122
+#: inc/configure.php:471 index.php:122
 msgid "An error occurs!"
 msgstr "Une erreur est survenue !"
 
-#: inc/configure.php:470
+#: inc/configure.php:472
 msgid "Please wait..."
 msgstr "Patientez quelques instants..."
 
-#: inc/configure.php:471
+#: inc/configure.php:473
 msgid "Software"
 msgstr "Logiciel"
 
-#: inc/configure.php:472 inc/test.php:510
+#: inc/configure.php:474 inc/test.php:510
 msgid "Path"
 msgstr "Chemin"
 
-#: inc/configure.php:473
+#: inc/configure.php:475
 msgid "File"
 msgstr "Fichier"
 
-#: inc/configure.php:474
+#: inc/configure.php:476
 msgid "Readable"
 msgstr "Lisable"
 
-#: inc/configure.php:477 inc/test.php:514 inc/test.php:515
-#: inc/users.pml.php:422 index.php:772
+#: inc/configure.php:479 inc/test.php:514 inc/test.php:515 inc/test.php:545
+#: inc/test.php:554 inc/users.pml.php:422 index.php:769
 msgid "Yes"
 msgstr "Oui"
 
-#: inc/configure.php:478
+#: inc/configure.php:480
 msgid "Name"
 msgstr "Nom"
 
-#: inc/configure.php:479
+#: inc/configure.php:481
 msgid "Description"
 msgstr "Description"
 
-#: inc/configure.php:480
+#: inc/configure.php:482
 msgid "Notes"
 msgstr "Remarques"
 
-#: inc/configure.php:481
+#: inc/configure.php:483
 msgid "You have to select at least one software to configure!"
 msgstr "Vous devez au moins choisir un logiciel à configurer !"
 
-#: inc/configure.php:482
+#: inc/configure.php:484
 msgid ""
 "You have to select at least one log file or type the path of a log file!"
 msgstr ""
 "Vous devez sélectionner au moins un fichier de log ou sinon renseignez le "
 "chemin d'un fichier de log !"
 
-#: inc/configure.php:519
+#: inc/configure.php:521
 msgid "Configurator"
 msgstr "Configurateur"
 
-#: inc/configure.php:540 inc/test.php:175
+#: inc/configure.php:542 inc/test.php:175
 msgid "Reload"
 msgstr "Recharger"
 
-#: inc/configure.php:546
+#: inc/configure.php:548
 msgid "Congratulations!"
 msgstr "Félicitations !"
 
-#: inc/configure.php:550
+#: inc/configure.php:552
 msgid "Your <em>Pimp my Log</em> instance is ready to use."
 msgstr "<em>Pimp my Log</em> est maintenant prêt à être utilisé."
 
-#: inc/configure.php:553
+#: inc/configure.php:555
 #, php-format
 msgid "You can manually adjust settings in the <code>%s</code> file."
 msgstr "Vous pouvez ajuster les paramètres dans le fichier <code>%s</code>."
 
-#: inc/configure.php:555
+#: inc/configure.php:557
 msgid ""
 "Please visit <a href=\"http://pimpmylog.com\">pimpmylog.com</a> for more "
 "informations."
@@ -429,7 +430,7 @@ msgstr ""
 "Visitez <a href=\"http://pimpmylog.com\">pimpmylog.com</a> pour plus "
 "d'informations."
 
-#: inc/configure.php:558
+#: inc/configure.php:560
 msgid "Pimp my Logs now!"
 msgstr "Pimp my Log maintenant !"
 
@@ -531,16 +532,16 @@ msgstr "1 ancien log trouvé"
 msgid "log type is <code>%s</code>"
 msgstr "le type de log est <code>%s</code>"
 
-#: inc/global.inc.php:505 inc/global.inc.php:513
+#: inc/global.inc.php:545 inc/global.inc.php:553
 msgid "No file is defined in <code>files</code> array"
 msgstr "Aucun fichier n'est défini dans le tableau <code>files</code>"
 
-#: inc/global.inc.php:522
+#: inc/global.inc.php:562
 #, php-format
 msgid "<code>%s</code> is mandatory for file ID <code>%s</code>"
 msgstr "<code>%s</code> est obligatoire pour le fichier d'ID <code>%s</code>"
 
-#: inc/global.inc.php:687
+#: inc/global.inc.php:727
 msgid "B KBMBGBTBPB"
 msgstr "o KoMoGoToPo"
 
@@ -711,7 +712,7 @@ msgstr "Lignes multiples"
 msgid "Use CTRL-R shortcut instead of clicking on this button"
 msgstr "Utilisez le raccourci CTRL-R au lieu de cliquer sur ce bouton"
 
-#: inc/test.php:293 index.php:524 index.php:544 index.php:593
+#: inc/test.php:293 index.php:521 index.php:541 index.php:590
 msgid "Loading..."
 msgstr "Chargement..."
 
@@ -751,57 +752,68 @@ msgstr "Ecrire"
 msgid "Real path"
 msgstr "Chemin réel"
 
-#: inc/test.php:569
+#: inc/test.php:540
+msgid "To be optimal, Pimp My Log needs all these modules ok:"
+msgstr ""
+"Pour fonctionner de manière optimale, Pimp My Log a besoin que ces modules "
+"soient installés :"
+
+#: inc/test.php:548 inc/test.php:557
+#, php-format
+msgid "Follow instructions %shere%s to enable"
+msgstr "Suivez les instructions d'installation %sici%s"
+
+#: inc/test.php:608
 #, php-format
 msgid "User %s already exists!"
 msgstr "L'utilisateur <code>%s</code> existe déjà."
 
-#: inc/test.php:572 inc/test.php:658 inc/users.pml.php:114
+#: inc/test.php:611 inc/test.php:697 inc/users.pml.php:114
 #: inc/users.pml.php:268
 msgid "Password confirmation is not the same"
 msgstr "La confirmation du mot de passe n'est pas correcte"
 
-#: inc/test.php:580
+#: inc/test.php:619
 msgid "Authentication has been enabled and admin account has been created!"
 msgstr ""
 "L'authentification a bien été activée et le compte admin a bien été crée !"
 
-#: inc/test.php:588
+#: inc/test.php:627
 msgid "Authentication is currently enabled"
 msgstr "L'authentification est activée"
 
-#: inc/test.php:592
+#: inc/test.php:631
 msgid "Please remove this file on your server to disable authentication"
 msgstr ""
 "Supprimer ce fichier sur votre serveur pour désactiver l'authentification"
 
-#: inc/test.php:603
+#: inc/test.php:642
 msgid "Authentication is currently disabled"
 msgstr "L'authentification est desactivée"
 
-#: inc/test.php:636
+#: inc/test.php:675
 msgid "Enable authentication"
 msgstr "Activer authentification"
 
-#: inc/test.php:651
+#: inc/test.php:690
 msgid "Please fill an existing username and a new password"
 msgstr "Renseignez un nom d'utilisateur existant et un nouveau mot de passe"
 
-#: inc/test.php:655
+#: inc/test.php:694
 #, php-format
 msgid "User %s does not exist!"
 msgstr "L'utilisateur %s n'existe pas !"
 
-#: inc/test.php:666
+#: inc/test.php:705
 #, php-format
 msgid "Password has been updated for user %s!"
 msgstr "Le mot de passe de l'utilisateur %s a bien été mis à jour !"
 
-#: inc/test.php:701
+#: inc/test.php:740
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: inc/test.php:705
+#: inc/test.php:744
 msgid "This feature is only available when authentication is enabled."
 msgstr ""
 "Cette fonctionnalité n'est disponible que quand l'authentification est "
@@ -1003,44 +1015,44 @@ msgstr ""
 "Sélectionnez les fichiers de logs qui peuvent être visualisés sans être "
 "connecté."
 
-#: inc/users.pml.php:398 index.php:761
+#: inc/users.pml.php:398 index.php:758
 msgid "Toggle all log files"
 msgstr "Inverser tous les fichiers"
 
-#: inc/users.pml.php:477 index.php:154
+#: inc/users.pml.php:480 index.php:154
 msgid "Access token"
 msgstr "Jeton d'accès"
 
-#: inc/users.pml.php:488
+#: inc/users.pml.php:491
 msgid "Access token copied!"
 msgstr "Jeton d'accès copié !"
 
-#: inc/users.pml.php:491 index.php:158
+#: inc/users.pml.php:494 index.php:158
 msgid "Presalt key"
 msgstr "Clé de salage"
 
-#: inc/users.pml.php:502
+#: inc/users.pml.php:505
 msgid "Presalt key copied!"
 msgstr "Clé de salage copiée !"
 
-#: inc/users.pml.php:507
+#: inc/users.pml.php:510
 msgid "Check to generate both new Access token and new Presalt key"
 msgstr "Cochez pour régénérer des nouveaux jeton d'accès et clé de salage"
 
-#: inc/users.pml.php:514
+#: inc/users.pml.php:517
 msgid "Your credentials have not been used"
 msgstr "Vos identifiants n'ont pas encore été utilisés"
 
-#: inc/users.pml.php:519
+#: inc/users.pml.php:522
 msgid "API has been called 1 time"
 msgstr "L'API a été appelée 1 fois"
 
-#: inc/users.pml.php:521
+#: inc/users.pml.php:524
 #, php-format
 msgid "API has been called %s times"
 msgstr "L'API a été appelée %s fois"
 
-#: inc/users.pml.php:525
+#: inc/users.pml.php:528
 #, php-format
 msgid ""
 "Last API call has been done at %s by IP address %s with user agent %s on URL "
@@ -1097,7 +1109,7 @@ msgstr "Votre accès est désactivé, vous n'avez accès à aucun fichier de log
 msgid "Please contact your administrator."
 msgstr "Merci de contacter votre administrateur"
 
-#: index.php:79 index.php:146 index.php:464
+#: index.php:79 index.php:146 index.php:461
 msgid "Sign out"
 msgstr "Déconnexion"
 
@@ -1175,7 +1187,7 @@ msgstr "1 log affiché"
 msgid "%s logs displayed,"
 msgstr "%s logs affichés,"
 
-#: index.php:123 index.php:616
+#: index.php:123 index.php:613
 msgid "Form is invalid:"
 msgstr "Le formulaire n'est pas valide :"
 
@@ -1241,7 +1253,7 @@ msgstr "Recherche effectuée avec Expression Regulière"
 msgid "Result copied!"
 msgstr "Résultat copié !"
 
-#: index.php:139 index.php:162 index.php:744
+#: index.php:139 index.php:162 index.php:741
 msgid "Roles"
 msgstr "Rôles"
 
@@ -1281,7 +1293,7 @@ msgstr "Montrer/Cacher la colonne %s"
 msgid "URL copied!"
 msgstr "Adresse copiée !"
 
-#: index.php:150 index.php:748
+#: index.php:150 index.php:745
 msgid "User"
 msgstr "Utilisateur"
 
@@ -1313,7 +1325,7 @@ msgstr "User agent"
 msgid "User name"
 msgstr "Nom d'utilisateur"
 
-#: index.php:165 index.php:683
+#: index.php:165 index.php:680
 msgid "Users"
 msgstr "Utilisateurs"
 
@@ -1414,9 +1426,13 @@ msgstr "Effacer les marqueurs"
 msgid "Language"
 msgstr "Langue"
 
-#: index.php:417
+#: index.php:418
 msgid "Change language..."
 msgstr "Choisir une langue"
+
+#: index.php:427
+msgid "Language cannot be changed"
+msgstr "La langue ne peut pas être changée"
 
 #: index.php:433
 msgid "Timezone"
@@ -1426,49 +1442,49 @@ msgstr "Fuseau horaire"
 msgid "Change timezone..."
 msgstr "Changer fuseau horaire"
 
-#: index.php:454 index.php:619
+#: index.php:451 index.php:616
 #, php-format
 msgid "You are currently connected as %s"
 msgstr "Vous êtes actuellement connecté en tant que %s"
 
-#: index.php:456
+#: index.php:453
 msgid "User settings"
 msgstr "Paramètres utilisateur"
 
-#: index.php:460
+#: index.php:457
 msgid "Click here to manager users"
 msgstr "Cliquez ici pour gérer les utilisateurs"
 
-#: index.php:460
+#: index.php:457
 msgid "Manage users"
 msgstr "Gérer les utilisateurs"
 
-#: index.php:462
+#: index.php:459
 msgid "Click here to view your profile"
 msgstr "Cliquez ici pour voir votre profil"
 
-#: index.php:462 index.php:659
+#: index.php:459 index.php:656
 msgid "Profile"
 msgstr "Profil"
 
-#: index.php:463
+#: index.php:460
 msgid "Click here to change your password"
 msgstr "Cliquez ici pour changer votre mot de passe"
 
-#: index.php:463 index.php:612
+#: index.php:460 index.php:609
 msgid "Change password"
 msgstr "Mot de passe"
 
-#: index.php:464
+#: index.php:461
 msgid "Click here to sign out"
 msgstr "Cliquez ici pour vous déconnecter"
 
-#: index.php:490
+#: index.php:487
 #, php-format
 msgid "Welcome in version %s"
 msgstr "Bienvenue en version %s"
 
-#: index.php:495
+#: index.php:492
 #, php-format
 msgid ""
 "The changelog and all informations about this version are available on the "
@@ -1477,56 +1493,56 @@ msgstr ""
 "Toutes les informations à propos de cette version sont disponibles sur le "
 "%sblog%s."
 
-#: index.php:524 index.php:544
+#: index.php:521 index.php:541
 msgid "No more data"
 msgstr "Pas plus de données"
 
-#: index.php:524 index.php:544
+#: index.php:521 index.php:541
 msgid "Load more"
 msgstr "Plus de logs"
 
-#: index.php:529 index.php:563
+#: index.php:526 index.php:560
 msgid "Export"
 msgstr "Exporter"
 
-#: index.php:531
+#: index.php:528
 msgid "ATOM"
 msgstr "ATOM"
 
-#: index.php:532
+#: index.php:529
 msgid "CSV"
 msgstr "CSV"
 
-#: index.php:533
+#: index.php:530
 msgid "JSON"
 msgstr "JSON"
 
-#: index.php:534
+#: index.php:531
 msgid "JSONP (with callback)"
 msgstr "JSONP (avec callback)"
 
-#: index.php:535
+#: index.php:532
 msgid "JSON Pretty Print"
 msgstr "JSON Affichage humain"
 
-#: index.php:536
+#: index.php:533
 msgid "RSS"
 msgstr "RSS"
 
-#: index.php:537
+#: index.php:534
 msgid "XML"
 msgstr "XML"
 
-#: index.php:562 index.php:598 index.php:611 index.php:645 index.php:658
-#: index.php:666 index.php:681 index.php:697 index.php:805 index.php:814
+#: index.php:559 index.php:595 index.php:608 index.php:642 index.php:655
+#: index.php:663 index.php:678 index.php:694 index.php:800 index.php:809
 msgid "Close"
 msgstr "Fermer"
 
-#: index.php:566
+#: index.php:563
 msgid "Webservice URL"
 msgstr "Adresse web service"
 
-#: index.php:567
+#: index.php:564
 msgid ""
 "Your URL seems to be local so it won't be reachable by external browsers and "
 "services"
@@ -1534,31 +1550,31 @@ msgstr ""
 "L'URL semble être une adresse locale. Elle risque de ne pas être joignable "
 "par des services externes"
 
-#: index.php:571
+#: index.php:568
 msgid "Open"
 msgstr "Ouvrir"
 
-#: index.php:575
+#: index.php:572
 msgid "Feel free to change these parameters in the URL:"
 msgstr "Vous pouvez changer librement les paramètres suivants dans l'adresse :"
 
-#: index.php:577
+#: index.php:574
 msgid "language"
 msgstr "langue"
 
-#: index.php:578
+#: index.php:575
 msgid "timezone to convert dates"
 msgstr "fuseau horaire pour convertir les dates"
 
-#: index.php:579
+#: index.php:576
 msgid "available formats are CSV, JSON, JSONPR and XML"
 msgstr "les formats disponibles sont CSV, JSON, JSONPR et XML"
 
-#: index.php:580
+#: index.php:577
 msgid "the maximum count of returned log lines"
 msgstr "le nombre maximal de logs voulus"
 
-#: index.php:581
+#: index.php:578
 msgid ""
 "the timeout in seconds to return log lines. Increase this value for big "
 "counts or when using search"
@@ -1566,14 +1582,14 @@ msgstr ""
 "le temps maximal pour retourner les logs. Augmentez cette valeur si vous "
 "affichez beaucoup de lignes en retour ou si vous utilisez la recherche"
 
-#: index.php:582
+#: index.php:579
 msgid ""
 "search this value in log lines. It can be a regular expression or a regex one"
 msgstr ""
 "expression à rechercher dans les loges. L'expression peut aussi être une "
 "expression régulière"
 
-#: index.php:583
+#: index.php:580
 msgid ""
 "this field is optional and is used to specify a callback function when "
 "format is JSONP"
@@ -1581,63 +1597,63 @@ msgstr ""
 "ce paramètre est optionnel et sert à préciser le nom de la fonction de "
 "callback quand vous utilisez le format JSONP"
 
-#: index.php:589
+#: index.php:586
 msgid "Current result"
 msgstr "Résultat actuel"
 
-#: index.php:593
+#: index.php:590
 msgid "Refresh"
 msgstr "Rafraichir"
 
-#: index.php:625
+#: index.php:622
 msgid "Current password"
 msgstr "Mot de passe actuel"
 
-#: index.php:632
+#: index.php:629
 msgid "New password"
 msgstr "Nouveau mot de passe"
 
-#: index.php:639
+#: index.php:636
 msgid "New password confirmation"
 msgstr "Confirmation du nouveau mot de passe"
 
-#: index.php:646 index.php:667 index.php:788 index.php:806
+#: index.php:643 index.php:664 index.php:786 index.php:801
 msgid "Saving..."
 msgstr "Enregistrement..."
 
-#: index.php:646 index.php:667 index.php:788 index.php:806
+#: index.php:643 index.php:664 index.php:786 index.php:801
 msgid "Save"
 msgstr "Enregistrer"
 
-#: index.php:684
+#: index.php:681
 msgid "Anonymous access"
 msgstr "Accès anonyme"
 
-#: index.php:685
+#: index.php:682
 msgid "History"
 msgstr "Historique"
 
-#: index.php:706 index.php:786
+#: index.php:703 index.php:784
 msgid "« Back"
 msgstr "« Retour"
 
-#: index.php:707
+#: index.php:704
 msgid "Edit"
 msgstr "Modifier"
 
-#: index.php:740
+#: index.php:737
 msgid "Leave password fields blank if you don't want to change it"
 msgstr "Laisser les champs de mot de passe vide pour ne pas les changer"
 
-#: index.php:751
+#: index.php:748
 msgid "Admin"
 msgstr "Admin"
 
-#: index.php:760
+#: index.php:757
 msgid "Select which log files user can view"
 msgstr "Sélectionnez les fichiers de logs que l'utilisateur peut voir"
 
-#: index.php:787
+#: index.php:785
 msgid "Cancel"
 msgstr "Annuler"
 

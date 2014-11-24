@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.1 - e71e528ee078144ca60ac82dc2ccf452f2520499*/
+/*! pimpmylog - 1.7.1 - 5190cd82068079c2f68a4c0b8871ba765a41fa91*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -347,9 +347,6 @@ echo test( $type , $regex , $match , $types , $log );
 										echo '</li>';
 
 										echo '</ul>';
-
-										_e('');
-
 									?></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2">PHPInfo</a></h4></div><div id="collapseThree2" class="panel-collapse collapse"><div class="panel-body"><?php
 									ob_start();
 									phpinfo();
