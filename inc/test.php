@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.0 - 813bdc8664dc9296fb3aa454ac7d5bed04958ed2*/
+/*! pimpmylog - 1.7.1 - e71e528ee078144ca60ac82dc2ccf452f2520499*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -12,7 +12,7 @@ include_once 'global.inc.php';
 
 load_default_constants();
 
-$access_file = 'test.PLEASE_REMOVE_ME.access_from_' . get_client_ip() . '_only.php';
+$access_file = str_replace(':', '', 'test.PLEASE_REMOVE_ME.access_from_' . get_client_ip() . '_only.php' );
 
 /**
  * Regex Tester
@@ -143,7 +143,7 @@ if ( ! file_exists( $access_file ) ) {
 	echo 		__('To grant access, please create this temporary file on your server:');
 	echo 		'<br/><br/>';
 	echo 	'</div>';
-	echo 	'<div class="col-md-8"><pre class="clipboard2content">touch \'' . dirname( __FILE__ ) . '/' . $access_file . '\'</pre></div>';
+	echo 	'<div class="col-md-8"><pre class="clipboard2content">touch \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\'</pre></div>';
 	echo 	'<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard2content" data-placement="right" data-text="' . h("Command has been copied to your clipboard!") . '">' . __('Copy to clipboard') . '</a></div>';
 	echo 	'<div class="col-xs-12">';
 	echo 		'<br/>' . __("Then reload this page.") . '<br/><br/>';
@@ -152,7 +152,7 @@ if ( ! file_exists( $access_file ) ) {
 	echo '</div>';
 }
 else {
-?><ul class="nav nav-tabs" role="tablist"><li class="active"><a href="#quittab" role="tab" data-toggle="tab"><?php _e('Quit');?></a></li><li><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li><li><a href="#resamplestab" role="tab" data-toggle="tab"><?php _e('Regex samples');?></a></li><li><a href="#configurationtab" role="tab" data-toggle="tab"><?php _e('Configuration');?></a></li><li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Password recovery');?></a></li><li><a href="#authactivation" role="tab" data-toggle="tab"><?php _e('Authentication');?></a></li></ul><div class="tab-content"><div class="tab-pane active" id="quittab"><br><div class="row"><div class="col-xs-12"><div class="alert alert-warning"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div></div><br><br><div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . '/' . $access_file . '\''; ?></pre></div><?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard3content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?></div></div><div class="tab-pane" id="retestertab"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
+?><ul class="nav nav-tabs" role="tablist"><li class="active"><a href="#quittab" role="tab" data-toggle="tab"><?php _e('Quit');?></a></li><li><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li><li><a href="#resamplestab" role="tab" data-toggle="tab"><?php _e('Regex samples');?></a></li><li><a href="#configurationtab" role="tab" data-toggle="tab"><?php _e('Configuration');?></a></li><li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Password recovery');?></a></li><li><a href="#authactivation" role="tab" data-toggle="tab"><?php _e('Authentication');?></a></li></ul><div class="tab-content"><div class="tab-pane active" id="quittab"><br><div class="row"><div class="col-xs-12"><div class="alert alert-warning"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div></div><br><br><div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\''; ?></pre></div><?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard3content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?></div></div><div class="tab-pane" id="retestertab"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
 								echo '[27-11-2013:23:20:40 +0300] This is an error
 on several lines with timezone UTC+3
 [27-11-2013:23:20:41 +0100] Single line is cool too';
@@ -323,6 +323,32 @@ echo test( $type , $regex , $match , $types , $log );
 										}
 										echo '</tbody>';
 										echo '</table></div>';
+
+									?></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseSix2">PHP Modules</a></h4></div><div id="collapseSix2" class="panel-collapse collapse"><div class="panel-body"><?php
+										_e('To be optimal, Pimp My Log needs all these modules ok:');
+										echo '<ul>';
+
+										echo '<li>';
+										if ( MB_SUPPORT === true ) {
+											echo 'Multibyte String <span class="label label-success">' . __('Yes') . '</span>';
+										} else {
+											echo 'Multibyte String <span class="label label-danger">' . __('No') . '</span>';
+											echo ' <span class="text-muted">(' . sprintf( __('Follow instructions %shere%s to enable') , '<a href="http://php.net/manual/en/mbstring.installation.php" target="_blank">' , '</a>' ) . ')</span>';
+										}
+										echo '</li>';
+
+										echo '<li>';
+										if ( GETTEXT_SUPPORT === true ) {
+											echo 'Gettext <span class="label label-success">' . __('Yes') . '</span>';
+										} else {
+											echo 'Gettext <span class="label label-danger">' . __('No') . '</span>';
+											echo ' <span class="text-muted">(' . sprintf( __('Follow instructions %shere%s to enable') , '<a href="http://php.net/manual/en/gettext.installation.php" target="_blank">' , '</a>' ) . ')</span>';
+										}
+										echo '</li>';
+
+										echo '</ul>';
+
+										_e('');
 
 									?></div></div></div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2">PHPInfo</a></h4></div><div id="collapseThree2" class="panel-collapse collapse"><div class="panel-body"><?php
 									ob_start();

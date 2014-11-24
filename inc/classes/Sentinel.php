@@ -132,7 +132,7 @@ class Sentinel
 	public static function create()
 	{
 		if ( file_exists( self::$authFile ) ) return false;
-		if ( touch( self::$authFile ) === false ) return false;
+		if ( @touch( self::$authFile ) === false ) return false;
 
 		self::$auth = array(
 			'generated' => date('U'),
@@ -173,7 +173,7 @@ class Sentinel
 		self::sessionDestroy();
 
 		if ( self::isAuthSet() ) {
-			return unlink( self::$authFile );
+			return @unlink( self::$authFile );
 		}
 
 		return true;

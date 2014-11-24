@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.0 - 813bdc8664dc9296fb3aa454ac7d5bed04958ed2*/
+/*! pimpmylog - 1.7.1 - e71e528ee078144ca60ac82dc2ccf452f2520499*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -434,9 +434,12 @@ switch ( @$_POST['action'] ) {
 			$r .= '				<input type="radio" name="f-' . $fid . '" id="anonymous-f-' . $fid . '-false" value="0"' . $dc . '/> '.__('No');
 			$r .= '			</label>';
 			$r .= '		</div>';
+			$r .= '	<span class="glyphicon glyphicon-question-sign text-muted" data-toggle="tooltip" data-placement="right" data-html="true" title="<div class=\'hyphen\'>' . h( $file['path'] ) . '</div>"></span>';
 			$r .= '	</div>';
 			$r .= '</div>';
 		}
+
+		$r .= '<script>$(function(){$(\'[data-toggle="tooltip"]\').tooltip()})</script>';
 
 		$return['b'] = $r;
 
