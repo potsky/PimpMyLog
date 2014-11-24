@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.0 - a49933da56c3bf3b7dfc88cc6b81407468d39bdb*/
+/*! pimpmylog - 1.7.1 - 5190cd82068079c2f68a4c0b8871ba765a41fa91*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -35,6 +35,46 @@ if ( ! defined( 'PML_CONFIG_BASE' ) ) {
         define( 'PML_CONFIG_BASE' , realpath( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.' ) );
     } else {
         define( 'PML_CONFIG_BASE' , PML_BASE );
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MB fallback functions
+|--------------------------------------------------------------------------
+|
+*/
+if ( ! function_exists( 'mb_strlen' ) ) {
+    function mb_strlen( $a ) {
+        return strlen( $a );
+    }
+    define( 'MB_SUPPORT' , false );
+} else {
+    define( 'MB_SUPPORT' , true );
+}
+
+if ( ! function_exists( 'mb_strtolower' ) ) {
+    function mb_strtolower( $a , $b = '' ) {
+        return strtolower( $a );
+    }
+}
+
+if ( ! function_exists( 'mb_check_encoding' ) ) {
+    function mb_check_encoding( $a , $b ) {
+        return false;
+    }
+}
+
+if ( ! function_exists( 'mb_substr' ) ) {
+    function mb_substr( $a , $b , $c = 9999999 ) {
+        return substr( $a , $b , $c );
+    }
+}
+
+if ( ! function_exists( 'mb_convert_encoding' ) ) {
+    function mb_convert_encoding( $a , $b , $c ) {
+        return utf8_encode( $a );
     }
 }
 
@@ -1269,7 +1309,10 @@ if ( function_exists( 'bindtextdomain' ) ) {
     bindtextdomain( 'messages' , dirname( __FILE__ ) . '/../lang' );
     bind_textdomain_codeset( 'messages' , 'UTF-8' );
     textdomain( 'messages' );
-} else {
+
+    define( 'GETTEXT_SUPPORT' , true );
+}
+else {
     /**
      * Fallback function for retrieving texts
      *
@@ -1281,6 +1324,8 @@ if ( function_exists( 'bindtextdomain' ) ) {
     {
         return $text;
     }
+
+    define( 'GETTEXT_SUPPORT' , false );
 
 }
 

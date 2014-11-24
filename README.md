@@ -1,7 +1,7 @@
 Pimp my Log 
 ===========
 
-[![Latest Stable Version](https://poser.pugx.org/potsky/pimp-my-log/v/stable.svg)](https://packagist.org/packages/potsky/pimp-my-log) [![Total Downloads](https://poser.pugx.org/potsky/pimp-my-log/downloads.svg)](https://packagist.org/packages/potsky/pimp-my-log) [![Build Status](https://travis-ci.org/potsky/PimpMyLog.svg)](https://travis-ci.org/potsky/PimpMyLog) <iframe src="http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true" class="ghstar" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="20"></iframe>
+[![Latest Stable Version](https://poser.pugx.org/potsky/pimp-my-log/v/stable.svg)](https://packagist.org/packages/potsky/pimp-my-log) [![Build Status](https://travis-ci.org/potsky/PimpMyLog.svg)](https://travis-ci.org/potsky/PimpMyLog)
 
 All informations are available on [pimpmylog.com](http://pimpmylog.com).
 
