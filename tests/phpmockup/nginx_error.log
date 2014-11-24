@@ -1,0 +1,152 @@
+2014/01/27 11:52:59 [error] 3679#0: *22 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/ HTTP/1.1", host: "ubuntu"
+2014/01/27 11:53:00 [error] 3679#0: *25 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/ HTTP/1.1", host: "ubuntu"
+2014/01/27 11:53:03 [error] 3679#0: *30 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/ HTTP/1.1", host: "ubuntu"
+2014/01/27 11:53:03 [error] 3679#0: *33 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/ HTTP/1.1", host: "ubuntu"
+2014/01/27 11:53:04 [error] 3679#0: *26 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog HTTP/1.1", host: "ubuntu"
+2014/01/27 11:53:50 [error] 3679#0: *37 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:18:17 [error] 1961#0: *1 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:18:18 [error] 1961#0: *2 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:18:23 [error] 1961#0: *3 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog-jekylla/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:18:25 [error] 1961#0: *4 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:18:25 [error] 1961#0: *5 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:19:23 [error] 1994#0: *1 rewrite or internal redirection cycle while internally redirecting to "/PImpMyLog-jekyll/", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:19:24 [error] 1994#0: *2 rewrite or internal redirection cycle while internally redirecting to "/PImpMyLog-jekyll/", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:20:58 [error] 1994#0: *3 rewrite or internal redirection cycle while internally redirecting to "/PImpMyLog/", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:20:58 [error] 1994#0: *4 rewrite or internal redirection cycle while internally redirecting to "/PImpMyLog/", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:21:16 [error] 1994#0: *5 rewrite or internal redirection cycle while internally redirecting to "/PImpMyLog/", client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:33:51 [error] 2277#0: *1 FastCGI sent in stderr: "Access to the script '/usr/share/nginx/www' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "ubuntu"
+2014/01/27 12:37:44 [error] 2277#0: *3 FastCGI sent in stderr: "Access to the script '/usr/share/nginx/www' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "ubuntu"
+2014/01/27 12:37:58 [error] 2465#0: *1 FastCGI sent in stderr: "Access to the script '/usr/share/nginx/www' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "ubuntu"
+2014/01/27 12:39:10 [error] 2465#0: *3 FastCGI sent in stderr: "Access to the script '/usr/share/nginx/www' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "ubuntu"
+2014/01/27 12:44:56 [error] 2694#0: *2 "/usr/share/nginx/www/PImpMyLog/index.php" is not found (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:44:57 [error] 2694#0: *1 open() "/usr/share/nginx/www/PImpMyLog" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /PImpMyLog HTTP/1.1", host: "ubuntu"
+2014/01/27 12:45:00 [error] 2694#0: *2 FastCGI sent in stderr: "Access to the script '/usr/share/nginx/www' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 172.16.25.1, server: ubuntu, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "ubuntu"
+2014/01/27 12:45:27 [error] 2694#0: *1 FastCGI sent in stderr: "Access to the script '/usr/share/nginx/www' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 172.16.25.1, server: ubuntu, request: "GET /PimpMyLog/ HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "ubuntu"
+2014/01/27 12:46:40 [error] 2694#0: *5 FastCGI sent in stderr: "Access to the script '/usr/share/nginx/www' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 172.16.25.1, server: ubuntu, request: "GET /PimpMyLog/ HTTP/1.1", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "ubuntu"
+2014/01/27 12:57:09 [error] 2937#0: *20 "/usr/share/nginx/www/PimpMyLog-jekyll/index.php" is not found (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /PimpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:59:01 [emerg] 2996#0: unexpected "}" in /etc/nginx/sites-enabled/default:12
+2014/01/27 12:59:01 [emerg] 2997#0: unexpected "}" in /etc/nginx/sites-enabled/default:12
+2014/01/27 12:59:17 [error] 3010#0: *1 "/mnt/hgfs/potsky/Private/Work/GitHub/PimpMyLog-jekyll/PimpMyLog-jekyll/index.php" is not found (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /PimpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:59:18 [error] 3010#0: *1 "/mnt/hgfs/potsky/Private/Work/GitHub/PimpMyLog-jekyll/PimpMyLog-jekyll/index.php" is not found (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /PimpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 12:59:58 [emerg] 3017#0: directive "location" has no opening "{" in /etc/nginx/sites-enabled/default:11
+2014/01/27 12:59:58 [emerg] 3018#0: directive "location" has no opening "{" in /etc/nginx/sites-enabled/default:11
+2014/01/27 13:00:10 [error] 3031#0: *1 "/mnt/hgfs/potsky/potsky/index.php" is not found (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /potsky/ HTTP/1.1", host: "ubuntu"
+2014/01/27 13:00:52 [error] 3044#0: *1 "/mnt/hgfs/potsky/potsky/index.php" is not found (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /potsky/ HTTP/1.1", host: "ubuntu"
+2014/01/27 13:01:00 [error] 3044#0: *1 "/mnt/hgfs/potsky/potsky/index.php" is not found (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /potsky/ HTTP/1.1", host: "ubuntu"
+2014/01/27 13:01:31 [error] 3059#0: *1 "/mnt/hgfs/potsky/potsky/index.php" is not found (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /potsky/ HTTP/1.1", host: "ubuntu"
+2014/01/27 13:01:59 [error] 3072#0: *1 open() "/usr/share/nginx/www/dist/global.min.css" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.css?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:01:59 [error] 3072#0: *2 open() "/usr/share/nginx/www/dist/global.min.js" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.js?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:01:59 [error] 3072#0: *1 open() "/usr/share/nginx/www/assets/PML.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/PML.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:01:59 [error] 3072#0: *1 open() "/usr/share/nginx/www/assets/theypimplogs/tcpartners.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/tcpartners.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:01:59 [error] 3072#0: *2 open() "/usr/share/nginx/www/assets/theypimplogs/videospot.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/videospot.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:01:59 [error] 3072#0: *3 open() "/usr/share/nginx/www/assets/madeinfrance.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/madeinfrance.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:01:59 [error] 3072#0: *4 open() "/usr/share/nginx/www/assets/favicon.ico" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/favicon.ico HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:03:02 [error] 3072#0: *5 open() "/usr/share/nginx/www/dist/global.min.css" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.css?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_build/"
+2014/01/27 13:03:02 [error] 3072#0: *6 open() "/usr/share/nginx/www/dist/global.min.js" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.js?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_build/"
+2014/01/27 13:03:02 [error] 3072#0: *5 open() "/usr/share/nginx/www/assets/PML.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/PML.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_build/"
+2014/01/27 13:03:02 [error] 3072#0: *5 open() "/usr/share/nginx/www/assets/theypimplogs/tcpartners.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/tcpartners.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_build/"
+2014/01/27 13:03:02 [error] 3072#0: *6 open() "/usr/share/nginx/www/assets/theypimplogs/videospot.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/videospot.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_build/"
+2014/01/27 13:03:02 [error] 3072#0: *7 open() "/usr/share/nginx/www/assets/madeinfrance.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/madeinfrance.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_build/"
+2014/01/27 13:03:44 [error] 3072#0: *6 open() "/usr/share/nginx/www/dist/global.min.js" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.js?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:03:44 [error] 3072#0: *5 open() "/usr/share/nginx/www/dist/global.min.css" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.css?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:03:45 [error] 3072#0: *5 open() "/usr/share/nginx/www/assets/PML.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/PML.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:03:45 [error] 3072#0: *5 open() "/usr/share/nginx/www/assets/theypimplogs/tcpartners.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/tcpartners.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:03:45 [error] 3072#0: *6 open() "/usr/share/nginx/www/assets/theypimplogs/videospot.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/videospot.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:03:45 [error] 3072#0: *7 open() "/usr/share/nginx/www/assets/madeinfrance.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/madeinfrance.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 13:04:31 [error] 3072#0: *5 "/usr/share/nginx/www/PimpMyLog-jekyll/index.php" is not found (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /PimpMyLog-jekyll/ HTTP/1.1", host: "ubuntu"
+2014/01/27 15:37:57 [error] 3071#0: *10 open() "/usr/share/nginx/www/dist/global.min.css" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.css?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:37:57 [error] 3071#0: *11 open() "/usr/share/nginx/www/dist/global.min.js" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.js?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:37:57 [error] 3071#0: *10 open() "/usr/share/nginx/www/assets/PML.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/PML.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:37:57 [error] 3071#0: *10 open() "/usr/share/nginx/www/assets/theypimplogs/tcpartners.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/tcpartners.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:37:57 [error] 3071#0: *11 open() "/usr/share/nginx/www/assets/theypimplogs/videospot.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/videospot.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:37:57 [error] 3071#0: *12 open() "/usr/share/nginx/www/assets/madeinfrance.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/madeinfrance.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:37:58 [error] 3071#0: *9 open() "/mnt/hgfs/potsky/Private/Work/GitHub/PimpMyLog" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /potsky/Private/Work/GitHub/PimpMyLog HTTP/1.1", host: "ubuntu"
+2014/01/27 15:39:50 [error] 3360#0: *2 open() "/usr/share/nginx/www/dist/global.min.css" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.css?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:39:50 [error] 3360#0: *3 open() "/usr/share/nginx/www/dist/global.min.js" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /dist/global.min.js?pml=0122141334 HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:39:50 [error] 3360#0: *2 open() "/usr/share/nginx/www/assets/PML.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/PML.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:39:50 [error] 3360#0: *2 open() "/usr/share/nginx/www/assets/theypimplogs/tcpartners.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/tcpartners.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:39:50 [error] 3360#0: *3 open() "/usr/share/nginx/www/assets/theypimplogs/videospot.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/theypimplogs/videospot.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:39:50 [error] 3360#0: *4 open() "/usr/share/nginx/www/assets/madeinfrance.png" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /assets/madeinfrance.png HTTP/1.1", host: "ubuntu", referrer: "http://ubuntu/potsky/Private/Work/GitHub/PimpMyLog-jekyll/_site/"
+2014/01/27 15:43:17 [error] 3360#0: *5 open() "/mnt/hgfs/potsky/Private/Work/GitHub/PimpMyLog-dev/caca" failed (2: No such file or directory), client: 172.16.25.1, server: ubuntu, request: "GET /potsky/Private/Work/GitHub/PimpMyLog-dev/caca HTTP/1.1", host: "ubuntu"
+2014/01/27 15:45:16 [emerg] 3440#0: invalid location modifier "/potsky" in /etc/nginx/sites-enabled/default:17
+2014/01/27 15:45:16 [emerg] 3441#0: invalid location modifier "/potsky" in /etc/nginx/sites-enabled/default:17
+2014/01/27 15:56:07 [debug] 3934#0: epoll add event: fd:7 op:1 ev:00000001
+2014/01/27 15:56:07 [debug] 3934#0: epoll add event: fd:8 op:1 ev:00000001
+2014/01/27 15:56:12 [debug] 3934#0: post event 00000000015F8750
+2014/01/27 15:56:12 [debug] 3934#0: delete posted event 00000000015F8750
+2014/01/27 15:56:12 [debug] 3934#0: accept on 0.0.0.0:80, ready: 0
+2014/01/27 15:56:12 [debug] 3934#0: posix_memalign: 00000000015CA140:256 @16
+2014/01/27 15:56:12 [debug] 3934#0: *1 accept: 172.16.25.1 fd:9
+2014/01/27 15:56:12 [debug] 3934#0: *1 event timer add: 9: 60000:1390834632196
+2014/01/27 15:56:12 [debug] 3934#0: *1 epoll add event: fd:9 op:1 ev:80000001
+2014/01/27 15:56:12 [debug] 3934#0: *1 post event 00000000015F8888
+2014/01/27 15:56:12 [debug] 3934#0: *1 delete posted event 00000000015F8888
+2014/01/27 15:56:12 [debug] 3934#0: *1 malloc: 00000000015D7A80:1296
+2014/01/27 15:56:12 [debug] 3934#0: *1 posix_memalign: 00000000015F6BB0:256 @16
+2014/01/27 15:56:12 [debug] 3934#0: *1 malloc: 00000000015D7FA0:1024
+2014/01/27 15:56:12 [debug] 3934#0: *1 posix_memalign: 00000000015D83B0:4096 @16
+2014/01/27 15:56:12 [debug] 3934#0: *1 http process request line
+2014/01/27 15:56:12 [debug] 3934#0: *1 recv: fd:9 603 of 1024
+2014/01/27 15:56:12 [debug] 3934#0: *1 http request line: "GET /potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php HTTP/1.1"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http uri: "/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http args: ""
+2014/01/27 15:56:12 [debug] 3934#0: *1 http exten: "php"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http process request header line
+2014/01/27 15:56:12 [debug] 3934#0: *1 http header: "Host: ubuntu"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http header: "Connection: keep-alive"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http header: "Cookie: __utma=203195477.1672172770.1390824120.1390824120.1390833478.2; __utmb=203195477.2.10.1390833478; __utmc=203195477; __utmz=203195477.1390824120.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http header: "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.73.11 (KHTML, like Gecko) Version/7.0.1 Safari/537.73.11"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http header: "Accept-Language: en-us"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http header: "Cache-Control: max-age=0"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http header: "Accept-Encoding: gzip, deflate"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http header done
+2014/01/27 15:56:12 [debug] 3934#0: *1 event timer del: 9: 1390834632196
+2014/01/27 15:56:12 [debug] 3934#0: *1 generic phase: 0
+2014/01/27 15:56:12 [debug] 3934#0: *1 rewrite phase: 1
+2014/01/27 15:56:12 [debug] 3934#0: *1 test location: "/potsky"
+2014/01/27 15:56:12 [debug] 3934#0: *1 test location: "/*\.php$"
+2014/01/27 15:56:12 [debug] 3934#0: *1 test location: ~ "\.php$"
+2014/01/27 15:56:12 [debug] 3934#0: *1 using configuration "\.php$"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http cl:-1 max:1048576
+2014/01/27 15:56:12 [debug] 3934#0: *1 rewrite phase: 3
+2014/01/27 15:56:12 [debug] 3934#0: *1 post rewrite phase: 4
+2014/01/27 15:56:12 [debug] 3934#0: *1 generic phase: 5
+2014/01/27 15:56:12 [debug] 3934#0: *1 generic phase: 6
+2014/01/27 15:56:12 [debug] 3934#0: *1 generic phase: 7
+2014/01/27 15:56:12 [debug] 3934#0: *1 access phase: 8
+2014/01/27 15:56:12 [debug] 3934#0: *1 access phase: 9
+2014/01/27 15:56:12 [debug] 3934#0: *1 access phase: 10
+2014/01/27 15:56:12 [debug] 3934#0: *1 post access phase: 11
+2014/01/27 15:56:12 [debug] 3934#0: *1 try files phase: 12
+2014/01/27 15:56:12 [debug] 3934#0: *1 http script var: "/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php"
+2014/01/27 15:56:12 [debug] 3934#0: *1 trying to use file: "/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php" "/usr/share/nginx/www/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php"
+2014/01/27 15:56:12 [debug] 3934#0: *1 trying to use file: "=404" "/usr/share/nginx/www=404"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http finalize request: 404, "/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php?" a:1, c:1
+2014/01/27 15:56:12 [debug] 3934#0: *1 http special response: 404, "/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php?"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http set discard body
+2014/01/27 15:56:12 [debug] 3934#0: *1 xslt filter header
+2014/01/27 15:56:12 [debug] 3934#0: *1 HTTP/1.1 404 Not Found
+Server: nginx/1.1.19
+Date: Mon, 27 Jan 2014 14:56:12 GMT
+Content-Type: text/html
+Transfer-Encoding: chunked
+Connection: keep-alive
+Content-Encoding: gzip
+
+2014/01/27 15:56:12 [debug] 3934#0: *1 write new buf t:1 f:0 00000000015D9098, pos 00000000015D9098, size: 186 file: 0, size: 0
+2014/01/27 15:56:12 [debug] 3934#0: *1 http write filter: l:0 f:0 s:186
+2014/01/27 15:56:12 [debug] 3934#0: *1 http output filter "/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php?"
+2014/01/27 15:56:12 [debug] 3934#0: *1 http copy filter: "/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php?"
+2014/01/27 15:56:12 [debug] 3934#0: *1 image filter
+2014/01/27 15:56:12 [debug] 3934#0: *1 xslt filter body
+2014/01/27 15:56:12 [debug] 3934#0: *1 http postpone filter "/potsky/Private/Work/GitHub/PimpMyLog-dev/_site/index.php?" 00000000015D9270
+2014/01/27 15:56:12 [debug] 3934#0: *1 http gzip filter
+2014/01/27 15:56:12 [debug] 3934#0: *1 malloc: 00000000015CE620:12288
+2014/01/27 15:56:12 [debug] 3934#0: *1 gzip alloc: n:1 s:5936 a:8192 p:00000000015CE620
+2014/01/27 15:56:12 [debug] 3934#0: *1 gzip alloc: n:512 s:2 a:1024 p:00000000015D0620
+2014/01/27 15:56:12 [debug] 3934#0: *1 gzip alloc: n:512 s:2 a:1024 p:00000000015D0A20
+2014/01/27 15:56:12 [debug] 3934#0: *1 gzip alloc: n:512 s:2 a:1024 p:00000000015D0E20
+2014/01/27 15:56:12 [debug] 3934#0: *1 gzip alloc: n:256 s:4 a:1024 p:00000000015D1220
+2014/01/27 15:56:12 [debug] 3934#0: *1 gzip in: 00000000015D92A0
+2014/01/27 15:56:12 [debug] 3934#0: *1 gzip in_buf:00000000015D9168 ni:00000000006BE7A0 ai:116

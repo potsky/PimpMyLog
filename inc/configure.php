@@ -118,8 +118,9 @@ if ( isset( $_POST['s'] ) ) {
 				// Unable to touch, return an error
 				else {
 					$return[ 'notice' ] =
-						sprintf( __( 'Unable to create file <code>%s</code>') , AUTH_CONFIGURATION_FILE )
-						. '<br/><br/>'
+						'<div class="alert alert-danger">'
+						. sprintf( __( 'Unable to create file <code>%s</code>') , AUTH_CONFIGURATION_FILE )
+						. '</div>'
 						. __( 'Please give temporary write access to the root directory:' )
 						. '<div class="row">'
 						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'chmod 777 ' . dirname( dirname( __FILE__ ) ) . '</pre></div>'
@@ -175,8 +176,9 @@ if ( isset( $_POST['s'] ) ) {
 			case 'touch':
 				if ( ! @touch( $config_file_temp ) ) {
 					$return[ 'notice' ] =
-						sprintf( __( 'Unable to create file <code>%s</code>') , $config_file_temp)
-						. '<br/><br/>'
+						'<div class="alert alert-danger">'
+						. sprintf( __( 'Unable to create file <code>%s</code>') , $config_file_temp)
+						. '</div>'
 						. __( 'Please give temporary write access to the root directory:' )
 						. '<div class="row">'
 						. '  <div class="col-md-10"><pre class="clipboardcontent">' . 'chmod 777 ' . dirname( dirname( __FILE__ ) ) . '</pre></div>'

@@ -217,4 +217,184 @@ class ParserTest extends TestCase {
 		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
     }
 
+	public function test_IIS_IIS()
+    {
+		$regex         = '|^(.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*),(.*)$|U';
+		$match         = array( "Date"    => array( 3 , " " , 4 ), "IP"      => 1, "Site"    => 5, "CMD"     => 13, "URL"     => 14, "Code"    => 11, "Size"    => 10, "User"    => 2, "ms"      => 8 );
+		$types         = array( "Date"    => "date:H:i:s", "IP"      => "ip:geo", "URL"     => "txt", "Code"    => "badge:http", "Size"    => "numeral:0b", "ms"      => "numeral:0,0" );
+		$multiline     = '';
+		$exclude       = '';
+		$file_path     = PHPMOCKUP . '/iis_iis.log';
+		$start_offset  = 0;
+		$start_from    = SEEK_END;
+		$load_more     = false;
+		$old_lastline  = '';
+		$data_to_parse = filesize( $file_path );
+		$full          = true;
+		$timeout       = 2;
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 10 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 10 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 61 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'main.css' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 4 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , array( "URL" => array(  "/main.css/" ) ) , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'main.css' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 0 , $logs['count'] );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '/main\\.(css|js)/' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 5 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+    }
+
+	public function test_IIS_NCSA_Common()
+    {
+		$regex         = '|^((\\S*) )*(\\S*) (\\S*) (\\S*) \\[(.*)\\] \"(\\S*) (.*) (\\S*)\" ([0-9]*) (.*)( \"(.*)\" \"(.*)\"( [0-9]*/([0-9]*))*)*$|U';
+		$match         = array( "Date"    => 6, "IP"      => 3, "CMD"     => 7, "URL"     => 8, "Code"    => 10, "Size"    => 11, "User"    => 5 );
+		$types         = array( "Date"    => "date:H:i:s", "IP"      => "ip:geo", "URL"     => "txt", "Code"    => "badge:http", "Size"    => "numeral:0b" );
+		$multiline     = '';
+		$exclude       = '';
+		$file_path     = PHPMOCKUP . '/iis_ncsa_common.log';
+		$start_offset  = 0;
+		$start_from    = SEEK_END;
+		$load_more     = false;
+		$old_lastline  = '';
+		$data_to_parse = filesize( $file_path );
+		$full          = true;
+		$timeout       = 2;
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 10 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 10 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 1000 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 141 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'main.css' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 10 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , array( "URL" => array(  "/main.css/" ) ) , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'main.css' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 0 , $logs['count'] );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '/main\\.(css|js)/' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 14 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+    }
+
+	public function test_IIS_W3C_Extended()
+    {
+		$regex         = '|^(.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*) (.*)$|U';
+		$match         = array("Date"=>array(1," ",2," "),"IP"=>11,"Site"=>3,"CMD"=>6,"URL"=>7,"QS"=>8,"Code"=>17,"Size"=>20,"Referer"=>15,"UA"=>13,"User"=>10,"ms"=>22);
+		$types         = array("Date"=>"date:H:i:s","Site"=>"txt","CMD"=>"txt","URL"=>"txt","QS"=>"txt","User"=>"txt","IP"=>"ip:geo","UA"=>"uaw3c:{os.name} {os.version} | {browser.name} {browser.version}\/100","Referer"=>"link","Code"=>"badge:http","Size"=>"numeral:0b","ms"=>"numeral:0,0");
+		$multiline     = '';
+		$exclude       = '';
+		$file_path     = PHPMOCKUP . '/iis_w3cextended.log';
+		$start_offset  = 0;
+		$start_from    = SEEK_END;
+		$load_more     = false;
+		$old_lastline  = '';
+		$data_to_parse = filesize( $file_path );
+		$full          = true;
+		$timeout       = 2;
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 10 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 10 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 91 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'main.css' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 7 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , array( "URL" => array(  "/main.css/" ) ) , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'main.css' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 0 , $logs['count'] );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '/main\\.(css|js)/' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 10 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+    }
+
+	public function test_nginx_error()
+    {
+		$regex         = '@^(.*)/(.*)/(.*) (.*):(.*):(.*) \\[(.*)\\] [0-9#]*: \\*[0-9]+ (((.*), client: (.*), server: (.*), request: \"(.*) (.*) HTTP.*\", host: \"(.*)\"(, referrer: \"(.*)\")*)|(.*))$@U';
+		$match         = array("Date" => array(1,"/",2,"/",3," ",4,":",5,":",6), "Severity" => 7, "Error"    => [10,18], "Client"   => 11, "Server"   => 12, "Method"   => 13, "Request"  => 14, "Host"     => 15, "Referer"  => 17 );
+		$types         = array("Date" => "date:H:i:s","Site"=>"txt","CMD"=>"txt","URL"=>"txt","QS"=>"txt","User"=>"txt","IP"=>"ip:geo","UA"=>"uaw3c:{os.name} {os.version} | {browser.name} {browser.version}\/100","Referer"=>"link","Code"=>"badge:http","Size"=>"numeral:0b","ms"=>"numeral:0,0");
+		$multiline     = '';
+		$exclude       = '';
+		$file_path     = PHPMOCKUP . '/nginx_error.log';
+		$start_offset  = 0;
+		$start_from    = SEEK_END;
+		$load_more     = false;
+		$old_lastline  = '';
+		$data_to_parse = filesize( $file_path );
+		$full          = true;
+		$timeout       = 2;
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 10 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 10 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 1000 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 133 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'index.php' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 23 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , array( "Error" => array(  "/index.php/" ) , "Request" => array(  "/index.php/" ) ) , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'index.php' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 0 , $logs['count'] );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '/access phase: [0-9]$/' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 2 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+    }
+
+	public function test_nginx_access()
+    {
+		$regex         = '|^((\\S*) )*(\\S*) (\\S*) (\\S*) \\[(.*)\\] \"(\\S*) (.*) (\\S*)\" ([0-9]*) (.*)( \"(.*)\" \"(.*)\"( [0-9]*/([0-9]*))*)*$|U';
+		$match         = array( "Date"    => 6, "IP"      => 3, "CMD"     => 7, "URL"     => 8, "Code"    => 10, "Size"    => 11, "Referer" => 13, "UA"      => 14, "User"    => 5 );
+		$types         = array( "Date"    => "date:H:i:s", "IP"      => "ip:geo", "URL"     => "txt", "Code"    => "badge:http", "Size"    => "numeral:0b", "Referer" => "link", "UA"      => "ua:{os.name} {os.version} | {browser.name} {browser.version}\/100" );
+		$multiline     = '';
+		$exclude       = '';
+		$file_path     = PHPMOCKUP . '/nginx_access.log';
+		$start_offset  = 0;
+		$start_from    = SEEK_END;
+		$load_more     = false;
+		$old_lastline  = '';
+		$data_to_parse = filesize( $file_path );
+		$full          = true;
+		$timeout       = 2;
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 10 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 10 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 1000 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 157 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'index.php' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 48 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , array( "URL" => array(  "/index.php/" ) ) , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'index.php' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 0 , $logs['count'] );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '/jekyll\/(.*)\//' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 43 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+    }
+
 }

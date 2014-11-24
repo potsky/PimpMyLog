@@ -8,6 +8,18 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.1" : {
+			"released" : "2014-11-23",
+			"changed" : [
+				"Debugger : add new informations in the configuration panel",
+				"User management : add tooltips to show the log file path",
+				"Unit tests : add IIS and nginx logs"
+			],
+			"fixed" : [
+				"PML now supports PHP installations without multibytes functions (mb_) in degraded mode",
+				"Fix the modal scrolling when admin has to manage to many log files"
+			]
+		},
 		"1.7.0" : {
 			"released" : "2014-11-22",
 			"new" : [

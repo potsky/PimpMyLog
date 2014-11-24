@@ -569,9 +569,9 @@ var users_view = function( obj ) {
 					var logslist = '';
 					for( var j in val ) {
 						if ( val[j].r === true ) {
-							logslist += '<span class="label label-success">' + files[ j ].display + '</span> ';
+							logslist += '<span style="display:block;float:left;margin:2px;" class="label label-success" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<div class=\'hyphen\'>' + $('<div/>').text( files[ j ].path ).html() + '</div>">' + files[ j ].display + '</span> ';
 						} else {
-							logslist += '<span class="label label-danger">' + files[ j ].display + '</span> ';
+							logslist += '<span style="display:block;float:left;margin:2px;" class="label label-danger" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<div class=\'hyphen\'>' + $('<div/>').text( files[ j ].path ).html() + '</div>">' + files[ j ].display + '</span> ';
 						}
 					}
 					val = logslist;
@@ -603,6 +603,8 @@ var users_view = function( obj ) {
 		r += '</table>';
 
 		$('#umUsersViewBody').html( r );
+		$(function(){$('[data-toggle="tooltip"]').tooltip()});
+
 	});
 
 	return false;

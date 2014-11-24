@@ -38,3 +38,11 @@ This class is used in the search input field when a regular expression is detect
 .navbar {
 	filter : none !important;
 }
+
+
+/*
+Backdrop should not scroll when the modal is too long
+ */
+.modal-backdrop {
+	position:fixed;
+}

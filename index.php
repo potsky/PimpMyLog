@@ -414,33 +414,30 @@ $csrf = csrf_get();
 
 							<li>
 								<select id="cog-lang" class="form-control input-sm" title="<?php _h( 'Language' );?>">
-									<option value=""><?php _e( 'Change language...' );?></option>
-
-									<?php
-
-									foreach ( $locale_available as $l => $n ) {
-										echo '<option value="' . $l . '"';
-										if ( $l == $locale ) echo ' selected="selected"';
-										echo '>' . $n . '</option>';
-									}
-
-									?>
-
+									<?php if ( GETTEXT_SUPPORT === true ): ?>
+										<option value=""><?php _e( 'Change language...' );?></option>
+										<?php
+											foreach ( $locale_available as $l => $n ) {
+												echo '<option value="' . $l . '"';
+												if ( $l == $locale ) echo ' selected="selected"';
+												echo '>' . $n . '</option>';
+											}
+										?>
+									<?php else : ?>
+										<option value=""><?php _e( 'Language cannot be changed' );?></option>
+									<?php endif; ?>
 								</select>
 							</li>
 
 							<li>
 								<select id="cog-tz" class="form-control input-sm" title="<?php _h( 'Timezone' );?>">
 									<option value=""><?php _e( 'Change timezone...' );?></option>
-
 									<?php
-
-									foreach ( $tz_available as $n ) {
-										echo '<option value="' . $n . '"';
-										if ( $n == $tz ) echo ' selected="selected"';
-										echo '>' . $n . '</option>';
-									}
-
+										foreach ( $tz_available as $n ) {
+											echo '<option value="' . $n . '"';
+											if ( $n == $tz ) echo ' selected="selected"';
+											echo '>' . $n . '</option>';
+										}
 									?>
 								</select>
 							</li>
@@ -775,6 +772,7 @@ $csrf = csrf_get();
 																	<input type="radio" name="f-<?php echo $fid ?>" id="add-logs-f-<?php echo $fid ?>-false" value="0" /> <?php _e('No'); ?>
 																</label>
 															</div>
+															<span class="glyphicon glyphicon-question-sign text-muted" data-toggle="tooltip" data-placement="right" data-html="true" title="<div class='hyphen'><?php echo h( $file['path'] ); ?></div>"></span>
 														</div>
 													</div>
 												<?php } ?>
@@ -794,12 +792,9 @@ $csrf = csrf_get();
 
 							<div class="tab-pane" id="umAnonymous">
 								<form id="umAnonymousForm" autocomplete="off" role="form">
-									<div class="modal-body">
-										<div class="modal-body form-horizontal">
-											<div id='umAnonymousAlert'></div>
-											<div id="umAnonymousBody" class="logs-selector"></div>
-										</div>
-
+									<div class="modal-body form-horizontal">
+										<div id='umAnonymousAlert'></div>
+										<div id="umAnonymousBody" class="logs-selector"></div>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>

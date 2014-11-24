@@ -3,7 +3,7 @@ include_once 'global.inc.php';
 
 load_default_constants();
 
-$access_file = 'test.PLEASE_REMOVE_ME.access_from_' . get_client_ip() . '_only.php';
+$access_file = str_replace(':', '', 'test.PLEASE_REMOVE_ME.access_from_' . get_client_ip() . '_only.php' );
 
 /**
  * Regex Tester
@@ -168,7 +168,7 @@ if ( ! file_exists( $access_file ) ) {
 	echo 		__('To grant access, please create this temporary file on your server:');
 	echo 		'<br/><br/>';
 	echo 	'</div>';
-	echo 	'<div class="col-md-8"><pre class="clipboard2content">touch \'' . dirname( __FILE__ ) . '/' . $access_file . '\'</pre></div>';
+	echo 	'<div class="col-md-8"><pre class="clipboard2content">touch \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\'</pre></div>';
 	echo 	'<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard2content" data-placement="right" data-text="' . h("Command has been copied to your clipboard!") . '">' . __('Copy to clipboard') . '</a></div>';
 	echo 	'<div class="col-xs-12">';
 	echo 		'<br/>' . __("Then reload this page.") . '<br/><br/>';
@@ -213,7 +213,7 @@ else {
 						<div class="alert alert-warning"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div>
 					</div>
 					<br/><br/>
-					<div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . '/' . $access_file . '\''; ?></pre></div>
+					<div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\''; ?></pre></div>
 					<?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard3content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?>
 				</div>
 			</div>
@@ -525,6 +525,48 @@ echo test( $type , $regex , $match , $types , $log );
 								</div>
 							</div>
 						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion2" href="#collapseSix2">
+										PHP Modules
+									</a>
+								</h4>
+							</div>
+							<div id="collapseSix2" class="panel-collapse collapse">
+								<div class="panel-body">
+									<?php
+										_e('To be optimal, Pimp My Log needs all these modules ok:');
+										echo '<ul>';
+
+										echo '<li>';
+										if ( MB_SUPPORT === true ) {
+											echo 'Multibyte String <span class="label label-success">' . __('Yes') . '</span>';
+										} else {
+											echo 'Multibyte String <span class="label label-danger">' . __('No') . '</span>';
+											echo ' <span class="text-muted">(' . sprintf( __('Follow instructions %shere%s to enable') , '<a href="http://php.net/manual/en/mbstring.installation.php" target="_blank">' , '</a>' ) . ')</span>';
+										}
+										echo '</li>';
+
+										echo '<li>';
+										if ( GETTEXT_SUPPORT === true ) {
+											echo 'Gettext <span class="label label-success">' . __('Yes') . '</span>';
+										} else {
+											echo 'Gettext <span class="label label-danger">' . __('No') . '</span>';
+											echo ' <span class="text-muted">(' . sprintf( __('Follow instructions %shere%s to enable') , '<a href="http://php.net/manual/en/gettext.installation.php" target="_blank">' , '</a>' ) . ')</span>';
+										}
+										echo '</li>';
+
+										echo '</ul>';
+
+										_e('');
+
+									?>
+								</div>
+							</div>
+						</div>
+
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">

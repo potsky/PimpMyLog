@@ -32,6 +32,46 @@ if ( ! defined( 'PML_CONFIG_BASE' ) ) {
 
 /*
 |--------------------------------------------------------------------------
+| MB fallback functions
+|--------------------------------------------------------------------------
+|
+*/
+if ( ! function_exists( 'mb_strlen' ) ) {
+    function mb_strlen( $a ) {
+        return strlen( $a );
+    }
+    define( 'MB_SUPPORT' , false );
+} else {
+    define( 'MB_SUPPORT' , true );
+}
+
+if ( ! function_exists( 'mb_strtolower' ) ) {
+    function mb_strtolower( $a , $b = '' ) {
+        return strtolower( $a );
+    }
+}
+
+if ( ! function_exists( 'mb_check_encoding' ) ) {
+    function mb_check_encoding( $a , $b ) {
+        return false;
+    }
+}
+
+if ( ! function_exists( 'mb_substr' ) ) {
+    function mb_substr( $a , $b , $c = 9999999 ) {
+        return substr( $a , $b , $c );
+    }
+}
+
+if ( ! function_exists( 'mb_convert_encoding' ) ) {
+    function mb_convert_encoding( $a , $b , $c ) {
+        return utf8_encode( $a );
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
 | Disable XDebug
 |--------------------------------------------------------------------------
 |
@@ -1260,7 +1300,10 @@ if ( function_exists( 'bindtextdomain' ) ) {
     bindtextdomain( 'messages' , dirname( __FILE__ ) . '/../lang' );
     bind_textdomain_codeset( 'messages' , 'UTF-8' );
     textdomain( 'messages' );
-} else {
+
+    define( 'GETTEXT_SUPPORT' , true );
+}
+else {
     /**
      * Fallback function for retrieving texts
      *
@@ -1272,6 +1315,8 @@ if ( function_exists( 'bindtextdomain' ) ) {
     {
         return $text;
     }
+
+    define( 'GETTEXT_SUPPORT' , false );
 
 }
 

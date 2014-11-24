@@ -1333,6 +1333,9 @@ $(function() {
 	clipboard_enable( "a.clipboardex", "#exModalUrl" , "right" , lemma.urlcopied );
 	clipboard_enable( "a.clipboardexr", "#exModalCtn" , "right" , lemma.resultcopied );
 
+	// Load tooltip for user modal for example
+	$('[data-toggle="tooltip"]').tooltip();
+
 	// Here we go
 	get_logs( true , true , true );
 
