@@ -559,9 +559,6 @@ echo test( $type , $regex , $match , $types , $log );
 										echo '</li>';
 
 										echo '</ul>';
-
-										_e('');
-
 									?>
 								</div>
 							</div>

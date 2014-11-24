@@ -328,7 +328,7 @@ class ParserTest extends TestCase {
 	public function test_nginx_error()
     {
 		$regex         = '@^(.*)/(.*)/(.*) (.*):(.*):(.*) \\[(.*)\\] [0-9#]*: \\*[0-9]+ (((.*), client: (.*), server: (.*), request: \"(.*) (.*) HTTP.*\", host: \"(.*)\"(, referrer: \"(.*)\")*)|(.*))$@U';
-		$match         = array("Date" => array(1,"/",2,"/",3," ",4,":",5,":",6), "Severity" => 7, "Error"    => [10,18], "Client"   => 11, "Server"   => 12, "Method"   => 13, "Request"  => 14, "Host"     => 15, "Referer"  => 17 );
+		$match         = array("Date" => array(1,"/",2,"/",3," ",4,":",5,":",6), "Severity" => 7, "Error"    => array(10,18), "Client"   => 11, "Server"   => 12, "Method"   => 13, "Request"  => 14, "Host"     => 15, "Referer"  => 17 );
 		$types         = array("Date" => "date:H:i:s","Site"=>"txt","CMD"=>"txt","URL"=>"txt","QS"=>"txt","User"=>"txt","IP"=>"ip:geo","UA"=>"uaw3c:{os.name} {os.version} | {browser.name} {browser.version}\/100","Referer"=>"link","Code"=>"badge:http","Size"=>"numeral:0b","ms"=>"numeral:0,0");
 		$multiline     = '';
 		$exclude       = '';
