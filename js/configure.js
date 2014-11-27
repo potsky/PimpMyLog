@@ -103,7 +103,7 @@ var pml_action = function ( object , done , options ) {
 	.fail( function ( a , b, c ) {
 		progressbar_color( 'danger' );
 		progressbar_set( 100 );
-		$('<div class="alert alert-danger fade in">' + c.message + '</div>').appendTo("#error");
+		$('<div class="alert alert-danger fade in">' + c.message + '<hr/><span class="glyphicon glyphicon-info-sign"></span> ' + lemma.suhosin + '<hr/>' + $('<div>').html(a.responseText).text() + '</div>').appendTo("#error");
 	})
 	.done( function ( data ) {
 		if ( data.error ) {

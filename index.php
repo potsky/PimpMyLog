@@ -26,7 +26,8 @@ if ( version_compare( PHP_VERSION , PHP_VERSION_REQUIRED ) < 0 ) {
 $config_file_name = get_config_file_name();
 if ( is_null( $config_file_name ) ) {
 	$title    = __( 'Welcome!' );
-	$message  = '<br/>';
+	$message  = '';
+	$message .= '<br/>';
 	$message .= __( 'Pimp my Log is not configured.');
 	$message .= '<br/><br/>';
 	$message .= '<span class="glyphicon glyphicon-cog"></span> ';
@@ -35,6 +36,12 @@ if ( is_null( $config_file_name ) ) {
 	$message .= '<span class="glyphicon glyphicon-heart-empty"></span> ';
 	$message .= __( 'Or let me try to configure it for you!' );
 	$message .= '<br/><br/>';
+	if ( SUHOSIN_LOADED === true ) {
+		$message .= '<div class="alert alert-danger"><strong>';
+		$message .= sprintf( __('Suhosin extension is loaded, according to its configuration, Pimp My Log could not run normally... More information %shere%s.') , '<a href="' . SUHOSIN_URL . '">' , '</a>' );
+		$message .= '</strong></div>';
+		$message .= '<br/><br/>';
+	}
 	$link_url = 'inc/configure.php?' . $_SERVER['QUERY_STRING'];
 	$link_msg = __('Configure now');
 	include_once 'inc/error.inc.php';
@@ -759,10 +766,28 @@ $csrf = csrf_get();
 													</div>
 												</div>
 												<?php foreach ( $files as $file_id => $file ) {
-													$fid = h( $file_id );
+													$fid     = h( $file_id );
+													$display = $files[ $file_id ][ 'display' ];
+													$paths   = $files[ $file_id ][ 'path' ];
+													$color   = 'default';
+
+													if ( isset( $files[ $file_id ][ 'oid' ] ) ) {
+														if ( $files[ $file_id ][ 'oid' ] !== $file_id ) continue;
+														$display = $files[ $file_id ][ 'odisplay' ];
+														if ( isset( $files[ $file_id ][ 'count' ] ) ) {
+															$remain = (int)$files[ $file_id ][ 'count' ] - 1;
+															if ( $remain === 1 ) {
+																$paths .= ' ' . __( 'and an other file defined by glob pattern' );
+															}
+															else if ( $remain > 1 ) {
+																$paths .= ' ' . sprintf( __( 'and %s other possible files defined by glob pattern' ) , $remain );
+															}
+														}
+														$color = 'warning';
+													}
 												?>
 													<div class="form-group" data-fileid="<?php echo $fid ?>">
-														<label for="<?php echo $fid ?>" class="col-sm-4 control-label"><?php echo $file['display'] ?></label>
+														<label for="<?php echo $fid ?>" class="col-sm-4 control-label text-<?php echo $color; ?>"><?php echo $display; ?></label>
 														<div class="col-sm-8">
 															<div class="btn-group" data-toggle="buttons">
 																<label class="btn btn-success btn-xs active logs-selector-yes">
@@ -772,7 +797,7 @@ $csrf = csrf_get();
 																	<input type="radio" name="f-<?php echo $fid ?>" id="add-logs-f-<?php echo $fid ?>-false" value="0" /> <?php _e('No'); ?>
 																</label>
 															</div>
-															<span class="glyphicon glyphicon-question-sign text-muted" data-toggle="tooltip" data-placement="right" data-html="true" title="<div class='hyphen'><?php echo h( $file['path'] ); ?></div>"></span>
+															<span class="glyphicon glyphicon-question-sign text-muted" data-toggle="tooltip" data-placement="right" data-html="true" title="<div class='hyphen'><?php echo h( $paths ); ?></div>"></span>
 														</div>
 													</div>
 												<?php } ?>

@@ -114,7 +114,7 @@ var get_rss = function( format ) {
 	.always( function() {
 	})
 	.fail( function ( e ) {
-		$('#prBody').html( get_alert( 'danger' , e.responseText , false ) );
+		$('#prBody').html( get_alert( 'danger' , c.message + '<hr/>' + e.responseText , false ) );
 	})
 	.done( function ( re ) {
 		if ( re.singlewarning ) {

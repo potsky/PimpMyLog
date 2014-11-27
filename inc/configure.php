@@ -10,6 +10,7 @@ load_default_constants();
 */
 include_once '../cfg/softwares.inc.php';
 
+
 /*
 |--------------------------------------------------------------------------
 | Ajax tasks required by body
@@ -27,6 +28,17 @@ if ( isset( $_POST['s'] ) ) {
 	$config_file_temp = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . CONFIG_FILE_TEMP;
 
 	try {
+
+		/*
+		|--------------------------------------------------------------------------
+		| Alert user if he has not configured the date.timezone setting
+		|--------------------------------------------------------------------------
+		|
+		*/
+		set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) { throw new ErrorException($errstr, 0, $errno, $errfile, $errline); });
+		$a = date('U');
+		restore_error_handler();
+
 
 		switch ( $_POST['s'] ) {
 
@@ -235,36 +247,42 @@ if ( isset( $_POST['s'] ) ) {
 
 					$gpaths = glob( $userpath , GLOB_MARK | GLOB_NOCHECK | GLOB_ONLYDIR );
 
-					foreach( $gpaths as $path ) {
+					if ( is_array( $gpaths ) ) {
 
-						$tried[ $software ][ $path ] = false;
+						foreach( $gpaths as $path ) {
 
-						if ( is_dir( $path ) ) {
+							$tried[ $software ][ $path ] = false;
 
-							$found = 1;
-							$tried[ $software ][ $path ] = true;
+							if ( is_dir( $path ) ) {
 
-							foreach ( $files as $type => $fpaths) {
+								$found = 1;
+								$tried[ $software ][ $path ] = true;
 
-								foreach ( $fpaths as $userfile ) {
+								foreach ( $files as $type => $fpaths) {
 
-									$gfiles   = glob( $path . $userfile , GLOB_MARK | GLOB_NOCHECK );
+									foreach ( $fpaths as $userfile ) {
 
-									foreach( $gfiles as $file ) {
+										$gfiles   = glob( $path . $userfile , GLOB_MARK | GLOB_NOCHECK );
 
-										$file              = basename( $file );
-										$allfiles[ $file ] = $file;
+										if ( is_array( $gfiles ) ) {
 
-										if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
+											foreach( $gfiles as $file ) {
 
-											if ( ! is_array( $tried[ $software ][ $path ] ) ) {
-												$tried[ $software ][ $path ] = array();
+												$file              = basename( $file );
+												$allfiles[ $file ] = $file;
+
+												if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
+
+													if ( ! is_array( $tried[ $software ][ $path ] ) ) {
+														$tried[ $software ][ $path ] = array();
+													}
+
+													$tried[ $software ][ $path ][ $type ][] = $file;
+													$found = 2;
+												}
+
 											}
-
-											$tried[ $software ][ $path ][ $type ][] = $file;
-											$found = 2;
 										}
-
 									}
 								}
 							}
@@ -450,8 +468,34 @@ if ( isset( $_POST['s'] ) ) {
 		}
 
 	} catch (Exception $e) {
-		$return['error'] = $e->getMessage();
+		// Error message for timezone not configured
+		if ( strpos( $e->getMessage() , 'date.timezone' ) ) {
+			$return[ 'error' ] = $e->getMessage() . '<hr/><span class="glyphicon glyphicon-info-sign"></span> ' . sprintf( __('You should take a look on this %spage%s.') , '<a href="' . TIME_ZONE_SUPPORT_URL . '">' , '</a>' );
+		}
+		// Other error messages
+		else {
+			$return[ 'error' ] = $e->getMessage() . '<hr/><span class="glyphicon glyphicon-info-sign"></span> ' . sprintf( __('You should take a look on this %spage%s.') , '<a href="' . SUHOSIN_URL . '">' , '</a>' );
+		}
 	}
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Check if we have returned something
+	|--------------------------------------------------------------------------
+	|
+	| If not, a command has stopped the execution and we need to alert user about
+	| its configuration
+	|
+	*/
+	$check = 0;
+	if ( $return['reload'] === true ) $check++;
+	if ( $return['next']   === true ) $check++;
+
+	if ( count( $return ) === $check ) {
+		$return[ 'error' ] = __( 'Your PHP installation is not correctly configured to run Pimp My Log.' ) . '<hr/><span class="glyphicon glyphicon-info-sign"></span> ' . sprintf( __('You should take a look on this %spage%s.') , '<a href="' . SUHOSIN_URL . '">' , '</a>' );
+	}
+
 
 	header( 'Content-type: application/json' );
 	echo json_encode( $return );
@@ -482,6 +526,7 @@ $lemma = array(
 	'notes'          => __( 'Notes' ),
 	'choosesoftware' => __( 'You have to select at least one software to configure!' ),
 	'chooselog'      => __( 'You have to select at least one log file or type the path of a log file!' ),
+	'suhosin'        => sprintf( __('You should take a look on this %spage%s.') , '<a href="' . SUHOSIN_URL . '">' , '</a>' ),
 );
 
 
@@ -533,6 +578,13 @@ $lemma = array(
 
 	<div class="container" id="process">
 		<br/>
+		<?php
+			if ( SUHOSIN_LOADED === true ) {
+				echo '<div class="alert alert-danger"><strong>';
+				echo sprintf( __('Suhosin extension is loaded, according to its configuration, Pimp My Log could not run normally... More information %shere%s.') , '<a href="' . SUHOSIN_URL . '">' , '</a>' );
+				echo '</strong></div>';
+			}
+		?>
 		<div id="error"></div>
 		<div id="user"></div>
 		<br/>

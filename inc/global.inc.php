@@ -72,6 +72,35 @@ if ( ! function_exists( 'mb_convert_encoding' ) ) {
 
 /*
 |--------------------------------------------------------------------------
+| Check for Suhosin
+|--------------------------------------------------------------------------
+|
+| Suhosin is used in CPanel installations for example and users do not always
+| know what is Suhosin and what it does
+|
+*/
+define( 'SUHOSIN_LOADED' , ( extension_loaded('suhosin') ) );
+define( 'SUHOSIN_URL'    , "http://support.pimpmylog.com/kb/configuration/php-installations-with-suhosin-extension-and-exotic-ini-settings" );
+
+
+/*
+|--------------------------------------------------------------------------
+| Enable safe mode
+|--------------------------------------------------------------------------
+|
+| User can create a file named SAFE_MODE at root directory to tell Pimp My Log
+| to avoid using functions like exec, ini_get, etc...
+|
+| These functions can be forbidden by PHP or Suhosin and are aimed to help
+| user but there are not mandatory.
+|
+*/
+define( 'SAFE_MODE' , file_exists( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . 'SAFE_MODE' ) );
+define( 'TIME_ZONE_SUPPORT_URL' , 'http://support.pimpmylog.com/discussions/problems/46-timezone-uncaught-exception' );
+
+
+/*
+|--------------------------------------------------------------------------
 | Disable XDebug
 |--------------------------------------------------------------------------
 |
@@ -446,7 +475,7 @@ function config_load($load_user_configuration_dir = true)
         $gpaths = glob( $path , GLOB_MARK | GLOB_NOCHECK );
 
         if ( count( $gpaths ) == 0 ) {
-        } elseif ( count( $gpaths ) == 1 ) {
+        } else if ( count( $gpaths ) == 1 ) {
             $files[ $fileid ]            = $file;
             $files[ $fileid ]['path']    = $gpaths[0];
         } else {
@@ -457,12 +486,18 @@ function config_load($load_user_configuration_dir = true)
                 $new_paths[ $path ] = filemtime( $path );
             }
 
+            // The most recent file will be the first
             arsort( $new_paths , SORT_NUMERIC );
 
-            foreach ($new_paths as $path => $lastmodified) {
-                $files[ $fileid . '_' . $i ]            = $file;
-                $files[ $fileid . '_' . $i ]['path']    = $path;
-                $files[ $fileid . '_' . $i ]['display'].= ' > ' . basename( $path );
+            // The first file id is the ID of the configuration file then others files are suffixed with _2, _3, etc...
+            foreach ( $new_paths as $path => $lastmodified ) {
+                $ext = ( $i > 1 ) ? '_' . $i : '';
+
+                $files[ $fileid . $ext ]             = $file;
+                $files[ $fileid . $ext ]['oid']      = $fileid;
+                $files[ $fileid . $ext ]['odisplay'] = $files[ $fileid . $ext ]['display'];
+                $files[ $fileid . $ext ]['path']     = $path;
+                $files[ $fileid . $ext ]['display']  .= ' > ' . basename( $path );
                 if ($i >= $count) {
                     break;
                 }
@@ -480,7 +515,12 @@ function config_load($load_user_configuration_dir = true)
         // Anonymous access only
         if ( is_null( $username ) ) {
             foreach ( $files as $fileid => $file ) {
-                if ( Sentinel::isLogAnonymous( $fileid ) ) {
+                $a = $fileid;
+                // glob file
+                if ( isset( $files[ $fileid ]['oid'] ) ) {
+                    $a = $files[ $fileid ]['oid'];
+                }
+                if ( Sentinel::isLogAnonymous( $a ) ) {
                     $final[ $fileid ] = $file;
                 }
             }
@@ -489,7 +529,12 @@ function config_load($load_user_configuration_dir = true)
         // Anonymous access + User access
         else {
             foreach ( $files as $fileid => $file ) {
-                if ( ( Sentinel::userCanOnLogs( $fileid , 'r' , true , $username ) ) || ( Sentinel::isLogAnonymous( $fileid ) ) ) {
+                $a = $fileid;
+                // glob file
+                if ( isset( $files[ $fileid ]['oid'] ) ) {
+                    $a = $files[ $fileid ]['oid'];
+                }
+                if ( ( Sentinel::userCanOnLogs( $a , 'r' , true , $username ) ) || ( Sentinel::isLogAnonymous( $a ) ) ) {
                     $final[ $fileid ] = $file;
                 }
             }
@@ -847,8 +892,16 @@ function get_server_user()
 {
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
         return '';
+    } else if ( SAFE_MODE === true ) {
+        // for Suhosin
+        return '';
     } else {
-        return @exec( 'whoami' );
+        // for PHP disabled_func
+        set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) {});
+        $a = exec( 'whoami' );
+        restore_error_handler();
+
+        return $a;
     }
 }
 
@@ -1137,10 +1190,12 @@ function upgrade_is_git() {
  * @return  mixed
  */
 function upgrade_can_git_pull() {
+    if ( SAFE_MODE === true ) return false;
+
     $base = PML_BASE;
 
     // Check if git is callable and if all files are not changed
-    $a = @exec('cd ' . escapeshellarg( $base ) . '; git status -s' , $lines , $code );
+    $a = exec('cd ' . escapeshellarg( $base ) . '; git status -s' , $lines , $code );
 
     // Error while executing this comand
     if ( $code !== 0 ) return array( $code , $lines);
@@ -1166,7 +1221,7 @@ function upgrade_can_git_pull() {
         if ( ! $f->isWritable() ) {
 
             // check if it ignored or not
-            $b = @exec( "git ls-files " . escapeshellarg( $f->getPathname() ) );
+            $b = exec( "git ls-files " . escapeshellarg( $f->getPathname() ) );
             if ( ! empty( $b ) ) {
                 $canwrite = false;
                 $lines[]  = $f->getPathname();
@@ -1246,7 +1301,7 @@ if ( isset( $_POST['tz'] ) ) {
     $tz = USER_TIME_ZONE;
 }
 if ( ! in_array( $tz , $tz_available ) ) {
-    $tz = date('e');
+    $tz = @date('e');
 }
 
 

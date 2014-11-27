@@ -1,7 +1,7 @@
 <?php
 function php_load_software() {
-	$path = @ini_get('error_log');
-	if ( $path != '' ) {
+	$path = ( SAFE_MODE === true ) ? '' : ini_get('error_log');
+	if ( $path !== '' ) {
 		return array(
 			'name'    => __('PHP'),
 			'desc'    => __('PHP'),

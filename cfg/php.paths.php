@@ -6,10 +6,9 @@ $files = array(
 	)
 );
 
+$path = ( SAFE_MODE === true ) ? '' : ini_get('error_log');
 
-$path  = @ini_get('error_log');
-
-if ( $path != '' ) {
+if ( $path !== '' ) {
 	$paths[]          = dirname( $path ) . DIRECTORY_SEPARATOR ;
 	$files['error'][] = basename( $path );
 }

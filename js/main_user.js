@@ -73,7 +73,7 @@ $(function() {
 	| On submit
 	|
 	*/
-	$('#prForm').on('submit', function() {
+	$('#prForm').on('submit', function( event ) {
 		profile_save();
 		event.preventDefault();
 		return false;
@@ -160,7 +160,7 @@ $(function() {
 	| On submit
 	|
 	*/
-	$('#changepassword').on('submit', function() {
+	$('#changepassword').on('submit', function( event ) {
 
 		$('#password1group').removeClass('has-error');
 		$('#password2group').removeClass('has-error');
@@ -248,7 +248,7 @@ $(function() {
 		$(this).parent().parent().parent().parent().find('.logs-selector').hide();
 	});
 
-	$('#umUsersAddForm').on('submit', function() {
+	$('#umUsersAddForm').on('submit', function( event ) {
 		event.preventDefault();
 		return users_add_save( this );
 	});
@@ -263,7 +263,7 @@ $(function() {
 	| Initialize form
 	|
 	*/
-	$('#umAnonymousForm').on('submit', function() {
+	$('#umAnonymousForm').on('submit', function( event ) {
 		event.preventDefault();
 		return anonymous_save( this );
 	});

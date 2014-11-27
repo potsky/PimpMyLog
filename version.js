@@ -8,6 +8,19 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.2" : {
+			"released" : "2014-11-29",
+			"new" : [
+				"Alert message when Suhosin PHP extension is loaded",
+				"Enable the SAFE_MODE latch file to let users run Pimp My Log on ultra secured PHP installations (<a href=\"http://support.pimpmylog.com/kb/configuration/php-installations-with-suhosin-extension-and-exotic-ini-settings\" target=\"_blank\">more info</a>)"
+			],
+			"changed" : [
+				"Glob files are now considered as unique for user access"
+			],
+			"fixed" : [
+				"Fix the user management popup in Firefox (<a href=\"http://support.pimpmylog.com/discussions/suggestions/57-ihm-for-addupdate-logifile-to-scan\" target=\"_blank\">more info</a>)"
+			]
+		},
 		"1.7.1" : {
 			"released" : "2014-11-23",
 			"changed" : [
