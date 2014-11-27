@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.1 - 5190cd82068079c2f68a4c0b8871ba765a41fa91*/
+/*! pimpmylog - 1.7.2 - 51fcfbcf77c3a3b0aa7e9b5386f3ca98ca784625*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -10,8 +10,8 @@
 ?>
 <?php
 function php_load_software() {
-	$path = @ini_get('error_log');
-	if ( $path != '' ) {
+	$path = ( SAFE_MODE === true ) ? '' : ini_get('error_log');
+	if ( $path !== '' ) {
 		return array(
 			'name'    => __('PHP'),
 			'desc'    => __('PHP'),
