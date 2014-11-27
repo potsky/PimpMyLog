@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.1 - 5190cd82068079c2f68a4c0b8871ba765a41fa91*/
+/*! pimpmylog - 1.7.2 - 143756c79ea2efe3a5ef7b7736373c02beae1678*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -16,10 +16,9 @@ $files = array(
 	)
 );
 
+$path = ( SAFE_MODE === true ) ? '' : ini_get('error_log');
 
-$path  = @ini_get('error_log');
-
-if ( $path != '' ) {
+if ( $path !== '' ) {
 	$paths[]          = dirname( $path ) . DIRECTORY_SEPARATOR ;
 	$files['error'][] = basename( $path );
 }

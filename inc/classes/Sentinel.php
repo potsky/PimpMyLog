@@ -799,7 +799,7 @@ class Sentinel
 	{
 		if (self::$currentlylocked === false) {
 			self::$authFileP = fopen( self::$authFile , "a+" );
-			if ( flock( self::$authFileP , LOCK_EX ) ) { // acquière un verrou exclusif
+			if ( flock( self::$authFileP , LOCK_EX ) ) {
 				self::$currentlylocked = true;
 			} else {
 				throw new Exception( 'Unable to lock file' );

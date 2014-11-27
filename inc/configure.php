@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.1 - 5190cd82068079c2f68a4c0b8871ba765a41fa91*/
+/*! pimpmylog - 1.7.2 - 143756c79ea2efe3a5ef7b7736373c02beae1678*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -19,6 +19,7 @@ load_default_constants();
 */
 include_once '../cfg/softwares.inc.php';
 
+
 /*
 |--------------------------------------------------------------------------
 | Ajax tasks required by body
@@ -36,6 +37,17 @@ if ( isset( $_POST['s'] ) ) {
 	$config_file_temp = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . CONFIG_FILE_TEMP;
 
 	try {
+
+		/*
+		|--------------------------------------------------------------------------
+		| Alert user if he has not configured the date.timezone setting
+		|--------------------------------------------------------------------------
+		|
+		*/
+		set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) { throw new ErrorException($errstr, 0, $errno, $errfile, $errline); });
+		$a = date('U');
+		restore_error_handler();
+
 
 		switch ( $_POST['s'] ) {
 
@@ -244,36 +256,42 @@ if ( isset( $_POST['s'] ) ) {
 
 					$gpaths = glob( $userpath , GLOB_MARK | GLOB_NOCHECK | GLOB_ONLYDIR );
 
-					foreach( $gpaths as $path ) {
+					if ( is_array( $gpaths ) ) {
 
-						$tried[ $software ][ $path ] = false;
+						foreach( $gpaths as $path ) {
 
-						if ( is_dir( $path ) ) {
+							$tried[ $software ][ $path ] = false;
 
-							$found = 1;
-							$tried[ $software ][ $path ] = true;
+							if ( is_dir( $path ) ) {
 
-							foreach ( $files as $type => $fpaths) {
+								$found = 1;
+								$tried[ $software ][ $path ] = true;
 
-								foreach ( $fpaths as $userfile ) {
+								foreach ( $files as $type => $fpaths) {
 
-									$gfiles   = glob( $path . $userfile , GLOB_MARK | GLOB_NOCHECK );
+									foreach ( $fpaths as $userfile ) {
 
-									foreach( $gfiles as $file ) {
+										$gfiles   = glob( $path . $userfile , GLOB_MARK | GLOB_NOCHECK );
 
-										$file              = basename( $file );
-										$allfiles[ $file ] = $file;
+										if ( is_array( $gfiles ) ) {
 
-										if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
+											foreach( $gfiles as $file ) {
 
-											if ( ! is_array( $tried[ $software ][ $path ] ) ) {
-												$tried[ $software ][ $path ] = array();
+												$file              = basename( $file );
+												$allfiles[ $file ] = $file;
+
+												if ( ( is_readable( $path . $file ) ) && ( ! is_dir( $path . $file ) ) ) {
+
+													if ( ! is_array( $tried[ $software ][ $path ] ) ) {
+														$tried[ $software ][ $path ] = array();
+													}
+
+													$tried[ $software ][ $path ][ $type ][] = $file;
+													$found = 2;
+												}
+
 											}
-
-											$tried[ $software ][ $path ][ $type ][] = $file;
-											$found = 2;
 										}
-
 									}
 								}
 							}
@@ -459,8 +477,34 @@ if ( isset( $_POST['s'] ) ) {
 		}
 
 	} catch (Exception $e) {
-		$return['error'] = $e->getMessage();
+		// Error message for timezone not configured
+		if ( strpos( $e->getMessage() , 'date.timezone' ) ) {
+			$return[ 'error' ] = $e->getMessage() . '<hr/><span class="glyphicon glyphicon-info-sign"></span> ' . sprintf( __('You should take a look on this %spage%s.') , '<a href="' . TIME_ZONE_SUPPORT_URL . '">' , '</a>' );
+		}
+		// Other error messages
+		else {
+			$return[ 'error' ] = $e->getMessage() . '<hr/><span class="glyphicon glyphicon-info-sign"></span> ' . sprintf( __('You should take a look on this %spage%s.') , '<a href="' . SUHOSIN_URL . '">' , '</a>' );
+		}
 	}
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Check if we have returned something
+	|--------------------------------------------------------------------------
+	|
+	| If not, a command has stopped the execution and we need to alert user about
+	| its configuration
+	|
+	*/
+	$check = 0;
+	if ( $return['reload'] === true ) $check++;
+	if ( $return['next']   === true ) $check++;
+
+	if ( count( $return ) === $check ) {
+		$return[ 'error' ] = __( 'Your PHP installation is not correctly configured to run Pimp My Log.' ) . '<hr/><span class="glyphicon glyphicon-info-sign"></span> ' . sprintf( __('You should take a look on this %spage%s.') , '<a href="' . SUHOSIN_URL . '">' , '</a>' );
+	}
+
 
 	header( 'Content-type: application/json' );
 	echo json_encode( $return );
@@ -491,6 +535,7 @@ $lemma = array(
 	'notes'          => __( 'Notes' ),
 	'choosesoftware' => __( 'You have to select at least one software to configure!' ),
 	'chooselog'      => __( 'You have to select at least one log file or type the path of a log file!' ),
+	'suhosin'        => sprintf( __('You should take a look on this %spage%s.') , '<a href="' . SUHOSIN_URL . '">' , '</a>' ),
 );
 
 
@@ -502,7 +547,13 @@ $lemma = array(
 */
 ?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title><?php echo TITLE;?></title><?php $fav = '../' ; include_once 'favicon.inc.php'; ?><meta name="description" content=""><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="../css/pml.min.css"><script>var lemma       = <?php echo json_encode($lemma);?>,
 			uuid        = <?php echo json_encode($uuid);?>,
-			querystring = "<?php echo $_SERVER['QUERY_STRING'];?>";</script></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="?<?php echo $_SERVER['QUERY_STRING'];?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Configurator');?></a></div></div></div><div class="jumbotronflat"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span class="sr-only"></span></div></div></div><div class="container" id="process"><br><div id="error"></div><div id="user"></div><br><p id="buttons"><a id="next" class="btn btn-primary" href="#" style="display:none"><?php _e('Continue');?></a> &nbsp; <a id="reload" class="btn btn-default" href="javascript:location.reload();" style="display:none"><?php _e('Reload');?></a>&nbsp;</p></div><div class="jumbotron" id="congratulations" style="display:none"><div class="container"><h1><?php _e( "Congratulations!" ); ?></h1><p><?php
+			querystring = "<?php echo $_SERVER['QUERY_STRING'];?>";</script></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="?<?php echo $_SERVER['QUERY_STRING'];?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Configurator');?></a></div></div></div><div class="jumbotronflat"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span class="sr-only"></span></div></div></div><div class="container" id="process"><br><?php
+			if ( SUHOSIN_LOADED === true ) {
+				echo '<div class="alert alert-danger"><strong>';
+				echo sprintf( __('Suhosin extension is loaded, according to its configuration, Pimp My Log could not run normally... More information %shere%s.') , '<a href="' . SUHOSIN_URL . '">' , '</a>' );
+				echo '</strong></div>';
+			}
+		?><div id="error"></div><div id="user"></div><br><p id="buttons"><a id="next" class="btn btn-primary" href="#" style="display:none"><?php _e('Continue');?></a> &nbsp; <a id="reload" class="btn btn-default" href="javascript:location.reload();" style="display:none"><?php _e('Reload');?></a>&nbsp;</p></div><div class="jumbotron" id="congratulations" style="display:none"><div class="container"><h1><?php _e( "Congratulations!" ); ?></h1><p><?php
 				echo '<br/>';
 				_e( 'Your <em>Pimp my Log</em> instance is ready to use.' );
 				echo '<br/>';

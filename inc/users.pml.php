@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.1 - 5190cd82068079c2f68a4c0b8871ba765a41fa91*/
+/*! pimpmylog - 1.7.2 - 143756c79ea2efe3a5ef7b7736373c02beae1678*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -293,6 +293,11 @@ switch ( @$_POST['action'] ) {
 							$logs[ substr( $fileid , 2 ) ] = array( 'r' => true );
 						}
 					}
+					else if ( substr( $fileid , 0 , 2 ) === 't-' ) {
+						if ( (int)$access === 1 ) {
+							$tags[ substr( $fileid , 2 ) ] = array( 'r' => true );
+						}
+					}
 				}
     			Sentinel::setUser( $username , $password , array('user') , $logs );
 				if ( $type === 'add' ) Sentinel::log( 'adduser ' . $username , $current_user );
@@ -410,7 +415,26 @@ switch ( @$_POST['action'] ) {
 
 		foreach( $files as $file_id => $file ) {
 
-			$fid = h( $file_id );
+			$fid     = h( $file_id );
+			$display = $files[ $file_id ][ 'display' ];
+			$paths   = $files[ $file_id ][ 'path' ];
+			$color   = 'default';
+
+			if ( isset( $files[ $file_id ][ 'oid' ] ) ) {
+				if ( $files[ $file_id ][ 'oid' ] !== $file_id ) continue;
+				$display = $files[ $file_id ][ 'odisplay' ];
+				if ( isset( $files[ $file_id ][ 'count' ] ) ) {
+					$remain = (int)$files[ $file_id ][ 'count' ] - 1;
+					if ( $remain === 1 ) {
+						$paths .= ' ' . __( 'and an other file defined by glob pattern' );
+					}
+					else if ( $remain > 1 ) {
+						$paths .= ' ' . sprintf( __( 'and %s other possible files defined by glob pattern' ) , $remain );
+					}
+				}
+				$color = 'warning';
+			}
+
 			if ( Sentinel::isLogAnonymous( $file_id ) ) {
 				$e  = 'active btn-success';
 				$d  = 'btn-default';
@@ -424,7 +448,7 @@ switch ( @$_POST['action'] ) {
 			}
 
 			$r .= '<div class="form-group" data-fileid="' . $fid . '">';
-			$r .= '	<label for="' . $fid . '" class="col-sm-4 control-label">' . $file['display'] . '</label>';
+			$r .= '	<label for="' . $fid . '" class="col-sm-4 control-label text-' . $color . '">' . $display . '</label>';
 			$r .= '	<div class="col-sm-8">';
 			$r .= '		<div class="btn-group" data-toggle="buttons">';
 			$r .= '			<label class="btn btn-xs logs-selector-yes ' . $e . '">';
@@ -434,7 +458,7 @@ switch ( @$_POST['action'] ) {
 			$r .= '				<input type="radio" name="f-' . $fid . '" id="anonymous-f-' . $fid . '-false" value="0"' . $dc . '/> '.__('No');
 			$r .= '			</label>';
 			$r .= '		</div>';
-			$r .= '	<span class="glyphicon glyphicon-question-sign text-muted" data-toggle="tooltip" data-placement="right" data-html="true" title="<div class=\'hyphen\'>' . h( $file['path'] ) . '</div>"></span>';
+			$r .= '	<span class="glyphicon glyphicon-question-sign text-muted" data-toggle="tooltip" data-placement="right" data-html="true" title="<div class=\'hyphen\'>' . h( $paths ) . '</div>"></span>';
 			$r .= '	</div>';
 			$r .= '</div>';
 		}
