@@ -48,7 +48,7 @@ $ git pull
 User files are defined in the `.gitignore` file and are not overridden.
 
 
-## 2.2 - With composer
+## 2.2 - With composer <img src="https://poser.pugx.org/potsky/pimp-my-log/downloads.svg"/>
 
 {% include documentation_install_composer.md %}
 

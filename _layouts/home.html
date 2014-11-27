@@ -33,13 +33,20 @@
 	<div class="jumbotron jbgray">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-6">
 					{% capture md %}{% include home_jumbo_2introduction.md %}{% endcapture %}{{ md | unindent | markdownify }}
 				</div>
-				<div class="col-md-4 text-center">
-					<a type="button" class="btn btn-sm btn-warning orangebutton" href="/getting-started/screenshots.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;Screenshots</a>
-					<a type="button" class="btn btn-sm btn-warning orangebutton" href="http://demo.pimpmylog.com"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;&nbsp;Demo</a>
-					<a type="button" class="btn btn-sm btn-warning orangebutton" href="/getting-started/quick-start.html"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;&nbsp;Quick start</a>
+				<div class="col-md-6">
+					<div class="text-center">
+						<a type="button" class="btn btn-sm btn-warning orangebutton" href="/getting-started/screenshots.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;Screenshots</a>
+						<a type="button" class="btn btn-sm btn-warning orangebutton" href="http://demo.pimpmylog.com"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;&nbsp;Demo</a>
+						<a type="button" class="btn btn-sm btn-warning orangebutton" href="/getting-started/quick-start.html"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;&nbsp;Quick start</a>
+					</div>
+					<br/>
+					<h5>Install with composer</h5>
+					<pre><code>composer require "potsky/pimp-my-log"</code></pre>
+					<h5>Install with git</h5>
+					<pre><code>git clone https://github.com/potsky/PimpMyLog.git</code></pre>
 				</div>
 			</div>
 		</div>
