@@ -9,21 +9,15 @@ class Sentinel
 	private static $api_session;
 	private static $currentlylocked = false;
 
-	/**
-	 * Sign values
-	 *
-	 * @param string $username the user to sign in
-	 * @param string $password its password
-	 *
-	 * @return array the user informations or false if failed
-	 */
 
 	/**
 	 * Manage login
 	 *
+	 * @param   array   $files  the files configuration
+	 *
 	 * @return [type] [description]
 	 */
-	public static function attempt()
+	public static function attempt( $files = false )
 	{
 
 		if ( self::isAuthSet() ) { // authentication is enabled on this instance
@@ -67,7 +61,7 @@ class Sentinel
 					die();
 				}
 
-				else if ( self::isAnonymousEnabled() ) { // Anonymous access is enabled, simply return to let anonymosu users to parse logs
+				else if ( self::isAnonymousEnabled( $files ) ) { // Anonymous access is enabled, simply return to let anonymosu users to parse logs
 					return null;
 				}
 
@@ -87,7 +81,7 @@ class Sentinel
 					self::signOut();
 					self::release();
 
-					if ( self::isAnonymousEnabled() ) { // Anonymosu access, redirect to normal page
+					if ( self::isAnonymousEnabled( $files ) ) { // Anonymous access, redirect to normal page
 						header( 'Location: ' . $_SERVER['PHP_SELF'] );
 					}
 					else { // No anonymous access, redirect to login page
@@ -335,11 +329,25 @@ class Sentinel
 	/**
 	 * Tell if at least one log file is accessible anonymously
 	 *
+	 * The $files parameter is optional. If given, it will check if all anonymous files still exist.
+	 * If they do not exist, they must be erased and they do not count for this check.
+	 *
+	 * @param   array    $files  The files configuration
+	 *
 	 * @return  boolean
 	 */
-	public static function isAnonymousEnabled()
+	public static function isAnonymousEnabled( $files = false )
 	{
-		return ( count( self::$auth['anonymous'] ) > 0 );
+		if ( $files === false ) {
+			return ( count( self::$auth['anonymous'] ) > 0 );
+		}
+
+		$found = 0;
+		foreach( self::$auth['anonymous'] as $file ) {
+			if ( isset( $files[ $file ] ) ) $found++;
+		}
+
+		return ( $found > 0 );
 	}
 
 	/**
@@ -821,6 +829,13 @@ class Sentinel
 		return stream_get_contents( self::$authFileP , -1 , 0 );
 	}
 
+	/**
+	 * Destroy a session
+	 *
+	 * Need a wrapper to manage session with phpunit
+	 *
+	 * @return  void
+	 */
 	private static function sessionDestroy()
 	{
 		// Web
@@ -837,6 +852,11 @@ class Sentinel
 		}
 	}
 
+	/**
+	 * Read a session
+	 *
+	 * @return  array  the array with all auth informations
+	 */
 	private static function sessionRead()
 	{
 		// Web
@@ -854,6 +874,14 @@ class Sentinel
 		}
 	}
 
+
+	/**
+	 * Write the session array
+	 *
+	 * @param   array  $value  the array to store
+	 *
+	 * @return  void
+	 */
 	private static function sessionWrite($value)
 	{
 		// Web

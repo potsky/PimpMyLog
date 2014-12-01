@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.2 - 51fcfbcf77c3a3b0aa7e9b5386f3ca98ca784625*/
+/*! pimpmylog - 1.7.3 - a593a486e10ac631e38d22a38087350f257a852b*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -138,7 +138,7 @@ switch ( @$_POST['action'] ) {
 		. '&search=' . urlencode( @$_POST['search'] )
 		;
 
-		$current_user = Sentinel::attempt();
+		$current_user = Sentinel::attempt( $files );
 
 		// We authenticate the url if a user is logged in
 		// -> if log is anonymous, the request will be authenticated and if an admin remove
