@@ -8,6 +8,12 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.4" : {
+			"released" : "2014-12-01",
+			"fixed" : [
+				"Ugly error on installations without authentication"
+			]
+		},
 		"1.7.3" : {
 			"released" : "2014-11-30",
 			"fixed" : [
