@@ -9,7 +9,7 @@ list( $badges , $files ) = config_load();
 |
 */
 if ( ! Sentinel::isAuthSet() ) die();
-$current_user = Sentinel::attempt();
+$current_user = Sentinel::attempt( $files );
 
 
 /*
@@ -390,7 +390,7 @@ switch ( @$_POST['action'] ) {
 			break;
 		}
 
-		if ( Sentinel::isAnonymousEnabled() ) {
+		if ( Sentinel::isAnonymousEnabled( $files ) ) {
 			$r = '<div class="alert alert-info">' . __('<strong>Anonymous access is enabled</strong>. Genuine users have to click on the user menu to sign in and access more logs.') . '</div>';
 		} else {
 			$r = '<div class="alert alert-info">' . __('<strong>Anonymous access is disabled</strong>. All users have to sign in from the sign in screen.') . '</div>';

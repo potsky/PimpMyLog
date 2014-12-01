@@ -568,10 +568,14 @@ var users_view = function( obj ) {
 				else {
 					var logslist = '';
 					for( var j in val ) {
-						if ( val[j].r === true ) {
-							logslist += '<span style="display:block;float:left;margin:2px;" class="label label-success" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<div class=\'hyphen\'>' + $('<div/>').text( files[ j ].path ).html() + '</div>">' + files[ j ].display + '</span> ';
-						} else {
-							logslist += '<span style="display:block;float:left;margin:2px;" class="label label-danger" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<div class=\'hyphen\'>' + $('<div/>').text( files[ j ].path ).html() + '</div>">' + files[ j ].display + '</span> ';
+
+						// Need to check if this file still exists because perhaps use has had this file in the past but this file does not exist anymore (glob usage eg)
+						if ( files[ j ] ) {
+							if ( val[j].r === true ) {
+								logslist += '<span style="display:block;float:left;margin:2px;" class="label label-success" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<div class=\'hyphen\'>' + $('<div/>').text( files[ j ].path ).html() + '</div>">' + files[ j ].display + '</span> ';
+							} else {
+								logslist += '<span style="display:block;float:left;margin:2px;" class="label label-danger" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<div class=\'hyphen\'>' + $('<div/>').text( files[ j ].path ).html() + '</div>">' + files[ j ].display + '</span> ';
+							}
 						}
 					}
 					val = logslist;

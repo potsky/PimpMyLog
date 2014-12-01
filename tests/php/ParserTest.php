@@ -9,14 +9,14 @@ class ParserTest extends TestCase {
     }
 
     // Tests with multi line and timezone
-	public function test_PHP_User_Errors()
+	public function test_PHP54_User_Errors()
     {
-		$regex         = "@^\\[(.*)-(.*)-(.*) (.*):(.*):(.*) (.*)\\] (.*)\$@U";
-		$match         = array( "Date" => array( 2 , " " , 1 , " " , 4 , ":" , 5 , ":" , 6 , " " , 3 , " " , 7 ) , "Error" => 8 );
+		$regex         = "@^\\[(.*)-(.*)-(.*) (.*):(.*):(.*)( (.*))*\\] (.*)\$@U";
+		$match         = array( "Date" => array( 2 , " " , 1 , " " , 4 , ":" , 5 , ":" , 6 , " " , 3 , " " , 8 ) , "Error" => 9 );
 		$types         = array( "Date" => "date:H:i:s" , 'Error' => "txt" );
 		$multiline     = 'Error';
 		$exclude       = '';
-		$file_path     = PHPMOCKUP . '/php_error_log.log';
+		$file_path     = PHPMOCKUP . '/php_error_log_5.4.log';
 		$start_offset  = 0;
 		$start_from    = SEEK_END;
 		$load_more     = false;
@@ -40,6 +40,39 @@ class ParserTest extends TestCase {
 		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
 
 		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '|12:3[0-9]|' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 2 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+    }
+
+	public function test_PHP53_User_Errors()
+    {
+		$regex         = "@^\\[(.*)-(.*)-(.*) (.*):(.*):(.*)( (.*))*\\] ((PHP (.*):  (.*) in (.*) on line (.*))|(.*))\$@U";
+		$match         = array( "Date" => array( 2 , " " , 1 , " " , 4 , ":" , 5 , ":" , 6 , " " , 3 ), "Severity" => 11, "Error"    => array( 12 , 15 ), "File"     => 13, "Line"     => 14 );
+		$types         = array( "Date" => "date:H:i:s", "Severity" => "badge:severity", "File"     => "pre:\/-69", "Line"     => "numeral", "Error"    => "pre" );
+		$multiline     = '';
+		$exclude       = '';
+		$file_path     = PHPMOCKUP . '/php_error_log_5.3.log';
+		$start_offset  = 0;
+		$start_from    = SEEK_END;
+		$load_more     = false;
+		$old_lastline  = '';
+		$data_to_parse = filesize( $file_path );
+		$full          = true;
+		$timeout       = 2;
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 2 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 2 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 18 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , 'Pimp my Log' , $data_to_parse , $full , $timeout );
+		$this->assertEquals( 2 , $logs['count'] );
+		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
+
+		$logs = LogParser::getNewLines( $regex , $match , $types , 'Europe/Paris' , 100 , $exclude , $file_path , $start_offset , $start_from , $load_more , $old_lastline , $multiline , '|10$|' , $data_to_parse , $full , $timeout );
 		$this->assertEquals( 2 , $logs['count'] );
 		$this->assertFalse( strpos( $logs['logs'][0]['Date'] , 'ERROR ! Unable to convert this string to date') );
     }

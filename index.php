@@ -64,7 +64,7 @@ list( $badges , $files ) = config_load();
 |--------------------------------------------------------------------------
 |
 */
-$current_user = Sentinel::attempt();
+$current_user = Sentinel::attempt( $files );
 
 
 /*
@@ -344,7 +344,7 @@ $csrf = csrf_get();
 
 				<form class="navbar-form navbar-right">
 
-					<?php if ( ( is_null( $current_user ) ) && ( Sentinel::isAnonymousEnabled() ) ) { ?>
+					<?php if ( ( is_null( $current_user ) ) && ( Sentinel::isAnonymousEnabled( $files ) ) ) { ?>
 						<div class="form-group">
 							<a href="?signin" class="btn-menu btn-primary btn-sm" title="<?php _h( 'Sign in' );?>"><?php _e('Sign in');?></a>
 						</div>&nbsp;

@@ -8,6 +8,14 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.3" : {
+			"released" : "2014-11-30",
+			"fixed" : [
+				"Fix PHP error log format for PHP 5.3 (#89)",
+				"Fix a javascript error when viewing a user who is granted on a non-existing log file",
+				"Signout was an UI infinite loop when the last anonymous file did not exist anymore"
+			]
+		},
 		"1.7.2" : {
 			"released" : "2014-11-29",
 			"new" : [

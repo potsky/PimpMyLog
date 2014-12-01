@@ -129,7 +129,7 @@ switch ( @$_POST['action'] ) {
 		. '&search=' . urlencode( @$_POST['search'] )
 		;
 
-		$current_user = Sentinel::attempt();
+		$current_user = Sentinel::attempt( $files );
 
 		// We authenticate the url if a user is logged in
 		// -> if log is anonymous, the request will be authenticated and if an admin remove
