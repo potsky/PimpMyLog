@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.2 - 51fcfbcf77c3a3b0aa7e9b5386f3ca98ca784625*/
+/*! pimpmylog - 1.7.3 - a593a486e10ac631e38d22a38087350f257a852b*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -46,14 +46,14 @@ function php_get_config( $type , $file , $software , $counter ) {
 		"notify"  : true,
 		"format"    : {
 			"type"         : "PHP",
-			"regex"        : "@^\\\\[(.*)-(.*)-(.*) (.*):(.*):(.*) (.*)\\\\] ((PHP (.*):  (.*) in (.*) on line (.*))|(.*))\$@U",
+			"regex"        : "@^\\\\[(.*)-(.*)-(.*) (.*):(.*):(.*)( (.*))*\\\\] ((PHP (.*):  (.*) in (.*) on line (.*))|(.*))\$@U",
 			"export_title" : "Error",
 			"match"        : {
-				"Date"     : [ 2 , " " , 1 , " " , 4 , ":" , 5 , ":" , 6 , " " , 3 , " " , 7 ],
-				"Severity" : 10,
-				"Error"    : [ 11 , 14 ],
-				"File"     : 12,
-				"Line"     : 13
+				"Date"     : [ 2 , " " , 1 , " " , 4 , ":" , 5 , ":" , 6 , " " , 3 ],
+				"Severity" : 11,
+				"Error"    : [ 12 , 15 ],
+				"File"     : 13,
+				"Line"     : 14
 			},
 			"types"    : {
 				"Date"     : "date:H:i:s",
@@ -63,7 +63,7 @@ function php_get_config( $type , $file , $software , $counter ) {
 				"Error"    : "pre"
 			},
 			"exclude": {
-				"Log": ["\/PHP Stack trace:\/", "\/PHP *[0-9]*\\\\. \/"]
+				"Log": ["\\\\/PHP Stack trace:\\\\/", "\\\\/PHP *[0-9]*\\\\. \\\\/"]
 			}
 		}
 	}

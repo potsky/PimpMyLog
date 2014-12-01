@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.2 - 51fcfbcf77c3a3b0aa7e9b5386f3ca98ca784625*/
+/*! pimpmylog - 1.7.3 - a593a486e10ac631e38d22a38087350f257a852b*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -73,7 +73,7 @@ list( $badges , $files ) = config_load();
 |--------------------------------------------------------------------------
 |
 */
-$current_user = Sentinel::attempt();
+$current_user = Sentinel::attempt( $files );
 
 
 /*
@@ -271,7 +271,7 @@ $csrf = csrf_get();
 						$i = h( $file_id );
 						break;
 					}
-					?><ul class="nav navbar-nav"><li id="singlelog" data-file="<?php echo $i; ?>"><a href="#"><?php echo $d; ?></a></li></ul><?php endif; ?><form class="navbar-form navbar-right"><?php if ( ( is_null( $current_user ) ) && ( Sentinel::isAnonymousEnabled() ) ) { ?><div class="form-group"><a href="?signin" class="btn-menu btn-primary btn-sm" title="<?php _h( 'Sign in' );?>"><?php _e('Sign in');?></a></div>&nbsp; <?php } ?><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo h( @$_GET['s'] );?>" placeholder="<?php _h( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _h( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No refresh' );?></option><?php
+					?><ul class="nav navbar-nav"><li id="singlelog" data-file="<?php echo $i; ?>"><a href="#"><?php echo $d; ?></a></li></ul><?php endif; ?><form class="navbar-form navbar-right"><?php if ( ( is_null( $current_user ) ) && ( Sentinel::isAnonymousEnabled( $files ) ) ) { ?><div class="form-group"><a href="?signin" class="btn-menu btn-primary btn-sm" title="<?php _h( 'Sign in' );?>"><?php _e('Sign in');?></a></div>&nbsp; <?php } ?><div class="form-group" id="searchctn"><input type="text" class="form-control input-sm clearable" id="search" value="<?php echo h( @$_GET['s'] );?>" placeholder="<?php _h( 'Search in logs' );?>"></div>&nbsp;<div class="form-group"><select id="autorefresh" class="form-control input-sm" title="<?php _h( 'Select a duration to check for new logs automatically' );?>"><option value="0"><?php _e( 'No refresh' );?></option><?php
 							foreach ( get_refresh_options( $files ) as $r ) {
 								echo '<option value="' . $r . '">' . sprintf( __( 'Refresh %ss' ) , $r ) . '</option>';
 							}
