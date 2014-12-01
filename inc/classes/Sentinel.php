@@ -338,6 +338,9 @@ class Sentinel
 	 */
 	public static function isAnonymousEnabled( $files = false )
 	{
+		if ( ! isset( self::$auth['anonymous'] ) ) return false;
+		if ( ! is_array( self::$auth['anonymous'] ) ) return false;
+
 		if ( $files === false ) {
 			return ( count( self::$auth['anonymous'] ) > 0 );
 		}
