@@ -8,7 +8,7 @@ $(function() {
 
 	$('#changeLogModal').on('show.bs.modal', function (e) {
 		$.ajax({
-			url      : 'version.js?callback=?',
+			url      : 'version.js?local=true&callback=?',
 			type     : 'GET',
 			dataType : 'jsonp',
 			jsonp    : 'pml_version_cb'
