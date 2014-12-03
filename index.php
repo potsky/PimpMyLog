@@ -559,8 +559,8 @@ $csrf = csrf_get();
 		<footer class="text-muted">
 			<small>
 				<?php echo FOOTER;?>
-				- <a href="inc/test.php"><?php _e('Debugger'); ?></a>
-				- <a href="#" data-toggle="modal" data-target="#changeLogModal"><?php _e('Change log'); ?></a>
+				&nbsp;-&nbsp;<a href="inc/test.php"><?php _e('Debugger'); ?></a>
+				&nbsp;-&nbsp;<a href="#" data-toggle="modal" data-target="#changeLogModal"><?php _e('Change log'); ?></a>
 				<span id="upgradefooter"></span>
 			</small>
 		</footer>
