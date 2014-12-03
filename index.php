@@ -139,7 +139,7 @@ $lemma = array(
 	'notification_deny'       => __( 'Notifications are denied for this site. Go to your browser preferences to enable notifications for this site.' ),
 	'profile_ok'              => __( 'Your profile has been successfully saved!' ),
 	'reallydeleteuser'        => __( 'Confirm' ),
-	'reallysigninuser'        => __('Confirm'),
+	'reallysigninuser'        => __( 'Confirm' ),
 	'regex_invalid'           => __( 'Search was done with regular engine' ),
 	'regex_valid'             => __( 'Search was done with RegEx engine' ),
 	'resultcopied'            => __( 'Result copied!' ),
@@ -227,7 +227,7 @@ $csrf = csrf_get();
 			file_selector        = <?php echo json_encode( FILE_SELECTOR ); ?>,
 			csrf_token           = <?php echo json_encode( $csrf ); ?>,
 			querystring          = <?php echo json_encode( $_SERVER['QUERY_STRING'] ); ?>,
-			currentuser          = <?php echo json_encode( Sentinel::getCurrentUsername() ); ?>,
+			currentuser          = <?php echo json_encode( $current_user ); ?>,
 			export_default       = <?php echo ( EXPORT === true ) ? 'true' : 'false';?>;
 			notification_default = <?php echo ( NOTIFICATION === true ) ? 'true' : 'false';?>;
 	</script>
@@ -556,7 +556,14 @@ $csrf = csrf_get();
 			<small id="footer"></small>
 		</div>
 		<hr/>
-		<footer class="text-muted"><small><?php echo FOOTER;?><span id="upgradefooter"></span></small></footer>
+		<footer class="text-muted">
+			<small>
+				<?php echo FOOTER;?>
+				- <a href="inc/test.php"><?php _e('Debugger'); ?></a>
+				- <a href="#" data-toggle="modal" data-target="#changeLogModal"><?php _e('Change log'); ?></a>
+				<span id="upgradefooter"></span>
+			</small>
+		</footer>
 	</div>
 
 	<div class="modal fade" id="exModal" tabindex="-1" role="dialog" aria-labelledby="exModalLabel" aria-hidden="true">
@@ -598,6 +605,21 @@ $csrf = csrf_get();
 						</div>
 					</div>
 				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="changeLogModal" tabindex="-1" role="dialog" aria-labelledby="exModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php _e('Close');?></span></button>
+					<h4 class="modal-title"><?php _e('Change Log');?></h4>
+				</div>
+				<div class="modal-body"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close');?></button>
 				</div>

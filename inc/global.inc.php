@@ -8,9 +8,20 @@
 |
 */
 if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
-    header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found');
-    die();
+	header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found');
+	die();
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Disable XDebug
+|--------------------------------------------------------------------------
+|
+| We do not need xdebug and if enabled, it is really slow !
+|
+*/
+if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
 
 
 /*
@@ -22,11 +33,11 @@ if ( realpath( __FILE__ ) === realpath( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
 if ( ! defined( 'PML_BASE' ) ) define( 'PML_BASE' , realpath( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '..' ) );
 
 if ( ! defined( 'PML_CONFIG_BASE' ) ) {
-    if ( upgrade_is_composer() ) {
-        define( 'PML_CONFIG_BASE' , realpath( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.' ) );
-    } else {
-        define( 'PML_CONFIG_BASE' , PML_BASE );
-    }
+	if ( upgrade_is_composer() ) {
+		define( 'PML_CONFIG_BASE' , realpath( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.' ) );
+	} else {
+		define( 'PML_CONFIG_BASE' , PML_BASE );
+	}
 }
 
 
@@ -37,36 +48,36 @@ if ( ! defined( 'PML_CONFIG_BASE' ) ) {
 |
 */
 if ( ! function_exists( 'mb_strlen' ) ) {
-    function mb_strlen( $a ) {
-        return strlen( $a );
-    }
-    define( 'MB_SUPPORT' , false );
+	function mb_strlen( $a ) {
+		return strlen( $a );
+	}
+	define( 'MB_SUPPORT' , false );
 } else {
-    define( 'MB_SUPPORT' , true );
+	define( 'MB_SUPPORT' , true );
 }
 
 if ( ! function_exists( 'mb_strtolower' ) ) {
-    function mb_strtolower( $a , $b = '' ) {
-        return strtolower( $a );
-    }
+	function mb_strtolower( $a , $b = '' ) {
+		return strtolower( $a );
+	}
 }
 
 if ( ! function_exists( 'mb_check_encoding' ) ) {
-    function mb_check_encoding( $a , $b ) {
-        return false;
-    }
+	function mb_check_encoding( $a , $b ) {
+		return false;
+	}
 }
 
 if ( ! function_exists( 'mb_substr' ) ) {
-    function mb_substr( $a , $b , $c = 9999999 ) {
-        return substr( $a , $b , $c );
-    }
+	function mb_substr( $a , $b , $c = 9999999 ) {
+		return substr( $a , $b , $c );
+	}
 }
 
 if ( ! function_exists( 'mb_convert_encoding' ) ) {
-    function mb_convert_encoding( $a , $b , $c ) {
-        return utf8_encode( $a );
-    }
+	function mb_convert_encoding( $a , $b , $c ) {
+		return utf8_encode( $a );
+	}
 }
 
 
@@ -101,17 +112,6 @@ define( 'TIME_ZONE_SUPPORT_URL' , 'http://support.pimpmylog.com/discussions/prob
 
 /*
 |--------------------------------------------------------------------------
-| Disable XDebug
-|--------------------------------------------------------------------------
-|
-| We do not need xdebug and if enabled, it is really slow !
-|
-*/
-if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
-
-
-/*
-|--------------------------------------------------------------------------
 | Disable magic quotes
 |--------------------------------------------------------------------------
 |
@@ -120,19 +120,19 @@ if ( function_exists( 'xdebug_disable' ) ) { xdebug_disable(); }
 |
 */
 if (get_magic_quotes_gpc()) {
-    $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
-    while (list($key, $val) = each($process)) {
-        foreach ($val as $k => $v) {
-            unset($process[$key][$k]);
-            if (is_array($v)) {
-                $process[$key][stripslashes($k)] = $v;
-                $process[] = &$process[$key][stripslashes($k)];
-            } else {
-                $process[$key][stripslashes($k)] = stripslashes($v);
-            }
-        }
-    }
-    unset($process);
+	$process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
+	while (list($key, $val) = each($process)) {
+		foreach ($val as $k => $v) {
+			unset($process[$key][$k]);
+			if (is_array($v)) {
+				$process[$key][stripslashes($k)] = $v;
+				$process[] = &$process[$key][stripslashes($k)];
+			} else {
+				$process[$key][stripslashes($k)] = stripslashes($v);
+			}
+		}
+	}
+	unset($process);
 }
 
 
@@ -205,14 +205,14 @@ define( 'DEFAULT_USER_CONFIGURATION_DIR'      , 'config.user.d' );
 $tz_available     = DateTimeZone::listIdentifiers();
 $locale_default   = 'en_GB';
 $locale_available = array(
-    'en_GB' => 'English',
-    'fr_FR' => 'Français',
-    'pt_BR' => 'Português do Brasil',
+	'en_GB' => 'English',
+	'fr_FR' => 'Français',
+	'pt_BR' => 'Português do Brasil',
 );
 $locale_numeraljs = array(
-    'en_GB' => 'en-gb',
-    'fr_FR' => 'fr',
-    'pt_BR' => 'pt-br',
+	'en_GB' => 'en-gb',
+	'fr_FR' => 'fr',
+	'pt_BR' => 'pt-br',
 );
 
 
@@ -223,7 +223,7 @@ $locale_numeraljs = array(
 |
 */
 function my_autoloader( $ClassName ) {
-    @include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . $ClassName . ".php");
+	@include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . $ClassName . ".php");
 }
 spl_autoload_register('my_autoloader');
 
@@ -246,7 +246,7 @@ spl_autoload_register('my_autoloader');
  */
 function h($text)
 {
-    return htmlentities( $text ,ENT_QUOTES,'UTF-8');
+	return htmlentities( $text ,ENT_QUOTES,'UTF-8');
 }
 
 /**
@@ -258,7 +258,7 @@ function h($text)
  */
 function _h($text)
 {
-    _e( htmlentities( $text ,ENT_QUOTES,'UTF-8') );
+	_e( htmlentities( $text ,ENT_QUOTES,'UTF-8') );
 }
 
 /**
@@ -271,10 +271,10 @@ function _h($text)
  */
 function __($text)
 {
-    if ( empty( $text ) )
-        return '';
-    else
-        return gettext( $text );
+	if ( empty( $text ) )
+		return '';
+	else
+		return gettext( $text );
 }
 
 /**
@@ -286,7 +286,7 @@ function __($text)
  */
 function _e($text)
 {
-    echo __( $text );
+	echo __( $text );
 }
 
 /**
@@ -296,45 +296,45 @@ function _e($text)
  */
 function load_default_constants()
 {
-    $defaults = array(
-        'AUTH_LOG_FILE_COUNT',
-        'AUTO_UPGRADE',
-        'CHECK_UPGRADE',
-        'DEFAULT_HELP_URL',
-        'EXPORT',
-        'FILE_SELECTOR',
-        'FOOTER',
-        'FORGOTTEN_YOUR_PASSWORD_URL',
-        'GEOIP_URL',
-        'GOOGLE_ANALYTICS',
-        'LOCALE',
-        'LOGS_MAX',
-        'LOGS_REFRESH',
-        'MAX_SEARCH_LOG_TIME',
-        'NAV_TITLE',
-        'NOTIFICATION',
-        'NOTIFICATION_TITLE',
-        'PIMPMYLOG_ISSUE_LINK',
-        'PIMPMYLOG_VERSION_URL',
-        'PULL_TO_REFRESH',
-        'SORT_LOG_FILES',
-        'TAG_SORT_TAG',
-        'TAG_NOT_TAGGED_FILES_ON_TOP',
-        'TAG_DISPLAY_LOG_FILES_COUNT',
-        'TITLE',
-        'TITLE_FILE',
-        'UPGRADE_MANUALLY_URL',
-        'USER_CONFIGURATION_DIR',
-    );
-    foreach ($defaults as $d) {
-        if ( ! defined( $d ) ) {
-            if ( defined( 'DEFAULT_' . $d ) ) {
-                define( $d , constant( 'DEFAULT_' . $d ) );
-            } else {
-                die( "Constant 'DEFAULT_$d' is not defined!" );
-            }
-        }
-    }
+	$defaults = array(
+		'AUTH_LOG_FILE_COUNT',
+		'AUTO_UPGRADE',
+		'CHECK_UPGRADE',
+		'DEFAULT_HELP_URL',
+		'EXPORT',
+		'FILE_SELECTOR',
+		'FOOTER',
+		'FORGOTTEN_YOUR_PASSWORD_URL',
+		'GEOIP_URL',
+		'GOOGLE_ANALYTICS',
+		'LOCALE',
+		'LOGS_MAX',
+		'LOGS_REFRESH',
+		'MAX_SEARCH_LOG_TIME',
+		'NAV_TITLE',
+		'NOTIFICATION',
+		'NOTIFICATION_TITLE',
+		'PIMPMYLOG_ISSUE_LINK',
+		'PIMPMYLOG_VERSION_URL',
+		'PULL_TO_REFRESH',
+		'SORT_LOG_FILES',
+		'TAG_SORT_TAG',
+		'TAG_NOT_TAGGED_FILES_ON_TOP',
+		'TAG_DISPLAY_LOG_FILES_COUNT',
+		'TITLE',
+		'TITLE_FILE',
+		'UPGRADE_MANUALLY_URL',
+		'USER_CONFIGURATION_DIR',
+	);
+	foreach ($defaults as $d) {
+		if ( ! defined( $d ) ) {
+			if ( defined( 'DEFAULT_' . $d ) ) {
+				define( $d , constant( 'DEFAULT_' . $d ) );
+			} else {
+				die( "Constant 'DEFAULT_$d' is not defined!" );
+			}
+		}
+	}
 }
 
 /**
@@ -346,17 +346,17 @@ function load_default_constants()
  */
 function get_config_file_path()
 {
-    $files = array(
-        CONFIG_FILE_NAME,
-        CONFIG_FILE_NAME_BEFORE_1_5_0,
-    );
-    foreach ($files as $f) {
-        if ( file_exists( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . $f ) ) {
-            return realpath( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . $f );
-        }
-    }
+	$files = array(
+		CONFIG_FILE_NAME,
+		CONFIG_FILE_NAME_BEFORE_1_5_0,
+	);
+	foreach ($files as $f) {
+		if ( file_exists( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . $f ) ) {
+			return realpath( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . $f );
+		}
+	}
 
-    return null;
+	return null;
 }
 
 /**
@@ -368,9 +368,9 @@ function get_config_file_path()
  */
 function get_config_file_name($path = false)
 {
-    if ( $path === false ) $path = get_config_file_path();
-    if ( is_null( $path ) ) return null;
-    return basename( $path );
+	if ( $path === false ) $path = get_config_file_path();
+	if ( is_null( $path ) ) return null;
+	return basename( $path );
 }
 
 /**
@@ -382,18 +382,18 @@ function get_config_file_name($path = false)
  */
 function get_config_file($path = false)
 {
-    if ( $path === false ) $path = get_config_file_path();
-    if ( is_null( $path ) ) return null;
+	if ( $path === false ) $path = get_config_file_path();
+	if ( is_null( $path ) ) return null;
 
-    if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
-        ob_start();
-        require $path;
-        $string = ob_get_clean();
-    } else {
-        $string = @file_get_contents( $path );
-    }
+	if ( strtolower( substr( $path , -3 , 3 ) ) === 'php' ) {
+		ob_start();
+		require $path;
+		$string = ob_get_clean();
+	} else {
+		$string = @file_get_contents( $path );
+	}
 
-    return json_decode( $string , true );
+	return json_decode( $string , true );
 }
 
 /**
@@ -406,169 +406,169 @@ function get_config_file($path = false)
  */
 function config_load($load_user_configuration_dir = true)
 {
-    $badges = false;
-    $files  = false;
+	$badges = false;
+	$files  = false;
 
-    // Read config file
-    $config = get_config_file();
+	// Read config file
+	$config = get_config_file();
 
-    if ( is_null( $config ) ) {
-        return array( $badges , $files );
-    }
+	if ( is_null( $config ) ) {
+		return array( $badges , $files );
+	}
 
-    // Get badges
-    $badges = $config[ 'badges' ];
+	// Get badges
+	$badges = $config[ 'badges' ];
 
-    // Set user constant
-    foreach ($config[ 'globals' ] as $cst => $val) {
-        if ( $cst == strtoupper( $cst ) ) {
-            @define( $cst , $val );
-        }
-    }
+	// Set user constant
+	foreach ($config[ 'globals' ] as $cst => $val) {
+		if ( $cst == strtoupper( $cst ) ) {
+			@define( $cst , $val );
+		}
+	}
 
-    // Set unset constants
-    load_default_constants();
+	// Set unset constants
+	load_default_constants();
 
-    // Set time limit
-    @set_time_limit( MAX_SEARCH_LOG_TIME + 2 );
+	// Set time limit
+	@set_time_limit( MAX_SEARCH_LOG_TIME + 2 );
 
-    // Append files from the USER_CONFIGURATION_DIR
-    if ( $load_user_configuration_dir === true ) {
-        if ( is_dir( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR ) ) {
-            $dir       = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR;
-            $userfiles = new RegexIterator(
-                new RecursiveIteratorIterator(
-                    new RecursiveDirectoryIterator( $dir , RecursiveDirectoryIterator::SKIP_DOTS ),
-                    RecursiveIteratorIterator::SELF_FIRST,
-                    RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
-                    ),
-                '/^.+\.(json|php)$/i',
-                RecursiveRegexIterator::GET_MATCH
-            );
-            foreach ($userfiles as $userfile) {
-                $filepath = realpath( $userfile[0] );
-                $c = get_config_file( $filepath );
-                if ( ! is_null( $c ) ) {
-                    foreach ($c as $k => $v) {
-                        $fileid                                        = get_slug( str_replace( PML_CONFIG_BASE , '' , $filepath ) . '/' . $k );
-                        $config[ 'files' ][ $fileid ]                  = $v;
-                        $config[ 'files' ][ $fileid ]['included_from'] = $filepath;
-                    }
-                }
-            }
-        }
-    }
+	// Append files from the USER_CONFIGURATION_DIR
+	if ( $load_user_configuration_dir === true ) {
+		if ( is_dir( PML_CONFIG_BASE . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR ) ) {
+			$dir       = PML_CONFIG_BASE . DIRECTORY_SEPARATOR . USER_CONFIGURATION_DIR;
+			$userfiles = new RegexIterator(
+				new RecursiveIteratorIterator(
+					new RecursiveDirectoryIterator( $dir , RecursiveDirectoryIterator::SKIP_DOTS ),
+					RecursiveIteratorIterator::SELF_FIRST,
+					RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
+					),
+				'/^.+\.(json|php)$/i',
+				RecursiveRegexIterator::GET_MATCH
+			);
+			foreach ($userfiles as $userfile) {
+				$filepath = realpath( $userfile[0] );
+				$c = get_config_file( $filepath );
+				if ( ! is_null( $c ) ) {
+					foreach ($c as $k => $v) {
+						$fileid                                        = get_slug( str_replace( PML_CONFIG_BASE , '' , $filepath ) . '/' . $k );
+						$config[ 'files' ][ $fileid ]                  = $v;
+						$config[ 'files' ][ $fileid ]['included_from'] = $filepath;
+					}
+				}
+			}
+		}
+	}
 
-    // Oups, there is no file... abort
-    if ( ! isset( $config[ 'files' ] ) ) {
-        return array( $badges , $files );
-    }
+	// Oups, there is no file... abort
+	if ( ! isset( $config[ 'files' ] ) ) {
+		return array( $badges , $files );
+	}
 
-    // Try to generate the files tree if there are globs...
-    $files_tmp = $config[ 'files' ];
-    $files     = array();
+	// Try to generate the files tree if there are globs...
+	$files_tmp = $config[ 'files' ];
+	$files     = array();
 
-    foreach ($files_tmp as $fileid => $file) {
+	foreach ($files_tmp as $fileid => $file) {
 
-        $path   = $file['path'];
-        $count  = max( 1 , @(int) $file['count']);
-        $gpaths = glob( $path , GLOB_MARK | GLOB_NOCHECK );
+		$path   = $file['path'];
+		$count  = max( 1 , @(int) $file['count']);
+		$gpaths = glob( $path , GLOB_MARK | GLOB_NOCHECK );
 
-        if ( count( $gpaths ) == 0 ) {
-        } else if ( count( $gpaths ) == 1 ) {
-            $files[ $fileid ]            = $file;
-            $files[ $fileid ]['path']    = $gpaths[0];
-        } else {
-            $new_paths = array();
-            $i         = 1;
+		if ( count( $gpaths ) == 0 ) {
+		} else if ( count( $gpaths ) == 1 ) {
+			$files[ $fileid ]            = $file;
+			$files[ $fileid ]['path']    = $gpaths[0];
+		} else {
+			$new_paths = array();
+			$i         = 1;
 
-            foreach ($gpaths as $path) {
-                $new_paths[ $path ] = filemtime( $path );
-            }
+			foreach ($gpaths as $path) {
+				$new_paths[ $path ] = filemtime( $path );
+			}
 
-            // The most recent file will be the first
-            arsort( $new_paths , SORT_NUMERIC );
+			// The most recent file will be the first
+			arsort( $new_paths , SORT_NUMERIC );
 
-            // The first file id is the ID of the configuration file then others files are suffixed with _2, _3, etc...
-            foreach ( $new_paths as $path => $lastmodified ) {
-                $ext = ( $i > 1 ) ? '_' . $i : '';
+			// The first file id is the ID of the configuration file then others files are suffixed with _2, _3, etc...
+			foreach ( $new_paths as $path => $lastmodified ) {
+				$ext = ( $i > 1 ) ? '_' . $i : '';
 
-                $files[ $fileid . $ext ]             = $file;
-                $files[ $fileid . $ext ]['oid']      = $fileid;
-                $files[ $fileid . $ext ]['odisplay'] = $files[ $fileid . $ext ]['display'];
-                $files[ $fileid . $ext ]['path']     = $path;
-                $files[ $fileid . $ext ]['display']  .= ' > ' . basename( $path );
-                if ($i >= $count) {
-                    break;
-                }
-                $i++;
-            }
-        }
-    }
+				$files[ $fileid . $ext ]             = $file;
+				$files[ $fileid . $ext ]['oid']      = $fileid;
+				$files[ $fileid . $ext ]['odisplay'] = $files[ $fileid . $ext ]['display'];
+				$files[ $fileid . $ext ]['path']     = $path;
+				$files[ $fileid . $ext ]['display']  .= ' > ' . basename( $path );
+				if ($i >= $count) {
+					break;
+				}
+				$i++;
+			}
+		}
+	}
 
-    // Remove forbidden files
-    if ( Sentinel::isAuthSet() ) { // authentication is enabled on this instance
+	// Remove forbidden files
+	if ( Sentinel::isAuthSet() ) { // authentication is enabled on this instance
 
-        $username = Sentinel::getCurrentUsername();
-        $final    = array();
+		$username = Sentinel::getCurrentUsername();
+		$final    = array();
 
-        // Anonymous access only
-        if ( is_null( $username ) ) {
-            foreach ( $files as $fileid => $file ) {
-                $a = $fileid;
-                // glob file
-                if ( isset( $files[ $fileid ]['oid'] ) ) {
-                    $a = $files[ $fileid ]['oid'];
-                }
-                if ( Sentinel::isLogAnonymous( $a ) ) {
-                    $final[ $fileid ] = $file;
-                }
-            }
-        }
+		// Anonymous access only
+		if ( is_null( $username ) ) {
+			foreach ( $files as $fileid => $file ) {
+				$a = $fileid;
+				// glob file
+				if ( isset( $files[ $fileid ]['oid'] ) ) {
+					$a = $files[ $fileid ]['oid'];
+				}
+				if ( Sentinel::isLogAnonymous( $a ) ) {
+					$final[ $fileid ] = $file;
+				}
+			}
+		}
 
-        // Anonymous access + User access
-        else {
-            foreach ( $files as $fileid => $file ) {
-                $a = $fileid;
-                // glob file
-                if ( isset( $files[ $fileid ]['oid'] ) ) {
-                    $a = $files[ $fileid ]['oid'];
-                }
-                if ( ( Sentinel::userCanOnLogs( $a , 'r' , true , $username ) ) || ( Sentinel::isLogAnonymous( $a ) ) ) {
-                    $final[ $fileid ] = $file;
-                }
-            }
-        }
+		// Anonymous access + User access
+		else {
+			foreach ( $files as $fileid => $file ) {
+				$a = $fileid;
+				// glob file
+				if ( isset( $files[ $fileid ]['oid'] ) ) {
+					$a = $files[ $fileid ]['oid'];
+				}
+				if ( ( Sentinel::userCanOnLogs( $a , 'r' , true , $username ) ) || ( Sentinel::isLogAnonymous( $a ) ) ) {
+					$final[ $fileid ] = $file;
+				}
+			}
+		}
 
-        $files = $final;
-    }
+		$files = $final;
+	}
 
-    // Finally sort files
-    if ( ! function_exists( 'display_asc' ) )              { function display_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
-    if ( ! function_exists( 'display_desc' ) )             { function display_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
-    if ( ! function_exists( 'display_insensitive_asc' ) )  { function display_insensitive_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
-    if ( ! function_exists( 'display_insensitive_desc' ) ) { function display_insensitive_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
-    switch ( trim( str_replace( array( '-' , '_' , ' ' , 'nsensitive' ) , '' , SORT_LOG_FILES ) ) ) {
-        case 'display':
-        case 'displayasc':
-            usort( $files , 'display_asc' );
-            break;
-        case 'displayi':
-        case 'displayiasc':
-            usort( $files , 'display_insensitive_asc' );
-            break;
-        case 'displaydesc':
-            usort( $files , 'display_desc' );
-            break;
-        case 'displayidesc':
-            usort( $files , 'display_insensitive_desc' );
-            break;
-        default:
-            # do not sort
-            break;
-    }
+	// Finally sort files
+	if ( ! function_exists( 'display_asc' ) )              { function display_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
+	if ( ! function_exists( 'display_desc' ) )             { function display_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
+	if ( ! function_exists( 'display_insensitive_asc' ) )  { function display_insensitive_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
+	if ( ! function_exists( 'display_insensitive_desc' ) ) { function display_insensitive_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
+	switch ( trim( str_replace( array( '-' , '_' , ' ' , 'nsensitive' ) , '' , SORT_LOG_FILES ) ) ) {
+		case 'display':
+		case 'displayasc':
+			usort( $files , 'display_asc' );
+			break;
+		case 'displayi':
+		case 'displayiasc':
+			usort( $files , 'display_insensitive_asc' );
+			break;
+		case 'displaydesc':
+			usort( $files , 'display_desc' );
+			break;
+		case 'displayidesc':
+			usort( $files , 'display_insensitive_desc' );
+			break;
+		default:
+			# do not sort
+			break;
+	}
 
-    return array( $badges , $files );
+	return array( $badges , $files );
 }
 
 /**
@@ -582,48 +582,48 @@ function config_load($load_user_configuration_dir = true)
  */
 function config_check($files)
 {
-    $errors = array();
+	$errors = array();
 
-    if ( ! is_array( $files ) ) {
-        if ( Sentinel::isAuthSet() ) return false;
+	if ( ! is_array( $files ) ) {
+		if ( Sentinel::isAuthSet() ) return false;
 
-        $errors[] = __( 'No file is defined in <code>files</code> array' );
+		$errors[] = __( 'No file is defined in <code>files</code> array' );
 
-        return $errors;
-    }
+		return $errors;
+	}
 
-    if ( count( $files ) === 0 ) {
-        if ( Sentinel::isAuthSet() ) return false;
+	if ( count( $files ) === 0 ) {
+		if ( Sentinel::isAuthSet() ) return false;
 
-        $errors[] = __( 'No file is defined in <code>files</code> array' );
+		$errors[] = __( 'No file is defined in <code>files</code> array' );
 
-        return $errors;
-    }
+		return $errors;
+	}
 
-    foreach ($files as $file_id => &$file) {
-        // error
-        foreach ( array( 'display' , 'path' , 'format' ) as $mandatory ) {
-            if ( ! isset( $file[ $mandatory ] ) ) {
-                $errors[] = sprintf( __( '<code>%s</code> is mandatory for file ID <code>%s</code>' ) , $mandatory , $file_id );
-            }
-        }
-        // fix
-        foreach ( array(
-                'max'       => LOGS_MAX,
-                'refresh'   => LOGS_REFRESH,
-                'notify'    => NOTIFICATION,
-        ) as $fix => $value ) {
-            if ( ! isset( $file[ $fix ] ) ) {
-                $file[ $fix ] = $value;
-            }
-        }
-    }
+	foreach ($files as $file_id => &$file) {
+		// error
+		foreach ( array( 'display' , 'path' , 'format' ) as $mandatory ) {
+			if ( ! isset( $file[ $mandatory ] ) ) {
+				$errors[] = sprintf( __( '<code>%s</code> is mandatory for file ID <code>%s</code>' ) , $mandatory , $file_id );
+			}
+		}
+		// fix
+		foreach ( array(
+				'max'       => LOGS_MAX,
+				'refresh'   => LOGS_REFRESH,
+				'notify'    => NOTIFICATION,
+		) as $fix => $value ) {
+			if ( ! isset( $file[ $fix ] ) ) {
+				$file[ $fix ] = $value;
+			}
+		}
+	}
 
-    if ( count($errors) == 0 ) {
-        return true;
-    } else {
-        return $errors;
-    }
+	if ( count($errors) == 0 ) {
+		return true;
+	} else {
+		return $errors;
+	}
 }
 
 /**
@@ -634,62 +634,62 @@ function config_check($files)
  * @return  array          an array of tags with fileids
  */
 function config_extract_tags( $files ) {
-    $tags = array( '_' => array() );
+	$tags = array( '_' => array() );
 
-    foreach ( $files as $fileid => $file ) {
-        // Tag found
-        if ( isset( $file['tags'] ) ) {
-            if ( is_array( $file['tags'] ) ) {
-                foreach ( $file['tags'] as $tag ) {
-                    $tags[ strval( $tag ) ][] = $fileid;
-                }
-            } else {
-                $tags[ strval( $file['tags'] ) ][] = $fileid;
-            }
-        }
-        // No tag
-        else {
-            $tags[ '_' ][] = $fileid;
-        }
-    }
+	foreach ( $files as $fileid => $file ) {
+		// Tag found
+		if ( isset( $file['tags'] ) ) {
+			if ( is_array( $file['tags'] ) ) {
+				foreach ( $file['tags'] as $tag ) {
+					$tags[ strval( $tag ) ][] = $fileid;
+				}
+			} else {
+				$tags[ strval( $file['tags'] ) ][] = $fileid;
+			}
+		}
+		// No tag
+		else {
+			$tags[ '_' ][] = $fileid;
+		}
+	}
 
-    switch ( trim( str_replace( array( '-' , '_' , ' ' , 'nsensitive' ) , '' , TAG_SORT_TAG ) ) ) {
-        case 'display':
-        case 'displayasc':
-            if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
-                ksort( $tags , SORT_NATURAL );
-            } else {
-                ksort( $tags );
-            }
-            break;
-        case 'displayi':
-        case 'displayiasc':
-            if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
-                ksort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
-            } else {
-                ksort( $tags );
-            }
-            break;
-        case 'displaydesc':
-            if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
-                krsort( $tags , SORT_NATURAL );
-            } else {
-                krsort( $tags );
-            }
-            break;
-        case 'displayidesc':
-            if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
-                krsort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
-            } else {
-                krsort( $tags );
-            }
-            break;
-        default:
-            # do not sort
-            break;
-    }
+	switch ( trim( str_replace( array( '-' , '_' , ' ' , 'nsensitive' ) , '' , TAG_SORT_TAG ) ) ) {
+		case 'display':
+		case 'displayasc':
+			if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+				ksort( $tags , SORT_NATURAL );
+			} else {
+				ksort( $tags );
+			}
+			break;
+		case 'displayi':
+		case 'displayiasc':
+			if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+				ksort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+			} else {
+				ksort( $tags );
+			}
+			break;
+		case 'displaydesc':
+			if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+				krsort( $tags , SORT_NATURAL );
+			} else {
+				krsort( $tags );
+			}
+			break;
+		case 'displayidesc':
+			if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
+				krsort( $tags , SORT_NATURAL | SORT_FLAG_CASE );
+			} else {
+				krsort( $tags );
+			}
+			break;
+		default:
+			# do not sort
+			break;
+	}
 
-    return $tags;
+	return $tags;
 }
 
 
@@ -706,26 +706,26 @@ function config_extract_tags( $files ) {
  */
 function get_refresh_options($files)
 {
-    $options = array(
-        1  => 1,
-        2  => 2,
-        3  => 3,
-        4  => 4,
-        5  => 5,
-        10 => 10,
-        15 => 15,
-        30 => 30,
-        45 => 45,
-        60 => 60
-    );
-    $options[ (int) LOGS_REFRESH ] = (int) LOGS_REFRESH;
-    foreach ($files as $file_id => $file) {
-        $options[ (int) @$file['refresh'] ] = (int) @$file['refresh'];
-    }
-    unset( $options[0] );
-    sort( $options );
+	$options = array(
+		1  => 1,
+		2  => 2,
+		3  => 3,
+		4  => 4,
+		5  => 5,
+		10 => 10,
+		15 => 15,
+		30 => 30,
+		45 => 45,
+		60 => 60
+	);
+	$options[ (int) LOGS_REFRESH ] = (int) LOGS_REFRESH;
+	foreach ($files as $file_id => $file) {
+		$options[ (int) @$file['refresh'] ] = (int) @$file['refresh'];
+	}
+	unset( $options[0] );
+	sort( $options );
 
-    return $options;
+	return $options;
 }
 
 /**
@@ -741,22 +741,22 @@ function get_refresh_options($files)
  */
 function get_max_options($files)
 {
-    $options = array(
-        5   => 5,
-        10  => 10,
-        20  => 20,
-        50  => 50,
-        100 => 100,
-        200 => 200
-    );
-    $options[ (int) LOGS_MAX ] = (int) LOGS_MAX;
-    foreach ($files as $file_id => $file) {
-        $options[ (int) @$file['max'] ] = (int) @$file['max'];
-    }
-    unset( $options[0] );
-    sort( $options );
+	$options = array(
+		5   => 5,
+		10  => 10,
+		20  => 20,
+		50  => 50,
+		100 => 100,
+		200 => 200
+	);
+	$options[ (int) LOGS_MAX ] = (int) LOGS_MAX;
+	foreach ($files as $file_id => $file) {
+		$options[ (int) @$file['max'] ] = (int) @$file['max'];
+	}
+	unset( $options[0] );
+	sort( $options );
 
-    return $options;
+	return $options;
 }
 
 /**
@@ -769,10 +769,10 @@ function get_max_options($files)
  */
 function human_filesize( $bytes , $decimals = 0 )
 {
-    $sz = __( 'B KBMBGBTBPB' );
-    $factor = floor( ( strlen( $bytes ) - 1 ) / 3 );
+	$sz = __( 'B KBMBGBTBPB' );
+	$factor = floor( ( strlen( $bytes ) - 1 ) / 3 );
 
-    return sprintf( "%.{$decimals}f" , $bytes / pow( 1024, $factor ) ) . @$sz[ (int)$factor * 2 ];
+	return sprintf( "%.{$decimals}f" , $bytes / pow( 1024, $factor ) ) . @$sz[ (int)$factor * 2 ];
 }
 
 /**
@@ -782,13 +782,13 @@ function human_filesize( $bytes , $decimals = 0 )
  */
 function csrf_get()
 {
-    start_session();
-    if ( ! isset( $_SESSION[ 'csrf_token' ] ) ) {
-        $_SESSION[ 'csrf_token' ] = md5( uniqid( '' , true ) );
-    }
-    session_write_close();
+	Session::start();
+	if ( ! isset( $_SESSION[ 'csrf_token' ] ) ) {
+		$_SESSION[ 'csrf_token' ] = md5( uniqid( '' , true ) );
+	}
+	Session::write_close();
 
-    return $_SESSION[ 'csrf_token' ];
+	return $_SESSION[ 'csrf_token' ];
 }
 
 /**
@@ -798,12 +798,12 @@ function csrf_get()
  */
 function csrf_verify()
 {
-    start_session();
-    $s = @$_SESSION[ 'csrf_token' ];
-    session_write_close();
-    if ( ! isset( $_POST[ 'csrf_token' ] ) )
-        return false;
-    return ( $s === @$_POST[ 'csrf_token' ] );
+	Session::start();
+	$s = @$_SESSION[ 'csrf_token' ];
+	Session::write_close();
+	if ( ! isset( $_POST[ 'csrf_token' ] ) )
+		return false;
+	return ( $s === @$_POST[ 'csrf_token' ] );
 }
 
 /**
@@ -816,15 +816,15 @@ function csrf_verify()
  */
 function get_slug($string, $separator = '-')
 {
-    $accents_regex = '~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i';
-    $special_cases = array( '&' => 'and');
-    $string        = mb_strtolower( trim( $string ), 'UTF-8' );
-    $string        = str_replace( array_keys($special_cases), array_values( $special_cases), $string );
-    $string        = preg_replace( $accents_regex, '$1', htmlentities( $string, ENT_QUOTES, 'UTF-8' ) );
-    $string        = preg_replace("/[^a-z0-9]/u", "$separator", $string);
-    $string        = preg_replace("/[$separator]+/u", "$separator", $string);
+	$accents_regex = '~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i';
+	$special_cases = array( '&' => 'and');
+	$string        = mb_strtolower( trim( $string ), 'UTF-8' );
+	$string        = str_replace( array_keys($special_cases), array_values( $special_cases), $string );
+	$string        = preg_replace( $accents_regex, '$1', htmlentities( $string, ENT_QUOTES, 'UTF-8' ) );
+	$string        = preg_replace("/[^a-z0-9]/u", "$separator", $string);
+	$string        = preg_replace("/[$separator]+/u", "$separator", $string);
 
-    return $string;
+	return $string;
 }
 
 /**
@@ -837,38 +837,38 @@ function get_slug($string, $separator = '-')
  */
 function json_indent($json)
 {
-    $result      = '';
-    $pos         = 0;
-    $strLen      = strlen($json);
-    $indentStr   = '  ';
-    $newLine     = "\n";
-    $prevChar    = '';
-    $outOfQuotes = true;
-    for ($i=0; $i<=$strLen; $i++) {
-        $char = substr($json, $i, 1);
-        if ($char == '"' && $prevChar != '\\') {
-            $outOfQuotes = !$outOfQuotes;
-        } elseif (($char == '}' || $char == ']') && $outOfQuotes) {
-            $result .= $newLine;
-            $pos --;
-            for ($j=0; $j<$pos; $j++) {
-                $result .= $indentStr;
-            }
-        }
-        $result .= $char;
-        if ( ( $char == ',' || $char == '{' || $char == '[' ) && $outOfQuotes ) {
-            $result .= $newLine;
-            if ($char == '{' || $char == '[') {
-                $pos ++;
-            }
-            for ($j = 0 ; $j < $pos ; $j++) {
-                $result .= $indentStr;
-            }
-        }
-        $prevChar = $char;
-    }
+	$result      = '';
+	$pos         = 0;
+	$strLen      = strlen($json);
+	$indentStr   = '  ';
+	$newLine     = "\n";
+	$prevChar    = '';
+	$outOfQuotes = true;
+	for ($i=0; $i<=$strLen; $i++) {
+		$char = substr($json, $i, 1);
+		if ($char == '"' && $prevChar != '\\') {
+			$outOfQuotes = !$outOfQuotes;
+		} elseif (($char == '}' || $char == ']') && $outOfQuotes) {
+			$result .= $newLine;
+			$pos --;
+			for ($j=0; $j<$pos; $j++) {
+				$result .= $indentStr;
+			}
+		}
+		$result .= $char;
+		if ( ( $char == ',' || $char == '{' || $char == '[' ) && $outOfQuotes ) {
+			$result .= $newLine;
+			if ($char == '{' || $char == '[') {
+				$pos ++;
+			}
+			for ($j = 0 ; $j < $pos ; $j++) {
+				$result .= $indentStr;
+			}
+		}
+		$prevChar = $char;
+	}
 
-    return $result;
+	return $result;
 }
 
 /**
@@ -880,7 +880,7 @@ function json_indent($json)
  */
 function clean_json_version($data)
 {
-    return str_replace( array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/);/*PSK*/' , '/*PSK*/)/*PSK*/' ) , array( '' , '' , '' ) , $data );
+	return str_replace( array( '/*PSK*/pml_version_cb(/*PSK*/' , '/*PSK*/);/*PSK*/' , '/*PSK*/)/*PSK*/' ) , array( '' , '' , '' ) , $data );
 }
 
 /**
@@ -890,19 +890,19 @@ function clean_json_version($data)
  */
 function get_server_user()
 {
-    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-        return '';
-    } else if ( SAFE_MODE === true ) {
-        // for Suhosin
-        return '';
-    } else {
-        // for PHP disabled_func
-        set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) {});
-        $a = exec( 'whoami' );
-        restore_error_handler();
+	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+		return '';
+	} else if ( SAFE_MODE === true ) {
+		// for Suhosin
+		return '';
+	} else {
+		// for PHP disabled_func
+		set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) {});
+		$a = exec( 'whoami' );
+		restore_error_handler();
 
-        return $a;
-    }
+		return $a;
+	}
 }
 
 /**
@@ -914,7 +914,7 @@ function get_server_user()
  */
 function is_assoc($arr)
 {
-    return array_keys( $arr ) !== range( 0 , count( $arr ) - 1 );
+	return array_keys( $arr ) !== range( 0 , count( $arr ) - 1 );
 }
 
 /**
@@ -927,9 +927,9 @@ function is_assoc($arr)
  */
 function mt_rand_str($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890_-ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 {
-    for ($s = '', $cl = strlen($c)-1, $i = 0; $i < $l; $s .= $c[mt_rand(0, $cl)], ++$i);
+	for ($s = '', $cl = strlen($c)-1, $i = 0; $i < $l; $s .= $c[mt_rand(0, $cl)], ++$i);
 
-    return $s;
+	return $s;
 }
 
 
@@ -939,26 +939,26 @@ function mt_rand_str($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890_-ABCDEFGHIJK
  * @return  string  an ip address
  */
 function get_client_ip() {
-    $ip = '';
-    if ( isset( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    }
-    else if ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    }
-    else if ( isset( $_SERVER['HTTP_X_FORWARDED'] ) ) {
-        $ip = $_SERVER['HTTP_X_FORWARDED'];
-    }
-    else if ( isset( $_SERVER['HTTP_FORWARDED_FOR'] ) ) {
-        $ip = $_SERVER['HTTP_FORWARDED_FOR'];
-    }
-    else if ( isset( $_SERVER['HTTP_FORWARDED'] ) ) {
-        $ip = $_SERVER['HTTP_FORWARDED'];
-    }
-    else if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
-        $ip = $_SERVER['REMOTE_ADDR'];
-    }
-    return $ip;
+	$ip = '';
+	if ( isset( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+		$ip = $_SERVER['HTTP_CLIENT_IP'];
+	}
+	else if ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	}
+	else if ( isset( $_SERVER['HTTP_X_FORWARDED'] ) ) {
+		$ip = $_SERVER['HTTP_X_FORWARDED'];
+	}
+	else if ( isset( $_SERVER['HTTP_FORWARDED_FOR'] ) ) {
+		$ip = $_SERVER['HTTP_FORWARDED_FOR'];
+	}
+	else if ( isset( $_SERVER['HTTP_FORWARDED'] ) ) {
+		$ip = $_SERVER['HTTP_FORWARDED'];
+	}
+	else if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+	return $ip;
 }
 
 /**
@@ -969,26 +969,26 @@ function get_client_ip() {
  * @return  string  current url
  */
 function get_current_url( $q = false ) {
-    if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
-        $s        = &$_SERVER;
-        $ssl      = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on') ? true:false;
-        $sp       = strtolower(@$s['SERVER_PROTOCOL']);
-        $protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
-        $port     = @$s['SERVER_PORT'];
-        $port     = ((!$ssl && $port=='80') || ($ssl && $port=='443')) ? '' : ':'.$port;
-        $host     = isset( $s['HTTP_X_FORWARDED_HOST'] ) ? $s['HTTP_X_FORWARDED_HOST'] : ( isset( $s['HTTP_HOST'] ) ? $s['HTTP_HOST'] : null );
-        $host     = isset($host) ? $host : @$s['SERVER_NAME'] . $port;
-        $uri      = $protocol . '://' . $host . @$s['REQUEST_URI'];
-        $segments = explode('?', $uri, 2);
-        $url      = $segments[0];
-        if ( $q === true ) {
-            if ( isset( $_SERVER['QUERY_STRING'] ) ) {
-                $url .= '?' . $_SERVER['QUERY_STRING'];
-            }
-        }
-        return $url;
-    }
-    return null;
+	if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
+		$s        = &$_SERVER;
+		$ssl      = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on') ? true:false;
+		$sp       = strtolower(@$s['SERVER_PROTOCOL']);
+		$protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
+		$port     = @$s['SERVER_PORT'];
+		$port     = ((!$ssl && $port=='80') || ($ssl && $port=='443')) ? '' : ':'.$port;
+		$host     = isset( $s['HTTP_X_FORWARDED_HOST'] ) ? $s['HTTP_X_FORWARDED_HOST'] : ( isset( $s['HTTP_HOST'] ) ? $s['HTTP_HOST'] : null );
+		$host     = isset($host) ? $host : @$s['SERVER_NAME'] . $port;
+		$uri      = $protocol . '://' . $host . @$s['REQUEST_URI'];
+		$segments = explode('?', $uri, 2);
+		$url      = $segments[0];
+		if ( $q === true ) {
+			if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+				$url .= '?' . $_SERVER['QUERY_STRING'];
+			}
+		}
+		return $url;
+	}
+	return null;
 }
 
 /**
@@ -999,11 +999,11 @@ function get_current_url( $q = false ) {
  * @return  boolean       true if address is local
  */
 function is_not_local_ip( $ip ) {
-    $ip = trim( $ip );
-    if ( $ip === '127.0.0.1' ) {
-        return false;
-    }
-    return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE);
+	$ip = trim( $ip );
+	if ( $ip === '127.0.0.1' ) {
+		return false;
+	}
+	return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE);
 }
 
 /**
@@ -1012,8 +1012,8 @@ function is_not_local_ip( $ip ) {
  * @return  void
  */
 function http404() {
-    header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found');
-    die();
+	header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found');
+	die();
 }
 
 /**
@@ -1022,8 +1022,8 @@ function http404() {
  * @return  void
  */
 function http403() {
-    header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 403 Forbidden');
-    die();
+	header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 403 Forbidden');
+	die();
 }
 /**
  * Return a 500 error
@@ -1031,8 +1031,8 @@ function http403() {
  * @return  void
  */
 function http500() {
-    header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 500 Internal Server Error');
-    die();
+	header( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 500 Internal Server Error');
+	die();
 }
 
 
@@ -1044,16 +1044,16 @@ function http500() {
  * @return  array          the cleaned array
  */
 function array_filter_recursive($input)  {
-    foreach ($input as &$value) {
-        if (is_array($value)) {
-            $value = array_filter_recursive($value);
-        }
-        else if (is_object($value)) {
-            $value = array_filter_recursive((array)$value);
-        }
-    }
+	foreach ($input as &$value) {
+		if (is_array($value)) {
+			$value = array_filter_recursive($value);
+		}
+		else if (is_object($value)) {
+			$value = array_filter_recursive((array)$value);
+		}
+	}
 
-    return array_filter($input);
+	return array_filter($input);
 }
 
 /**
@@ -1062,13 +1062,13 @@ function array_filter_recursive($input)  {
  * @return  string  the version string or empty if not available
  */
 function get_current_pml_version() {
-    $v = '';
-    $file    = dirname( __FILE__ ) . '/../version.js';
-    if ( file_exists( $file ) ) {
-        $j = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
-        $v = @$j[ 'version' ];
-    }
-    return $v;
+	$v = '';
+	$file    = dirname( __FILE__ ) . '/../version.js';
+	if ( file_exists( $file ) ) {
+		$j = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
+		$v = @$j[ 'version' ];
+	}
+	return $v;
 }
 
 /**
@@ -1077,15 +1077,15 @@ function get_current_pml_version() {
  * @return  string  the version string or empty if not available
  */
 function get_current_pml_version_infos() {
-    $i = array();
-    $file    = dirname( __FILE__ ) . '/../version.js';
-    if ( file_exists( $file ) ) {
-        $j      = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
-        $v      = @$j[ 'version' ];
-        $i      = @$j[ 'changelog' ][ $v ];
-        $i['v'] = $v;
-    }
-    return $i;
+	$i = array();
+	$file    = dirname( __FILE__ ) . '/../version.js';
+	if ( file_exists( $file ) ) {
+		$j      = json_decode( clean_json_version( @file_get_contents( $file ) ) , true );
+		$v      = @$j[ 'version' ];
+		$i      = @$j[ 'changelog' ][ $v ];
+		$i['v'] = $v;
+	}
+	return $i;
 }
 
 /**
@@ -1097,20 +1097,20 @@ function get_current_pml_version_infos() {
  * @return  string              the xml string
  */
 function generate_xml_from_array( $array, $node_name ) {
-    $xml = '';
-    if (is_array($array) || is_object($array)) {
-        foreach ($array as $key=>$value) {
-            if (is_numeric($key)) {
-                $key = $node_name;
-            }
+	$xml = '';
+	if (is_array($array) || is_object($array)) {
+		foreach ($array as $key=>$value) {
+			if (is_numeric($key)) {
+				$key = $node_name;
+			}
 
-            $xml .= '<' . $key . '>' . generate_xml_from_array( $value, $node_name) . '</' . $key . '>';
-        }
-    } else {
-        $xml = htmlspecialchars($array, ENT_QUOTES);
-    }
+			$xml .= '<' . $key . '>' . generate_xml_from_array( $value, $node_name) . '</' . $key . '>';
+		}
+	} else {
+		$xml = htmlspecialchars($array, ENT_QUOTES);
+	}
 
-    return $xml;
+	return $xml;
 }
 
 
@@ -1122,17 +1122,17 @@ function generate_xml_from_array( $array, $node_name ) {
  * @return null|string
  */
 function array2csv( $array ) {
-    if ( count( $array ) == 0 ) {
-        return null;
-    }
-    ob_start();
-    $df = fopen( "php://output" , 'w' );
-    fputcsv( $df , array_keys( reset( $array ) ) , "\t" );
-    foreach ( $array as $row ) {
-        fputcsv( $df , $row , "\t" );
-    }
-    fclose( $df );
-    return ob_get_clean();
+	if ( count( $array ) == 0 ) {
+		return null;
+	}
+	ob_start();
+	$df = fopen( "php://output" , 'w' );
+	fputcsv( $df , array_keys( reset( $array ) ) , "\t" );
+	foreach ( $array as $row ) {
+		fputcsv( $df , $row , "\t" );
+	}
+	fclose( $df );
+	return ob_get_clean();
 }
 
 
@@ -1146,17 +1146,17 @@ function array2csv( $array ) {
  */
 function get_non_UTC_timstamp( $timestamp = null , $tzfrom = null )
 {
-    if ( is_null( $tzfrom ) ) {
-        $tzfrom = date_default_timezone_get();
-    }
-    if ( is_null( $timestamp ) ) {
-        $timestamp = time();
-    }
+	if ( is_null( $tzfrom ) ) {
+		$tzfrom = date_default_timezone_get();
+	}
+	if ( is_null( $timestamp ) ) {
+		$timestamp = time();
+	}
 
-    $d = new DateTime( "@" . $timestamp );
-    $d->setTimezone( new DateTimeZone( $tzfrom ) );
+	$d = new DateTime( "@" . $timestamp );
+	$d->setTimezone( new DateTimeZone( $tzfrom ) );
 
-    return $timestamp - $d->getOffset();
+	return $timestamp - $d->getOffset();
 }
 
 /**
@@ -1165,12 +1165,18 @@ function get_non_UTC_timstamp( $timestamp = null , $tzfrom = null )
  * @return  boolean
  */
 function upgrade_is_composer() {
-    if ( ! file_exists( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'composer.json' ) ) return false;
-    if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' ) ) return false;
-    if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'potsky' ) ) return false;
-    if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'pimp-my-log' ) ) return false;
+	$a = false;
 
-    return true;
+	// Catch errors for people who has activated open_basedire restrictions
+	set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) {});
+	if      ( basename( PML_BASE ) !== 'pimp-my-log' ) $a = false;
+	else if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'potsky' ) ) $a = false;
+	else if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' ) ) $a = false;
+	else if ( ! file_exists( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'composer.json' ) ) $a = false;
+	else $a = true;
+	restore_error_handler();
+
+	return $a;
 }
 
 /**
@@ -1179,9 +1185,11 @@ function upgrade_is_composer() {
  * @return  boolean
  */
 function upgrade_is_git() {
-    if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '.git' ) ) return false;
+	if ( SAFE_MODE === true ) return false;
 
-    return true;
+	if ( ! is_dir( PML_BASE . DIRECTORY_SEPARATOR . '.git' ) ) return false;
+
+	return true;
 }
 
 /**
@@ -1190,79 +1198,48 @@ function upgrade_is_git() {
  * @return  mixed
  */
 function upgrade_can_git_pull() {
-    if ( SAFE_MODE === true ) return false;
+	if ( SAFE_MODE === true ) return false;
 
-    $base = PML_BASE;
+	$base = PML_BASE;
 
-    // Check if git is callable and if all files are not changed
-    $a = exec('cd ' . escapeshellarg( $base ) . '; git status -s' , $lines , $code );
+	// Check if git is callable and if all files are not changed
+	$a = exec('cd ' . escapeshellarg( $base ) . '; git status -s' , $lines , $code );
 
-    // Error while executing this comand
-    if ( $code !== 0 ) return array( $code , $lines);
+	// Error while executing this comand
+	if ( $code !== 0 ) return array( $code , $lines);
 
-    // Error, files have been modified
-    if ( count( $lines ) !== 0 ) return array( $code , $lines);
+	// Error, files have been modified
+	if ( count( $lines ) !== 0 ) return array( $code , $lines);
 
-    // can write all files with this webserver user ?
-    $canwrite = true;
-    $lines    = array();
-    $git      = mb_strlen( realpath( $base ) ) + 1;
-    $pmlfiles = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator( $base ),
-        RecursiveIteratorIterator::SELF_FIRST
-    );
+	// can write all files with this webserver user ?
+	$canwrite = true;
+	$lines    = array();
+	$git      = mb_strlen( realpath( $base ) ) + 1;
+	$pmlfiles = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator( $base ),
+		RecursiveIteratorIterator::SELF_FIRST
+	);
 
-    foreach ($pmlfiles as $f) {
+	foreach ($pmlfiles as $f) {
 
-        // Ignore all .git/* files
-        if ( ( mb_substr( $f->getPathname() , $git , 4 ) ) === '.git' ) continue;
+		// Ignore all .git/* files
+		if ( ( mb_substr( $f->getPathname() , $git , 4 ) ) === '.git' ) continue;
 
-        // check if this file is writable
-        if ( ! $f->isWritable() ) {
+		// check if this file is writable
+		if ( ! $f->isWritable() ) {
 
-            // check if it ignored or not
-            $b = exec( "git ls-files " . escapeshellarg( $f->getPathname() ) );
-            if ( ! empty( $b ) ) {
-                $canwrite = false;
-                $lines[]  = $f->getPathname();
-            }
-        }
-    }
+			// check if it ignored or not
+			$b = exec( "git ls-files " . escapeshellarg( $f->getPathname() ) );
+			if ( ! empty( $b ) ) {
+				$canwrite = false;
+				$lines[]  = $f->getPathname();
+			}
+		}
+	}
 
-    if ( $canwrite === false ) return array( 2706 , $lines );
+	if ( $canwrite === false ) return array( 2706 , $lines );
 
-    return true;
-}
-
-/**
- * Overwrite the original session start to specify a path at root of the installation
- *
- * If you have several instances of PML on the same server with different paths,
- * authentication has to be managed distinctly
- *
- * @param   string   $path      the path of the cookie
- * @param   integer  $lifetime  the lifetime of the cookie
- *
- * @return  [type]              [description]
- */
-function start_session( $path = '' , $lifetime = 0 ) {
-    if ( empty( $path ) ) {
-        $sub  = array( 'inc' );
-        $url  = parse_url( get_current_url() );
-        // we add a string on bottom to manage urls like these
-        // - http://niania/blahblah/pimpmylog/
-        // - http://niania/blahblah/pimpmylog/index.php
-        // So they become
-        // - http://niania/blahblah/pimpmylog/fake
-        // - http://niania/blahblah/pimpmylog/index.phpfake
-        $path = dirname( $url[ 'path' ] . 'fake' );
-        // Now remove all identified subfolders
-        if ( in_array( basename( $path ) , $sub ) ) {
-            $path = dirname( $path );
-        }
-    }
-    session_set_cookie_params ( $lifetime , $path );
-    return @session_start();
+	return true;
 }
 
 
@@ -1277,12 +1254,12 @@ function start_session( $path = '' , $lifetime = 0 ) {
 |
 */
 if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
-    if ( ! isset( $_COOKIE['u'] ) ) {
-        $uuid = sha1( json_encode( $_SERVER ) . uniqid( '' , true ) );
-        setcookie( 'u' ,  $uuid , time()+60*60*24*3000 , '/' );
-    } else {
-        $uuid = $_COOKIE['u'];
-    }
+	if ( ! isset( $_COOKIE['u'] ) ) {
+		$uuid = sha1( json_encode( $_SERVER ) . uniqid( '' , true ) );
+		setcookie( 'u' ,  $uuid , time()+60*60*24*3000 , '/' );
+	} else {
+		$uuid = $_COOKIE['u'];
+	}
 }
 
 
@@ -1294,14 +1271,14 @@ if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
 */
 $tz = '';
 if ( isset( $_POST['tz'] ) ) {
-    $tz = $_POST['tz'];
+	$tz = $_POST['tz'];
 } elseif ( isset( $_GET['tz'] ) ) {
-    $tz = $_GET['tz'];
+	$tz = $_GET['tz'];
 } elseif ( defined( 'USER_TIME_ZONE' ) ) {
-    $tz = USER_TIME_ZONE;
+	$tz = USER_TIME_ZONE;
 }
 if ( ! in_array( $tz , $tz_available ) ) {
-    $tz = @date('e');
+	$tz = @date('e');
 }
 
 
@@ -1317,61 +1294,61 @@ $localejs = $locale_numeraljs[ $locale_default ];
 
 if ( function_exists( 'bindtextdomain' ) ) {
 
-    if ( isset( $_GET['l'] ) ) {
-        $locale = $_GET['l'];
-    } elseif ( isset( $_COOKIE['pmllocale'] ) ) {
-        $locale = $_COOKIE['pmllocale'];
-    } elseif ( defined( 'LOCALE' ) ) {
-        $locale = LOCALE;
-    } elseif ( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
-        @list( $locale, $dumb ) = @explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'], 2 );
-    }
+	if ( isset( $_GET['l'] ) ) {
+		$locale = $_GET['l'];
+	} elseif ( isset( $_COOKIE['pmllocale'] ) ) {
+		$locale = $_COOKIE['pmllocale'];
+	} elseif ( defined( 'LOCALE' ) ) {
+		$locale = LOCALE;
+	} elseif ( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
+		@list( $locale, $dumb ) = @explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'], 2 );
+	}
 
-    $locale            = str_replace( '-', '_', $locale );
-    @list( $lang, $b ) = explode( '_', $locale );
-    $locale            = strtolower( $lang ).'_'.strtoupper( $b );
+	$locale            = str_replace( '-', '_', $locale );
+	@list( $lang, $b ) = explode( '_', $locale );
+	$locale            = strtolower( $lang ).'_'.strtoupper( $b );
 
-    if ( ! array_key_exists( $locale, $locale_available ) ) {
-        $locale = $locale_default;
-    }
+	if ( ! array_key_exists( $locale, $locale_available ) ) {
+		$locale = $locale_default;
+	}
 
-    putenv( 'LC_ALL=' . $locale );
-    putenv( 'LANGUAGE=' . $locale );
+	putenv( 'LC_ALL=' . $locale );
+	putenv( 'LANGUAGE=' . $locale );
 
-    if ( ( ! isset( $_COOKIE['pmllocale'] ) ) || (  $_COOKIE['pmllocale'] !== $locale ) ) {
-        if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
-            setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 );
-        }
-    }
+	if ( ( ! isset( $_COOKIE['pmllocale'] ) ) || (  $_COOKIE['pmllocale'] !== $locale ) ) {
+		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) { // only web, not unittests
+			setcookie( 'pmllocale' , $locale , time()+60*60*24*3000 );
+		}
+	}
 
-    if ($lang == 'fr') {
-        setlocale( LC_ALL , $locale , $locale . '.utf8' , 'fra' );
-    } elseif ($lang == 'de') {
-        setlocale( LC_ALL , $locale , $locale . '.utf8' , 'deu_deu' , 'de' , 'ge' );
-    } else {
-        setlocale( LC_ALL , $locale , $locale . '.utf8' );
-    }
+	if ($lang == 'fr') {
+		setlocale( LC_ALL , $locale , $locale . '.utf8' , 'fra' );
+	} elseif ($lang == 'de') {
+		setlocale( LC_ALL , $locale , $locale . '.utf8' , 'deu_deu' , 'de' , 'ge' );
+	} else {
+		setlocale( LC_ALL , $locale , $locale . '.utf8' );
+	}
 
-    bindtextdomain( 'messages' , dirname( __FILE__ ) . '/../lang' );
-    bind_textdomain_codeset( 'messages' , 'UTF-8' );
-    textdomain( 'messages' );
+	bindtextdomain( 'messages' , dirname( __FILE__ ) . '/../lang' );
+	bind_textdomain_codeset( 'messages' , 'UTF-8' );
+	textdomain( 'messages' );
 
-    define( 'GETTEXT_SUPPORT' , true );
+	define( 'GETTEXT_SUPPORT' , true );
 }
 else {
-    /**
-     * Fallback function for retrieving texts
-     *
-     * @param string $text the string to display
-     *
-     * @return string the same string but not translated!
-     */
-    function gettext($text)
-    {
-        return $text;
-    }
+	/**
+	 * Fallback function for retrieving texts
+	 *
+	 * @param string $text the string to display
+	 *
+	 * @return string the same string but not translated!
+	 */
+	function gettext($text)
+	{
+		return $text;
+	}
 
-    define( 'GETTEXT_SUPPORT' , false );
+	define( 'GETTEXT_SUPPORT' , false );
 
 }
 

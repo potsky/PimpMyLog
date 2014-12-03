@@ -8,6 +8,22 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.5" : {
+			"released" : "2014-12-03",
+			"new" : [
+				"Rick has hidden an Easter Egg. In december, I know... but will you find it?"
+			],
+			"fixed" : [
+				"Bug with the open_basedir ini parameter set with non composer installations (<a href=\"http://support.pimpmylog.com/discussions/problems/68-trouble-with-alias\" target=\"_blank\">more info</a>)"
+			],
+			"changed" : [
+				"Session rewrite to alert user if the PHP session path is not in the open_basedir ini parameter",
+				"Admins can connect to the debugger without creating a lock file",
+				"Add the changelog link in the footer (#90)",
+				"Debugger configuration rights check now manages unallowed paths due to open_basedir restrictions",
+				"Add the debugger link in the footer"
+			]
+		},
 		"1.7.4" : {
 			"released" : "2014-12-01",
 			"fixed" : [

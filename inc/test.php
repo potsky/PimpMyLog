@@ -160,12 +160,15 @@ $lemma = array(
 		<br/>
 
 <?php
-if ( ! file_exists( $access_file ) ) {
+if ( ( ! file_exists( $access_file ) ) && ( ! Sentinel::isAdmin() ) ) {
 	echo '<div class="row">';
 	echo 	'<div class="col-xs-12"><div class="alert alert-danger">';
 	echo 			__( 'This page is protected for security reasons.');
-	echo 		'</div><br/>';
-	echo 		__('To grant access, please create this temporary file on your server:');
+	echo 		'</div>';
+	if ( Sentinel::isAuthSet() ) {
+		echo sprintf( __('%sSign in%s as an administrator to view this page or follow instructions below.') , '<a href="../index.php?signin&attempt=' . urlencode( 'inc/test.php' ) . '">' , '</a>' ) . '<br/>';
+	}
+	echo 		'<br/>' . __('To grant access, please create this temporary file on your server:');
 	echo 		'<br/><br/>';
 	echo 	'</div>';
 	echo 	'<div class="col-md-8"><pre class="clipboard2content">touch \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\'</pre></div>';
@@ -185,12 +188,12 @@ else {
 		|
 		======================================================================== -->
 		<ul class="nav nav-tabs" role="tablist">
-		  <li class="active"><a href="#quittab" role="tab" data-toggle="tab"><?php _e('Quit');?></a></li>
-		  <li><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li>
-		  <li><a href="#resamplestab" role="tab" data-toggle="tab"><?php _e('Regex samples');?></a></li>
-		  <li><a href="#configurationtab" role="tab" data-toggle="tab"><?php _e('Configuration');?></a></li>
-		  <li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Password recovery');?></a></li>
-		  <li><a href="#authactivation" role="tab" data-toggle="tab"><?php _e('Authentication');?></a></li>
+			<li class="active"><a href="#quittab" role="tab" data-toggle="tab"><?php _e('Quit');?></a></li>
+			<li><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li>
+			<li><a href="#resamplestab" role="tab" data-toggle="tab"><?php _e('Regex samples');?></a></li>
+			<li><a href="#configurationtab" role="tab" data-toggle="tab"><?php _e('Configuration');?></a></li>
+			<li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Password recovery');?></a></li>
+			<li><a href="#authactivation" role="tab" data-toggle="tab"><?php _e('Authentication');?></a></li>
 		</ul>
 
 
@@ -209,15 +212,20 @@ else {
 			<div class="tab-pane active" id="quittab">
 				<br/>
 				<div class="row">
-					<div class="col-xs-12">
-						<div class="alert alert-warning"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div>
-					</div>
-					<br/><br/>
-					<div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\''; ?></pre></div>
-					<?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard3content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?>
+					<?php if ( ! Sentinel::isAdmin() ) : ?>
+						<div class="col-xs-12">
+							<div class="alert alert-warning"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div>
+						</div>
+						<br/><br/>
+						<div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\''; ?></pre></div>
+						<?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard3content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?>
+					<?php else : ?>
+						<div class="col-xs-12">
+							<div class="alert alert-info"><?php _e('You can access the debugger because you are an administrator'); ?></div>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
-
 
 			<!--========================================================================
 			|
@@ -510,12 +518,37 @@ echo test( $type , $regex , $match , $types , $log );
 										echo '<thead><tr><th>'.__('Read').'</th><th>'.__('Write').'</th><th>ID</th><th>'.__('Path').'</th><th>'.__('Real path').'</th></tr></thead>';
 										echo '<tbody>';
 										foreach ( $paths as $id => $file ) {
+
+											set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) {});
+											if ( is_readable($file) ) {
+												$r  = __('Yes');
+												$rc = 'success';
+											} else {
+												$r  = __('No');
+												$rc = 'danger';
+											}
+											if ( is_writable($file) ) {
+												$w  = __('Yes');
+												$wc = 'success';
+											} else {
+												$w  = __('No');
+												$wc = 'danger';
+											}
+											$rp = realpath($file);
+											restore_error_handler();
+
+											if ( empty( $rp ) ) {
+												$rc = 'default';
+												$wc = 'default';
+												$rp = __('Not allowed by open_basedir restriction');
+											}
+
 											echo '<tr>
-											<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
-											<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
+											<td><span class="label label-' . $rc . '">'. $r .'</span></td>
+											<td><span class="label label-' . $wc . '">'. $w .'</span></td>
 											<td>'.$id.'</td>
 											<td><code>'.$file.'</code></td>
-											<td><code>'.realpath($file).'</code></td>
+											<td><code>'.$rp.'</code></td>
 											</tr>';
 										}
 										echo '</tbody>';
