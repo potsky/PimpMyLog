@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.4 - 74123f07158efa89ced363879b180850ecd352cd*/
+/*! pimpmylog - 1.7.5 - d7a945c060e7a3cbdb5e7b0b2d58aa2d69a8e918*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -135,12 +135,15 @@ $lemma = array(
 
 
 ?><!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content=""><meta name="viewport" content="width=device-width"><title><?php echo TITLE;?></title><?php $fav = '../' ; include_once 'favicon.inc.php'; ?><link rel="stylesheet" href="../css/pml.min.css"><script>var lemma = <?php echo json_encode($lemma);?>;</script></head><body><!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]--><div class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="logo"></div><div class="navbar-header"><a class="navbar-brand" href="?<?php echo $_SERVER['QUERY_STRING'];?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Debugger');?></a></div></div></div><div class="container"><br><?php
-if ( ! file_exists( $access_file ) ) {
+if ( ( ! file_exists( $access_file ) ) && ( ! Sentinel::isAdmin() ) ) {
 	echo '<div class="row">';
 	echo 	'<div class="col-xs-12"><div class="alert alert-danger">';
 	echo 			__( 'This page is protected for security reasons.');
-	echo 		'</div><br/>';
-	echo 		__('To grant access, please create this temporary file on your server:');
+	echo 		'</div>';
+	if ( Sentinel::isAuthSet() ) {
+		echo sprintf( __('%sSign in%s as an administrator to view this page or follow instructions below.') , '<a href="../index.php?signin&attempt=' . urlencode( 'inc/test.php' ) . '">' , '</a>' ) . '<br/>';
+	}
+	echo 		'<br/>' . __('To grant access, please create this temporary file on your server:');
 	echo 		'<br/><br/>';
 	echo 	'</div>';
 	echo 	'<div class="col-md-8"><pre class="clipboard2content">touch \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\'</pre></div>';
@@ -152,7 +155,7 @@ if ( ! file_exists( $access_file ) ) {
 	echo '</div>';
 }
 else {
-?><ul class="nav nav-tabs" role="tablist"><li class="active"><a href="#quittab" role="tab" data-toggle="tab"><?php _e('Quit');?></a></li><li><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li><li><a href="#resamplestab" role="tab" data-toggle="tab"><?php _e('Regex samples');?></a></li><li><a href="#configurationtab" role="tab" data-toggle="tab"><?php _e('Configuration');?></a></li><li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Password recovery');?></a></li><li><a href="#authactivation" role="tab" data-toggle="tab"><?php _e('Authentication');?></a></li></ul><div class="tab-content"><div class="tab-pane active" id="quittab"><br><div class="row"><div class="col-xs-12"><div class="alert alert-warning"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div></div><br><br><div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\''; ?></pre></div><?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard3content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?></div></div><div class="tab-pane" id="retestertab"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
+?><ul class="nav nav-tabs" role="tablist"><li class="active"><a href="#quittab" role="tab" data-toggle="tab"><?php _e('Quit');?></a></li><li><a href="#retestertab" role="tab" data-toggle="tab"><?php _e('Regex tester');?></a></li><li><a href="#resamplestab" role="tab" data-toggle="tab"><?php _e('Regex samples');?></a></li><li><a href="#configurationtab" role="tab" data-toggle="tab"><?php _e('Configuration');?></a></li><li><a href="#passwordtab" role="tab" data-toggle="tab"><?php _e('Password recovery');?></a></li><li><a href="#authactivation" role="tab" data-toggle="tab"><?php _e('Authentication');?></a></li></ul><div class="tab-content"><div class="tab-pane active" id="quittab"><br><div class="row"><?php if ( ! Sentinel::isAdmin() ) : ?><div class="col-xs-12"><div class="alert alert-warning"><?php _e('Please remove this temporary file on your server to disable the debugger!'); ?></div></div><br><br><div class="col-md-8"><pre class="clipboard3content"><?php echo 'rm \'' . dirname( __FILE__ ) . DIRECTORY_SEPARATOR . $access_file . '\''; ?></pre></div><?php echo '<div class="col-md-4"><a class="btn btn-primary clipboard" data-source=".clipboard3content" data-placement="right" data-text="' . h( "Command has been copied to your clipboard!" ) . '">' . __('Copy to clipboard') . '</a></div>';?><?php else : ?><div class="col-xs-12"><div class="alert alert-info"><?php _e('You can access the debugger because you are an administrator'); ?></div></div><?php endif; ?></div></div><div class="tab-pane" id="retestertab"><div class="panel-body"><form class="form-horizontal" role="form" id="regextest"><div class="form-group" id="GPinputLog"><label for="inputLog" class="col-sm-2 control-label"><?php _e('Log');?></label><div class="col-sm-10"><textarea class="form-control test" id="inputLog" placeholder="Log"><?php
 								echo '[27-11-2013:23:20:40 +0300] This is an error
 on several lines with timezone UTC+3
 [27-11-2013:23:20:41 +0100] Single line is cool too';
@@ -313,12 +316,37 @@ echo test( $type , $regex , $match , $types , $log );
 										echo '<thead><tr><th>'.__('Read').'</th><th>'.__('Write').'</th><th>ID</th><th>'.__('Path').'</th><th>'.__('Real path').'</th></tr></thead>';
 										echo '<tbody>';
 										foreach ( $paths as $id => $file ) {
+
+											set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) {});
+											if ( is_readable($file) ) {
+												$r  = __('Yes');
+												$rc = 'success';
+											} else {
+												$r  = __('No');
+												$rc = 'danger';
+											}
+											if ( is_writable($file) ) {
+												$w  = __('Yes');
+												$wc = 'success';
+											} else {
+												$w  = __('No');
+												$wc = 'danger';
+											}
+											$rp = realpath($file);
+											restore_error_handler();
+
+											if ( empty( $rp ) ) {
+												$rc = 'default';
+												$wc = 'default';
+												$rp = __('Not allowed by open_basedir restriction');
+											}
+
 											echo '<tr>
-											<td>' . ( is_readable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
-											<td>' . ( is_writable($file) ? '<span class="label label-success">'.__('Yes').'</span>' : '<span class="label label-danger">'.__('No').'</span>'  ) . '</td>
+											<td><span class="label label-' . $rc . '">'. $r .'</span></td>
+											<td><span class="label label-' . $wc . '">'. $w .'</span></td>
 											<td>'.$id.'</td>
 											<td><code>'.$file.'</code></td>
-											<td><code>'.realpath($file).'</code></td>
+											<td><code>'.$rp.'</code></td>
 											</tr>';
 										}
 										echo '</tbody>';

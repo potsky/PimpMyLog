@@ -1,13 +1,29 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.7.4",
-	"versiondevh" : "74123f07158efa89ced363879b180850ecd352cd",
+	"version"     : "1.7.5",
+	"versiondevh" : "d7a945c060e7a3cbdb5e7b0b2d58aa2d69a8e918",
 	"messages"    : {
 		"20141121" : "Thank you to people who have starred the project on GitHub !",
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.5" : {
+			"released" : "2014-12-03",
+			"new" : [
+				"Rick has hidden an Easter Egg. In december, I know... but will you find it?"
+			],
+			"fixed" : [
+				"Bug with the open_basedir ini parameter set with non composer installations (<a href=\"http://support.pimpmylog.com/discussions/problems/68-trouble-with-alias\" target=\"_blank\">more info</a>)"
+			],
+			"changed" : [
+				"Session rewrite to alert user if the PHP session path is not in the open_basedir ini parameter",
+				"Admins can connect to the debugger without creating a lock file",
+				"Add the changelog link in the footer (#90)",
+				"Debugger configuration rights check now manages unallowed paths due to open_basedir restrictions",
+				"Add the debugger link in the footer"
+			]
+		},
 		"1.7.4" : {
 			"released" : "2014-12-01",
 			"fixed" : [
