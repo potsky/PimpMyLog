@@ -54,7 +54,7 @@ class Sentinel
 
 				else if ( isset( $_GET['signin'] ) ) { // sign in page when anonymous access is enabled
 
-					$attempt = $_SERVER['REQUEST_URI'] . '?' . $_SERVER['QUERY_STRING'];
+					$attempt = ( isset( $_GET['attempt'] ) ) ? $_GET['attempt'] : $_SERVER['REQUEST_URI'] . '?' . $_SERVER['QUERY_STRING'];
 					$error   = 0;
 					include_once PML_BASE . '/inc/login.inc.php';
 					self::release();
@@ -220,7 +220,6 @@ class Sentinel
 		} else {
 			$auth = self::sessionRead();
 		}
-
 		return ( isset( $auth['username'] ) ) ? $auth['username'] : null;
 	}
 
@@ -843,10 +842,10 @@ class Sentinel
 	{
 		// Web
 		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			start_session();
+			Session::start();
 			unset( $_SESSION['auth'] );
 			$_SESSION['auth'] = array();
-			session_write_close();
+			Session::write_close();
 		}
 		// CLI
 		else {
@@ -864,7 +863,10 @@ class Sentinel
 	{
 		// Web
 		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			start_session();
+
+			if ( isset( $_SESSION['auth'] ) ) return $_SESSION['auth'];
+
+			Session::start();
 
 			return ( isset( $_SESSION['auth'] ) ) ? $_SESSION['auth'] : array();
 		}
@@ -889,9 +891,9 @@ class Sentinel
 	{
 		// Web
 		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			start_session();
+			Session::start();
 			$_SESSION[ 'auth' ] = $value;
-			session_write_close();
+			Session::write_close();
 		}
 		// CLI
 		else {
