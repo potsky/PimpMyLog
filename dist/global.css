@@ -7808,6 +7808,15 @@ td.visible-print {
 .fa-plus-square-o:before {
   content: "\f196";
 }
+p {
+  line-height: 1.5em!important;
+}
+blockquote {
+  line-height: 1.2em!important;
+}
+blockquote p {
+  line-height: 1.2em!important;
+}
 /* Retina logo */
 .logo {
   position: absolute;
