@@ -17,7 +17,7 @@ Change version in `package.json`, it will be automatically added in the `version
 
 - `grunt` to dev and watch : site available at `~/_site/_`
 - `grunt build` to build for publishing and watch : site available at `~/_build/`
-- `grunt build install` to publish on the branch *beta*
+- `grunt build install-beta` to publish on the branch *beta*
 
 ## Production
 

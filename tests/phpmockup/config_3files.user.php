@@ -75,12 +75,9 @@
 				}
 			}
 		},
-		"apache3filesPHP2": {
+		"apache3filesPHP2with_missing_parameters": {
 			"display" : "Apache Error #2",
 			"path"    : "\/var\/log\/apache2\/error_log",
-			"refresh" : 5,
-			"max"     : 10,
-			"notify"  : true,
 			"format"  : {
 				"type" : "HTTPD 2.2",
 				"regex": "|^\\[(.*)\\] \\[(.*)\\] (\\[client (.*)\\] )*((?!\\[client ).*)(, referer: (.*))*$|U",

@@ -15,6 +15,7 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 
 /* Specific to cell types */
 .pml-pre,
+.pml-preformatted,
 .pml-txt,
 .pml-link {
 	font-size       : 0.8em;
@@ -27,7 +28,7 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 	hyphens         : auto;
 }
 
-.pml-pre, .pml-prefake {
+.pml-pre, .pml-prefake, .pml-preformatted {
 	font-family : 'ubuntu_monoregular', monospace, serif;
 }
 

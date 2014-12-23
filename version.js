@@ -8,6 +8,19 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.6" : {
+			"released" : "2014-12-23",
+			"new" : [
+				"New type 'preformatted': it is the same type as 'pre' but new lines and tabs strings are replaced by real new lines and real tabs. var_dump and other debug functions returns are now well displayed!"
+			],
+			"changed" : [
+				"Type output change: txt and fake types (not prefake) are now in full raw text format. HTML is no more parsed. Use 'prefake' to let HTML in your logs be parsed",
+				"Dev: javascript files are split now, Grunt will concat them before uglifying"
+			],
+			"fixed" : [
+				"Configuration : max, refresh and notifiy parameters was no more optional since Pimp My Log 1.6"
+			]
+		},
 		"1.7.5" : {
 			"released" : "2014-12-03",
 			"new" : [

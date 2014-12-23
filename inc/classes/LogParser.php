@@ -21,7 +21,6 @@ class LogParser
      * @param   integer  $data_to_parse        The maximum count of bytes to read a new line (basically the difference between the previous scanned file size and the current one)
      * @param   boolean  $full                 Whether the log file should be loaded from scratch
      * @param   [type]   $max_search_log_time  The maximum duration in s to parse lines
-
      *
      * @return  [type]                        [description]
      */

@@ -73,7 +73,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 				"types": {
 					"Date"     : "date:H:i:s",
 					"IP"       : "ip:http",
-					"Log"      : "pre",
+					"Log"      : "preformatted",
 					"Severity" : "badge:severity",
 					"Referer"  : "link"
 				},
@@ -113,7 +113,7 @@ EOF;
 				"types": {
 					"Date"     : "date:H:i:s",
 					"IP"       : "ip:http",
-					"Log"      : "pre",
+					"Log"      : "preformatted",
 					"Severity" : "badge:severity",
 					"Referer"  : "link"
 				},

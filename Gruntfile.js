@@ -522,10 +522,10 @@ module.exports = function(grunt) {
 
 			prod: {
 				files: {
-					'_build/js/login.min.js'     : ['js/login.js'],
-					'_build/js/main.min.js'      : ['js/main.js' , 'js/main_user.js' , 'js/main_changelog.js'],
-					'_build/js/test.min.js'      : ['js/test.js'],
-					'_build/js/configure.min.js' : ['js/configure.js'],
+					'_build/js/login.min.js'     : [ 'js/login.js' ],
+					'_build/js/main.min.js'      : [ 'js/main_*.js' , 'js/main.js'  ],
+					'_build/js/test.min.js'      : [ 'js/test.js' ],
+					'_build/js/configure.min.js' : [ 'js/configure.js' ],
 				},
 				options: {
 					banner       : licence,
@@ -545,10 +545,10 @@ module.exports = function(grunt) {
 
 			dev: {
 				files: {
-					'_site/js/login.min.js'     : ['js/login.js'],
-					'_site/js/main.min.js'      : ['js/main.js' , 'js/main_user.js' , 'js/main_changelog.js'],
-					'_site/js/test.min.js'      : ['js/test.js'],
-					'_site/js/configure.min.js' : ['js/configure.js'],
+					'_site/js/login.min.js'     : [ 'js/login.js' ],
+					'_site/js/main.min.js'      : [ 'js/main_*.js' , 'js/main.js' ],
+					'_site/js/test.min.js'      : [ 'js/test.js' ],
+					'_site/js/configure.min.js' : [ 'js/configure.js' ],
 				},
 				options : {
 					mangle   : false,
