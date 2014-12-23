@@ -1,20 +1,26 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.7.6",
-	"versiondevh" : "43936e5c0152ca0d944f089227bc3d628290dbaa",
+	"version"     : "1.7.7",
+	"versiondevh" : "4e47bed8b4b48a5dd0f9ba9b09d5eb32a717cabb",
 	"messages"    : {
 		"20141121" : "Thank you to people who have starred the project on GitHub !",
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.7" : {
+			"released" : "2014-12-23",
+			"fixed" : [
+				"Cut text in modes txt, pre and preformatted displays hellip; instead of ..."
+			]
+		},
 		"1.7.6" : {
 			"released" : "2014-12-23",
 			"new" : [
 				"New type 'preformatted': it is the same type as 'pre' but new lines and tabs strings are replaced by real new lines and real tabs. var_dump and other debug functions returns are now well displayed!"
 			],
 			"changed" : [
-				"Type output change: txt and fake types (not prefake) are now in full raw text format. HTML is no more parsed. Use 'prefake' to let HTML in your logs be parsed",
+				"Type output change: txt, pre and preformatted types (not prefake) are now in full raw text format. HTML is no more parsed. Use 'prefake' to let HTML in your logs be parsed",
 				"Dev: javascript files are split now, Grunt will concat them before uglifying"
 			],
 			"fixed" : [
