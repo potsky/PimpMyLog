@@ -8,13 +8,19 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.7" : {
+			"released" : "2014-12-23",
+			"fixed" : [
+				"Cut text in modes txt, pre and preformatted displays hellip; instead of ..."
+			]
+		},
 		"1.7.6" : {
 			"released" : "2014-12-23",
 			"new" : [
 				"New type 'preformatted': it is the same type as 'pre' but new lines and tabs strings are replaced by real new lines and real tabs. var_dump and other debug functions returns are now well displayed!"
 			],
 			"changed" : [
-				"Type output change: txt and fake types (not prefake) are now in full raw text format. HTML is no more parsed. Use 'prefake' to let HTML in your logs be parsed",
+				"Type output change: txt, pre and preformatted types (not prefake) are now in full raw text format. HTML is no more parsed. Use 'prefake' to let HTML in your logs be parsed",
 				"Dev: javascript files are split now, Grunt will concat them before uglifying"
 			],
 			"fixed" : [

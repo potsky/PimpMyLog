@@ -505,6 +505,10 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 					output_html = false;
 				}
 
+				if ( output_html === false ) {
+					val = val.replace( /&hellip;/g , '...' );
+				}
+
 				var b = (output_html === true ) ? $( '<td></td>' ).html( val ) : $( '<td></td>' ).text( val );
 				b     = b.prop( "title" , title ).addClass( 'pml-' + c + " pml-" + type.parser ).appendTo( tr );
 				if ( ! is_column_displayed( c ) ) $( b ).hide();

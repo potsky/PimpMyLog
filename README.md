@@ -21,5 +21,5 @@ Change version in `package.json`, it will be automatically added in the `version
 
 ## Production
 
-- `grunt build install-production` to publish on the branch *master*
+- `grunt build install-production` to publish on the branch *master* (update will be available via composer)
 - then `grunt release` to update [demo.pimpmylog.com](http://demo.pimpmylog.com) then people will be alerted about a new version
