@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.5 - d7a945c060e7a3cbdb5e7b0b2d58aa2d69a8e918*/
+/*! pimpmylog - 1.7.6 - 43936e5c0152ca0d944f089227bc3d628290dbaa*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -83,7 +83,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 				"types": {
 					"Date"     : "date:H:i:s",
 					"IP"       : "ip:http",
-					"Log"      : "pre",
+					"Log"      : "preformatted",
 					"Severity" : "badge:severity",
 					"Referer"  : "link"
 				},
@@ -123,7 +123,7 @@ EOF;
 				"types": {
 					"Date"     : "date:H:i:s",
 					"IP"       : "ip:http",
-					"Log"      : "pre",
+					"Log"      : "preformatted",
 					"Severity" : "badge:severity",
 					"Referer"  : "link"
 				},

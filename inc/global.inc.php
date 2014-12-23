@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.5 - d7a945c060e7a3cbdb5e7b0b2d58aa2d69a8e918*/
+/*! pimpmylog - 1.7.6 - 43936e5c0152ca0d944f089227bc3d628290dbaa*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -484,10 +484,12 @@ function config_load($load_user_configuration_dir = true)
 		$gpaths = glob( $path , GLOB_MARK | GLOB_NOCHECK );
 
 		if ( count( $gpaths ) == 0 ) {
-		} else if ( count( $gpaths ) == 1 ) {
+		}
+		else if ( count( $gpaths ) == 1 ) {
 			$files[ $fileid ]            = $file;
 			$files[ $fileid ]['path']    = $gpaths[0];
-		} else {
+		}
+		else {
 			$new_paths = array();
 			$i         = 1;
 
@@ -552,6 +554,19 @@ function config_load($load_user_configuration_dir = true)
 		$files = $final;
 	}
 
+	// Fix missing values with defaults
+	foreach ( $files as $fileid => $file ) {
+		foreach (array(
+			'max'       => LOGS_MAX,
+			'refresh'   => LOGS_REFRESH,
+			'notify'    => NOTIFICATION,
+		) as $fix => $value ) {
+			if ( ! isset( $file[ $fix ] ) ) {
+				$files[ $fileid ][ $fix ] = $value;
+			}
+		}
+	}
+
 	// Finally sort files
 	if ( ! function_exists( 'display_asc' ) )              { function display_asc($a, $b) { return strcmp( $a["display"] , $b["display"] ); } }
 	if ( ! function_exists( 'display_desc' ) )             { function display_desc($a, $b) { return strcmp( $b["display"] , $a["display"] ); } }
@@ -589,7 +604,7 @@ function config_load($load_user_configuration_dir = true)
  *
  * @return  mixed  true if ok, otherwise an array of errors
  */
-function config_check($files)
+function config_check( $files )
 {
 	$errors = array();
 
@@ -614,16 +629,6 @@ function config_check($files)
 		foreach ( array( 'display' , 'path' , 'format' ) as $mandatory ) {
 			if ( ! isset( $file[ $mandatory ] ) ) {
 				$errors[] = sprintf( __( '<code>%s</code> is mandatory for file ID <code>%s</code>' ) , $mandatory , $file_id );
-			}
-		}
-		// fix
-		foreach ( array(
-				'max'       => LOGS_MAX,
-				'refresh'   => LOGS_REFRESH,
-				'notify'    => NOTIFICATION,
-		) as $fix => $value ) {
-			if ( ! isset( $file[ $fix ] ) ) {
-				$file[ $fix ] = $value;
 			}
 		}
 	}
