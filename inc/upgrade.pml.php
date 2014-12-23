@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.5 - d7a945c060e7a3cbdb5e7b0b2d58aa2d69a8e918*/
+/*! pimpmylog - 1.7.6 - bfe300db33eb4ebd6b42f5069a35080e02f5f3ab*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -65,7 +65,6 @@ if ( isset( $_POST['action'] ) ) {
 			break;
 	}
 }
-
 
 
 /*
