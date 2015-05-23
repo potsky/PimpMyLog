@@ -1,6 +1,6 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.7.7",
+	"version"     : "1.7.8",
 	"versiondevh" : "82a1a7504873a6aed42a95a13b42ec8f8d12213f",
 	"messages"    : {
 		"20141121" : "Thank you to people who have starred the project on GitHub !",
@@ -8,6 +8,12 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.8" : {
+			"released" : "2015-05-23",
+			"fixed" : [
+				"Restore support for PHP 5.2"
+			]
+		},
 		"1.7.7" : {
 			"released" : "2014-12-23",
 			"fixed" : [
