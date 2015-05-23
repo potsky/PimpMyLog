@@ -8,6 +8,12 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.8" : {
+			"released" : "2015-05-23",
+			"fixed" : [
+				"Restore support for PHP 5.2"
+			]
+		},
 		"1.7.7" : {
 			"released" : "2014-12-23",
 			"fixed" : [

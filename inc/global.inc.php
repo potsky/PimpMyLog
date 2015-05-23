@@ -889,20 +889,39 @@ function clean_json_version($data)
 }
 
 /**
+ * Do nothing for set_error_handler PHP5.2 style
+ *
+ * @param   integer  $errno
+ * @param   string   $errstr
+ *
+ * @return  void
+ */
+function dumb_test($errno, $errstr)
+{
+
+}
+
+/**
  * Try to guess who runs the server
  *
  * @return  string  a user information
  */
 function get_server_user()
 {
-	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+    {
 		return '';
-	} else if ( SAFE_MODE === true ) {
+	}
+    else if ( SAFE_MODE === true )
+    {
 		// for Suhosin
 		return '';
-	} else {
+	}
+    else
+    {
 		// for PHP disabled_func
-		set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) {});
+        set_error_handler( "dumb_test" );
+
 		$a = exec( 'whoami' );
 		restore_error_handler();
 
@@ -1172,13 +1191,15 @@ function get_non_UTC_timstamp( $timestamp = null , $tzfrom = null )
 function upgrade_is_composer() {
 	$a = false;
 
-	// Catch errors for people who has activated open_basedire restrictions
-	set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) {});
+	// Catch errors for people who has activated open_basedir restrictions
+    set_error_handler( "dumb_test" );
+
 	if      ( basename( PML_BASE ) !== 'pimp-my-log' ) $a = false;
 	else if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'potsky' ) ) $a = false;
 	else if ( ! is_dir(      PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' ) ) $a = false;
 	else if ( ! file_exists( PML_BASE . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'composer.json' ) ) $a = false;
 	else $a = true;
+
 	restore_error_handler();
 
 	return $a;
