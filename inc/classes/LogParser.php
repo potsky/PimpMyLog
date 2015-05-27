@@ -356,49 +356,87 @@ class LogParser
 
             $type = ( isset ( $types[ $token ] ) ) ? $types[ $token ] : 'txt';
 
-            if ( substr( $type , 0 , 4 ) === 'date' ) {
+            if ( substr( $type , 0 , 4 ) === 'date' )
+            {
 
                 // Date is an array description with keys ( 'Y' : 5 , 'M' : 2 , ... )
-                if ( is_array( $key ) && ( is_assoc( $key ) ) ) {
+                if ( is_array( $key ) && ( is_assoc( $key ) ) )
+                {
                     $newdate = array();
-                    foreach ($key as $k => $v) {
+                    foreach ($key as $k => $v)
+                    {
                         $newdate[ $k ] = @$out[ $v ][ 0 ];
                     }
-                    if ( isset( $newdate['M'] ) ) {
+
+                    if ( isset( $newdate['U'] ) )
+                    {
+                        $str = date( 'Y/m/d H:i:s' , $newdate['U'] );
+                    }
+                    else if ( isset( $newdate['r'] ) )
+                    {
+                        $str = date( 'Y/m/d H:i:s' , $newdate['r'] );
+                    }
+                    else if ( isset( $newdate['c'] ) )
+                    {
+                        $str = date( 'Y/m/d H:i:s' , $newdate['c'] );
+                    }
+                    else if ( isset( $newdate['M'] ) )
+                    {
                         $str = trim( $newdate['M'] . ' ' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . $newdate['Y'] . ' ' . @$newdate['z'] );
-                    } elseif ( isset( $newdate['m'] ) ) {
+                    }
+                    elseif ( isset( $newdate['m'] ) )
+                    {
                         $str = trim( $newdate['Y'] . '/' . $newdate['m'] . '/' . $newdate['d'] . ' ' . $newdate['H'] . ':' . $newdate['i'] . ':' . $newdate['s'] . ' ' . @$newdate['z'] );
                     }
                 }
+
                 // Date is an array description without keys ( 2 , ':' , 3 , '-' , ... )
-                else if ( is_array( $key ) ) {
+                else if ( is_array( $key ) )
+                {
                     $str = '';
-                    foreach ($key as $v) {
+                    foreach ($key as $v)
+                    {
                         $str .= ( is_string( $v ) ) ? $v : @$out[ $v ][0];
                     }
-                } else {
+                }
+
+                else
+                {
                     $str = @$out[ $key ][0];
                 }
 
                 // remove part next to the last /
                 $dateformat = ( substr( $type , 0 , 5 ) === 'date:' ) ? substr( $type , 5 ) : 'Y/m/d H:i:s';
-                if ( ( $p = strrpos(    $dateformat , '/' ) ) !== false ) {
+
+                if ( ( $p = strrpos(    $dateformat , '/' ) ) !== false )
+                {
                     $dateformat = substr( $dateformat , 0 , $p );
                 }
-                if ( ( $timestamp = strtotime( $str ) ) === false ) {
+
+                if ( ( $timestamp = strtotime( $str ) ) === false )
+                {
                     $formatted_date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
                     $timestamp      = 0;
-                } else {
+                }
 
-                    if ( version_compare( PHP_VERSION , '5.3.0' ) >= 0 ) {
+                else
+                {
+
+                    if ( version_compare( PHP_VERSION , '5.3.0' ) >= 0 )
+                    {
                         $date = new DateTime();
                         $date->setTimestamp( $timestamp );
-                    } else {
+                    }
+                    else
+                    {
                         $date = new DateTime( "@" . $timestamp );
                     }
-                    if ( ! is_null( $tz ) ) {
+
+                    if ( ! is_null( $tz ) )
+                    {
                         $date->setTimezone( new DateTimeZone( $tz ) );
                     }
+
                     $formatted_date = $date->format( $dateformat );
                     $timestamp      = (int)$date->format('U');
                 }
