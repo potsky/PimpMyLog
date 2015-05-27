@@ -8,6 +8,12 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.9" : {
+			"released" : "2015-05-27",
+			"new" : [
+				"Support for date formats (parsing): U,c and r"
+			]
+		},
 		"1.7.8" : {
 			"released" : "2015-05-23",
 			"fixed" : [
