@@ -857,9 +857,9 @@ You can deal with odd date format as in the following example by capturing :
 
 You can also deal with these single parameters :
 
-- 'c' : ISO 8601 date. *eg*: `2004-02-12T15:19:21+00:00`
-- 'r' : RFC 2822 date. *eg*: `Thu, 21 Dec 2000 16:01:07 +0200`
-- 'U' : Seconds since the Unix Epoch
+- `c` : ISO 8601 date. *eg*: `2004-02-12T15:19:21+00:00`
+- `r` : RFC 2822 date. *eg*: `Thu, 21 Dec 2000 16:01:07 +0200`
+- `U` : Seconds since the Unix Epoch
 
 You can deal with odd date format as in the following example by capturing :
 
