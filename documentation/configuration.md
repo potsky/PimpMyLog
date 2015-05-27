@@ -855,6 +855,15 @@ You can deal with odd date format as in the following example by capturing :
 - `s` : Seconds with leading zeros *eg*:`00` through `59`
 - `z` : Time zone offset *eg*:`+0300` or `Europe/Paris` <small>[since v1.6]</small>
 
+You can also deal with these single parameters :
+
+- 'c' : ISO 8601 date. *eg*: `2004-02-12T15:19:21+00:00`
+- 'r' : » RFC 2822 formatted date . *eg*: `Thu, 21 Dec 2000 16:01:07 +0200`
+- 'U' : Seconds since the Unix Epoch
+
+You can deal with odd date format as in the following example by capturing :
+
+
 > **Warning**  
 > 
 > Letter case is very important! `M` is not `m`!
@@ -873,6 +882,19 @@ Example:
         "i" : 5,
         "s" : 6,
         "Y" : 8
+    },
+    "IP"          : 12,
+    "Log"         : 14,
+    "Severity"    : 10,
+    "WhatYouWant" : 11,
+    "Referer"     : 16,
+},
+```
+
+```json
+"match": {
+    "Date"    : {
+        "U" : 2
     },
     "IP"          : 12,
     "Log"         : 14,
