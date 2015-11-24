@@ -8,6 +8,12 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+		"1.7.10" : {
+			"released" : "2015-11-24",
+			"fixed" : [
+				"Regex tester error in debugger for authenticated users (<a href=\"http://support.pimpmylog.com/discussions/problems/75-bug-on-debugger\" target=\"_blank\">more info</a>)"
+			]
+		},
 		"1.7.9" : {
 			"released" : "2015-05-27",
 			"new" : [

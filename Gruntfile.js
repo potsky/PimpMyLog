@@ -818,7 +818,7 @@ module.exports = function(grunt) {
 		var a;
 		try {
 			a = JSON.parse( grunt.file.read('./version.js').replace('/*PSK*/pml_version_cb(/*PSK*/','').replace('/*PSK*/);/*PSK*/','') );
-			if ( /^[0-9]\.[0-9]\.[0-9]$/.test( npmpkg.version ) === false ) {
+			if ( /^[0-9]*\.[0-9]*\.[0-9]*$/.test( npmpkg.version ) === false ) {
 				grunt.verbose.or.error().error( 'Package version ' + npmpkg.version + ' is not A.B.C' );
 				grunt.fail.warn('Unable to continue');
 			}
@@ -827,7 +827,7 @@ module.exports = function(grunt) {
 				grunt.fail.warn('Unable to continue');
 			}
 			for ( var i in a.changelog ) {
-				if ( /^[0-9]\.[0-9]\.[0-9]$/.test( i ) === false ) {
+				if ( /^[0-9]*\.[0-9]*\.[0-9]*$/.test( i ) === false ) {
 					grunt.verbose.or.error().error( 'version.js version ' + i + ' is not A.B.C' );
 					grunt.fail.warn('Unable to continue');
 				}

@@ -433,17 +433,23 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 				}
 
 				// Parse values
-				if ( 'badge' === type.parser ) {
+				if ( 'badge' === type.parser )
+				{
 					var clas;
-					if ( type.param === 'http' ) {
+					if ( type.param === 'http' )
+					{
 						clas = badges[ type.param ][ logs.logs[log][ c ].substr( 0 , 1 ) ];
-					} else if ( type.param === 'severity' ) {
+					}
+					else if ( type.param === 'severity' )
+					{
 						clas = badges[ type.param ][ logs.logs[log][ c ].toLowerCase() ];
-						if ( clas === undefined ) {
+						if ( clas === undefined )
+						{
 							clas = badges[ type.param ][ logs.logs[log][ c ] ];
 						}
 					}
-					if ( clas === undefined ) {
+					if ( clas === undefined )
+					{
 						clas = 'default';
 					}
 					val = '<span class="label label-' + clas + '">' + val_cut( val , type.cut ) + '</span>';

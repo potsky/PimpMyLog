@@ -79,7 +79,13 @@ function test( $type , $regex , $match , $types , $logs , $headers = true , $mul
 /**
  * Ajax return for regexp tester
  */
-if ( ( @$_POST['action'] === 'regextest' ) && ( file_exists( $access_file ) ) ) {
+if ( @$_POST['action'] === 'regextest' )
+{
+	if ( ( ! file_exists( $access_file ) ) && ( ! Sentinel::isAdmin() ) )
+	{
+		echo json_encode( array( 'msg' => "Authentication error" ) );
+		die();
+	}
 
 	$return    = array();
 	$match     = @json_decode( $_POST['m'] , true );
@@ -115,6 +121,8 @@ if ( ( @$_POST['action'] === 'regextest' ) && ( file_exists( $access_file ) ) ) 
 	echo json_encode( $return );
 	die();
 }
+
+
 
 
 //////////////////////
