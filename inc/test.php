@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.9 - 10b502eaf17be208850be61febb044c2fdb86207*/
+/*! pimpmylog - 1.7.10 - 65d6f147e509133fc5f09642ba82b149ef750ef2*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -88,7 +88,13 @@ function test( $type , $regex , $match , $types , $logs , $headers = true , $mul
 /**
  * Ajax return for regexp tester
  */
-if ( ( @$_POST['action'] === 'regextest' ) && ( file_exists( $access_file ) ) ) {
+if ( @$_POST['action'] === 'regextest' )
+{
+	if ( ( ! file_exists( $access_file ) ) && ( ! Sentinel::isAdmin() ) )
+	{
+		echo json_encode( array( 'msg' => "Authentication error" ) );
+		die();
+	}
 
 	$return    = array();
 	$match     = @json_decode( $_POST['m'] , true );
@@ -124,6 +130,8 @@ if ( ( @$_POST['action'] === 'regextest' ) && ( file_exists( $access_file ) ) ) 
 	echo json_encode( $return );
 	die();
 }
+
+
 
 
 //////////////////////
