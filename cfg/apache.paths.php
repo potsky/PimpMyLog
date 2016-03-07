@@ -53,3 +53,26 @@ $files = array(
 		'apache_access.log',
 	),
 );
+/**
+ * Add sub-directories within specified paths
+ * helps with multiple site environments
+ */
+foreach ( $paths as $path ) {
+    if ( is_dir( $path ) ) {
+        $directory = new RecursiveDirectoryIterator($path);
+        $iterator = new RecursiveIteratorIterator($directory);
+        foreach ( $iterator as $file ) {
+            foreach ( $files as $type ) {
+                foreach ( $type as $filename ) {
+                    if ( $file->getFilename() == $filename ) {
+                        $paths[] = $file->getPath();
+                        continue 3;
+                    }
+                }
+            }            
+        }
+    }
+}
+
+sort( $paths );
+
