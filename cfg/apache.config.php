@@ -57,7 +57,7 @@ function apache_get_config( $type , $file , $software , $counter ) {
 		if ( $test === 1 ) {
 			return<<<EOF
 		"$software$counter": {
-			"display" : "Apache Error #$counter",
+			"display" : $file_json_encoded,
 			"path"    : $file_json_encoded,
 			"refresh" : 5,
 			"max"     : 10,
@@ -104,7 +104,7 @@ EOF;
 
 			return<<<EOF
 		"$software$counter": {
-			"display" : "Apache Error #$counter",
+			"display" : $file_json_encoded,
 			"path"    : $file_json_encoded,
 			"refresh" : 5,
 			"max"     : 10,
@@ -144,7 +144,7 @@ EOF;
 
 		return<<<EOF
 		"$software$counter": {
-			"display" : "Apache Access #$counter",
+			"display" : $file_json_encoded,
 			"path"    : $file_json_encoded,
 			"refresh" : 0,
 			"max"     : 10,
