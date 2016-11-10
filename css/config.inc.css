@@ -104,3 +104,9 @@ tr:nth-child(even)       td.marker { background-color : #ffff00!important; }
 tr:nth-child(odd):hover  td.marker { background-color : #e8e800!important; }
 tr:nth-child(even):hover td.marker { background-color : #f8f800!important; }
 
+/* Make sure dropdown menu isn't too skinny for longer menu items */
+.navbar-nav>li>.dropdown-menu {
+    width: auto !important;
+    max-width: none !important;
+}
+
