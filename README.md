@@ -1,8 +1,9 @@
-[![Stories in Ready](https://badge.waffle.io/potsky/PimpMyLog.png?label=ready&title=Ready)](https://waffle.io/potsky/PimpMyLog)
 Pimp my Log 
 ===========
 
-[![Latest Stable Version](https://poser.pugx.org/potsky/pimp-my-log/v/stable.svg)](https://packagist.org/packages/potsky/pimp-my-log) [![Build Status](https://travis-ci.org/potsky/PimpMyLog.svg)](https://travis-ci.org/potsky/PimpMyLog)
+[![Latest Stable Version](https://poser.pugx.org/potsky/pimp-my-log/v/stable.svg)](https://packagist.org/packages/potsky/pimp-my-log)
+[![Build Status](https://travis-ci.org/potsky/PimpMyLog.svg)](https://travis-ci.org/potsky/PimpMyLog)
+[![Stories in Ready](https://badge.waffle.io/potsky/PimpMyLog.png?label=ready&title=Ready)](https://waffle.io/potsky/PimpMyLog)
 
 All informations are available on [pimpmylog.com](http://pimpmylog.com).
 
