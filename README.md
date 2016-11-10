@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/potsky/PimpMyLog.png?label=ready&title=Ready)](https://waffle.io/potsky/PimpMyLog)
 Pimp my Log 
 ===========
 
