@@ -153,7 +153,7 @@ $now = $now->format( 'Y/m/d H:i:s' );
 |
 */
 if ( isset( $_POST['sp'] ) ) {
-    $start_offset = (float)$_POST['sp'] - 1;
+    $start_offset = (int)$_POST['sp'] - 1;
     $start_from   = SEEK_SET;
     $load_more    = true;
 }

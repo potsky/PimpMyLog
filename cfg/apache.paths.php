@@ -6,17 +6,17 @@
  * @var  array
  */
 $paths = array(
-	'/var/log/',
-	'/var/log/apache/',
-	'/var/log/apache2/',
-	'/var/log/httpd/',
-	'/usr/local/var/log/apache/',
-	'/usr/local/var/log/apache2/',
-	'/usr/local/var/log/httpd/',
-	'/opt/local/apache/logs/',
-	'/opt/local/apache2/logs/',
-	'/opt/local/httpd/logs/',
-	'C:/wamp/logs/',
+	'/var/log/' ,
+	'/var/log/apache/' ,
+	'/var/log/apache2/' ,
+	'/var/log/httpd/' ,
+	'/usr/local/var/log/apache/' ,
+	'/usr/local/var/log/apache2/' ,
+	'/usr/local/var/log/httpd/' ,
+	'/opt/local/apache/logs/' ,
+	'/opt/local/apache2/logs/' ,
+	'/opt/local/httpd/logs/' ,
+	'C:/wamp/logs/' ,
 );
 
 
@@ -31,15 +31,51 @@ $paths = array(
  * @var  array
  */
 $files = array(
-	'error' => array(
-		'error.log',
-		'error_log',
-		'apache_error.log',
-	),
+	'error'  => array(
+		'error.log' ,
+		'error_log' ,
+		'apache_error.log' ,
+	) ,
 	'access' => array(
-		'access.log',
-		'access_log',
-		'apache.log',
-		'apache_access.log',
-	),
+		'access.log' ,
+		'access_log' ,
+		'apache.log' ,
+		'apache_access.log' ,
+	) ,
 );
+
+/**
+ * Add sub-directories within specified paths
+ * helps with multiple site environments
+ */
+foreach ( $paths as $path )
+{
+	if ( is_dir( $path ) )
+	{
+		try
+		{
+			$directory = new RecursiveDirectoryIterator( $path );
+			$iterator  = new RecursiveIteratorIterator( $directory );
+			/** @var DirectoryIterator $file */
+			foreach ( $iterator as $file )
+			{
+				foreach ( $files as $type )
+				{
+					foreach ( $type as $filename )
+					{
+						if ( $file->getFilename() === $filename )
+						{
+							$paths[] = $file->getPath();
+							continue 3;
+						}
+					}
+				}
+			}
+		}
+		catch ( Exception $e )
+		{
+		}
+	}
+}
+
+sort( $paths );

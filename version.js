@@ -3,11 +3,23 @@
 	"version"     : "@@VERSIONDEV",
 	"versiondevh" : "@@VERSIONDEVH",
 	"messages"    : {
-		"20141121" : "Thank you to people who have starred the project on GitHub !",
+        "20161214" : "<p>Hi folks!</p><p>Life has been really complicated this last year but I hope things will be fun again and I hope I will have time to update Pimp My Log.</p>",
+        "20141121" : "Thank you to people who have starred the project on GitHub !",
 		"20141012" : "<p>Hi folks!</p><p>This alert box has been added to send important messages to you about <em>Pimp my Log</em>. It is not intended to be a <em>Spam Zone</em>.</p><p>I need to know if I should continue the development of <em>Pimp My Log</em> and how many people are interested in <em>Pimp my Log</em>. Would you just let me know by starring the project in GitHub please?</p><p><iframe src=\"http://pimpmylog.com/github-btn.html?user=potsky&repo=PimpMyLog&type=watch&count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"170\" height=\"30\"></iframe></p><p>And don&#8217;t worry, <em>Pimp my Log</em> will be in open-source forever.</p><p><em>potsky</em></p>",
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+        "1.7.11" : {
+            "released" : "2016-12-14",
+            "new" : [
+                "Search for log paths within sub-directories of specified Apache paths (#103)",
+                "Allow installation to custom installer path (#107)",
+                "Custom configuration file path (#102)"
+            ],
+            "fixed" : [
+                "BUG: fseek() expects parameter 2 to be integer, float given (<a href=\"http://support.pimpmylog.com/discussions/problems/150-bug-fseek-expects-parameter-2-to-be-integer-float-given\" target=\"_blank\">more info</a> and #108)"
+            ]
+        },
 		"1.7.10" : {
 			"released" : "2015-11-24",
 			"fixed" : [
