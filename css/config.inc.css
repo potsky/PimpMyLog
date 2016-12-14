@@ -1,9 +1,9 @@
-/*! pimpmylog - 1.7.10 - 65d6f147e509133fc5f09642ba82b149ef750ef2*/
+/*! pimpmylog - 1.7.11 - d666559cb0e141ca9c4984773e180f75b7c53664*/
 /*
  * pimpmylog
  * http://pimpmylog.com
  *
- * Copyright (c) 2015 Potsky, contributors
+ * Copyright (c) 2016 Potsky, contributors
  * Licensed under the GPLv3 license.
  */
 /*
@@ -30,7 +30,6 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 	white-space     : pre-wrap;
 	-ms-word-break  : break-all;
 	word-break      : break-all;
-	word-break      : break-word;
 	-webkit-hyphens : auto;
 	-moz-hyphens    : auto;
 	hyphens         : auto;
@@ -46,7 +45,6 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 	white-space : nowrap;
 }
 
-
 .pml-badge {
 	font-size  : 0.9em;
 	text-align : center;
@@ -54,7 +52,7 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 
 /* Specific to column */
 .pml-CMD {
-	white-space :nowrap;
+	white-space : nowrap;
 }
 
 .pml-Severity {
@@ -77,30 +75,38 @@ Your stylesheet will be loaded instead of this one if you create a file located 
 	font-size       : 0.8em;
 	-ms-word-break  : break-all;
 	word-break      : break-all;
-	word-break      : break-word;
 	-webkit-hyphens : auto;
 	-moz-hyphens    : auto;
 	hyphens         : auto;
 }
 
 .pml-User {
-	font-size: 0.8em;
+	font-size : 0.8em;
 }
 
 /* New log color on the row */
 .newlog td:first-child {
-	background-position : 0 0;
-	background-image    : url(../img/1x1pink_low.gif);
-	background-size     : 1px 100%;
-	background-repeat   : no-repeat;
+	background-size : 1px 100%;
+	background      : url(../img/1x1pink_low.gif) no-repeat 0 0;
 }
 
 /* Marker colors when you click on a date field */
 td.pml-date {
-	cursor:pointer;
+	cursor : pointer;
 }
-tr:nth-child(odd)        td.marker { background-color : #efef00!important; }
-tr:nth-child(even)       td.marker { background-color : #ffff00!important; }
-tr:nth-child(odd):hover  td.marker { background-color : #e8e800!important; }
-tr:nth-child(even):hover td.marker { background-color : #f8f800!important; }
 
+tr:nth-child(odd) td.marker {
+	background-color : #efef00 !important;
+}
+
+tr:nth-child(even) td.marker {
+	background-color : #ffff00 !important;
+}
+
+tr:nth-child(odd):hover td.marker {
+	background-color : #e8e800 !important;
+}
+
+tr:nth-child(even):hover td.marker {
+	background-color : #f8f800 !important;
+}
