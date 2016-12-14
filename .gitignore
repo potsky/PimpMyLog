@@ -8,6 +8,7 @@ Thumbs.db
 .Trashes
 .cli_fake_session
 _cli_fake_session
+.idea
 
 /todo.*.todo
 /.sass-cache
