@@ -1,10 +1,10 @@
 <?php
-/*! pimpmylog - 1.7.10 - 65d6f147e509133fc5f09642ba82b149ef750ef2*/
+/*! pimpmylog - 1.7.11 - d666559cb0e141ca9c4984773e180f75b7c53664*/
 /*
  * pimpmylog
  * http://pimpmylog.com
  *
- * Copyright (c) 2015 Potsky, contributors
+ * Copyright (c) 2016 Potsky, contributors
  * Licensed under the GPLv3 license.
  */
 ?><?php
@@ -232,6 +232,7 @@ $csrf = csrf_get();
 												$selected  = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] === $file_id ) ) ? ' active' : '';
 												$notagged .= '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
 												$notagged .= ( isset( $files[ $file_id ][ 'included_from' ] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $files[ $file_id ]['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
+												$notagged .= " &gt; " . $files[ $file_id ][ 'path' ];
 												$notagged .= '">' . $files[ $file_id ]['display'] . '</a></li>';
 											}
 										} else {
@@ -243,6 +244,7 @@ $csrf = csrf_get();
 												$selected = ( ( isset( $_GET['i'] ) ) && ( $_GET['i'] === $file_id ) ) ? ' active' : '';
 												$tagged  .= '<li id="file_' . $file_id . '" data-file="' . $file_id . '" class="file_menup' . $selected . '"><a class="file_menu" href="#" title="';
 												$tagged  .= ( isset( $files[ $file_id ]['included_from'] ) ) ? h( sprintf( __('Log file #%s defined in %s' ) , $file_id , $files[ $file_id ]['included_from'] ) ) : h( sprintf( __( 'Log file #%s defined in main configuration file' ) , $file_id ) );
+												$tagged  .= " &gt; " . $files[ $file_id ][ 'path' ];
 												$tagged  .= '">' . $files[ $file_id ]['display'] . '</a></li>';
 											}
 											$tagged .= 	'</ul>';

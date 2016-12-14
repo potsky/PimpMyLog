@@ -1,10 +1,10 @@
 <?php
-/*! pimpmylog - 1.7.10 - 65d6f147e509133fc5f09642ba82b149ef750ef2*/
+/*! pimpmylog - 1.7.11 - d666559cb0e141ca9c4984773e180f75b7c53664*/
 /*
  * pimpmylog
  * http://pimpmylog.com
  *
- * Copyright (c) 2015 Potsky, contributors
+ * Copyright (c) 2016 Potsky, contributors
  * Licensed under the GPLv3 license.
  */
 ?><?php
@@ -162,7 +162,7 @@ $now = $now->format( 'Y/m/d H:i:s' );
 |
 */
 if ( isset( $_POST['sp'] ) ) {
-    $start_offset = (float)$_POST['sp'] - 1;
+    $start_offset = (int)$_POST['sp'] - 1;
     $start_from   = SEEK_SET;
     $load_more    = true;
 }
