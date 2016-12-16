@@ -9,14 +9,15 @@ This file is not updated and is ignored when you perform a `git pull` so you can
 
 The file is composed by these 3 objects:
 
-* `globals` : global constants for *Pimp My Log* that you can overwrite
-* `files` : the log files description with path, format, column definition, ...
-* `badges` : a matching array between some kind of values and CSS classes
+* [`globals`](#globals) : global constants for *Pimp My Log* that you can overwrite
+* [`files`](#files) : the log files description with path, format, column definition, ...
+* [`badges`](#badges) : a matching array between some kind of values and CSS classes
 
-
+Finally, you can set some settings with [environment](#environment) parameters.
 
 # 1 - Globals
 
+<a name="globals"></a>
 <a name="AUTO_UPGRADE"></a>
 
 #### AUTO\_UPGRADE
@@ -564,6 +565,8 @@ The `badges` object defines which CSS class should be used when applying the typ
 ```
 
 # 3 - Files
+
+<a name="files"></a>
 
 The file object is the main item in the configuration file and it defines:
 
@@ -1167,3 +1170,13 @@ The default type simply display the value without any format.
 
 *eg*: `txt/100`, `map/100`, `dude/100`, ... will display the same thing
 
+
+# 4 - Environment parameters
+
+ <a name="environment"></a>
+
+#### Env parameter `PML_BASE_CONFIG`
+
+*Pimp My Log* can store configuration somewhere else the root directory.
+
+Set the `PML_BASE_CONFIG` environment parameter on your system to the folder path where you want *Pimp My Log* to save configuration.

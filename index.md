@@ -41,9 +41,16 @@ If you want to contribute to translations, go [here](https://poeditor.com/join/p
 
 #### Special thanks
 
+Contributors :
+
+- [Brad](https://github.com/therecluse26)
+- [Jannik Keller](https://github.com/jannikkeller)
+- [Vmak11](https://github.com/Vmak11)
+- [Satys](https://github.com/Satys)
+
 A special thanks goes out to :
 
-* *Buzz* @ [Ledouze](http://www.ledouze.fr) agency for the logo
+* *Buzz* @ [Hungry & Foolish](http://www.hungryandfoolish.paris) agency for the logo
 * [ENTP](http://entp.com/) for their amazing web support tool app [Tender](http://tenderapp.com/)
 * [GitHub](http://github.com) for code hosting
 * [Jekyll](http://jekyllrb.com)
@@ -66,7 +73,6 @@ A special thanks goes out to :
 * [sprintf.js](https://github.com/alexei/sprintf.js) by [Alexandru Marasteanu](http://alexei.ro/)
 * [ua-parser.js](http://faisalman.github.io/ua-parser-js/) by [Faisal Salman](https://github.com/faisalman)
 * [zClip](http://www.steamdev.com/zclip/) by [Steamdev](http://www.steamdev.com)
-
 
 ---
 

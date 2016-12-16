@@ -4,6 +4,7 @@ Desktop.ini
 ._*
 Thumbs.db
 *.swp
+.idea
 
 # Files that might appear on external disks
 .Spotlight-V100
