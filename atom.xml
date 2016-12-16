@@ -4,13 +4,28 @@
  <title>Pimp my Log</title>
  <link href="http://pimpmylog.com/atom.xml" rel="self"/>
  <link href="http://pimpmylog.com"/>
- <updated>2015-05-27T09:19:55+02:00</updated>
+ <updated>2016-12-16T15:28:36+01:00</updated>
  <id>http://pimpmylog.com</id>
  <author>
    <name>Potsky</name>
    <email>potsky@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Version 1.7.11 released</title>
+   <link href="http://pimpmylog.com/general/2016/12/14/version-1.7.11"/>
+   <updated>2016-12-14T00:00:00+01:00</updated>
+   <id>http://pimpmylog.com/general/2016/12/14/version-1.7.11</id>
+   <content type="html">&lt;p&gt;Hi folks!&lt;/p&gt;
+
+&lt;p&gt;after a long break, I resume &lt;em&gt;Pimp My Log&lt;/em&gt; development.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.7.11&quot;&gt;&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Version 1.7 released</title>

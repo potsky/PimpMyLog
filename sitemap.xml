@@ -61,6 +61,10 @@
         <lastmod>2014-11-22T19:41:04+01:00</lastmod>
     </url>
     <url>
+        <loc>/general/2016/12/14/version-1.7.11</loc>
+        <lastmod>2016-12-16T15:02:37+01:00</lastmod>
+    </url>
+    <url>
         <loc>/blog/</loc>
         <lastmod>2014-01-13T12:36:01+01:00</lastmod>
     </url>
@@ -82,7 +86,7 @@
     </url>
     <url>
         <loc>/documentation/configuration.html</loc>
-        <lastmod>2015-05-27T09:17:09+02:00</lastmod>
+        <lastmod>2016-12-16T15:27:45+01:00</lastmod>
     </url>
     <url>
         <loc>/documentation/customization.html</loc>
@@ -106,7 +110,7 @@
     </url>
     <url>
         <loc>/</loc>
-        <lastmod>2014-11-27T17:56:08+01:00</lastmod>
+        <lastmod>2016-12-16T14:59:51+01:00</lastmod>
     </url>
     <url>
         <loc>/rss.xml</loc>
