@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.12 - 61426bab9d7c14b17bd7eb13b086d627f9eb3154*/
+/*! pimpmylog - 1.7.12 - 1c8238c00f2d9c31f06ea170fd377b921c14f73c*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -216,6 +216,7 @@ $csrf = csrf_get();
 			badges               = <?php echo json_encode( $badges ); ?>,
 			lemma                = <?php echo json_encode( $lemma ); ?>,
 			geoip_url            = <?php echo json_encode( GEOIP_URL ); ?>,
+			port_url             = <?php echo json_encode( PORT_URL ); ?>,
 			pull_to_refresh      = <?php echo ( PULL_TO_REFRESH === true ) ? 'true' : 'false';?>,
 			file_selector        = <?php echo json_encode( FILE_SELECTOR ); ?>,
 			csrf_token           = <?php echo json_encode( $csrf ); ?>,

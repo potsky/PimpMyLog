@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.12 - 61426bab9d7c14b17bd7eb13b086d627f9eb3154*/
+/*! pimpmylog - 1.7.12 - 1c8238c00f2d9c31f06ea170fd377b921c14f73c*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -19,6 +19,7 @@
 		"_remove_me_to_set_FOOTER"                      : "&copy; <a href=\"http:\/\/www.potsky.com\" target=\"doc\">Potsky<\/a> 2007-' . YEAR . ' - <a href=\"http:\/\/pimpmylog.com\" target=\"doc\">Pimp my Log<\/a>",
 		"_remove_me_to_set_FORGOTTEN_YOUR_PASSWORD_URL" : "http:\/\/support.pimpmylog.com\/kb\/misc\/forgotten-your-password",
 		"_remove_me_to_set_GEOIP_URL"                   : "http:\/\/www.geoiptool.com\/en\/?IP=%p",
+		"_remove_me_to_set_PORT_URL"                    : "http:\/\/www.adminsub.net\/tcp-udp-port-finder\/%p",
 		"_remove_me_to_set_GOOGLE_ANALYTICS"            : "UA-XXXXX-X",
 		"_remove_me_to_set_HELP_URL"                    : "http:\/\/pimpmylog.com",
 		"_remove_me_to_set_LOCALE"                      : "gb_GB",
