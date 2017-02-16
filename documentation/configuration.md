@@ -335,6 +335,20 @@ To track beta versions:
 
 ---
 
+<a name="PORT_URL"></a>
+
+#### PORT\_URL
+
+This constant is used to generate links for fields with type *port* (see below). The url is used and the TCP/UDP port will replace all `%p` instance.
+
+Default:
+
+```json
+"PORT_URL" : "http:\/\/www.adminsub.net\/tcp-udp-port-finder\/%p"
+```
+
+---
+
 <a name="PULL_TO_REFRESH"></a>
 
 #### PULL\_TO\_REFRESH
@@ -1114,6 +1128,12 @@ Numeral uses the awesome library *Numeral.js* available [here](http://numeraljs.
 - *eg:* `numeral:0b` will produce an whole number of bytes
 - *eg:* `numeral:0.0` will produce an whole number formated with a thousand separator
 
+
+### type *port*
+
+The *port* type assumes that the value is a valid numerical TCP/UDP port.
+
+*eg*: type `port` on value `443` will produce text `443` linked to <http://www.adminsub.net/tcp-udp-port-finder/443>
 
 
 ### type *pre*
