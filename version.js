@@ -12,9 +12,7 @@
         "1.7.12" : {
             "released" : "2017-02-16",
             "new" : [
-                "Add port type for TCP/UDP ports (#103)",
-                "Allow installation to custom installer path (#107)",
-                "Custom configuration file path (#102)"
+                "Add port type for TCP/UDP ports (#111)"
             ],
             "fixed" : [
                 "BUG: error with Array Index (contains the log id) (#108)"
