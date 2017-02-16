@@ -672,17 +672,17 @@ function config_load( $load_user_configuration_dir = true )
 	{
 		case 'display':
 		case 'displayasc':
-			usort( $files , 'display_asc' );
+			uasort( $files , 'display_asc' );
 			break;
 		case 'displayi':
 		case 'displayiasc':
-			usort( $files , 'display_insensitive_asc' );
+			uasort( $files , 'display_insensitive_asc' );
 			break;
 		case 'displaydesc':
-			usort( $files , 'display_desc' );
+			uasort( $files , 'display_desc' );
 			break;
 		case 'displayidesc':
-			usort( $files , 'display_insensitive_desc' );
+			uasort( $files , 'display_insensitive_desc' );
 			break;
 		default:
 			# do not sort

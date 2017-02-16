@@ -9,6 +9,12 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+        "1.7.12" : {
+            "released" : "2017-02-16",
+            "fixed" : [
+                "BUG: error with Array Index (contains the log id) (#108)"
+            ]
+        },
         "1.7.11" : {
             "released" : "2016-12-14",
             "new" : [
