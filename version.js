@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.7.11",
-	"versiondevh" : "d666559cb0e141ca9c4984773e180f75b7c53664",
+	"version"     : "1.7.12",
+	"versiondevh" : "61426bab9d7c14b17bd7eb13b086d627f9eb3154",
 	"messages"    : {
         "20161214" : "<p>Hi folks!</p><p>Life has been really complicated this last year but I hope things will be fun again and I hope I will have time to update Pimp My Log.</p>",
         "20141121" : "Thank you to people who have starred the project on GitHub !",
@@ -9,6 +9,12 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+        "1.7.12" : {
+            "released" : "2017-02-16",
+            "fixed" : [
+                "BUG: error with Array Index (contains the log id) (#108)"
+            ]
+        },
         "1.7.11" : {
             "released" : "2016-12-14",
             "new" : [
