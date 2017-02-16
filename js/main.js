@@ -1,4 +1,4 @@
-/*global title_file,file_selector,numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,geoip_url,pull_to_refresh,csrf_token,querystring,notification_default, UAParser */
+/*global title_file,file_selector,numeral,logs_refresh_default,logs_max_default,files,notification_title,badges,lemma,port_url,geoip_url,pull_to_refresh,csrf_token,querystring,notification_default, UAParser */
 /*jshint unused:false*/
 
 var file,

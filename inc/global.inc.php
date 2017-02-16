@@ -206,6 +206,7 @@ define( 'DEFAULT_FILE_SELECTOR' , 'bs' );
 define( 'DEFAULT_FOOTER' , '&copy; <a href="http://www.potsky.com" target="doc">Potsky</a> 2007-' . YEAR . ' - <a href="http://pimpmylog.com" target="doc">Pimp my Log</a>' );
 define( 'DEFAULT_FORGOTTEN_YOUR_PASSWORD_URL' , 'http://support.pimpmylog.com/kb/misc/forgotten-your-password' );
 define( 'DEFAULT_GEOIP_URL' , 'http://www.geoiptool.com/en/?IP=%p' );
+define( 'DEFAULT_PORT_URL' , 'http://www.adminsub.net/tcp-udp-port-finder/%p' );
 define( 'DEFAULT_GOOGLE_ANALYTICS' , 'UA-XXXXX-X' );
 define( 'DEFAULT_HELP_URL' , 'http://pimpmylog.com' );
 define( 'DEFAULT_LOCALE' , 'gb_GB' );
@@ -347,6 +348,7 @@ function load_default_constants()
 		'FOOTER' ,
 		'FORGOTTEN_YOUR_PASSWORD_URL' ,
 		'GEOIP_URL' ,
+		'PORT_URL' ,
 		'GOOGLE_ANALYTICS' ,
 		'LOCALE' ,
 		'LOGS_MAX' ,

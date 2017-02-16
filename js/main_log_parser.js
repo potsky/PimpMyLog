@@ -472,6 +472,9 @@ var get_logs     = function( load_default_values , load_full_file , load_from_ge
 						val = '<a href="' + type.param + '://' + val + '" target="linkout">' + val_cut( val , type.cut ) + '</a>';
 					}
 				}
+				else if ( 'port' === type.parser ) {
+					val = '<a href="' + port_url.replace( "%p" , val ) + '" target="linkout">' + val_cut( val , type.cut ) + '</a>';
+				}
 				else if ( 'link' === type.parser ) {
 					val = '<a href="' + val + '" target="linkout">' + val_cut( val , type.cut ) + '</a>';
 				}

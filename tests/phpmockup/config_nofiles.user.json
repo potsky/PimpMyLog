@@ -11,6 +11,7 @@
 		"_remove_me_to_set_NOTIFICATION_TITLE"             : "New logs [%f]",
 		"_remove_me_to_set_GOOGLE_ANALYTICS"               : "UA-XXXXX-X",
 		"_remove_me_to_set_PULL_TO_REFRESH"                : true,
+        "_remove_me_to_set_PORT_URL"                       : "http:\/\/www.adminsub.net\/tcp-udp-port-finder\/%p",
 		"_remove_me_to_set_GEOIP_URL"                      : "http:\/\/www.geoiptool.com\/en\/?IP=%p",
 		"_remove_me_to_set_CHECK_UPGRADE"                  : true,
 		"_remove_me_to_set_MAX_SEARCH_LOG_TIME"            : 3,
