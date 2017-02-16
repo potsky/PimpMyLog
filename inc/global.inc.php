@@ -1,10 +1,10 @@
 <?php
-/*! pimpmylog - 1.7.11 - d666559cb0e141ca9c4984773e180f75b7c53664*/
+/*! pimpmylog - 1.7.12 - 61426bab9d7c14b17bd7eb13b086d627f9eb3154*/
 /*
  * pimpmylog
  * http://pimpmylog.com
  *
- * Copyright (c) 2016 Potsky, contributors
+ * Copyright (c) 2017 Potsky, contributors
  * Licensed under the GPLv3 license.
  */
 ?><?php
@@ -681,17 +681,17 @@ function config_load( $load_user_configuration_dir = true )
 	{
 		case 'display':
 		case 'displayasc':
-			usort( $files , 'display_asc' );
+			uasort( $files , 'display_asc' );
 			break;
 		case 'displayi':
 		case 'displayiasc':
-			usort( $files , 'display_insensitive_asc' );
+			uasort( $files , 'display_insensitive_asc' );
 			break;
 		case 'displaydesc':
-			usort( $files , 'display_desc' );
+			uasort( $files , 'display_desc' );
 			break;
 		case 'displayidesc':
-			usort( $files , 'display_insensitive_desc' );
+			uasort( $files , 'display_insensitive_desc' );
 			break;
 		default:
 			# do not sort
