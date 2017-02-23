@@ -1,7 +1,7 @@
 {
     "name"        : "potsky/pimp-my-log",
     "description" : "Log viewer for your web server",
-    "version"     : "1.7.12",
+    "version"     : "1.7.13",
     "license"     : "GPL-3.0+",
     "type"        : "project",
     "homepage"    : "http://pimpmylog.com",
@@ -21,6 +21,11 @@
             "name"     : "Cassio Santos",
             "homepage" : "http://www.cassiosantos.com",
             "role"     : "Translator (pt_BR)"
+        },
+        {
+            "name"     : "Martin",
+            "homepage" : "https://github.com/mmattel",
+            "role"     : "Configuration examples contributor"
         }
     ],
     "require" : {

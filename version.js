@@ -1,6 +1,6 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.7.12",
+	"version"     : "1.7.13",
 	"versiondevh" : "22dae58317b3bf9647c48f09986f80e7d51f841e",
 	"messages"    : {
         "20161214" : "<p>Hi folks!</p><p>Life has been really complicated this last year but I hope things will be fun again and I hope I will have time to update Pimp My Log.</p>",
@@ -9,6 +9,18 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+        "1.7.13" : {
+            "released" : "2017-02-23",
+            "new" : [
+                "Add configuration examples in the cfg-examples folder (#112)"
+            ],
+            "fixed" : [
+                "globals.USER_TIME_ZONE not working (#114)"
+            ],
+            "changed" : [
+                "Bower dependencies updated (#113)"
+            ]
+        },
         "1.7.12" : {
             "released" : "2017-02-16",
             "new" : [

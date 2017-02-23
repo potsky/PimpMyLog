@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.12 - 22dae58317b3bf9647c48f09986f80e7d51f841e*/
+/*! pimpmylog - 1.7.13 - 22dae58317b3bf9647c48f09986f80e7d51f841e*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -291,7 +291,7 @@ echo test( $type , $regex , $match , $types , $log );
 												echo sprintf( __( 'Generated files with includes for user %s') , '<code>' . $current_user . '</code>' );
 											}
 										?></a></h4></div><div id="collapseFive2" class="panel-collapse collapse"><div class="panel-body"><pre><?php
-										list( $badges , $files ) = config_load();
+										list( $badges , $files , $tz ) = config_load();
 										if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
 											echo json_encode( $files , JSON_PRETTY_PRINT );
 										} else {

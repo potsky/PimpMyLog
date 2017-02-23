@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.12 - 22dae58317b3bf9647c48f09986f80e7d51f841e*/
+/*! pimpmylog - 1.7.13 - 22dae58317b3bf9647c48f09986f80e7d51f841e*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -66,7 +66,7 @@ else if ( ( isset( $_GET['t'] ) ) && ( ! isset( $_GET['h'] ) ) ) {
 |--------------------------------------------------------------------------
 |
 */
-list( $badges , $files ) = config_load();
+list( $badges , $files , $tz ) = config_load();
 
 if ( ! isset( $files[ $file_id ] ) ) {
 	http403();
