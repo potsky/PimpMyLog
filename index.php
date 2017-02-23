@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.12 - 22dae58317b3bf9647c48f09986f80e7d51f841e*/
+/*! pimpmylog - 1.7.13 - ff070626847cc3e56b93b84fc5434e1687022488*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -64,7 +64,7 @@ if ( is_null( $config_file_name ) ) {
 |--------------------------------------------------------------------------
 |
 */
-list( $badges , $files ) = config_load();
+list( $badges , $files , $tz ) = config_load();
 
 
 /*
@@ -289,7 +289,7 @@ $csrf = csrf_get();
 												echo '>' . $n . '</option>';
 											}
 										?><?php else : ?><option value=""><?php _e( 'Language cannot be changed' );?></option><?php endif; ?></select></li><li><select id="cog-tz" class="form-control input-sm" title="<?php _h( 'Timezone' );?>"><option value=""><?php _e( 'Change timezone...' );?></option><?php
-										foreach ( $tz_available as $n ) {
+										foreach ( DateTimeZone::listIdentifiers() as $n ) {
 											echo '<option value="' . $n . '"';
 											if ( $n == $tz ) echo ' selected="selected"';
 											echo '>' . $n . '</option>';

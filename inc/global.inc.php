@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.12 - 22dae58317b3bf9647c48f09986f80e7d51f841e*/
+/*! pimpmylog - 1.7.13 - ff070626847cc3e56b93b84fc5434e1687022488*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -247,7 +247,6 @@ define( 'DEFAULT_USER_CONFIGURATION_DIR' , 'config.user.d' );
 | javascript locale used by numeralJS
 |
 */
-$tz_available     = DateTimeZone::listIdentifiers();
 $locale_default   = 'en_GB';
 $locale_available = array(
 	'en_GB' => 'English' ,
@@ -478,19 +477,20 @@ function get_config_file( $path = false )
  * @param   boolean $load_user_configuration_dir do we have to parse all user configuration files ? No for upgrade for
  *                                               example...
  *
- * @return  array    [ badges , files ]
+ * @return  array    [ badges , files , $tz ]
  */
 function config_load( $load_user_configuration_dir = true )
 {
 	$badges = false;
 	$files  = false;
+	$tz     = false;
 
 	// Read config file
 	$config = get_config_file();
 
 	if ( is_null( $config ) )
 	{
-		return array( $badges , $files );
+		return array( $badges , $files , $tz );
 	}
 
 	// Get badges
@@ -501,12 +501,18 @@ function config_load( $load_user_configuration_dir = true )
 	{
 		if ( $cst == strtoupper( $cst ) )
 		{
-			@define( $cst , $val );
+			if ( ! defined( $cst ) )
+			{
+				define( $cst , $val );
+			}
 		}
 	}
 
 	// Set unset constants
 	load_default_constants();
+
+	// Load the time zone
+	$tz = get_user_time_zone();
 
 	// Set time limit
 	@set_time_limit( MAX_SEARCH_LOG_TIME + 2 );
@@ -546,7 +552,7 @@ function config_load( $load_user_configuration_dir = true )
 	// Oups, there is no file... abort
 	if ( ! isset( $config[ 'files' ] ) )
 	{
-		return array( $badges , $files );
+		return array( $badges , $files , $tz );
 	}
 
 	// Try to generate the files tree if there are globs...
@@ -700,7 +706,7 @@ function config_load( $load_user_configuration_dir = true )
 			break;
 	}
 
-	return array( $badges , $files );
+	return array( $badges , $files , $tz );
 }
 
 /**
@@ -873,7 +879,7 @@ function get_refresh_options( $files )
 		15 => 15 ,
 		30 => 30 ,
 		45 => 45 ,
-		60 => 60,
+		60 => 60 ,
 	);
 	$options[ (int)LOGS_REFRESH ] = (int)LOGS_REFRESH;
 	foreach ( $files as $file_id => $file )
@@ -905,7 +911,7 @@ function get_max_options( $files )
 		20  => 20 ,
 		50  => 50 ,
 		100 => 100 ,
-		200 => 200,
+		200 => 200 ,
 	);
 	$options[ (int)LOGS_MAX ] = (int)LOGS_MAX;
 	foreach ( $files as $file_id => $file )
@@ -1523,6 +1529,35 @@ function upgrade_can_git_pull()
 }
 
 
+/**
+ * Return the correct timezone according to settings
+ *
+ * @return bool|string
+ */
+function get_user_time_zone()
+{
+	$tz = '';
+	if ( isset( $_POST[ 'tz' ] ) )
+	{
+		$tz = $_POST[ 'tz' ];
+	}
+	elseif ( isset( $_GET[ 'tz' ] ) )
+	{
+		$tz = $_GET[ 'tz' ];
+	}
+	elseif ( defined( 'USER_TIME_ZONE' ) )
+	{
+		$tz = USER_TIME_ZONE;
+	}
+	if ( ! in_array( $tz , DateTimeZone::listIdentifiers() ) )
+	{
+		$tz = @date( 'e' );
+	}
+
+	return $tz;
+}
+
+
 /*
 |--------------------------------------------------------------------------
 | Uniq ID
@@ -1544,31 +1579,6 @@ if ( isset( $_SERVER[ 'SERVER_PROTOCOL' ] ) )
 	{
 		$uuid = $_COOKIE[ 'u' ];
 	}
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Timezone
-|--------------------------------------------------------------------------
-|
-*/
-$tz = '';
-if ( isset( $_POST[ 'tz' ] ) )
-{
-	$tz = $_POST[ 'tz' ];
-}
-elseif ( isset( $_GET[ 'tz' ] ) )
-{
-	$tz = $_GET[ 'tz' ];
-}
-elseif ( defined( 'USER_TIME_ZONE' ) )
-{
-	$tz = USER_TIME_ZONE;
-}
-if ( ! in_array( $tz , $tz_available ) )
-{
-	$tz = @date( 'e' );
 }
 
 
