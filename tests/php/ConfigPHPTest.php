@@ -26,7 +26,7 @@ class ConfigPHPTest extends TestCase {
         $this->assertNull( get_config_file_path() );
         $this->assertNull( get_config_file_name() );
         $this->assertNull( get_config_file() );
-        list( $badges , $files ) = config_load();
+        list( $badges , $files , $tz ) = config_load();
         $this->assertFalse( $files );
         $this->assertCount( 1 , config_check( $files ) );
     }
@@ -40,7 +40,7 @@ class ConfigPHPTest extends TestCase {
         $this->assertArrayHasKey( 'globals', get_config_file() );
         $this->assertArrayHasKey( 'badges', get_config_file() );
         $this->assertArrayNotHasKey( 'files', get_config_file() );
-        list( $badges , $files ) = config_load();
+        list( $badges , $files , $tz ) = config_load();
         $this->assertFalse( $files );
         $this->assertCount( 1 , config_check( $files ) );
     }
@@ -62,7 +62,7 @@ class ConfigPHPTest extends TestCase {
         $this->assertArrayHasKey( 'files', $config );
         $this->assertCount( 3 , $config['files'] );
 
-        list( $badges , $files ) = config_load();
+        list( $badges , $files , $tz ) = config_load();
         $this->assertInternalType( 'array' , $files );
         $this->assertTrue( config_check( $files ) );
     }
@@ -83,7 +83,7 @@ class ConfigPHPTest extends TestCase {
         $this->assertArrayHasKey( 'badges', $config );
         $this->assertArrayNotHasKey( 'files', $config );
 
-        list( $badges , $files ) = config_load();
+        list( $badges , $files , $tz ) = config_load();
         $this->assertCount( 1 + 1 + 2 + 2 , $files );
         $this->assertTrue( config_check( $files ) );
     }
@@ -105,7 +105,7 @@ class ConfigPHPTest extends TestCase {
         $this->assertArrayHasKey( 'badges' , $config );
         $this->assertArrayHasKey( 'files' , $config );
 
-        list( $badges , $files ) = config_load();
+        list( $badges , $files , $tz ) = config_load();
         $this->assertCount( 3 + 1 + 1 + 2 + 2 , $files );
         $this->assertTrue( config_check( $files ) );
     }

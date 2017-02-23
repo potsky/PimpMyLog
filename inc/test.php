@@ -476,7 +476,7 @@ echo test( $type , $regex , $match , $types , $log );
 							<div id="collapseFive2" class="panel-collapse collapse">
 								<div class="panel-body">
 									<pre><?php
-										list( $badges , $files ) = config_load();
+										list( $badges , $files , $tz ) = config_load();
 										if ( version_compare( PHP_VERSION , '5.4.0' ) >= 0 ) {
 											echo json_encode( $files , JSON_PRETTY_PRINT );
 										} else {

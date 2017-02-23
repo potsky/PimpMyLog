@@ -55,7 +55,7 @@ if ( is_null( $config_file_name ) ) {
 |--------------------------------------------------------------------------
 |
 */
-list( $badges , $files ) = config_load();
+list( $badges , $files , $tz ) = config_load();
 
 
 /*
@@ -443,7 +443,7 @@ $csrf = csrf_get();
 								<select id="cog-tz" class="form-control input-sm" title="<?php _h( 'Timezone' );?>">
 									<option value=""><?php _e( 'Change timezone...' );?></option>
 									<?php
-										foreach ( $tz_available as $n ) {
+										foreach ( DateTimeZone::listIdentifiers() as $n ) {
 											echo '<option value="' . $n . '"';
 											if ( $n == $tz ) echo ' selected="selected"';
 											echo '>' . $n . '</option>';

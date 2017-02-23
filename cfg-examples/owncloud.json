@@ -1,0 +1,34 @@
+{
+        "Owncloud1": {
+                "display" : "Owncloud",
+                "path"    : "/var/www/owncloud/data/owncloud.log",
+                "refresh" : 0,
+                "max"     : 50,
+                "notify"  : false,
+                "format"  : {
+                        "regex": "/reqId.{3}(.*?)((?<=.).),.{1}remoteAddr.{3}(.*?)((?<=.).),.{1}app.{3}(.*?)((?<=.).),.{1}message.{3}(.*?)((?<=.).),.{1}level.{2}(\\d),.{1}time.{3}(.*?)((?<=.).),.{1}method.{3}(.*?)((?<=.).),.{1}url.{3}(.*?)((?<=.).),.{1}user.{3}(.*?)((?<=.)..)\\z/",
+                        "match": {
+                                "Date"                  : 10,
+                                "Time"                  : 10,
+                                "IP"                    : 3,
+                                "Level"                 : 9,
+                                "App"                   : 5,
+                                "Message"               : 7,
+                                "Method"                : 12,
+                                "URL"                   : 14,
+                                "User"                  : 16
+                        },
+                        "types": {
+                                "Date"                  : "date:Y.m.d",
+                                "Time"                  : "date:h.m.s:i",
+                                "Level"                 : "txt",
+                                "IP"                    : "ip:geo",
+                                "Method"                : "txt",
+                                "App"                   : "txt",
+                                "Message"               : "pre",
+                                "URL"                   : "pre",
+                                "User"                  : "txt"
+                        }
+                }
+        }
+}

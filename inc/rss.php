@@ -57,7 +57,7 @@ else if ( ( isset( $_GET['t'] ) ) && ( ! isset( $_GET['h'] ) ) ) {
 |--------------------------------------------------------------------------
 |
 */
-list( $badges , $files ) = config_load();
+list( $badges , $files , $tz ) = config_load();
 
 if ( ! isset( $files[ $file_id ] ) ) {
 	http403();

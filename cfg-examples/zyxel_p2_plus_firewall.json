@@ -1,0 +1,34 @@
+{
+        "Firewall_1": {
+                "display" : "Firewall Syslog",
+                "path"    : "/var/log/remote_hosts/firewall.log",
+                "refresh" : 0,
+                "max"     : 20,
+                "notify"  : false,
+                "format"  : {
+                        "regex": "/([0-9]{4,4}-[0-9]{1,2}-[0-9]{1,2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,6}.[0-9]{1,2}).firewall(?(?=.src)(.src.{2}([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})..(?(?=\\d)([0-9]{1,})|(?(?=.*dst)(.*dst.{2}([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}).(?(?=\\d)([0-9]{1,})()))())))|(?(?=.dst)(.dst.{2}([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}).(?(?=\\d)([0-9]{1,})()))|())).(?(?=.dst)(.dst.{2}([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}).(?(?=\\d)([0-9]{1,})))).*msg..(.*?)((?<=.).).note.{2}(.*?)((?<=.).).devID.{2}(.*?)((?<=.).).cat.{2}(.*)((?<=.).)./",
+                        "match": {
+                                "Date"    : 1,
+                                "Time"    : 1,
+                                "Source"  : 3,
+                                "Source-Port"   : 4,
+                                "Destination" : [6,11,16],
+                                "Dest-Port"   : [7,17],
+                                "Message" : 18,
+                                "Note"    : 20,
+                                "Category": 24
+                        },
+                        "types": {
+                                "Date"    : "date:Y:m:d",
+                                "Time"    : "date:H:i:s",
+                                "Source"  : "ip:geo",
+                                "Source-Port"   : "port",
+                                "Destination" : "ip:geo",
+                                "Dest-Port"   : "port",
+                                "Message" : "txt",
+                                "Note   " : "txt",
+                                "Category": "txt"
+                        }
+                }
+        }
+}

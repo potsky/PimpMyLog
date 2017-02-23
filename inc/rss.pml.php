@@ -1,6 +1,6 @@
 <?php
 include_once 'global.inc.php';
-list( $badges , $files ) = config_load();
+list( $badges , $files , $tz ) = config_load();
 
 
 /*

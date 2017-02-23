@@ -1,0 +1,28 @@
+{
+        "NetApp_1": {
+                "display" : "NetApp Syslog",
+                "path"    : "/var/log/remote_hosts/filer.log",
+                "refresh" : 0,
+                "max"     : 20,
+                "notify"  : false,
+                "format"  : {
+                        "regex": "/([0-9]{4,4}-[0-9]{1,2}-[0-9]{1,2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,6}.[0-9]{1,2}).(.*?) .(.*?):.(.*?)(\\]:\\s*)(?(?=\\d)([0-9]{1,}:[0-9]{2}.{3}up.([0-9]{1,}.days)(.+?(?=[0-9]{10})).{11}(.*+))|(.*+))/",
+                        "match": {
+                                "Date"    : 1,
+                                "Time"    : 1,
+                                "Type"    : 4,
+                                "Source"  : 3,
+                                "Uptime"  : 7,
+                                "Message" : [9,10]
+                        },
+                        "types": {
+                                "Date"    : "date:Y:m:d",
+                                "Time"    : "date:H:i:s",
+                                "Type"    : "txt",
+                                "Source"  : "txt",
+                                "Uptime"  : "txt",
+                                "Message" : "txt"
+                        }
+                }
+        }
+}

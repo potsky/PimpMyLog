@@ -9,6 +9,18 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+        "1.7.13" : {
+            "released" : "2017-02-23",
+            "new" : [
+                "Add configuration examples in the cfg-examples folder (#112)"
+            ],
+            "fixed" : [
+                "globals.USER_TIME_ZONE not working (#114)"
+            ],
+            "changed" : [
+                "Bower dependencies updated (#113)"
+            ]
+        },
         "1.7.12" : {
             "released" : "2017-02-16",
             "new" : [

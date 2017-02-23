@@ -1,0 +1,22 @@
+{
+        "UPS_1": {
+                "display" : "UPS APC Syslog",
+                "path"    : "/var/log/remote_hosts/apc1.log4",
+                "refresh" : 0,
+                "max"     : 20,
+                "notify"  : false,
+                "format"  : {
+                        "regex": "/([0-9]{4,4}-[0-9]{1,2}-[0-9]{1,2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,6}.[0-9]{1,2}.{0}) (.*?) (.*+)/",
+                        "match": {
+                                "Date"    : 1,
+                                "Time"    : 1,
+                                "Message" : 3
+                        },
+                        "types": {
+                                "Date"    : "date:Y:m:d",
+                                "Time"    : "date:H:i:s",
+                                "Message" : "txt"
+                        }
+                }
+        }
+}

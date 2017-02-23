@@ -1,0 +1,26 @@
+{
+        "Accesspoint_1": {
+                "display" : "Accesspoint Syslog",
+                "path"    : "/var/log/remote_hosts/mm-ap1.log",
+                "refresh" : 0,
+                "max"     : 20,
+                "notify"  : false,
+                "format"  : {
+                        "regex": "/([0-9]{4,4}-[0-9]{1,2}-[0-9]{1,2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,6}.[0-9]{1,2}.{3}) (.*?) (.*?): (.*?):(.*?) (.*?): .(.*?): (.*+)/",
+                        "match": {
+                                "Date"    : 1,
+                                "Time"    : 1,
+                                "ID"      : 3,
+                                "DOT"     : 7,
+                                "Message" : 8
+                        },
+                        "types": {
+                                "Date"    : "date:Y:m:d",
+                                "Time"    : "date:H:i:s",
+                                "ID"      : "txt",
+                                "DOT"     : "txt",
+                                "Message" : "txt"
+                        }
+                }
+        }
+}

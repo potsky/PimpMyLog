@@ -93,6 +93,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					src: [
+						'cfg-examples/**/*',
 						'cfg/**/*',
 						'img/**/*',
 						'inc/**/*',

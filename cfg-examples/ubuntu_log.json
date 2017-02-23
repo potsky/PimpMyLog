@@ -1,0 +1,50 @@
+{
+        "Server1": {
+                "display" : "Servername Authlog",
+                "path"    : "/var/log/auth.log",
+                "refresh" : 0,
+                "max"     : 20,
+                "notify"  : false,
+                "format"  : {
+                        "regex": "/([0-9]{4,4}-[0-9]{1,2}-[0-9]{1,2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,6}.[0-9]{1,2}:[0-9]{1,2}) (.*?) ([a-zA-Z]+).(?(?=\\d)(\\d+)|())(?(?=\\])(..)|())(.*+)/",
+                        "match": {
+                                "Date"    : 1,
+                                "Time"    : 1,
+                                "Source"  : 3,
+                                "PID"     : 4,
+                                "Message" : 8
+                        },
+                        "types": {
+                                "Date"    : "date:Y:m:d",
+                                "Time"    : "date:H:i:s",
+                                "Source"  : "txt",
+                                "PID"     : "numeral",
+                                "Message" : "txt"
+                        }
+                }
+        },
+        "Server2": {
+                "display" : "Servername Syslog",
+                "path"    : "/var/log/syslog",
+                "refresh" : 0,
+                "max"     : 20,
+                "notify"  : false,
+                "format"  : {
+                        "regex": "/([0-9]{4,4}-[0-9]{1,2}-[0-9]{1,2}T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,6}.[0-9]{1,2}:[0-9]{1,2}) (.*?) ([a-zA-Z]+).(?(?=\\d)(\\d+)|())(?(?=\\])(..)|())(.*+)/",
+                        "match": {
+                                "Date"    : 1,
+                                "Time"    : 1,
+                                "Source"  : 3,
+                                "PID"     : 4,
+                                "Message" : 8
+                        },
+                        "types": {
+                                "Date"    : "date:Y:m:d",
+                                "Time"    : "date:H:i:s",
+                                "Source"  : "txt",
+                                "PID"     : "numeral",
+                                "Message" : "txt"
+                        }
+                }
+        }
+}

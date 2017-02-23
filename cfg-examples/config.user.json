@@ -1,0 +1,33 @@
+{
+        "globals": {
+        },
+
+        "badges": {
+                "severity": {
+                        "debug"       : "success",
+                        "info"        : "success",
+                        "notice"      : "default",
+                        "Notice"      : "info",
+                        "warn"        : "warning",
+                        "error"       : "danger",
+                        "crit"        : "danger",
+                        "alert"       : "danger",
+                        "emerg"       : "danger",
+                        "Notice"      : "info",
+                        "fatal error" : "danger",
+                        "parse error" : "danger",
+                        "Warning"     : "warning"
+                },
+                "http": {
+                        "1" : "info",
+                        "2" : "success",
+                        "3" : "default",
+                        "4" : "warning",
+                        "5" : "danger"
+                }
+
+        },
+
+        "files": {
+        }
+}
