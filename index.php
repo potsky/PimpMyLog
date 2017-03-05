@@ -227,6 +227,9 @@ $csrf = csrf_get();
 
 									$notagged = '';
 									$tagged   = '';
+	
+									asort($files);
+	
 									foreach ( config_extract_tags( $files ) as $tag => $f ) {
 										if ( $tag === '_' ) {
 											foreach ( $f as $file_id ) {
