@@ -1,4 +1,5 @@
-![](http://pimpmylog.com/assets/PML.png)
+Pimp my Log 
+===========
 
 [![Latest Stable Version](https://poser.pugx.org/potsky/pimp-my-log/v/stable.svg)](https://packagist.org/packages/potsky/pimp-my-log) [![Build Status](https://travis-ci.org/potsky/PimpMyLog.svg)](https://travis-ci.org/potsky/PimpMyLog)
 
