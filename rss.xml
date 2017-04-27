@@ -5,9 +5,24 @@
         <description>Pimp my Log - Potsky</description>
         <link>http://pimpmylog.com/rss.xml</link>
         <link>http://pimpmylog.com</link>
-        <lastBuildDate>2017-02-16T14:53:15+01:00</lastBuildDate>
-        <pubDate>2017-02-16T14:53:15+01:00</pubDate>
+        <lastBuildDate>2017-04-27T12:50:03+02:00</lastBuildDate>
+        <pubDate>2017-04-27T12:50:03+02:00</pubDate>
         <ttl>1800</ttl>
+
+        <item>
+                <title>Version 1.7.14 released</title>
+                <description>&lt;p&gt;Hi folks!&lt;/p&gt;
+
+&lt;p&gt;A fix release...&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;pmlversion pmlchangelog&quot; data-version=&quot;1.7.14&quot;&gt;&lt;/div&gt;
+</description>
+                <link>http://pimpmylog.com/general/2017/04/27/version-1.7.14</link>
+                <guid>http://pimpmylog.com/general/2017/04/27/version-1.7.14</guid>
+                <pubDate>2017-04-27T00:00:00+02:00</pubDate>
+        </item>
 
         <item>
                 <title>Version 1.7.12 released</title>
