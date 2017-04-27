@@ -35,7 +35,8 @@ if ( isset( $_POST['s'] ) ) {
 		|--------------------------------------------------------------------------
 		|
 		*/
-		set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) { throw new ErrorException($errstr, 0, $errno, $errfile, $errline); });
+		function pml_error_handler($errno, $errstr, $errfile, $errline, array $errcontext) { throw new ErrorException($errstr, 0, $errno, $errfile, $errline); };
+		set_error_handler("pml_error_handler");
 		$a = date('U');
 		restore_error_handler();
 
