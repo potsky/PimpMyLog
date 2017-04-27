@@ -1,7 +1,7 @@
 /*PSK*/pml_version_cb(/*PSK*/
 {
-	"version"     : "1.7.13",
-	"versiondevh" : "22dae58317b3bf9647c48f09986f80e7d51f841e",
+	"version"     : "1.7.14",
+	"versiondevh" : "ff070626847cc3e56b93b84fc5434e1687022488",
 	"messages"    : {
         "20161214" : "<p>Hi folks!</p><p>Life has been really complicated this last year but I hope things will be fun again and I hope I will have time to update Pimp My Log.</p>",
         "20141121" : "Thank you to people who have starred the project on GitHub !",
@@ -9,6 +9,13 @@
 		"20141011" : "This message will never be shown. Never Gonna Give You Up !"
 	},
 	"changelog"   : {
+        "1.7.14" : {
+            "released" : "2017-04-27",
+            "fixed" : [
+                "unexpected T_FUNCTION, [PHP 5.2] (#118)",
+                "Undefined index: logs (<a href=\"http://support.pimpmylog.com/discussions/problems/162-undefined-index-logs\" target=\"_blank\">more info</a>)"
+            ]
+        },
         "1.7.13" : {
             "released" : "2017-02-23",
             "new" : [

@@ -1,5 +1,5 @@
 <?php
-/*! pimpmylog - 1.7.13 - 22dae58317b3bf9647c48f09986f80e7d51f841e*/
+/*! pimpmylog - 1.7.14 - ff070626847cc3e56b93b84fc5434e1687022488*/
 /*
  * pimpmylog
  * http://pimpmylog.com
@@ -44,7 +44,8 @@ if ( isset( $_POST['s'] ) ) {
 		|--------------------------------------------------------------------------
 		|
 		*/
-		set_error_handler( function($errno, $errstr, $errfile, $errline, array $errcontext) { throw new ErrorException($errstr, 0, $errno, $errfile, $errline); });
+		function pml_error_handler($errno, $errstr, $errfile, $errline, array $errcontext) { throw new ErrorException($errstr, 0, $errno, $errfile, $errline); };
+		set_error_handler("pml_error_handler");
 		$a = date('U');
 		restore_error_handler();
 
