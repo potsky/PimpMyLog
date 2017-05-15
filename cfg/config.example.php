@@ -40,7 +40,8 @@
 		"_remove_me_to_set_TITLE_FILE"                  : "Pimp my Log [%f]",
 		"_remove_me_to_set_UPGRADE_MANUALLY_URL"        : "http:\/\/pimpmylog.com\/getting-started\/#update",
 		"_remove_me_to_set_USER_CONFIGURATION_DIR"      : "config.user.d",
-		"_remove_me_to_set_USER_TIME_ZONE"              : "Europe\/Paris"
+		"_remove_me_to_set_USER_TIME_ZONE"              : "Europe\/Paris",
+		"_remove_me_to_set_DISABLE_AUTOREFRESH"         : true,
 	},
 
 	"badges": {
