@@ -465,6 +465,13 @@ class LogParser
 					$dateformat = substr( $dateformat , 0 , $p );
 				}
 
+                                $matches = array();
+                                if ( ( preg_match( '/([A-Z]{3}) ([A-Z]{3}) ([0-9]{1,2}) ([0-9]{2}:[0-9]{2}:[0-9]{2})\.[0-9]+ ([0-9]{2,4})/i', $str, $matches ) ) )
+                                {
+                                        // Remove microseconds from datetime string
+                                        $str = $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4] . ' ' . $matches[5];
+                                }
+
 				if ( ( $timestamp = strtotime( $str ) ) === false )
 				{
 					$formatted_date = "ERROR ! Unable to convert this string to date : <code>$str</code>";
