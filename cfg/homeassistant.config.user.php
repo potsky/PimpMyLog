@@ -19,12 +19,12 @@ function homeassistant_get_config( $type , $file , $software , $counter ) {
                             "Message"   : 6
                     },
                     "types": {
-                            "Date"      : "date:Y/m/d",
+                            "Date"      : "date:d:m:Y",
                             "Time"      : "date:H:i:s",
                             "Severity"  : "badge:severity",
                             "Thread"    : "txt",
                             "Component" : "txt",
-                            "Message"   : "txt"
+                            "Message"   : "pre"
                     }
                 }
             }
