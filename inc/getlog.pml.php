@@ -106,6 +106,13 @@ $old_file_size       = (int) @$_POST['filesize'];
 $search              = @$_POST['search'];
 $old_lastline        = @$_POST['lastline'];
 
+// adds leading and trailing slashes to the search regex field (if not empty) automatially
+// without, you cant copy/paste a regex from the tester as it misses the required slashes.
+if (!empty($search)) {
+    $search = trim($search, '/');
+    $search = '/' . $search . '/';
+}
+
 header('Content-type: application/json');
 
 if ( ! csrf_verify() ) {
