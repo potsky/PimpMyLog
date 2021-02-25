@@ -157,26 +157,29 @@ define( 'TIME_ZONE_SUPPORT_URL' , 'http://support.pimpmylog.com/discussions/prob
 | http://support.pimpmylog.com/discussions/problems/56-regex-tester-match-is-not-a-valid-associative-array
 |
 */
-if ( get_magic_quotes_gpc() )
+if ( version_compare(PHP_VERSION, '7.4', '<') )
 {
-	$process = array( &$_GET , &$_POST , &$_COOKIE , &$_REQUEST );
-	while ( list( $key , $val ) = each( $process ) )
+	if ( get_magic_quotes_gpc() )
 	{
-		foreach ( $val as $k => $v )
+		$process = array( &$_GET , &$_POST , &$_COOKIE , &$_REQUEST );
+		while ( list( $key , $val ) = each( $process ) )
 		{
-			unset( $process[ $key ][ $k ] );
-			if ( is_array( $v ) )
+			foreach ( $val as $k => $v )
 			{
-				$process[ $key ][ stripslashes( $k ) ] = $v;
-				$process[]                             = &$process[ $key ][ stripslashes( $k ) ];
-			}
-			else
-			{
-				$process[ $key ][ stripslashes( $k ) ] = stripslashes( $v );
+				unset( $process[ $key ][ $k ] );
+				if ( is_array( $v ) )
+				{
+					$process[ $key ][ stripslashes( $k ) ] = $v;
+					$process[]                             = &$process[ $key ][ stripslashes( $k ) ];
+				}
+				else
+				{
+					$process[ $key ][ stripslashes( $k ) ] = stripslashes( $v );
+				}
 			}
 		}
+		unset( $process );
 	}
-	unset( $process );
 }
 
 
