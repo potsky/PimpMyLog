@@ -157,7 +157,7 @@ define( 'TIME_ZONE_SUPPORT_URL' , 'http://support.pimpmylog.com/discussions/prob
 | http://support.pimpmylog.com/discussions/problems/56-regex-tester-match-is-not-a-valid-associative-array
 |
 */
-if ( get_magic_quotes_gpc() )
+if ( @get_magic_quotes_gpc() )
 {
 	$process = array( &$_GET , &$_POST , &$_COOKIE , &$_REQUEST );
 	while ( list( $key , $val ) = each( $process ) )
